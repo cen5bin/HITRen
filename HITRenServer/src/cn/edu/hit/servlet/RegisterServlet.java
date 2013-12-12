@@ -11,19 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.edu.hit.Dao.UserSimpleLogic;
 
-import com.mongodb.Mongo;
-
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class RegisterServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/RegisterServlet")
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +32,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		out.print("asd");
+		out.print(UserSimpleLogic.createUid());
+		
 	}
 
 	/**
@@ -45,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		boolean ret = UserSimpleLogic.login(email, password);
+		boolean ret = UserSimpleLogic.register(email, password);
 		if (ret)
 			out.print("OK!\n");
 		else 
