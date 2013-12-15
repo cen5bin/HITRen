@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import cn.edu.hit.Dao.UserSimpleLogic;
 
 /**
@@ -41,14 +44,27 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out = response.getWriter();
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		boolean ret = UserSimpleLogic.register(email, password);
-		if (ret)
-			out.print("OK!\n");
-		else 
-			out.print("NO\n");
+		
+		String email = "";//request.getParameter("email");
+		String password = "";//request.getParameter("password");
+		try {
+			JSONObject json = new JSONObject(request.getParameter("data"));
+			email = json.get("email").toString();
+			password = json.get("password").toString();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			PrintWriter out = response.getWriter();
+			boolean ret = UserSimpleLogic.register(email, password);
+			out.print(UserSimpleLogic.retData);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

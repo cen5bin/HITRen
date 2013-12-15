@@ -17,7 +17,6 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Register</servlet-name>
     <servlet-class>cn.edu.hit.servlet.RegisterServlet</servlet-class>
@@ -26,6 +25,25 @@
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>UpdateUserInfo</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.UpdateUserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateUserInfo</servlet-name>
+    <url-pattern>/UpdateUserInfo</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>DownloadUserInfo</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.DownloadUserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadUserInfo</servlet-name>
+    <url-pattern>/DownloadUserInfo</url-pattern>
+  </servlet-mapping>
+  
   
   
 </web-app>
