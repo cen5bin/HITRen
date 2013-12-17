@@ -20,6 +20,7 @@ class UserConstant {
 	protected static final String UID = "uid";
 	protected static final String EMAIL = "email";
 	protected static final String PASSWORD = "password";
+	protected static final String SEQ = "seq";
 }
 
 class IDCounter {
@@ -30,4 +31,10 @@ class IDCounter {
 	protected static final String VALUE = "value";
 	//key
 	protected static final String UID = "uid";
+}
+
+class HttpData {
+	protected static final String SUC = "SUC";
+	protected static final String INFO = "INFO";
+	protected static final String DATA = "DATA";
 }

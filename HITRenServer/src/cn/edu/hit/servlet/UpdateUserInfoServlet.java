@@ -1,11 +1,18 @@
 package cn.edu.hit.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cn.edu.hit.Dao.UserSimpleLogic;
 
 /**
  * Servlet implementation class UpdateUserInfoServlet
@@ -34,6 +41,16 @@ public class UpdateUserInfoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String data = request.getParameter("data");
+		try {
+			JSONObject json = new JSONObject(data);
+			UserSimpleLogic.updateInfo(json.getInt("uid"), json.toString());
+			PrintWriter out = response.getWriter();
+			out.print(UserSimpleLogic.retData);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

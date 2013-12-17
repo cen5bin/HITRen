@@ -1,12 +1,14 @@
 package cn.edu.hit.Dao;
 
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.util.JSON;
 
 
 public class UserSimpleLogic {
@@ -19,11 +21,11 @@ public class UserSimpleLogic {
 		obj.put(UserConstant.PASSWORD, password);
 		DBCursor cursor = DBController.query(UserConstant.COLLNAME, obj);
 		if (!cursor.hasNext()) {
-			retData.put("SUC", false);
+			retData.put(HttpData.SUC, false);
 			return false;
 		}
-		retData.put("SUC", true);
-		retData.put("uid", cursor.next().get(IDCounter.UID).toString());
+		retData.put(HttpData.SUC, true);
+		retData.put(UserConstant.UID, cursor.next().get(IDCounter.UID).toString());
 		return true;
 	}
 	
@@ -33,26 +35,26 @@ public class UserSimpleLogic {
 		retData = new JSONObject();
 		obj.put(UserConstant.EMAIL, email);
 		if (DBController.objExits(UserConstant.COLLNAME, obj)) {
-			retData.put("SUC", false);
+			retData.put(HttpData.SUC, false);
 			return false;
 		}
 		obj.put(UserConstant.PASSWORD, password);
 		int uid = UserSimpleLogic.createUid();
 		System.out.println(uid);
 		if (uid == -1) {
-			retData.put("SUC", false);
+			retData.put(HttpData.SUC, false);
 			return false;
 		}
 		obj.put(UserConstant.UID, uid);
-		obj.put("seq", 1);
+		obj.put(UserConstant.SEQ, 1);
 		retString = "" + uid;
 		if (!DBController.addObj(UserConstant.COLLNAME, obj)) {
-			retData.put("SUC", false);
+			retData.put(HttpData.SUC, false);
 			return false;
 		}
-		retData.put("SUC", true);
-		retData.put("uid", uid);
-		retData.put("seq", 1);
+		retData.put(HttpData.SUC, true);
+		retData.put(UserConstant.UID, uid);
+		retData.put(UserConstant.SEQ, 1);
 		return true;
 	}
 	
@@ -70,28 +72,43 @@ public class UserSimpleLogic {
 		return (Integer) cursor.next().get(IDCounter.VALUE);
 	}
 	
-	public static boolean updateInfo(int uid, Object ...args) {
+	public static boolean updateInfo(int uid, String json) throws JSONException {
 		BasicDBObject oldObj = new BasicDBObject();
+		retData = new JSONObject();
 		oldObj.put(IDCounter.UID, uid);
+		BasicDBObject tmpObj = (BasicDBObject)JSON.parse(json);
+		tmpObj.removeField(UserConstant.SEQ);
 		BasicDBObject newObj = new BasicDBObject();
-		for (int i = 0; i < args.length; i+=2) {
-			newObj.put(args[i].toString(), args[i+1]);
+		newObj.put("$set", tmpObj);
+		newObj.put("$inc", new BasicDBObject().append(UserConstant.SEQ, 1));
+		boolean ret = DBController.update(UserConstant.COLLNAME, oldObj, newObj);
+		if (!ret)
+		{
+			retData.put(HttpData.SUC, false);
+			return false;
 		}
-		return DBController.update(UserConstant.COLLNAME, oldObj, newObj);
+		retData.put(HttpData.SUC, true);
+		return true;
 	}
 	
-	public static boolean downloadInfo(int uid, int seq) {
+	public static boolean downloadInfo(int uid, int seq) throws JSONException {
 		BasicDBObject obj = new BasicDBObject();
+		retData = new JSONObject();
 		obj.put(IDCounter.UID, uid);
 		DBCursor cursor = DBController.query(UserConstant.COLLNAME, obj);
 		if (!cursor.hasNext()) {
-			retString = "not found";
+			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "not found");
 			return false;
 		}
 		DBObject retObj = cursor.next();
-		if (Integer.parseInt(retObj.get(IDCounter.UID).toString()) == uid)
-			retString = "Newest!";
-		retString = retObj.toString();
+		if (Integer.parseInt(retObj.get(UserConstant.SEQ).toString()) == seq) {
+			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "newest");
+			return false;
+		}
+		retData.put(HttpData.SUC, true);
+		retData.put(HttpData.DATA, retObj);
 		return true;
 	}
 	

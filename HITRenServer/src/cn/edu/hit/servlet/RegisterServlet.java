@@ -58,7 +58,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		try {
 			PrintWriter out = response.getWriter();
-			boolean ret = UserSimpleLogic.register(email, password);
+			UserSimpleLogic.register(email, password);
 			out.print(UserSimpleLogic.retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

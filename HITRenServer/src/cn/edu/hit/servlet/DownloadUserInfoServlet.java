@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import cn.edu.hit.Dao.UserSimpleLogic;
 
 /**
@@ -38,11 +41,19 @@ public class DownloadUserInfoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int uid = Integer.parseInt(request.getParameter("uid"));
-		int seq = Integer.parseInt(request.getParameter("seq"));
-		UserSimpleLogic.downloadInfo(uid, seq);
-		PrintWriter out = response.getWriter();
-		out.print(UserSimpleLogic.retString);
+		String data = request.getParameter("data");
+		try {
+			JSONObject json = new JSONObject(data);
+			int uid = json.getInt("uid");
+			int seq = json.getInt("seq");
+			UserSimpleLogic.downloadInfo(uid, seq);
+			PrintWriter out = response.getWriter();
+			out.print(UserSimpleLogic.retData);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

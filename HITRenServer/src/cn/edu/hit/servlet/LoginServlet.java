@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 
 		try {
 			PrintWriter out = response.getWriter();
-			boolean ret = UserSimpleLogic.login(email, password);
+			UserSimpleLogic.login(email, password);
 			out.print(UserSimpleLogic.retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
