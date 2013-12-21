@@ -15,4 +15,5 @@
 - (BOOL)concernUser:(int)uid inGroups:(NSArray *)gnames;
 - (BOOL)addGroup:(NSString *)gname;
 - (BOOL)deleteGroup:(NSString *)gname;
+- (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2;
 @end

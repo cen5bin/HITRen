@@ -37,13 +37,13 @@
     [data setIntValue:self.user.uid forKey:@"uid"];
     [data setValue:gname forKey:@"gname"];
     NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"AddGroup"];
+    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"AddConcernlistGroup"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
-        LOG(@"addGroup fail");
+        LOG(@"addConcernlistGroup fail");
         FUNC_END();
         return NO;
     }
-    LOG(@"addGroup succ");
+    LOG(@"addConcernlistGroup succ");
     FUNC_END();
     return  YES;
 }
@@ -54,16 +54,34 @@
     [data setIntValue:self.user.uid forKey:@"uid"];
     [data setValue:gname forKey:@"gname"];
     NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"DeleteGroup"];
+    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"DeleteConcernlistGroup"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
-        LOG(@"deleteGroup fail");
+        LOG(@"deleteConcernlistGroup fail");
         FUNC_END();
         return NO;
     }
-    LOG(@"deleteGroup succ");
+    LOG(@"deleteConcernlistGroup succ");
 
     FUNC_END();
     return YES;
 }
 
+- (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2 {
+    FUNC_START();
+    HttpData *data = [[HttpData alloc]init];
+    [data setIntValue:self.user.uid forKey:@"uid"];
+    [data setValue:gname1 forKey:@"gname1"];
+    [data setValue:gname2 forKey:@"gname2"];
+    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
+    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"RenameConcernlistGroup"];
+    if (![[ret objectForKey:@"SUC"] boolValue]) {
+        LOG(@"renameGroup fail");
+        FUNC_END();
+        return NO;
+    }
+    LOG(@"renameGroup succ");
+
+    FUNC_END();
+    return YES;
+}
 @end

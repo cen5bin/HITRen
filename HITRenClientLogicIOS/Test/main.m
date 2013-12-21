@@ -30,7 +30,8 @@ int main(int argc, const char * argv[])
         RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
 //        [logic1 addGroup:@"asd"];
 //        [logic1 deleteGroup:@"你好4"];
-        [logic1 concernUser:3 inGroups:[NSArray arrayWithObjects:@"default",@"asd",nil]];
+//        [logic1 concernUser:4 inGroups:[NSArray arrayWithObjects:@"default",@"asd",nil]];
+        [logic1 renameGroup:@"asd1" newName:@"asd"];
         return 0;
         
 //        //第一步，创建URL

@@ -59,13 +59,29 @@ public class RelationshipLogic {
 		return true;
 	}
 	
+	public static boolean renameGroup(int uid, String gname1, String gname2) throws JSONException {
+		retData = new JSONObject();
+		BasicDBObject oldObj = new BasicDBObject();
+		oldObj.put(UserConstant.UID, uid);
+		oldObj.put("concernlist.gname", gname1);
+		BasicDBObject newObj = new BasicDBObject();
+		newObj.put("$set", new BasicDBObject().append("concernlist.$.gname", gname2));
+		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
+		if (!ret) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		retData.put(HttpData.SUC, true);
+		return true;
+	}
+	
 	public static boolean concernUserInGroup(int uid, String group, int uid1) throws JSONException {
 		retData = new JSONObject();
 		BasicDBObject oldObj = new BasicDBObject(UserConstant.UID, uid);
 		oldObj.put(UserConstant.UID, uid);
 		oldObj.put("concernlist.gname", group);
 		BasicDBObject newObj = new BasicDBObject();
-		newObj.append("$push", new BasicDBObject().append("concernlist.$.userlist", uid1));
+		newObj.append("$addToSet", new BasicDBObject().append("concernlist.$.userlist", uid1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
