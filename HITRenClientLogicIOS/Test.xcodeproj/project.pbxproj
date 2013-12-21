@@ -15,6 +15,8 @@
 		F8393026185B5346003FAEEB /* HttpTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = F8393025185B5346003FAEEB /* HttpTransfer.m */; };
 		F881FFFC186027B700AB91DB /* HttpData.m in Sources */ = {isa = PBXBuildFile; fileRef = F881FFFB186027B700AB91DB /* HttpData.m */; };
 		F8A59EEC185C441200030361 /* Kit.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A59EEB185C441200030361 /* Kit.m */; };
+		F8B493E21865A86900D500F1 /* BaseLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B493E11865A86900D500F1 /* BaseLogic.m */; };
+		F8B493E51865AA3C00D500F1 /* RelationshipLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B493E41865AA3C00D500F1 /* RelationshipLogic.m */; };
 		F8D2FDD0185DCDE400194D8E /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D2FDCF185DCDE400194D8E /* Student.m */; };
 		F8D2FDD3185DCF5400194D8E /* Teacher.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D2FDD2185DCF5400194D8E /* Teacher.m */; };
 /* End PBXBuildFile section */
@@ -48,6 +50,10 @@
 		F881FFFB186027B700AB91DB /* HttpData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpData.m; sourceTree = "<group>"; };
 		F8A59EEA185C441200030361 /* Kit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kit.h; sourceTree = "<group>"; };
 		F8A59EEB185C441200030361 /* Kit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Kit.m; sourceTree = "<group>"; };
+		F8B493E01865A86900D500F1 /* BaseLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLogic.h; sourceTree = "<group>"; };
+		F8B493E11865A86900D500F1 /* BaseLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLogic.m; sourceTree = "<group>"; };
+		F8B493E31865AA3C00D500F1 /* RelationshipLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipLogic.h; sourceTree = "<group>"; };
+		F8B493E41865AA3C00D500F1 /* RelationshipLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationshipLogic.m; sourceTree = "<group>"; };
 		F8D2FDCE185DCDE400194D8E /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
 		F8D2FDCF185DCDE400194D8E /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 		F8D2FDD1185DCF5400194D8E /* Teacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teacher.h; sourceTree = "<group>"; };
@@ -94,13 +100,17 @@
 		F805B0AC18102844000A3545 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				F8B493E31865AA3C00D500F1 /* RelationshipLogic.h */,
+				F8B493E41865AA3C00D500F1 /* RelationshipLogic.m */,
 				F8393021185B4DDC003FAEEB /* User.h */,
 				F8393022185B4DDC003FAEEB /* User.m */,
 				F805B0AD18102844000A3545 /* main.m */,
+				F8B493E01865A86900D500F1 /* BaseLogic.h */,
+				F8B493E11865A86900D500F1 /* BaseLogic.m */,
 				F8A59EEA185C441200030361 /* Kit.h */,
+				F8A59EEB185C441200030361 /* Kit.m */,
 				F881FFFA186027B700AB91DB /* HttpData.h */,
 				F881FFFB186027B700AB91DB /* HttpData.m */,
-				F8A59EEB185C441200030361 /* Kit.m */,
 				F839301E185B4C71003FAEEB /* UserSimpleLogic.h */,
 				F839301F185B4C71003FAEEB /* UserSimpleLogic.m */,
 				F8D2FDCE185DCDE400194D8E /* Student.h */,
@@ -182,6 +192,8 @@
 				F8D2FDD0185DCDE400194D8E /* Student.m in Sources */,
 				F8D2FDD3185DCF5400194D8E /* Teacher.m in Sources */,
 				F881FFFC186027B700AB91DB /* HttpData.m in Sources */,
+				F8B493E21865A86900D500F1 /* BaseLogic.m in Sources */,
+				F8B493E51865AA3C00D500F1 /* RelationshipLogic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

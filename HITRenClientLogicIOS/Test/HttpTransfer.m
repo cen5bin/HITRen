@@ -17,7 +17,7 @@ static int PORT = 8080;
 + (NSData *)requestServerForNSDataWithGetMethod:(NSString *)requestString AndServletName:(NSString *)servlet {
     NSString *urlString = [NSString stringWithFormat:@"http://%@:%d/%@/%@",IP, PORT, SERVER_NAME, servlet];
     NSURL *url = [NSURL URLWithString:urlString];
-    NSData *data = [requestString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSData *data = [requestString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];
     [request setHTTPBody:data];
@@ -28,7 +28,7 @@ static int PORT = 8080;
 + (NSData *)requestServerForNSDataWithPostMethod:(NSString *)requestString AndServletName:(NSString *)servlet {
     NSString *urlString = [NSString stringWithFormat:@"http://%@:%d/%@/%@",IP, PORT, SERVER_NAME, servlet];
     NSURL *url = [NSURL URLWithString:urlString];
-    NSData *data = [requestString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSData *data = [requestString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%ld",[data length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];

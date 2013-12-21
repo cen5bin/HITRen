@@ -10,12 +10,12 @@
 #define HITREN_DEBUG
 
 NSString *stringToUrlString(NSString * string);
-void functionLog(const char* funcName, NSString *string);
+void functionLog(const char *filename, int line, const char* funcName, NSString *string);
 
 #ifdef HITREN_DEBUG
 
     #define LOG(x) NSLog(@"%@",x)
-    #define FUNC_LOG(x) functionLog(__FUNCTION__, x)
+    #define FUNC_LOG(x) functionLog(__FILE__,__LINE__,__FUNCTION__, x)
     #define FUNC_START() FUNC_LOG(@"start")
     #define FUNC_END() FUNC_LOG(@"end")
 

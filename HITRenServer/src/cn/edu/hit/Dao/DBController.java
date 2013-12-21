@@ -62,4 +62,10 @@ public class DBController {
 			return false;
 	}
 	
+	public static boolean removeObj(String collname, BasicDBObject obj) {
+		WriteResult wr = db.getCollection(collname).remove(obj);
+		 if (wr != null && wr.getN() > 0)
+				return true;
+			return false;
+	}
 }

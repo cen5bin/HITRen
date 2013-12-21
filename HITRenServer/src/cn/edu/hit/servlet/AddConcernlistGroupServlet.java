@@ -12,19 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.edu.hit.Dao.UserSimpleLogic;
+import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class AddConcernlistGroupServlet
+ * 添加好友分组
+ * 客户端传递过来uid和分组名称gname
  */
-@WebServlet("/RegisterServlet")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/AddConcernlistGroupServlet")
+public class AddConcernlistGroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public AddConcernlistGroupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,8 +37,7 @@ public class RegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		out.print(UserSimpleLogic.createUid());
-		
+		out.print("zz");
 	}
 
 	/**
@@ -44,23 +45,17 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String email = "";//request.getParameter("email");
-		String password = "";//request.getParameter("password");
+//		request.setCharacterEncoding("utf-8");
+		String data = request.getParameter("data");
+		data = new String(data.getBytes("ISO8859_1"),"utf-8");
 		try {
-			JSONObject json = new JSONObject(request.getParameter("data"));
-			email = json.get("email").toString();
-			password = json.get("password").toString();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
+			JSONObject json = new JSONObject(data);
+			int uid = json.getInt("uid");
+			String gname = json.getString("gname");
+			RelationshipLogic.addGroup(uid, gname);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
-			UserSimpleLogic.register(email, password);
-			out.print(UserSimpleLogic.retData);
+			out.print(RelationshipLogic.retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

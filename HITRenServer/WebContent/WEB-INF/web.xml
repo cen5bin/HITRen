@@ -25,8 +25,7 @@
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>UpdateUserInfo</servlet-name>
     <servlet-class>cn.edu.hit.servlet.UpdateUserInfoServlet</servlet-class>
   </servlet>
@@ -34,8 +33,7 @@
     <servlet-name>UpdateUserInfo</servlet-name>
     <url-pattern>/UpdateUserInfo</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>DownloadUserInfo</servlet-name>
     <servlet-class>cn.edu.hit.servlet.DownloadUserInfoServlet</servlet-class>
   </servlet>
@@ -43,7 +41,28 @@
     <servlet-name>DownloadUserInfo</servlet-name>
     <url-pattern>/DownloadUserInfo</url-pattern>
   </servlet-mapping>
-  
-  
-  
+  <servlet>
+    <servlet-name>ConcernUser</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.ConcernUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConcernUser</servlet-name>
+    <url-pattern>/ConcernUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddGroup</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.AddConcernlistGroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddGroup</servlet-name>
+    <url-pattern>/AddGroup</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteGroup</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.DeleteConcernlistGroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteGroup</servlet-name>
+    <url-pattern>/DeleteGroup</url-pattern>
+  </servlet-mapping>
 </web-app>

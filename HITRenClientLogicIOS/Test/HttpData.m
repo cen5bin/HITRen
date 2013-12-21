@@ -28,6 +28,6 @@
 
 - (NSString *)getJsonString {
     NSData *data = [NSJSONSerialization dataWithJSONObject:_dic options:NSJSONWritingPrettyPrinted error:nil];
-    return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 @end

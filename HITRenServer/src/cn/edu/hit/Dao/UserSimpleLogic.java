@@ -2,6 +2,8 @@ package cn.edu.hit.Dao;
 
 
 
+import java.io.UnsupportedEncodingException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,19 +32,20 @@ public class UserSimpleLogic {
 	}
 	
 	//×¢²á¹¦ÄÜ
-	public static boolean register(String email, String password) throws JSONException {
+	public static boolean register(String email, String password) throws JSONException, UnsupportedEncodingException {
 		BasicDBObject obj = new BasicDBObject();
 		retData = new JSONObject();
 		obj.put(UserConstant.EMAIL, email);
 		if (DBController.objExits(UserConstant.COLLNAME, obj)) {
 			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "ÓÊÏäÒÑÊ¹ÓÃ");
 			return false;
 		}
 		obj.put(UserConstant.PASSWORD, password);
 		int uid = UserSimpleLogic.createUid();
-		System.out.println(uid);
 		if (uid == -1) {
 			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "×¢²áÊ§°Ü");
 			return false;
 		}
 		obj.put(UserConstant.UID, uid);
@@ -50,6 +53,13 @@ public class UserSimpleLogic {
 		retString = "" + uid;
 		if (!DBController.addObj(UserConstant.COLLNAME, obj)) {
 			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "×¢²áÊ§°Ü");
+			return false;
+		}
+		if (!RelationshipLogic.createRelationship(uid)){
+			DBController.removeObj(UserConstant.COLLNAME, obj);
+			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "×¢²áÊ§°Ü");
 			return false;
 		}
 		retData.put(HttpData.SUC, true);

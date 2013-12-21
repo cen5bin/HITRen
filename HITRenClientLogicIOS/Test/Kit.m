@@ -8,8 +8,8 @@
 
 #import "Kit.h"
 
-void functionLog(const char* funcName,NSString *string) {
-    NSLog(@"%s line %d:%s %@",__FILE__,__LINE__, funcName, string);
+void functionLog(const char *filename, int line, const char* funcName,NSString *string) {
+    NSLog(@"%s line %d:%s %@", filename, line, funcName, string);
 }
 
 NSString *stringToUrlString(NSString *string) {

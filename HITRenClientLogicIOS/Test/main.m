@@ -8,24 +8,29 @@
 
 #import <Foundation/Foundation.h>
 #import "UserSimpleLogic.h"
+#import "RelationshipLogic.h"
 #import "User.h"
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
         User *user = [[User alloc] init];
-        user.email = @"cen100bin@163.com";
+        user.email = @"bin@163.com";
         user.password = @"123";
         UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
-        [logic signUp];
+//        [logic signUp];
         [logic login];
-        //[logic downloadInfo];
-        logic.user.sex = 1;
-        logic.user.hometown = @"zj";
-        logic.user.birthday = @"asdad";
-        logic.user.seq = 8;
-//        [logic updateInfo];
-        [logic downloadInfo];
+//        //[logic downloadInfo];
+//        logic.user.sex = 1;
+//        logic.user.hometown = @"zj";
+//        logic.user.birthday = @"asdad";
+//        logic.user.seq = 7;
+////        [logic updateInfo];
+//        [logic downloadInfo];
+        RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
+//        [logic1 addGroup:@"asd"];
+//        [logic1 deleteGroup:@"你好4"];
+        [logic1 concernUser:3 inGroups:[NSArray arrayWithObjects:@"default",@"asd",nil]];
         return 0;
         
 //        //第一步，创建URL

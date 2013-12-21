@@ -13,12 +13,6 @@
 
 @implementation UserSimpleLogic
 
-- (id)initWithUser:(User *)user {
-    if (self = [super init]) {
-        self.user = user;
-    }
-    return self;
-}
 
 - (BOOL)login {
     FUNC_START();
@@ -47,6 +41,7 @@
     NSMutableDictionary *ret = [HttpTransfer syncPost:requestString to:@"Register"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"signUp fail");
+        LOG([ret objectForKey:@"INFO"]);
         FUNC_END();
         return NO;
     }

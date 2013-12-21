@@ -8,14 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "User.h"
+#import "BaseLogic.h"
 
-@interface UserSimpleLogic : NSObject {
+@interface UserSimpleLogic : BaseLogic {
     
 }
 
-@property (retain, nonatomic) User *user;
-
-- (id)initWithUser:(User*)user;
 - (BOOL)login;
 - (BOOL)signUp;
 - (BOOL)downloadInfo;

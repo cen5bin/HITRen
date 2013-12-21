@@ -33,6 +33,15 @@ class IDCounter {
 	protected static final String UID = "uid";
 }
 
+class Relationship {
+	protected static final String COLLNAME = "Relationship";
+	protected static final String UID = "uid";
+	protected static final String CONCERNLIST = "concernlist";
+	protected static final String BLACKLIST = "blacklist";
+	protected static final String GNAME = "gname";
+	protected static final String USERLIST = "userlist";
+}
+
 class HttpData {
 	protected static final String SUC = "SUC";
 	protected static final String INFO = "INFO";
