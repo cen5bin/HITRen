@@ -73,12 +73,20 @@
     <servlet-name>RenameConcernlistGroup</servlet-name>
     <url-pattern>/RenameConcernlistGroup</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>CopyUsersToGroups</servlet-name>
     <servlet-class>cn.edu.hit.servlet.CopyUsersToGroupsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CopyUsersToGroups</servlet-name>
     <url-pattern>/CopyUsersToGroups</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteUsersFromGroup</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.DeleteUsersFromGroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUsersFromGroup</servlet-name>
+    <url-pattern>/DeleteUsersFromGroup</url-pattern>
   </servlet-mapping>
 </web-app>

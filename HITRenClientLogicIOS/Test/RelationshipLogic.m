@@ -87,6 +87,9 @@
 
 - (BOOL) moveUsers:(NSArray *)users fromGroup:(NSString *)gname toGroups:(NSArray *)gnames {
     FUNC_START();
+    HttpData *data = [[HttpData alloc] init];
+    [data setIntValue:self.user.uid forKey:@"uid"];
+//    [data setValue:<#(id)#> forKey:<#(NSString *)#>]
     FUNC_END();
     return YES;
 }
@@ -121,5 +124,23 @@
     BOOL ret = [self copyUsers:users toGroups:[NSArray arrayWithObjects:gname, nil]];
     FUNC_END();
     return ret;
+}
+
+- (BOOL)deleteUsers:(NSArray *)users fromGroup:(NSString *)gname {
+    FUNC_START();
+    HttpData *data = [[HttpData alloc] init];
+    [data setIntValue:self.user.uid forKey:@"uid"];
+    [data setValue:users forKey:@"users"];
+    [data setValue:gname forKey:@"gname"];
+    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
+    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"DeleteUsersFromGroup"];
+    if (![[ret objectForKey:@"SUC"] boolValue]) {
+        LOG(@"DeleteUsersFromGroup fail");
+        FUNC_END();
+        return NO;
+    }
+    LOG(@"DeleteUsersFromGroup succ");
+    FUNC_END();
+    return YES;
 }
 @end

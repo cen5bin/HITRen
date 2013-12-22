@@ -11,3 +11,4 @@ HITRen
 - 重命名好友分组: `RenameConcernlistGroupServlet.java`,参数:`uid`,`gname1`,`gname2`
 - 关注一个好友到分组: `ConcernUserServlet.java`, 参数:自己的`uid`,要关注的好友`uid1`,要放的分组`gnames`
 - 将一些好友复制到新的分组: `CopyUsersToGroupsServlet.java`, 参数: `uid`,`users`,`gnames`
+- 将一些好友从分组中删除: `DeleteUsersFromGroupServlet.java`, 参数: `uid`,`users`,`gname` 

@@ -17,6 +17,7 @@
 - (BOOL)copyUsers:(NSArray *)users toGroups:(NSArray *)gnames;
 - (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname0 toGroup:(NSString *)gname;
 - (BOOL)copyUsers:(NSArray *)users toGroup:(NSString *)gname;
+- (BOOL)deleteUsers:(NSArray *)users fromGroup:(NSString *)gname;
 - (BOOL)addGroup:(NSString *)gname;
 - (BOOL)deleteGroup:(NSString *)gname;
 - (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2;
