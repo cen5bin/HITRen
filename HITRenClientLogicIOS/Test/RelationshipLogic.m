@@ -89,7 +89,17 @@
     FUNC_START();
     HttpData *data = [[HttpData alloc] init];
     [data setIntValue:self.user.uid forKey:@"uid"];
-//    [data setValue:<#(id)#> forKey:<#(NSString *)#>]
+    [data setValue:users forKey:@"users"];
+    [data setValue:gname forKey:@"gname"];
+    [data setValue:gnames forKey:@"gnames"];
+    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
+    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"MoveUsersFromGroupToGroups"];
+    if (![[ret objectForKey:@"SUC"] boolValue]) {
+        LOG(@"MoveUsersFromGroupToGroups fail");
+        FUNC_END();
+        return NO;
+    }
+    LOG(@"MoveUsersFromGroupToGroups succ");
     FUNC_END();
     return YES;
 }

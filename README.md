@@ -12,7 +12,7 @@ HITRen
 - 关注一个好友到分组: [ConcernUserServlet.java][7], 参数:自己的`uid`,要关注的好友`uid1`,要放的分组`gnames`
 - 将一些好友复制到新的分组: [CopyUsersToGroupsServlet.java][8], 参数: `uid`,`users`,`gnames`
 - 将一些好友从分组中删除: [DeleteUsersFromGroupServlet.java][9], 参数: `uid`,`users`,`gname` 
-
+- 将一些好友从一个分组移动到另外的一些分组: [MoveUsersFromGroupToGroupsServlet.java][10], 参数: `uid`,`users`,	当前所在分组`gname`,目标分组`gnames`
 
 
 
@@ -32,4 +32,5 @@ HITRen
 [7]:HITRenServer/src/cn/edu/hit/servlet/ConcernUserServlet.java
 [8]:HITRenServer/src/cn/edu/hit/servlet/CopyUsersToGroupsServlet.java
 [9]:HITRenServer/src/cn/edu/hit/servlet/DeleteUsersFromGroupServlet.java
+[10]:HITRenServer/src/cn/edu/hit/servlet/MoveUsersFromGroupToGroupsServlet.java
 

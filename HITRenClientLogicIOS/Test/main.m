@@ -33,6 +33,7 @@ int main(int argc, const char * argv[])
 //        [logic1 concernUser:4 inGroups:[NSArray arrayWithObjects:@"default",@"asd",nil]];
 //        [logic1 renameGroup:@"asd1" newName:@"asd"];
         [logic1 deleteUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:100],[NSNumber numberWithInt:101], nil] fromGroup:@"asd"];
+        [logic1 moveUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:10],[NSNumber numberWithInt:11], nil] fromGroup:@"default" toGroups:[NSArray arrayWithObjects:@"asd", nil]];
         return 0;
         
 //        //第一步，创建URL

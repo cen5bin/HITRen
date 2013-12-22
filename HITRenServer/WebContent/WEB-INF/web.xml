@@ -89,4 +89,12 @@
     <servlet-name>DeleteUsersFromGroup</servlet-name>
     <url-pattern>/DeleteUsersFromGroup</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>MoveUsersFromGroupToGroups</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.MoveUsersFromGroupToGroupsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MoveUsersFromGroupToGroups</servlet-name>
+    <url-pattern>/MoveUsersFromGroupToGroups</url-pattern>
+  </servlet-mapping>
 </web-app>

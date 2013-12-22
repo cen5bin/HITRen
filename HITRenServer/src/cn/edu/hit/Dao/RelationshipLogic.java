@@ -106,6 +106,15 @@ public class RelationshipLogic {
 		retData.put(HttpData.SUC, true);
 		return true;
 	}
+	
+	public static boolean moveUsersFromGroupToGroup(int uid, ArrayList<Integer>users, String gname1, String gname2) throws JSONException {
+		boolean ret = RelationshipLogic.copyUsersToGroup(uid, users, gname2);
+		if (!ret)
+			return false;
+		ret = RelationshipLogic.deleteUserFromGroup(uid, users, gname1);
+		return ret;
+	}
+	
 	public static boolean concernUserInGroup(int uid, String group, int uid1) throws JSONException {
 		retData = new JSONObject();
 		BasicDBObject oldObj = new BasicDBObject(UserConstant.UID, uid);
