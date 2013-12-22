@@ -84,4 +84,42 @@
     FUNC_END();
     return YES;
 }
+
+- (BOOL) moveUsers:(NSArray *)users toGroups:(NSArray *)gnames {
+    FUNC_START();
+    FUNC_END();
+    return YES;
+}
+
+- (BOOL) moveUsers:(NSArray *)users toGroup:(NSString *)gname {
+    FUNC_START();
+    BOOL ret = [self moveUsers:users toGroups:[NSArray arrayWithObjects:gname, nil]];
+    FUNC_END();
+    return ret;
+}
+
+- (BOOL) copyUsers:(NSArray *)users toGroups:(NSArray *)gnames {
+    FUNC_START();
+    HttpData *data = [[HttpData alloc] init];
+    [data setIntValue:self.user.uid forKey:@"uid"];
+    [data setValue:users forKey:@"users"];
+    [data setValue:gnames forKey:@"gnames"];
+    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
+    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"CopyUsersToGroups"];
+    if (![[ret objectForKey:@"SUC"] boolValue]) {
+        LOG(@"CopyUsersToGroups fail");
+        FUNC_END();
+        return NO;
+    }
+    LOG(@"CopyUsersToGroups succ");
+    FUNC_END();
+    return YES;
+}
+
+- (BOOL) copyUsers:(NSArray *)users toGroup:(NSString *)gname {
+    FUNC_START();
+    BOOL ret = [self copyUsers:users toGroups:[NSArray arrayWithObjects:gname, nil]];
+    FUNC_END();
+    return ret;
+}
 @end
