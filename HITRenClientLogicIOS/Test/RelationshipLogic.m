@@ -85,15 +85,15 @@
     return YES;
 }
 
-- (BOOL) moveUsers:(NSArray *)users toGroups:(NSArray *)gnames {
+- (BOOL) moveUsers:(NSArray *)users fromGroup:(NSString *)gname toGroups:(NSArray *)gnames {
     FUNC_START();
     FUNC_END();
     return YES;
 }
 
-- (BOOL) moveUsers:(NSArray *)users toGroup:(NSString *)gname {
+- (BOOL) moveUsers:(NSArray *)users fromGroup:(NSString *)gname0 toGroup:(NSString *)gname {
     FUNC_START();
-    BOOL ret = [self moveUsers:users toGroups:[NSArray arrayWithObjects:gname, nil]];
+    BOOL ret = [self moveUsers:users fromGroup:gname0 toGroups:[NSArray arrayWithObjects:gname, nil]];
     FUNC_END();
     return ret;
 }
