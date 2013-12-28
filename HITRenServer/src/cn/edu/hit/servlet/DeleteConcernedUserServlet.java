@@ -52,13 +52,16 @@ public class DeleteConcernedUserServlet extends HttpServlet {
 			int uid = json.getInt("uid");
 			int uid1 = json.getInt("uid1");
 			JSONArray gnames = json.getJSONArray("gnames");
+			boolean ret = false;
 			for (int i = 0; i < gnames.length(); i++) {
 				ArrayList<Integer> users = new ArrayList<Integer>();
 				users.add(uid1);
-				boolean ret = RelationshipLogic.deleteUserFromGroup(uid, users, gnames.getString(i));
+				ret = RelationshipLogic.deleteUserFromGroup(uid, users, gnames.getString(i));
 				if (!ret)
 					break;
 			}
+			if (ret)
+				RelationshipLogic.removeAfollowerFromUid(uid, uid1);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(RelationshipLogic.retData);

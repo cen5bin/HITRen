@@ -30,15 +30,18 @@ class IDCounter {
 	protected static final String KEY = "key";
 	protected static final String VALUE = "value";
 	//key
-	protected static final String UID = "uid";
+	protected static final String UID = UserConstant.UID;
 }
 
 class Relationship {
 	protected static final String COLLNAME = "Relationship";
-	protected static final String UID = "uid";
+	protected static final String UID = UserConstant.UID;
 	protected static final String SEQ = "seq";
 	protected static final String CONCERNLIST = "concernlist";
 	protected static final String BLACKLIST = "blacklist";
+	protected static final String FOLLOWLIST = "followlist";
+	
+	//以下两个字段是在concernlist数组中每个元素的内部字段
 	protected static final String GNAME = "gname";
 	protected static final String USERLIST = "userlist";
 }

@@ -148,13 +148,52 @@ public class RelationshipLogic {
 		return ret;
 	}
 	
+	// 之后可以把addtoset改成push
 	public static boolean concernUserInGroup(int uid, String group, int uid1) throws JSONException {
 		retData = new JSONObject();
-		BasicDBObject oldObj = new BasicDBObject(UserConstant.UID, uid);
-		oldObj.put(UserConstant.UID, uid);
+		BasicDBObject oldObj = new BasicDBObject();
+		oldObj.put(Relationship.UID, uid);
 		oldObj.put("concernlist.gname", group);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.append("$addToSet", new BasicDBObject().append("concernlist.$.userlist", uid1));
+		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
+		if (!ret) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		
+		//被关注者的followlist里要加入关注他的人
+		ret = RelationshipLogic.addAfollowerToUid(uid, uid1);
+		if (!ret) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		retData.put(HttpData.SUC, true);
+		return true;
+	}
+	
+	// 之后可以把addtoset改成push
+	public static boolean addAfollowerToUid(int followerid, int uid) throws JSONException {
+		retData = new JSONObject();
+		BasicDBObject oldObj = new BasicDBObject();
+		oldObj.put(Relationship.UID, uid);
+		BasicDBObject newObj = new BasicDBObject();
+		newObj.put("$addToSet", new BasicDBObject().append(Relationship.FOLLOWLIST, followerid));
+		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
+		if (!ret) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		retData.put(HttpData.SUC, true);
+		return true;
+	}
+	
+	public static boolean removeAfollowerFromUid(int followid, int uid) throws JSONException {
+		retData = new JSONObject();
+		BasicDBObject oldObj = new BasicDBObject();
+		oldObj.put(Relationship.UID, uid);
+		BasicDBObject newObj = new BasicDBObject();
+		newObj.put("$pull", new BasicDBObject().append(Relationship.FOLLOWLIST, followid));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -175,12 +214,6 @@ public class RelationshipLogic {
 			retData.put(HttpData.INFO, "newest");
 			return false;
 		}
-//		int seq1 = Integer.parseInt(retObj.get(Relationship.SEQ).toString());
-//		if (seq == seq1) {
-//			retData.put(HttpData.SUC, false);
-//			retData.put(HttpData.INFO, "newest");
-//			return false;
-//		}
 		retData.put(HttpData.SUC, true);
 		retData.put(HttpData.DATA, retObj);
 		return true;

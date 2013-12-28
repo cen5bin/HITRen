@@ -32,10 +32,10 @@ int main(int argc, const char * argv[])
         RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
         [logic1 downloadInfo];
 //        [logic1 deleteGroup:@"asd"];
-//        [logic1 deleteConcernedUser:1];
+        [logic1 deleteConcernedUser:33];
 //        [logic1 addGroup:@"asd"];
 //        [logic1 deleteGroup:@"你好4"];
-//        [logic1 concernUser:5 inGroups:[NSArray arrayWithObjects:@"asd",nil]];
+//        [logic1 concernUser:33 inGroups:[NSArray arrayWithObjects:@"asd",nil]];
 //        [logic1 copyUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:100],[NSNumber numberWithInt:101], nil] toGroup:@"asd"];
 //        [logic1 renameGroup:@"asd1" newName:@"asd"];
 //        [logic1 deleteUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:3], nil] fromGroup:@"default"];
