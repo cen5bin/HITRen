@@ -36,6 +36,7 @@ class IDCounter {
 class Relationship {
 	protected static final String COLLNAME = "Relationship";
 	protected static final String UID = "uid";
+	protected static final String SEQ = "seq";
 	protected static final String CONCERNLIST = "concernlist";
 	protected static final String BLACKLIST = "blacklist";
 	protected static final String GNAME = "gname";

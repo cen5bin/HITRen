@@ -10,6 +10,10 @@
 
 @implementation HttpData
 
++ (id)data {
+    HttpData *data = [[HttpData alloc] init] ;
+    return data;
+}
 
 - (id)init {
     if (self = [super init]) {

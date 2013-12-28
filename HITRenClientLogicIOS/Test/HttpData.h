@@ -12,6 +12,7 @@
     NSMutableDictionary *_dic;
 }
 
++ (id)data;
 - (id)init;
 - (void)setValue:(id)value forKey:(NSString *)key;
 - (void)setIntValue:(int)value forKey:(NSString *)key;

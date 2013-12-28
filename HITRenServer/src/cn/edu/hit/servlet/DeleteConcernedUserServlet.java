@@ -17,18 +17,18 @@ import org.json.JSONObject;
 import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
- * Servlet implementation class MoveUsersFromGroupToGroupsServlet
- * 将一部分好友从一个分组移动到其他的一些分组
- * 参数 自己的id uid, 要移动的用户users, 当前所在分组gname, 目标分组gnames
+ * Servlet implementation class DeleteConcernedUserServlet
+ * 删除关注的人
+ * 参数uid,uid1(要删除的人的uid),gnames(该uid所在的所有分组)
  */
-@WebServlet("/MoveUsersFromGroupToGroupsServlet")
-public class MoveUsersFromGroupToGroupsServlet extends HttpServlet {
+@WebServlet("/DeleteConcernedUserServlet")
+public class DeleteConcernedUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MoveUsersFromGroupToGroupsServlet() {
+    public DeleteConcernedUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,14 +50,12 @@ public class MoveUsersFromGroupToGroupsServlet extends HttpServlet {
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
-			JSONArray users0 = json.getJSONArray("users");
-			ArrayList<Integer> users = new ArrayList<Integer>();
-			for (int i = 0; i < users0.length(); i++)
-				users.add(users0.getInt(i));
-			JSONArray groups = json.getJSONArray("gnames");
-			String gname = json.getString("gname");
-			for (int i = 0; i < groups.length(); i++) {
-				boolean ret = RelationshipLogic.moveUsersFromGroupToGroup(uid, users, gname, groups.getString(i));
+			int uid1 = json.getInt("uid1");
+			JSONArray gnames = json.getJSONArray("gnames");
+			for (int i = 0; i < gnames.length(); i++) {
+				ArrayList<Integer> users = new ArrayList<Integer>();
+				users.add(uid1);
+				boolean ret = RelationshipLogic.deleteUserFromGroup(uid, users, gnames.getString(i));
 				if (!ret)
 					break;
 			}

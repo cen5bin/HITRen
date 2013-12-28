@@ -43,6 +43,7 @@ public class RenameConcernlistGroupServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String data = request.getParameter("data");
+		data = new String(data.getBytes("ISO8859_1"),"utf-8");
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
@@ -50,6 +51,7 @@ public class RenameConcernlistGroupServlet extends HttpServlet {
 			String gname2 = json.getString("gname2");
 			System.out.print(gname1+" "+gname2);
 			RelationshipLogic.renameGroup(uid, gname1, gname2);
+			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(RelationshipLogic.retData);
 		} catch (JSONException e) {

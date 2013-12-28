@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>616D8843-4EB9-4A35-B861-BE693314BA2A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Test</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E211030F-4D7F-41B4-88D0-84E6F667D611</key>
+		<string>ssh://github.com/cen5bin/HITRen.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HITRenClientLogicIOS/Test.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E211030F-4D7F-41B4-88D0-84E6F667D611</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/cen5bin/HITRen.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E211030F-4D7F-41B4-88D0-84E6F667D611</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E211030F-4D7F-41B4-88D0-84E6F667D611</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HITRen</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,5 +1,14 @@
 HITRen
 ======
+##0. 基础
+- 客户端请求数据的方法，利用url来请求相应的servlet，同时需要传递相应的参数，所需参数在以下条目中悉数介绍
+- servlet命名规范：每个servlet对应的java文件的文件名去掉结尾处的servlet即可，如登录需要请求LoginServlet，该servlet的名称为Login
+- 参数命名：单词为复数形式的都是数组，如gnames，数组中元素的数据类型以该单词的单数形式为准，如uids，则每个元素都是uid的类型；所有id都是int型，seq也为int型，其他无特别说明的就是字符串
+- 返回值：每个servlet都是返回一个json数据
+	- 字段SUC是bool型，表示操作成功与否
+	- INFO字符串，表示附加说明，具体每个servlet都不同
+	- DATA，json格式，表示实际返回的数据
+
 ##1. 用户简单逻辑
 - 登录: [LoginServlet.java][1] 客户端需要传参数`email`和`password`
 - 注册: [RegisterServlet.java][2] 客户端需要传参数`email`和`password`
@@ -13,7 +22,8 @@ HITRen
 - 将一些好友复制到新的分组: [CopyUsersToGroupsServlet.java][8], 参数: `uid`,`users`,`gnames`
 - 将一些好友从分组中删除: [DeleteUsersFromGroupServlet.java][9], 参数: `uid`,`users`,`gname` 
 - 将一些好友从一个分组移动到另外的一些分组: [MoveUsersFromGroupToGroupsServlet.java][10], 参数: `uid`,`users`,	当前所在分组`gname`,目标分组`gnames`
-
+- 下载好友关系信息: [DownloadRelationshipInfoServlet.java][11], 参数: `uid`, `seq`
+- 删除关注的好友: [DeleteConcernedUserServlet.java][12], 参数: `uid`, `uid1`, `gnames`
 
 
 
@@ -33,4 +43,5 @@ HITRen
 [8]:HITRenServer/src/cn/edu/hit/servlet/CopyUsersToGroupsServlet.java
 [9]:HITRenServer/src/cn/edu/hit/servlet/DeleteUsersFromGroupServlet.java
 [10]:HITRenServer/src/cn/edu/hit/servlet/MoveUsersFromGroupToGroupsServlet.java
-
+[11]:HITRenServer/src/cn/edu/hit/servlet/DownloadRelationshipInfoServlet.java
+[12]:HITRenServer/src/cn/edu/hit/servlet/DeleteConcernedUserServlet.java

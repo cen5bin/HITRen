@@ -17,10 +17,12 @@ int main(int argc, const char * argv[])
         User *user = [[User alloc] init];
         user.email = @"bin@163.com";
         user.password = @"123";
+        RelationShip *relationShip = [[RelationShip alloc] init];
+        user.relationShip = relationShip;
         UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
 //        [logic signUp];
         [logic login];
-//        //[logic downloadInfo];
+        [logic downloadInfo];
 //        logic.user.sex = 1;
 //        logic.user.hometown = @"zj";
 //        logic.user.birthday = @"asdad";
@@ -28,12 +30,16 @@ int main(int argc, const char * argv[])
 ////        [logic updateInfo];
 //        [logic downloadInfo];
         RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
+        [logic1 downloadInfo];
+//        [logic1 deleteGroup:@"asd"];
+//        [logic1 deleteConcernedUser:1];
 //        [logic1 addGroup:@"asd"];
 //        [logic1 deleteGroup:@"你好4"];
-//        [logic1 concernUser:4 inGroups:[NSArray arrayWithObjects:@"default",@"asd",nil]];
+//        [logic1 concernUser:5 inGroups:[NSArray arrayWithObjects:@"asd",nil]];
+//        [logic1 copyUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:100],[NSNumber numberWithInt:101], nil] toGroup:@"asd"];
 //        [logic1 renameGroup:@"asd1" newName:@"asd"];
-        [logic1 deleteUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:100],[NSNumber numberWithInt:101], nil] fromGroup:@"asd"];
-        [logic1 moveUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:10],[NSNumber numberWithInt:11], nil] fromGroup:@"default" toGroups:[NSArray arrayWithObjects:@"asd", nil]];
+//        [logic1 deleteUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:3], nil] fromGroup:@"default"];
+//        [logic1 moveUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:10],[NSNumber numberWithInt:11], nil] fromGroup:@"default" toGroups:[NSArray arrayWithObjects:@"asd", nil]];
         return 0;
         
 //        //第一步，创建URL

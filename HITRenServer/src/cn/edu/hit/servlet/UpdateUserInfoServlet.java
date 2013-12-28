@@ -42,9 +42,11 @@ public class UpdateUserInfoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String data = request.getParameter("data");
+		data = new String(data.getBytes("ISO8859_1"),"utf-8");
 		try {
 			JSONObject json = new JSONObject(data);
 			UserSimpleLogic.updateInfo(json.getInt("uid"), json.toString());
+			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(UserSimpleLogic.retData);
 		} catch (JSONException e) {

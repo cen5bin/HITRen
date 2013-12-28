@@ -21,13 +21,19 @@ public class UserSimpleLogic {
 		retData = new JSONObject();
 		obj.put(UserConstant.EMAIL, email);
 		obj.put(UserConstant.PASSWORD, password);
-		DBCursor cursor = DBController.query(UserConstant.COLLNAME, obj);
-		if (!cursor.hasNext()) {
+		DBObject retObject = DBController.queryOne(UserConstant.COLLNAME, obj);
+		if (retObject == null) {
 			retData.put(HttpData.SUC, false);
 			return false;
 		}
+//		DBCursor cursor = DBController.query(UserConstant.COLLNAME, obj);
+//		if (!cursor.hasNext()) {
+//			retData.put(HttpData.SUC, false);
+//			return false;
+//		}
 		retData.put(HttpData.SUC, true);
-		retData.put(UserConstant.UID, cursor.next().get(IDCounter.UID).toString());
+//		retData.put(UserConstant.UID, cursor.next().get(IDCounter.UID).toString());
+		retData.put(UserConstant.UID, retObject.get(IDCounter.UID).toString());
 		return true;
 	}
 	

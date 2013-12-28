@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String data = request.getParameter("data");
+		data = new String(data.getBytes("ISO8859_1"),"utf-8");
 		String email = "";
 		String password = "";
 		try {
@@ -58,6 +59,7 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		try {
+			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			UserSimpleLogic.login(email, password);
 			out.print(UserSimpleLogic.retData);

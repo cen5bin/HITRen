@@ -17,6 +17,7 @@
 		F8A59EEC185C441200030361 /* Kit.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A59EEB185C441200030361 /* Kit.m */; };
 		F8B493E21865A86900D500F1 /* BaseLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B493E11865A86900D500F1 /* BaseLogic.m */; };
 		F8B493E51865AA3C00D500F1 /* RelationshipLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B493E41865AA3C00D500F1 /* RelationshipLogic.m */; };
+		F8B493EB1867197000D500F1 /* RelationShip.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B493EA1867197000D500F1 /* RelationShip.m */; };
 		F8D2FDD0185DCDE400194D8E /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D2FDCF185DCDE400194D8E /* Student.m */; };
 		F8D2FDD3185DCF5400194D8E /* Teacher.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D2FDD2185DCF5400194D8E /* Teacher.m */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,8 @@
 		F8B493E11865A86900D500F1 /* BaseLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLogic.m; sourceTree = "<group>"; };
 		F8B493E31865AA3C00D500F1 /* RelationshipLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipLogic.h; sourceTree = "<group>"; };
 		F8B493E41865AA3C00D500F1 /* RelationshipLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationshipLogic.m; sourceTree = "<group>"; };
+		F8B493E91867197000D500F1 /* RelationShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationShip.h; sourceTree = "<group>"; };
+		F8B493EA1867197000D500F1 /* RelationShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationShip.m; sourceTree = "<group>"; };
 		F8D2FDCE185DCDE400194D8E /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
 		F8D2FDCF185DCDE400194D8E /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
 		F8D2FDD1185DCF5400194D8E /* Teacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teacher.h; sourceTree = "<group>"; };
@@ -119,6 +122,8 @@
 				F8D2FDCF185DCDE400194D8E /* Student.m */,
 				F8393024185B5346003FAEEB /* HttpTransfer.h */,
 				F8393025185B5346003FAEEB /* HttpTransfer.m */,
+				F8B493E91867197000D500F1 /* RelationShip.h */,
+				F8B493EA1867197000D500F1 /* RelationShip.m */,
 				F805B0B118102844000A3545 /* Test.1 */,
 				F805B0AF18102844000A3545 /* Supporting Files */,
 			);
@@ -159,7 +164,7 @@
 		F805B09F18102844000A3545 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = wubincen;
 			};
 			buildConfigurationList = F805B0A218102844000A3545 /* Build configuration list for PBXProject "Test" */;
@@ -194,6 +199,7 @@
 				F881FFFC186027B700AB91DB /* HttpData.m in Sources */,
 				F8B493E21865A86900D500F1 /* BaseLogic.m in Sources */,
 				F8B493E51865AA3C00D500F1 /* RelationshipLogic.m in Sources */,
+				F8B493EB1867197000D500F1 /* RelationShip.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +210,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -237,7 +242,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;

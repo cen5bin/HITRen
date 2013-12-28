@@ -153,4 +153,67 @@
     FUNC_END();
     return YES;
 }
+
+- (BOOL)deleteConcernedUser:(int)uid {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    [data setIntValue:self.user.uid forKey:@"uid"];
+    [data setIntValue:uid forKey:@"uid1"];
+    [data setValue:[self getGroupsOfUser:uid] forKey:@"gnames"];
+    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
+    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"DeleteConcernedUser"];
+    if (![[ret objectForKey:@"SUC"] boolValue]) {
+        LOG(@"DeleteConcernedUser fail");
+        FUNC_END();
+        return NO;
+    }
+    LOG(@"DeleteConcernedUser succ");
+    FUNC_END();
+    return YES;
+}
+
+- (BOOL)downloadInfo {
+    FUNC_START();
+    HttpData *data = [[HttpData alloc] init];
+    [data setIntValue:self.user.uid forKey:@"uid"];
+    [data setIntValue:self.user.relationShip.seq forKey:@"seq"];
+    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
+    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"DownloadRelationshipInfo"];
+    if (![[ret objectForKey:@"SUC"] boolValue]) {
+        LOG(@"downloadRelationshipInfo fail");
+        FUNC_END();
+        if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"])
+            return YES;
+        return NO;
+    }
+    LOG(@"downloadRelationshipInfo succ");
+    [self unPackRelationshipInfoData:[ret objectForKey:@"DATA"]];
+    RUN([self print]);
+    FUNC_END();
+    return YES;
+}
+
+- (void)unPackRelationshipInfoData:(NSDictionary *)dic {
+    self.user.relationShip.seq = [[dic objectForKey:@"seq"] intValue];
+    self.user.relationShip.blackList = [dic objectForKey:@"blacklist"];
+    self.user.relationShip.concerList = [dic objectForKey:@"concernlist"];
+    self.user.relationShip.followList = [dic objectForKey:@"followlist"];
+}
+
+- (NSArray *)getGroupsOfUser:(int)uid {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in self.user.relationShip.concerList) {
+        if ([[dic objectForKey:@"userlist"] indexOfObject:[NSNumber numberWithInt:uid]] != NSNotFound)
+            [array addObject:[dic objectForKey:@"gname"]];
+    }
+    return array;
+}
+
+- (void)print {
+    NSLog(@"seq: %d",self.user.relationShip.seq);
+    NSLog(@"blacklist: %@", [self.user.relationShip.blackList description]);
+    NSLog(@"concernlist: %@", [self.user.relationShip.concerList description]);
+    NSLog(@"followlist: %@", [self.user.relationShip.followList description]);
+}
+
 @end

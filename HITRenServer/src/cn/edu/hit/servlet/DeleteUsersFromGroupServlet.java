@@ -46,6 +46,7 @@ public class DeleteUsersFromGroupServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String data = request.getParameter("data");
+		data = new String(data.getBytes("ISO8859_1"),"utf-8");
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
@@ -54,6 +55,7 @@ public class DeleteUsersFromGroupServlet extends HttpServlet {
 			for (int i = 0; i < users0.length(); i++)
 				users.add(users0.getInt(i));
 			String gname = json.getString("gname");
+			response.setCharacterEncoding("utf-8");
 			RelationshipLogic.deleteUserFromGroup(uid, users, gname);
 			PrintWriter out = response.getWriter();
 			out.print(RelationshipLogic.retData);

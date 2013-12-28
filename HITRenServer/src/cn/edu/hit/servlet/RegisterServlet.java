@@ -48,7 +48,9 @@ public class RegisterServlet extends HttpServlet {
 		String email = "";//request.getParameter("email");
 		String password = "";//request.getParameter("password");
 		try {
-			JSONObject json = new JSONObject(request.getParameter("data"));
+			String data = request.getParameter("data");
+			data = new String(data.getBytes("ISO8859_1"),"utf-8");
+			JSONObject json = new JSONObject(data);
 			email = json.get("email").toString();
 			password = json.get("password").toString();
 		} catch (JSONException e) {

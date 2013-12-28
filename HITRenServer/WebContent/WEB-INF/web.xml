@@ -97,4 +97,20 @@
     <servlet-name>MoveUsersFromGroupToGroups</servlet-name>
     <url-pattern>/MoveUsersFromGroupToGroups</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadRelationshipInfo</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.DownloadRelationshipInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadRelationshipInfo</servlet-name>
+    <url-pattern>/DownloadRelationshipInfo</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>DeleteConcernedUser</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.DeleteConcernedUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteConcernedUser</servlet-name>
+    <url-pattern>/DeleteConcernedUser</url-pattern>
+  </servlet-mapping>
 </web-app>

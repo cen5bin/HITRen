@@ -42,11 +42,13 @@ public class DownloadUserInfoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String data = request.getParameter("data");
+		data = new String(data.getBytes("ISO8859_1"),"utf-8");
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
 			int seq = json.getInt("seq");
 			UserSimpleLogic.downloadInfo(uid, seq);
+			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(UserSimpleLogic.retData);
 		} catch (JSONException e) {

@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.WriteResult;
 
@@ -32,10 +33,19 @@ public class DBController {
 	public static DBCursor query(String collname, BasicDBObject obj) {
 		return db.getCollection(collname).find(obj);
 	}
+	
+	public static DBObject queryOne(String collname, BasicDBObject obj) {
+		return db.getCollection(collname).findOne(obj);
+	}
 
+	public static DBObject queryOne(String collname, BasicDBObject obj1, BasicDBObject obj2) {
+		return db.getCollection(collname).findOne(obj1,obj2);
+	}
 	public static boolean objExits(String collname, BasicDBObject obj) {
-		DBCursor cursor = DBController.query(collname, obj);
-		return cursor.hasNext();
+		DBObject retObj = DBController.queryOne(collname, obj);
+		return retObj != null;
+//		DBCursor cursor = DBController.query(collname, obj);
+//		return cursor.hasNext();
 	}
 	public static boolean addObj(String collname, BasicDBObject obj) {
 		WriteResult wr = db.getCollection(collname).save(obj);
