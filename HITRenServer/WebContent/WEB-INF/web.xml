@@ -105,12 +105,28 @@
     <servlet-name>DownloadRelationshipInfo</servlet-name>
     <url-pattern>/DownloadRelationshipInfo</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>DeleteConcernedUser</servlet-name>
     <servlet-class>cn.edu.hit.servlet.DeleteConcernedUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteConcernedUser</servlet-name>
     <url-pattern>/DeleteConcernedUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MoveUsersToBlacklist</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.MoveUsersToBlacklistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MoveUsersToBlacklist</servlet-name>
+    <url-pattern>/MoveUsersToBlacklist</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RecoverUsersFromBlacklist</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.RecoverUsersFromBlacklistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecoverUsersFromBlacklist</servlet-name>
+    <url-pattern>/RecoverUsersFromBlacklist</url-pattern>
   </servlet-mapping>
 </web-app>

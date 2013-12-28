@@ -172,6 +172,54 @@
     return YES;
 }
 
+- (BOOL)moveUserToBlacklist:(int)uid {
+    FUNC_START();
+    BOOL ret = [self moveUsersToBlacklist:[NSArray arrayWithObjects:[NSNumber numberWithInt:uid], nil]];
+    FUNC_END();
+    return ret;
+}
+
+- (BOOL)moveUsersToBlacklist:(NSArray *)users {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    [data setIntValue:self.user.uid forKey:@"uid"];
+    [data setValue:users forKey:@"users"];
+    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
+    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"MoveUsersToBlacklist"];
+    if (![[ret objectForKey:@"SUC"] boolValue]) {
+        LOG(@"MoveUsersToBlacklist fail");
+        FUNC_END();
+        return NO;
+    }
+    LOG(@"MoveUsersToBlacklist succ");
+    FUNC_END();
+    return YES;
+}
+
+- (BOOL)recoverUserFromBlacklist:(int)uid {
+    FUNC_START();
+    BOOL ret = [self recoverUsersFromBlacklist:[NSArray arrayWithObjects:[NSNumber numberWithInt:uid], nil]];
+    FUNC_END();
+    return ret;
+}
+
+- (BOOL)recoverUsersFromBlacklist:(NSArray *)users {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    [data setIntValue:self.user.uid forKey:@"uid"];
+    [data setValue:users forKey:@"users"];
+    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
+    NSMutableDictionary *ret = [HttpTransfer syncPost:request to:@"RecoverUsersFromBlacklist"];
+    if (![[ret objectForKey:@"SUC"] boolValue]) {
+        LOG(@"RecoverUsersFromBlacklist fail");
+        FUNC_END();
+        return NO;
+    }
+    LOG(@"RecoverUsersFromBlacklist succ");
+    FUNC_END();
+    return YES;
+}
+
 - (BOOL)downloadInfo {
     FUNC_START();
     HttpData *data = [[HttpData alloc] init];

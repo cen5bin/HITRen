@@ -22,6 +22,10 @@
 - (BOOL)deleteGroup:(NSString *)gname;
 - (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2;
 - (BOOL)deleteConcernedUser:(int)uid;
+- (BOOL)moveUserToBlacklist:(int)uid;
+- (BOOL)moveUsersToBlacklist:(NSArray *)users;
+- (BOOL)recoverUserFromBlacklist:(int)uid;
+- (BOOL)recoverUsersFromBlacklist:(NSArray *)users;
 - (BOOL)downloadInfo;
 
 @end

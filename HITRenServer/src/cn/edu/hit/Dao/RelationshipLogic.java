@@ -203,6 +203,36 @@ public class RelationshipLogic {
 		return true;
 	}
 	
+	public static boolean moveUsersToBlacklist(int uid, ArrayList<Integer> users) throws JSONException {
+		retData = new JSONObject();
+		BasicDBObject oldObj = new BasicDBObject();
+		oldObj.put(Relationship.UID, uid);
+		BasicDBObject newObj = new BasicDBObject();
+		newObj.put("$addToSet", new BasicDBObject().append(Relationship.BLACKLIST, new BasicDBObject().append("$each", users)));
+		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
+		if (!ret) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		retData.put(HttpData.SUC, true);
+		return true;
+	}
+	
+	public static boolean recoverUsersToBlacklist(int uid, ArrayList<Integer> users) throws JSONException {
+		retData = new JSONObject();
+		BasicDBObject oldObj = new BasicDBObject();
+		oldObj.put(Relationship.UID, uid);
+		BasicDBObject newObj = new BasicDBObject();
+		newObj.put("$pullAll", new BasicDBObject().append(Relationship.BLACKLIST, users));
+		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
+		if (!ret) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		retData.put(HttpData.SUC, true);
+		return true;
+	}
+	
 	public static boolean downloadRelationshipInfo(int uid,int seq) throws JSONException {
 		retData = new JSONObject();
 		BasicDBObject obj = new BasicDBObject();

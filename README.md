@@ -24,7 +24,8 @@ HITRen
 - 将一些好友从一个分组移动到另外的一些分组: [MoveUsersFromGroupToGroupsServlet.java][10], 参数: `uid`,`users`,	当前所在分组`gname`,目标分组`gnames`
 - 下载好友关系信息: [DownloadRelationshipInfoServlet.java][11], 参数: `uid`, `seq`
 - 删除关注的好友: [DeleteConcernedUserServlet.java][12], 参数: `uid`, `uid1`, `gnames`
-
+- 拉进黑名单: [MoveUsersToBlacklistServlet.java][13], 参数: `uid`, `users`
+- 从黑名单恢复: [RecoverUsersFromBlacklistServlet.java][14], 参数: `uid`, `users`
 
 
 
@@ -45,3 +46,5 @@ HITRen
 [10]:HITRenServer/src/cn/edu/hit/servlet/MoveUsersFromGroupToGroupsServlet.java
 [11]:HITRenServer/src/cn/edu/hit/servlet/DownloadRelationshipInfoServlet.java
 [12]:HITRenServer/src/cn/edu/hit/servlet/DeleteConcernedUserServlet.java
+[13]:HITRenServer/src/cn/edu/hit/servlet/MoveUsersToBlacklistServlet.java
+[14]:HITRenServer/src/cn/edu/hit/servlet/RecoverUsersFromBlacklistServlet.java
