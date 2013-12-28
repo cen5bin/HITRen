@@ -2,12 +2,12 @@ HITRen
 ======
 ##0. 基础
 - 客户端请求数据的方法，利用url来请求相应的servlet，同时需要传递相应的参数，所需参数在以下条目中悉数介绍
-- servlet命名规范：每个servlet对应的java文件的文件名去掉结尾处的servlet即可，如登录需要请求LoginServlet，该servlet的名称为Login
-- 参数命名：单词为复数形式的都是数组，如gnames，数组中元素的数据类型以该单词的单数形式为准，如uids，则每个元素都是uid的类型；所有id都是int型，seq也为int型，其他无特别说明的就是字符串
+- servlet命名规范：每个servlet对应的java文件的文件名去掉结尾处的servlet即可，如登录需要请求`LoginServlet`，该servlet的名称为`Login`
+- 参数命名：单词为复数形式的都是数组，如gnames，数组中元素的数据类型以该单词的单数形式为准，如uids，则每个元素都是uid的类型；所有`id`都是`int`型，`seq`也为`int`型，其他无特别说明的就是字符串
 - 返回值：每个servlet都是返回一个json数据
-	- 字段SUC是bool型，表示操作成功与否
-	- INFO字符串，表示附加说明，具体每个servlet都不同
-	- DATA，json格式，表示实际返回的数据
+	- 字段`SUC`是`bool`型，表示操作成功与否
+	- `INFO`字符串，表示附加说明，具体每个servlet都不同
+	- `DATA`，json格式，表示实际返回的数据
 
 ##1. 用户简单逻辑
 - 登录: [LoginServlet.java][1] 客户端需要传参数`email`和`password`
