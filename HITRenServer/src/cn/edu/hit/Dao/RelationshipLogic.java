@@ -38,6 +38,7 @@ public class RelationshipLogic {
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.put("$addToSet", new BasicDBObject().append(Relationship.CONCERNLIST, 
 				new BasicDBObject().append(Relationship.GNAME, gname)));
+		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -82,6 +83,7 @@ public class RelationshipLogic {
 		oldObj.put(UserConstant.UID, uid);
 		newObj = new BasicDBObject();
 		newObj.put("$pull", new BasicDBObject().append(Relationship.CONCERNLIST, new BasicDBObject().append(Relationship.GNAME, gname)));
+		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -99,6 +101,7 @@ public class RelationshipLogic {
 		oldObj.put("concernlist.gname", gname1);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.put("$set", new BasicDBObject().append("concernlist.$.gname", gname2));
+		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -115,6 +118,7 @@ public class RelationshipLogic {
 		oldObj.put("concernlist.gname", gname);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.put("$addToSet", new BasicDBObject().append("concernlist.$.userlist", new BasicDBObject().append("$each", users)));
+		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -131,6 +135,7 @@ public class RelationshipLogic {
 		oldObj.put("concernlist.gname", gname);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.put("$pullAll", new BasicDBObject().append("concernlist.$.userlist", users));
+		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -156,6 +161,7 @@ public class RelationshipLogic {
 		oldObj.put("concernlist.gname", group);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.append("$addToSet", new BasicDBObject().append("concernlist.$.userlist", uid1));
+		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -179,6 +185,7 @@ public class RelationshipLogic {
 		oldObj.put(Relationship.UID, uid);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.put("$addToSet", new BasicDBObject().append(Relationship.FOLLOWLIST, followerid));
+		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -194,6 +201,7 @@ public class RelationshipLogic {
 		oldObj.put(Relationship.UID, uid);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.put("$pull", new BasicDBObject().append(Relationship.FOLLOWLIST, followid));
+		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -209,6 +217,7 @@ public class RelationshipLogic {
 		oldObj.put(Relationship.UID, uid);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.put("$addToSet", new BasicDBObject().append(Relationship.BLACKLIST, new BasicDBObject().append("$each", users)));
+		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -224,6 +233,7 @@ public class RelationshipLogic {
 		oldObj.put(Relationship.UID, uid);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.put("$pullAll", new BasicDBObject().append(Relationship.BLACKLIST, users));
+		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
