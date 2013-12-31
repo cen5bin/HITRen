@@ -20,17 +20,19 @@ int main(int argc, const char * argv[])
         RelationShip *relationShip = [[RelationShip alloc] init];
         user.relationShip = relationShip;
         UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
-//        [logic signUp];
+        [logic signUp];
         [logic login];
-        [logic downloadInfo];
+//        [logic downloadInfo];
 //        logic.user.sex = 1;
 //        logic.user.hometown = @"zj";
-//        logic.user.birthday = @"asdad";
+//        logic.user.birthday = @"asdad2";
 //        logic.user.seq = 7;
-////        [logic updateInfo];
+//        [logic updateInfo];
 //        [logic downloadInfo];
         RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
         [logic1 downloadInfo];
+//        [logic1 addGroup:@"ffff"];
+        [logic1 deleteGroup:@"ffff"];
 //        [logic1 concernUser:<#(int)#> inGroups:<#(NSArray *)#>]
 //        [logic1 deleteUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:1], nil] fromGroup:@"asd"];
 //        [logic1 copyUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:1], nil] toGroup:@"asd"];
@@ -40,14 +42,15 @@ int main(int argc, const char * argv[])
 //        [logic1 recoverUsersFromBlacklist:[NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:10], nil]];
 //        [logic1 moveUserToBlacklist:11];
 //        [logic1 addGroup:@"你好"];
-//        [logic1 deleteGroup:@"你好4"];
+//        [logic1 deleteGroup:@"ffff"];
 //        [logic1 moveUserToBlacklist:33];
-        [logic1 recoverUserFromBlacklist:33];
+//        [logic1 recoverUserFromBlacklist:33];
 //        [logic1 deleteConcernedUser:33];
-//        [logic1 concernUser:33 inGroups:[NSArray arrayWithObjects:@"asd",nil]];
+//        [logic1 concernUser:33 inGroups:[NSArray arrayWithObjects:@"ffff",nil]];
 //        [logic1 copyUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:100],[NSNumber numberWithInt:101], nil] toGroup:@"asd"];
-//        [logic1 renameGroup:@"asd1" newName:@"asd"];
-//        [logic1 deleteUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:3], nil] fromGroup:@"default"];
+//        [logic1 deleteGroup:@"cccc"];
+//        [logic1 renameGroup:@"asd1" newName:@"cccc"];
+//        [logic1 deleteUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:100], nil] fromGroup:@"asd"];
 //        [logic1 moveUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:10],[NSNumber numberWithInt:11], nil] fromGroup:@"default" toGroups:[NSArray arrayWithObjects:@"asd", nil]];
         return 0;
         

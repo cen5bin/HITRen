@@ -1,4 +1,4 @@
-package cn.edu.hit.servlet;
+package cn.edu.hit.servlet.relationshiplogic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,20 +15,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.edu.hit.Dao.RelationshipLogic;
+import cn.edu.hit.Dao.UserSimpleLogic;
 
 /**
- * Servlet implementation class DeleteUsersFromGroupServlet
- * 将部分好友从分组中删除
- * 参数 自己的uid 要删除的数组users，分组名gname
+ * Servlet implementation class MoveUsersToBlacklistServlet
+ * 将一些人拉进黑名单
+ * 参数uid ，users（要拉进黑名单的用户uid数组）
  */
-@WebServlet("/DeleteUsersFromGroupServlet")
-public class DeleteUsersFromGroupServlet extends HttpServlet {
+@WebServlet("/MoveUsersToBlacklistServlet")
+public class MoveUsersToBlacklistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteUsersFromGroupServlet() {
+    public MoveUsersToBlacklistServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -54,16 +55,14 @@ public class DeleteUsersFromGroupServlet extends HttpServlet {
 			ArrayList<Integer> users = new ArrayList<Integer>();
 			for (int i = 0; i < users0.length(); i++)
 				users.add(users0.getInt(i));
-			String gname = json.getString("gname");
+			RelationshipLogic.moveUsersToBlacklist(uid, users);
 			response.setCharacterEncoding("utf-8");
-			RelationshipLogic.deleteUserFromGroup(uid, users, gname);
 			PrintWriter out = response.getWriter();
-			out.print(RelationshipLogic.retData);
+			out.print(UserSimpleLogic.retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 }
