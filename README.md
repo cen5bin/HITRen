@@ -34,17 +34,18 @@ HITRen
 
 
 
-[1]:HITRenServer/src/cn/edu/hit/servlet/LoginServlet.java
-[2]:HITRenServer/src/cn/edu/hit/servlet/RegisterServlet.java
-[3]:HITRenServer/src/cn/edu/hit/servlet/DownloadUserInfoServlet.java
-[4]:HITRenServer/src/cn/edu/hit/servlet/UpdataUserInfoServlet.java
-[5]:HITRenServer/src/cn/edu/hit/servlet/AddConcernlistGroupServlet.java
-[6]:HITRenServer/src/cn/edu/hit/servlet/RenameConcernlistGroupServlet.java
-[7]:HITRenServer/src/cn/edu/hit/servlet/ConcernUserServlet.java
-[8]:HITRenServer/src/cn/edu/hit/servlet/CopyUsersToGroupsServlet.java
-[9]:HITRenServer/src/cn/edu/hit/servlet/DeleteUsersFromGroupServlet.java
-[10]:HITRenServer/src/cn/edu/hit/servlet/MoveUsersFromGroupToGroupsServlet.java
-[11]:HITRenServer/src/cn/edu/hit/servlet/DownloadRelationshipInfoServlet.java
-[12]:HITRenServer/src/cn/edu/hit/servlet/DeleteConcernedUserServlet.java
-[13]:HITRenServer/src/cn/edu/hit/servlet/MoveUsersToBlacklistServlet.java
-[14]:HITRenServer/src/cn/edu/hit/servlet/RecoverUsersFromBlacklistServlet.java
+[1]:HITRenServer/src/cn/edu/hit/servlet/usersimplelogic/LoginServlet.java
+[2]:HITRenServer/src/cn/edu/hit/servlet/usersimplelogic/RegisterServlet.java
+[3]:HITRenServer/src/cn/edu/hit/servlet/usersimplelogic/DownloadUserInfoServlet.java
+[4]:HITRenServer/src/cn/edu/hit/servlet/usersimplelogic/UpdataUserInfoServlet.java
+
+[5]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/AddConcernlistGroupServlet.java
+[6]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/RenameConcernlistGroupServlet.java
+[7]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/ConcernUserServlet.java
+[8]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/CopyUsersToGroupsServlet.java
+[9]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/DeleteUsersFromGroupServlet.java
+[10]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/MoveUsersFromGroupToGroupsServlet.java
+[11]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/DownloadRelationshipInfoServlet.java
+[12]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/DeleteConcernedUserServlet.java
+[13]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/MoveUsersToBlacklistServlet.java
+[14]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/RecoverUsersFromBlacklistServlet.java
