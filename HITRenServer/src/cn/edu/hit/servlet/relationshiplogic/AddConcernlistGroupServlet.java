@@ -1,4 +1,4 @@
-package cn.edu.hit.servlet;
+package cn.edu.hit.servlet.relationshiplogic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,17 +15,18 @@ import org.json.JSONObject;
 import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
- * Servlet implementation class RenameConcernlistGroupServlet
- * 重命名分组，传递参数uid，gname1，gname2，将gname1重命名为gname2
+ * Servlet implementation class AddConcernlistGroupServlet
+ * 添加好友分组
+ * 客户端传递过来uid和分组名称gname
  */
-@WebServlet("/RenameConcernlistGroupServlet")
-public class RenameConcernlistGroupServlet extends HttpServlet {
+@WebServlet("/AddConcernlistGroupServlet")
+public class AddConcernlistGroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RenameConcernlistGroupServlet() {
+    public AddConcernlistGroupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,6 +36,8 @@ public class RenameConcernlistGroupServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
+		out.print("zz");
 	}
 
 	/**
@@ -42,15 +45,14 @@ public class RenameConcernlistGroupServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+//		request.setCharacterEncoding("utf-8");
 		String data = request.getParameter("data");
 		data = new String(data.getBytes("ISO8859_1"),"utf-8");
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
-			String gname1 = json.getString("gname1");
-			String gname2 = json.getString("gname2");
-			System.out.print(gname1+" "+gname2);
-			RelationshipLogic.renameGroup(uid, gname1, gname2);
+			String gname = json.getString("gname");
+			RelationshipLogic.addGroup(uid, gname);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(RelationshipLogic.retData);
@@ -58,6 +60,7 @@ public class RenameConcernlistGroupServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

@@ -1,7 +1,8 @@
-package cn.edu.hit.servlet;
+package cn.edu.hit.servlet.relationshiplogic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,24 +10,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
- * Servlet implementation class AddConcernlistGroupServlet
- * 添加好友分组
- * 客户端传递过来uid和分组名称gname
+ * Servlet implementation class DeleteConcernedUserServlet
+ * 删除关注的人
+ * 参数uid,uid1(要删除的人的uid),gnames(该uid所在的所有分组)
  */
-@WebServlet("/AddConcernlistGroupServlet")
-public class AddConcernlistGroupServlet extends HttpServlet {
+@WebServlet("/DeleteConcernedUserServlet")
+public class DeleteConcernedUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddConcernlistGroupServlet() {
+    public DeleteConcernedUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,8 +38,6 @@ public class AddConcernlistGroupServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out = response.getWriter();
-		out.print("zz");
 	}
 
 	/**
@@ -45,14 +45,23 @@ public class AddConcernlistGroupServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		request.setCharacterEncoding("utf-8");
 		String data = request.getParameter("data");
 		data = new String(data.getBytes("ISO8859_1"),"utf-8");
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
-			String gname = json.getString("gname");
-			RelationshipLogic.addGroup(uid, gname);
+			int uid1 = json.getInt("uid1");
+			JSONArray gnames = json.getJSONArray("gnames");
+			boolean ret = false;
+			for (int i = 0; i < gnames.length(); i++) {
+				ArrayList<Integer> users = new ArrayList<Integer>();
+				users.add(uid1);
+				ret = RelationshipLogic.deleteUserFromGroup(uid, users, gnames.getString(i));
+				if (!ret)
+					break;
+			}
+			if (ret)
+				RelationshipLogic.removeAfollowerFromUid(uid, uid1);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(RelationshipLogic.retData);
@@ -60,7 +69,6 @@ public class AddConcernlistGroupServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 }

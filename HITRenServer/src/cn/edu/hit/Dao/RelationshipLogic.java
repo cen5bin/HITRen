@@ -37,7 +37,7 @@ public class RelationshipLogic {
 		oldObj.put(UserConstant.UID, uid);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.put("$addToSet", new BasicDBObject().append(Relationship.CONCERNLIST, 
-				new BasicDBObject().append(Relationship.GNAME, gname)));
+				new BasicDBObject().append(Relationship.GNAME, gname).append(Relationship.USERLIST, new ArrayList<String>())));
 		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
 		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
 		if (!ret) {

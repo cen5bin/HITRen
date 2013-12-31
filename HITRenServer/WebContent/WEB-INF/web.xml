@@ -11,7 +11,7 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>Login</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.LoginServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.usersimplelogic.LoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -19,7 +19,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Register</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.RegisterServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.usersimplelogic.RegisterServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
@@ -27,7 +27,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>UpdateUserInfo</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.UpdateUserInfoServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.usersimplelogic.UpdateUserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateUserInfo</servlet-name>
@@ -35,7 +35,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DownloadUserInfo</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.DownloadUserInfoServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.usersimplelogic.DownloadUserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DownloadUserInfo</servlet-name>
@@ -43,7 +43,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ConcernUser</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.ConcernUserServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.ConcernUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ConcernUser</servlet-name>
@@ -51,7 +51,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AddConcernlistGroup</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.AddConcernlistGroupServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.AddConcernlistGroupServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AddConcernlistGroup</servlet-name>
@@ -59,7 +59,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DeleteConcernlistGroup</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.DeleteConcernlistGroupServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.DeleteConcernlistGroupServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteConcernlistGroup</servlet-name>
@@ -67,7 +67,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>RenameConcernlistGroup</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.RenameConcernlistGroupServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.RenameConcernlistGroupServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RenameConcernlistGroup</servlet-name>
@@ -75,7 +75,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>CopyUsersToGroups</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.CopyUsersToGroupsServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.CopyUsersToGroupsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CopyUsersToGroups</servlet-name>
@@ -83,7 +83,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DeleteUsersFromGroup</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.DeleteUsersFromGroupServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.DeleteUsersFromGroupServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteUsersFromGroup</servlet-name>
@@ -91,7 +91,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>MoveUsersFromGroupToGroups</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.MoveUsersFromGroupToGroupsServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.MoveUsersFromGroupToGroupsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MoveUsersFromGroupToGroups</servlet-name>
@@ -99,7 +99,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DownloadRelationshipInfo</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.DownloadRelationshipInfoServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.DownloadRelationshipInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DownloadRelationshipInfo</servlet-name>
@@ -107,7 +107,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DeleteConcernedUser</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.DeleteConcernedUserServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.DeleteConcernedUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteConcernedUser</servlet-name>
@@ -115,7 +115,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>MoveUsersToBlacklist</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.MoveUsersToBlacklistServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.MoveUsersToBlacklistServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MoveUsersToBlacklist</servlet-name>
@@ -123,7 +123,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>RecoverUsersFromBlacklist</servlet-name>
-    <servlet-class>cn.edu.hit.servlet.RecoverUsersFromBlacklistServlet</servlet-class>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.RecoverUsersFromBlacklistServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RecoverUsersFromBlacklist</servlet-name>

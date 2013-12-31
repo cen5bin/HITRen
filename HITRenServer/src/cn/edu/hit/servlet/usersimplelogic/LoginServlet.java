@@ -1,4 +1,4 @@
-package cn.edu.hit.servlet;
+package cn.edu.hit.servlet.usersimplelogic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,17 +14,18 @@ import org.json.JSONObject;
 
 import cn.edu.hit.Dao.UserSimpleLogic;
 
+
 /**
- * Servlet implementation class UpdateUserInfoServlet
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/UpdateUserInfoServlet")
-public class UpdateUserInfoServlet extends HttpServlet {
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateUserInfoServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +35,8 @@ public class UpdateUserInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
+		out.print("asd");
 	}
 
 	/**
@@ -41,18 +44,30 @@ public class UpdateUserInfoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		String data = request.getParameter("data");
 		data = new String(data.getBytes("ISO8859_1"),"utf-8");
+		String email = "";
+		String password = "";
 		try {
 			JSONObject json = new JSONObject(data);
-			UserSimpleLogic.updateInfo(json.getInt("uid"), json.toString());
+			email = json.get("email").toString();
+			password = json.get("password").toString();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
+			UserSimpleLogic.login(email, password);
 			out.print(UserSimpleLogic.retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

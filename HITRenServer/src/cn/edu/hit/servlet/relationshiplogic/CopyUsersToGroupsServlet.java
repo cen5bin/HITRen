@@ -1,7 +1,8 @@
-package cn.edu.hit.servlet;
+package cn.edu.hit.servlet.relationshiplogic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,18 +17,18 @@ import org.json.JSONObject;
 import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
- * Servlet implementation class ConcernUserServlet
- * 关注一个好友,把他加到分组中，默认加入default分组
- * 客户端传来uid，uid1（关注的人的uid），和分组列表gnames（数组）
+ * Servlet implementation class CopyUsersToGroupsServlet
+ * 将一部分好友复制到某些分组
+ * 传递参数：当前用户uid，要复制的好友users，目标分组gnames
  */
-@WebServlet("/ConcernUserServlet")
-public class ConcernUserServlet extends HttpServlet {
+@WebServlet("/CopyUsersToGroupsServlet")
+public class CopyUsersToGroupsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConcernUserServlet() {
+    public CopyUsersToGroupsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,21 +50,24 @@ public class ConcernUserServlet extends HttpServlet {
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
-			int uid1 = json.getInt("uid1");
-			JSONArray jsonArray = json.getJSONArray("gnames");
-			for (int i = 0; i < jsonArray.length(); i++){
-				boolean ret = RelationshipLogic.concernUserInGroup(uid, jsonArray.getString(i), uid1);
-				if (!ret) 
+			JSONArray users0 = json.getJSONArray("users");
+			ArrayList<Integer> users = new ArrayList<Integer>();
+			for (int i = 0; i < users0.length(); i++)
+				users.add(users0.getInt(i));
+			JSONArray groups = json.getJSONArray("gnames");
+			for (int i = 0; i < groups.length(); i++) {
+				boolean ret = RelationshipLogic.copyUsersToGroup(uid, users, groups.getString(i));
+				if (!ret)
 					break;
 			}
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(RelationshipLogic.retData);
-			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

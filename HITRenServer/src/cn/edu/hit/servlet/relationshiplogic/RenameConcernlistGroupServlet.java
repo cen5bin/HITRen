@@ -1,4 +1,4 @@
-package cn.edu.hit.servlet;
+package cn.edu.hit.servlet.relationshiplogic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,16 +15,17 @@ import org.json.JSONObject;
 import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
- * Servlet implementation class DownloadRelationshipInfoServlet
+ * Servlet implementation class RenameConcernlistGroupServlet
+ * 重命名分组，传递参数uid，gname1，gname2，将gname1重命名为gname2
  */
-@WebServlet("/DownloadRelationshipInfoServlet")
-public class DownloadRelationshipInfoServlet extends HttpServlet {
+@WebServlet("/RenameConcernlistGroupServlet")
+public class RenameConcernlistGroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DownloadRelationshipInfoServlet() {
+    public RenameConcernlistGroupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,8 +47,10 @@ public class DownloadRelationshipInfoServlet extends HttpServlet {
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
-			int seq = json.getInt("seq");
-			RelationshipLogic.downloadRelationshipInfo(uid, seq);
+			String gname1 = json.getString("gname1");
+			String gname2 = json.getString("gname2");
+			System.out.print(gname1+" "+gname2);
+			RelationshipLogic.renameGroup(uid, gname1, gname2);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(RelationshipLogic.retData);
@@ -55,7 +58,6 @@ public class DownloadRelationshipInfoServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 }
