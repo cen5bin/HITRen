@@ -23,6 +23,23 @@ class UserConstant {
 	protected static final String SEQ = "seq";
 }
 
+class Message {
+	protected static final String COLLNAME = "Message";
+	
+	protected static final String MID = "mid";
+	protected static final String UID = UserConstant.UID;
+	protected static final String TIME = "time";
+	protected static final String COMMENTLIST = "commentlist";
+	protected static final String LIKEDLIST = "likedlist";
+	protected static final String SHATECOUNT = "sharedcount";
+	protected static final String TYPE = "type";
+	protected static final class Type {
+		protected static final int NORMAL = 0;
+		protected static final int SHARED = 1;
+	}
+	protected static final String CONTENT = "content";
+}
+
 class IDCounter {
 	//表名
 	protected static final String COLLNAME = "IDCounter";
@@ -31,6 +48,7 @@ class IDCounter {
 	protected static final String VALUE = "value";
 	//key
 	protected static final String UID = UserConstant.UID;
+	protected static final String MID = Message.MID;
 }
 
 class Relationship {
@@ -44,6 +62,14 @@ class Relationship {
 	//以下两个字段是在concernlist数组中每个元素的内部字段
 	protected static final String GNAME = "gname";
 	protected static final String USERLIST = "userlist";
+	
+	protected static final String DEFAULT = "default";
+}
+
+class TimeLine {
+	protected static String COLLNAME = "TimeLine";
+	protected static String UID = UserConstant.UID;
+	protected static String LIST = "list";
 }
 
 class HttpData {

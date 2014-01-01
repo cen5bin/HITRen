@@ -10,10 +10,14 @@
 #import "UserSimpleLogic.h"
 #import "RelationshipLogic.h"
 #import "User.h"
+#import "TestHttpTransfer.h"
+
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
+        testAsyncRequest();
+//        sleep(10);
         User *user = [[User alloc] init];
         user.email = @"bin@163.com";
         user.password = @"123";
@@ -29,10 +33,10 @@ int main(int argc, const char * argv[])
 //        logic.user.seq = 7;
 //        [logic updateInfo];
 //        [logic downloadInfo];
-        RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
-        [logic1 downloadInfo];
+//        RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
+//        [logic1 downloadInfo];
 //        [logic1 addGroup:@"ffff"];
-        [logic1 deleteGroup:@"ffff"];
+//        [logic1 deleteGroup:@"ffff"];
 //        [logic1 concernUser:<#(int)#> inGroups:<#(NSArray *)#>]
 //        [logic1 deleteUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:1], nil] fromGroup:@"asd"];
 //        [logic1 copyUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:1], nil] toGroup:@"asd"];

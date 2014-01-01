@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#define HITREN_DEBUG
+//#define HITREN_DEBUG
 
 NSString *stringToUrlString(NSString * string);
 void functionLog(const char *filename, int line, const char* funcName, NSString *string);

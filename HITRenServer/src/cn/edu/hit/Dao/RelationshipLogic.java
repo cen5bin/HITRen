@@ -1,6 +1,8 @@
 package cn.edu.hit.Dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -257,5 +259,28 @@ public class RelationshipLogic {
 		retData.put(HttpData.SUC, true);
 		retData.put(HttpData.DATA, retObj);
 		return true;
+	}
+	
+	public static Map<String, ArrayList<Integer>> getRelationshipOfUser(int uid) throws JSONException {
+		BasicDBObject obj1 = new BasicDBObject();
+		obj1.put(Relationship.UID, uid);
+		BasicDBObject obj2 = new BasicDBObject();
+		obj2.put(Relationship.CONCERNLIST, 1);
+		DBObject retObj = DBController.queryOne(Relationship.COLLNAME, obj1, obj2);
+		if (retObj == null)
+			return null;
+		Map<String, ArrayList<Integer>> retMap = new HashMap<String, ArrayList<Integer>>();
+		JSONArray jsonArray = new JSONObject(retObj.toString()).getJSONArray(Relationship.CONCERNLIST);
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject json = new JSONObject(jsonArray.getString(i));
+			String gname = json.getString(Relationship.GNAME);
+			JSONArray users0 = json.getJSONArray(Relationship.USERLIST);
+			ArrayList<Integer> users = new ArrayList<Integer>();
+			for (int j = 0; j < users0.length(); j++)
+				users.add(users0.getInt(i));
+			retMap.put(gname, users);
+		}
+		return retMap;
+//		return retObj;
 	}
 }

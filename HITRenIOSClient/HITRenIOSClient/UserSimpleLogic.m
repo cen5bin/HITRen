@@ -20,6 +20,7 @@
     [dic setValue:self.user.email forKey:@"email"];
     [dic setValue:self.user.password forKey:@"password"];
     NSString *requestString = [NSString stringWithFormat:@"data=%@",stringToUrlString([dic description])];
+    LOG([httpTransfer description]);
     NSMutableDictionary *ret = [httpTransfer syncPost:requestString to:@"Login"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"login fail");

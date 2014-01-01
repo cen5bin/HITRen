@@ -10,11 +10,13 @@
 		F805B0AB18102844000A3545 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F805B0AA18102844000A3545 /* Foundation.framework */; };
 		F805B0AE18102844000A3545 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F805B0AD18102844000A3545 /* main.m */; };
 		F805B0B218102844000A3545 /* Test.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F805B0B118102844000A3545 /* Test.1 */; };
+		F80B0C9C1873F9B6003E72DC /* MessageLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0C9B1873F9B6003E72DC /* MessageLogic.m */; };
+		F80B0CA018740BAC003E72DC /* TestHttpTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0C9F18740BAC003E72DC /* TestHttpTransfer.m */; };
 		F8393020185B4C71003FAEEB /* UserSimpleLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F839301F185B4C71003FAEEB /* UserSimpleLogic.m */; };
 		F8393023185B4DDC003FAEEB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = F8393022185B4DDC003FAEEB /* User.m */; };
 		F8393026185B5346003FAEEB /* HttpTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = F8393025185B5346003FAEEB /* HttpTransfer.m */; };
 		F881FFFC186027B700AB91DB /* HttpData.m in Sources */ = {isa = PBXBuildFile; fileRef = F881FFFB186027B700AB91DB /* HttpData.m */; };
-		F8A59EEC185C441200030361 /* Kit.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A59EEB185C441200030361 /* Kit.m */; };
+		F8A59EEC185C441200030361 /* LogKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A59EEB185C441200030361 /* LogKit.m */; };
 		F8B493E21865A86900D500F1 /* BaseLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B493E11865A86900D500F1 /* BaseLogic.m */; };
 		F8B493E51865AA3C00D500F1 /* RelationshipLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B493E41865AA3C00D500F1 /* RelationshipLogic.m */; };
 		F8B493EB1867197000D500F1 /* RelationShip.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B493EA1867197000D500F1 /* RelationShip.m */; };
@@ -41,6 +43,10 @@
 		F805B0AD18102844000A3545 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F805B0B018102844000A3545 /* Test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Test-Prefix.pch"; sourceTree = "<group>"; };
 		F805B0B118102844000A3545 /* Test.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Test.1; sourceTree = "<group>"; };
+		F80B0C9A1873F9B6003E72DC /* MessageLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageLogic.h; sourceTree = "<group>"; };
+		F80B0C9B1873F9B6003E72DC /* MessageLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageLogic.m; sourceTree = "<group>"; };
+		F80B0C9E18740BAC003E72DC /* TestHttpTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHttpTransfer.h; sourceTree = "<group>"; };
+		F80B0C9F18740BAC003E72DC /* TestHttpTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHttpTransfer.m; sourceTree = "<group>"; };
 		F839301E185B4C71003FAEEB /* UserSimpleLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSimpleLogic.h; sourceTree = "<group>"; };
 		F839301F185B4C71003FAEEB /* UserSimpleLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSimpleLogic.m; sourceTree = "<group>"; };
 		F8393021185B4DDC003FAEEB /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -49,8 +55,8 @@
 		F8393025185B5346003FAEEB /* HttpTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpTransfer.m; sourceTree = "<group>"; };
 		F881FFFA186027B700AB91DB /* HttpData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpData.h; sourceTree = "<group>"; };
 		F881FFFB186027B700AB91DB /* HttpData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpData.m; sourceTree = "<group>"; };
-		F8A59EEA185C441200030361 /* Kit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kit.h; sourceTree = "<group>"; };
-		F8A59EEB185C441200030361 /* Kit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Kit.m; sourceTree = "<group>"; };
+		F8A59EEA185C441200030361 /* LogKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogKit.h; sourceTree = "<group>"; };
+		F8A59EEB185C441200030361 /* LogKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogKit.m; sourceTree = "<group>"; };
 		F8B493E01865A86900D500F1 /* BaseLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLogic.h; sourceTree = "<group>"; };
 		F8B493E11865A86900D500F1 /* BaseLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLogic.m; sourceTree = "<group>"; };
 		F8B493E31865AA3C00D500F1 /* RelationshipLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipLogic.h; sourceTree = "<group>"; };
@@ -103,27 +109,12 @@
 		F805B0AC18102844000A3545 /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				F8B493E31865AA3C00D500F1 /* RelationshipLogic.h */,
-				F8B493E41865AA3C00D500F1 /* RelationshipLogic.m */,
-				F8393021185B4DDC003FAEEB /* User.h */,
-				F8393022185B4DDC003FAEEB /* User.m */,
+				F80B0C9D18740B5E003E72DC /* test */,
+				F80B0C991873F948003E72DC /* kit */,
+				F80B0C981873F918003E72DC /* network */,
+				F80B0C971873F8C9003E72DC /* model */,
+				F80B0C961873F897003E72DC /* controller */,
 				F805B0AD18102844000A3545 /* main.m */,
-				F8B493E01865A86900D500F1 /* BaseLogic.h */,
-				F8B493E11865A86900D500F1 /* BaseLogic.m */,
-				F8A59EEA185C441200030361 /* Kit.h */,
-				F8A59EEB185C441200030361 /* Kit.m */,
-				F881FFFA186027B700AB91DB /* HttpData.h */,
-				F881FFFB186027B700AB91DB /* HttpData.m */,
-				F839301E185B4C71003FAEEB /* UserSimpleLogic.h */,
-				F839301F185B4C71003FAEEB /* UserSimpleLogic.m */,
-				F8D2FDCE185DCDE400194D8E /* Student.h */,
-				F8D2FDD1185DCF5400194D8E /* Teacher.h */,
-				F8D2FDD2185DCF5400194D8E /* Teacher.m */,
-				F8D2FDCF185DCDE400194D8E /* Student.m */,
-				F8393024185B5346003FAEEB /* HttpTransfer.h */,
-				F8393025185B5346003FAEEB /* HttpTransfer.m */,
-				F8B493E91867197000D500F1 /* RelationShip.h */,
-				F8B493EA1867197000D500F1 /* RelationShip.m */,
 				F805B0B118102844000A3545 /* Test.1 */,
 				F805B0AF18102844000A3545 /* Supporting Files */,
 			);
@@ -136,6 +127,65 @@
 				F805B0B018102844000A3545 /* Test-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F80B0C961873F897003E72DC /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				F8B493E01865A86900D500F1 /* BaseLogic.h */,
+				F8B493E11865A86900D500F1 /* BaseLogic.m */,
+				F839301E185B4C71003FAEEB /* UserSimpleLogic.h */,
+				F839301F185B4C71003FAEEB /* UserSimpleLogic.m */,
+				F8B493E31865AA3C00D500F1 /* RelationshipLogic.h */,
+				F8B493E41865AA3C00D500F1 /* RelationshipLogic.m */,
+				F80B0C9A1873F9B6003E72DC /* MessageLogic.h */,
+				F80B0C9B1873F9B6003E72DC /* MessageLogic.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		F80B0C971873F8C9003E72DC /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F8393021185B4DDC003FAEEB /* User.h */,
+				F8393022185B4DDC003FAEEB /* User.m */,
+				F8D2FDCE185DCDE400194D8E /* Student.h */,
+				F8D2FDCF185DCDE400194D8E /* Student.m */,
+				F8D2FDD1185DCF5400194D8E /* Teacher.h */,
+				F8D2FDD2185DCF5400194D8E /* Teacher.m */,
+				F8B493E91867197000D500F1 /* RelationShip.h */,
+				F8B493EA1867197000D500F1 /* RelationShip.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		F80B0C981873F918003E72DC /* network */ = {
+			isa = PBXGroup;
+			children = (
+				F881FFFA186027B700AB91DB /* HttpData.h */,
+				F881FFFB186027B700AB91DB /* HttpData.m */,
+				F8393024185B5346003FAEEB /* HttpTransfer.h */,
+				F8393025185B5346003FAEEB /* HttpTransfer.m */,
+			);
+			name = network;
+			sourceTree = "<group>";
+		};
+		F80B0C991873F948003E72DC /* kit */ = {
+			isa = PBXGroup;
+			children = (
+				F8A59EEA185C441200030361 /* LogKit.h */,
+				F8A59EEB185C441200030361 /* LogKit.m */,
+			);
+			name = kit;
+			sourceTree = "<group>";
+		};
+		F80B0C9D18740B5E003E72DC /* test */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0C9E18740BAC003E72DC /* TestHttpTransfer.h */,
+				F80B0C9F18740BAC003E72DC /* TestHttpTransfer.m */,
+			);
+			name = test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,12 +239,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F80B0C9C1873F9B6003E72DC /* MessageLogic.m in Sources */,
 				F805B0AE18102844000A3545 /* main.m in Sources */,
 				F8393020185B4C71003FAEEB /* UserSimpleLogic.m in Sources */,
 				F8393023185B4DDC003FAEEB /* User.m in Sources */,
 				F8393026185B5346003FAEEB /* HttpTransfer.m in Sources */,
-				F8A59EEC185C441200030361 /* Kit.m in Sources */,
+				F8A59EEC185C441200030361 /* LogKit.m in Sources */,
 				F8D2FDD0185DCDE400194D8E /* Student.m in Sources */,
+				F80B0CA018740BAC003E72DC /* TestHttpTransfer.m in Sources */,
 				F8D2FDD3185DCF5400194D8E /* Teacher.m in Sources */,
 				F881FFFC186027B700AB91DB /* HttpData.m in Sources */,
 				F8B493E21865A86900D500F1 /* BaseLogic.m in Sources */,

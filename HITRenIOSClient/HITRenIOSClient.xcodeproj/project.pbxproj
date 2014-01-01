@@ -1,0 +1,638 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F80B0CF81874269D003E72DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F80B0CF71874269D003E72DC /* Foundation.framework */; };
+		F80B0CFA1874269D003E72DC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F80B0CF91874269D003E72DC /* CoreGraphics.framework */; };
+		F80B0CFC1874269D003E72DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F80B0CFB1874269D003E72DC /* UIKit.framework */; };
+		F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F80B0D001874269D003E72DC /* InfoPlist.strings */; };
+		F80B0D041874269D003E72DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D031874269D003E72DC /* main.m */; };
+		F80B0D081874269D003E72DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D071874269D003E72DC /* AppDelegate.m */; };
+		F80B0D0B1874269D003E72DC /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80B0D091874269D003E72DC /* Main_iPhone.storyboard */; };
+		F80B0D0E1874269D003E72DC /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80B0D0C1874269D003E72DC /* Main_iPad.storyboard */; };
+		F80B0D111874269D003E72DC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D101874269D003E72DC /* ViewController.m */; };
+		F80B0D131874269D003E72DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F80B0D121874269D003E72DC /* Images.xcassets */; };
+		F80B0D1A1874269D003E72DC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F80B0D191874269D003E72DC /* XCTest.framework */; };
+		F80B0D1B1874269D003E72DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F80B0CF71874269D003E72DC /* Foundation.framework */; };
+		F80B0D1C1874269D003E72DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F80B0CFB1874269D003E72DC /* UIKit.framework */; };
+		F80B0D241874269D003E72DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F80B0D221874269D003E72DC /* InfoPlist.strings */; };
+		F80B0D261874269D003E72DC /* HITRenIOSClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D251874269D003E72DC /* HITRenIOSClientTests.m */; };
+		F80B0D47187426F2003E72DC /* BaseLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D30187426F2003E72DC /* BaseLogic.m */; };
+		F80B0D48187426F2003E72DC /* HttpData.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D32187426F2003E72DC /* HttpData.m */; };
+		F80B0D49187426F2003E72DC /* HttpTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D34187426F2003E72DC /* HttpTransfer.m */; };
+		F80B0D4A187426F2003E72DC /* LogKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D36187426F2003E72DC /* LogKit.m */; };
+		F80B0D4B187426F2003E72DC /* MessageLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D38187426F2003E72DC /* MessageLogic.m */; };
+		F80B0D4C187426F2003E72DC /* RelationShip.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D3A187426F2003E72DC /* RelationShip.m */; };
+		F80B0D4D187426F2003E72DC /* RelationshipLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D3C187426F2003E72DC /* RelationshipLogic.m */; };
+		F80B0D4E187426F2003E72DC /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D3E187426F2003E72DC /* Student.m */; };
+		F80B0D4F187426F2003E72DC /* Teacher.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D40187426F2003E72DC /* Teacher.m */; };
+		F80B0D50187426F2003E72DC /* TestHttpTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D42187426F2003E72DC /* TestHttpTransfer.m */; };
+		F80B0D51187426F2003E72DC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D44187426F2003E72DC /* User.m */; };
+		F80B0D52187426F2003E72DC /* UserSimpleLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D46187426F2003E72DC /* UserSimpleLogic.m */; };
+		F80B0D5C18744C17003E72DC /* TestUserSimpleLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D5B18744C17003E72DC /* TestUserSimpleLogic.m */; };
+		F80B0D5F187452A0003E72DC /* TestMessageLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D5E187452A0003E72DC /* TestMessageLogic.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F80B0D1D1874269D003E72DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F80B0CEC1874269D003E72DC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F80B0CF31874269D003E72DC;
+			remoteInfo = HITRenIOSClient;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F80B0CF41874269D003E72DC /* HITRenIOSClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HITRenIOSClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F80B0CF71874269D003E72DC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F80B0CF91874269D003E72DC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F80B0CFB1874269D003E72DC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F80B0CFF1874269D003E72DC /* HITRenIOSClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HITRenIOSClient-Info.plist"; sourceTree = "<group>"; };
+		F80B0D011874269D003E72DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F80B0D031874269D003E72DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F80B0D051874269D003E72DC /* HITRenIOSClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HITRenIOSClient-Prefix.pch"; sourceTree = "<group>"; };
+		F80B0D061874269D003E72DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F80B0D071874269D003E72DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F80B0D0A1874269D003E72DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		F80B0D0D1874269D003E72DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		F80B0D0F1874269D003E72DC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F80B0D101874269D003E72DC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F80B0D121874269D003E72DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F80B0D181874269D003E72DC /* HITRenIOSClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HITRenIOSClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F80B0D191874269D003E72DC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		F80B0D211874269D003E72DC /* HITRenIOSClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HITRenIOSClientTests-Info.plist"; sourceTree = "<group>"; };
+		F80B0D231874269D003E72DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F80B0D251874269D003E72DC /* HITRenIOSClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HITRenIOSClientTests.m; sourceTree = "<group>"; };
+		F80B0D2F187426F2003E72DC /* BaseLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLogic.h; sourceTree = "<group>"; };
+		F80B0D30187426F2003E72DC /* BaseLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLogic.m; sourceTree = "<group>"; };
+		F80B0D31187426F2003E72DC /* HttpData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpData.h; sourceTree = "<group>"; };
+		F80B0D32187426F2003E72DC /* HttpData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpData.m; sourceTree = "<group>"; };
+		F80B0D33187426F2003E72DC /* HttpTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpTransfer.h; sourceTree = "<group>"; };
+		F80B0D34187426F2003E72DC /* HttpTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpTransfer.m; sourceTree = "<group>"; };
+		F80B0D35187426F2003E72DC /* LogKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogKit.h; sourceTree = "<group>"; };
+		F80B0D36187426F2003E72DC /* LogKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogKit.m; sourceTree = "<group>"; };
+		F80B0D37187426F2003E72DC /* MessageLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageLogic.h; sourceTree = "<group>"; };
+		F80B0D38187426F2003E72DC /* MessageLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageLogic.m; sourceTree = "<group>"; };
+		F80B0D39187426F2003E72DC /* RelationShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationShip.h; sourceTree = "<group>"; };
+		F80B0D3A187426F2003E72DC /* RelationShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationShip.m; sourceTree = "<group>"; };
+		F80B0D3B187426F2003E72DC /* RelationshipLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationshipLogic.h; sourceTree = "<group>"; };
+		F80B0D3C187426F2003E72DC /* RelationshipLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationshipLogic.m; sourceTree = "<group>"; };
+		F80B0D3D187426F2003E72DC /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		F80B0D3E187426F2003E72DC /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		F80B0D3F187426F2003E72DC /* Teacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teacher.h; sourceTree = "<group>"; };
+		F80B0D40187426F2003E72DC /* Teacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Teacher.m; sourceTree = "<group>"; };
+		F80B0D41187426F2003E72DC /* TestHttpTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHttpTransfer.h; sourceTree = "<group>"; };
+		F80B0D42187426F2003E72DC /* TestHttpTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHttpTransfer.m; sourceTree = "<group>"; };
+		F80B0D43187426F2003E72DC /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		F80B0D44187426F2003E72DC /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		F80B0D45187426F2003E72DC /* UserSimpleLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSimpleLogic.h; sourceTree = "<group>"; };
+		F80B0D46187426F2003E72DC /* UserSimpleLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSimpleLogic.m; sourceTree = "<group>"; };
+		F80B0D5A18744C17003E72DC /* TestUserSimpleLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUserSimpleLogic.h; sourceTree = "<group>"; };
+		F80B0D5B18744C17003E72DC /* TestUserSimpleLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUserSimpleLogic.m; sourceTree = "<group>"; };
+		F80B0D5D187452A0003E72DC /* TestMessageLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMessageLogic.h; sourceTree = "<group>"; };
+		F80B0D5E187452A0003E72DC /* TestMessageLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestMessageLogic.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F80B0CF11874269D003E72DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F80B0CFA1874269D003E72DC /* CoreGraphics.framework in Frameworks */,
+				F80B0CFC1874269D003E72DC /* UIKit.framework in Frameworks */,
+				F80B0CF81874269D003E72DC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F80B0D151874269D003E72DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F80B0D1A1874269D003E72DC /* XCTest.framework in Frameworks */,
+				F80B0D1C1874269D003E72DC /* UIKit.framework in Frameworks */,
+				F80B0D1B1874269D003E72DC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F80B0CEB1874269D003E72DC = {
+			isa = PBXGroup;
+			children = (
+				F80B0CFD1874269D003E72DC /* HITRenIOSClient */,
+				F80B0D1F1874269D003E72DC /* HITRenIOSClientTests */,
+				F80B0CF61874269D003E72DC /* Frameworks */,
+				F80B0CF51874269D003E72DC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F80B0CF51874269D003E72DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0CF41874269D003E72DC /* HITRenIOSClient.app */,
+				F80B0D181874269D003E72DC /* HITRenIOSClientTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F80B0CF61874269D003E72DC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0CF71874269D003E72DC /* Foundation.framework */,
+				F80B0CF91874269D003E72DC /* CoreGraphics.framework */,
+				F80B0CFB1874269D003E72DC /* UIKit.framework */,
+				F80B0D191874269D003E72DC /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F80B0CFD1874269D003E72DC /* HITRenIOSClient */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0D5818742830003E72DC /* TestCode */,
+				F80B0D5718742814003E72DC /* ViewController */,
+				F80B0D561874278A003E72DC /* Network */,
+				F80B0D551874276C003E72DC /* Kit */,
+				F80B0D5418742743003E72DC /* Model */,
+				F80B0D531874270F003E72DC /* LogicController */,
+				F80B0D061874269D003E72DC /* AppDelegate.h */,
+				F80B0D071874269D003E72DC /* AppDelegate.m */,
+				F80B0D091874269D003E72DC /* Main_iPhone.storyboard */,
+				F80B0D0C1874269D003E72DC /* Main_iPad.storyboard */,
+				F80B0D121874269D003E72DC /* Images.xcassets */,
+				F80B0CFE1874269D003E72DC /* Supporting Files */,
+			);
+			path = HITRenIOSClient;
+			sourceTree = "<group>";
+		};
+		F80B0CFE1874269D003E72DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0CFF1874269D003E72DC /* HITRenIOSClient-Info.plist */,
+				F80B0D001874269D003E72DC /* InfoPlist.strings */,
+				F80B0D031874269D003E72DC /* main.m */,
+				F80B0D051874269D003E72DC /* HITRenIOSClient-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F80B0D1F1874269D003E72DC /* HITRenIOSClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0D251874269D003E72DC /* HITRenIOSClientTests.m */,
+				F80B0D201874269D003E72DC /* Supporting Files */,
+			);
+			path = HITRenIOSClientTests;
+			sourceTree = "<group>";
+		};
+		F80B0D201874269D003E72DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0D211874269D003E72DC /* HITRenIOSClientTests-Info.plist */,
+				F80B0D221874269D003E72DC /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F80B0D531874270F003E72DC /* LogicController */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0D2F187426F2003E72DC /* BaseLogic.h */,
+				F80B0D30187426F2003E72DC /* BaseLogic.m */,
+				F80B0D37187426F2003E72DC /* MessageLogic.h */,
+				F80B0D38187426F2003E72DC /* MessageLogic.m */,
+				F80B0D3B187426F2003E72DC /* RelationshipLogic.h */,
+				F80B0D3C187426F2003E72DC /* RelationshipLogic.m */,
+				F80B0D45187426F2003E72DC /* UserSimpleLogic.h */,
+				F80B0D46187426F2003E72DC /* UserSimpleLogic.m */,
+			);
+			name = LogicController;
+			sourceTree = "<group>";
+		};
+		F80B0D5418742743003E72DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0D3D187426F2003E72DC /* Student.h */,
+				F80B0D3E187426F2003E72DC /* Student.m */,
+				F80B0D3F187426F2003E72DC /* Teacher.h */,
+				F80B0D40187426F2003E72DC /* Teacher.m */,
+				F80B0D43187426F2003E72DC /* User.h */,
+				F80B0D44187426F2003E72DC /* User.m */,
+				F80B0D39187426F2003E72DC /* RelationShip.h */,
+				F80B0D3A187426F2003E72DC /* RelationShip.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		F80B0D551874276C003E72DC /* Kit */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0D35187426F2003E72DC /* LogKit.h */,
+				F80B0D36187426F2003E72DC /* LogKit.m */,
+			);
+			name = Kit;
+			sourceTree = "<group>";
+		};
+		F80B0D561874278A003E72DC /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0D31187426F2003E72DC /* HttpData.h */,
+				F80B0D32187426F2003E72DC /* HttpData.m */,
+				F80B0D33187426F2003E72DC /* HttpTransfer.h */,
+				F80B0D34187426F2003E72DC /* HttpTransfer.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		F80B0D5718742814003E72DC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0D0F1874269D003E72DC /* ViewController.h */,
+				F80B0D101874269D003E72DC /* ViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		F80B0D5818742830003E72DC /* TestCode */ = {
+			isa = PBXGroup;
+			children = (
+				F80B0D41187426F2003E72DC /* TestHttpTransfer.h */,
+				F80B0D42187426F2003E72DC /* TestHttpTransfer.m */,
+				F80B0D5A18744C17003E72DC /* TestUserSimpleLogic.h */,
+				F80B0D5B18744C17003E72DC /* TestUserSimpleLogic.m */,
+				F80B0D5D187452A0003E72DC /* TestMessageLogic.h */,
+				F80B0D5E187452A0003E72DC /* TestMessageLogic.m */,
+			);
+			name = TestCode;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F80B0CF31874269D003E72DC /* HITRenIOSClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F80B0D291874269D003E72DC /* Build configuration list for PBXNativeTarget "HITRenIOSClient" */;
+			buildPhases = (
+				F80B0CF01874269D003E72DC /* Sources */,
+				F80B0CF11874269D003E72DC /* Frameworks */,
+				F80B0CF21874269D003E72DC /* Resources */,
+				F80B0D5918742918003E72DC /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HITRenIOSClient;
+			productName = HITRenIOSClient;
+			productReference = F80B0CF41874269D003E72DC /* HITRenIOSClient.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F80B0D171874269D003E72DC /* HITRenIOSClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F80B0D2C1874269D003E72DC /* Build configuration list for PBXNativeTarget "HITRenIOSClientTests" */;
+			buildPhases = (
+				F80B0D141874269D003E72DC /* Sources */,
+				F80B0D151874269D003E72DC /* Frameworks */,
+				F80B0D161874269D003E72DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F80B0D1E1874269D003E72DC /* PBXTargetDependency */,
+			);
+			name = HITRenIOSClientTests;
+			productName = HITRenIOSClientTests;
+			productReference = F80B0D181874269D003E72DC /* HITRenIOSClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F80B0CEC1874269D003E72DC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = wubincen;
+				TargetAttributes = {
+					F80B0D171874269D003E72DC = {
+						TestTargetID = F80B0CF31874269D003E72DC;
+					};
+				};
+			};
+			buildConfigurationList = F80B0CEF1874269D003E72DC /* Build configuration list for PBXProject "HITRenIOSClient" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F80B0CEB1874269D003E72DC;
+			productRefGroup = F80B0CF51874269D003E72DC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F80B0CF31874269D003E72DC /* HITRenIOSClient */,
+				F80B0D171874269D003E72DC /* HITRenIOSClientTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F80B0CF21874269D003E72DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F80B0D0E1874269D003E72DC /* Main_iPad.storyboard in Resources */,
+				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,
+				F80B0D0B1874269D003E72DC /* Main_iPhone.storyboard in Resources */,
+				F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F80B0D161874269D003E72DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F80B0D241874269D003E72DC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F80B0D5918742918003E72DC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F80B0CF01874269D003E72DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F80B0D4F187426F2003E72DC /* Teacher.m in Sources */,
+				F80B0D4E187426F2003E72DC /* Student.m in Sources */,
+				F80B0D111874269D003E72DC /* ViewController.m in Sources */,
+				F80B0D081874269D003E72DC /* AppDelegate.m in Sources */,
+				F80B0D4D187426F2003E72DC /* RelationshipLogic.m in Sources */,
+				F80B0D041874269D003E72DC /* main.m in Sources */,
+				F80B0D4C187426F2003E72DC /* RelationShip.m in Sources */,
+				F80B0D5C18744C17003E72DC /* TestUserSimpleLogic.m in Sources */,
+				F80B0D50187426F2003E72DC /* TestHttpTransfer.m in Sources */,
+				F80B0D51187426F2003E72DC /* User.m in Sources */,
+				F80B0D47187426F2003E72DC /* BaseLogic.m in Sources */,
+				F80B0D4B187426F2003E72DC /* MessageLogic.m in Sources */,
+				F80B0D4A187426F2003E72DC /* LogKit.m in Sources */,
+				F80B0D52187426F2003E72DC /* UserSimpleLogic.m in Sources */,
+				F80B0D5F187452A0003E72DC /* TestMessageLogic.m in Sources */,
+				F80B0D49187426F2003E72DC /* HttpTransfer.m in Sources */,
+				F80B0D48187426F2003E72DC /* HttpData.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F80B0D141874269D003E72DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F80B0D261874269D003E72DC /* HITRenIOSClientTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F80B0D1E1874269D003E72DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F80B0CF31874269D003E72DC /* HITRenIOSClient */;
+			targetProxy = F80B0D1D1874269D003E72DC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F80B0D001874269D003E72DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F80B0D011874269D003E72DC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F80B0D091874269D003E72DC /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F80B0D0A1874269D003E72DC /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		F80B0D0C1874269D003E72DC /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F80B0D0D1874269D003E72DC /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		F80B0D221874269D003E72DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F80B0D231874269D003E72DC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F80B0D271874269D003E72DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F80B0D281874269D003E72DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F80B0D2A1874269D003E72DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HITRenIOSClient/HITRenIOSClient-Prefix.pch";
+				INFOPLIST_FILE = "HITRenIOSClient/HITRenIOSClient-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F80B0D2B1874269D003E72DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HITRenIOSClient/HITRenIOSClient-Prefix.pch";
+				INFOPLIST_FILE = "HITRenIOSClient/HITRenIOSClient-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F80B0D2D1874269D003E72DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HITRenIOSClient.app/HITRenIOSClient";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HITRenIOSClient/HITRenIOSClient-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "HITRenIOSClientTests/HITRenIOSClientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		F80B0D2E1874269D003E72DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HITRenIOSClient.app/HITRenIOSClient";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HITRenIOSClient/HITRenIOSClient-Prefix.pch";
+				INFOPLIST_FILE = "HITRenIOSClientTests/HITRenIOSClientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F80B0CEF1874269D003E72DC /* Build configuration list for PBXProject "HITRenIOSClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F80B0D271874269D003E72DC /* Debug */,
+				F80B0D281874269D003E72DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F80B0D291874269D003E72DC /* Build configuration list for PBXNativeTarget "HITRenIOSClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F80B0D2A1874269D003E72DC /* Debug */,
+				F80B0D2B1874269D003E72DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F80B0D2C1874269D003E72DC /* Build configuration list for PBXNativeTarget "HITRenIOSClientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F80B0D2D1874269D003E72DC /* Debug */,
+				F80B0D2E1874269D003E72DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F80B0CEC1874269D003E72DC /* Project object */;
+}

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 wubincen. All rights reserved.
 //
 
-#import "Kit.h"
+#import "LogKit.h"
 
 void functionLog(const char *filename, int line, const char* funcName,NSString *string) {
     NSLog(@"%s line %d:%s %@", filename, line, funcName, string);

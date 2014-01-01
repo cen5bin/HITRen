@@ -8,7 +8,7 @@
 
 #import "HttpTransfer.h"
 
-static NSString *IP = @"127.0.0.1";
+static NSString *IP = @"10.9.180.61";//@"127.0.0.1";
 static NSString *SERVER_NAME = @"HITRenServer";
 static int PORT = 8080;
 
@@ -16,16 +16,16 @@ static int PORT = 8080;
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    NSLog(@"zzz111");
+    [self.data appendData:data];
 //    NSLog(@"data: %@",[data description]);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"fuck");
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"fffffff");
+    self.data = [NSMutableData data];
 //    NSLog(@"response: %@", [response description]);
 }
 
@@ -48,7 +48,7 @@ static int PORT = 8080;
     NSString *urlString = [NSString stringWithFormat:@"http://%@:%d/%@/%@",IP, PORT, SERVER_NAME, servlet];
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [requestString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%ld",[data length]];
+    NSString *postLength = [NSString stringWithFormat:@"%d",[data length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];
     [request setHTTPMethod:@"POST"];
@@ -61,39 +61,31 @@ static int PORT = 8080;
 
 
 - (BOOL)asyncRequestServerForNSDataWithGetMethod:(NSString *)requestString AndServletName:(NSString *)servlet {
-    NSLog(@"asd1");
-    NSMutableURLRequest*request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
-    [request setHTTPMethod:@"GET"];
-    [NSURLConnection  connectionWithRequest:request delegate:self];
-    return YES;
+    NSString *urlString = [NSString stringWithFormat:@"http://%@:%d/%@/%@",IP, PORT, SERVER_NAME, servlet];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSData *data = [requestString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:url];
+    [request setHTTPBody:data];
+    NSURLConnection *connection = [NSURLConnection  connectionWithRequest:request delegate:self];
+    return connection != nil;
 }
 
 - (BOOL)asyncRequestServerForNSDataWithPostMethod:(NSString *)requestString AndServletName:(NSString *)servlet {
     NSString *urlString = [NSString stringWithFormat:@"http://%@:%d/%@/%@",IP, PORT, SERVER_NAME, servlet];
-    urlString = @"http://www.baidu.com";
+    NSLog(@"%@",urlString);
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [requestString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%ld",[data length]];
+    NSString *postLength = [NSString stringWithFormat:@"%ld",(unsigned long)[data length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:data];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];//[NSURLConnection connectionWithRequest:request delegate:self];
-
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
     return connection!=nil;
 }
-//+ (NSString *)requestServerWithGetMethod:(NSString *)requestString AndServletName:(NSString *)servlet{
-//    NSData *received = [HttpTransfer requestServerForNSDataWithGetMethod:requestString AndServletName:servlet];
-//    NSString *str = [[NSString alloc]initWithData:received encoding:NSUTF8StringEncoding];
-//    return str;
-//}
-//
-//+ (NSString *)requestServerWithPostMethod:(NSString *)requestString AndServletName:(NSString *)servlet {
-//    NSData *received = [HttpTransfer requestServerForNSDataWithPostMethod:requestString AndServletName:servlet];    NSString *str = [[NSString alloc]initWithData:received encoding:NSUTF8StringEncoding];
-//    return str;
-//}
 
 - (NSMutableDictionary *) syncGet:(NSString *)string to:(NSString *)servlet {
     NSData *data = [self requestServerForNSDataWithGetMethod:string AndServletName:servlet];
@@ -107,6 +99,14 @@ static int PORT = 8080;
     return dic;
 }
 
+- (BOOL) asyncPost:(NSString *)string to:(NSString *)servlet {
+    NSLog(@"zzz");
+    return [self asyncRequestServerForNSDataWithPostMethod:string AndServletName:servlet];
+}
 
+- (BOOL) asyncGet:(NSString *)string to:(NSString *)servlet {
+    
+    return [self asyncRequestServerForNSDataWithGetMethod:string AndServletName:servlet];
+}
 
 @end

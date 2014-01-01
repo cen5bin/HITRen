@@ -129,4 +129,12 @@
     <servlet-name>RecoverUsersFromBlacklist</servlet-name>
     <url-pattern>/RecoverUsersFromBlacklist</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>SendShortMessage</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.messagelogic.SendShortMessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendShortMessage</servlet-name>
+    <url-pattern>/SendShortMessage</url-pattern>
+  </servlet-mapping>
 </web-app>
