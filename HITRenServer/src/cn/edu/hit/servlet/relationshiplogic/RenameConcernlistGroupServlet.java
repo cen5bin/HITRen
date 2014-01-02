@@ -16,7 +16,7 @@ import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
  * Servlet implementation class RenameConcernlistGroupServlet
- * 重命名分组，传递参数uid，gname1，gname2，将gname1重命名为gname2
+ * 閲嶅懡鍚嶅垎缁勶紝浼犻�掑弬鏁皍id锛実name1锛実name2锛屽皢gname1閲嶅懡鍚嶄负gname2
  */
 @WebServlet("/RenameConcernlistGroupServlet")
 public class RenameConcernlistGroupServlet extends HttpServlet {

@@ -16,8 +16,8 @@ import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
  * Servlet implementation class AddConcernlistGroupServlet
- * 添加好友分组
- * 客户端传递过来uid和分组名称gname
+ * 娣诲姞濂藉弸鍒嗙粍
+ * 瀹㈡埛绔紶閫掕繃鏉id鍜屽垎缁勫悕绉癵name
  */
 @WebServlet("/AddConcernlistGroupServlet")
 public class AddConcernlistGroupServlet extends HttpServlet {

@@ -15,7 +15,7 @@ import com.mongodb.util.JSON;
 
 public class UserSimpleLogic {
 	
-	//µÇÂ¼¹¦ÄÜµÄ
+	//ç™»å½•åŠŸèƒ½çš„
 	public static boolean login(String email, String password) throws JSONException {
 		BasicDBObject obj = new BasicDBObject();
 		retData = new JSONObject();
@@ -37,21 +37,21 @@ public class UserSimpleLogic {
 		return true;
 	}
 	
-	//×¢²á¹¦ÄÜ
+	//æ³¨å†ŒåŠŸèƒ½
 	public static boolean register(String email, String password) throws JSONException, UnsupportedEncodingException {
 		BasicDBObject obj = new BasicDBObject();
 		retData = new JSONObject();
 		obj.put(UserConstant.EMAIL, email);
 		if (DBController.objExits(UserConstant.COLLNAME, obj)) {
 			retData.put(HttpData.SUC, false);
-			retData.put(HttpData.INFO, "ÓÊÏäÒÑÊ¹ÓÃ");
+			retData.put(HttpData.INFO, "é‚®ç®±å·²ä½¿ç”¨");
 			return false;
 		}
 		obj.put(UserConstant.PASSWORD, password);
 		int uid = UserSimpleLogic.createUid();
 		if (uid == -1) {
 			retData.put(HttpData.SUC, false);
-			retData.put(HttpData.INFO, "×¢²áÊ§°Ü");
+			retData.put(HttpData.INFO, "æ³¨å†Œå¤±è´¥");
 			return false;
 		}
 		obj.put(UserConstant.UID, uid);
@@ -59,18 +59,18 @@ public class UserSimpleLogic {
 		retString = "" + uid;
 		if (!DBController.addObj(UserConstant.COLLNAME, obj)) {
 			retData.put(HttpData.SUC, false);
-			retData.put(HttpData.INFO, "×¢²áÊ§°Ü");
+			retData.put(HttpData.INFO, "æ³¨å†Œå¤±è´¥");
 			return false;
 		}
 		if (!RelationshipLogic.createRelationship(uid)){
 			DBController.removeObj(UserConstant.COLLNAME, obj);
 			retData.put(HttpData.SUC, false);
-			retData.put(HttpData.INFO, "×¢²áÊ§°Ü");
+			retData.put(HttpData.INFO, "æ³¨å†Œå¤±è´¥");
 			return false;
 		}
 		if (!MessageLogic.createTimeline(uid)) {
 			retData.put(HttpData.SUC, false);
-			retData.put(HttpData.INFO, "×¢²áÊ§°Ü");
+			retData.put(HttpData.INFO, "æ³¨å†Œå¤±è´¥");
 			return false;
 		}
 		retData.put(HttpData.SUC, true);
@@ -79,7 +79,7 @@ public class UserSimpleLogic {
 		return true;
 	}
 	
-	//Ã¿´Î²åÈë×¢²áÒ»¸öĞÂÕË»§¾Í±ØĞëÎªÆä·ÖÅäÒ»¸öµ¥¶ÀµÄuid
+	//æ¯æ¬¡æ’å…¥æ³¨å†Œä¸€ä¸ªæ–°è´¦æˆ·å°±å¿…é¡»ä¸ºå…¶åˆ†é…ä¸€ä¸ªå•ç‹¬çš„uid
 	public static int createUid() {
 		BasicDBObject oldObj = new BasicDBObject();
 		oldObj.put(IDCounter.KEY, IDCounter.UID);

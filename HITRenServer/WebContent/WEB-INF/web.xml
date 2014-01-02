@@ -137,4 +137,12 @@
     <servlet-name>SendShortMessage</servlet-name>
     <url-pattern>/SendShortMessage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>LikeTheMessage</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.messagelogic.LikeTheMessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LikeTheMessage</servlet-name>
+    <url-pattern>/LikeTheMessage</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -19,8 +19,8 @@ import cn.edu.hit.Dao.UserSimpleLogic;
 
 /**
  * Servlet implementation class RecoverUsersFromBlacklistServlet
- * 将黑名单里的一部分用户恢复
- * 参数uid, users(要恢复的uid数组)
+ * 灏嗛粦鍚嶅崟閲岀殑涓�閮ㄥ垎鐢ㄦ埛鎭㈠
+ * 鍙傛暟uid, users(瑕佹仮澶嶇殑uid鏁扮粍)
  */
 @WebServlet("/RecoverUsersFromBlacklistServlet")
 public class RecoverUsersFromBlacklistServlet extends HttpServlet {

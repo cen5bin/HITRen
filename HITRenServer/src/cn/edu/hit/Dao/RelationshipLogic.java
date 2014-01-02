@@ -8,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.edu.hit.kit.LogKit;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -157,7 +156,7 @@ public class RelationshipLogic {
 		return ret;
 	}
 	
-	// Ö®ºó¿ÉÒÔ°Ñaddtoset¸Ä³Épush
+	// ä¹‹åå¯ä»¥æŠŠaddtosetæ”¹æˆpush
 	public static boolean concernUserInGroup(int uid, String group, int uid1) throws JSONException {
 		retData = new JSONObject();
 		BasicDBObject oldObj = new BasicDBObject();
@@ -172,7 +171,7 @@ public class RelationshipLogic {
 			return false;
 		}
 		
-		//±»¹Ø×¢ÕßµÄfollowlistÀïÒª¼ÓÈë¹Ø×¢ËûµÄÈË
+		//è¢«å…³æ³¨è€…çš„followlisté‡Œè¦åŠ å…¥å…³æ³¨ä»–çš„äºº
 		ret = RelationshipLogic.addAfollowerToUid(uid, uid1);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
@@ -182,7 +181,7 @@ public class RelationshipLogic {
 		return true;
 	}
 	
-	// Ö®ºó¿ÉÒÔ°Ñaddtoset¸Ä³Épush
+	// ä¹‹åå¯ä»¥æŠŠaddtosetæ”¹æˆpush
 	public static boolean addAfollowerToUid(int followerid, int uid) throws JSONException {
 		retData = new JSONObject();
 		BasicDBObject oldObj = new BasicDBObject();

@@ -18,8 +18,8 @@ import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
  * Servlet implementation class DeleteConcernedUserServlet
- * É¾³ı¹Ø×¢µÄÈË
- * ²ÎÊıuid,uid1(ÒªÉ¾³ıµÄÈËµÄuid),gnames(¸ÃuidËùÔÚµÄËùÓĞ·Ö×é)
+ * åˆ é™¤å…³æ³¨çš„äºº
+ * å‚æ•°uid,uid1(è¦åˆ é™¤çš„äººçš„uid),gnames(è¯¥uidæ‰€åœ¨çš„æ‰€æœ‰åˆ†ç»„)
  */
 @WebServlet("/DeleteConcernedUserServlet")
 public class DeleteConcernedUserServlet extends HttpServlet {

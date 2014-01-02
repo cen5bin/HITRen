@@ -18,8 +18,8 @@ import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
  * Servlet implementation class CopyUsersToGroupsServlet
- * ½«Ò»²¿·ÖºÃÓÑ¸´ÖÆµ½Ä³Ğ©·Ö×é
- * ´«µİ²ÎÊı£ºµ±Ç°ÓÃ»§uid£¬Òª¸´ÖÆµÄºÃÓÑusers£¬Ä¿±ê·Ö×égnames
+ * å°†ä¸€éƒ¨åˆ†å¥½å‹å¤åˆ¶åˆ°æŸäº›åˆ†ç»„
+ * ä¼ é€’å‚æ•°ï¼šå½“å‰ç”¨æˆ·uidï¼Œè¦å¤åˆ¶çš„å¥½å‹usersï¼Œç›®æ ‡åˆ†ç»„gnames
  */
 @WebServlet("/CopyUsersToGroupsServlet")
 public class CopyUsersToGroupsServlet extends HttpServlet {

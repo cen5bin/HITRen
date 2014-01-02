@@ -19,8 +19,8 @@ import cn.edu.hit.Dao.UserSimpleLogic;
 
 /**
  * Servlet implementation class MoveUsersToBlacklistServlet
- * ½«Ò»Ğ©ÈËÀ­½øºÚÃûµ¥
- * ²ÎÊıuid £¬users£¨ÒªÀ­½øºÚÃûµ¥µÄÓÃ»§uidÊı×é£©
+ * å°†ä¸€äº›äººæ‹‰è¿›é»‘åå•
+ * å‚æ•°uid ï¼Œusersï¼ˆè¦æ‹‰è¿›é»‘åå•çš„ç”¨æˆ·uidæ•°ç»„ï¼‰
  */
 @WebServlet("/MoveUsersToBlacklistServlet")
 public class MoveUsersToBlacklistServlet extends HttpServlet {

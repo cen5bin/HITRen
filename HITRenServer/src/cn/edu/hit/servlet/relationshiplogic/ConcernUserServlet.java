@@ -17,8 +17,8 @@ import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
  * Servlet implementation class ConcernUserServlet
- * ¹Ø×¢Ò»¸öºÃÓÑ,°ÑËû¼Óµ½·Ö×éÖĞ£¬Ä¬ÈÏ¼ÓÈëdefault·Ö×é
- * ¿Í»§¶Ë´«À´uid£¬uid1£¨¹Ø×¢µÄÈËµÄuid£©£¬ºÍ·Ö×éÁĞ±ígnames£¨Êı×é£©
+ * å…³æ³¨ä¸€ä¸ªå¥½å‹,æŠŠä»–åŠ åˆ°åˆ†ç»„ä¸­ï¼Œé»˜è®¤åŠ å…¥defaultåˆ†ç»„
+ * å®¢æˆ·ç«¯ä¼ æ¥uidï¼Œuid1ï¼ˆå…³æ³¨çš„äººçš„uidï¼‰ï¼Œå’Œåˆ†ç»„åˆ—è¡¨gnamesï¼ˆæ•°ç»„ï¼‰
  */
 @WebServlet("/ConcernUserServlet")
 public class ConcernUserServlet extends HttpServlet {

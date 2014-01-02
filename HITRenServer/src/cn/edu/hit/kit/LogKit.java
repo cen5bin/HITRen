@@ -48,25 +48,25 @@ public class LogKit {
 				append(traceElement.getLineNumber()).append("|").append(traceElement.getMethodName()).append("]");
 		return buf.toString();
 	}
-	// µ±Ç°ÎÄ¼şÃû 
+	// å½“å‰æ–‡ä»¶å 
 	public static String _FILE_() { 
 		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
 		return traceElement.getFileName(); 
 	} 
 
-	// µ±Ç°·½·¨Ãû 
+	// å½“å‰æ–¹æ³•å 
 	public static String _FUNC_() { 
 		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
 		return traceElement.getMethodName(); 
 	} 
 
-	// µ±Ç°ĞĞºÅ 
+	// å½“å‰è¡Œå· 
 	public static int _LINE_() { 
 		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
 		return traceElement.getLineNumber(); 
 	} 
 
-	// µ±Ç°Ê±¼ä 
+	// å½“å‰æ—¶é—´ 
 	public static String _TIME_() { 
 		Date now = new Date(); 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 

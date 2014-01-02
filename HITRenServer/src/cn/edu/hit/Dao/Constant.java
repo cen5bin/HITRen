@@ -13,10 +13,10 @@ public enum Constant {
 }
 
 class UserConstant {
-	//Êı¾İ¿â±íÃû
+	//æ•°æ®åº“è¡¨å
 	protected static final String COLLNAME = "User"; 
 
-	//×Ö¶ÎÃû
+	//å­—æ®µå
 	protected static final String UID = "uid";
 	protected static final String EMAIL = "email";
 	protected static final String PASSWORD = "password";
@@ -41,9 +41,9 @@ class Message {
 }
 
 class IDCounter {
-	//±íÃû
+	//è¡¨å
 	protected static final String COLLNAME = "IDCounter";
-	//ÁĞÃû
+	//åˆ—å
 	protected static final String KEY = "key";
 	protected static final String VALUE = "value";
 	//key
@@ -59,7 +59,7 @@ class Relationship {
 	protected static final String BLACKLIST = "blacklist";
 	protected static final String FOLLOWLIST = "followlist";
 	
-	//ÒÔÏÂÁ½¸ö×Ö¶ÎÊÇÔÚconcernlistÊı×éÖĞÃ¿¸öÔªËØµÄÄÚ²¿×Ö¶Î
+	//ä»¥ä¸‹ä¸¤ä¸ªå­—æ®µæ˜¯åœ¨concernlistæ•°ç»„ä¸­æ¯ä¸ªå…ƒç´ çš„å†…éƒ¨å­—æ®µ
 	protected static final String GNAME = "gname";
 	protected static final String USERLIST = "userlist";
 	

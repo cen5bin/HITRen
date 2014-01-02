@@ -18,8 +18,8 @@ import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
  * Servlet implementation class MoveUsersFromGroupToGroupsServlet
- * ½«Ò»²¿·ÖºÃÓÑ´ÓÒ»¸ö·Ö×éÒÆ¶¯µ½ÆäËûµÄÒ»Ğ©·Ö×é
- * ²ÎÊı ×Ô¼ºµÄid uid, ÒªÒÆ¶¯µÄÓÃ»§users, µ±Ç°ËùÔÚ·Ö×égname, Ä¿±ê·Ö×égnames
+ * å°†ä¸€éƒ¨åˆ†å¥½å‹ä»ä¸€ä¸ªåˆ†ç»„ç§»åŠ¨åˆ°å…¶ä»–çš„ä¸€äº›åˆ†ç»„
+ * å‚æ•° è‡ªå·±çš„id uid, è¦ç§»åŠ¨çš„ç”¨æˆ·users, å½“å‰æ‰€åœ¨åˆ†ç»„gname, ç›®æ ‡åˆ†ç»„gnames
  */
 @WebServlet("/MoveUsersFromGroupToGroupsServlet")
 public class MoveUsersFromGroupToGroupsServlet extends HttpServlet {

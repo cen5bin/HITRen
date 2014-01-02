@@ -16,8 +16,8 @@ import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
  * Servlet implementation class DeleteConcernlistGroupServlet
- * 删除好友分组
- * 客户端传递uid和gname过来
+ * 鍒犻櫎濂藉弸鍒嗙粍
+ * 瀹㈡埛绔紶閫抲id鍜実name杩囨潵
  */
 @WebServlet("/DeleteConcernlistGroupServlet")
 public class DeleteConcernlistGroupServlet extends HttpServlet {

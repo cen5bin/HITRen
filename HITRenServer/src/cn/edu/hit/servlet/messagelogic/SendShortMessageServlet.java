@@ -19,8 +19,8 @@ import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
  * Servlet implementation class SendShortMessageServlet
- * ·¢¶Ì×´Ì¬
- * ²ÎÊı uid£¬ message£¬ auth£¨¿É¼û·¶Î§£¬Îª0±íÊ¾È«²¿ÈË¿É¼û£¬Îª1±íÊ¾²¿·ÖÈË¿É¼û£©£¬Èç¹ûauth=1£¬»¹µÃ·¢ËÍgnames±íÊ¾¿É¼ûµÄ·Ö×é
+ * å‘çŸ­çŠ¶æ€
+ * å‚æ•° uidï¼Œ messageï¼Œ authï¼ˆå¯è§èŒƒå›´ï¼Œä¸º0è¡¨ç¤ºå…¨éƒ¨äººå¯è§ï¼Œä¸º1è¡¨ç¤ºéƒ¨åˆ†äººå¯è§ï¼‰ï¼Œå¦‚æœauth=1ï¼Œè¿˜å¾—å‘é€gnamesè¡¨ç¤ºå¯è§çš„åˆ†ç»„
  */
 @WebServlet("/SendShortMessageServlet")
 public class SendShortMessageServlet extends HttpServlet {

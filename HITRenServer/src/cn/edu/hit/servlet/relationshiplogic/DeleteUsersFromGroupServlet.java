@@ -18,8 +18,8 @@ import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
  * Servlet implementation class DeleteUsersFromGroupServlet
- * ½«²¿·ÖºÃÓÑ´Ó·Ö×éÖĞÉ¾³ı
- * ²ÎÊı ×Ô¼ºµÄuid ÒªÉ¾³ıµÄÊı×éusers£¬·Ö×éÃûgname
+ * å°†éƒ¨åˆ†å¥½å‹ä»åˆ†ç»„ä¸­åˆ é™¤
+ * å‚æ•° è‡ªå·±çš„uid è¦åˆ é™¤çš„æ•°ç»„usersï¼Œåˆ†ç»„ågname
  */
 @WebServlet("/DeleteUsersFromGroupServlet")
 public class DeleteUsersFromGroupServlet extends HttpServlet {
