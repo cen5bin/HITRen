@@ -37,6 +37,7 @@ public class MessageLogic {
 		obj.put(Message.TYPE, type);
 		obj.put(Message.CONTENT, message);
 		DBController.addObj(Message.COLLNAME, obj);
+		MessageLogic.addMessageToSelf(uid, mid);
 		if (gnames.size() == 0) {
 			boolean ret = MessageLogic.addMessageToGlobalTimeline(mid);
 			if (!ret) {
@@ -44,6 +45,7 @@ public class MessageLogic {
 				retData.put(HttpData.SUC, false);
 				return false;
 			}
+			
 		}
 		else {
 			boolean ret = MessageLogic.addMessageToGroups(uid, mid, gnames);
@@ -103,5 +105,11 @@ public class MessageLogic {
 		if (!ret)
 			LogKit.err("addMessageToUsers failed");
 		return ret;
+	}
+	
+	private static boolean addMessageToSelf(int uid, int mid) {
+		ArrayList<Integer> users = new ArrayList<Integer>();
+		users.add(uid);
+		return MessageLogic.addMessageToUsers(mid, users);
 	}
 }

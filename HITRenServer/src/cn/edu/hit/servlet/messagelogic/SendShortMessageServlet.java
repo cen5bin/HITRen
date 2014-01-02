@@ -16,7 +16,6 @@ import org.json.JSONObject;
 
 import cn.edu.hit.Dao.MessageLogic;
 import cn.edu.hit.Dao.RelationshipLogic;
-import cn.edu.hit.kit.LogKit;
 
 /**
  * Servlet implementation class SendShortMessageServlet
