@@ -67,8 +67,10 @@ class Relationship {
 }
 
 class TimeLine {
-	protected static String COLLNAME = "TimeLine";
-	protected static String UID = UserConstant.UID;
+	protected static final String COLLNAME = "TimeLine";
+	protected static final String GLOBAL = "GlobalTimeline";
+	protected static final String UID = UserConstant.UID;
+	protected static final String SEQ = "seq";
 	protected static String LIST = "list";
 }
 

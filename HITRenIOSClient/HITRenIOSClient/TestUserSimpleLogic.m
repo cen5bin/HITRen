@@ -22,3 +22,15 @@ void testUserSimpleLogic() {
     [logic login];
 
 }
+
+void registerSomeUsers() {
+    for (int i = 0; i < 20; i++) {
+        User *user = [[User alloc] init];
+        user.email = [NSString stringWithFormat:@"%dzzzaaa@163.com", i];
+        user.password = @"123";
+        RelationShip *relationShip = [[RelationShip alloc] init];
+        user.relationShip = relationShip;
+        UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
+        [logic signUp];
+    }
+}

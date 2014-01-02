@@ -54,11 +54,10 @@ public class SendShortMessageServlet extends HttpServlet {
 			int uid = json.getInt("uid");
 			int auth = json.getInt("auth");
 			String message = json.getString("message");
-			LogKit.debug("message:"+message);
 			ArrayList<String> gnames = new ArrayList<String>();
 			if (auth == 1) {
 				JSONArray gnames0 = json.getJSONArray("gnames");
-				for (int i = 0; i < gnames.size(); i++)
+				for (int i = 0; i < gnames0.length(); i++)
 				gnames.add(gnames0.getString(i));
 			}
 			MessageLogic.sendShortMessage(uid, message, gnames);

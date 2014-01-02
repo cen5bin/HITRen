@@ -12,6 +12,7 @@
 
 @interface RelationshipLogic : BaseLogic
 
+- (BOOL)concernUser:(int)uid inGroup:(NSString *)gname;
 - (BOOL)concernUser:(int)uid inGroups:(NSArray *)gnames;
 - (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname toGroups:(NSArray *)gnames;
 - (BOOL)copyUsers:(NSArray *)users toGroups:(NSArray *)gnames;

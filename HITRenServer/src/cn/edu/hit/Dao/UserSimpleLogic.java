@@ -68,6 +68,11 @@ public class UserSimpleLogic {
 			retData.put(HttpData.INFO, "×¢²áÊ§°Ü");
 			return false;
 		}
+		if (!MessageLogic.createTimeline(uid)) {
+			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "×¢²áÊ§°Ü");
+			return false;
+		}
 		retData.put(HttpData.SUC, true);
 		retData.put(UserConstant.UID, uid);
 		retData.put(UserConstant.SEQ, 1);

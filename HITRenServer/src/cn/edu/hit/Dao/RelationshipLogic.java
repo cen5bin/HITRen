@@ -8,6 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.edu.hit.kit.LogKit;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
@@ -272,12 +274,12 @@ public class RelationshipLogic {
 		Map<String, ArrayList<Integer>> retMap = new HashMap<String, ArrayList<Integer>>();
 		JSONArray jsonArray = new JSONObject(retObj.toString()).getJSONArray(Relationship.CONCERNLIST);
 		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject json = new JSONObject(jsonArray.getString(i));
+			JSONObject json = new JSONObject(jsonArray.get(i).toString());
 			String gname = json.getString(Relationship.GNAME);
 			JSONArray users0 = json.getJSONArray(Relationship.USERLIST);
 			ArrayList<Integer> users = new ArrayList<Integer>();
 			for (int j = 0; j < users0.length(); j++)
-				users.add(users0.getInt(i));
+				users.add(users0.getInt(j));
 			retMap.put(gname, users);
 		}
 		return retMap;

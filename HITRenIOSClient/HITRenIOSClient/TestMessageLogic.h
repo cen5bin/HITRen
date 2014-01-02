@@ -9,3 +9,5 @@
 #import <Foundation/Foundation.h>
 
 void testSendShortMessage();
+
+void testSendShortMessageToGroups();

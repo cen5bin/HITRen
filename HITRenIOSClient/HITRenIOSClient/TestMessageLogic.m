@@ -24,3 +24,16 @@ void testSendShortMessage() {
     MessageLogic *logic1 = [[MessageLogic alloc] initWithUser:user];
     [logic1 sendShortMessage:@"asdasd"];
 }
+
+void testSendShortMessageToGroups() {
+    User *user = [[User alloc] init];
+    user.email = @"0zzzaaa@163.com";
+    user.password = @"123";
+    RelationShip *relationShip = [[RelationShip alloc] init];
+    user.relationShip = relationShip;
+    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
+    //    [logic signUp];
+    [logic login];
+    MessageLogic *logic1 = [[MessageLogic alloc] initWithUser:user];
+    [logic1 sendShortMessage:@"asdasd" toGroup:@"default"];
+}

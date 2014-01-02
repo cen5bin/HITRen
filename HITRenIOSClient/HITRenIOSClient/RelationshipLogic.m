@@ -13,6 +13,13 @@
 
 @implementation RelationshipLogic
 
+- (BOOL)concernUser:(int)uid inGroup:(NSString *)gname {
+    FUNC_START();
+    BOOL ret = [self concernUser:uid inGroups:[NSArray arrayWithObjects:gname, nil]];
+    FUNC_END();
+    return ret;
+}
+
 - (BOOL)concernUser:(int)uid inGroups:(NSArray *)gnames {
     FUNC_START();
     HttpData *data = [[HttpData alloc] init];

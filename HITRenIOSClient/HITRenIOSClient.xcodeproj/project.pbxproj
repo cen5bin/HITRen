@@ -36,6 +36,7 @@
 		F80B0D52187426F2003E72DC /* UserSimpleLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D46187426F2003E72DC /* UserSimpleLogic.m */; };
 		F80B0D5C18744C17003E72DC /* TestUserSimpleLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D5B18744C17003E72DC /* TestUserSimpleLogic.m */; };
 		F80B0D5F187452A0003E72DC /* TestMessageLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D5E187452A0003E72DC /* TestMessageLogic.m */; };
+		F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FC7F4818751A0800842DC5 /* TestRelationship.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		F80B0D5B18744C17003E72DC /* TestUserSimpleLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUserSimpleLogic.m; sourceTree = "<group>"; };
 		F80B0D5D187452A0003E72DC /* TestMessageLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMessageLogic.h; sourceTree = "<group>"; };
 		F80B0D5E187452A0003E72DC /* TestMessageLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestMessageLogic.m; sourceTree = "<group>"; };
+		F8FC7F4718751A0800842DC5 /* TestRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRelationship.h; sourceTree = "<group>"; };
+		F8FC7F4818751A0800842DC5 /* TestRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRelationship.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +272,8 @@
 				F80B0D5B18744C17003E72DC /* TestUserSimpleLogic.m */,
 				F80B0D5D187452A0003E72DC /* TestMessageLogic.h */,
 				F80B0D5E187452A0003E72DC /* TestMessageLogic.m */,
+				F8FC7F4718751A0800842DC5 /* TestRelationship.h */,
+				F8FC7F4818751A0800842DC5 /* TestRelationship.m */,
 			);
 			name = TestCode;
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 				F80B0D50187426F2003E72DC /* TestHttpTransfer.m in Sources */,
 				F80B0D51187426F2003E72DC /* User.m in Sources */,
 				F80B0D47187426F2003E72DC /* BaseLogic.m in Sources */,
+				F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */,
 				F80B0D4B187426F2003E72DC /* MessageLogic.m in Sources */,
 				F80B0D4A187426F2003E72DC /* LogKit.m in Sources */,
 				F80B0D52187426F2003E72DC /* UserSimpleLogic.m in Sources */,
@@ -623,6 +629,7 @@
 				F80B0D2B1874269D003E72DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F80B0D2C1874269D003E72DC /* Build configuration list for PBXNativeTarget "HITRenIOSClientTests" */ = {
 			isa = XCConfigurationList;
@@ -631,6 +638,7 @@
 				F80B0D2E1874269D003E72DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
