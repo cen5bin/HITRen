@@ -15,7 +15,7 @@ HITRen
 - 下载用户基本信息: [DownloadUserInfoServlet.java][3] 客户端需要传参数`uid`,`seq`
 - 更新用户信息: [UpdataUserInfoServlet.java][4] 客户端需要传参数是一个json对象，包括用户的所有基本信息
 
-##2. 好友关系管理
+##2. 好友关系逻辑
 - 增加好友分组: [AddConcernlistGroupServlet.java][5], 参数: `uid`,`gname`
 - 重命名好友分组: [RenameConcernlistGroupServlet.java][6],参数:`uid`,`gname1`,`gname2`
 - 关注一个好友到分组: [ConcernUserServlet.java][7], 参数:自己的`uid`,要关注的好友`uid1`,要放的分组`gnames`
@@ -26,6 +26,11 @@ HITRen
 - 删除关注的好友: [DeleteConcernedUserServlet.java][12], 参数: `uid`, `uid1`, `gnames`
 - 拉进黑名单: [MoveUsersToBlacklistServlet.java][13], 参数: `uid`, `users`
 - 从黑名单恢复: [RecoverUsersFromBlacklistServlet.java][14], 参数: `uid`, `users`
+- 删除好友分组: [DeleteConcernlistGroupServlet.java][15], 参数: `uid`,`gname`,删除后，该分组中所有的好友都会移到default分组中
+
+##3. 社交功能逻辑
+- 发短状态: [SendShortMessageServlet.java][16], 参数: `uid`, `message`:状态内容, `auth`:表示是否设置可见范围，0表示不设置，1表示设置, `gnames`:如果`auth=1`，则必须传这个字段，否则不用传
+
 
 
 
@@ -49,3 +54,8 @@ HITRen
 [12]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/DeleteConcernedUserServlet.java
 [13]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/MoveUsersToBlacklistServlet.java
 [14]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/RecoverUsersFromBlacklistServlet.java
+[15]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/DeleteConcernlistGroupServlet.java
+[16]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/SendShortMessageServlet.java
+
+
+
