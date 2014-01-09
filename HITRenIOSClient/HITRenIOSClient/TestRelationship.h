@@ -9,3 +9,4 @@
 #import <Foundation/Foundation.h>
 
 void testConcernUser(int uid);
+void testDeleteConcernedUser(int uid);

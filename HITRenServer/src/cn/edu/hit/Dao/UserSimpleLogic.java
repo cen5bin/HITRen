@@ -3,9 +3,12 @@ package cn.edu.hit.Dao;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import cn.edu.hit.kit.LogKit;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
@@ -62,21 +65,57 @@ public class UserSimpleLogic {
 			retData.put(HttpData.INFO, "注册失败");
 			return false;
 		}
-		if (!RelationshipLogic.createRelationship(uid)){
+		if (!UserSimpleLogic.createRelationship(uid)){
 			DBController.removeObj(UserConstant.COLLNAME, obj);
 			retData.put(HttpData.SUC, false);
-			retData.put(HttpData.INFO, "注册失败");
+			retData.put(HttpData.INFO, "relationship 建立失败");
 			return false;
 		}
-		if (!MessageLogic.createTimeline(uid)) {
+		if (!UserSimpleLogic.createTimeline(uid)) {
 			retData.put(HttpData.SUC, false);
-			retData.put(HttpData.INFO, "注册失败");
+			retData.put(HttpData.INFO, "timeline 建立失败");
 			return false;
 		}
 		retData.put(HttpData.SUC, true);
 		retData.put(UserConstant.UID, uid);
 		retData.put(UserConstant.SEQ, 1);
 		return true;
+	}
+	
+	//为当前注册用户建好友关系表
+	private static boolean createRelationship(int uid) throws JSONException {
+		retData = new JSONObject();
+		BasicDBObject obj = new BasicDBObject();
+		obj.put(UserConstant.UID, uid);
+		ArrayList<BasicDBObject> list = new ArrayList<BasicDBObject>();
+		BasicDBObject defalut = new BasicDBObject();
+		defalut.put(Relationship.GNAME, Relationship.DEFAULT);
+		defalut.put(Relationship.USERLIST, new ArrayList<Integer>());
+		list.add(defalut);
+		BasicDBObject all = new BasicDBObject();
+		all.put(Relationship.GNAME, Relationship.ALL);
+		all.put(Relationship.USERLIST, new ArrayList<Integer>());
+		list.add(all);
+		obj.put(Relationship.CONCERNLIST, list);
+		obj.put(Relationship.SEQ, 1);
+		boolean ret = DBController.addObj(Relationship.COLLNAME, obj);
+		if (!ret) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		retData.put(HttpData.SUC, true);
+		return true;
+	}
+	
+	// 为当前注册用户建立timeline
+	private static boolean createTimeline(int uid) {
+		BasicDBObject obj = new BasicDBObject(TimeLine.UID, uid);
+		obj.put(TimeLine.SEQ, 1);
+		obj.put(TimeLine.LIST, new ArrayList<Integer>());
+		boolean ret = DBController.addObj(TimeLine.COLLNAME, obj);
+		if (!ret)
+			LogKit.err("createTimeline failed");
+		return ret;
 	}
 	
 	//每次插入注册一个新账户就必须为其分配一个单独的uid

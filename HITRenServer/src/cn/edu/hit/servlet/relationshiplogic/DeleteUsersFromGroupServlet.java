@@ -56,7 +56,7 @@ public class DeleteUsersFromGroupServlet extends HttpServlet {
 				users.add(users0.getInt(i));
 			String gname = json.getString("gname");
 			response.setCharacterEncoding("utf-8");
-			RelationshipLogic.deleteUserFromGroup(uid, users, gname);
+			RelationshipLogic.deleteUsersFromGroup(uid, users, gname);
 			PrintWriter out = response.getWriter();
 			out.print(RelationshipLogic.retData);
 		} catch (JSONException e) {

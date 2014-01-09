@@ -14,14 +14,29 @@
 
 void testConcernUser(int uid) {
     User *user = [[User alloc] init];
-    user.email = [NSString stringWithFormat:@"%dzzzaaa@163.com", 0];
+    user.email = [NSString stringWithFormat:@"ll1bin@163.com"];
+    user.password = @"123";
+    RelationShip *relationShip = [[RelationShip alloc] init];
+    user.relationShip = relationShip;
+    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
+//    [logic signUp];
+    [logic login];
+    RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
+    [logic1 addGroup:@"asd"];
+//    for (int i = 40; i < 50; i++)
+    [logic1 concernUser:uid inGroup:@"asd"];
+//    [logic1 concernUser:<#(int)#> inGroups:<#(NSArray *)#>]
+}
+
+void testDeleteConcernedUser(int uid) {
+    User *user = [[User alloc] init];
+    user.email = [NSString stringWithFormat:@"ll1bin@163.com"];
     user.password = @"123";
     RelationShip *relationShip = [[RelationShip alloc] init];
     user.relationShip = relationShip;
     UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
     [logic login];
     RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
-//    for (int i = 40; i < 50; i++)
-    [logic1 concernUser:uid inGroup:@"default"];
-//    [logic1 concernUser:<#(int)#> inGroups:<#(NSArray *)#>]
+    [logic1 deleteConcernedUser:uid];
+
 }

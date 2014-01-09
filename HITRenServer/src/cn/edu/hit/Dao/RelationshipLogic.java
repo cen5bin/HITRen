@@ -8,32 +8,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.edu.hit.kit.LogKit;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 public class RelationshipLogic {
 	public static JSONObject retData;
-	
-	public static boolean createRelationship(int uid) throws JSONException {
-		retData = new JSONObject();
-		BasicDBObject obj = new BasicDBObject();
-		obj.put(UserConstant.UID, uid);
-		ArrayList<BasicDBObject> list = new ArrayList<BasicDBObject>();
-		BasicDBObject defalut = new BasicDBObject();
-		defalut.put(Relationship.GNAME, "default");
-		list.add(defalut);
-		obj.put(Relationship.CONCERNLIST, list);
-		obj.put(Relationship.SEQ, 1);
-		boolean ret = DBController.addObj(Relationship.COLLNAME, obj);
-		if (!ret) {
-			retData.put(HttpData.SUC, false);
-			return false;
-		}
-		retData.put(HttpData.SUC, true);
-		return true;
-	}
-	
+		
 	public static boolean addGroup(int uid, String gname) throws JSONException {
 		retData = new JSONObject();
 		BasicDBObject oldObj = new BasicDBObject();
@@ -53,6 +35,11 @@ public class RelationshipLogic {
 	
 	public static boolean deleteGroup(int uid, String gname) throws JSONException {
 		retData = new JSONObject();
+		if (gname.equals(Relationship.DEFAULT) || gname.equals(Relationship.ALL)) {
+			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "无法删除这个分组");
+			return false;
+		}
 		BasicDBObject obj1 = new BasicDBObject();
 		obj1.put("uid", uid);
 		obj1.put("concernlist.gname", gname);
@@ -99,6 +86,11 @@ public class RelationshipLogic {
 	
 	public static boolean renameGroup(int uid, String gname1, String gname2) throws JSONException {
 		retData = new JSONObject();
+		if (gname1.equals(Relationship.DEFAULT) || gname1.equals(Relationship.ALL)) {
+			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "无法重命名这个分组");
+			return false;
+		}
 		BasicDBObject oldObj = new BasicDBObject();
 		oldObj.put(UserConstant.UID, uid);
 		oldObj.put("concernlist.gname", gname1);
@@ -116,6 +108,11 @@ public class RelationshipLogic {
 	
 	public static boolean copyUsersToGroup(int uid, ArrayList<Integer> users, String gname) throws JSONException {
 		retData = new JSONObject();
+		if (gname.equals(Relationship.ALL)) {
+			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "无法复制用户到这个分组");
+			return false;
+		}
 		BasicDBObject oldObj = new BasicDBObject();
 		oldObj.put(UserConstant.UID, uid);
 		oldObj.put("concernlist.gname", gname);
@@ -131,7 +128,30 @@ public class RelationshipLogic {
 		return true;
 	}
 	
-	public static boolean deleteUserFromGroup(int uid, ArrayList<Integer> users, String gname) throws JSONException {
+	public static boolean deleteUsersFromGroup(int uid, ArrayList<Integer> users, String gname) throws JSONException {
+		if (gname.equals(Relationship.ALL)) {
+			retData = new JSONObject();
+			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "无法从这个分组删除好友");
+			return false;
+		}
+		return RelationshipLogic.realDeleteUsersFromGroup(uid, users, gname);
+//		BasicDBObject oldObj = new BasicDBObject();
+//		oldObj.put(UserConstant.UID, uid);
+//		oldObj.put("concernlist.gname", gname);
+//		BasicDBObject newObj = new BasicDBObject();
+//		newObj.put("$pullAll", new BasicDBObject().append("concernlist.$.userlist", users));
+//		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
+//		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
+//		if (!ret) {
+//			retData.put(HttpData.SUC, false);
+//			return false;
+//		}
+//		retData.put(HttpData.SUC, true);
+//		return true;
+	}
+	
+	private static boolean realDeleteUsersFromGroup(int uid, ArrayList<Integer> users, String gname) throws JSONException {
 		retData = new JSONObject();
 		BasicDBObject oldObj = new BasicDBObject();
 		oldObj.put(UserConstant.UID, uid);
@@ -146,13 +166,51 @@ public class RelationshipLogic {
 		}
 		retData.put(HttpData.SUC, true);
 		return true;
+		
+	}
+	
+	private static boolean deleteConcernedUserFromGroups(int uid, int uid1, ArrayList<String> gnames) throws JSONException {
+		if (!gnames.contains(Relationship.ALL))
+			gnames.add(Relationship.ALL);
+		ArrayList<Integer> users = new ArrayList<Integer>();
+		users.add(uid1);
+		for (String gname:gnames)
+			if (!RelationshipLogic.realDeleteUsersFromGroup(uid, users, gname)) {
+				LogKit.err("deleteUsersFromGroup gname: %s", gname.toString());
+				return false;
+			}
+		if (RelationshipLogic.removeAfollowerFromUid(uid, uid1))
+		return true;
+		return false;
+	}
+	
+	public static boolean deleteConcernedUser(int uid, int uid1) throws JSONException {
+		Map<String, ArrayList<Integer>> relationShip = RelationshipLogic.getRelationshipOfUser(uid);
+		retData = new JSONObject();
+		if (relationShip == null) {
+			retData.put(HttpData.SUC, false);
+			LogKit.err("relationship is null");
+			return false;
+		}
+		ArrayList<String> gnames = new ArrayList<String>();
+		for (String gname:relationShip.keySet())
+			if (relationShip.get(gname).contains(uid1))
+				gnames.add(gname);
+		
+		return RelationshipLogic.deleteConcernedUserFromGroups(uid, uid1, gnames);		
 	}
 	
 	public static boolean moveUsersFromGroupToGroup(int uid, ArrayList<Integer>users, String gname1, String gname2) throws JSONException {
+		retData = new JSONObject();
+		if (gname2.equals(Relationship.DEFAULT) || gname1.equals(Relationship.ALL)) {
+			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "非法操作");
+			return false;
+		}
 		boolean ret = RelationshipLogic.copyUsersToGroup(uid, users, gname2);
 		if (!ret)
 			return false;
-		ret = RelationshipLogic.deleteUserFromGroup(uid, users, gname1);
+		ret = RelationshipLogic.deleteUsersFromGroup(uid, users, gname1);
 		return ret;
 	}
 	
@@ -178,6 +236,17 @@ public class RelationshipLogic {
 			return false;
 		}
 		retData.put(HttpData.SUC, true);
+		return true;
+	}
+	
+	public static boolean concernUserInGroups(int uid, ArrayList<String> gnames, int uid1) throws JSONException {
+		if (!gnames.contains(Relationship.ALL))
+			gnames.add(Relationship.ALL);
+		if (gnames.size() == 1)
+			gnames.add(Relationship.DEFAULT);
+		for (String gname : gnames)
+			if (!RelationshipLogic.concernUserInGroup(uid, gname, uid1))
+				return false;
 		return true;
 	}
 	
@@ -270,6 +339,7 @@ public class RelationshipLogic {
 		DBObject retObj = DBController.queryOne(Relationship.COLLNAME, obj1, obj2);
 		if (retObj == null)
 			return null;
+		LogKit.debug("get relationship from database: %s", retObj.toString());
 		Map<String, ArrayList<Integer>> retMap = new HashMap<String, ArrayList<Integer>>();
 		JSONArray jsonArray = new JSONObject(retObj.toString()).getJSONArray(Relationship.CONCERNLIST);
 		for (int i = 0; i < jsonArray.length(); i++) {

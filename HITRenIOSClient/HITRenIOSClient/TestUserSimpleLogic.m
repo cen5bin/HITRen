@@ -13,7 +13,7 @@
 
 void testUserSimpleLogic() {
     User *user = [[User alloc] init];
-    user.email = @"bin@163.com";
+    user.email = @"llbin@163.com";
     user.password = @"123";
     RelationShip *relationShip = [[RelationShip alloc] init];
     user.relationShip = relationShip;

@@ -8,66 +8,85 @@ public class LogKit {
 	
 	public final static void debug(Object o) {
 		if (isdebug) {
-			StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
-			StringBuffer buf = new StringBuffer("[").append(_TIME_()).append(" | ").
-					append(traceElement.getFileName()).append(" (").
-					append(traceElement.getLineNumber()).append(")").append(" | ").append(traceElement.getMethodName()).append("]");
-			System.out.println(buf.toString() + " "+ o.toString());
+			System.out.println(getPrefix() + " "+ o.toString());
 		}
 	}
 	
 	public final static void debug(String s) {
 		if (isdebug) {
-			StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
-			StringBuffer buf = new StringBuffer("[").append(_TIME_()).append(" | ").
-					append(traceElement.getFileName()).append(" (").
-					append(traceElement.getLineNumber()).append(")").append(" | ").append(traceElement.getMethodName()).append("]");
-			System.out.println(buf.toString() + " "+ s);
+			System.out.println(getPrefix() + " "+ s);
+		}
+	}
+	
+	public final static void debug(String s, Object ...arg) {
+		if (isdebug) {
+			System.out.printf(getPrefix() + s+"\n", arg);
+		}
+	}
+	
+	private final static void debug(String s, int d, Object ...arg) {
+		if (isdebug) {
+			System.out.printf(getPrefix(d) + s+"\n", arg);
+		}
+	}
+	
+	private final static void debug(String s, int d) {
+		if (isdebug) {
+			System.out.println(getPrefix(d) + " "+ s);
 		}
 	}
 	
 	public final static void debug(int x) {
 		if (isdebug) {
-			StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
-			StringBuffer buf = new StringBuffer("[").append(_TIME_()).append(" | ").
-					append(traceElement.getFileName()).append(" (").
-					append(traceElement.getLineNumber()).append(")").append(" | ").append(traceElement.getMethodName()).append("]");
-			System.out.println(buf.toString() + " " + x);
+			System.out.println(getPrefix() + " " + x);
 		}
 	}
 	
 	public final static void err(String s) {
-		debug("error: "+s);
+		debug("error: "+s, 1);
 	}
 	
+	public final static void err(String s, Object ...arg) {
+		debug("error: "+s, 1, arg);
+	}
 	
 	public static final String getPrefix() {
-		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
-		StringBuffer buf = new StringBuffer("[").append(_TIME_()).append("|").
+		return getPrefix(1);
+//		StackTraceElement traceElement = ((new Exception()).getStackTrace())[2]; 
+//		StringBuffer buf = new StringBuffer("[").append(_TIME_()).append("|").
+//				append(traceElement.getFileName()).append(":").
+//				append(traceElement.getLineNumber()).append(" | ").append(traceElement.getMethodName()).append("]");
+//		return buf.toString();
+	}
+	
+	public static final String getPrefix(int d) {
+		StackTraceElement traceElement = ((new Exception()).getStackTrace())[d+2]; 
+		StringBuffer buf = new StringBuffer("[").append(_TIME_()).append(" | ").
 				append(traceElement.getFileName()).append(":").
-				append(traceElement.getLineNumber()).append("|").append(traceElement.getMethodName()).append("]");
+				append(traceElement.getLineNumber()).append(" | ").append(traceElement.getMethodName()).append("]");
 		return buf.toString();
 	}
-	// 当前文件名 
-	public static String _FILE_() { 
-		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
-		return traceElement.getFileName(); 
-	} 
-
-	// 当前方法名 
-	public static String _FUNC_() { 
-		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
-		return traceElement.getMethodName(); 
-	} 
-
-	// 当前行号 
-	public static int _LINE_() { 
-		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
-		return traceElement.getLineNumber(); 
-	} 
+//	
+//	// 当前文件名 
+//	public static String _FILE_() { 
+//		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
+//		return traceElement.getFileName(); 
+//	} 
+//
+//	// 当前方法名 
+//	public static String _FUNC_() { 
+//		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
+//		return traceElement.getMethodName(); 
+//	} 
+//
+//	// 当前行号 
+//	public static int _LINE_() { 
+//		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
+//		return traceElement.getLineNumber(); 
+//	} 
 
 	// 当前时间 
-	public static String _TIME_() { 
+	private static String _TIME_() { 
 		Date now = new Date(); 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 		return sdf.format(now); 

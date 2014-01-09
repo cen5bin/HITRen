@@ -166,7 +166,7 @@
     HttpData *data = [HttpData data];
     [data setIntValue:self.user.uid forKey:@"uid"];
     [data setIntValue:uid forKey:@"uid1"];
-    [data setValue:[self getGroupsOfUser:uid] forKey:@"gnames"];
+//    [data setValue:[self getGroupsOfUser:uid] forKey:@"gnames"];
     NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
     NSMutableDictionary *ret = [httpTransfer syncPost:request to:@"DeleteConcernedUser"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
@@ -255,14 +255,14 @@
     self.user.relationShip.followList = [dic objectForKey:@"followlist"];
 }
 
-- (NSArray *)getGroupsOfUser:(int)uid {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    for (NSDictionary *dic in self.user.relationShip.concerList) {
-        if ([[dic objectForKey:@"userlist"] indexOfObject:[NSNumber numberWithInt:uid]] != NSNotFound)
-            [array addObject:[dic objectForKey:@"gname"]];
-    }
-    return array;
-}
+//- (NSArray *)getGroupsOfUser:(int)uid {
+//    NSMutableArray *array = [[NSMutableArray alloc] init];
+//    for (NSDictionary *dic in self.user.relationShip.concerList) {
+//        if ([[dic objectForKey:@"userlist"] indexOfObject:[NSNumber numberWithInt:uid]] != NSNotFound)
+//            [array addObject:[dic objectForKey:@"gname"]];
+//    }
+//    return array;
+//}
 
 - (void)print {
     NSLog(@"seq: %d",self.user.relationShip.seq);

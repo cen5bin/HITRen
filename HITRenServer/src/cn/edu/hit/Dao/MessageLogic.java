@@ -59,16 +59,6 @@ public class MessageLogic {
 		return true;
 	}
 	
-	public static boolean createTimeline(int uid) {
-		BasicDBObject obj = new BasicDBObject(TimeLine.UID, uid);
-		obj.put(TimeLine.SEQ, 1);
-		obj.put(TimeLine.LIST, new ArrayList<Integer>());
-		boolean ret = DBController.addObj(TimeLine.COLLNAME, obj);
-		if (!ret)
-			LogKit.err("createTimeline failed");
-		return ret;
-	}
-	
 	private static int createMid() {
 		BasicDBObject oldObj = new BasicDBObject(IDCounter.KEY, IDCounter.MID);
 		BasicDBObject newObj = new BasicDBObject("$inc", new BasicDBObject().append(IDCounter.VALUE, 1));

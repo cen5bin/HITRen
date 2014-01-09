@@ -64,6 +64,7 @@ class Relationship {
 	protected static final String USERLIST = "userlist";
 	
 	protected static final String DEFAULT = "default";
+	protected static final String ALL = "ALL";
 }
 
 class TimeLine {

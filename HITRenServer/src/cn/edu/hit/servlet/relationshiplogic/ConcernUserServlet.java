@@ -2,6 +2,7 @@ package cn.edu.hit.servlet.relationshiplogic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ import cn.edu.hit.Dao.RelationshipLogic;
 
 /**
  * Servlet implementation class ConcernUserServlet
- * 关注一个好友,把他加到分组中，默认加入default分组
+ * 关注一个好友,把他加到分组中，默认加入default分组，必须将关注的好友都加入到ALL分组
  * 客户端传来uid，uid1（关注的人的uid），和分组列表gnames（数组）
  */
 @WebServlet("/ConcernUserServlet")
@@ -50,12 +51,16 @@ public class ConcernUserServlet extends HttpServlet {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
 			int uid1 = json.getInt("uid1");
+//			boolean ret = RelationshipLogic.concernUserInGroup(uid, "", uid1)
 			JSONArray jsonArray = json.getJSONArray("gnames");
+			ArrayList<String> gnames = new ArrayList<String>();
 			for (int i = 0; i < jsonArray.length(); i++){
-				boolean ret = RelationshipLogic.concernUserInGroup(uid, jsonArray.getString(i), uid1);
-				if (!ret) 
-					break;
+				gnames.add(jsonArray.getString(i));
+//				boolean ret = RelationshipLogic.concernUserInGroup(uid, jsonArray.getString(i), uid1);
+//				if (!ret) 
+//					break;
 			}
+			RelationshipLogic.concernUserInGroups(uid, gnames, uid1);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(RelationshipLogic.retData);
