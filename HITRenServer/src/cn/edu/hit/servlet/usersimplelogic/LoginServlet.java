@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jivesoftware.smack.XMPPException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.edu.hit.Dao.UserSimpleLogic;
 import cn.edu.hit.kit.LogKit;
+import cn.edu.hit.openfire.AccountManager;
+import cn.edu.hit.openfire.MessagePusher;
 
 
 /**
@@ -37,7 +40,16 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		out.print("asd");
+		out.print(request.getServletContext().getRealPath(""));
+		try {
+			MessagePusher.MessageIsLikedByUser(0, 0);
+//			AccountManager.createAccount(22, "123");
+			AccountManager.changePassword(22, "1234", "123");
+//			AccountManager.deleteAccount(22, "123");
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

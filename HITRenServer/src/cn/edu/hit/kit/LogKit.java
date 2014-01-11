@@ -52,11 +52,6 @@ public class LogKit {
 	
 	public static final String getPrefix() {
 		return getPrefix(1);
-//		StackTraceElement traceElement = ((new Exception()).getStackTrace())[2]; 
-//		StringBuffer buf = new StringBuffer("[").append(_TIME_()).append("|").
-//				append(traceElement.getFileName()).append(":").
-//				append(traceElement.getLineNumber()).append(" | ").append(traceElement.getMethodName()).append("]");
-//		return buf.toString();
 	}
 	
 	public static final String getPrefix(int d) {
@@ -66,24 +61,6 @@ public class LogKit {
 				append(traceElement.getLineNumber()).append(" | ").append(traceElement.getMethodName()).append("]");
 		return buf.toString();
 	}
-//	
-//	// 当前文件名 
-//	public static String _FILE_() { 
-//		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
-//		return traceElement.getFileName(); 
-//	} 
-//
-//	// 当前方法名 
-//	public static String _FUNC_() { 
-//		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
-//		return traceElement.getMethodName(); 
-//	} 
-//
-//	// 当前行号 
-//	public static int _LINE_() { 
-//		StackTraceElement traceElement = ((new Exception()).getStackTrace())[1]; 
-//		return traceElement.getLineNumber(); 
-//	} 
 
 	// 当前时间 
 	private static String _TIME_() { 

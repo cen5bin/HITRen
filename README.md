@@ -23,7 +23,7 @@ HITRen
 - 将一些好友从分组中删除: [DeleteUsersFromGroupServlet.java][9], 参数: `uid`,`users`,`gname` 
 - 将一些好友从一个分组移动到另外的一些分组: [MoveUsersFromGroupToGroupsServlet.java][10], 参数: `uid`,`users`,	当前所在分组`gname`,目标分组`gnames`
 - 下载好友关系信息: [DownloadRelationshipInfoServlet.java][11], 参数: `uid`, `seq`
-- 删除关注的好友: [DeleteConcernedUserServlet.java][12], 参数: `uid`, `uid1`, `gnames`
+- 删除关注的好友: [DeleteConcernedUserServlet.java][12], 参数: `uid`, `uid1`
 - 拉进黑名单: [MoveUsersToBlacklistServlet.java][13], 参数: `uid`, `users`
 - 从黑名单恢复: [RecoverUsersFromBlacklistServlet.java][14], 参数: `uid`, `users`
 - 删除好友分组: [DeleteConcernlistGroupServlet.java][15], 参数: `uid`,`gname`,删除后，该分组中所有的好友都会移到default分组中

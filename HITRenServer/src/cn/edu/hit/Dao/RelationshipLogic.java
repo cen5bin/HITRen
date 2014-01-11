@@ -136,19 +136,6 @@ public class RelationshipLogic {
 			return false;
 		}
 		return RelationshipLogic.realDeleteUsersFromGroup(uid, users, gname);
-//		BasicDBObject oldObj = new BasicDBObject();
-//		oldObj.put(UserConstant.UID, uid);
-//		oldObj.put("concernlist.gname", gname);
-//		BasicDBObject newObj = new BasicDBObject();
-//		newObj.put("$pullAll", new BasicDBObject().append("concernlist.$.userlist", users));
-//		newObj.put("$inc", new BasicDBObject().append(Relationship.SEQ, 1));
-//		boolean ret = DBController.update(Relationship.COLLNAME, oldObj, newObj);
-//		if (!ret) {
-//			retData.put(HttpData.SUC, false);
-//			return false;
-//		}
-//		retData.put(HttpData.SUC, true);
-//		return true;
 	}
 	
 	private static boolean realDeleteUsersFromGroup(int uid, ArrayList<Integer> users, String gname) throws JSONException {

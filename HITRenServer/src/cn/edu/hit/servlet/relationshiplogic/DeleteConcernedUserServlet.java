@@ -53,18 +53,6 @@ public class DeleteConcernedUserServlet extends HttpServlet {
 			
 			LogKit.debug("deleteConcernedUserFromGroups uid: %d  uid1: %d", uid, uid1);
 			RelationshipLogic.deleteConcernedUser(uid, uid1);
-			
-//			boolean ret = false;
-//			ArrayList<Integer> users = new ArrayList<Integer>();
-//			users.add(uid1);
-//			for (int i = 0; i < gnames.length(); i++) {
-//				
-//				ret = RelationshipLogic.deleteUsersFromGroup(uid, users, gnames.getString(i));
-//				if (!ret)
-//					break;
-//			}
-//			if (ret)
-//				RelationshipLogic.removeAfollowerFromUid(uid, uid1);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(RelationshipLogic.retData);

@@ -51,14 +51,10 @@ public class ConcernUserServlet extends HttpServlet {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
 			int uid1 = json.getInt("uid1");
-//			boolean ret = RelationshipLogic.concernUserInGroup(uid, "", uid1)
 			JSONArray jsonArray = json.getJSONArray("gnames");
 			ArrayList<String> gnames = new ArrayList<String>();
 			for (int i = 0; i < jsonArray.length(); i++){
 				gnames.add(jsonArray.getString(i));
-//				boolean ret = RelationshipLogic.concernUserInGroup(uid, jsonArray.getString(i), uid1);
-//				if (!ret) 
-//					break;
 			}
 			RelationshipLogic.concernUserInGroups(uid, gnames, uid1);
 			response.setCharacterEncoding("utf-8");
