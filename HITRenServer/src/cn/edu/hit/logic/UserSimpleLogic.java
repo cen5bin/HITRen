@@ -1,4 +1,4 @@
-package cn.edu.hit.Dao;
+package cn.edu.hit.logic;
 
 
 
@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.edu.hit.constant.HttpData;
+import cn.edu.hit.constant.IDCounter;
+import cn.edu.hit.constant.Notice;
+import cn.edu.hit.constant.Relationship;
+import cn.edu.hit.constant.TimeLine;
+import cn.edu.hit.constant.UserConstant;
+import cn.edu.hit.dao.DBController;
 import cn.edu.hit.kit.LogKit;
 
 import com.mongodb.BasicDBObject;
@@ -35,7 +42,6 @@ public class UserSimpleLogic {
 //			return false;
 //		}
 		retData.put(HttpData.SUC, true);
-//		retData.put(UserConstant.UID, cursor.next().get(IDCounter.UID).toString());
 		retData.put(UserConstant.UID, retObject.get(IDCounter.UID).toString());
 		return true;
 	}
@@ -59,6 +65,7 @@ public class UserSimpleLogic {
 		}
 		obj.put(UserConstant.UID, uid);
 		obj.put(UserConstant.SEQ, 1);
+		obj.put(UserConstant.NAME, email.split("@")[0]);
 		retString = "" + uid;
 		if (!DBController.addObj(UserConstant.COLLNAME, obj)) {
 			retData.put(HttpData.SUC, false);
@@ -74,6 +81,11 @@ public class UserSimpleLogic {
 		if (!UserSimpleLogic.createTimeline(uid)) {
 			retData.put(HttpData.SUC, false);
 			retData.put(HttpData.INFO, "timeline 建立失败");
+			return false;
+		}
+		if (!UserSimpleLogic.createNotice(uid)) {
+			retData.put(HttpData.SUC, false);
+			retData.put(HttpData.INFO, "notice 建立失败");
 			return false;
 		}
 		retData.put(HttpData.SUC, true);
@@ -115,6 +127,21 @@ public class UserSimpleLogic {
 		boolean ret = DBController.addObj(TimeLine.COLLNAME, obj);
 		if (!ret)
 			LogKit.err("createTimeline failed");
+		return ret;
+	}
+	
+	/**
+	 * 为用户建立notice记录
+	 * @param uid
+	 * @return
+	 */
+	private static boolean createNotice(int uid) {
+		BasicDBObject obj = new BasicDBObject(Notice.UID, uid);
+		obj.put(Notice.SEQ, 1);
+		obj.put(Notice.LIST, new ArrayList<String>());
+		boolean ret = DBController.addObj(Notice.COLLNAME, obj);
+		if (!ret)
+			LogKit.err("createNotice failed");
 		return ret;
 	}
 	

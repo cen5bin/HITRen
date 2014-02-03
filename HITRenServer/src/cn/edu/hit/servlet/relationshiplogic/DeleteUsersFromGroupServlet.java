@@ -14,7 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.edu.hit.Dao.RelationshipLogic;
+import cn.edu.hit.logic.RelationshipLogic;
 
 /**
  * Servlet implementation class DeleteUsersFromGroupServlet

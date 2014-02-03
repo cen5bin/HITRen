@@ -1,4 +1,4 @@
-package cn.edu.hit.Dao;
+package cn.edu.hit.dao;
 
 import java.net.UnknownHostException;
 

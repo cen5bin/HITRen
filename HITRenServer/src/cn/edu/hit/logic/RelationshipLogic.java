@@ -1,4 +1,4 @@
-package cn.edu.hit.Dao;
+package cn.edu.hit.logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +8,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.edu.hit.constant.HttpData;
+import cn.edu.hit.constant.Relationship;
+import cn.edu.hit.constant.UserConstant;
+import cn.edu.hit.dao.DBController;
 import cn.edu.hit.kit.LogKit;
 
 import com.mongodb.BasicDBObject;

@@ -9,14 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jivesoftware.smack.XMPPException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.edu.hit.Dao.UserSimpleLogic;
 import cn.edu.hit.kit.LogKit;
-import cn.edu.hit.openfire.AccountManager;
-import cn.edu.hit.openfire.MessagePusher;
+import cn.edu.hit.logic.MessageLogic;
+import cn.edu.hit.logic.UserSimpleLogic;
 
 
 /**
@@ -39,14 +37,14 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out = response.getWriter();
-		out.print(request.getServletContext().getRealPath(""));
+//		MemController.setUserInfo(11, "asdsad123");
+//		String s = MemController.getUserInfo(11);
+//		System.out.println(s);
+		
 		try {
-			MessagePusher.MessageIsLikedByUser(0, 0);
-//			AccountManager.createAccount(22, "123");
-			AccountManager.changePassword(22, "1234", "123");
-//			AccountManager.deleteAccount(22, "123");
-		} catch (XMPPException e) {
+//			AccountManager.createAccount(35, "123");
+			MessageLogic.likeTheMessage(35, 40);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

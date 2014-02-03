@@ -9,10 +9,13 @@ import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
+import cn.edu.hit.kit.FileKit;
+
 public class OpenfireConnector {
-	private String confpath = this.getClass().getClassLoader().getResource("").getPath()+"/../conf/openfire.conf";
+	private String confpath = FileKit.getConfPath()+"openfire.conf"; //this.getClass().getClassLoader().getResource("").getPath()+"/../conf/openfire.conf";
 	
 	// openfire服务器信息
+	private static String IP;
 	private static String hostname;
 	private static int port;
 	
@@ -61,15 +64,27 @@ public class OpenfireConnector {
 		return normalConnection;
 	}
 	
+	/**
+	 * 返回域名
+	 * @return 
+	 * @throws XMPPException 
+	 * @throws IOException 
+	 */
+	public static String getHostname() throws IOException, XMPPException {
+		if (hostname == null)
+			getAdminConnection();
+		return hostname;
+	}
 	private OpenfireConnector() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(confpath));
+		IP = br.readLine().split(":")[1].trim();
 		hostname = br.readLine().split(":")[1].trim();
 		port = Integer.parseInt(br.readLine().split(":")[1].trim());
 		username = br.readLine().split(":")[1].trim();
 		password = br.readLine().split(":")[1].trim();
 		br.close();
 		
-		config = new ConnectionConfiguration(hostname, port);
+		config = new ConnectionConfiguration(hostname, port, IP);
 		config.setReconnectionAllowed(true);
 		config.setCompressionEnabled(true);
 		config.setSASLAuthenticationEnabled(true);
@@ -82,7 +97,7 @@ public class OpenfireConnector {
 	}
 	
 	private void connectToOpenfire(String username, String password) throws XMPPException {
-		ConnectionConfiguration config = new ConnectionConfiguration(hostname, port);
+		ConnectionConfiguration config = new ConnectionConfiguration(hostname, port, IP);
 		config.setCompressionEnabled(true);
 		config.setSASLAuthenticationEnabled(true);
 		normalConnection = new XMPPConnection(config);

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.edu.hit.Dao.RelationshipLogic;
 import cn.edu.hit.kit.LogKit;
+import cn.edu.hit.logic.RelationshipLogic;
 
 /**
  * Servlet implementation class DeleteConcernedUserServlet
