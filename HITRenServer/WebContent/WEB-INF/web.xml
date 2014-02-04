@@ -145,4 +145,13 @@
     <servlet-name>LikeTheMessage</servlet-name>
     <url-pattern>/LikeTheMessage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CancelLikeTheMessage</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.messagelogic.CancelLikeTheMessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CancelLikeTheMessage</servlet-name>
+    <url-pattern>/CancelLikeTheMessage</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

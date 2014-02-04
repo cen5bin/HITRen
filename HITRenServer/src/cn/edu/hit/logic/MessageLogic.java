@@ -79,8 +79,8 @@ public class MessageLogic {
 	
 	/**
 	 * 用户uid为状态mid点赞
-	 * @param uid
-	 * @param mid
+	 * @param uid 点赞者
+	 * @param mid 被点赞的状态
 	 * @return
 	 * @throws Exception 
 	 */
@@ -108,6 +108,34 @@ public class MessageLogic {
 		
 		int uid0 = Integer.parseInt(retObj.get(Message.UID).toString());
 		TipsPusher.messageIsLikedByUser(uid0, uid, user.getName());
+		retData.put(HttpData.SUC, true);
+		return true;
+	}
+	
+	/**
+	 * 取消点赞
+	 * @param uid 取消点赞者
+	 * @param mid 被取消的状态
+	 * @return
+	 * @throws JSONException
+	 */
+	public static boolean cancelLikeTheMessage(int uid, int mid) throws JSONException {
+		retData = new JSONObject();
+		BasicDBObject oldObj = new BasicDBObject(Message.MID, mid);
+		BasicDBObject newObj = new BasicDBObject();
+		newObj = newObj.append("$pull", new BasicDBObject(Message.LIKEDLIST, new BasicDBObject(Message.UID, uid)));
+		newObj = newObj.append("$inc", new BasicDBObject(Message.SEQ, 1));
+		boolean ret = DBController.update(Message.COLLNAME, oldObj, newObj, false, false);
+		if (!ret) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		DBObject retObj = DBController.queryOne(Message.COLLNAME, oldObj);
+		ret = MemWorker.setMessageInfo(mid, retObj.toString());
+		if (!ret) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
 		retData.put(HttpData.SUC, true);
 		return true;
 	}

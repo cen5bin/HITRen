@@ -1,4 +1,4 @@
-package cn.edu.hit.servlet.usersimplelogic;
+package cn.edu.hit.servlet.messagelogic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,22 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.edu.hit.kit.LogKit;
 import cn.edu.hit.logic.MessageLogic;
-import cn.edu.hit.logic.UserSimpleLogic;
-
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class CancelLikeTheMessageServlet
+ * 取消点赞
+ * 参数 取消者uid， 状态mid
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/CancelLikeTheMessageServlet")
+public class CancelLikeTheMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public CancelLikeTheMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,18 +36,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		MemController.setUserInfo(11, "asdsad123");
-//		String s = MemController.getUserInfo(11);
-//		System.out.println(s);
-		
-		try {
-//			AccountManager.createAccount(35, "123");
-			MessageLogic.cancelLikeTheMessage(35, 40);
-//			MessageLogic.likeTheMessage(35, 40);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -56,31 +43,20 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		String data = request.getParameter("data");
 		data = new String(data.getBytes("ISO8859_1"),"utf-8");
-		String email = "";
-		String password = "";
 		try {
 			JSONObject json = new JSONObject(data);
-			email = json.get("email").toString();
-			LogKit.debug(email);
-			password = json.get("password").toString();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
+			int uid = json.getInt("uid");
+			int mid = json.getInt("mid");
+			MessageLogic.cancelLikeTheMessage(uid, mid);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
-			UserSimpleLogic.login(email, password);
-			out.print(UserSimpleLogic.retData);
+			out.print(MessageLogic.retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 }

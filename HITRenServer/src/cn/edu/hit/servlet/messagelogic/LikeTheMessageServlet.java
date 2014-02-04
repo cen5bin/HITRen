@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.edu.hit.logic.MessageLogic;
-import cn.edu.hit.logic.RelationshipLogic;
 
 /**
  * Servlet implementation class LikeTheMessageServlet
+ * 点赞
+ * 参数uid（点赞者），mid（被点赞的状态）
  */
 @WebServlet("/LikeTheMessageServlet")
 public class LikeTheMessageServlet extends HttpServlet {
