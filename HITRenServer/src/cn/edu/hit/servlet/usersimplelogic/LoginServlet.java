@@ -18,6 +18,7 @@ import cn.edu.hit.kit.FileKit;
 import cn.edu.hit.kit.LogKit;
 import cn.edu.hit.logic.MessageLogic;
 import cn.edu.hit.logic.UserSimpleLogic;
+import cn.edu.hit.openfire.AccountManager;
 
 
 /**
@@ -40,15 +41,15 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		MemWorker.setUserInfo(11, "asdsad123");
-		String s = MemWorker.getUserInfo(11);
-		System.out.println(s);
+//		MemWorker.setUserInfo(11, "asdsad123");
+//		String s = MemWorker.getUserInfo(11);
+//		System.out.println(s);
 		
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(FileKit.getConfPath());
 			
-//			AccountManager.createAccount(35, "123");
+			AccountManager.createAccount(36, "123");
 //			MessageLogic.cancelLikeTheMessage(35, 40);
 //			MessageLogic.likeTheMessage(35, 40);
 		} catch (Exception e) {

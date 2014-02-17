@@ -34,9 +34,22 @@ HITRen
 
 
 
-
-
-
+---
+##项目构成
+- 配置文件：
+	- 路径： WEB-INF/conf
+	- [memcache.conf][17]: memcached的配置文件，内容是部署的服务器ip和端口
+	- [openfire.conf][18]: openfire服务器的配置文件，包含了服务器的基本信息，详见文件内容
+- 包
+	- cn.edu.hit.constant: 各种常量，主要是mongodb中的字段名
+	- cn.edu.hit.dao: 和底层数据操作有关的类，包括mongodb的操作和memcached的操作
+	- cn.edu.hit.kit: 工具类，包括文件路径的获取，时间的获取以及log
+	- cn.edu.hit.logic: 逻辑代码，处理服务器中的各种逻辑
+	- cn.edu.hit.model: 数据模型，用来表示数据
+	- cn.edu.hit.openfire: 操作openfire的函数，包括在openfire中新建用户，发送推送消息等
+	- cn.edu.hit.servlet.messagelogic: 社交功能中关于状态的servlet
+	- cn.edu.hit.servlet.relationshiplogic: 社交模块中的好友关系处理servlet
+	- cn.edu.hit.servlet.usersimplelogic: 用户登录、注册、信息修改等等
 
 
 [1]:HITRenServer/src/cn/edu/hit/servlet/usersimplelogic/LoginServlet.java
@@ -56,6 +69,7 @@ HITRen
 [14]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/RecoverUsersFromBlacklistServlet.java
 [15]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/DeleteConcernlistGroupServlet.java
 [16]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/SendShortMessageServlet.java
-
+[17]:HITRenServer/WebContent/WEB-INF/conf/memcache.conf
+[18]:HITRenServer/WebContent/WEB-INF/conf/openfire.conf
 
 
