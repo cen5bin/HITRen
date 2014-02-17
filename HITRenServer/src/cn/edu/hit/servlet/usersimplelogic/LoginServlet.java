@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.edu.hit.dao.MemController;
+import cn.edu.hit.dao.MemWorker;
+import cn.edu.hit.kit.FileKit;
 import cn.edu.hit.kit.LogKit;
 import cn.edu.hit.logic.MessageLogic;
 import cn.edu.hit.logic.UserSimpleLogic;
@@ -37,13 +40,16 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		MemController.setUserInfo(11, "asdsad123");
-//		String s = MemController.getUserInfo(11);
-//		System.out.println(s);
+		MemWorker.setUserInfo(11, "asdsad123");
+		String s = MemWorker.getUserInfo(11);
+		System.out.println(s);
 		
 		try {
+			PrintWriter out = response.getWriter();
+			out.print(FileKit.getConfPath());
+			
 //			AccountManager.createAccount(35, "123");
-			MessageLogic.cancelLikeTheMessage(35, 40);
+//			MessageLogic.cancelLikeTheMessage(35, 40);
 //			MessageLogic.likeTheMessage(35, 40);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
