@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(FileKit.getConfPath());
 			
-			AccountManager.createAccount(36, "123");
+//			AccountManager.createAccount(36, "123");
 //			MessageLogic.cancelLikeTheMessage(35, 40);
 //			MessageLogic.likeTheMessage(35, 40);
 		} catch (Exception e) {
