@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.edu.hit.kit.DataKit;
 import cn.edu.hit.logic.UserSimpleLogic;
 
 /**
@@ -44,24 +45,17 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String email = "";//request.getParameter("email");
-		String password = "";//request.getParameter("password");
+		String email = "";
+		String password = "";
 		try {
-			String data = request.getParameter("data");
-			data = new String(data.getBytes("ISO8859_1"),"utf-8");
+			String data = DataKit.getDataFromClient(request.getReader());
 			JSONObject json = new JSONObject(data);
-			email = json.get("email").toString();
+			email = json.getString("email");
 			password = json.get("password").toString();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
+			UserSimpleLogic.register(email, password);
+			
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
-			UserSimpleLogic.register(email, password);
 			out.print(UserSimpleLogic.retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

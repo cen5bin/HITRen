@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import cn.edu.hit.dao.MemController;
 import cn.edu.hit.dao.MemWorker;
+import cn.edu.hit.kit.DataKit;
 import cn.edu.hit.kit.FileKit;
 import cn.edu.hit.kit.LogKit;
 import cn.edu.hit.logic.MessageLogic;
@@ -47,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			PrintWriter out = response.getWriter();
-			out.print(FileKit.getConfPath());
+//			out.print(DataKit.getData(request.getReader()));
 			
 //			AccountManager.createAccount(36, "123");
 //			MessageLogic.cancelLikeTheMessage(35, 40);
@@ -64,30 +65,22 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String data = request.getParameter("data");
-		data = new String(data.getBytes("ISO8859_1"),"utf-8");
+		String data = DataKit.getDataFromClient(request.getReader());
 		String email = "";
 		String password = "";
 		try {
 			JSONObject json = new JSONObject(data);
 			email = json.get("email").toString();
-			LogKit.debug(email);
 			password = json.get("password").toString();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
+			UserSimpleLogic.login(email, password);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
-			UserSimpleLogic.login(email, password);
 			out.print(UserSimpleLogic.retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

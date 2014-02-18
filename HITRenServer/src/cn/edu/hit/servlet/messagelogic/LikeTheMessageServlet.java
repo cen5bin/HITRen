@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import cn.edu.hit.kit.DataKit;
 import cn.edu.hit.logic.MessageLogic;
 
 /**
@@ -42,8 +43,7 @@ public class LikeTheMessageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String data = request.getParameter("data");
-		data = new String(data.getBytes("ISO8859_1"),"utf-8");
+		String data = DataKit.getDataFromClient(request.getReader());
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
