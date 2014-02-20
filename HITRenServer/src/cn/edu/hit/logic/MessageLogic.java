@@ -49,7 +49,7 @@ public class MessageLogic {
 		obj.put(Message.UID, uid);
 		obj.put(Message.TIME, now);
 		obj.put(Message.SEQ, 1);
-		obj.put(Message.COMMENTLIST, new ArrayList<String>());
+//		sobj.put(Message.COMMENTLIST, new ArrayList<String>());
 		obj.put(Message.LIKEDLIST, new ArrayList<String>());
 		obj.put(Message.SHATECOUNT, 0);
 		obj.put(Message.TYPE, type);
@@ -91,7 +91,7 @@ public class MessageLogic {
 		BasicDBObject userInfo = new BasicDBObject();
 		userInfo.put(Message.LIKEDINFO.UID, uid);
 		User user = DataReader.getLeastUserInfo(uid);
-		userInfo.put(Message.LIKEDINFO.UNAME, user.getName());
+//		userInfo.put(Message.LIKEDINFO.UNAME, user.getName());
 		newObj.put("$push", new BasicDBObject().append(Message.LIKEDLIST, userInfo));
 		newObj.put("$inc", new BasicDBObject(Message.SEQ, 1));
 		boolean ret = DBController.update(Message.COLLNAME, oldObj, newObj, false, false);
