@@ -30,8 +30,9 @@ HITRen
 
 ##3. 社交功能逻辑
 - 发短状态: [SendShortMessageServlet.java][16], 参数: `uid`, `message`:状态内容, `auth`:表示是否设置可见范围，0表示不设置，1表示设置, `gnames`:如果`auth=1`，则必须传这个字段，否则不用传
-
-
+- 点赞: [LikeTheMessageServlet.java][19], 参数: `uid`, `mid`: 被点赞的状态
+- 取消点赞: [CancelLikeTheMessageServlet.java][20], 参数： `uid`, `mid`:被取消点赞的状态
+- 评论状态: [CommentMessageServlet.java][21], 参数: `uid`, `mid`: 被评论的状态, `type`:评论类型，0表示直接评论状态，1表示回复某人, 如果`type`是1，则有字段`reuid`表示被回复的uid,`content`表示回复内容 
 
 
 ---
@@ -68,8 +69,9 @@ HITRen
 [13]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/MoveUsersToBlacklistServlet.java
 [14]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/RecoverUsersFromBlacklistServlet.java
 [15]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/DeleteConcernlistGroupServlet.java
-[16]:HITRenServer/src/cn/edu/hit/servlet/relationshiplogic/SendShortMessageServlet.java
+[16]:HITRenServer/src/cn/edu/hit/servlet/messagelogic/SendShortMessageServlet.java
 [17]:HITRenServer/WebContent/WEB-INF/conf/memcache.conf
 [18]:HITRenServer/WebContent/WEB-INF/conf/openfire.conf
-
-
+[19]:HITRenServer/src/cn/edu/hit/servlet/messagelogic/LikeTheMessageServlet.java
+[20]:HITRenServer/src/cn/edu/hit/servlet/messagelogic/CancelLikeTheMessageServlet.java
+[20]:HITRenServer/src/cn/edu/hit/servlet/messagelogic/CommentMessageServlet.java
