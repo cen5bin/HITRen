@@ -161,4 +161,12 @@
     <servlet-name>CommentMessage</servlet-name>
     <url-pattern>/CommentMessage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ShareMessage</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.messagelogic.ShareMessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShareMessage</servlet-name>
+    <url-pattern>/ShareMessage</url-pattern>
+  </servlet-mapping>
 </web-app>

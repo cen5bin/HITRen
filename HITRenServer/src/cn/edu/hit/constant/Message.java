@@ -20,4 +20,5 @@ public class Message {
 		public static final int SHARED = 1;
 	}
 	public static final String CONTENT = "content";
+	public static final String PRE = "pre";
 }

@@ -39,6 +39,15 @@ public class TipsPusher {
 		TipsPusher.sendMessage(calJidWithUid(uid), message);
 	}
 	
+	/**
+	 * 状态被分享
+	 * @param uid 被分享的状态的作者
+	 * @param uid1 分享者
+	 * @param name 
+	 * @param pic
+	 * @param mid 被分享的状态
+	 * @throws Exception
+	 */
 	public static void messageIsSharedByUser(int uid, int uid1, String name, String pic, int mid) throws Exception {
 		String message = TipsCreator.createSNSPushMessage(SNSPushMessageType.SHARED, uid1, name, pic, mid);
 		TipsPusher.sendMessage(calJidWithUid(uid), message);

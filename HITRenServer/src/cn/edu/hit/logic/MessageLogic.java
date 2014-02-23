@@ -28,6 +28,7 @@ import com.mongodb.DBObject;
 public class MessageLogic {
 	public static JSONObject retData;
 	
+	
 	/**
 	 * 发纯文字状态
 	 * @param uid 作者
@@ -161,7 +162,7 @@ public class MessageLogic {
 		dataObj.put(Comment.TIME, TimeKit.now());
 		newObj.put("$push", new BasicDBObject(Comment.LIST, dataObj));
 		newObj.put("$inc", new BasicDBObject(Comment.SEQ, 1));
-		if (DBController.update(Comment.COLLNAME, oldObj, newObj, true, false)) {
+		if (!DBController.update(Comment.COLLNAME, oldObj, newObj, true, false)) {
 			retData.put(HttpData.SUC, false);
 			return false;
 		}
@@ -172,6 +173,77 @@ public class MessageLogic {
 		}
 		User user = DataReader.getLeastUserInfo(uid);
 		TipsPusher.messageIsCommentedByUser(uid1, uid, user.getName(), user.getPic(), mid);
+		return true;
+	}
+	
+	/**
+	 * 分享状态
+	 * @param uid 分享者
+	 * @param mid1 相关状态
+	 * @param content 分享时的描述
+	 * @return
+	 * @throws Exception 
+	 */
+	public static boolean shareMessage(int uid, int mid1, String content, ArrayList<String> gnames) throws Exception {
+		retData = new JSONObject();
+		int mid = createMid();
+		if (mid == -1) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		String now = TimeKit.now();
+		int type = Message.Type.SHARED;
+		BasicDBObject obj = new BasicDBObject();
+		obj.put(Message.MID, mid);
+		obj.put(Message.UID, uid);
+		obj.put(Message.TIME, now);
+		obj.put(Message.SEQ, 1);
+		obj.put(Message.LIKEDLIST, new ArrayList<String>());
+		obj.put(Message.SHATECOUNT, 0);
+		obj.put(Message.TYPE, type);
+		obj.put(Message.PRE, content);
+		
+		BasicDBObject contentObj = new BasicDBObject();
+		cn.edu.hit.model.Message message = DataReader.getMessageInfo(mid1);
+		contentObj.put(Message.UID, message.getUid());
+		contentObj.put(Message.TYPE, message.getType());
+		contentObj.put(Message.CONTENT, message.getContent());
+		contentObj.put(Message.PRE, message.getPrefix());
+		
+		obj.put(Message.CONTENT, contentObj);
+		DBController.addObj(Message.COLLNAME, obj);
+		MessageLogic.addMessageToSelf(uid, mid);
+		if (gnames.size() == 0) {
+			boolean ret = MessageLogic.addMessageToGlobalTimeline(mid);
+			if (!ret) {
+				LogKit.err("addMessageToGlobalTimeline");
+				retData.put(HttpData.SUC, false);
+				return false;
+			}
+			
+		}
+		else {
+			boolean ret = MessageLogic.addMessageToGroups(uid, mid, gnames);
+			if (!ret) {
+				LogKit.err("addMessageToGroups");
+				retData.put(HttpData.SUC, false);
+				return false;
+			}
+		}
+		
+		BasicDBObject oldObj = new BasicDBObject();
+		oldObj.put(Message.MID, mid1);
+		BasicDBObject newObj = new BasicDBObject();
+		newObj.put("$inc", new BasicDBObject(Message.SEQ, 1).append(Message.SHATECOUNT, 1));
+		if (!DBController.update(Message.COLLNAME, oldObj, newObj)) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		
+		User user = DataReader.getLeastUserInfo(uid);
+		TipsPusher.messageIsSharedByUser(message.getUid(), uid, user.getName(), user.getPic(), mid1);
+		
+		retData.put(HttpData.SUC, true);
 		return true;
 	}
 	/**

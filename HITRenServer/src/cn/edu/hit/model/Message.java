@@ -9,7 +9,14 @@ public class Message {
 	private String content = "";
 	private int type;
 	private int sharedCount = 0;
+	private String prefix = "";
 	
+	public String getPrefix() {
+		return prefix;
+	}
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
 	public String getContent() {
 		return content;
 	}
