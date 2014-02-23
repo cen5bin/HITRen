@@ -20,23 +20,32 @@ public class TipsPusher {
 	 * @throws IOException 
 	 * @throws JSONException 
 	 */
-	public static void messageIsLikedByUser(int uid, int uid1, String name) throws Exception {
-		String message = TipsCreator.createSNSPushMessage(SNSPushMessageType.LIKED, uid1, name, "");
+	public static void messageIsLikedByUser(int uid, int uid1, String name, String pic, int mid) throws Exception {
+		String message = TipsCreator.createSNSPushMessage(SNSPushMessageType.LIKED, uid1, name, pic, mid);
 		TipsPusher.sendMessage(calJidWithUid(uid), message);
 	}
 	
-	public static void messageIsCommentedByUser(int uid, int uid1, String name) throws Exception {
-		String message = TipsCreator.createSNSPushMessage(SNSPushMessageType.COMMENTED, uid1, name, "");
+	/**
+	 * 状态被评论，或者被回复
+	 * @param uid 被评论或者被回复的用户id
+	 * @param uid1 去评论的用户id
+	 * @param name 去评论的用户名字
+	 * @param pic
+	 * @param mid 相关状态id
+	 * @throws Exception
+	 */
+	public static void messageIsCommentedByUser(int uid, int uid1, String name, String pic, int mid) throws Exception {
+		String message = TipsCreator.createSNSPushMessage(SNSPushMessageType.COMMENTED, uid1, name, pic, mid);
 		TipsPusher.sendMessage(calJidWithUid(uid), message);
 	}
 	
-	public static void messageIsSharedByUser(int uid, int uid1, String name) throws Exception {
-		String message = TipsCreator.createSNSPushMessage(SNSPushMessageType.SHARED, uid1, name, "");
+	public static void messageIsSharedByUser(int uid, int uid1, String name, String pic, int mid) throws Exception {
+		String message = TipsCreator.createSNSPushMessage(SNSPushMessageType.SHARED, uid1, name, pic, mid);
 		TipsPusher.sendMessage(calJidWithUid(uid), message);
 	}
 	
-	public static void messageIsReportedByUser(int uid, int uid1, String name) throws Exception {
-		String message = TipsCreator.createSNSPushMessage(SNSPushMessageType.REPORTED, uid1, name, "");
+	public static void messageIsReportedByUser(int uid, int uid1, String name, String pic, int mid) throws Exception {
+		String message = TipsCreator.createSNSPushMessage(SNSPushMessageType.REPORTED, uid1, name, pic, mid);
 		TipsPusher.sendMessage(calJidWithUid(uid), message);
 	}
 	

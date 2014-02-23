@@ -12,19 +12,21 @@ enum SNSPushMessageType {
 
 class SNSPushMessageField {
 	protected final static String TYPE = "type";
+	protected final static String MID = "mid";
 	protected final static String BY = "by";
 	protected final static String BY_UID = "uid";
 	protected final static String BY_NAME = "name";
 	protected final static String BY_PIC = "pic";
+	
 }
 
 public class TipsCreator {
 	
 	protected static String createSNSPushMessage(SNSPushMessageType type, int uid, String name) throws JSONException {
-		return createSNSPushMessage(type, uid, name, "");
+		return createSNSPushMessage(type, uid, name, "", -1);
 	}
 	
-	protected static String createSNSPushMessage(SNSPushMessageType type, int uid, String name, String pic) throws JSONException {
+	protected static String createSNSPushMessage(SNSPushMessageType type, int uid, String name, String pic, int mid) throws JSONException {
 		JSONObject retObj = new JSONObject();
 		int type0 = 0;
 		if (type == SNSPushMessageType.LIKED)
@@ -36,6 +38,7 @@ public class TipsCreator {
 		else if (type == SNSPushMessageType.REPORTED)
 			type0 = 4;
 		retObj.put(SNSPushMessageField.TYPE, type0);
+		retObj.put(SNSPushMessageField.MID, mid);
 		JSONObject by = new JSONObject();
 		by.put(SNSPushMessageField.BY_UID, uid);
 		by.put(SNSPushMessageField.BY_NAME, name);

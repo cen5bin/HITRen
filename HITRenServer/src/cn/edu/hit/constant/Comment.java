@@ -4,6 +4,7 @@ public class Comment {
 	public static final String COLLNAME = "Comment";
 	
 	public static final String CID = "cid";
+	public static final String SEQ = "seq";
 	public static final String LIST = "list";
 	
 	public static final String UID = UserConstant.UID;

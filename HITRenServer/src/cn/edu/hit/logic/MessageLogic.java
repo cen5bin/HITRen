@@ -9,6 +9,7 @@ import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.edu.hit.constant.Comment;
 import cn.edu.hit.constant.HttpData;
 import cn.edu.hit.constant.IDCounter;
 import cn.edu.hit.constant.Message;
@@ -107,7 +108,7 @@ public class MessageLogic {
 		}
 		
 		int uid0 = Integer.parseInt(retObj.get(Message.UID).toString());
-		TipsPusher.messageIsLikedByUser(uid0, uid, user.getName());
+		TipsPusher.messageIsLikedByUser(uid0, uid, user.getName(), "", mid);
 		retData.put(HttpData.SUC, true);
 		return true;
 	}
@@ -140,6 +141,39 @@ public class MessageLogic {
 		return true;
 	}
 	
+	/**
+	 * 评论状态
+	 * @param uid 评论者
+	 * @param mid 相关状态
+	 * @param reuid 被评论的uid，如果是状态本人，则可传-1
+	 * @param content 评论的内容
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean commentMessage(int uid, int mid, int reuid, String content) throws Exception {
+		retData = new JSONObject();
+		BasicDBObject oldObj = new BasicDBObject(Comment.CID, mid);
+		BasicDBObject newObj = new BasicDBObject();
+		BasicDBObject dataObj = new BasicDBObject();
+		dataObj.put(Comment.UID, uid);
+		dataObj.put(Comment.REUID, reuid);
+		dataObj.put(Comment.CONTENT, content);
+		dataObj.put(Comment.TIME, TimeKit.now());
+		newObj.put("$push", new BasicDBObject(Comment.LIST, dataObj));
+		newObj.put("$inc", new BasicDBObject(Comment.SEQ, 1));
+		if (DBController.update(Comment.COLLNAME, oldObj, newObj, true, false)) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		int uid1 = reuid;
+		if (uid1 == -1) {
+			cn.edu.hit.model.Message message = DataReader.getMessageInfo(mid);
+			uid1 = message.getUid();
+		}
+		User user = DataReader.getLeastUserInfo(uid);
+		TipsPusher.messageIsCommentedByUser(uid1, uid, user.getName(), user.getPic(), mid);
+		return true;
+	}
 	/**
 	 * 为每一条状态生成一个mid
 	 * @return
