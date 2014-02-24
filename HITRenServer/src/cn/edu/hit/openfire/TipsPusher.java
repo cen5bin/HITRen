@@ -53,6 +53,15 @@ public class TipsPusher {
 		TipsPusher.sendMessage(calJidWithUid(uid), message);
 	}
 	
+	/**
+	 * 状态被举报
+	 * @param uid 状态的作者
+	 * @param uid1 举报者
+	 * @param name
+	 * @param pic
+	 * @param mid 相关状态
+	 * @throws Exception
+	 */
 	public static void messageIsReportedByUser(int uid, int uid1, String name, String pic, int mid) throws Exception {
 		String message = TipsCreator.createSNSPushMessage(SNSPushMessageType.REPORTED, uid1, name, pic, mid);
 		TipsPusher.sendMessage(calJidWithUid(uid), message);

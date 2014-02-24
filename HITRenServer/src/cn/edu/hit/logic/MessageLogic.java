@@ -252,10 +252,22 @@ public class MessageLogic {
 	 * @param uid 举报者
 	 * @param mid 被举报的状态
 	 * @return
+	 * @throws Exception 
 	 */
-	public static boolean reportMessage(int uid, int mid) {
+	public static boolean reportMessage(int uid, int mid) throws Exception {
 		retData = new JSONObject();
-		
+		BasicDBObject oldObj = new BasicDBObject(Message.MID, mid);
+		BasicDBObject newObj = new BasicDBObject();
+		newObj.put("$push", new BasicDBObject(Message.REPORTLIST, new BasicDBObject(Message.REPORTINFO.UID, uid)));
+		newObj.put("$inc", new BasicDBObject(Message.REPORTCOUNT, 1));
+		newObj.put("$inc", new BasicDBObject(Message.SEQ, 1));
+		if (!DBController.update(Message.COLLNAME, oldObj, newObj)) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		cn.edu.hit.model.Message message = DataReader.getMessageInfo(mid);
+		User user = DataReader.getLeastUserInfo(uid);
+		TipsPusher.messageIsReportedByUser(message.getUid(), uid, user.getName(), user.getPic(), mid);
 		return true;
 	}
 	

@@ -15,6 +15,7 @@ public class Message {
 	}
 	public static final String SHATECOUNT = "sharedcount";
 	public static final String REPORTCOUNT = "reportcount";
+	public static final String REPORTLIST = "reportlist";
 	public static final class REPORTINFO {
 		public static final String UID = UserConstant.UID;
 	}
