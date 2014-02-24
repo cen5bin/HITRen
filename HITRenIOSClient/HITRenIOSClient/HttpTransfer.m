@@ -49,7 +49,7 @@ static int PORT = 8080;
     NSString *urlString = [NSString stringWithFormat:@"http://%@:%d/%@/%@",IP, PORT, SERVER_NAME, servlet];
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [requestString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%d",[data length]];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[data length]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];
     [request setHTTPMethod:@"POST"];

@@ -32,7 +32,7 @@
 //    testSendShortMessage();
 //    registerSomeUsers();
 //    testConcernUser(42);
-    testDeleteConcernedUser(42);
+//    testDeleteConcernedUser(42);
 //    testSendShortMessageToGroups();
 //    for (int i = 40; i < 50; i++)
 //        testConcernUser(i);
