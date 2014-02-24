@@ -30,6 +30,16 @@ public class MemWorker {
 	}
 	
 	/**
+	 * 删除memcached中的用户信息
+	 * @param uid
+	 * @return
+	 */
+	public static boolean deleteUserInfo(int uid) {
+		String key = calUserKey(uid);
+		return MemController.delete(key);
+	}
+	
+	/**
 	 * 获取mid对应的状态
 	 * @param mid
 	 * @return
@@ -42,6 +52,11 @@ public class MemWorker {
 	public static boolean setMessageInfo(int mid, String messageInfo) {
 		String key = calMessageKey(mid);
 		return MemController.set(key, messageInfo);
+	}
+	
+	public static boolean deleteMessageInfo(int mid) {
+		String key = calMessageKey(mid);
+		return MemController.delete(key);
 	}
 	
 	/**

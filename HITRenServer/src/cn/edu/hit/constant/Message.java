@@ -7,13 +7,17 @@ public class Message {
 	public static final String UID = UserConstant.UID;
 	public static final String TIME = "time";
 	public static final String SEQ = "seq";
-	public static final String COMMENTLIST = "commentlist";
+//	public static final String COMMENTLIST = "commentlist";
 	public static final String LIKEDLIST = "likedlist";
 	public static final class LIKEDINFO {
 		public static final String UID = UserConstant.UID;
 //		public static final String UNAME = UserConstant.NAME;
 	}
 	public static final String SHATECOUNT = "sharedcount";
+	public static final String REPORTCOUNT = "reportcount";
+	public static final class REPORTINFO {
+		public static final String UID = UserConstant.UID;
+	}
 	public static final String TYPE = "type";
 	public static final class Type {
 		public static final int NORMAL = 0;

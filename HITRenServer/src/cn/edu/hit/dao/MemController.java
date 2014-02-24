@@ -65,4 +65,7 @@ public class MemController {
 		return mcc.set(key, value);
 	}
 	
+	public static boolean delete(String key) {
+		return mcc.delete(key);
+	}
 }

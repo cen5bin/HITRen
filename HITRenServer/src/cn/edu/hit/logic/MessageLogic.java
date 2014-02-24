@@ -242,10 +242,23 @@ public class MessageLogic {
 		
 		User user = DataReader.getLeastUserInfo(uid);
 		TipsPusher.messageIsSharedByUser(message.getUid(), uid, user.getName(), user.getPic(), mid1);
-		
+		MemWorker.deleteMessageInfo(mid1);
 		retData.put(HttpData.SUC, true);
 		return true;
 	}
+	
+	/**
+	 * 举报状态
+	 * @param uid 举报者
+	 * @param mid 被举报的状态
+	 * @return
+	 */
+	public static boolean reportMessage(int uid, int mid) {
+		retData = new JSONObject();
+		
+		return true;
+	}
+	
 	/**
 	 * 为每一条状态生成一个mid
 	 * @return
