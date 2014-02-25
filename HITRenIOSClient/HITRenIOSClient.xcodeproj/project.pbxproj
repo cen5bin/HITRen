@@ -81,6 +81,8 @@
 		F84B7DFD18BB43EB007FC2D5 /* xmppserver.plist in Resources */ = {isa = PBXBuildFile; fileRef = F84B7DFC18BB43EB007FC2D5 /* xmppserver.plist */; };
 		F84B7E0318BB6942007FC2D5 /* build-libidn.sh in Resources */ = {isa = PBXBuildFile; fileRef = F84B7DFF18BB6942007FC2D5 /* build-libidn.sh */; };
 		F84B7E0718BB6B6C007FC2D5 /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F84B7E0618BB6B6C007FC2D5 /* libidn.a */; };
+		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
+		F88BCB3118BB7A6400407521 /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3018BB7A6400407521 /* DBController.m */; };
 		F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FC7F4818751A0800842DC5 /* TestRelationship.m */; };
 /* End PBXBuildFile section */
 
@@ -235,6 +237,9 @@
 		F84B7E0218BB6942007FC2D5 /* stringprep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringprep.h; sourceTree = "<group>"; };
 		F84B7E0518BB6A9A007FC2D5 /* Sample_XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sample_XMPPFramework.h; sourceTree = "<group>"; };
 		F84B7E0618BB6B6C007FC2D5 /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libidn.a; path = "../../../Downloads/XMPPFramework-master/Vendor/libidn/libidn.a"; sourceTree = "<group>"; };
+		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F88BCB2F18BB7A6400407521 /* DBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBController.h; sourceTree = "<group>"; };
+		F88BCB3018BB7A6400407521 /* DBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBController.m; sourceTree = "<group>"; };
 		F8FC7F4718751A0800842DC5 /* TestRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRelationship.h; sourceTree = "<group>"; };
 		F8FC7F4818751A0800842DC5 /* TestRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRelationship.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,6 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */,
 				F84B7E0718BB6B6C007FC2D5 /* libidn.a in Frameworks */,
 				F84B7DF318BB3CE5007FC2D5 /* libresolv.dylib in Frameworks */,
 				F84B7DF118BB3CDA007FC2D5 /* libxml2.dylib in Frameworks */,
@@ -290,6 +296,7 @@
 		F80B0CF61874269D003E72DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */,
 				F84B7E0618BB6B6C007FC2D5 /* libidn.a */,
 				F84B7DF218BB3CE5007FC2D5 /* libresolv.dylib */,
 				F84B7DF018BB3CDA007FC2D5 /* libxml2.dylib */,
@@ -306,6 +313,7 @@
 		F80B0CFD1874269D003E72DC /* HITRenIOSClient */ = {
 			isa = PBXGroup;
 			children = (
+				F88BCB2E18BB7A4100407521 /* data */,
 				F84B7DFB18BB43AB007FC2D5 /* conf */,
 				F84B7D6118BB3C6A007FC2D5 /* XMPPFramework */,
 				F80B0D5818742830003E72DC /* TestCode */,
@@ -704,6 +712,15 @@
 			path = libidn;
 			sourceTree = "<group>";
 		};
+		F88BCB2E18BB7A4100407521 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				F88BCB2F18BB7A6400407521 /* DBController.h */,
+				F88BCB3018BB7A6400407521 /* DBController.m */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -833,6 +850,7 @@
 				F84B7DC918BB3C8D007FC2D5 /* XMPPAnonymousAuthentication.m in Sources */,
 				F84B7DE718BB3C8D007FC2D5 /* ContextFilterLogFormatter.m in Sources */,
 				F80B0D041874269D003E72DC /* main.m in Sources */,
+				F88BCB3118BB7A6400407521 /* DBController.m in Sources */,
 				F80B0D4C187426F2003E72DC /* RelationShip.m in Sources */,
 				F80B0D5C18744C17003E72DC /* TestUserSimpleLogic.m in Sources */,
 				F84B7DE118BB3C8D007FC2D5 /* GCDAsyncSocket.m in Sources */,
