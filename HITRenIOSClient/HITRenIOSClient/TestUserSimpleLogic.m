@@ -18,7 +18,7 @@ void testUserSimpleLogic() {
     RelationShip *relationShip = [[RelationShip alloc] init];
     user.relationShip = relationShip;
     UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
-    [logic signUp];
+//    [logic signUp];
     [logic login];
 
 }

@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <sqlite3.h>
 
 @interface DBController : NSObject {
-    
+    sqlite3 *db;
 }
+
++(DBController *)sharedInstance;
+
+
 
 @end

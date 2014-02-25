@@ -83,6 +83,8 @@
 		F84B7E0718BB6B6C007FC2D5 /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F84B7E0618BB6B6C007FC2D5 /* libidn.a */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3118BB7A6400407521 /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3018BB7A6400407521 /* DBController.m */; };
+		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
+		F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3918BC7C2800407521 /* LoginViewController.m */; };
 		F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FC7F4818751A0800842DC5 /* TestRelationship.m */; };
 /* End PBXBuildFile section */
 
@@ -240,6 +242,10 @@
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB2F18BB7A6400407521 /* DBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBController.h; sourceTree = "<group>"; };
 		F88BCB3018BB7A6400407521 /* DBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBController.m; sourceTree = "<group>"; };
+		F88BCB3518BC79EA00407521 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		F88BCB3618BC79EA00407521 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		F88BCB3818BC7C2800407521 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		F88BCB3918BC7C2800407521 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F8FC7F4718751A0800842DC5 /* TestRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRelationship.h; sourceTree = "<group>"; };
 		F8FC7F4818751A0800842DC5 /* TestRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRelationship.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -414,6 +420,10 @@
 			children = (
 				F80B0D0F1874269D003E72DC /* ViewController.h */,
 				F80B0D101874269D003E72DC /* ViewController.m */,
+				F88BCB3518BC79EA00407521 /* RootViewController.h */,
+				F88BCB3618BC79EA00407521 /* RootViewController.m */,
+				F88BCB3818BC7C2800407521 /* LoginViewController.h */,
+				F88BCB3918BC7C2800407521 /* LoginViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -839,6 +849,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */,
 				F84B7DD518BB3C8D007FC2D5 /* XMPPJID.m in Sources */,
 				F80B0D4F187426F2003E72DC /* Teacher.m in Sources */,
 				F80B0D4E187426F2003E72DC /* Student.m in Sources */,
@@ -859,6 +870,7 @@
 				F84B7DE518BB3C8D007FC2D5 /* DDLog.m in Sources */,
 				F84B7DDD18BB3C8D007FC2D5 /* RFImageToDataTransformer.m in Sources */,
 				F84B7DE318BB3C8D007FC2D5 /* DDASLLogger.m in Sources */,
+				F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */,
 				F84B7DE218BB3C8D007FC2D5 /* DDAbstractDatabaseLogger.m in Sources */,
 				F80B0D51187426F2003E72DC /* User.m in Sources */,
 				F84B7DD418BB3C8D007FC2D5 /* XMPPIQ.m in Sources */,

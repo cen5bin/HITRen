@@ -16,12 +16,16 @@
 
 - (BOOL)login {
     FUNC_START();
+    HttpData *data = [[HttpData alloc] init];
+    [data setValue:self.user.email forKey:@"email"];
+    [data setValue:self.user.password forKey:@"password"];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setValue:self.user.email forKey:@"email"];
     [dic setValue:self.user.password forKey:@"password"];
-    NSString *requestString = [NSString stringWithFormat:@"data=%@",stringToUrlString([dic description])];
+    NSString *requestString = [data getJsonString];//[NSString stringWithFormat:@"data=%@",stringToUrlString([dic description])];
     LOG([httpTransfer description]);
     NSMutableDictionary *ret = [httpTransfer syncPost:requestString to:@"Login"];
+    LOG(@"asda");
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"login fail");
         FUNC_END();
