@@ -81,10 +81,21 @@
 		F84B7DFD18BB43EB007FC2D5 /* xmppserver.plist in Resources */ = {isa = PBXBuildFile; fileRef = F84B7DFC18BB43EB007FC2D5 /* xmppserver.plist */; };
 		F84B7E0318BB6942007FC2D5 /* build-libidn.sh in Resources */ = {isa = PBXBuildFile; fileRef = F84B7DFF18BB6942007FC2D5 /* build-libidn.sh */; };
 		F84B7E0718BB6B6C007FC2D5 /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F84B7E0618BB6B6C007FC2D5 /* libidn.a */; };
+		F8550EFF18C4C251005E51FE /* p_btm1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFA18C4C251005E51FE /* p_btm1.png */; };
+		F8550F0018C4C251005E51FE /* p_btm2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFB18C4C251005E51FE /* p_btm2.png */; };
+		F8550F0118C4C251005E51FE /* p_btm3.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFC18C4C251005E51FE /* p_btm3.png */; };
+		F8550F0218C4C251005E51FE /* p_btm5.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFD18C4C251005E51FE /* p_btm5.png */; };
+		F8550F0318C4C251005E51FE /* p_btm4.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFE18C4C251005E51FE /* p_btm4.png */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3118BB7A6400407521 /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3018BB7A6400407521 /* DBController.m */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
 		F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3918BC7C2800407521 /* LoginViewController.m */; };
+		F88BCB4218BC947F00407521 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB4118BC947F00407521 /* MainViewController.m */; };
+		F88F987218C17EFA009CE742 /* topbar0.png in Resources */ = {isa = PBXBuildFile; fileRef = F88F987118C17EFA009CE742 /* topbar0.png */; };
+		F88F987418C184C0009CE742 /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F88F987318C184C0009CE742 /* topbar1.png */; };
+		F88F987718C185B3009CE742 /* topbar2.png in Resources */ = {isa = PBXBuildFile; fileRef = F88F987518C185B3009CE742 /* topbar2.png */; };
+		F88F987818C185B3009CE742 /* topbar3.png in Resources */ = {isa = PBXBuildFile; fileRef = F88F987618C185B3009CE742 /* topbar3.png */; };
+		F88F989418C1E910009CE742 /* BtmToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F88F989318C1E910009CE742 /* BtmToolBar.m */; };
 		F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FC7F4818751A0800842DC5 /* TestRelationship.m */; };
 /* End PBXBuildFile section */
 
@@ -239,6 +250,11 @@
 		F84B7E0218BB6942007FC2D5 /* stringprep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringprep.h; sourceTree = "<group>"; };
 		F84B7E0518BB6A9A007FC2D5 /* Sample_XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sample_XMPPFramework.h; sourceTree = "<group>"; };
 		F84B7E0618BB6B6C007FC2D5 /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libidn.a; path = "../../../Downloads/XMPPFramework-master/Vendor/libidn/libidn.a"; sourceTree = "<group>"; };
+		F8550EFA18C4C251005E51FE /* p_btm1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm1.png; sourceTree = "<group>"; };
+		F8550EFB18C4C251005E51FE /* p_btm2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm2.png; sourceTree = "<group>"; };
+		F8550EFC18C4C251005E51FE /* p_btm3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm3.png; sourceTree = "<group>"; };
+		F8550EFD18C4C251005E51FE /* p_btm5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm5.png; sourceTree = "<group>"; };
+		F8550EFE18C4C251005E51FE /* p_btm4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm4.png; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB2F18BB7A6400407521 /* DBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBController.h; sourceTree = "<group>"; };
 		F88BCB3018BB7A6400407521 /* DBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBController.m; sourceTree = "<group>"; };
@@ -246,6 +262,14 @@
 		F88BCB3618BC79EA00407521 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		F88BCB3818BC7C2800407521 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F88BCB3918BC7C2800407521 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		F88BCB4018BC947F00407521 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		F88BCB4118BC947F00407521 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		F88F987118C17EFA009CE742 /* topbar0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar0.png; sourceTree = "<group>"; };
+		F88F987318C184C0009CE742 /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
+		F88F987518C185B3009CE742 /* topbar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar2.png; sourceTree = "<group>"; };
+		F88F987618C185B3009CE742 /* topbar3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar3.png; sourceTree = "<group>"; };
+		F88F989218C1E910009CE742 /* BtmToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BtmToolBar.h; sourceTree = "<group>"; };
+		F88F989318C1E910009CE742 /* BtmToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BtmToolBar.m; sourceTree = "<group>"; };
 		F8FC7F4718751A0800842DC5 /* TestRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRelationship.h; sourceTree = "<group>"; };
 		F8FC7F4818751A0800842DC5 /* TestRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRelationship.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -319,11 +343,11 @@
 		F80B0CFD1874269D003E72DC /* HITRenIOSClient */ = {
 			isa = PBXGroup;
 			children = (
+				F88F989018C1E838009CE742 /* UI */,
 				F88BCB2E18BB7A4100407521 /* data */,
 				F84B7DFB18BB43AB007FC2D5 /* conf */,
 				F84B7D6118BB3C6A007FC2D5 /* XMPPFramework */,
 				F80B0D5818742830003E72DC /* TestCode */,
-				F80B0D5718742814003E72DC /* ViewController */,
 				F80B0D561874278A003E72DC /* Network */,
 				F80B0D551874276C003E72DC /* Kit */,
 				F80B0D5418742743003E72DC /* Model */,
@@ -424,6 +448,8 @@
 				F88BCB3618BC79EA00407521 /* RootViewController.m */,
 				F88BCB3818BC7C2800407521 /* LoginViewController.h */,
 				F88BCB3918BC7C2800407521 /* LoginViewController.m */,
+				F88BCB4018BC947F00407521 /* MainViewController.h */,
+				F88BCB4118BC947F00407521 /* MainViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -731,6 +757,57 @@
 			name = data;
 			sourceTree = "<group>";
 		};
+		F88F986E18C17C41009CE742 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				F88F990C18C365BB009CE742 /* btmbar */,
+				F88F987918C18600009CE742 /* topbar */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
+		F88F987918C18600009CE742 /* topbar */ = {
+			isa = PBXGroup;
+			children = (
+				F88F987518C185B3009CE742 /* topbar2.png */,
+				F88F987618C185B3009CE742 /* topbar3.png */,
+				F88F987318C184C0009CE742 /* topbar1.png */,
+				F88F987118C17EFA009CE742 /* topbar0.png */,
+			);
+			name = topbar;
+			sourceTree = "<group>";
+		};
+		F88F989018C1E838009CE742 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F88F989118C1E86C009CE742 /* component */,
+				F88F986E18C17C41009CE742 /* resources */,
+				F80B0D5718742814003E72DC /* ViewController */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		F88F989118C1E86C009CE742 /* component */ = {
+			isa = PBXGroup;
+			children = (
+				F88F989218C1E910009CE742 /* BtmToolBar.h */,
+				F88F989318C1E910009CE742 /* BtmToolBar.m */,
+			);
+			name = component;
+			sourceTree = "<group>";
+		};
+		F88F990C18C365BB009CE742 /* btmbar */ = {
+			isa = PBXGroup;
+			children = (
+				F8550EFA18C4C251005E51FE /* p_btm1.png */,
+				F8550EFB18C4C251005E51FE /* p_btm2.png */,
+				F8550EFC18C4C251005E51FE /* p_btm3.png */,
+				F8550EFD18C4C251005E51FE /* p_btm5.png */,
+				F8550EFE18C4C251005E51FE /* p_btm4.png */,
+			);
+			name = btmbar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -810,11 +887,20 @@
 			files = (
 				F84B7E0318BB6942007FC2D5 /* build-libidn.sh in Resources */,
 				F80B0D0E1874269D003E72DC /* Main_iPad.storyboard in Resources */,
+				F8550F0018C4C251005E51FE /* p_btm2.png in Resources */,
+				F8550F0318C4C251005E51FE /* p_btm4.png in Resources */,
 				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,
 				F80B0D0B1874269D003E72DC /* Main_iPhone.storyboard in Resources */,
 				F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */,
+				F88F987818C185B3009CE742 /* topbar3.png in Resources */,
 				F84B7DE918BB3C8D007FC2D5 /* README.txt in Resources */,
+				F8550F0118C4C251005E51FE /* p_btm3.png in Resources */,
+				F88F987718C185B3009CE742 /* topbar2.png in Resources */,
+				F8550EFF18C4C251005E51FE /* p_btm1.png in Resources */,
+				F88F987418C184C0009CE742 /* topbar1.png in Resources */,
 				F84B7DFD18BB43EB007FC2D5 /* xmppserver.plist in Resources */,
+				F8550F0218C4C251005E51FE /* p_btm5.png in Resources */,
+				F88F987218C17EFA009CE742 /* topbar0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,6 +949,7 @@
 				F80B0D041874269D003E72DC /* main.m in Sources */,
 				F88BCB3118BB7A6400407521 /* DBController.m in Sources */,
 				F80B0D4C187426F2003E72DC /* RelationShip.m in Sources */,
+				F88BCB4218BC947F00407521 /* MainViewController.m in Sources */,
 				F80B0D5C18744C17003E72DC /* TestUserSimpleLogic.m in Sources */,
 				F84B7DE118BB3C8D007FC2D5 /* GCDAsyncSocket.m in Sources */,
 				F84B7DEB18BB3C8D007FC2D5 /* DDXMLDocument.m in Sources */,
@@ -877,6 +964,7 @@
 				F84B7DEC18BB3C8D007FC2D5 /* DDXMLElement.m in Sources */,
 				F84B7DCD18BB3C8D007FC2D5 /* XMPPPlainAuthentication.m in Sources */,
 				F84B7DCE18BB3C8D007FC2D5 /* XMPPXFacebookPlatformAuthentication.m in Sources */,
+				F88F989418C1E910009CE742 /* BtmToolBar.m in Sources */,
 				F84B7DD018BB3C8D007FC2D5 /* NSData+XMPP.m in Sources */,
 				F84B7DD318BB3C8D007FC2D5 /* XMPPElement.m in Sources */,
 				F84B7DED18BB3C8D007FC2D5 /* DDXMLNode.m in Sources */,

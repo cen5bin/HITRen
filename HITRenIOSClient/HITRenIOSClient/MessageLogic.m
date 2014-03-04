@@ -38,7 +38,7 @@
         [data setValue:gnames forKey:@"gnames"];
     }
     NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    LOG([gnames description]);
+    L([gnames description]);
     BOOL ret = [httpTransfer asyncPost:request to:@"SendShortMessage"];
     if (!ret) {
         LOG(@"SendShortMessage fail");

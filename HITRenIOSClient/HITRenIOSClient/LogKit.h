@@ -10,23 +10,23 @@
 #define HITREN_DEBUG
 
 NSString *stringToUrlString(NSString * string);
-void functionLog(const char *filename, int line, const char* funcName, NSString *string);
+//void functionLog(const char *filename, int line, const char* funcName, NSString *string);
+
+
+#define HITREN_DEBUG
+
+#define FUNC_INFO ([NSString stringWithFormat:@"<%s:%d> %s: ", [[[[NSString stringWithUTF8String:__FILE__] componentsSeparatedByString:@"/"] lastObject]UTF8String], __LINE__, __FUNCTION__])
 
 #ifdef HITREN_DEBUG
-
-    #define LOG(x) printf("DEBUG: %s\n",[x UTF8String])
-    #define FUNC_LOG(x) functionLog(__FILE__,__LINE__,__FUNCTION__, x)
-    #define FUNC_START() FUNC_LOG(@"start")
-    #define FUNC_END() FUNC_LOG(@"end")
-    #define RUN(x) x
-
+#define _LOG(fmt, args...) NSLog(fmt, ##args)
 #else
-
-    #define LOG(x) nil
-    #define FUNC_LOG(x) nil
-    #define FUNC_START() nil
-    #define FUNC_END() nil
-    #define RUN(x) nil
+#define _LOG(fmt, args...) NULL
 #endif
+
+#define L(x) _LOG(@"%@%@",FUNC_INFO,(x))
+#define LOG(fmt, args...) _LOG(@"%@"fmt, FUNC_INFO,##args)
+
+#define FUNC_START()  LOG(@"function start")
+#define FUNC_END()  LOG(@"function end")
 
 

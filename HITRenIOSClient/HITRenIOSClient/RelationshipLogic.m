@@ -243,7 +243,7 @@
     }
     LOG(@"downloadRelationshipInfo succ");
     [self unPackRelationshipInfoData:[ret objectForKey:@"DATA"]];
-    RUN([self print]);
+//    RUN([self print]);
     FUNC_END();
     return YES;
 }

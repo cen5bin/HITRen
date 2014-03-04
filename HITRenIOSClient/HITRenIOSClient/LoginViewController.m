@@ -46,9 +46,9 @@
 - (IBAction)login:(id)sender {
     User *user = [[User alloc] init];
     user.email = [self.email.text copy];
-    LOG(user.email);
+    LOG(@"%@",user.email);
     user.password = [self.password.text copy];
-    LOG(user.password);
+    LOG(@"%@",user.password);
     UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
     if ([logic login]) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -56,6 +56,11 @@
         [userDefaults setValue:user.password forKey:@"password"];
         [userDefaults setInteger:user.uid forKey:@"uid"];
         [userDefaults synchronize];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]];
+        
+        MainViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"test123"];//[[MainViewController alloc] initWithNibName:@"test123" bundle:nil];
+        [self.navigationController pushViewController:controller animated:YES];
+//        [self.navigationController presentViewController:controller animated:YES completion:nil];
     }
 }
 @end

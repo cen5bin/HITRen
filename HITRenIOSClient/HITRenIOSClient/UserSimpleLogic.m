@@ -23,7 +23,7 @@
     [dic setValue:self.user.email forKey:@"email"];
     [dic setValue:self.user.password forKey:@"password"];
     NSString *requestString = [data getJsonString];//[NSString stringWithFormat:@"data=%@",stringToUrlString([dic description])];
-    LOG([httpTransfer description]);
+//    LOG([httpTransfer description]);
     NSMutableDictionary *ret = [httpTransfer syncPost:requestString to:@"Login"];
     LOG(@"asda");
     if (![[ret objectForKey:@"SUC"] boolValue]) {
@@ -46,7 +46,7 @@
     NSMutableDictionary *ret = [httpTransfer syncPost:requestString to:@"Register"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"signUp fail");
-        LOG([ret objectForKey:@"INFO"]);
+        L([ret objectForKey:@"INFO"]);
         FUNC_END();
         return NO;
     }

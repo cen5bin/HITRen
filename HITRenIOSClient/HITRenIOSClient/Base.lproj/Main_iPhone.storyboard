@@ -107,25 +107,55 @@
             </objects>
             <point key="canvasLocation" x="1339" y="-205"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="3SH-Vv-JTm">
+        <!--Main View Controller-->
+        <scene sceneID="Nde-x7-f8a">
             <objects>
-                <viewController id="gPj-Bq-EJ7" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="test123" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DJe-Ga-VTd" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="u8s-gC-A4u"/>
-                        <viewControllerLayoutGuide type="bottom" id="Pbg-fM-wC9"/>
+                        <viewControllerLayoutGuide type="top" id="VYp-BJ-cTo"/>
+                        <viewControllerLayoutGuide type="bottom" id="2xo-bH-zSh"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KWF-1G-j4c">
+                    <view key="view" contentMode="scaleToFill" id="mEh-rE-MD3">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="asdadda" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9o-9u-FSY">
+                                <rect key="frame" x="130" y="111" width="67" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="p_btm3.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Z8-Vp-j8U" customClass="BtmToolBar">
+                                <rect key="frame" x="-1" y="498" width="322" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="topbar1.png" translatesAutoresizingMaskIntoConstraints="NO" id="3d4-SX-W64">
+                                <rect key="frame" x="0.0" y="-1" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QS3-6f-u8H">
+                                <rect key="frame" x="86" y="168" width="70" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="btmToolBar" destination="6Z8-Vp-j8U" id="HdR-TS-CV0"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h4s-b4-Cd1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gFO-Di-yp6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1880" y="210"/>
+            <point key="canvasLocation" x="1725" y="-185"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="p_btm3.png" width="1181" height="173"/>
+        <image name="topbar1.png" width="640" height="91"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

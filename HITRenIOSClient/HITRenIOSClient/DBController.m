@@ -40,7 +40,7 @@ static DBController *controller = nil;
     for (NSString *key in [tablesDic allKeys])
         if (sqlite3_exec(db, [[tablesDic objectForKey:key] UTF8String], NULL, NULL, NULL) != SQLITE_OK) {
             NSString *string = [NSString stringWithFormat:@"创建%@表失败", key];
-            LOG(string);
+            L(string);
             return NO;
         }
 //    if (sqlite3_exec(db, "drop table User;", NULL, NULL, NULL) != SQLITE_OK) {

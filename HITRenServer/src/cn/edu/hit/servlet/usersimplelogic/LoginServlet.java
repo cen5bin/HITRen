@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,13 +21,14 @@ import cn.edu.hit.kit.LogKit;
 import cn.edu.hit.logic.MessageLogic;
 import cn.edu.hit.logic.UserSimpleLogic;
 import cn.edu.hit.openfire.AccountManager;
+import cn.edu.hit.servlet.kit.BaseServlet;
 
 
 /**
  * Servlet implementation class LoginServlet
  */
 @WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -45,7 +47,9 @@ public class LoginServlet extends HttpServlet {
 //		MemWorker.setUserInfo(11, "asdsad123");
 //		String s = MemWorker.getUserInfo(11);
 //		System.out.println(s);
-		
+//		Logger logger = Logger.getLogger(LoginServlet.class);
+		logger.error("asdasd");
+		logger.debug("xxxxx");
 		try {
 			PrintWriter out = response.getWriter();
 //			out.print(DataKit.getData(request.getReader()));

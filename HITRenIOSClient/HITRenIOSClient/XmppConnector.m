@@ -83,7 +83,7 @@ static XmppConnector* connector = nil;
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
     NSString *msg = [[message elementForName:@"body"] stringValue];
-    LOG(msg);
+    L(msg);
 }
 
 @end
