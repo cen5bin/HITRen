@@ -106,6 +106,7 @@
 		F8E9687C18C70AAD00B9384B /* ToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687B18C70AAD00B9384B /* ToolsViewController.m */; };
 		F8E9687F18C70B0700B9384B /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687E18C70B0700B9384B /* CalendarViewController.m */; };
 		F8E9688218C70B5700B9384B /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9688118C70B5700B9384B /* PersonViewController.m */; };
+		F8E9688518C714C200B9384B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9688418C714C200B9384B /* RegisterViewController.m */; };
 		F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FC7F4818751A0800842DC5 /* TestRelationship.m */; };
 /* End PBXBuildFile section */
 
@@ -298,6 +299,8 @@
 		F8E9687E18C70B0700B9384B /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		F8E9688018C70B5700B9384B /* PersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewController.h; sourceTree = "<group>"; };
 		F8E9688118C70B5700B9384B /* PersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewController.m; sourceTree = "<group>"; };
+		F8E9688318C714C200B9384B /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		F8E9688418C714C200B9384B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		F8FC7F4718751A0800842DC5 /* TestRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRelationship.h; sourceTree = "<group>"; };
 		F8FC7F4818751A0800842DC5 /* TestRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRelationship.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -488,6 +491,8 @@
 				F8E9687E18C70B0700B9384B /* CalendarViewController.m */,
 				F8E9688018C70B5700B9384B /* PersonViewController.h */,
 				F8E9688118C70B5700B9384B /* PersonViewController.m */,
+				F8E9688318C714C200B9384B /* RegisterViewController.h */,
+				F8E9688418C714C200B9384B /* RegisterViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1041,6 +1046,7 @@
 				F84B7DCE18BB3C8D007FC2D5 /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				F88F989418C1E910009CE742 /* BtmToolBar.m in Sources */,
 				F84B7DD018BB3C8D007FC2D5 /* NSData+XMPP.m in Sources */,
+				F8E9688518C714C200B9384B /* RegisterViewController.m in Sources */,
 				F84B7DD318BB3C8D007FC2D5 /* XMPPElement.m in Sources */,
 				F84B7DED18BB3C8D007FC2D5 /* DDXMLNode.m in Sources */,
 				F84B7DD618BB3C8D007FC2D5 /* XMPPMessage.m in Sources */,
