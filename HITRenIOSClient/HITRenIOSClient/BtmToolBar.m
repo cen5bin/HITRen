@@ -21,51 +21,30 @@ const int buttonCount = 5;
     return self;
 }
 
-- (void)handleTouchesEvent:(UITouch*)touch {
-    FUNC_START();
-    CGPoint point = [touch locationInView:self];
-    CGFloat blockwidth = self.frame.size.width / buttonCount;
-    int index = 1 + (int)(point.x / blockwidth);
-    UIImage* image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"temp%d", index] ofType:@"png"]];
-    self.image = image;
-    [self setNeedsDisplay];
-    FUNC_END();
 
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    FUNC_START();
-    UITouch* touch = [touches anyObject];
-    CGPoint point = [touch locationInView:self];
+- (int)calIndex:(CGPoint)point {
     LOG(@"%f %f", point.x, point.y);
     CGFloat blockwidth = self.frame.size.width / buttonCount;
     LOG(@"blockwidth %f", blockwidth);
     int index = 1 + (int)(point.x / blockwidth);
-    UIImage* image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"p_btm%d", index] ofType:@"png"]];
-    self.image = image;
-    [self setNeedsDisplay];
-    FUNC_END();
+    return index;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    FUNC_START();
+//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+//    FUNC_START();
 //    UITouch* touch = [touches anyObject];
 //    CGPoint point = [touch locationInView:self];
+//    LOG(@"%f %f", point.x, point.y);
 //    CGFloat blockwidth = self.frame.size.width / buttonCount;
+//    LOG(@"blockwidth %f", blockwidth);
 //    int index = 1 + (int)(point.x / blockwidth);
-//    UIImage* image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"r_btm%d", index] ofType:@"png"]];
+//    UIImage* image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"p_btm%d", index] ofType:@"png"]];
 //    self.image = image;
 //    [self setNeedsDisplay];
-    FUNC_END();
-}   
+//    FUNC_END();
+//}
+//
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.

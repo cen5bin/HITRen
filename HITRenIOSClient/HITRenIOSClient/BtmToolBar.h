@@ -12,6 +12,6 @@
     
 }
 
+- (int)calIndex:(CGPoint)point;
 
-- (void)handleTouchesEvent:(UITouch*)touch;
 @end

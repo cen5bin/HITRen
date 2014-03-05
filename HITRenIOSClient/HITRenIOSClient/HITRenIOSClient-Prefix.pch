@@ -13,8 +13,10 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "UIFunctions.h"
     #import "LogKit.h"
     #import "BtmToolBar.h"
+    #import "TopToolBar.h"
     #import "MainViewController.h"
-
+    #import "FreshNewsViewController.h"
 #endif

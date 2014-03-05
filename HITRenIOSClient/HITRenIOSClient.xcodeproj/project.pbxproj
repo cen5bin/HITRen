@@ -91,11 +91,21 @@
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
 		F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3918BC7C2800407521 /* LoginViewController.m */; };
 		F88BCB4218BC947F00407521 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB4118BC947F00407521 /* MainViewController.m */; };
-		F88F987218C17EFA009CE742 /* topbar0.png in Resources */ = {isa = PBXBuildFile; fileRef = F88F987118C17EFA009CE742 /* topbar0.png */; };
-		F88F987418C184C0009CE742 /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F88F987318C184C0009CE742 /* topbar1.png */; };
-		F88F987718C185B3009CE742 /* topbar2.png in Resources */ = {isa = PBXBuildFile; fileRef = F88F987518C185B3009CE742 /* topbar2.png */; };
-		F88F987818C185B3009CE742 /* topbar3.png in Resources */ = {isa = PBXBuildFile; fileRef = F88F987618C185B3009CE742 /* topbar3.png */; };
 		F88F989418C1E910009CE742 /* BtmToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F88F989318C1E910009CE742 /* BtmToolBar.m */; };
+		F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685C18C5F96C00B9384B /* topbar0.png */; };
+		F8E9686018C5F96C00B9384B /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685D18C5F96C00B9384B /* topbar1.png */; };
+		F8E9686118C5F96C00B9384B /* topbar2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685E18C5F96C00B9384B /* topbar2.png */; };
+		F8E9686418C5F9B800B9384B /* TopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9686318C5F9B800B9384B /* TopToolBar.m */; };
+		F8E9686718C5FBBC00B9384B /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9686618C5FBBC00B9384B /* TestView.m */; };
+		F8E9686A18C5FC3900B9384B /* FreshNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9686918C5FC3900B9384B /* FreshNewsViewController.m */; };
+		F8E9686D18C6DB6A00B9384B /* loginbutton0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9686C18C6DB6A00B9384B /* loginbutton0.png */; };
+		F8E9687018C6DCB500B9384B /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9686F18C6DCB500B9384B /* email.png */; };
+		F8E9687218C6DE4F00B9384B /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9687118C6DE4F00B9384B /* password.png */; };
+		F8E9687618C7055E00B9384B /* UIFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687518C7055E00B9384B /* UIFunctions.m */; };
+		F8E9687918C709CB00B9384B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687818C709CB00B9384B /* MessageViewController.m */; };
+		F8E9687C18C70AAD00B9384B /* ToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687B18C70AAD00B9384B /* ToolsViewController.m */; };
+		F8E9687F18C70B0700B9384B /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687E18C70B0700B9384B /* CalendarViewController.m */; };
+		F8E9688218C70B5700B9384B /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9688118C70B5700B9384B /* PersonViewController.m */; };
 		F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FC7F4818751A0800842DC5 /* TestRelationship.m */; };
 /* End PBXBuildFile section */
 
@@ -264,12 +274,30 @@
 		F88BCB3918BC7C2800407521 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		F88BCB4018BC947F00407521 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		F88BCB4118BC947F00407521 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		F88F987118C17EFA009CE742 /* topbar0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar0.png; sourceTree = "<group>"; };
-		F88F987318C184C0009CE742 /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
-		F88F987518C185B3009CE742 /* topbar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar2.png; sourceTree = "<group>"; };
-		F88F987618C185B3009CE742 /* topbar3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar3.png; sourceTree = "<group>"; };
 		F88F989218C1E910009CE742 /* BtmToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BtmToolBar.h; sourceTree = "<group>"; };
 		F88F989318C1E910009CE742 /* BtmToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BtmToolBar.m; sourceTree = "<group>"; };
+		F8E9685C18C5F96C00B9384B /* topbar0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar0.png; sourceTree = "<group>"; };
+		F8E9685D18C5F96C00B9384B /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
+		F8E9685E18C5F96C00B9384B /* topbar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar2.png; sourceTree = "<group>"; };
+		F8E9686218C5F9B800B9384B /* TopToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopToolBar.h; sourceTree = "<group>"; };
+		F8E9686318C5F9B800B9384B /* TopToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopToolBar.m; sourceTree = "<group>"; };
+		F8E9686518C5FBBC00B9384B /* TestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestView.h; sourceTree = "<group>"; };
+		F8E9686618C5FBBC00B9384B /* TestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
+		F8E9686818C5FC3900B9384B /* FreshNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshNewsViewController.h; sourceTree = "<group>"; };
+		F8E9686918C5FC3900B9384B /* FreshNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshNewsViewController.m; sourceTree = "<group>"; };
+		F8E9686C18C6DB6A00B9384B /* loginbutton0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginbutton0.png; sourceTree = "<group>"; };
+		F8E9686F18C6DCB500B9384B /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
+		F8E9687118C6DE4F00B9384B /* password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = password.png; sourceTree = "<group>"; };
+		F8E9687418C7055E00B9384B /* UIFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFunctions.h; sourceTree = "<group>"; };
+		F8E9687518C7055E00B9384B /* UIFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFunctions.m; sourceTree = "<group>"; };
+		F8E9687718C709CB00B9384B /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		F8E9687818C709CB00B9384B /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		F8E9687A18C70AAD00B9384B /* ToolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolsViewController.h; sourceTree = "<group>"; };
+		F8E9687B18C70AAD00B9384B /* ToolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolsViewController.m; sourceTree = "<group>"; };
+		F8E9687D18C70B0700B9384B /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		F8E9687E18C70B0700B9384B /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		F8E9688018C70B5700B9384B /* PersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewController.h; sourceTree = "<group>"; };
+		F8E9688118C70B5700B9384B /* PersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewController.m; sourceTree = "<group>"; };
 		F8FC7F4718751A0800842DC5 /* TestRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRelationship.h; sourceTree = "<group>"; };
 		F8FC7F4818751A0800842DC5 /* TestRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRelationship.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -450,6 +478,16 @@
 				F88BCB3918BC7C2800407521 /* LoginViewController.m */,
 				F88BCB4018BC947F00407521 /* MainViewController.h */,
 				F88BCB4118BC947F00407521 /* MainViewController.m */,
+				F8E9686818C5FC3900B9384B /* FreshNewsViewController.h */,
+				F8E9686918C5FC3900B9384B /* FreshNewsViewController.m */,
+				F8E9687718C709CB00B9384B /* MessageViewController.h */,
+				F8E9687818C709CB00B9384B /* MessageViewController.m */,
+				F8E9687A18C70AAD00B9384B /* ToolsViewController.h */,
+				F8E9687B18C70AAD00B9384B /* ToolsViewController.m */,
+				F8E9687D18C70B0700B9384B /* CalendarViewController.h */,
+				F8E9687E18C70B0700B9384B /* CalendarViewController.m */,
+				F8E9688018C70B5700B9384B /* PersonViewController.h */,
+				F8E9688118C70B5700B9384B /* PersonViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -760,6 +798,8 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8E9686E18C6DCA600B9384B /* textfield */,
+				F8E9686B18C6DB4B00B9384B /* button */,
 				F88F990C18C365BB009CE742 /* btmbar */,
 				F88F987918C18600009CE742 /* topbar */,
 			);
@@ -769,10 +809,9 @@
 		F88F987918C18600009CE742 /* topbar */ = {
 			isa = PBXGroup;
 			children = (
-				F88F987518C185B3009CE742 /* topbar2.png */,
-				F88F987618C185B3009CE742 /* topbar3.png */,
-				F88F987318C184C0009CE742 /* topbar1.png */,
-				F88F987118C17EFA009CE742 /* topbar0.png */,
+				F8E9685C18C5F96C00B9384B /* topbar0.png */,
+				F8E9685D18C5F96C00B9384B /* topbar1.png */,
+				F8E9685E18C5F96C00B9384B /* topbar2.png */,
 			);
 			name = topbar;
 			sourceTree = "<group>";
@@ -780,6 +819,7 @@
 		F88F989018C1E838009CE742 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				F8E9687318C7053200B9384B /* function */,
 				F88F989118C1E86C009CE742 /* component */,
 				F88F986E18C17C41009CE742 /* resources */,
 				F80B0D5718742814003E72DC /* ViewController */,
@@ -792,6 +832,10 @@
 			children = (
 				F88F989218C1E910009CE742 /* BtmToolBar.h */,
 				F88F989318C1E910009CE742 /* BtmToolBar.m */,
+				F8E9686218C5F9B800B9384B /* TopToolBar.h */,
+				F8E9686318C5F9B800B9384B /* TopToolBar.m */,
+				F8E9686518C5FBBC00B9384B /* TestView.h */,
+				F8E9686618C5FBBC00B9384B /* TestView.m */,
 			);
 			name = component;
 			sourceTree = "<group>";
@@ -806,6 +850,32 @@
 				F8550EFE18C4C251005E51FE /* p_btm4.png */,
 			);
 			name = btmbar;
+			sourceTree = "<group>";
+		};
+		F8E9686B18C6DB4B00B9384B /* button */ = {
+			isa = PBXGroup;
+			children = (
+				F8E9686C18C6DB6A00B9384B /* loginbutton0.png */,
+			);
+			name = button;
+			sourceTree = "<group>";
+		};
+		F8E9686E18C6DCA600B9384B /* textfield */ = {
+			isa = PBXGroup;
+			children = (
+				F8E9687118C6DE4F00B9384B /* password.png */,
+				F8E9686F18C6DCB500B9384B /* email.png */,
+			);
+			name = textfield;
+			sourceTree = "<group>";
+		};
+		F8E9687318C7053200B9384B /* function */ = {
+			isa = PBXGroup;
+			children = (
+				F8E9687418C7055E00B9384B /* UIFunctions.h */,
+				F8E9687518C7055E00B9384B /* UIFunctions.m */,
+			);
+			name = function;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -885,22 +955,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8E9687218C6DE4F00B9384B /* password.png in Resources */,
 				F84B7E0318BB6942007FC2D5 /* build-libidn.sh in Resources */,
 				F80B0D0E1874269D003E72DC /* Main_iPad.storyboard in Resources */,
 				F8550F0018C4C251005E51FE /* p_btm2.png in Resources */,
+				F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */,
 				F8550F0318C4C251005E51FE /* p_btm4.png in Resources */,
 				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,
 				F80B0D0B1874269D003E72DC /* Main_iPhone.storyboard in Resources */,
+				F8E9687018C6DCB500B9384B /* email.png in Resources */,
+				F8E9686018C5F96C00B9384B /* topbar1.png in Resources */,
+				F8E9686D18C6DB6A00B9384B /* loginbutton0.png in Resources */,
 				F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */,
-				F88F987818C185B3009CE742 /* topbar3.png in Resources */,
 				F84B7DE918BB3C8D007FC2D5 /* README.txt in Resources */,
 				F8550F0118C4C251005E51FE /* p_btm3.png in Resources */,
-				F88F987718C185B3009CE742 /* topbar2.png in Resources */,
+				F8E9686118C5F96C00B9384B /* topbar2.png in Resources */,
 				F8550EFF18C4C251005E51FE /* p_btm1.png in Resources */,
-				F88F987418C184C0009CE742 /* topbar1.png in Resources */,
 				F84B7DFD18BB43EB007FC2D5 /* xmppserver.plist in Resources */,
 				F8550F0218C4C251005E51FE /* p_btm5.png in Resources */,
-				F88F987218C17EFA009CE742 /* topbar0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -935,7 +1007,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8E9686418C5F9B800B9384B /* TopToolBar.m in Sources */,
 				F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */,
+				F8E9686A18C5FC3900B9384B /* FreshNewsViewController.m in Sources */,
 				F84B7DD518BB3C8D007FC2D5 /* XMPPJID.m in Sources */,
 				F80B0D4F187426F2003E72DC /* Teacher.m in Sources */,
 				F80B0D4E187426F2003E72DC /* Student.m in Sources */,
@@ -956,6 +1030,7 @@
 				F80B0D50187426F2003E72DC /* TestHttpTransfer.m in Sources */,
 				F84B7DE518BB3C8D007FC2D5 /* DDLog.m in Sources */,
 				F84B7DDD18BB3C8D007FC2D5 /* RFImageToDataTransformer.m in Sources */,
+				F8E9688218C70B5700B9384B /* PersonViewController.m in Sources */,
 				F84B7DE318BB3C8D007FC2D5 /* DDASLLogger.m in Sources */,
 				F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */,
 				F84B7DE218BB3C8D007FC2D5 /* DDAbstractDatabaseLogger.m in Sources */,
@@ -974,13 +1049,17 @@
 				F84B7DE418BB3C8D007FC2D5 /* DDFileLogger.m in Sources */,
 				F84B7DDB18BB3C8D007FC2D5 /* DDList.m in Sources */,
 				F84B7DCC18BB3C8D007FC2D5 /* XMPPDigestMD5Authentication.m in Sources */,
+				F8E9687918C709CB00B9384B /* MessageViewController.m in Sources */,
 				F84B7DDE18BB3C8D007FC2D5 /* XMPPIDTracker.m in Sources */,
 				F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */,
 				F84B7DDC18BB3C8D007FC2D5 /* GCDMulticastDelegate.m in Sources */,
 				F80B0D4B187426F2003E72DC /* MessageLogic.m in Sources */,
 				F84B7DE618BB3C8D007FC2D5 /* DDTTYLogger.m in Sources */,
 				F84B7DD718BB3C8D007FC2D5 /* XMPPModule.m in Sources */,
+				F8E9687C18C70AAD00B9384B /* ToolsViewController.m in Sources */,
+				F8E9686718C5FBBC00B9384B /* TestView.m in Sources */,
 				F84B7DD818BB3C8D007FC2D5 /* XMPPParser.m in Sources */,
+				F8E9687F18C70B0700B9384B /* CalendarViewController.m in Sources */,
 				F80B0D4A187426F2003E72DC /* LogKit.m in Sources */,
 				F84B7DFA18BB3F81007FC2D5 /* XmppConnector.m in Sources */,
 				F84B7DEA18BB3C8D007FC2D5 /* NSString+DDXML.m in Sources */,
@@ -995,6 +1074,7 @@
 				F80B0D49187426F2003E72DC /* HttpTransfer.m in Sources */,
 				F84B7DE018BB3C8D007FC2D5 /* XMPPStringPrep.m in Sources */,
 				F80B0D48187426F2003E72DC /* HttpData.m in Sources */,
+				F8E9687618C7055E00B9384B /* UIFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

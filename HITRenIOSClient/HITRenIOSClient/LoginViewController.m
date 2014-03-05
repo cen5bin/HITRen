@@ -28,13 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:YES];
 	// Do any additional setup after loading the view.
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+//    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,9 +58,11 @@
         [userDefaults synchronize];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]];
         
-        MainViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"test123"];//[[MainViewController alloc] initWithNibName:@"test123" bundle:nil];
+        MainViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"mainview3"];
         [self.navigationController pushViewController:controller animated:YES];
-//        [self.navigationController presentViewController:controller animated:YES completion:nil];
+//        [self pushViewController:controller animated:YES];
+//        [self prese]
+//        [self presentViewController:controller animated:YES completion:nil];
     }
 }
 @end

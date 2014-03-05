@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 //#import "BtmToolBar.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController {
+    CGRect contentFrame;
+    
+}
+
 @property (weak, nonatomic) IBOutlet BtmToolBar *btmToolBar;
+@property (weak, nonatomic) IBOutlet TopToolBar *topToolBar;
 
 @end
