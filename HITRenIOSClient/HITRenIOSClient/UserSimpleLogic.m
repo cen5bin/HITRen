@@ -10,18 +10,20 @@
 #import "HttpTransfer.h"
 #import "LogKit.h"
 #import "HttpData.h"
+#import "User.h"
 
 @implementation UserSimpleLogic
 
 
 - (BOOL)login {
     FUNC_START();
+    User *user = [UserSimpleLogic user];
     HttpData *data = [[HttpData alloc] init];
-    [data setValue:self.user.email forKey:@"email"];
-    [data setValue:self.user.password forKey:@"password"];
+    [data setValue:user.email forKey:@"email"];
+    [data setValue:user.password forKey:@"password"];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:self.user.email forKey:@"email"];
-    [dic setValue:self.user.password forKey:@"password"];
+    [dic setValue:user.email forKey:@"email"];
+    [dic setValue:user.password forKey:@"password"];
     NSString *requestString = [data getJsonString];//[NSString stringWithFormat:@"data=%@",stringToUrlString([dic description])];
 //    LOG([httpTransfer description]);
     NSMutableDictionary *ret = [httpTransfer syncPost:requestString to:@"Login"];
@@ -31,7 +33,7 @@
         FUNC_END();
         return NO;
     }
-    self.user.uid = [[ret objectForKey:@"uid"] intValue];
+    user.uid = [[ret objectForKey:@"uid"] intValue];
     LOG(@"login succ");
     FUNC_END();
     return YES;

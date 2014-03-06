@@ -29,6 +29,22 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *email = [userDefaults objectForKey:@"email"];
+    NSString *password = [userDefaults objectForKey:@"password"];
+    
+    if (!email || [email isEqualToString:@""]||!password || [password isEqualToString:@""])
+        return;
+    User* user = [UserSimpleLogic user];
+    user.email = email;
+    user.password = password;
+    UserSimpleLogic *logic = [[UserSimpleLogic alloc] init];
+    
+    if ([logic login]) {
+        MainViewController *controller = getViewControllerOfName(@"mainview3");
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 	// Do any additional setup after loading the view.
 }
 
@@ -50,10 +66,8 @@
 
 - (IBAction)login:(id)sender {
     User *user = [[User alloc] init];
-    user.email = [self.email.text copy];
-    LOG(@"%@",user.email);
-    user.password = [self.password.text copy];
-    LOG(@"%@",user.password);
+    user.email = self.email.text;
+    user.password = self.password.text;
     UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
     if ([logic login]) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -61,14 +75,8 @@
         [userDefaults setValue:user.password forKey:@"password"];
         [userDefaults setInteger:user.uid forKey:@"uid"];
         [userDefaults synchronize];
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]];
-        
-        MainViewController *controller = getViewControllerOfName(@"mainview3");//[storyboard instantiateViewControllerWithIdentifier:@"mainview3"];
-        
+        MainViewController *controller = getViewControllerOfName(@"mainview3");
         [self.navigationController pushViewController:controller animated:YES];
-//        [self pushViewController:controller animated:YES];
-//        [self prese]
-//        [self presentViewController:controller animated:YES completion:nil];
     }
 }
 @end

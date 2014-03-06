@@ -16,6 +16,8 @@
 
 @property (retain, nonatomic) User *user;
 
-
++ (User*)user;
+//+ (id)logic;
+- (id)init;
 - (id)initWithUser:(User *)user;
 @end
