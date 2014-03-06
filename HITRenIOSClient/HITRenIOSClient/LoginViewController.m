@@ -43,6 +43,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.email resignFirstResponder];
+    [self.password resignFirstResponder];
+}
+
 - (IBAction)login:(id)sender {
     User *user = [[User alloc] init];
     user.email = [self.email.text copy];
@@ -56,9 +61,10 @@
         [userDefaults setValue:user.password forKey:@"password"];
         [userDefaults setInteger:user.uid forKey:@"uid"];
         [userDefaults synchronize];
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]];
         
-        MainViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"mainview3"];
+        MainViewController *controller = getViewControllerOfName(@"mainview3");//[storyboard instantiateViewControllerWithIdentifier:@"mainview3"];
+        
         [self.navigationController pushViewController:controller animated:YES];
 //        [self pushViewController:controller animated:YES];
 //        [self prese]
