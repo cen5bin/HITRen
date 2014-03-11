@@ -29,7 +29,7 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
-    
+    [DBController sharedInstance];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *email = [userDefaults objectForKey:@"email"];
     NSString *password = [userDefaults objectForKey:@"password"];

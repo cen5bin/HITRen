@@ -13,6 +13,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "DBController.h"
     #import "UIFunctions.h"
     #import "LogKit.h"
     #import "BtmToolBar.h"
