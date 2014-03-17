@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.edu.hit.dao.DataReader;
 import cn.edu.hit.dao.MemController;
 import cn.edu.hit.dao.MemWorker;
 import cn.edu.hit.kit.DataKit;
@@ -52,6 +53,11 @@ public class LoginServlet extends BaseServlet {
 		logger.debug("xxxxx");
 		try {
 			PrintWriter out = response.getWriter();
+			DataReader.getLeastUserInfo(35);
+			DataReader.getLeastUserInfo(28);
+			DataReader.getLeastUserInfo(29);
+			DataReader.getMessageInfo(40);
+//			DataReader.getMessageInfo(11);
 //			out.print(DataKit.getData(request.getReader()));
 			
 //			AccountManager.createAccount(36, "123");

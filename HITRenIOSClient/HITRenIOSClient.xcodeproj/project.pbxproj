@@ -92,6 +92,7 @@
 		F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3918BC7C2800407521 /* LoginViewController.m */; };
 		F88BCB4218BC947F00407521 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB4118BC947F00407521 /* MainViewController.m */; };
 		F88F989418C1E910009CE742 /* BtmToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F88F989318C1E910009CE742 /* BtmToolBar.m */; };
+		F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F89B9C9D18D6EC73007DDDCC /* empty.png */; };
 		F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685C18C5F96C00B9384B /* topbar0.png */; };
 		F8E9686018C5F96C00B9384B /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685D18C5F96C00B9384B /* topbar1.png */; };
 		F8E9686118C5F96C00B9384B /* topbar2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685E18C5F96C00B9384B /* topbar2.png */; };
@@ -277,6 +278,7 @@
 		F88BCB4118BC947F00407521 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		F88F989218C1E910009CE742 /* BtmToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BtmToolBar.h; sourceTree = "<group>"; };
 		F88F989318C1E910009CE742 /* BtmToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BtmToolBar.m; sourceTree = "<group>"; };
+		F89B9C9D18D6EC73007DDDCC /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		F8E9685C18C5F96C00B9384B /* topbar0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar0.png; sourceTree = "<group>"; };
 		F8E9685D18C5F96C00B9384B /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
 		F8E9685E18C5F96C00B9384B /* topbar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar2.png; sourceTree = "<group>"; };
@@ -803,6 +805,7 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F89B9C9818D6E8B0007DDDCC /* pic */,
 				F8E9686E18C6DCA600B9384B /* textfield */,
 				F8E9686B18C6DB4B00B9384B /* button */,
 				F88F990C18C365BB009CE742 /* btmbar */,
@@ -855,6 +858,14 @@
 				F8550EFE18C4C251005E51FE /* p_btm4.png */,
 			);
 			name = btmbar;
+			sourceTree = "<group>";
+		};
+		F89B9C9818D6E8B0007DDDCC /* pic */ = {
+			isa = PBXGroup;
+			children = (
+				F89B9C9D18D6EC73007DDDCC /* empty.png */,
+			);
+			name = pic;
 			sourceTree = "<group>";
 		};
 		F8E9686B18C6DB4B00B9384B /* button */ = {
@@ -964,6 +975,7 @@
 				F84B7E0318BB6942007FC2D5 /* build-libidn.sh in Resources */,
 				F80B0D0E1874269D003E72DC /* Main_iPad.storyboard in Resources */,
 				F8550F0018C4C251005E51FE /* p_btm2.png in Resources */,
+				F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */,
 				F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */,
 				F8550F0318C4C251005E51FE /* p_btm4.png in Resources */,
 				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,

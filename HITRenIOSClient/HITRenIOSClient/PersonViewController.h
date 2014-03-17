@@ -10,4 +10,11 @@
 
 @interface PersonViewController : MainViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *email;
+@property (weak, nonatomic) IBOutlet UITextField *username;
+
+@property (weak, nonatomic) IBOutlet UILabel *sex;
+@property (weak, nonatomic) IBOutlet UILabel *birthday;
+
+
 @end
