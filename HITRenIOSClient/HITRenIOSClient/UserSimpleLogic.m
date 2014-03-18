@@ -15,19 +15,15 @@
 @implementation UserSimpleLogic
 
 
-- (BOOL)login {
++ (BOOL)login {
     FUNC_START();
     User *user = [UserSimpleLogic user];
-    HttpData *data = [[HttpData alloc] init];
+    HttpData *data = [HttpData data];
     [data setValue:user.email forKey:@"email"];
     [data setValue:user.password forKey:@"password"];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:user.email forKey:@"email"];
-    [dic setValue:user.password forKey:@"password"];
-    NSString *requestString = [data getJsonString];//[NSString stringWithFormat:@"data=%@",stringToUrlString([dic description])];
-//    LOG([httpTransfer description]);
+    NSString *requestString = [data getJsonString];
+    HttpTransfer *httpTransfer = [HttpTransfer sharedInstance];
     NSMutableDictionary *ret = [httpTransfer syncPost:requestString to:@"Login"];
-    LOG(@"asda");
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"login fail");
         FUNC_END();
@@ -39,21 +35,23 @@
     return YES;
 }
 
-- (BOOL)signUp {
++ (BOOL)signUp {
     FUNC_START();
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:self.user.email forKey:@"email"];
-    [dic setValue:self.user.password forKey:@"password"];
-    NSString *requestString = [NSString stringWithFormat:@"data=%@",stringToUrlString([dic description])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:requestString to:@"Register"];
+    User *user = [UserSimpleLogic user];
+    HttpData *data = [HttpData data];
+    [data setValue:user.email forKey:@"email"];
+    [data setValue:user.password forKey:@"password"];
+    
+    HttpTransfer *httpTransfer = [HttpTransfer sharedInstance];
+    NSMutableDictionary *ret = [httpTransfer syncPost:[data getJsonString] to:@"Register"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"signUp fail");
         L([ret objectForKey:@"INFO"]);
         FUNC_END();
         return NO;
     }
-    self.user.uid = [[ret objectForKey:@"uid"] intValue];
-    self.user.seq = [[ret objectForKey:@"seq"] intValue];
+    user.uid = [[ret objectForKey:@"uid"] intValue];
+    user.seq = [[ret objectForKey:@"seq"] intValue];
     LOG(@"signUp succ");
     FUNC_END();
     return YES;

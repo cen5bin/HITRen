@@ -18,9 +18,9 @@ void testSendShortMessage() {
     user.password = @"123";
     RelationShip *relationShip = [[RelationShip alloc] init];
     user.relationShip = relationShip;
-    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
+//    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
 //    [logic signUp];
-    [logic login];
+    [UserSimpleLogic login];
     MessageLogic *logic1 = [[MessageLogic alloc] initWithUser:user];
     [logic1 sendShortMessage:@"asdasd"];
 }
@@ -31,9 +31,9 @@ void testSendShortMessageToGroups() {
     user.password = @"123";
     RelationShip *relationShip = [[RelationShip alloc] init];
     user.relationShip = relationShip;
-    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
+//    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
     //    [logic signUp];
-    [logic login];
+    [UserSimpleLogic login];
     MessageLogic *logic1 = [[MessageLogic alloc] initWithUser:user];
     [logic1 sendShortMessage:@"asdasd" toGroup:@"default"];
 }

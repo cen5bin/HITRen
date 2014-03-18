@@ -14,8 +14,15 @@ static NSString *IP = //@"10.9.180.121";
 static NSString *SERVER_NAME = @"HITRenServer";
 static int PORT = 8080;
 
+static HttpTransfer *transfer;
+
 @implementation HttpTransfer
 
++ (HttpTransfer *)sharedInstance {
+    if (!transfer)
+        transfer = [[HttpTransfer alloc] init];
+    return transfer;
+}
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.data appendData:data];

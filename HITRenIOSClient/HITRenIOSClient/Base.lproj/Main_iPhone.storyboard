@@ -248,6 +248,7 @@
                         <outlet property="birthday" destination="7xz-Z5-xOZ" id="5Ik-Rc-eIp"/>
                         <outlet property="btmToolBar" destination="YxV-rY-rSH" id="FBG-s0-vzf"/>
                         <outlet property="email" destination="at3-6d-16z" id="2tF-uH-WzO"/>
+                        <outlet property="hometown" destination="3zs-k4-rbv" id="8jg-uj-sOb"/>
                         <outlet property="sex" destination="QDo-TU-u22" id="cFK-A4-utn"/>
                         <outlet property="topToolBar" destination="8Rm-Jf-wpp" id="bHs-fg-ODj"/>
                         <outlet property="username" destination="LOd-xh-5rw" id="Cz0-jN-vpu"/>

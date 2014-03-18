@@ -7,6 +7,8 @@
 //
 
 #import "RegisterViewController.h"
+#import "User.h"
+#import "PersonViewController.h"
 
 @interface RegisterViewController ()
 
@@ -41,6 +43,30 @@
 }
 
 - (IBAction)signUp:(id)sender {
+    if (self.email.text == nil || [self.email.text isEqualToString:@""]) {
+        alert(@"错误", @"邮箱不能为空", self);
+        return;
+    }
+    if (self.password.text == nil || self.password.text.length < 6) {
+        alert(@"错误", @"密码不得小于6位", self);
+        return;
+    }
+    if ([self.email.text rangeOfString:@"@"].location == NSNotFound) {
+        alert(@"错误", @"邮箱格式不正确", self);
+        return;
+    }
+    User *user = [UserSimpleLogic user];
+    user.email = self.email.text;
+    user.password = self.password.text;
+    if ([UserSimpleLogic signUp]) {
+        PersonViewController *controller = getViewControllerOfName(@"mainview5");
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else {
+        alert(@"错误", @"注册失败，请重试", self);
+        self.email.text = @"";
+        self.password.text = @"";
+    }
 }
 
 - (IBAction)comeBack:(id)sender {

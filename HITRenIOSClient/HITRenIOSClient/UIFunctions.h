@@ -9,3 +9,4 @@
 #import <UIKit/UIKit.h>
 
 id getViewControllerOfName(NSString *name);
+void alert(NSString *title, NSString *message, id delegate);

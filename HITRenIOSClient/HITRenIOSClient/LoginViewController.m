@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
+//    return;
     [DBController sharedInstance];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *email = [userDefaults objectForKey:@"email"];
@@ -39,9 +40,9 @@
     User* user = [UserSimpleLogic user];
     user.email = email;
     user.password = password;
-    UserSimpleLogic *logic = [[UserSimpleLogic alloc] init];
+//    UserSimpleLogic *logic = [[UserSimpleLogic alloc] init];
     
-    if ([logic login]) {
+    if ([UserSimpleLogic login]) {
         MainViewController *controller = getViewControllerOfName(@"mainview3");
         [self.navigationController pushViewController:controller animated:YES];
     }
@@ -65,11 +66,11 @@
 }
 
 - (IBAction)login:(id)sender {
-    User *user = [[User alloc] init];
+    User *user = [UserSimpleLogic user];
     user.email = self.email.text;
     user.password = self.password.text;
-    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
-    if ([logic login]) {
+//    UserSimpleLogic *logic = [[UserSimpleLogic alloc] init];
+    if ([UserSimpleLogic login]) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setValue:user.email forKey:@"email"];
         [userDefaults setValue:user.password forKey:@"password"];

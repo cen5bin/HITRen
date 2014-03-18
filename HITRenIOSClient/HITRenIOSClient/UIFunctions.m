@@ -13,3 +13,8 @@ id getViewControllerOfName(NSString *name) {
     id controller = [storyboard instantiateViewControllerWithIdentifier:name];
     return controller;
 }
+
+void alert(NSString *title, NSString *message, id delegate) {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    [alertView show];
+}

@@ -12,7 +12,10 @@
 
 @interface HttpTransfer : NSURLConnection<NSURLConnectionDataDelegate>
 
++ (HttpTransfer *)sharedInstance;
+
 @property (retain, nonatomic) NSMutableData *data;
+
 
 - (NSMutableDictionary *) syncPost:(NSString *)string to:(NSString *)servlet;
 - (NSMutableDictionary *) syncGet:(NSString *)string to:(NSString *)servlet;

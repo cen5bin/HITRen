@@ -20,4 +20,6 @@
     #import "TopToolBar.h"
     #import "MainViewController.h"
     #import "FreshNewsViewController.h"
+    #import "User.h"
+    #import "UserSimpleLogic.h"
 #endif

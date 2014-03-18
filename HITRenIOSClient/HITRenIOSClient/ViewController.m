@@ -49,7 +49,7 @@
     User *user = [[User alloc] init];
     user.email = self.email.text;
     user.password = self.password.text;
-    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
-    [logic login];
+//    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
+//    [logic login];
 }
 @end

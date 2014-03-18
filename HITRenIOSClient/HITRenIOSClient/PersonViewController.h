@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *sex;
 @property (weak, nonatomic) IBOutlet UILabel *birthday;
+@property (weak, nonatomic) IBOutlet UILabel *hometown;
 
 
 @end

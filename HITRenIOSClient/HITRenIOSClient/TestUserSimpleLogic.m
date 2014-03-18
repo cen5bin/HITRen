@@ -17,9 +17,9 @@ void testUserSimpleLogic() {
     user.password = @"123";
     RelationShip *relationShip = [[RelationShip alloc] init];
     user.relationShip = relationShip;
-    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
+//    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
 //    [logic signUp];
-    [logic login];
+//    [logic login];
 
 }
 
@@ -30,7 +30,7 @@ void registerSomeUsers() {
         user.password = @"123";
         RelationShip *relationShip = [[RelationShip alloc] init];
         user.relationShip = relationShip;
-        UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
-        [logic signUp];
+//        UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
+//        [logic signUp];
     }
 }

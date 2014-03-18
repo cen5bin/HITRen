@@ -14,8 +14,8 @@
     
 }
 
-- (BOOL)login;
-- (BOOL)signUp;
++ (BOOL)login;
++ (BOOL)signUp;
 - (BOOL)downloadInfo;
 - (BOOL)updateInfo;
 @end
