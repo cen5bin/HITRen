@@ -60,14 +60,27 @@
     user.password = self.password.text;
     if ([UserSimpleLogic signUp]) {
         PersonViewController *controller = getViewControllerOfName(@"mainview5");
+        controller.fromRegister = YES;
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:user.email forKey:@"email"];
+        [userDefaults setObject:user.password forKey:@"password"];
+        [userDefaults synchronize];
         [self.navigationController pushViewController:controller animated:YES];
+        
     }
     else {
         alert(@"错误", @"注册失败，请重试", self);
         self.email.text = @"";
         self.password.text = @"";
     }
+    
 }
+
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    FUNC_START();
+//    L(@"segue");
+//    FUNC_END();
+//}
 
 - (IBAction)comeBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

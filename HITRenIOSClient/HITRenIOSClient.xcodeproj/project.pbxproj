@@ -86,6 +86,9 @@
 		F8550F0118C4C251005E51FE /* p_btm3.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFC18C4C251005E51FE /* p_btm3.png */; };
 		F8550F0218C4C251005E51FE /* p_btm5.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFD18C4C251005E51FE /* p_btm5.png */; };
 		F8550F0318C4C251005E51FE /* p_btm4.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFE18C4C251005E51FE /* p_btm4.png */; };
+		F86B9E4918D8806900D71A7B /* me.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4818D8806900D71A7B /* me.png */; };
+		F86B9E4C18D8826400D71A7B /* me1.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4A18D8826400D71A7B /* me1.png */; };
+		F86B9E4D18D8826400D71A7B /* me2.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4B18D8826400D71A7B /* me2.png */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3118BB7A6400407521 /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3018BB7A6400407521 /* DBController.m */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
@@ -267,6 +270,9 @@
 		F8550EFC18C4C251005E51FE /* p_btm3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm3.png; sourceTree = "<group>"; };
 		F8550EFD18C4C251005E51FE /* p_btm5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm5.png; sourceTree = "<group>"; };
 		F8550EFE18C4C251005E51FE /* p_btm4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm4.png; sourceTree = "<group>"; };
+		F86B9E4818D8806900D71A7B /* me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me.png; sourceTree = "<group>"; };
+		F86B9E4A18D8826400D71A7B /* me1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me1.png; sourceTree = "<group>"; };
+		F86B9E4B18D8826400D71A7B /* me2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me2.png; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB2F18BB7A6400407521 /* DBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBController.h; sourceTree = "<group>"; };
 		F88BCB3018BB7A6400407521 /* DBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBController.m; sourceTree = "<group>"; };
@@ -817,6 +823,9 @@
 		F88F987918C18600009CE742 /* topbar */ = {
 			isa = PBXGroup;
 			children = (
+				F86B9E4A18D8826400D71A7B /* me1.png */,
+				F86B9E4B18D8826400D71A7B /* me2.png */,
+				F86B9E4818D8806900D71A7B /* me.png */,
 				F8E9685C18C5F96C00B9384B /* topbar0.png */,
 				F8E9685D18C5F96C00B9384B /* topbar1.png */,
 				F8E9685E18C5F96C00B9384B /* topbar2.png */,
@@ -983,9 +992,12 @@
 				F8E9687018C6DCB500B9384B /* email.png in Resources */,
 				F8E9686018C5F96C00B9384B /* topbar1.png in Resources */,
 				F8E9686D18C6DB6A00B9384B /* loginbutton0.png in Resources */,
+				F86B9E4D18D8826400D71A7B /* me2.png in Resources */,
+				F86B9E4C18D8826400D71A7B /* me1.png in Resources */,
 				F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */,
 				F84B7DE918BB3C8D007FC2D5 /* README.txt in Resources */,
 				F8550F0118C4C251005E51FE /* p_btm3.png in Resources */,
+				F86B9E4918D8806900D71A7B /* me.png in Resources */,
 				F8E9686118C5F96C00B9384B /* topbar2.png in Resources */,
 				F8550EFF18C4C251005E51FE /* p_btm1.png in Resources */,
 				F84B7DFD18BB43EB007FC2D5 /* xmppserver.plist in Resources */,
