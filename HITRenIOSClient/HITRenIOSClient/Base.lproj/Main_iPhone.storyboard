@@ -166,8 +166,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" allowsMultipleSelection="YES" rowHeight="100" sectionHeaderHeight="10" sectionFooterHeight="10" id="OVn-9w-xXx">
-                                <rect key="frame" x="0.0" y="43" width="320" height="445"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="0.0" y="43" width="320" height="476"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <sections>
                                     <tableViewSection id="ZNv-7E-QCb">
@@ -356,7 +356,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="alphabet" secureTextEntry="YES"/>
                                                         </textField>
                                                     </subviews>
                                                 </tableViewCellContentView>
@@ -374,7 +374,9 @@
                         <outlet property="headCell" destination="5N1-6R-meX" id="SfB-gf-bl8"/>
                         <outlet property="hometown" destination="sl6-pR-BTE" id="fY6-GC-CWS"/>
                         <outlet property="hometownCell" destination="1jz-dz-oIo" id="fVq-Vd-bhk"/>
+                        <outlet property="jwcID" destination="Tqi-TY-pbi" id="Zrw-vl-Ukm"/>
                         <outlet property="jwcIDCell" destination="dyn-Qq-qf0" id="24P-ep-0af"/>
+                        <outlet property="jwcPassword" destination="sE2-Ow-uTg" id="Vq0-dC-NCl"/>
                         <outlet property="jwcPasswordCell" destination="SE3-sE-HjI" id="PMq-pt-bh0"/>
                         <outlet property="sexCell" destination="d3y-wn-Poz" id="ekO-ML-dTj"/>
                         <outlet property="tableView" destination="OVn-9w-xXx" id="oXS-6J-UJa"/>

@@ -31,6 +31,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -93,6 +94,18 @@
     return [[_tableCells objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 1)
+        return @"教务处账号绑定";
+    return @"";
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    UITableViewHeaderFooterView *view0 = (UITableViewHeaderFooterView *)view;
+    view0.textLabel.font = [UIFont systemFontOfSize:14];
+    view0.textLabel.textColor = [UIColor darkGrayColor];
+}
+
 - (void)keyboardWillShow:(NSNotification *)notification {
     FUNC_START();
     NSDictionary *info = [notification userInfo];
@@ -108,6 +121,41 @@
     FUNC_END();
 }
 
+- (void)keyboardFrameDidChange:(NSNotification *)notification {
+    FUNC_START();
+    L(@"changed");
+    NSDictionary *info = [notification userInfo];
+    NSValue *value = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect rect = [value CGRectValue];
+    CGRect rect1;
+    if (self.username.isFirstResponder)
+        rect1 = [self.usernameCell convertRect:self.username.frame toView:self.view.window];
+    else if (self.jwcID.isFirstResponder)
+        rect1 = [self.jwcIDCell convertRect:self.jwcID.frame toView:self.view.window];
+    else if (self.jwcPassword.isFirstResponder)
+        rect1 = [self.jwcPasswordCell convertRect:self.jwcPassword.frame toView:self.view.window];
+    else {
+        FUNC_END();
+        return;
+    }
+    
+    LOG(@"rect1 %f %f %f %f", rect1.origin.x, rect1.origin.y, rect1.size.width, rect1.size.height);
+    LOG(@"rect %f %f %f %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+
+    if (CGRectIntersectsRect(rect1, rect)) {
+        LOG(@"rect minY:%f", CGRectGetMinY(rect));
+        LOG(@"rect1 maxY:%f", CGRectGetMaxY(rect1));
+        CGFloat height = -CGRectGetMinY(rect)+CGRectGetMaxY(rect1)+self.tableView.contentOffset.y+20;
+        CGSize size = self.tableView.contentSize;
+        size.height += height;
+        self.tableView.contentSize = size;
+        self.tableView.contentOffset = CGPointMake(0, height+20);
+        
+        LOG(@"%f", self.tableView.contentOffset.y);
+    }
+//    self.tableView.contentOffset = CGPointMake(0, -100);
+    FUNC_END();
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

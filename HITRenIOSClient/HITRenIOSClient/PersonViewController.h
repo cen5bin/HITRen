@@ -25,12 +25,16 @@
 
 
 
-@property (weak, nonatomic) IBOutlet UITextField *email;
-@property (weak, nonatomic) IBOutlet UITextField *username;
+@property (strong, nonatomic) IBOutlet UITextField *email;
+@property (strong, nonatomic) IBOutlet UITextField *username;
 
 @property (weak, nonatomic) IBOutlet UILabel *sex;
 @property (weak, nonatomic) IBOutlet UILabel *birthday;
 @property (weak, nonatomic) IBOutlet UILabel *hometown;
+
+@property (strong, nonatomic) IBOutlet UITextField *jwcID;
+@property (strong, nonatomic) IBOutlet UITextField *jwcPassword;
+
 
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 
