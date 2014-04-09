@@ -65,7 +65,7 @@ public class UserSimpleLogic {
 		}
 		obj.put(UserConstant.UID, uid);
 		obj.put(UserConstant.SEQ, 1);
-		obj.put(UserConstant.NAME, email.split("@")[0]);
+		obj.put(UserConstant.NAME, email);
 		retString = "" + uid;
 		if (!DBController.addObj(UserConstant.COLLNAME, obj)) {
 			retData.put(HttpData.SUC, false);

@@ -14,8 +14,11 @@
     
 }
 
+
++ (void)loadUserInfo;
 + (BOOL)login;
 + (BOOL)signUp;
-- (BOOL)downloadInfo;
++ (BOOL)downloadInfo;
 + (BOOL)updateInfo;
++ (BOOL)updateInfoFinished:(NSDictionary*)ret;
 @end

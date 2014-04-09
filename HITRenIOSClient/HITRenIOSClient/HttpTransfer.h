@@ -10,9 +10,12 @@
 
 
 
-@interface HttpTransfer : NSURLConnection<NSURLConnectionDataDelegate>
+@interface HttpTransfer : NSURLConnection<NSURLConnectionDataDelegate> {
+    NSString *_eventName;
+}
 
 + (HttpTransfer *)sharedInstance;
++ (HttpTransfer *)transfer;
 
 @property (retain, nonatomic) NSMutableData *data;
 
@@ -20,7 +23,7 @@
 - (NSMutableDictionary *) syncPost:(NSString *)string to:(NSString *)servlet;
 - (NSMutableDictionary *) syncGet:(NSString *)string to:(NSString *)servlet;
 
-
+- (BOOL)asyncPost:(NSString *)string to:(NSString *)servlet withEventName:(NSString *)eventName;
 - (BOOL) asyncPost:(NSString *)string to:(NSString *)servlet;
 - (BOOL) asyncGet:(NSString *)string to:(NSString *)servlet;
 

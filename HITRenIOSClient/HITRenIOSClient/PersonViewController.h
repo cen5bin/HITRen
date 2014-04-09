@@ -13,6 +13,11 @@
     NSMutableArray *_tableCells;
     UIDatePicker *_datePicker;
     HometownPicker *_hometownPicker;
+    
+    BOOL _hometownChanged;
+    BOOL _birthdayChanged;
+    BOOL _sexSet;
+    BOOL _usernameChanged;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

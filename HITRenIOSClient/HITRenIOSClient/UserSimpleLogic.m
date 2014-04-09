@@ -57,14 +57,16 @@
     return YES;
 }
 
-- (BOOL)downloadInfo {
++ (BOOL)downloadInfo {
     FUNC_START();
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:[NSString stringWithFormat:@"%d", self.user.uid] forKey:@"uid"];
-    [dic setValue:[NSString stringWithFormat:@"%d", self.user.seq] forKey:@"seq"];
-    NSString *requestString = [NSString stringWithFormat:@"data=%@",stringToUrlString([dic description])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:requestString to:@"DownloadUserInfo"];
+    HttpData *data = [HttpData data];
+    User *user = [UserSimpleLogic user];
+    [data setValue:[NSString stringWithFormat:@"%d", user.uid] forKey:@"uid"];
+    [data setValue:[NSString stringWithFormat:@"%d", user.seq] forKey:@"seq"];
+    HttpTransfer *httpTransfer = [HttpTransfer sharedInstance];
+    NSMutableDictionary *ret = [httpTransfer syncPost:[data getJsonString] to:@"DownloadUserInfo"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
+        [UserSimpleLogic loadUserInfo];
         LOG(@"downloadInfo fail");
         FUNC_END();
         if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"])
@@ -72,8 +74,9 @@
         return NO;
     }
     LOG(@"downloadInfo succ");
-    [self unpackUserInfoData:[ret objectForKey:@"DATA"]];
-    [self.user print];
+    [UserSimpleLogic unpackUserInfoData:[ret objectForKey:@"DATA"]];
+    [UserSimpleLogic save];
+    [user print];
     FUNC_END();
     return YES;
 }
@@ -81,8 +84,14 @@
 + (BOOL)updateInfo {
     FUNC_START();
     HttpData *data = [UserSimpleLogic packUserInfoData];
-    HttpTransfer *httpTransfer = [HttpTransfer sharedInstance];
-    NSMutableDictionary *ret = [httpTransfer syncPost:[data getJsonString] to:@"UpdateUserInfo"];
+    HttpTransfer *httpTransfer = [HttpTransfer transfer];
+    [httpTransfer asyncPost:[data getJsonString] to:@"UpdateUserInfo" withEventName:ASYNC_EVENT_UPDATEUSETINFO];
+    FUNC_END();
+    return YES;
+}
+
++ (BOOL)updateInfoFinished:(NSDictionary*)ret {
+    FUNC_START();
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"updateInfo fail");
         FUNC_END();
@@ -90,11 +99,23 @@
     }
     User *user = [UserSimpleLogic user];
     user.seq++;
+    [UserSimpleLogic save];
     LOG(@"updateInfo succ");
     FUNC_END();
     return YES;
 }
 
++ (void)save {
+    User *user = [UserSimpleLogic user];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:user.username forKey:@"username"];
+    [userDefaults setObject:user.password forKey:@"password"];
+    [userDefaults setObject:user.birthday forKey:@"birthday"];
+    [userDefaults setObject:user.hometown forKey:@"hometown"];
+    [userDefaults setObject:[NSNumber numberWithInt:user.sex] forKey:@"sex"];
+    [userDefaults synchronize];
+
+}
 
 + (HttpData *)packUserInfoData {
     HttpData *data = [[HttpData alloc] init];
@@ -111,7 +132,7 @@
     return data;
 }
 
-- (void)unpackUserInfoData:(NSDictionary*)dic {
++ (void)unpackUserInfoData:(NSDictionary*)dic {
     self.user.seq = [[dic objectForKey:@"seq"] intValue];
     self.user.sex = [[dic objectForKey:@"sex"] intValue];
     self.user.signature = [dic objectForKey:@"signature"];
@@ -124,7 +145,14 @@
     self.user.uid = [[dic objectForKey:@"uid"] intValue];
 }
 
-- (void) dealloc {
-    self.user = nil;
+
++ (void)loadUserInfo{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    User *user = [UserSimpleLogic user];
+    user.username = [userDefaults objectForKey:@"username"];
+    user.sex = [[userDefaults objectForKey:@"sex"] intValue];
+    user.birthday = [userDefaults objectForKey:@"birthday"];
+    user.hometown = [userDefaults objectForKey:@"hometown"];
 }
+
 @end

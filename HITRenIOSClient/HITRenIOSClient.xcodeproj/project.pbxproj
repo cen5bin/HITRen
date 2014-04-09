@@ -313,6 +313,7 @@
 		F8E9688118C70B5700B9384B /* PersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewController.m; sourceTree = "<group>"; };
 		F8E9688318C714C200B9384B /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		F8E9688418C714C200B9384B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		F8F7D16018F5295D00748AE1 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		F8FC7F4718751A0800842DC5 /* TestRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRelationship.h; sourceTree = "<group>"; };
 		F8FC7F4818751A0800842DC5 /* TestRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRelationship.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -393,11 +394,12 @@
 				F80B0D561874278A003E72DC /* Network */,
 				F80B0D551874276C003E72DC /* Kit */,
 				F80B0D5418742743003E72DC /* Model */,
-				F80B0D531874270F003E72DC /* LogicController */,
+				F80B0D531874270F003E72DC /* Logic */,
 				F80B0D061874269D003E72DC /* AppDelegate.h */,
 				F80B0D071874269D003E72DC /* AppDelegate.m */,
 				F80B0D121874269D003E72DC /* Images.xcassets */,
 				F80B0CFE1874269D003E72DC /* Supporting Files */,
+				F8F7D16018F5295D00748AE1 /* Constant.h */,
 			);
 			path = HITRenIOSClient;
 			sourceTree = "<group>";
@@ -431,7 +433,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F80B0D531874270F003E72DC /* LogicController */ = {
+		F80B0D531874270F003E72DC /* Logic */ = {
 			isa = PBXGroup;
 			children = (
 				F80B0D2F187426F2003E72DC /* BaseLogic.h */,
@@ -443,7 +445,7 @@
 				F80B0D45187426F2003E72DC /* UserSimpleLogic.h */,
 				F80B0D46187426F2003E72DC /* UserSimpleLogic.m */,
 			);
-			name = LogicController;
+			name = Logic;
 			sourceTree = "<group>";
 		};
 		F80B0D5418742743003E72DC /* Model */ = {

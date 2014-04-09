@@ -29,11 +29,6 @@
 	// Do any additional setup after loading the view.
     LOG(@"%@", [self.topToolBar description]);
     LOG(@"%@", [self.btmToolBar description]);
-//    CGRect topFrame = self.topToolBar.frame;
-//    CGRect btmFrame = self.btmToolBar.frame;
-//    contentFrame = CGRectMake(0, 0, self.view.frame.size.width, 0);
-//    contentFrame.origin.y = CGRectGetMaxY(topFrame);
-//    contentFrame.size.height = CGRectGetMinY(btmFrame) - CGRectGetMaxY(topFrame);
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,16 +45,11 @@
         int index = [self.btmToolBar calIndex:point];
         UIViewController *controller = getViewControllerOfName([NSString stringWithFormat:@"mainview%d", index]);
         UINavigationController *navigateController = self.navigationController;
-        [self.navigationController popViewControllerAnimated:NO];
+        if (index != 5)
+            [self.navigationController popViewControllerAnimated:NO];
         [navigateController pushViewController:controller animated:NO];
     }
     
-    
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]];
-//    
-//    FreshNewsViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"testmain"];
-//    controller.view.frame = contentFrame;
-//    [self.view addSubview:controller.view];
     FUNC_END();
 }
 

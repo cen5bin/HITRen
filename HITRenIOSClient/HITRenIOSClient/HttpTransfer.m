@@ -24,13 +24,19 @@ static HttpTransfer *transfer;
     return transfer;
 }
 
++ (HttpTransfer *)transfer {
+    return [[HttpTransfer alloc] init];
+}
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.data appendData:data];
-//    NSLog(@"data: %@",[data description]);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
+    L(@"finished loading");
+    NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:self.data options:NSJSONReadingMutableLeaves error:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ASYNCDATALOADED object:_eventName userInfo:dic];
+//    [[NSNotificationCenter defaultCenter] po]
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -106,6 +112,11 @@ static HttpTransfer *transfer;
     NSData *data = [self requestServerForNSDataWithPostMethod:string AndServletName:servlet];
     NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
     return dic;
+}
+
+- (BOOL)asyncPost:(NSString *)string to:(NSString *)servlet withEventName:(NSString *)eventName {
+    _eventName = eventName;
+    return [self asyncRequestServerForNSDataWithPostMethod:string AndServletName:servlet];
 }
 
 - (BOOL) asyncPost:(NSString *)string to:(NSString *)servlet {

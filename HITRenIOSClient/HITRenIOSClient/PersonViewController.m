@@ -34,6 +34,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidFinishLoading:) name:ASYNCDATALOADED object:nil];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
@@ -57,7 +59,20 @@
     CGSize size = self.view.frame.size;
     size.height += 75;
     self.tableView.contentSize = size;
-
+    
+    if (!self.fromRegister) {
+        [UserSimpleLogic downloadInfo];
+    }
+    
+    User *user = [UserSimpleLogic user];
+    if (user.birthday)
+        [self.birthday setTitle:user.birthday forState:UIControlStateNormal];
+    if (user.hometown)
+        [self.hometown setTitle:user.hometown forState:UIControlStateNormal];
+    if (user.username)
+        self.username.text = user.username;
+    if (user.sex)
+        [self performSelector:@selector(doHighLight:) withObject:user.sex == 2?self.femaleButton:self.maleButton afterDelay:0.0];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -80,8 +95,18 @@
         else if (point.x > self.view.frame.size.width - 50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"me1" ofType:@"png"]];
             self.topBar.image = image;
-//            User *user = [UserSimpleLogic user];
+            [self hidePicker];
+            User *user = [UserSimpleLogic user];
+            if (_hometownChanged) user.hometown = self.hometown.titleLabel.text;
+            if (_birthdayChanged) user.birthday = self.birthday.titleLabel.text;
+            if (self.username.text && self.username.text.length) user.username = self.username.text;
+            if (self.maleButton.highlighted) user.sex = 1;
+            else if (self.femaleButton.highlighted) user.sex = 2;
             
+            [UserSimpleLogic updateInfo];
+            
+            image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"me" ofType:@"png"]];
+            self.topBar.image = image;
         }
         
     }
@@ -126,7 +151,6 @@
 
 - (void)keyboardFrameDidChange:(NSNotification *)notification {
     FUNC_START();
-    L(@"changed");
     NSDictionary *info = [notification userInfo];
     NSValue *value = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect rect = [value CGRectValue];
@@ -138,11 +162,9 @@
     else if (self.jwcPassword.isFirstResponder)
         rect1 = [self.jwcPasswordCell convertRect:self.jwcPassword.frame toView:self.view.window];
     else {
-        L(@"not covered");
         FUNC_END();
         return;
     }
-    
 
     if (CGRectIntersectsRect(rect1, rect)) {
         CGFloat height = -CGRectGetMinY(rect)+CGRectGetMaxY(rect1)+self.tableView.contentOffset.y+20;
@@ -152,7 +174,7 @@
         self.tableView.contentOffset = CGPointMake(0, height+20);
         
     }
-//    self.tableView.contentOffset = CGPointMake(0, -100);
+
     FUNC_END();
 }
 - (void)didReceiveMemoryWarning
@@ -175,6 +197,7 @@
     }
     else if (sender == self.birthday) {
         L(@"birthday");
+        [self resignAll];
         if (_datePicker && _datePicker.superview) return;
         if (_hometownPicker && _hometownPicker.superview) [_hometownPicker removeFromSuperview];
         if (!_datePicker) {
@@ -193,6 +216,7 @@
     }
     else if (sender == self.hometown) {
         L(@"hometown");
+        [self resignAll];
         if (_hometownPicker && _hometownPicker.superview) return;
         if (_datePicker && _datePicker.superview) [_datePicker removeFromSuperview];
         if (!_hometownPicker) {
@@ -207,7 +231,13 @@
             CGRect rect = _hometownPicker.frame;
             rect.origin.y -= rect.size.height;
             _hometownPicker.frame = rect;
-        } completion:^(BOOL finished) {}];
+        } completion:^(BOOL finished) {
+            User *user = [UserSimpleLogic user];
+            if (!user.hometown) {
+                [self.hometown setTitle:@"北京 北京市" forState:UIControlStateNormal];
+                _hometownChanged = YES;
+            }
+        }];
     }
 }
 
@@ -220,35 +250,40 @@
 }
 
 - (void)hometownValueChanged{
-    L(@"yes");
     NSMutableDictionary *dic = _hometownPicker.hometown;
-    self.hometown.titleLabel.text = [NSString stringWithFormat:@"%@ %@", [dic objectForKey:@"province"], [dic objectForKey:@"city"]];
-    L([dic description]);
+//    self.hometown.titleLabel.text = [NSString stringWithFormat:@"%@ %@", [dic objectForKey:@"province"], [dic objectForKey:@"city"]];
+    [self.hometown setTitle:[NSString stringWithFormat:@"%@ %@", [dic objectForKey:@"province"], [dic objectForKey:@"city"]] forState:UIControlStateNormal];
+    _hometownChanged = YES;
 }
 - (void)dateValueChanged {
-//    [[_datePicker.date description] ran]
     FUNC_START();
     NSDateFormatter *formater = [[NSDateFormatter alloc] init];
     [formater setDateFormat:@"yyyy-MM-dd"];
-    CGRect rect = self.birthday.titleLabel.frame;
-    rect.origin.x -= 100;
-    rect.size.width += 100;
-    self.birthday.titleLabel.frame = rect;
-    self.birthday.titleLabel.text = [formater stringFromDate:_datePicker.date];
-//    L([formater stringFromDate:_datePicker.date]);
+    [self.birthday setTitle:[formater stringFromDate:_datePicker.date] forState:UIControlStateNormal];
+    _birthdayChanged = YES;
     FUNC_END();
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self hidePicker];
+    [self resignAll];
+}
+
+- (void)resignAll {
+    [self.username resignFirstResponder];
+    [self.jwcID resignFirstResponder];
+    [self.jwcPassword resignFirstResponder];
+}
+
+- (void)hidePicker {
     if (_datePicker && _datePicker.superview) {
-            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-                CGRect rect = _datePicker.frame;
-                    rect.origin.y += rect.size.height;
-                    _datePicker.frame = rect;
-                } completion:^(BOOL finished){
-                    [_datePicker removeFromSuperview];
-                    L(@"finished");
-                }];
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+            CGRect rect = _datePicker.frame;
+            rect.origin.y += rect.size.height;
+            _datePicker.frame = rect;
+        } completion:^(BOOL finished){
+            [_datePicker removeFromSuperview];
+        }];
     }
     
     if (_hometownPicker && _hometownPicker.superview) {
@@ -258,9 +293,15 @@
             _hometownPicker.frame = rect;
         } completion:^(BOOL finished){
             [_hometownPicker removeFromSuperview];
-            L(@"finished");
         }];
     }
+
+}
+
+- (void)dataDidFinishLoading:(NSNotification*)notification {
+    if ([notification.object isEqual:ASYNC_EVENT_UPDATEUSETINFO])
+        [UserSimpleLogic updateInfoFinished:notification.userInfo];
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
