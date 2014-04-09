@@ -78,34 +78,36 @@
     return YES;
 }
 
-- (BOOL)updateInfo {
++ (BOOL)updateInfo {
     FUNC_START();
-    HttpData *data = [self packUserInfoData];
-    NSString *requestString = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:requestString to:@"UpdateUserInfo"];
+    HttpData *data = [UserSimpleLogic packUserInfoData];
+    HttpTransfer *httpTransfer = [HttpTransfer sharedInstance];
+    NSMutableDictionary *ret = [httpTransfer syncPost:[data getJsonString] to:@"UpdateUserInfo"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"updateInfo fail");
         FUNC_END();
         return NO;
     }
-    self.user.seq++;
+    User *user = [UserSimpleLogic user];
+    user.seq++;
     LOG(@"updateInfo succ");
     FUNC_END();
     return YES;
 }
 
 
-- (HttpData *)packUserInfoData {
++ (HttpData *)packUserInfoData {
     HttpData *data = [[HttpData alloc] init];
-    [data setValue:self.user.email forKey:@"email"];
-    [data setValue:self.user.password forKey:@"password"];
-    [data setValue:self.user.birthday forKey:@"birthday"];
-    [data setValue:self.user.hometown forKey:@"hometown"];
-    [data setValue:self.user.username forKey:@"username"];
-    [data setIntValue:self.user.seq forKey:@"seq"];
-    [data setIntValue:self.user.uid forKey:@"uid"];
-    [data setIntValue:self.user.status forKey:@"status"];
-    [data setIntValue:self.user.sex forKey:@"sex"];
+    User *user = [UserSimpleLogic user];
+    [data setValue:user.email forKey:@"email"];
+    [data setValue:user.password forKey:@"password"];
+    [data setValue:user.birthday forKey:@"birthday"];
+    [data setValue:user.hometown forKey:@"hometown"];
+    [data setValue:user.username forKey:@"username"];
+    [data setIntValue:user.seq forKey:@"seq"];
+    [data setIntValue:user.uid forKey:@"uid"];
+    [data setIntValue:user.status forKey:@"status"];
+    [data setIntValue:user.sex forKey:@"sex"];
     return data;
 }
 

@@ -90,11 +90,13 @@
 		F86B9E4C18D8826400D71A7B /* me1.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4A18D8826400D71A7B /* me1.png */; };
 		F86B9E4D18D8826400D71A7B /* me2.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4B18D8826400D71A7B /* me2.png */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
-		F88BCB3118BB7A6400407521 /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3018BB7A6400407521 /* DBController.m */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
 		F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3918BC7C2800407521 /* LoginViewController.m */; };
 		F88BCB4218BC947F00407521 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB4118BC947F00407521 /* MainViewController.m */; };
 		F88F989418C1E910009CE742 /* BtmToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F88F989318C1E910009CE742 /* BtmToolBar.m */; };
+		F892372A18F3A62D00658F47 /* HITRenData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F892372818F3A62D00658F47 /* HITRenData.xcdatamodeld */; };
+		F892372C18F3C6DF00658F47 /* hometowns.plist in Resources */ = {isa = PBXBuildFile; fileRef = F892372B18F3C6DF00658F47 /* hometowns.plist */; };
+		F892372F18F3C85A00658F47 /* HometownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F892372E18F3C85A00658F47 /* HometownPicker.m */; };
 		F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F89B9C9D18D6EC73007DDDCC /* empty.png */; };
 		F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685C18C5F96C00B9384B /* topbar0.png */; };
 		F8E9686018C5F96C00B9384B /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685D18C5F96C00B9384B /* topbar1.png */; };
@@ -274,8 +276,6 @@
 		F86B9E4A18D8826400D71A7B /* me1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me1.png; sourceTree = "<group>"; };
 		F86B9E4B18D8826400D71A7B /* me2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me2.png; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		F88BCB2F18BB7A6400407521 /* DBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBController.h; sourceTree = "<group>"; };
-		F88BCB3018BB7A6400407521 /* DBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBController.m; sourceTree = "<group>"; };
 		F88BCB3518BC79EA00407521 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		F88BCB3618BC79EA00407521 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		F88BCB3818BC7C2800407521 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -284,6 +284,10 @@
 		F88BCB4118BC947F00407521 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		F88F989218C1E910009CE742 /* BtmToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BtmToolBar.h; sourceTree = "<group>"; };
 		F88F989318C1E910009CE742 /* BtmToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BtmToolBar.m; sourceTree = "<group>"; };
+		F892372918F3A62D00658F47 /* HITRenData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HITRenData.xcdatamodel; sourceTree = "<group>"; };
+		F892372B18F3C6DF00658F47 /* hometowns.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = hometowns.plist; sourceTree = "<group>"; };
+		F892372D18F3C85A00658F47 /* HometownPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HometownPicker.h; sourceTree = "<group>"; };
+		F892372E18F3C85A00658F47 /* HometownPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HometownPicker.m; sourceTree = "<group>"; };
 		F89B9C9D18D6EC73007DDDCC /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		F8E9685C18C5F96C00B9384B /* topbar0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar0.png; sourceTree = "<group>"; };
 		F8E9685D18C5F96C00B9384B /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
@@ -385,7 +389,6 @@
 				F88F989018C1E838009CE742 /* UI */,
 				F88BCB2E18BB7A4100407521 /* data */,
 				F84B7DFB18BB43AB007FC2D5 /* conf */,
-				F84B7D6118BB3C6A007FC2D5 /* XMPPFramework */,
 				F80B0D5818742830003E72DC /* TestCode */,
 				F80B0D561874278A003E72DC /* Network */,
 				F80B0D551874276C003E72DC /* Kit */,
@@ -393,8 +396,6 @@
 				F80B0D531874270F003E72DC /* LogicController */,
 				F80B0D061874269D003E72DC /* AppDelegate.h */,
 				F80B0D071874269D003E72DC /* AppDelegate.m */,
-				F80B0D091874269D003E72DC /* Main_iPhone.storyboard */,
-				F80B0D0C1874269D003E72DC /* Main_iPad.storyboard */,
 				F80B0D121874269D003E72DC /* Images.xcassets */,
 				F80B0CFE1874269D003E72DC /* Supporting Files */,
 			);
@@ -774,6 +775,7 @@
 		F84B7DF718BB3F5E007FC2D5 /* xmpp */ = {
 			isa = PBXGroup;
 			children = (
+				F84B7D6118BB3C6A007FC2D5 /* XMPPFramework */,
 				F84B7DF818BB3F81007FC2D5 /* XmppConnector.h */,
 				F84B7DF918BB3F81007FC2D5 /* XmppConnector.m */,
 			);
@@ -802,8 +804,8 @@
 		F88BCB2E18BB7A4100407521 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				F88BCB2F18BB7A6400407521 /* DBController.h */,
-				F88BCB3018BB7A6400407521 /* DBController.m */,
+				F892372B18F3C6DF00658F47 /* hometowns.plist */,
+				F892372818F3A62D00658F47 /* HITRenData.xcdatamodeld */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -836,6 +838,8 @@
 		F88F989018C1E838009CE742 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				F80B0D091874269D003E72DC /* Main_iPhone.storyboard */,
+				F80B0D0C1874269D003E72DC /* Main_iPad.storyboard */,
 				F8E9687318C7053200B9384B /* function */,
 				F88F989118C1E86C009CE742 /* component */,
 				F88F986E18C17C41009CE742 /* resources */,
@@ -853,6 +857,8 @@
 				F8E9686318C5F9B800B9384B /* TopToolBar.m */,
 				F8E9686518C5FBBC00B9384B /* TestView.h */,
 				F8E9686618C5FBBC00B9384B /* TestView.m */,
+				F892372D18F3C85A00658F47 /* HometownPicker.h */,
+				F892372E18F3C85A00658F47 /* HometownPicker.m */,
 			);
 			name = component;
 			sourceTree = "<group>";
@@ -992,6 +998,7 @@
 				F8E9687018C6DCB500B9384B /* email.png in Resources */,
 				F8E9686018C5F96C00B9384B /* topbar1.png in Resources */,
 				F8E9686D18C6DB6A00B9384B /* loginbutton0.png in Resources */,
+				F892372C18F3C6DF00658F47 /* hometowns.plist in Resources */,
 				F86B9E4D18D8826400D71A7B /* me2.png in Resources */,
 				F86B9E4C18D8826400D71A7B /* me1.png in Resources */,
 				F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */,
@@ -1050,7 +1057,6 @@
 				F84B7DC918BB3C8D007FC2D5 /* XMPPAnonymousAuthentication.m in Sources */,
 				F84B7DE718BB3C8D007FC2D5 /* ContextFilterLogFormatter.m in Sources */,
 				F80B0D041874269D003E72DC /* main.m in Sources */,
-				F88BCB3118BB7A6400407521 /* DBController.m in Sources */,
 				F80B0D4C187426F2003E72DC /* RelationShip.m in Sources */,
 				F88BCB4218BC947F00407521 /* MainViewController.m in Sources */,
 				F80B0D5C18744C17003E72DC /* TestUserSimpleLogic.m in Sources */,
@@ -1083,6 +1089,7 @@
 				F84B7DDE18BB3C8D007FC2D5 /* XMPPIDTracker.m in Sources */,
 				F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */,
 				F84B7DDC18BB3C8D007FC2D5 /* GCDMulticastDelegate.m in Sources */,
+				F892372F18F3C85A00658F47 /* HometownPicker.m in Sources */,
 				F80B0D4B187426F2003E72DC /* MessageLogic.m in Sources */,
 				F84B7DE618BB3C8D007FC2D5 /* DDTTYLogger.m in Sources */,
 				F84B7DD718BB3C8D007FC2D5 /* XMPPModule.m in Sources */,
@@ -1103,6 +1110,7 @@
 				F84B7DCF18BB3C8D007FC2D5 /* XMPPXOAuth2Google.m in Sources */,
 				F80B0D49187426F2003E72DC /* HttpTransfer.m in Sources */,
 				F84B7DE018BB3C8D007FC2D5 /* XMPPStringPrep.m in Sources */,
+				F892372A18F3A62D00658F47 /* HITRenData.xcdatamodeld in Sources */,
 				F80B0D48187426F2003E72DC /* HttpData.m in Sources */,
 				F8E9687618C7055E00B9384B /* UIFunctions.m in Sources */,
 			);
@@ -1357,6 +1365,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F892372818F3A62D00658F47 /* HITRenData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F892372918F3A62D00658F47 /* HITRenData.xcdatamodel */,
+			);
+			currentVersion = F892372918F3A62D00658F47 /* HITRenData.xcdatamodel */;
+			path = HITRenData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F80B0CEC1874269D003E72DC /* Project object */;
 }

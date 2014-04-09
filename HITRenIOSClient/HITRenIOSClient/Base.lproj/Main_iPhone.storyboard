@@ -166,7 +166,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" allowsMultipleSelection="YES" rowHeight="100" sectionHeaderHeight="10" sectionFooterHeight="10" id="OVn-9w-xXx">
-                                <rect key="frame" x="0.0" y="43" width="320" height="476"/>
+                                <rect key="frame" x="0.0" y="43" width="320" height="505"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <sections>
@@ -248,6 +248,9 @@
                                                             <state key="highlighted">
                                                                 <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="buttonClicked:" destination="fH7-mk-uTD" eventType="touchUpInside" id="Int-WS-XQv"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qgj-NI-Qdp">
                                                             <rect key="frame" x="257" y="3" width="36" height="36"/>
@@ -257,6 +260,9 @@
                                                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="buttonClicked:" destination="fH7-mk-uTD" eventType="touchUpInside" id="RGF-fk-N7M"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
@@ -275,13 +281,18 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hxw-Br-YkC">
-                                                            <rect key="frame" x="152" y="11" width="136" height="21"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Oip-3F-w8B">
+                                                            <rect key="frame" x="122" y="5" width="169" height="34"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                            <state key="normal" title="                     点击设置">
+                                                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="buttonClicked:" destination="fH7-mk-uTD" eventType="touchUpInside" id="Ob6-5B-EXC"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -292,13 +303,6 @@
                                                     <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sl6-pR-BTE">
-                                                            <rect key="frame" x="152" y="11" width="136" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="家乡:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b20-0W-i5a">
                                                             <rect key="frame" x="15" y="11" width="39" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -306,6 +310,18 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bFI-FO-N1B">
+                                                            <rect key="frame" x="74" y="0.0" width="217" height="44"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <state key="normal" title="                              点击设置">
+                                                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="buttonClicked:" destination="fH7-mk-uTD" eventType="touchUpInside" id="kpA-rC-2w2"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -369,15 +385,18 @@
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="birthday" destination="Oip-3F-w8B" id="VGt-Gn-J6c"/>
                         <outlet property="birthdayCell" destination="Q8a-up-yZg" id="hG0-ya-Cl9"/>
                         <outlet property="email" destination="CHO-bv-ONf" id="GW6-xW-wna"/>
+                        <outlet property="femaleButton" destination="Qgj-NI-Qdp" id="5U6-VC-nzC"/>
                         <outlet property="headCell" destination="5N1-6R-meX" id="SfB-gf-bl8"/>
-                        <outlet property="hometown" destination="sl6-pR-BTE" id="fY6-GC-CWS"/>
+                        <outlet property="hometown" destination="bFI-FO-N1B" id="SeM-Oz-V80"/>
                         <outlet property="hometownCell" destination="1jz-dz-oIo" id="fVq-Vd-bhk"/>
                         <outlet property="jwcID" destination="Tqi-TY-pbi" id="Zrw-vl-Ukm"/>
                         <outlet property="jwcIDCell" destination="dyn-Qq-qf0" id="24P-ep-0af"/>
                         <outlet property="jwcPassword" destination="sE2-Ow-uTg" id="Vq0-dC-NCl"/>
                         <outlet property="jwcPasswordCell" destination="SE3-sE-HjI" id="PMq-pt-bh0"/>
+                        <outlet property="maleButton" destination="Ank-Ic-qys" id="Zdb-ej-8km"/>
                         <outlet property="sexCell" destination="d3y-wn-Poz" id="ekO-ML-dTj"/>
                         <outlet property="tableView" destination="OVn-9w-xXx" id="oXS-6J-UJa"/>
                         <outlet property="topBar" destination="8Rm-Jf-wpp" id="zDR-KT-07e"/>
@@ -387,7 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SJv-5v-NkX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1945" y="-456"/>
+            <point key="canvasLocation" x="1956" y="-420"/>
         </scene>
         <!--Tools View Controller - 工具-->
         <scene sceneID="mT2-y3-Lv1">
@@ -415,7 +434,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hQR-zF-0j1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2303" y="-261"/>
+            <point key="canvasLocation" x="2337" y="-420"/>
         </scene>
         <!--Calendar View Controller - 日程-->
         <scene sceneID="j7h-ok-K1M">

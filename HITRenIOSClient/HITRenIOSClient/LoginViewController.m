@@ -30,7 +30,7 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     return;
-    [DBController sharedInstance];
+//    [DBController sharedInstance];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *email = [userDefaults objectForKey:@"email"];
     NSString *password = [userDefaults objectForKey:@"password"];
@@ -40,7 +40,6 @@
     User* user = [UserSimpleLogic user];
     user.email = email;
     user.password = password;
-//    UserSimpleLogic *logic = [[UserSimpleLogic alloc] init];
     
     if ([UserSimpleLogic login]) {
         MainViewController *controller = getViewControllerOfName(@"mainview3");

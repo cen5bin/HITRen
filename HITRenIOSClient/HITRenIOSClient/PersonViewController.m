@@ -7,6 +7,8 @@
 //
 
 #import "PersonViewController.h"
+#import "User.h"
+#import "HometownPicker.h"
 
 @interface PersonViewController ()
 
@@ -29,7 +31,6 @@
 	// Do any additional setup after loading the view.
     FUNC_START();
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
     
@@ -39,17 +40,25 @@
     self.tableView.backgroundView = nil;
     self.email.enabled = NO;
     
+    
     NSMutableArray *section0 = [[NSMutableArray alloc] initWithObjects:self.headCell,self.usernameCell,self.sexCell, self.birthdayCell, self.hometownCell, nil];
     NSMutableArray *section1 = [[NSMutableArray alloc] initWithObjects:self.jwcIDCell, self.jwcPasswordCell, nil];
-    LOG(@"section0 %d", [section0 count]);
+    
     _tableCells = [[NSMutableArray alloc] initWithObjects:section0, section1, nil];
-    LOG(@"%d", [[_tableCells objectAtIndex:0] count]);
+   
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     self.email.text = [userDefaults objectForKey:@"email"];
 
     FUNC_END();
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    CGSize size = self.view.frame.size;
+    size.height += 75;
+    self.tableView.contentSize = size;
+
+}
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     FUNC_START();
@@ -71,6 +80,8 @@
         else if (point.x > self.view.frame.size.width - 50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"me1" ofType:@"png"]];
             self.topBar.image = image;
+//            User *user = [UserSimpleLogic user];
+            
         }
         
     }
@@ -106,15 +117,7 @@
     view0.textLabel.textColor = [UIColor darkGrayColor];
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification {
-    FUNC_START();
-    NSDictionary *info = [notification userInfo];
-    NSValue *value = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
 
-    CGSize size = [value CGRectValue].size;
-    LOG(@"%f", size.height);
-    FUNC_END();
-}
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     FUNC_START();
@@ -135,23 +138,19 @@
     else if (self.jwcPassword.isFirstResponder)
         rect1 = [self.jwcPasswordCell convertRect:self.jwcPassword.frame toView:self.view.window];
     else {
+        L(@"not covered");
         FUNC_END();
         return;
     }
     
-    LOG(@"rect1 %f %f %f %f", rect1.origin.x, rect1.origin.y, rect1.size.width, rect1.size.height);
-    LOG(@"rect %f %f %f %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
 
     if (CGRectIntersectsRect(rect1, rect)) {
-        LOG(@"rect minY:%f", CGRectGetMinY(rect));
-        LOG(@"rect1 maxY:%f", CGRectGetMaxY(rect1));
         CGFloat height = -CGRectGetMinY(rect)+CGRectGetMaxY(rect1)+self.tableView.contentOffset.y+20;
         CGSize size = self.tableView.contentSize;
         size.height += height;
         self.tableView.contentSize = size;
         self.tableView.contentOffset = CGPointMake(0, height+20);
         
-        LOG(@"%f", self.tableView.contentOffset.y);
     }
 //    self.tableView.contentOffset = CGPointMake(0, -100);
     FUNC_END();
@@ -162,4 +161,109 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)buttonClicked:(id)sender {
+    L([sender description]);
+    if (sender == self.maleButton) {
+        L(@"male");
+        [self performSelector:@selector(doHighLight:) withObject:self.maleButton afterDelay:0.0];
+        [self performSelector:@selector(unDoHighLight:) withObject:self.femaleButton afterDelay:0.0];
+    }
+    else if (sender == self.femaleButton) {
+        L(@"female");
+        [self performSelector:@selector(doHighLight:) withObject:self.femaleButton afterDelay:0.0];
+        [self performSelector:@selector(unDoHighLight:) withObject:self.maleButton afterDelay:0.0];
+    }
+    else if (sender == self.birthday) {
+        L(@"birthday");
+        if (_datePicker && _datePicker.superview) return;
+        if (_hometownPicker && _hometownPicker.superview) [_hometownPicker removeFromSuperview];
+        if (!_datePicker) {
+            _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame), 0, 0)];
+            _datePicker.datePickerMode = UIDatePickerModeDate;
+            [_datePicker addTarget:self action:@selector(dateValueChanged) forControlEvents:UIControlEventValueChanged];
+        }
+        _datePicker.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), 0, 0);
+        [self.view addSubview:_datePicker];
+        
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+            CGRect rect = _datePicker.frame;
+            rect.origin.y -= rect.size.height;
+            _datePicker.frame = rect;
+        } completion:^(BOOL finished) {}];
+    }
+    else if (sender == self.hometown) {
+        L(@"hometown");
+        if (_hometownPicker && _hometownPicker.superview) return;
+        if (_datePicker && _datePicker.superview) [_datePicker removeFromSuperview];
+        if (!_hometownPicker) {
+            _hometownPicker = [[HometownPicker alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame), 320, 216)];
+            
+            [_hometownPicker addTarget:self action:@selector(hometownValueChanged)];
+        }
+        _hometownPicker.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), 320, 216);
+        [self.view addSubview:_hometownPicker];
+        
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+            CGRect rect = _hometownPicker.frame;
+            rect.origin.y -= rect.size.height;
+            _hometownPicker.frame = rect;
+        } completion:^(BOOL finished) {}];
+    }
+}
+
+- (void)doHighLight:(UIButton *)b {
+    b.highlighted = YES;
+}
+
+- (void)unDoHighLight:(UIButton *)b {
+    b.highlighted = NO;
+}
+
+- (void)hometownValueChanged{
+    L(@"yes");
+    NSMutableDictionary *dic = _hometownPicker.hometown;
+    self.hometown.titleLabel.text = [NSString stringWithFormat:@"%@ %@", [dic objectForKey:@"province"], [dic objectForKey:@"city"]];
+    L([dic description]);
+}
+- (void)dateValueChanged {
+//    [[_datePicker.date description] ran]
+    FUNC_START();
+    NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+    [formater setDateFormat:@"yyyy-MM-dd"];
+    CGRect rect = self.birthday.titleLabel.frame;
+    rect.origin.x -= 100;
+    rect.size.width += 100;
+    self.birthday.titleLabel.frame = rect;
+    self.birthday.titleLabel.text = [formater stringFromDate:_datePicker.date];
+//    L([formater stringFromDate:_datePicker.date]);
+    FUNC_END();
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (_datePicker && _datePicker.superview) {
+            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+                CGRect rect = _datePicker.frame;
+                    rect.origin.y += rect.size.height;
+                    _datePicker.frame = rect;
+                } completion:^(BOOL finished){
+                    [_datePicker removeFromSuperview];
+                    L(@"finished");
+                }];
+    }
+    
+    if (_hometownPicker && _hometownPicker.superview) {
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+            CGRect rect = _hometownPicker.frame;
+            rect.origin.y += rect.size.height;
+            _hometownPicker.frame = rect;
+        } completion:^(BOOL finished){
+            [_hometownPicker removeFromSuperview];
+            L(@"finished");
+        }];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+}
 @end

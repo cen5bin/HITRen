@@ -8,8 +8,11 @@
 
 #import "MainViewController.h"
 
-@interface PersonViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@class HometownPicker;
+@interface PersonViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate> {
     NSMutableArray *_tableCells;
+    UIDatePicker *_datePicker;
+    HometownPicker *_hometownPicker;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -28,9 +31,13 @@
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UITextField *username;
 
-@property (weak, nonatomic) IBOutlet UILabel *sex;
-@property (weak, nonatomic) IBOutlet UILabel *birthday;
-@property (weak, nonatomic) IBOutlet UILabel *hometown;
+@property (strong, nonatomic) IBOutlet UIButton *maleButton;
+@property (strong, nonatomic) IBOutlet UIButton *femaleButton;
+
+
+@property (strong, nonatomic) IBOutlet UIButton *birthday;
+@property (strong, nonatomic) IBOutlet UIButton *hometown;
+
 
 @property (strong, nonatomic) IBOutlet UITextField *jwcID;
 @property (strong, nonatomic) IBOutlet UITextField *jwcPassword;
@@ -39,5 +46,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 
 @property (nonatomic) BOOL fromRegister;
+
+- (IBAction)buttonClicked:(id)sender;
 
 @end
