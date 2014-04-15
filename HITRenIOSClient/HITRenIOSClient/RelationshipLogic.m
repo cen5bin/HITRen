@@ -227,13 +227,13 @@
     return YES;
 }
 
-- (BOOL)downloadInfo {
++ (BOOL)downloadInfo {
     FUNC_START();
-    HttpData *data = [[HttpData alloc] init];
-    [data setIntValue:self.user.uid forKey:@"uid"];
-    [data setIntValue:self.user.relationShip.seq forKey:@"seq"];
-    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:request to:@"DownloadRelationshipInfo"];
+    HttpData *data = [HttpData data];//[[HttpData alloc] init];
+    User *user = [RelationshipLogic user];
+    [data setIntValue:user.uid forKey:@"uid"];
+    [data setIntValue:user.relationShip.seq forKey:@"seq"];
+    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"DownloadRelationshipInfo"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"downloadRelationshipInfo fail");
         FUNC_END();
@@ -242,17 +242,33 @@
         return NO;
     }
     LOG(@"downloadRelationshipInfo succ");
-    [self unPackRelationshipInfoData:[ret objectForKey:@"DATA"]];
+    [RelationshipLogic unPackRelationshipInfoData:[ret objectForKey:@"DATA"]];
 //    RUN([self print]);
     FUNC_END();
     return YES;
 }
 
-- (void)unPackRelationshipInfoData:(NSDictionary *)dic {
-    self.user.relationShip.seq = [[dic objectForKey:@"seq"] intValue];
-    self.user.relationShip.blackList = [dic objectForKey:@"blacklist"];
-    self.user.relationShip.concerList = [dic objectForKey:@"concernlist"];
-    self.user.relationShip.followList = [dic objectForKey:@"followlist"];
++ (NSMutableArray *)downloadFriendsInfo:(NSArray *)users {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    [data setValue:users forKey:@"uids"];
+    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"DownloadFriendsInfo"];
+    if (![[ret objectForKey:@"SUC"] boolValue]) {
+        L(@"failed");
+        FUNC_END();
+        return nil;
+    }
+    L(@"succ");
+    FUNC_END();
+    return [ret objectForKey:@"DATA"];
+}
+
++ (void)unPackRelationshipInfoData:(NSDictionary *)dic {
+    User *user = [RelationshipLogic user];
+    user.relationShip.seq = [[dic objectForKey:@"seq"] intValue];
+    user.relationShip.blackList = [dic objectForKey:@"blacklist"];
+    user.relationShip.concerList = [dic objectForKey:@"concernlist"];
+    user.relationShip.followList = [dic objectForKey:@"followlist"];
 }
 
 //- (NSArray *)getGroupsOfUser:(int)uid {

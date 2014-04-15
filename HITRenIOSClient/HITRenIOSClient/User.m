@@ -8,7 +8,16 @@
 
 #import "User.h"
 
+
 @implementation User
+
+- (id)init {
+    if (self = [super init]) {
+        RelationShip *relationship = [[RelationShip alloc] init];
+        self.relationShip = relationship;
+    }
+    return self;
+}
 
 - (void)print {
     NSLog(@"uid %d",self.uid);

@@ -143,6 +143,14 @@
     <url-pattern>/RecoverUsersFromBlacklist</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DownloadFriendsInfo</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.relationshiplogic.DownloadFriendsInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadFriendsInfo</servlet-name>
+    <url-pattern>/DownloadFriendsInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>SendShortMessage</servlet-name>
     <servlet-class>cn.edu.hit.servlet.messagelogic.SendShortMessageServlet</servlet-class>
   </servlet>

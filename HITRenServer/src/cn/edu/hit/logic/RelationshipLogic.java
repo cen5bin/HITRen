@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,10 +16,12 @@ import cn.edu.hit.dao.DBController;
 import cn.edu.hit.kit.LogKit;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 public class RelationshipLogic {
 	public static JSONObject retData;
+	public static Logger logger = Logger.getRootLogger();
 		
 	public static boolean addGroup(int uid, String gname) throws JSONException {
 		retData = new JSONObject();
@@ -319,6 +322,23 @@ public class RelationshipLogic {
 		}
 		retData.put(HttpData.SUC, true);
 		retData.put(HttpData.DATA, retObj);
+		return true;
+	}
+	
+	public static boolean downloadFriendsInfo(ArrayList<Integer> users) throws JSONException {
+		retData = new JSONObject();
+		BasicDBObject obj = new BasicDBObject();
+		obj.put(UserConstant.UID, new BasicDBObject("$in", users));
+		logger.info(obj);
+		DBCursor retObj = DBController.query(UserConstant.COLLNAME, obj);
+		if (!retObj.hasNext()) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		ArrayList<DBObject> infos = new ArrayList<DBObject>();
+		while (retObj.hasNext()) infos.add(retObj.next());
+		retData.put(HttpData.SUC, true);
+		retData.put(HttpData.DATA, infos);
 		return true;
 	}
 	

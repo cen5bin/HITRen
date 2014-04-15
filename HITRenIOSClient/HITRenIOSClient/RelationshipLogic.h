@@ -27,6 +27,7 @@
 - (BOOL)moveUsersToBlacklist:(NSArray *)users;
 - (BOOL)recoverUserFromBlacklist:(int)uid;
 - (BOOL)recoverUsersFromBlacklist:(NSArray *)users;
-- (BOOL)downloadInfo;
++ (BOOL)downloadInfo;
++ (NSMutableArray *)downloadFriendsInfo:(NSArray *)users;
 
 @end

@@ -26,6 +26,7 @@
 
 //关系
 @property (retain, nonatomic) RelationShip *relationShip;
+- (id)init;
 
 - (void) print;
 @end

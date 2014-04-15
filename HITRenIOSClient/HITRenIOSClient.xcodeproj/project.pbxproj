@@ -97,6 +97,12 @@
 		F892372A18F3A62D00658F47 /* HITRenData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F892372818F3A62D00658F47 /* HITRenData.xcdatamodeld */; };
 		F892372C18F3C6DF00658F47 /* hometowns.plist in Resources */ = {isa = PBXBuildFile; fileRef = F892372B18F3C6DF00658F47 /* hometowns.plist */; };
 		F892372F18F3C85A00658F47 /* HometownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F892372E18F3C85A00658F47 /* HometownPicker.m */; };
+		F89964E818FCF11A00D7FA44 /* FriendsGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964E718FCF11A00D7FA44 /* FriendsGroupViewController.m */; };
+		F89964EB18FD0F6A00D7FA44 /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964EA18FD0F6A00D7FA44 /* FriendsListViewController.m */; };
+		F89964F518FD2C3600D7FA44 /* base0.png in Resources */ = {isa = PBXBuildFile; fileRef = F89964F218FD2C3600D7FA44 /* base0.png */; };
+		F89964F618FD2C3600D7FA44 /* base1.png in Resources */ = {isa = PBXBuildFile; fileRef = F89964F318FD2C3600D7FA44 /* base1.png */; };
+		F89964F718FD2C3600D7FA44 /* base2.png in Resources */ = {isa = PBXBuildFile; fileRef = F89964F418FD2C3600D7FA44 /* base2.png */; };
+		F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964F918FD331200D7FA44 /* FriendInfoViewController.m */; };
 		F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F89B9C9D18D6EC73007DDDCC /* empty.png */; };
 		F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685C18C5F96C00B9384B /* topbar0.png */; };
 		F8E9686018C5F96C00B9384B /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685D18C5F96C00B9384B /* topbar1.png */; };
@@ -288,6 +294,15 @@
 		F892372B18F3C6DF00658F47 /* hometowns.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = hometowns.plist; sourceTree = "<group>"; };
 		F892372D18F3C85A00658F47 /* HometownPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HometownPicker.h; sourceTree = "<group>"; };
 		F892372E18F3C85A00658F47 /* HometownPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HometownPicker.m; sourceTree = "<group>"; };
+		F89964E618FCF11A00D7FA44 /* FriendsGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsGroupViewController.h; sourceTree = "<group>"; };
+		F89964E718FCF11A00D7FA44 /* FriendsGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsGroupViewController.m; sourceTree = "<group>"; };
+		F89964E918FD0F6A00D7FA44 /* FriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsListViewController.h; sourceTree = "<group>"; };
+		F89964EA18FD0F6A00D7FA44 /* FriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsListViewController.m; sourceTree = "<group>"; };
+		F89964F218FD2C3600D7FA44 /* base0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base0.png; sourceTree = "<group>"; };
+		F89964F318FD2C3600D7FA44 /* base1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base1.png; sourceTree = "<group>"; };
+		F89964F418FD2C3600D7FA44 /* base2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base2.png; sourceTree = "<group>"; };
+		F89964F818FD331200D7FA44 /* FriendInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendInfoViewController.h; sourceTree = "<group>"; };
+		F89964F918FD331200D7FA44 /* FriendInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendInfoViewController.m; sourceTree = "<group>"; };
 		F89B9C9D18D6EC73007DDDCC /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		F8E9685C18C5F96C00B9384B /* topbar0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar0.png; sourceTree = "<group>"; };
 		F8E9685D18C5F96C00B9384B /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
@@ -504,6 +519,12 @@
 				F8E9688118C70B5700B9384B /* PersonViewController.m */,
 				F8E9688318C714C200B9384B /* RegisterViewController.h */,
 				F8E9688418C714C200B9384B /* RegisterViewController.m */,
+				F89964E618FCF11A00D7FA44 /* FriendsGroupViewController.h */,
+				F89964E718FCF11A00D7FA44 /* FriendsGroupViewController.m */,
+				F89964E918FD0F6A00D7FA44 /* FriendsListViewController.h */,
+				F89964EA18FD0F6A00D7FA44 /* FriendsListViewController.m */,
+				F89964F818FD331200D7FA44 /* FriendInfoViewController.h */,
+				F89964F918FD331200D7FA44 /* FriendInfoViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -827,9 +848,11 @@
 		F88F987918C18600009CE742 /* topbar */ = {
 			isa = PBXGroup;
 			children = (
-				F86B9E4A18D8826400D71A7B /* me1.png */,
-				F86B9E4B18D8826400D71A7B /* me2.png */,
-				F86B9E4818D8806900D71A7B /* me.png */,
+				F89964F218FD2C3600D7FA44 /* base0.png */,
+				F89964F318FD2C3600D7FA44 /* base1.png */,
+				F89964F418FD2C3600D7FA44 /* base2.png */,
+				F89964DF18FCEFA000D7FA44 /* my friends */,
+				F89964DE18FCEF7E00D7FA44 /* me */,
 				F8E9685C18C5F96C00B9384B /* topbar0.png */,
 				F8E9685D18C5F96C00B9384B /* topbar1.png */,
 				F8E9685E18C5F96C00B9384B /* topbar2.png */,
@@ -875,6 +898,23 @@
 				F8550EFE18C4C251005E51FE /* p_btm4.png */,
 			);
 			name = btmbar;
+			sourceTree = "<group>";
+		};
+		F89964DE18FCEF7E00D7FA44 /* me */ = {
+			isa = PBXGroup;
+			children = (
+				F86B9E4A18D8826400D71A7B /* me1.png */,
+				F86B9E4B18D8826400D71A7B /* me2.png */,
+				F86B9E4818D8806900D71A7B /* me.png */,
+			);
+			name = me;
+			sourceTree = "<group>";
+		};
+		F89964DF18FCEFA000D7FA44 /* my friends */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "my friends";
 			sourceTree = "<group>";
 		};
 		F89B9C9818D6E8B0007DDDCC /* pic */ = {
@@ -999,10 +1039,13 @@
 				F80B0D0B1874269D003E72DC /* Main_iPhone.storyboard in Resources */,
 				F8E9687018C6DCB500B9384B /* email.png in Resources */,
 				F8E9686018C5F96C00B9384B /* topbar1.png in Resources */,
+				F89964F718FD2C3600D7FA44 /* base2.png in Resources */,
 				F8E9686D18C6DB6A00B9384B /* loginbutton0.png in Resources */,
 				F892372C18F3C6DF00658F47 /* hometowns.plist in Resources */,
 				F86B9E4D18D8826400D71A7B /* me2.png in Resources */,
 				F86B9E4C18D8826400D71A7B /* me1.png in Resources */,
+				F89964F518FD2C3600D7FA44 /* base0.png in Resources */,
+				F89964F618FD2C3600D7FA44 /* base1.png in Resources */,
 				F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */,
 				F84B7DE918BB3C8D007FC2D5 /* README.txt in Resources */,
 				F8550F0118C4C251005E51FE /* p_btm3.png in Resources */,
@@ -1057,6 +1100,7 @@
 				F80B0D081874269D003E72DC /* AppDelegate.m in Sources */,
 				F80B0D4D187426F2003E72DC /* RelationshipLogic.m in Sources */,
 				F84B7DC918BB3C8D007FC2D5 /* XMPPAnonymousAuthentication.m in Sources */,
+				F89964EB18FD0F6A00D7FA44 /* FriendsListViewController.m in Sources */,
 				F84B7DE718BB3C8D007FC2D5 /* ContextFilterLogFormatter.m in Sources */,
 				F80B0D041874269D003E72DC /* main.m in Sources */,
 				F80B0D4C187426F2003E72DC /* RelationShip.m in Sources */,
@@ -1072,6 +1116,7 @@
 				F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */,
 				F84B7DE218BB3C8D007FC2D5 /* DDAbstractDatabaseLogger.m in Sources */,
 				F80B0D51187426F2003E72DC /* User.m in Sources */,
+				F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */,
 				F84B7DD418BB3C8D007FC2D5 /* XMPPIQ.m in Sources */,
 				F84B7DEC18BB3C8D007FC2D5 /* DDXMLElement.m in Sources */,
 				F84B7DCD18BB3C8D007FC2D5 /* XMPPPlainAuthentication.m in Sources */,
@@ -1104,6 +1149,7 @@
 				F84B7DEA18BB3C8D007FC2D5 /* NSString+DDXML.m in Sources */,
 				F80B0D52187426F2003E72DC /* UserSimpleLogic.m in Sources */,
 				F84B7DDA18BB3C8D007FC2D5 /* XMPPStream.m in Sources */,
+				F89964E818FCF11A00D7FA44 /* FriendsGroupViewController.m in Sources */,
 				F84B7DD218BB3C8D007FC2D5 /* NSXMLElement+XMPP.m in Sources */,
 				F84B7DD918BB3C8D007FC2D5 /* XMPPPresence.m in Sources */,
 				F80B0D5F187452A0003E72DC /* TestMessageLogic.m in Sources */,
