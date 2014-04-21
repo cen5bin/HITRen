@@ -43,7 +43,7 @@
     [NSThread detachNewThreadSelector:@selector(startActivityIndicator) toTarget:self withObject:nil];
     
     User *user = [RelationshipLogic user];
-    user.uid = 33;//[[userDefaults objectForKey:@"uid"] intValue];
+//    user.uid = 33;//[[userDefaults objectForKey:@"uid"] intValue];
 
     if ([RelationshipLogic downloadInfo]) {
         _groups = user.relationShip.concerList;
@@ -85,9 +85,25 @@
     int index = [self.tableView indexPathForCell:sender].row;
     FriendsListViewController *controller = segue.destinationViewController;
     controller.uids = [[_groups objectAtIndex:index] objectForKey:@"userlist"];
+    controller.gname = [[_groups objectAtIndex:index] objectForKey:@"gname"];
     
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint p = [touch locationInView:self.view];
+    if (CGRectContainsPoint(self.topBar.frame, p)) {
+        if (p.x <= 50) {
+            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
+            self.topBar.image = image;
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 - (void)didReceiveMemoryWarning
 {

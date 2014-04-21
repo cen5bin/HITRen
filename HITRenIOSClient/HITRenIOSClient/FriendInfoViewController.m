@@ -7,6 +7,8 @@
 //
 
 #import "FriendInfoViewController.h"
+#import "GroupChooserViewController.h"
+#import "RelationshipLogic.h"
 
 @interface FriendInfoViewController ()
 
@@ -74,8 +76,53 @@
             self.topBar.image = image;
             [self.navigationController popViewControllerAnimated:YES];
         }
+        else if (p.x >= self.view.frame.size.width - 50) {
+            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+            self.topBar.image = image;
+
+            UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"管理" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"取消关注" otherButtonTitles:@"复制到分组", @"移动到分组", @"从分组删除", @"拉入黑名单",nil, nil];
+            [sheet showInView:self.view];
+        }
     }
 }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    LOG(@"%d", buttonIndex);
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+    self.topBar.image = image;
+    if (buttonIndex == 0 || buttonIndex == 5) return;
+    if (buttonIndex == 4) {
+        return;
+    }
+    GroupChooserViewController *controller = getViewControllerOfName(@"GroupChooser");
+    controller.flag = buttonIndex;
+    controller.uid = [[self.data objectForKey:@"uid"] intValue];
+    controller.gname = self.gname;
+    if (buttonIndex == 3) {
+        controller.groups = [self calGroupsOfUser:controller.uid include:YES];
+    }
+    else {
+        controller.groups = [self calGroupsOfUser:controller.uid include:NO];
+    }
+    
+    [self.navigationController pushViewController:controller animated:YES];
+
+}
+
+- (NSMutableArray *)calGroupsOfUser:(int)uid include:(BOOL) include{
+    FUNC_START();
+    User *user = [RelationshipLogic user];
+    NSMutableArray *res = [[NSMutableArray alloc] init];
+    if ([RelationshipLogic downloadInfo]) {
+        for (NSDictionary *dic in user.relationShip.concerList)
+            if ([[dic objectForKey:@"userlist"] containsObject:[NSNumber numberWithInt:uid]] ^ (!include))
+                [res addObject:[dic objectForKey:@"gname"]];
+    }
+    FUNC_END();
+    return res;
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {

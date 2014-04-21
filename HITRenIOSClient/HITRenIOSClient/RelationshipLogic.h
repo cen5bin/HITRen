@@ -14,11 +14,15 @@
 
 - (BOOL)concernUser:(int)uid inGroup:(NSString *)gname;
 - (BOOL)concernUser:(int)uid inGroups:(NSArray *)gnames;
-- (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname toGroups:(NSArray *)gnames;
-- (BOOL)copyUsers:(NSArray *)users toGroups:(NSArray *)gnames;
-- (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname0 toGroup:(NSString *)gname;
-- (BOOL)copyUsers:(NSArray *)users toGroup:(NSString *)gname;
-- (BOOL)deleteUsers:(NSArray *)users fromGroup:(NSString *)gname;
++ (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname toGroups:(NSArray *)gnames;
++ (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname0 toGroup:(NSString *)gname;
++ (BOOL)moveUser:(int)uid fromGroup:(NSString *)gname toGroups:(NSArray *)gnames;
++ (BOOL)copyUsers:(NSArray *)users toGroups:(NSArray *)gnames;
++ (BOOL)copyUsers:(NSArray *)users toGroup:(NSString *)gname;
++ (BOOL)copyUser:(int)uid toGroups:(NSArray *)gnames;
++ (BOOL)deleteUsers:(NSArray *)users fromGroup:(NSString *)gname;
++ (BOOL)deleteUser:(int)uid fromGroup:(NSString *)gname;
+
 - (BOOL)addGroup:(NSString *)gname;
 - (BOOL)deleteGroup:(NSString *)gname;
 - (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2;

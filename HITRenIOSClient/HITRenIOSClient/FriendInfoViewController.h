@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FriendInfoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface FriendInfoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
     NSMutableArray *_cells;
 }
 
@@ -31,5 +31,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 
 @property (strong, nonatomic) NSDictionary *data;
+@property (strong, nonatomic) NSString *gname; // 当前选中的这个人是在哪个跟组里选的
 
 @end

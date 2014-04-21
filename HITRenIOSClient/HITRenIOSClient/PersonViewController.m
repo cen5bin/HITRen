@@ -44,9 +44,10 @@
     
     
     NSMutableArray *section0 = [[NSMutableArray alloc] initWithObjects:self.headCell,self.usernameCell,self.sexCell, self.birthdayCell, self.hometownCell, nil];
-    NSMutableArray *section1 = [[NSMutableArray alloc] initWithObjects:self.jwcIDCell, self.jwcPasswordCell, nil];
+    NSMutableArray *section1 = [[NSMutableArray alloc] initWithObjects:self.friendsManageCell, nil];
+    NSMutableArray *section2 = [[NSMutableArray alloc] initWithObjects:self.jwcIDCell, self.jwcPasswordCell, nil];
     
-    _tableCells = [[NSMutableArray alloc] initWithObjects:section0, section1, nil];
+    _tableCells = [[NSMutableArray alloc] initWithObjects:section0, section1, section2, nil];
    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     self.email.text = [userDefaults objectForKey:@"email"];
@@ -131,7 +132,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 1)
+    if (section == 2)
         return @"教务处账号绑定";
     return @"";
 }

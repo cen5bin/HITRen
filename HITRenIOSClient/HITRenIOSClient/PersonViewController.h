@@ -28,6 +28,8 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *birthdayCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *hometownCell;
 
+@property (strong, nonatomic) IBOutlet UITableViewCell *friendsManageCell;
+
 @property (strong, nonatomic) IBOutlet UITableViewCell *jwcIDCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *jwcPasswordCell;
 
@@ -38,7 +40,6 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *maleButton;
 @property (strong, nonatomic) IBOutlet UIButton *femaleButton;
-
 
 @property (strong, nonatomic) IBOutlet UIButton *birthday;
 @property (strong, nonatomic) IBOutlet UIButton *hometown;

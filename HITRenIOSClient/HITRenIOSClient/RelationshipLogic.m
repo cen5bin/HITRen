@@ -10,6 +10,7 @@
 #import "LogKit.h"
 #import "HttpData.h"
 #import "HttpTransfer.h"
+#import "User.h"
 
 @implementation RelationshipLogic
 
@@ -92,15 +93,15 @@
     return YES;
 }
 
-- (BOOL) moveUsers:(NSArray *)users fromGroup:(NSString *)gname toGroups:(NSArray *)gnames {
++ (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname toGroups:(NSArray *)gnames {
     FUNC_START();
-    HttpData *data = [[HttpData alloc] init];
-    [data setIntValue:self.user.uid forKey:@"uid"];
+    HttpData *data = [HttpData data];
+    User *user = [RelationshipLogic user];
+    [data setIntValue:user.uid forKey:@"uid"];
     [data setValue:users forKey:@"users"];
     [data setValue:gname forKey:@"gname"];
     [data setValue:gnames forKey:@"gnames"];
-    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:request to:@"MoveUsersFromGroupToGroups"];
+    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"MoveUsersFromGroupToGroups"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"MoveUsersFromGroupToGroups fail");
         FUNC_END();
@@ -111,21 +112,28 @@
     return YES;
 }
 
-- (BOOL) moveUsers:(NSArray *)users fromGroup:(NSString *)gname0 toGroup:(NSString *)gname {
++ (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname0 toGroup:(NSString *)gname {
     FUNC_START();
-    BOOL ret = [self moveUsers:users fromGroup:gname0 toGroups:[NSArray arrayWithObjects:gname, nil]];
+    BOOL ret = [RelationshipLogic moveUsers:users fromGroup:gname0 toGroups:[NSArray arrayWithObjects:gname, nil]];
     FUNC_END();
     return ret;
 }
 
-- (BOOL) copyUsers:(NSArray *)users toGroups:(NSArray *)gnames {
++ (BOOL)moveUser:(int)uid fromGroup:(NSString *)gname toGroups:(NSArray *)gnames {
     FUNC_START();
-    HttpData *data = [[HttpData alloc] init];
-    [data setIntValue:self.user.uid forKey:@"uid"];
+    BOOL ret = [RelationshipLogic moveUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:uid], nil] fromGroup:gname toGroups:gnames];
+    FUNC_END();
+    return ret;
+}
+
++ (BOOL)copyUsers:(NSArray *)users toGroups:(NSArray *)gnames {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    User *user = [RelationshipLogic user];
+    [data setIntValue:user.uid forKey:@"uid"];
     [data setValue:users forKey:@"users"];
     [data setValue:gnames forKey:@"gnames"];
-    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:request to:@"CopyUsersToGroups"];
+    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"CopyUsersToGroups"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"CopyUsersToGroups fail");
         FUNC_END();
@@ -136,21 +144,28 @@
     return YES;
 }
 
-- (BOOL) copyUsers:(NSArray *)users toGroup:(NSString *)gname {
++ (BOOL)copyUsers:(NSArray *)users toGroup:(NSString *)gname {
     FUNC_START();
-    BOOL ret = [self copyUsers:users toGroups:[NSArray arrayWithObjects:gname, nil]];
+    BOOL ret = [RelationshipLogic copyUsers:users toGroups:[NSArray arrayWithObjects:gname, nil]];
     FUNC_END();
     return ret;
 }
 
-- (BOOL)deleteUsers:(NSArray *)users fromGroup:(NSString *)gname {
++ (BOOL)copyUser:(int)uid toGroups:(NSArray *)gnames {
     FUNC_START();
-    HttpData *data = [[HttpData alloc] init];
-    [data setIntValue:self.user.uid forKey:@"uid"];
+    BOOL ret = [RelationshipLogic copyUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:uid], nil] toGroups:gnames];
+    FUNC_END();
+    return ret;
+}
+
++ (BOOL)deleteUsers:(NSArray *)users fromGroup:(NSString *)gname {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    User *user = [RelationshipLogic user];
+    [data setIntValue:user.uid forKey:@"uid"];
     [data setValue:users forKey:@"users"];
     [data setValue:gname forKey:@"gname"];
-    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:request to:@"DeleteUsersFromGroup"];
+    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"DeleteUsersFromGroup"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"DeleteUsersFromGroup fail");
         FUNC_END();
@@ -159,6 +174,13 @@
     LOG(@"DeleteUsersFromGroup succ");
     FUNC_END();
     return YES;
+}
+
++ (BOOL)deleteUser:(int)uid fromGroup:(NSString *)gname {
+    FUNC_START();
+    BOOL ret = [RelationshipLogic deleteUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:uid], nil] fromGroup:gname];
+    FUNC_END();
+    return ret;
 }
 
 - (BOOL)deleteConcernedUser:(int)uid {

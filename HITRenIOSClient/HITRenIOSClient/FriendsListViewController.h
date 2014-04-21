@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 
 @property (strong, nonatomic) NSMutableArray *uids;
+@property (strong, nonatomic) NSString *gname;
 
 @end
 

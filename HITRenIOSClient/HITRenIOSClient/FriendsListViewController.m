@@ -93,6 +93,7 @@
     FriendInfoViewController *controller = segue.destinationViewController;
     NSDictionary *dic = [_friends objectAtIndex:index];
     controller.data = dic;
+    controller.gname = self.gname;
 
 }
 

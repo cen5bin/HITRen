@@ -103,6 +103,7 @@
 		F89964F618FD2C3600D7FA44 /* base1.png in Resources */ = {isa = PBXBuildFile; fileRef = F89964F318FD2C3600D7FA44 /* base1.png */; };
 		F89964F718FD2C3600D7FA44 /* base2.png in Resources */ = {isa = PBXBuildFile; fileRef = F89964F418FD2C3600D7FA44 /* base2.png */; };
 		F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964F918FD331200D7FA44 /* FriendInfoViewController.m */; };
+		F89964FD18FD50F200D7FA44 /* GroupChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */; };
 		F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F89B9C9D18D6EC73007DDDCC /* empty.png */; };
 		F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685C18C5F96C00B9384B /* topbar0.png */; };
 		F8E9686018C5F96C00B9384B /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685D18C5F96C00B9384B /* topbar1.png */; };
@@ -303,6 +304,8 @@
 		F89964F418FD2C3600D7FA44 /* base2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base2.png; sourceTree = "<group>"; };
 		F89964F818FD331200D7FA44 /* FriendInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendInfoViewController.h; sourceTree = "<group>"; };
 		F89964F918FD331200D7FA44 /* FriendInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendInfoViewController.m; sourceTree = "<group>"; };
+		F89964FB18FD50F200D7FA44 /* GroupChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChooserViewController.h; sourceTree = "<group>"; };
+		F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChooserViewController.m; sourceTree = "<group>"; };
 		F89B9C9D18D6EC73007DDDCC /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		F8E9685C18C5F96C00B9384B /* topbar0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar0.png; sourceTree = "<group>"; };
 		F8E9685D18C5F96C00B9384B /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
@@ -525,6 +528,8 @@
 				F89964EA18FD0F6A00D7FA44 /* FriendsListViewController.m */,
 				F89964F818FD331200D7FA44 /* FriendInfoViewController.h */,
 				F89964F918FD331200D7FA44 /* FriendInfoViewController.m */,
+				F89964FB18FD50F200D7FA44 /* GroupChooserViewController.h */,
+				F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1148,6 +1153,7 @@
 				F84B7DFA18BB3F81007FC2D5 /* XmppConnector.m in Sources */,
 				F84B7DEA18BB3C8D007FC2D5 /* NSString+DDXML.m in Sources */,
 				F80B0D52187426F2003E72DC /* UserSimpleLogic.m in Sources */,
+				F89964FD18FD50F200D7FA44 /* GroupChooserViewController.m in Sources */,
 				F84B7DDA18BB3C8D007FC2D5 /* XMPPStream.m in Sources */,
 				F89964E818FCF11A00D7FA44 /* FriendsGroupViewController.m in Sources */,
 				F84B7DD218BB3C8D007FC2D5 /* NSXMLElement+XMPP.m in Sources */,
