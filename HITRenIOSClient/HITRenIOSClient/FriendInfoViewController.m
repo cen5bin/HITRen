@@ -9,6 +9,7 @@
 #import "FriendInfoViewController.h"
 #import "GroupChooserViewController.h"
 #import "RelationshipLogic.h"
+#import "RelationShip.h"
 
 @interface FriendInfoViewController ()
 

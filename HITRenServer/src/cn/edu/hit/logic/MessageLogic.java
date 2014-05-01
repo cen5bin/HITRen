@@ -1,11 +1,15 @@
 package cn.edu.hit.logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,12 +26,14 @@ import cn.edu.hit.kit.TimeKit;
 import cn.edu.hit.model.User;
 import cn.edu.hit.openfire.TipsPusher;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 public class MessageLogic {
 	public static JSONObject retData;
-	
+	public static Logger logger = Logger.getRootLogger();
 	
 	/**
 	 * 发纯文字状态
@@ -41,9 +47,11 @@ public class MessageLogic {
 		retData = new JSONObject();
 		int mid = createMid();
 		if (mid == -1) {
+			logger.error("createMid failed");
 			retData.put(HttpData.SUC, false);
 			return false;
 		}
+		logger.info("createMid succ");
 		String now = TimeKit.now();
 		int type = Message.Type.NORMAL;
 		BasicDBObject obj = new BasicDBObject();
@@ -76,6 +84,51 @@ public class MessageLogic {
 			}
 		}
 		retData.put(HttpData.SUC, true);
+		return true;
+	}
+	
+	/**
+	 * 下载timeline中的mid列表，可能和客户端中已经存在的有重复
+	 * @param seq
+	 * @return
+	 * @throws JSONException
+	 */
+	public static boolean downloadTimeline(int seq) throws JSONException {
+		retData = new JSONObject();
+		BasicDBObject obj1 = new BasicDBObject(TimeLine.UID, 0);
+		int[] range = {0, 10000};
+		BasicDBObject obj2 = new BasicDBObject(TimeLine.LIST, new BasicDBObject("$slice", range));
+		DBObject retObj = DBController.queryOne(TimeLine.GLOBAL, obj1, obj2);
+		if (retObj == null) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		retData.put(HttpData.SUC, true);
+		int seq0 = Integer.parseInt(retObj.get(TimeLine.SEQ).toString());
+		if (seq == seq0) {
+			retData.put(HttpData.INFO, "newest");
+			return true;
+		}
+		BasicDBList retList = (BasicDBList) retObj.get(TimeLine.LIST);
+		int len = retList.size();
+		if (len > seq0 - seq + 100)
+			retData.put(HttpData.DATA, retList.subList(0, seq0 - seq + 100));
+		else
+			retData.put(HttpData.DATA, retList);	
+		return true;
+	}
+	
+	/**
+	 * 下载状态数据
+	 * @param uid
+	 * @param gseq
+	 * @param useq
+	 * @param index 开始找的状态下标
+	 * @return
+	 */
+	public static boolean downloadMessages(int uid, int gseq, int index) {
+		retData = new JSONObject();
+		
 		return true;
 	}
 	

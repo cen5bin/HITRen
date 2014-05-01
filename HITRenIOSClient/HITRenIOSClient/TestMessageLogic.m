@@ -21,8 +21,8 @@ void testSendShortMessage() {
 //    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
 //    [logic signUp];
     [UserSimpleLogic login];
-    MessageLogic *logic1 = [[MessageLogic alloc] initWithUser:user];
-    [logic1 sendShortMessage:@"asdasd"];
+//    MessageLogic *logic1 = [[MessageLogic alloc] initWithUser:user];
+//    [logic1 sendShortMessage:@"asdasd"];
 }
 
 void testSendShortMessageToGroups() {
@@ -34,6 +34,6 @@ void testSendShortMessageToGroups() {
 //    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
     //    [logic signUp];
     [UserSimpleLogic login];
-    MessageLogic *logic1 = [[MessageLogic alloc] initWithUser:user];
-    [logic1 sendShortMessage:@"asdasd" toGroup:@"default"];
+//    MessageLogic *logic1 = [[MessageLogic alloc] initWithUser:user];
+//    [logic1 sendShortMessage:@"asdasd" toGroup:@"default"];
 }

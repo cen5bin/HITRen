@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuDelegate.h"
 //#import "BtmToolBar.h"
 
-@interface MainViewController : UIViewController {
+@class MenuView;
+@interface MainViewController : UIViewController<MenuDelegate> {
     CGRect contentFrame;
-    
+    MenuView *_menuView;
 }
 
 @property (weak, nonatomic) IBOutlet BtmToolBar *btmToolBar;

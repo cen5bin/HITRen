@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FreshNewsViewController : MainViewController
+@interface FreshNewsViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate> {
+    NSMutableArray* _data;
+    UIActivityIndicatorView *_activityIndicator;
+    BOOL _timelineDownloading;
+}
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

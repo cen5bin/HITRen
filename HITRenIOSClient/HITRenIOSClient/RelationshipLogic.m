@@ -11,6 +11,7 @@
 #import "HttpData.h"
 #import "HttpTransfer.h"
 #import "User.h"
+#import "RelationShip.h"
 
 @implementation RelationshipLogic
 

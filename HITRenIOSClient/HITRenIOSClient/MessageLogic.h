@@ -10,9 +10,10 @@
 
 @interface MessageLogic : BaseLogic
 
-- (BOOL)sendShortMessage:(NSString *)message;
-- (BOOL)sendShortMessage:(NSString *)message toGroup:(NSString *)gname;
-- (BOOL)sendShortMessage:(NSString *)message toGroups:(NSArray *)gnames;
++ (BOOL)sendShortMessage:(NSString *)message;
++ (BOOL)sendShortMessage:(NSString *)message toGroup:(NSString *)gname;
++ (BOOL)sendShortMessage:(NSString *)message toGroups:(NSArray *)gnames;
++ (BOOL)downloadTimeline;
 
 
 @end

@@ -18,3 +18,10 @@ void alert(NSString *title, NSString *message, id delegate) {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"确定" otherButtonTitles: nil];
     [alertView show];
 }
+
+void drawStringWithFontInRect(NSString *string, UIFont *font, CGRect rect) {
+    CGSize size = [string sizeWithFont:font];
+    CGRect rect1 = rect;
+    rect1.origin.y += (rect.size.height - size.height) / 2;
+    [string drawInRect:rect1 withFont:font lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentCenter];
+}

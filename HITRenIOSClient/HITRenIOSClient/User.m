@@ -7,14 +7,15 @@
 //
 
 #import "User.h"
-
+#import "RelationShip.h"
+#import "Timeline.h"
 
 @implementation User
 
 - (id)init {
     if (self = [super init]) {
-        RelationShip *relationship = [[RelationShip alloc] init];
-        self.relationShip = relationship;
+        self.relationShip = [[RelationShip alloc] init];
+        self.timeline = [[Timeline alloc] init];
     }
     return self;
 }

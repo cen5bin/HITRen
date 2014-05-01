@@ -198,4 +198,20 @@
     <servlet-name>ReportMessage</servlet-name>
     <url-pattern>/ReportMessage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadMessages</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.messagelogic.DownloadMessagesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadMessages</servlet-name>
+    <url-pattern>/DownloadMessages</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadTimeline</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.messagelogic.DownloadTimelineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadTimeline</servlet-name>
+    <url-pattern>/DownloadTimeline</url-pattern>
+  </servlet-mapping>
 </web-app>

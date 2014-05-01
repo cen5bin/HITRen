@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "User.h"
 #import "BaseLogic.h"
 
 @interface RelationshipLogic : BaseLogic
