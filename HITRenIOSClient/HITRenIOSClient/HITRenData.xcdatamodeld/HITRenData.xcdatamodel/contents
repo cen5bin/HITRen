@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Timeline" syncable="YES">
-        <attribute name="mids" optional="YES" attributeType="Binary" syncable="YES"/>
+    <entity name="Comment" representedClassName="Comment" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reuid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="messageInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="comment" inverseEntity="Message" syncable="YES"/>
+    </entity>
+    <entity name="Message" representedClassName="Message" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="likedlist" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="mid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="sharedCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="comment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Comment" inverseName="messageInfo" inverseEntity="Comment" syncable="YES"/>
+    </entity>
+    <entity name="Timeline" representedClassName="Timeline" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Timeline" positionX="-4401" positionY="-1287" width="128" height="73"/>
+        <element name="Comment" positionX="-5211" positionY="-898" width="128" height="103"/>
+        <element name="Timeline" positionX="-5294" positionY="-1260" width="128" height="73"/>
+        <element name="Message" positionX="-5238" positionY="-1161" width="128" height="58"/>
     </elements>
 </model>

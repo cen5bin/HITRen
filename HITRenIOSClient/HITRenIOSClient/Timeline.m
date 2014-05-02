@@ -2,20 +2,35 @@
 //  Timeline.m
 //  HITRenIOSClient
 //
-//  Created by wubincen on 14-4-28.
+//  Created by wubincen on 14-5-1.
 //  Copyright (c) 2014年 wubincen. All rights reserved.
 //
 
 #import "Timeline.h"
 
+
 @implementation Timeline
 
-- (id)init {
-    if (self = [super init]) {
-        self.mids = [[NSMutableArray alloc] init];
-        self.messagesDic = [[NSMutableDictionary alloc] init];
+@dynamic data;
+@dynamic seq;
+@synthesize mids = _mids;
+//@dynamic mids;
+- (NSMutableArray *)getMids {
+    L(@"get Mids");
+    if (_mids) return _mids;
+    if (self.data == nil) {
+        L(@"data is nil");
+        _mids = [[NSMutableArray alloc] init];
+        return _mids;
     }
-    return self;
+    _mids = [NSKeyedUnarchiver unarchiveObjectWithData:self.data];
+    L([_mids description]);
+    return _mids;
+}
+
+- (void)update {
+    self.data = [NSKeyedArchiver archivedDataWithRootObject:self.mids];
+//    [self.managedObjectContext save:nil];
 }
 
 @end

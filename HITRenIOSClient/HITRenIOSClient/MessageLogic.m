@@ -11,6 +11,7 @@
 #import "HttpData.h"
 #import "HttpTransfer.h"
 #import "Timeline.h"
+#import "DataManager.h"
 
 @implementation MessageLogic
 
@@ -55,12 +56,26 @@
 + (BOOL)downloadTimeline {
     FUNC_START();
     HttpData *data = [HttpData data];
-    User *user = [MessageLogic user];
+//    User *user = [MessageLogic user];
 //    [data setIntValue:user.uid forKey:@"uid"];
-    [data setIntValue:user.timeline.seq forKey:@"seq"];
+    [data setIntValue:[DataManager timeline].seq.intValue forKey:@"seq"];
     BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadTimeline" withEventName:ASYNC_EVENT_DOWNLOADTIMELINE];
     if (!ret) {
         L(@"DownloadTimeline failed");
+        FUNC_END();
+        return NO;
+    }
+    FUNC_END();
+    return YES;
+}
+
++ (BOOL)downloadMessages:(NSArray *)mids {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    [data setValue:mids forKey:@"mids"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadMessages" withEventName:ASYNC_EVENT_DOWNLOADMESSAGES];
+    if (!ret) {
+        L(@"DownloadMessages failed");
         FUNC_END();
         return NO;
     }

@@ -9,13 +9,14 @@
 #import "User.h"
 #import "RelationShip.h"
 #import "Timeline.h"
+#import "DataManager.h"
 
 @implementation User
 
 - (id)init {
     if (self = [super init]) {
         self.relationShip = [[RelationShip alloc] init];
-        self.timeline = [[Timeline alloc] init];
+//        self.timeline = [DataManager getTimeline];
     }
     return self;
 }

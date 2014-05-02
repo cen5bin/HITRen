@@ -49,24 +49,24 @@ public class LoginServlet extends BaseServlet {
 //		String s = MemWorker.getUserInfo(11);
 //		System.out.println(s);
 //		Logger logger = Logger.getLogger(LoginServlet.class);
-		logger.error("asdasd");
-		logger.debug("xxxxx");
-		try {
-			PrintWriter out = response.getWriter();
-			DataReader.getLeastUserInfo(35);
-			DataReader.getLeastUserInfo(28);
-			DataReader.getLeastUserInfo(29);
-			DataReader.getMessageInfo(40);
-//			DataReader.getMessageInfo(11);
-//			out.print(DataKit.getData(request.getReader()));
-			
-//			AccountManager.createAccount(36, "123");
-//			MessageLogic.cancelLikeTheMessage(35, 40);
-//			MessageLogic.likeTheMessage(35, 40);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		logger.error("asdasd");
+//		logger.debug("xxxxx");
+//		try {
+//			PrintWriter out = response.getWriter();
+//			DataReader.getLeastUserInfo(35);
+//			DataReader.getLeastUserInfo(28);
+//			DataReader.getLeastUserInfo(29);
+//			DataReader.getMessageInfo(40);
+////			DataReader.getMessageInfo(11);
+////			out.print(DataKit.getData(request.getReader()));
+//			
+////			AccountManager.createAccount(36, "123");
+////			MessageLogic.cancelLikeTheMessage(35, 40);
+////			MessageLogic.likeTheMessage(35, 40);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	/**

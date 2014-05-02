@@ -3,6 +3,7 @@ package cn.edu.hit.logic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +66,7 @@ public class MessageLogic {
 		obj.put(Message.TYPE, type);
 		obj.put(Message.CONTENT, message);
 		DBController.addObj(Message.COLLNAME, obj);
+		MemWorker.setMessageInfo(mid, obj.toString());
 		MessageLogic.addMessageToSelf(uid, mid);
 		if (gnames.size() == 0) {
 			boolean ret = MessageLogic.addMessageToGlobalTimeline(mid);
@@ -109,12 +111,47 @@ public class MessageLogic {
 			retData.put(HttpData.INFO, "newest");
 			return true;
 		}
+		JSONObject data = new JSONObject();
+		data.put("seq", seq0);
 		BasicDBList retList = (BasicDBList) retObj.get(TimeLine.LIST);
 		int len = retList.size();
 		if (len > seq0 - seq + 100)
-			retData.put(HttpData.DATA, retList.subList(0, seq0 - seq + 100));
+			data.put("mids", retList.subList(0, seq0 - seq + 100));
 		else
-			retData.put(HttpData.DATA, retList);	
+			data.put("mids", retList);
+			retData.put(HttpData.DATA, data);	
+		return true;
+	}
+	
+	/**
+	 * 下载mids中的所有状态数据
+	 * @param mids
+	 * @return
+	 * @throws JSONException
+	 */
+	public static boolean downloadMessages(ArrayList<Integer>mids) throws JSONException {
+		retData = new JSONObject();
+		JSONObject json = new JSONObject();
+		Map<Integer, String> data = new HashMap<Integer, String>();
+		for (int i = mids.size()-1; i >= 0; i--) {
+			int mid = mids.get(i);
+			String info = DataReader.getMessage(mid);
+			if (info != null) {
+//				data.put(mid, info);
+				json.put(mid+"", new JSONObject(info));
+				mids.remove(i);
+			}
+		}
+		BasicDBObject obj = new BasicDBObject();
+		obj.put(Message.MID, new BasicDBObject("$in", mids));
+		DBCursor cursor = DBController.query(Message.COLLNAME, obj);
+		while (cursor.hasNext()) {
+			DBObject retObj = cursor.next();
+			logger.info(retObj);
+			json.put(retObj.get(Message.MID).toString(), retObj);
+		}
+		retData.put(HttpData.SUC, true);
+		retData.put(HttpData.DATA, json);
 		return true;
 	}
 	
@@ -128,6 +165,7 @@ public class MessageLogic {
 	 */
 	public static boolean downloadMessages(int uid, int gseq, int index) {
 		retData = new JSONObject();
+		
 		
 		return true;
 	}

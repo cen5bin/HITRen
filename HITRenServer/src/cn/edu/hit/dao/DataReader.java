@@ -60,20 +60,31 @@ public class DataReader {
 			ret.setSeq(json.getInt(cn.edu.hit.constant.Message.SEQ));
 		}
 		else {
-			BasicDBObject obj = new BasicDBObject(cn.edu.hit.constant.Message.MID, mid);
-			DBObject retObj = DBController.queryOne(cn.edu.hit.constant.Message.COLLNAME, obj);
-			if (retObj == null)
-				return null;
-			JSONObject json = new JSONObject(retObj.toString());
-			ret.setMid(json.getInt(cn.edu.hit.constant.Message.MID));
-			ret.setUid(json.getInt(cn.edu.hit.constant.Message.UID));
-			ret.setContent(json.getString(cn.edu.hit.constant.Message.CONTENT));
-			ret.setType(json.getInt(cn.edu.hit.constant.Message.TYPE));
-			ret.setTime(json.getString(cn.edu.hit.constant.Message.TIME));
-			ret.setSeq(json.getInt(cn.edu.hit.constant.Message.SEQ));
-			MemWorker.setMessageInfo(mid, retObj.toString());
+			return null;
+//			BasicDBObject obj = new BasicDBObject(cn.edu.hit.constant.Message.MID, mid);
+//			DBObject retObj = DBController.queryOne(cn.edu.hit.constant.Message.COLLNAME, obj);
+//			if (retObj == null)
+//				return null;
+//			JSONObject json = new JSONObject(retObj.toString());
+//			ret.setMid(json.getInt(cn.edu.hit.constant.Message.MID));
+//			ret.setUid(json.getInt(cn.edu.hit.constant.Message.UID));
+//			ret.setContent(json.getString(cn.edu.hit.constant.Message.CONTENT));
+//			ret.setType(json.getInt(cn.edu.hit.constant.Message.TYPE));
+//			ret.setTime(json.getString(cn.edu.hit.constant.Message.TIME));
+//			ret.setSeq(json.getInt(cn.edu.hit.constant.Message.SEQ));
+//			MemWorker.setMessageInfo(mid, retObj.toString());
 		}
 		return ret;
+	}
+	
+	
+	/**
+	 * 从缓存获取状态
+	 * @param mid
+	 * @return
+	 */
+	public static String getMessage(int mid) {
+		return MemWorker.getMessageInfo(mid);
 	}
 	
 }

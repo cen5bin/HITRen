@@ -2,19 +2,22 @@
 //  Timeline.h
 //  HITRenIOSClient
 //
-//  Created by wubincen on 14-4-28.
+//  Created by wubincen on 14-5-1.
 //  Copyright (c) 2014年 wubincen. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface Timeline : NSObject
 
-@property (nonatomic) int seq;
-//@property (nonatomic) int useq;
-@property (strong, nonatomic) NSMutableArray *mids;
-@property (strong, nonatomic) NSMutableDictionary *messagesDic;
+@interface Timeline : NSManagedObject {
+    NSMutableArray *_mids;
+}
 
-- (id)init;
+@property (nonatomic, retain) NSData * data;
+@property (nonatomic, retain) NSNumber * seq;
+@property (nonatomic, retain, getter = getMids) NSMutableArray *mids;
+
+- (void)update;
 
 @end

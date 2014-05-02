@@ -46,7 +46,9 @@ public class MemWorker {
 	 */
 	public static String getMessageInfo(int mid) {
 		String key = calMessageKey(mid);
-		return MemController.get(key).toString();
+		Object obj = MemController.get(key);
+		if (obj == null) return null;
+		return obj.toString();
 	}
 	
 	public static boolean setMessageInfo(int mid, String messageInfo) {

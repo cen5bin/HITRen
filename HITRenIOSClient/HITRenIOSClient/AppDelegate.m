@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "XmppConnector.h"
+#import "DBController.h"
 
 
 @implementation AppDelegate
@@ -16,7 +17,7 @@
 {
     // Override point for customization after application launch.
     [[XmppConnector sharedInstance] connect];
-    
+//    [DBController deleteFile];
 
     
 //    NSString* tmp = @" {\"asd\" : \"1\",\"aaa\":1} ";

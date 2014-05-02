@@ -1,6 +1,8 @@
 package cn.edu.hit.servlet.messagelogic;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,15 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.edu.hit.kit.DataKit;
+import cn.edu.hit.logic.MessageLogic;
 
 /**
  * Servlet implementation class DownloadMessagesServlet
  * 下载状态数据
- * uid 用户id； gseq，global的序列号；useq，用户自己timeline的序列号；index 查找状态的初始下标
+ * mids
  */
 @WebServlet("/DownloadMessagesServlet")
 public class DownloadMessagesServlet extends HttpServlet {
@@ -45,10 +49,14 @@ public class DownloadMessagesServlet extends HttpServlet {
 		String data = DataKit.getDataFromClient(request.getReader());
 		try {
 			JSONObject json = new JSONObject(data);
-			int uid = json.getInt("uid");
-			int gseq = json.getInt("gseq");
-			int useq = json.getInt("useq");
-			int index = json.getInt("index");
+			JSONArray mids0 = json.getJSONArray("mids");
+			ArrayList<Integer> mids = new ArrayList<Integer>();
+			for (int i = 0; i < mids0.length(); i++)
+				mids.add(mids0.getInt(i));
+			MessageLogic.downloadMessages(mids);
+			response.setCharacterEncoding("utf-8");
+			PrintWriter out = response.getWriter();
+			out.print(MessageLogic.retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -14,6 +14,7 @@
 + (BOOL)sendShortMessage:(NSString *)message toGroup:(NSString *)gname;
 + (BOOL)sendShortMessage:(NSString *)message toGroups:(NSArray *)gnames;
 + (BOOL)downloadTimeline;
++ (BOOL)downloadMessages:(NSArray *)mids;
 
 
 @end

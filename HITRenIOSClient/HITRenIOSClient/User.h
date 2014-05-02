@@ -27,7 +27,7 @@
 
 //关系
 @property (strong, nonatomic) RelationShip *relationShip;
-@property (strong, nonatomic) Timeline *timeline;
+//@property (strong, nonatomic) Timeline *timeline;
 - (id)init;
 
 - (void) print;

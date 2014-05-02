@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/MessageLogic.m"
-            timestampString = "419846517.418632"
+            timestampString = "420641582.788206"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "+sendShortMessage:toGroups:"
             landmarkType = "5">
          </BreakpointContent>

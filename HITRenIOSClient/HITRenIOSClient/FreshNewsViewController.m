@@ -10,6 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ShortMessageCell.h"
 #import "MessageLogic.h"
+#import "Timeline.h"
+#import "DataManager.h"
+#import "AppData.h"
 
 @interface FreshNewsViewController ()
 
@@ -33,8 +36,10 @@
     _data = [[NSMutableArray alloc] initWithObjects:@"asd", @"aaa", nil];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(timelineDidDownload:) name:ASYNCDATALOADED object:nil];
-//    self.tableView.pagingEnabled = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    AppData *appData = [AppData sharedInstance];
+    [MessageLogic downloadMessages:appData.timeline.mids];
+     L([appData.timeline.mids description]);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -84,22 +89,47 @@
     [MessageLogic downloadTimeline];
 }
 
+- (void)dataDidDownload:(NSNotification *)notification {
+    FUNC_START();
+    if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADTIMELINE])
+        [self timelineDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADMESSAGES])
+        [self messageDidDownload:notification];
+    FUNC_END();
+}
+
 - (void)timelineDidDownload:(NSNotification *)notification {
     NSDictionary *ret = notification.userInfo;
-    if ([ret objectForKey:@"SUC"]) {
-        L(@"download timeline succ");
-    }
-    else L(@"download timeline fail");
     if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
+        L(@"local timeline newest");
         [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
         _timelineDownloading = NO;
         return;
     }
-    NSArray *mids = [ret objectForKey:@"DATA"];
-    
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    NSArray *mids = [data objectForKey:@"mids"];
+    int seq = [[data objectForKey:@"seq"] intValue];
+    AppData *appData = [AppData sharedInstance];
+    for (int i = 0; i < mids.count; i++) {
+        if ([appData.timeline.mids containsObject:[mids objectAtIndex:i]]) break;
+        [appData.timeline.mids insertObject:[mids objectAtIndex:i] atIndex:0];
+    }
+    [appData.timeline update];
+    appData.timeline.seq = [NSNumber numberWithInt:seq];
+    [AppData saveData];
     [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
     _timelineDownloading = NO;
-    
+}
+
+- (void)messageDidDownload:(NSNotification *)notification {
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"message download succ");
+    else L(@"message download fail");
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    for (NSString *key in [data allKeys]) {
+        L([[data objectForKey:key] objectForKey:@"content"]);
+    }
+//    L([notification.userInfo description]);
 }
 
 - (UIActivityIndicatorView *)getActivityIndicator {
