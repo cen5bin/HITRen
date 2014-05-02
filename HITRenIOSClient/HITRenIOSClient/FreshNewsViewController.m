@@ -38,7 +38,11 @@
     _data = [[NSMutableArray alloc] init];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
+    self.tableView.decelerationRate = 0.5;
     _currentPage = 0;
+    _maxDataLoadedPage = 0;
+    _backgroubdLoadData = NO;
+    _backgroubdLoadWorking = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
     
     AppData *appData = [AppData sharedInstance];
@@ -91,6 +95,7 @@
         cell = [[ShortMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     Message *message = [_data objectAtIndex:indexPath.row];
     cell.textView.text = message.content;
+    
     CGRect rect = cell.textView.frame;
     CGFloat height = rect.size.height;
     rect.size.height = [self calculateTextViewHeight:message.content];
@@ -121,6 +126,96 @@
         if (!view.superview)
             [scrollView addSubview:[self getActivityIndicator]];
         [self beginToDownloadTimeline];
+        return;
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
+        [self workAtIndexpath:indexPath];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
+    [self workAtIndexpath:indexPath];
+}
+
+// 到达indexPath时处理的工作
+- (void)workAtIndexpath:(NSIndexPath *)indexPath {
+    LOG(@"current %d max %d", _currentPage, _maxDataLoadedPage);
+    if (_currentPage < _maxDataLoadedPage) return;
+    if (_backgroubdLoadWorking) return;
+    L(@"work");
+    _backgroubdLoadWorking = YES;
+//    _backgroubdLoadDat
+    int row = indexPath.row;
+    _currentPage = row / PAGE_MESSAGE_COUNT;
+    AppData *appData = [AppData sharedInstance];
+    if (_data.count - row < 15) {
+        L(@"< 15");
+        NSArray *messageNeedDownload = [appData messagesNeedDownloadFromIndex:_data.count];
+        if (messageNeedDownload.count == 0) {
+            NSArray *messages = [appData getMessagesInPage:_currentPage + 1];
+            for (id message in messages)
+                [_data addObject:message];
+            [self.tableView reloadData];
+            _backgroubdLoadWorking = NO;
+            _maxDataLoadedPage = _currentPage + 1;
+//            isWorking = NO;
+        }
+        else {
+            _backgroubdLoadData = YES;
+            _backgroubdLoadDataAtIndex = -1;
+            L([messageNeedDownload description]);
+            [MessageLogic downloadMessages:messageNeedDownload];
+        }
+        return;
+    }
+    else if (row % PAGE_MESSAGE_COUNT < PAGE_MESSAGE_COUNT * 2 / 3) {
+        _backgroubdLoadWorking = NO;
+        return;
+    }
+    L(@"work1");
+    Message *message1 = [_data objectAtIndex:_currentPage * PAGE_MESSAGE_COUNT];
+    Message *message2 = [_data objectAtIndex:_currentPage * PAGE_MESSAGE_COUNT + 1];
+    
+    int index1 = [appData.timeline.mids indexOfObject:message1.mid];
+    int index2 = [appData.timeline.mids indexOfObject:message2.mid];
+    if (index2 - index1 == 1) return;
+    NSArray *messageNeedDownload = [appData messagesNeedDownloadFromIndex:index1+1];
+    if (messageNeedDownload.count == 0) {
+        NSArray *messages = [appData getMessagesInPage:_currentPage + 1];
+        for (Message *message in messages) {
+            if ([message2.mid isEqualToNumber:message.mid]) break;
+            [_data addObject:message];
+        }
+        [self.tableView reloadData];
+        _backgroubdLoadWorking = NO;
+        _maxDataLoadedPage = _currentPage + 1;
+    }
+    else {
+        _backgroubdLoadData = YES;
+        _backgroubdLoadDataAtIndex = _currentPage * PAGE_MESSAGE_COUNT + 1;
+        [MessageLogic downloadMessages:messageNeedDownload];
+    }
+    
+//    [self backgroundLoadData];
+
+}
+
+- (void)backgroundLoadData {
+    AppData *appData = [AppData sharedInstance];
+    NSArray *messageNeedDownload = [appData messagesNeedDownloadFromIndex:_data.count];
+    if (messageNeedDownload.count == 0) {
+        NSArray *messages = [appData getMessagesInPage:_currentPage + 1];
+        for (id message in messages)
+            [_data addObject:message];
+        [self.tableView reloadData];
+    }
+    else {
+        [MessageLogic downloadMessages:messageNeedDownload];
     }
 }
 
@@ -159,6 +254,7 @@
         _timelineDownloading = NO;
         return;
     }
+    _maxDataLoadedPage = 0;
     NSDictionary *data = [ret objectForKey:@"DATA"];
     NSArray *mids = [data objectForKey:@"mids"];
     int seq = [[data objectForKey:@"seq"] intValue];
@@ -172,7 +268,7 @@
     [appData.timeline update];
     appData.timeline.seq = [NSNumber numberWithInt:seq];
     [AppData saveData];
-    NSMutableArray *messageNeedDownload = [appData messagesNeedDownload];
+    NSArray *messageNeedDownload = [appData messagesNeedDownload];
     L([messageNeedDownload description]);
     [MessageLogic downloadMessages:messageNeedDownload];
 //    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -185,6 +281,7 @@
     else L(@"message download fail");
     NSDictionary *data = [ret objectForKey:@"DATA"];
     AppData *appData = [AppData sharedInstance];
+    int nowCount = _data.count;
     for (NSString *key in [[data allKeys] sortedArrayUsingSelector:@selector(compare:)]) {
         NSDictionary *obj = [data objectForKey:key];
         Message *message = [appData messgeForId:[key intValue]];
@@ -199,8 +296,13 @@
         message.sharedCount = [obj objectForKey:@"sharedcount"];
         message.likedList = [obj objectForKey:@"likedlist"];
         message.uid = [obj objectForKey:@"uid"];
+        if (!_backgroubdLoadData)
         [_data insertObject:message atIndex:0];
-        
+        else {
+            if (_backgroubdLoadDataAtIndex == -1)
+                [_data insertObject:message atIndex:nowCount];
+            else [_data insertObject:message atIndex:_backgroubdLoadDataAtIndex];
+        }
     }
     [AppData saveData];
     if (_updateAtTop) {
@@ -211,7 +313,13 @@
     }
     _updateAtTop = NO;
     _moreMessageCell = 1;
+//    if (!_backgroubdLoadData)
     [self.tableView reloadData];
+    if (_backgroubdLoadData) {
+        _backgroubdLoadWorking = NO;
+        _maxDataLoadedPage = _currentPage + 1;
+        _backgroubdLoadData = NO;
+    }
 //    L([notification.userInfo description]);
 }
 

@@ -80,15 +80,33 @@ static AppData *appData;
     return _messageList;
 }
 
-- (NSMutableArray *)messagesNeedDownload {
+- (NSArray *)messagesNeedDownload {
+    return [self messagesNeedDownloadFromIndex:0];
+//    NSMutableArray *ret = [[NSMutableArray alloc] init];
+//    int count = self.timeline.mids.count;
+//    if (count > PAGE_MESSAGE_COUNT) count = PAGE_MESSAGE_COUNT;
+//    for (int i = 0; i < count; i++) {
+//        if ([self privateMessageForId:[[self.timeline.mids objectAtIndex:i] intValue]]) break;
+//        [ret addObject:[self.timeline.mids objectAtIndex:i]];
+//    }
+//    return ret;
+}
+
+- (NSArray *)messagesNeedDownloadFromIndex:(int)index {
     NSMutableArray *ret = [[NSMutableArray alloc] init];
     int count = self.timeline.mids.count;
-    if (count > PAGE_MESSAGE_COUNT) count = PAGE_MESSAGE_COUNT;
-    for (int i = 0; i < count; i++) {
-        if ([self privateMessageForId:[[self.timeline.mids objectAtIndex:i] intValue]]) break;
-        [ret addObject:[self.timeline.mids objectAtIndex:i]];
+    if (index >= count) return nil;
+    int count0 = count;
+    if (count0 > PAGE_MESSAGE_COUNT) count0 = PAGE_MESSAGE_COUNT;
+    for (int i = 0; i < count0 && i + index < count ; i++) {
+        if ([self privateMessageForId:[[self.timeline.mids objectAtIndex:i + index] intValue]]) break;
+        [ret addObject:[self.timeline.mids objectAtIndex:i + index]];
     }
     return ret;
+}
+
+- (NSArray *)getMessagesInPage:(int)page {
+    return [DataManager messagesInPage:page];
 }
 //- (void)insertMessage:(Message *)message {
 //    Message *tmp = [self messgeForId:message.mid];

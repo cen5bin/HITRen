@@ -15,6 +15,12 @@
     int _currentPage;
     BOOL _updateAtTop;
     int _moreMessageCell;
+    
+    BOOL _backgroubdLoadData;
+    BOOL _backgroubdLoadWorking;
+    int _backgroubdLoadDataAtIndex;
+    int _maxDataLoadedPage; //最大的加载过数据的页面号，如果拉取过新的timeline，需要将其置为0
+    
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

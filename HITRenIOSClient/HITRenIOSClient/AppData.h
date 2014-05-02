@@ -24,7 +24,9 @@
 + (Message *)newMessage;
 - (id)init;
 - (Message *)messgeForId:(int)mid;
-- (NSMutableArray *)messagesNeedDownload;
+- (NSArray *)messagesNeedDownload;
+- (NSArray *)messagesNeedDownloadFromIndex:(int)index;
+- (NSArray *)getMessagesInPage:(int)page;
 
 //- (void)insertMessage:(Message *)message;
 @end

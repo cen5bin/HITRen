@@ -16,10 +16,8 @@
 @synthesize mids = _mids;
 //@dynamic mids;
 - (NSMutableArray *)getMids {
-    L(@"get Mids");
     if (_mids) return _mids;
     if (self.data == nil) {
-        L(@"data is nil");
         _mids = [[NSMutableArray alloc] init];
         return _mids;
     }
