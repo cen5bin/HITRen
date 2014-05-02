@@ -111,6 +111,7 @@
 		F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F89B9C9D18D6EC73007DDDCC /* empty.png */; };
 		F89DFADB19136EC20043DD6B /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFADA19136EC20043DD6B /* Comment.m */; };
 		F89DFADE191372E60043DD6B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFADD191372E60043DD6B /* Message.m */; };
+		F89DFAE11913B0240043DD6B /* MoreMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFAE01913B0240043DD6B /* MoreMessageCell.m */; };
 		F8A0F78B191363FE008A64AB /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A0F78A191363FE008A64AB /* AppData.m */; };
 		F8A5FD55191217FA0091939B /* Timeline.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A5FD54191217FA0091939B /* Timeline.m */; };
 		F8A5FD57191218930091939B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A5FD56191218930091939B /* CoreData.framework */; };
@@ -330,6 +331,8 @@
 		F89DFADA19136EC20043DD6B /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		F89DFADC191372E60043DD6B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		F89DFADD191372E60043DD6B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		F89DFADF1913B0240043DD6B /* MoreMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreMessageCell.h; sourceTree = "<group>"; };
+		F89DFAE01913B0240043DD6B /* MoreMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreMessageCell.m; sourceTree = "<group>"; };
 		F8A0F789191363FE008A64AB /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		F8A0F78A191363FE008A64AB /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
 		F8A5FD53191217FA0091939B /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timeline.h; sourceTree = "<group>"; };
@@ -948,6 +951,8 @@
 				F892372E18F3C85A00658F47 /* HometownPicker.m */,
 				F823B51D190666CD004D4514 /* ShortMessageCell.h */,
 				F823B51E190666CD004D4514 /* ShortMessageCell.m */,
+				F89DFADF1913B0240043DD6B /* MoreMessageCell.h */,
+				F89DFAE01913B0240043DD6B /* MoreMessageCell.m */,
 			);
 			name = component;
 			sourceTree = "<group>";
@@ -1200,6 +1205,7 @@
 				F8A5FD55191217FA0091939B /* Timeline.m in Sources */,
 				F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */,
 				F84B7DD418BB3C8D007FC2D5 /* XMPPIQ.m in Sources */,
+				F89DFAE11913B0240043DD6B /* MoreMessageCell.m in Sources */,
 				F84B7DEC18BB3C8D007FC2D5 /* DDXMLElement.m in Sources */,
 				F84B7DCD18BB3C8D007FC2D5 /* XMPPPlainAuthentication.m in Sources */,
 				F84B7DCE18BB3C8D007FC2D5 /* XMPPXFacebookPlatformAuthentication.m in Sources */,

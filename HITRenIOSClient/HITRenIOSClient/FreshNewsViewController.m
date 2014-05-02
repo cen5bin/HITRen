@@ -99,22 +99,13 @@
     rect = cell.bgView.frame;
     rect.size.height += tmp;
     cell.bgView.frame = rect;
-//    CGRect rect = cell.textView.frame;
-//    CGFloat tmp = cell.textView.contentSize.height - rect.size.height;
-//    rect.size.height = cell.textView.contentSize.height;
-//    cell.textView.frame = rect;
-//    rect = cell.frame;
-//    rect.size.height += tmp;
-//    cell.frame = rect;
-    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == _data.count) return 50;
     Message *message = [_data objectAtIndex:indexPath.row];
     return SHORTMESSAGRCELL_HEIGHT + [self calculateTextViewHeight:message.content] - TEXTVIEW_HEIGHT;
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    return cell.frame.size.height;
 }
 
 - (CGFloat)calculateTextViewHeight:(NSString *)string {
@@ -154,11 +145,17 @@
     FUNC_END();
 }
 
+- (void)hideTopActivityIndicator {
+    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+    _activityIndicator.hidden = YES;
+}
+
 - (void)timelineDidDownload:(NSNotification *)notification {
     NSDictionary *ret = notification.userInfo;
     if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
         L(@"local timeline newest");
-        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+        [self hideTopActivityIndicator];
+//        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
         _timelineDownloading = NO;
         return;
     }
@@ -206,10 +203,14 @@
         
     }
     [AppData saveData];
-    if (_updateAtTop)
-        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+    if (_updateAtTop) {
+        [self hideTopActivityIndicator];
+//        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+//        [_activityIndicator stopAnimating];
+//        _activityIndicator.hidden = YES;
+    }
     _updateAtTop = NO;
-//    _moreMessageCell = 1;
+    _moreMessageCell = 1;
     [self.tableView reloadData];
 //    L([notification.userInfo description]);
 }
@@ -222,6 +223,7 @@
         CGFloat len = 30;
         _activityIndicator.frame = CGRectMake(CGRectGetMidX(self.view.frame)-len / 2, -len, len, len);
     }
+    _activityIndicator.hidden = NO;
     if (!_activityIndicator.isAnimating)
         [_activityIndicator startAnimating];
     return _activityIndicator;
