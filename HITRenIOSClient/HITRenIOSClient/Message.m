@@ -19,6 +19,23 @@
 @dynamic likedlist;
 @dynamic type;
 @dynamic sharedCount;
+@dynamic seq;
 @dynamic comment;
 
+@synthesize likedList = _likedList;
+
+- (NSMutableArray *)getLikedList {
+    if (_likedList) return _likedList;
+    if (self.likedlist == nil) {
+        _likedList = [[NSMutableArray alloc] init];
+        return _likedList;
+    }
+    _likedList = [NSKeyedUnarchiver unarchiveObjectWithData:self.likedlist];
+    return _likedList;
+}
+
+- (void)setLikedList:(NSMutableArray *)likedList {
+    _likedList = likedList;
+    self.likedlist = [NSKeyedArchiver archivedDataWithRootObject:_likedList];
+}
 @end

@@ -17,7 +17,7 @@
 {
     // Override point for customization after application launch.
     [[XmppConnector sharedInstance] connect];
-//    [DBController deleteFile];
+    [DBController deleteFile];
 
     
 //    NSString* tmp = @" {\"asd\" : \"1\",\"aaa\":1} ";

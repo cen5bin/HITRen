@@ -10,12 +10,24 @@
 #import "DataManager.h"
 #import "Timeline.h"
 #import "Message.h"
+//#import "MessageLogic.h"
 
 static AppData *appData;
 
 @implementation AppData
 
 @synthesize timeline = _timeline;
+@synthesize messageList = _messageList;
+
+- (id)init {
+    if (self = [super init]) {
+        NSArray *messages = [DataManager messagesInPage:0];
+        _messages = [[NSMutableDictionary alloc] init];
+        for (Message *message in messages)
+            [_messages setObject:message forKey:message.mid];
+    }
+    return self;
+}
 
 + (id)sharedInstance {
     if (appData) return appData;
@@ -37,23 +49,60 @@ static AppData *appData;
     return _timeline;
 }
 
-- (Message *)messgeForId:(NSNumber *)mid {
-    return [_messages objectForKey:mid];
+- (Message *)messgeForId:(int)mid {
+    NSNumber *mid0 = [NSNumber numberWithInt:mid];
+    Message *message = [_messages objectForKey:mid0];
+    if (message == nil) {
+        message = [AppData newMessage];
+        [_messages setObject:message forKey:mid0];
+        message.mid = mid0;
+    }
+    return message;
 }
 
-- (void)insertMessage:(Message *)message {
-    Message *tmp = [self messgeForId:message.mid];
-    if (tmp == nil) {
-        tmp = [DataManager getMessage];
-        [_messages setObject:tmp forKey:message.mid];
-    }
-    tmp.mid = message.mid;
-    tmp.content = message.content;
-    tmp.type = message.type;
-    tmp.likedlist = message.likedlist;
-    tmp.uid = message.uid;
-    tmp.time = message.time;
-    tmp.sharedCount = message.sharedCount;
-    tmp.comment = message.comment;
+- (Message *)privateMessageForId:(int)mid {
+    NSNumber *mid0 = [NSNumber numberWithInt:mid];
+    return [_messages objectForKey:mid0];
 }
+
+- (NSMutableArray *)getMessageList {
+    if (_messageList) return _messageList;
+    _messageList = [[NSMutableArray alloc] init];
+    int count = self.timeline.mids.count;
+    if (count > PAGE_MESSAGE_COUNT) count = PAGE_MESSAGE_COUNT;
+    NSMutableArray *needDownload = [[NSMutableArray alloc] init];
+    for (int i = 0; i < count; i++) {
+        Message *message = [self privateMessageForId:[[self.timeline.mids objectAtIndex:i] intValue]];
+        if (!message)
+            [needDownload addObject:[self.timeline.mids objectAtIndex:i]];
+    }
+    
+    return _messageList;
+}
+
+- (NSMutableArray *)messagesNeedDownload {
+    NSMutableArray *ret = [[NSMutableArray alloc] init];
+    int count = self.timeline.mids.count;
+    if (count > PAGE_MESSAGE_COUNT) count = PAGE_MESSAGE_COUNT;
+    for (int i = 0; i < count; i++) {
+        if ([self privateMessageForId:[[self.timeline.mids objectAtIndex:i] intValue]]) break;
+        [ret addObject:[self.timeline.mids objectAtIndex:i]];
+    }
+    return ret;
+}
+//- (void)insertMessage:(Message *)message {
+//    Message *tmp = [self messgeForId:message.mid];
+//    if (tmp == nil) {
+//        tmp = [DataManager getMessage];
+//        [_messages setObject:tmp forKey:message.mid];
+//    }
+//    tmp.mid = message.mid;
+//    tmp.content = message.content;
+//    tmp.type = message.type;
+//    tmp.likedlist = message.likedlist;
+//    tmp.uid = message.uid;
+//    tmp.time = message.time;
+//    tmp.sharedCount = message.sharedCount;
+//    tmp.comment = message.comment;
+//}
 @end

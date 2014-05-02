@@ -37,18 +37,23 @@ static NSMutableArray *_messages;
     return [res objectAtIndex:0];
 }
 
-+ (NSMutableArray *)messages {
-    if (_messages) return _messages;
++ (NSArray *)messagesInPage:(int)page {
     NSManagedObjectContext *context = [DBController context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Message" inManagedObjectContext:context];
     request.entity = entity;
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"mid" ascending:NO];
+    NSArray *array = [NSArray arrayWithObjects:sortDescriptor, nil];
+    request.sortDescriptors = array;
+    request.fetchOffset = page * PAGE_MESSAGE_COUNT;
+    request.fetchLimit = PAGE_MESSAGE_COUNT;
     NSArray *res = [context executeFetchRequest:request error:nil];
-    if (!res || res.count == 0)
-        _messages = [[NSMutableArray alloc] init];
-    else
-        _messages = [NSMutableArray arrayWithArray:res];
-    return _messages;
+    return res;
+//    if (!res || res.count == 0)
+//        _messages = [[NSMutableArray alloc] init];
+//    else
+//        _messages = [NSMutableArray arrayWithArray:res];
+//    return _messages;
 }
 
 + (Message *)getMessage {

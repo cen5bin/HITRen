@@ -14,6 +14,7 @@
 
 + (Timeline *)timeline;
 + (Message *)getMessage;
++ (NSArray *)messagesInPage:(int)page;
 + (void)save;
 
 @end

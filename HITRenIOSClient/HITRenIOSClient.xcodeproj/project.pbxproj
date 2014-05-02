@@ -109,8 +109,8 @@
 		F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964F918FD331200D7FA44 /* FriendInfoViewController.m */; };
 		F89964FD18FD50F200D7FA44 /* GroupChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */; };
 		F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F89B9C9D18D6EC73007DDDCC /* empty.png */; };
-		F89DFAD819136EC10043DD6B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFAD719136EC10043DD6B /* Message.m */; };
 		F89DFADB19136EC20043DD6B /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFADA19136EC20043DD6B /* Comment.m */; };
+		F89DFADE191372E60043DD6B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFADD191372E60043DD6B /* Message.m */; };
 		F8A0F78B191363FE008A64AB /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A0F78A191363FE008A64AB /* AppData.m */; };
 		F8A5FD55191217FA0091939B /* Timeline.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A5FD54191217FA0091939B /* Timeline.m */; };
 		F8A5FD57191218930091939B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A5FD56191218930091939B /* CoreData.framework */; };
@@ -326,10 +326,10 @@
 		F89964FB18FD50F200D7FA44 /* GroupChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChooserViewController.h; sourceTree = "<group>"; };
 		F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChooserViewController.m; sourceTree = "<group>"; };
 		F89B9C9D18D6EC73007DDDCC /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
-		F89DFAD619136EC10043DD6B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		F89DFAD719136EC10043DD6B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		F89DFAD919136EC20043DD6B /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		F89DFADA19136EC20043DD6B /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		F89DFADC191372E60043DD6B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		F89DFADD191372E60043DD6B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		F8A0F789191363FE008A64AB /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		F8A0F78A191363FE008A64AB /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
 		F8A5FD53191217FA0091939B /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timeline.h; sourceTree = "<group>"; };
@@ -518,8 +518,8 @@
 				F8A0F78A191363FE008A64AB /* AppData.m */,
 				F89DFAD919136EC20043DD6B /* Comment.h */,
 				F89DFADA19136EC20043DD6B /* Comment.m */,
-				F89DFAD619136EC10043DD6B /* Message.h */,
-				F89DFAD719136EC10043DD6B /* Message.m */,
+				F89DFADC191372E60043DD6B /* Message.h */,
+				F89DFADD191372E60043DD6B /* Message.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1194,6 +1194,7 @@
 				F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */,
 				F89DFADB19136EC20043DD6B /* Comment.m in Sources */,
 				F84B7DE218BB3C8D007FC2D5 /* DDAbstractDatabaseLogger.m in Sources */,
+				F89DFADE191372E60043DD6B /* Message.m in Sources */,
 				F80B0D51187426F2003E72DC /* User.m in Sources */,
 				F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */,
 				F8A5FD55191217FA0091939B /* Timeline.m in Sources */,
@@ -1238,7 +1239,6 @@
 				F84B7DD218BB3C8D007FC2D5 /* NSXMLElement+XMPP.m in Sources */,
 				F84B7DD918BB3C8D007FC2D5 /* XMPPPresence.m in Sources */,
 				F80B0D5F187452A0003E72DC /* TestMessageLogic.m in Sources */,
-				F89DFAD819136EC10043DD6B /* Message.m in Sources */,
 				F84B7DDF18BB3C8D007FC2D5 /* XMPPSRVResolver.m in Sources */,
 				F84B7DCA18BB3C8D007FC2D5 /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				F84B7DCF18BB3C8D007FC2D5 /* XMPPXOAuth2Google.m in Sources */,

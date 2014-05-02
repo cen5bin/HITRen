@@ -12,6 +12,8 @@
     NSMutableArray* _data;
     UIActivityIndicatorView *_activityIndicator;
     BOOL _timelineDownloading;
+    int _currentPage;
+    BOOL _updateAtTop;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

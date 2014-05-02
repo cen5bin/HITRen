@@ -12,14 +12,19 @@
 @interface AppData : NSObject {
     Timeline *_timeline;
     NSMutableDictionary *_messages;
+    NSMutableArray *_messageList;
 }
 
 @property (nonatomic, strong, getter = getTimeline) Timeline *timeline;
+@property (nonatomic, strong, getter = getMessageList) NSMutableArray *messageList;
 
 + (id)sharedInstance;
 + (void)saveData;
 
 + (Message *)newMessage;
-- (Message *)messgeForId:(NSNumber *)mid;
-- (void)insertMessage:(Message *)message;
+- (id)init;
+- (Message *)messgeForId:(int)mid;
+- (NSMutableArray *)messagesNeedDownload;
+
+//- (void)insertMessage:(Message *)message;
 @end

@@ -9,6 +9,8 @@
 #ifndef HITRenIOSClient_Constant_h
 #define HITRenIOSClient_Constant_h
 
+#define PAGE_MESSAGE_COUNT 30 //一页有多少状态
+
 #define ASYNCDATALOADED @"HITRenAsyncDataFinishedLoading"
 
 #define ASYNC_EVENT_UPDATEUSETINFO @"HITRenAsyncDataUpdataUserInfo"
