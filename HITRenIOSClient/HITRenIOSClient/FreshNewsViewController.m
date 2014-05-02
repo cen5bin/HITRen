@@ -40,12 +40,10 @@
     self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
     _currentPage = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+    
     AppData *appData = [AppData sharedInstance];
     if (appData.timeline.mids.count == 0) {
+        _moreMessageCell = 0;
         _updateAtTop = YES;
         _currentPage = 0;
         UIView *view = [self getActivityIndicator];
@@ -54,6 +52,21 @@
         [self.tableView setContentOffset:CGPointMake(0, -35) animated:NO];
         [self beginToDownloadTimeline];
     }
+    else _moreMessageCell = 1;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+//    AppData *appData = [AppData sharedInstance];
+//    if (appData.timeline.mids.count == 0) {
+//        _updateAtTop = YES;
+//        _currentPage = 0;
+//        UIView *view = [self getActivityIndicator];
+//        if (!view.superview)
+//            [self.tableView addSubview:[self getActivityIndicator]];
+//        [self.tableView setContentOffset:CGPointMake(0, -35) animated:NO];
+//        [self beginToDownloadTimeline];
+//    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -61,24 +74,54 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _data.count;
+    return _data.count + _moreMessageCell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ShortMessageCell";
+    static NSString *CellIdentifier1 = @"MoreMessageCell";
+    if (indexPath.row == _data.count) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1 forIndexPath:indexPath];
+        if (!cell)
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        return cell;
+    }
     ShortMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (!cell)
         cell = [[ShortMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     Message *message = [_data objectAtIndex:indexPath.row];
     cell.textView.text = message.content;
-
+    CGRect rect = cell.textView.frame;
+    CGFloat height = rect.size.height;
+    rect.size.height = [self calculateTextViewHeight:message.content];
+    cell.textView.frame = rect;
+    CGFloat tmp = rect.size.height - height;
+    rect = cell.bgView.frame;
+    rect.size.height += tmp;
+    cell.bgView.frame = rect;
+//    CGRect rect = cell.textView.frame;
+//    CGFloat tmp = cell.textView.contentSize.height - rect.size.height;
+//    rect.size.height = cell.textView.contentSize.height;
+//    cell.textView.frame = rect;
+//    rect = cell.frame;
+//    rect.size.height += tmp;
+//    cell.frame = rect;
+    
     return cell;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-////    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    return 100;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    Message *message = [_data objectAtIndex:indexPath.row];
+    return SHORTMESSAGRCELL_HEIGHT + [self calculateTextViewHeight:message.content] - TEXTVIEW_HEIGHT;
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    return cell.frame.size.height;
+}
+
+- (CGFloat)calculateTextViewHeight:(NSString *)string {
+    UIFont *font = [UIFont systemFontOfSize:14];
+    CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(TEXTVIEW_WIDTH-5, FLT_MAX)];
+    return size.height + 8;
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint p = scrollView.contentOffset;
@@ -166,6 +209,7 @@
     if (_updateAtTop)
         [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
     _updateAtTop = NO;
+//    _moreMessageCell = 1;
     [self.tableView reloadData];
 //    L([notification.userInfo description]);
 }

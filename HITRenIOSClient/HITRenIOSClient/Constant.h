@@ -10,6 +10,9 @@
 #define HITRenIOSClient_Constant_h
 
 #define PAGE_MESSAGE_COUNT 30 //一页有多少状态
+#define TEXTVIEW_WIDTH 290     //状态中的textView宽度
+#define TEXTVIEW_HEIGHT 90   //状态中的textView默认高度
+#define SHORTMESSAGRCELL_HEIGHT 200 //shortmessage cell 的默认高度
 
 #define ASYNCDATALOADED @"HITRenAsyncDataFinishedLoading"
 

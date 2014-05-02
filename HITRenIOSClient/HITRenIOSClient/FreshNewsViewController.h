@@ -14,6 +14,7 @@
     BOOL _timelineDownloading;
     int _currentPage;
     BOOL _updateAtTop;
+    int _moreMessageCell;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
