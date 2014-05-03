@@ -113,6 +113,8 @@
 		F89DFADE191372E60043DD6B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFADD191372E60043DD6B /* Message.m */; };
 		F89DFAE11913B0240043DD6B /* MoreMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFAE01913B0240043DD6B /* MoreMessageCell.m */; };
 		F89DFAE4191494AD0043DD6B /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFAE3191494AD0043DD6B /* UserInfo.m */; };
+		F89DFAF01914ED130043DD6B /* liked.png in Resources */ = {isa = PBXBuildFile; fileRef = F89DFAEF1914ED130043DD6B /* liked.png */; };
+		F89DFB021914FA9E0043DD6B /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = F89DFB011914FA9E0043DD6B /* comment.png */; };
 		F8A0F78B191363FE008A64AB /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A0F78A191363FE008A64AB /* AppData.m */; };
 		F8A5FD55191217FA0091939B /* Timeline.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A5FD54191217FA0091939B /* Timeline.m */; };
 		F8A5FD57191218930091939B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A5FD56191218930091939B /* CoreData.framework */; };
@@ -336,6 +338,8 @@
 		F89DFAE01913B0240043DD6B /* MoreMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreMessageCell.m; sourceTree = "<group>"; };
 		F89DFAE2191494AD0043DD6B /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		F89DFAE3191494AD0043DD6B /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		F89DFAEF1914ED130043DD6B /* liked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liked.png; sourceTree = "<group>"; };
+		F89DFB011914FA9E0043DD6B /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
 		F8A0F789191363FE008A64AB /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		F8A0F78A191363FE008A64AB /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
 		F8A5FD53191217FA0091939B /* Timeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timeline.h; sourceTree = "<group>"; };
@@ -905,6 +909,8 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F89DFB011914FA9E0043DD6B /* comment.png */,
+				F89DFAEF1914ED130043DD6B /* liked.png */,
 				F89B9C9818D6E8B0007DDDCC /* pic */,
 				F8E9686E18C6DCA600B9384B /* textfield */,
 				F8E9686B18C6DB4B00B9384B /* button */,
@@ -1122,7 +1128,9 @@
 				F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */,
 				F8550F0318C4C251005E51FE /* p_btm4.png in Resources */,
 				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,
+				F89DFAF01914ED130043DD6B /* liked.png in Resources */,
 				F80B0D0B1874269D003E72DC /* Main_iPhone.storyboard in Resources */,
+				F89DFB021914FA9E0043DD6B /* comment.png in Resources */,
 				F8E9687018C6DCB500B9384B /* email.png in Resources */,
 				F8E9686018C5F96C00B9384B /* topbar1.png in Resources */,
 				F89964F718FD2C3600D7FA44 /* base2.png in Resources */,

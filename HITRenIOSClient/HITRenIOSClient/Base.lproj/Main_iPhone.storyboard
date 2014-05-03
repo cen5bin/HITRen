@@ -180,6 +180,40 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
+                                                        <view contentMode="scaleToFill" id="p3i-mL-cre">
+                                                            <rect key="frame" x="0.0" y="150" width="306" height="37"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XsZ-1s-ZN7">
+                                                                    <rect key="frame" x="0.0" y="6" width="102" height="25"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <state key="normal" title="赞" image="liked.png">
+                                                                        <color key="titleColor" red="0.094117656350135803" green="0.086274512112140656" blue="0.54117649793624878" alpha="1" colorSpace="deviceRGB"/>
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xNl-TJ-VFe">
+                                                                    <rect key="frame" x="102" y="6" width="102" height="25"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <state key="normal" title="评论" image="comment.png">
+                                                                        <color key="titleColor" red="0.094117656349999995" green="0.086274512110000007" blue="0.5411764979" alpha="1" colorSpace="deviceRGB"/>
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lzl-VQ-8Nf">
+                                                                    <rect key="frame" x="204" y="6" width="102" height="25"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <state key="normal" title="分享">
+                                                                        <color key="titleColor" red="0.094117656349999995" green="0.086274512110000007" blue="0.5411764979" alpha="1" colorSpace="deviceRGB"/>
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.031372550874948502" green="0.011764707043766975" blue="0.035294119268655777" alpha="0.059999999999999998" colorSpace="deviceRGB"/>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -187,6 +221,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bgView" destination="BpI-2d-0Xp" id="vmc-vo-coK"/>
+                                            <outlet property="cellBar" destination="p3i-mL-cre" id="eqI-Mg-Pmb"/>
                                             <outlet property="picture" destination="BVc-Nk-cue" id="bl2-YI-pq9"/>
                                             <outlet property="textView" destination="50O-xH-0Kc" id="sYM-t0-dCd"/>
                                             <outlet property="time" destination="lwS-nf-4B4" id="MrG-7k-Q0q"/>
@@ -1183,8 +1218,10 @@
     </scenes>
     <resources>
         <image name="base0.png" width="640" height="91"/>
+        <image name="comment.png" width="204" height="50"/>
         <image name="email.png" width="496" height="76"/>
         <image name="empty.png" width="224" height="224"/>
+        <image name="liked.png" width="204" height="50"/>
         <image name="loginbutton0.png" width="496" height="88"/>
         <image name="me.png" width="640" height="91"/>
         <image name="p_btm1.png" width="1181" height="173"/>

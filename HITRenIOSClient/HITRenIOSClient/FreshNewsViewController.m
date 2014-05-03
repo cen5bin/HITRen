@@ -106,6 +106,9 @@
     rect = cell.bgView.frame;
     rect.size.height += tmp;
     cell.bgView.frame = rect;
+    rect = cell.cellBar.frame;
+    rect.origin.y += tmp;
+    cell.cellBar.frame = rect;
     return cell;
 }
 
