@@ -93,8 +93,10 @@
     if (userInfo)
         cell.username.text = userInfo.username;
     
-//    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-//    format.dateFormat = @"yy"
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    L([message.time description]);
+    cell.time.text = [format stringFromDate:message.time];
     
     CGRect rect = cell.textView.frame;
     CGFloat height = rect.size.height;
@@ -289,7 +291,8 @@
         message.mid = [obj objectForKey:@"mid"];
         message.content = [obj objectForKey:@"content"];
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
-        format.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+        format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        L([obj objectForKey:@"time"]);
         message.time = [format dateFromString:[obj objectForKey:@"time"]];
         message.type = [obj objectForKey:@"type"];
         message.sharedCount = [obj objectForKey:@"sharedcount"];
