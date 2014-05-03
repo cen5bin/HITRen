@@ -13,9 +13,10 @@ public class MemWorker {
 	 */
 	public static String getUserInfo(int uid) {
 		String key = calUserKey(uid);
-		if (MemController.get(key) == null)
+		Object obj = MemController.get(key);
+		if (obj == null)
 			return null;
-		return MemController.get(key).toString();
+		return obj.toString();
 	}
 	
 	/**

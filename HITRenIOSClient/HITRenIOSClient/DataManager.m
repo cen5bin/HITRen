@@ -10,8 +10,9 @@
 #import "Timeline.h"
 #import "Message.h"
 #import "Comment.h"
+#import "UserInfo.h"
 
-static NSMutableArray *_messages;
+//static NSMutableArray *_messages;
 //static Timeline *_timeline;
 
 @implementation DataManager
@@ -25,7 +26,6 @@ static NSMutableArray *_messages;
     request.entity = entity;
     NSArray *res = [context executeFetchRequest:request error:nil];
     if (!res || res.count == 0) {
-        L([res description]);
         Timeline *timeline = [NSEntityDescription insertNewObjectForEntityForName:@"Timeline" inManagedObjectContext:context];
         timeline.seq = 0;
         timeline.data = nil;
@@ -49,17 +49,37 @@ static NSMutableArray *_messages;
     request.fetchLimit = PAGE_MESSAGE_COUNT;
     NSArray *res = [context executeFetchRequest:request error:nil];
     return res;
-//    if (!res || res.count == 0)
-//        _messages = [[NSMutableArray alloc] init];
-//    else
-//        _messages = [NSMutableArray arrayWithArray:res];
-//    return _messages;
 }
 
 + (Message *)getMessage {
     NSManagedObjectContext *context = [DBController context];
     Message *message = [NSEntityDescription insertNewObjectForEntityForName:@"Message" inManagedObjectContext:context];
     return message;
+}
+
++ (UserInfo *)getUserInfo {
+    NSManagedObjectContext *context = [DBController context];
+    UserInfo *userInfo = [NSEntityDescription insertNewObjectForEntityForName:@"UserInfo" inManagedObjectContext:context];
+    return userInfo;
+}
+
++ (UserInfo *)getUserInfoOfUid:(int)uid {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"UserInfo" inManagedObjectContext:context];
+    request.entity = entity;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid == %d", uid];
+    request.predicate = predicate;
+    request.fetchLimit = 1;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return [array objectAtIndex:0];
+    return nil;
+}
+
++ (void)deleteEntity:(NSManagedObject *)entity {
+    NSManagedObjectContext *context = [DBController context];
+    [context deleteObject:entity];
 }
 
 + (void)save {

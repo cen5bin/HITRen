@@ -105,6 +105,19 @@
     return YES;
 }
 
++ (BOOL)downloadUseInfos:(NSArray *)uids {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    [data setValue:uids forKey:@"uids"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadUsersData" withEventName:ASYNC_EVENT_DOWNLOADUSERINFOS];
+    if (!ret) {
+        L(@"download userinfos fail");
+        return NO;
+    }
+    FUNC_END();
+    return YES;
+}
+
 + (void)save {
     User *user = [UserSimpleLogic user];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

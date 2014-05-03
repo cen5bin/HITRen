@@ -10,6 +10,7 @@
 #import "DataManager.h"
 #import "Timeline.h"
 #import "Message.h"
+#import "UserInfo.h"
 //#import "MessageLogic.h"
 
 static AppData *appData;
@@ -17,14 +18,12 @@ static AppData *appData;
 @implementation AppData
 
 @synthesize timeline = _timeline;
-@synthesize messageList = _messageList;
 
 - (id)init {
     if (self = [super init]) {
-        NSArray *messages = [DataManager messagesInPage:0];
-        _messages = [[NSMutableDictionary alloc] init];
-        for (Message *message in messages)
-            [_messages setObject:message forKey:message.mid];
+        [self loadMessageInPage:0];
+//        self.userInfos = [[NSMutableDictionary alloc] init];
+        _userInfos = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -49,6 +48,16 @@ static AppData *appData;
     return _timeline;
 }
 
+- (void)loadMessageInPage:(int)page {
+    NSArray *messages = [DataManager messagesInPage:page];
+    _messages = [[NSMutableDictionary alloc] init];
+    for (Message *message in messages) {
+        if ([_messages objectForKey:message.mid])
+            [DataManager deleteEntity:[_messages objectForKey:message.mid]];
+        [_messages setObject:message forKey:message.mid];
+    }
+}
+
 - (Message *)messgeForId:(int)mid {
     NSNumber *mid0 = [NSNumber numberWithInt:mid];
     Message *message = [_messages objectForKey:mid0];
@@ -65,34 +74,12 @@ static AppData *appData;
     return [_messages objectForKey:mid0];
 }
 
-- (NSMutableArray *)getMessageList {
-    if (_messageList) return _messageList;
-    _messageList = [[NSMutableArray alloc] init];
-    int count = self.timeline.mids.count;
-    if (count > PAGE_MESSAGE_COUNT) count = PAGE_MESSAGE_COUNT;
-    NSMutableArray *needDownload = [[NSMutableArray alloc] init];
-    for (int i = 0; i < count; i++) {
-        Message *message = [self privateMessageForId:[[self.timeline.mids objectAtIndex:i] intValue]];
-        if (!message)
-            [needDownload addObject:[self.timeline.mids objectAtIndex:i]];
-    }
-    
-    return _messageList;
-}
-
 - (NSArray *)messagesNeedDownload {
     return [self messagesNeedDownloadFromIndex:0];
-//    NSMutableArray *ret = [[NSMutableArray alloc] init];
-//    int count = self.timeline.mids.count;
-//    if (count > PAGE_MESSAGE_COUNT) count = PAGE_MESSAGE_COUNT;
-//    for (int i = 0; i < count; i++) {
-//        if ([self privateMessageForId:[[self.timeline.mids objectAtIndex:i] intValue]]) break;
-//        [ret addObject:[self.timeline.mids objectAtIndex:i]];
-//    }
-//    return ret;
 }
 
 - (NSArray *)messagesNeedDownloadFromIndex:(int)index {
+    [self loadMessageInPage:index / PAGE_MESSAGE_COUNT + 1];
     NSMutableArray *ret = [[NSMutableArray alloc] init];
     int count = self.timeline.mids.count;
     if (index >= count) return nil;
@@ -108,19 +95,38 @@ static AppData *appData;
 - (NSArray *)getMessagesInPage:(int)page {
     return [DataManager messagesInPage:page];
 }
-//- (void)insertMessage:(Message *)message {
-//    Message *tmp = [self messgeForId:message.mid];
-//    if (tmp == nil) {
-//        tmp = [DataManager getMessage];
-//        [_messages setObject:tmp forKey:message.mid];
-//    }
-//    tmp.mid = message.mid;
-//    tmp.content = message.content;
-//    tmp.type = message.type;
-//    tmp.likedlist = message.likedlist;
-//    tmp.uid = message.uid;
-//    tmp.time = message.time;
-//    tmp.sharedCount = message.sharedCount;
-//    tmp.comment = message.comment;
+
+- (UserInfo *)userInfoForId:(int)uid {
+    NSNumber *uid0 = [NSNumber numberWithInt:uid];
+    UserInfo *userInfo = [_userInfos objectForKey:uid0];
+    if (userInfo) return userInfo;
+    userInfo = [DataManager getUserInfo];
+    [_userInfos setObject:userInfo forKey:uid0];
+    userInfo.uid = uid0;
+    return userInfo;
+}
+
+- (UserInfo *)readUserInfoForId:(int)uid {
+    NSNumber *uid0 = [NSNumber numberWithInt:uid];
+    UserInfo *userInfo = [_userInfos objectForKey:uid0];
+    if (userInfo) return userInfo;
+    userInfo = [DataManager getUserInfoOfUid:uid];
+    if (!userInfo) return nil;
+    [_userInfos setObject:userInfo forKey:uid0];
+    return userInfo;
+}
+
+- (NSArray *)userInfosNeedDownload:(NSArray *)uids {
+    NSMutableArray *ret = [[NSMutableArray alloc] init];
+    for (NSNumber *uid in uids) {
+        if ([self readUserInfoForId:[uid intValue]]) continue;
+        [ret addObject:uid];
+    }
+    return ret;
+}
+
+//- (UserInfo *)getUserInfo:(int)uid {
+//    
 //}
+
 @end

@@ -10,10 +10,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ShortMessageCell.h"
 #import "MessageLogic.h"
+#import "UserSimpleLogic.h"
 #import "Timeline.h"
 #import "DataManager.h"
 #import "AppData.h"
 #import "Message.h"
+#import "UserInfo.h"
 
 @interface FreshNewsViewController ()
 
@@ -61,16 +63,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    AppData *appData = [AppData sharedInstance];
-//    if (appData.timeline.mids.count == 0) {
-//        _updateAtTop = YES;
-//        _currentPage = 0;
-//        UIView *view = [self getActivityIndicator];
-//        if (!view.superview)
-//            [self.tableView addSubview:[self getActivityIndicator]];
-//        [self.tableView setContentOffset:CGPointMake(0, -35) animated:NO];
-//        [self beginToDownloadTimeline];
-//    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -95,6 +87,14 @@
         cell = [[ShortMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     Message *message = [_data objectAtIndex:indexPath.row];
     cell.textView.text = message.content;
+    
+    AppData *appData = [AppData sharedInstance];
+    UserInfo *userInfo = [appData readUserInfoForId:[message.uid intValue]];
+    if (userInfo)
+        cell.username.text = userInfo.username;
+    
+//    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+//    format.dateFormat = @"yy"
     
     CGRect rect = cell.textView.frame;
     CGFloat height = rect.size.height;
@@ -147,9 +147,7 @@
     LOG(@"current %d max %d", _currentPage, _maxDataLoadedPage);
     if (_currentPage < _maxDataLoadedPage) return;
     if (_backgroubdLoadWorking) return;
-    L(@"work");
     _backgroubdLoadWorking = YES;
-//    _backgroubdLoadDat
     int row = indexPath.row;
     _currentPage = row / PAGE_MESSAGE_COUNT;
     AppData *appData = [AppData sharedInstance];
@@ -163,7 +161,6 @@
             [self.tableView reloadData];
             _backgroubdLoadWorking = NO;
             _maxDataLoadedPage = _currentPage + 1;
-//            isWorking = NO;
         }
         else {
             _backgroubdLoadData = YES;
@@ -201,23 +198,22 @@
         [MessageLogic downloadMessages:messageNeedDownload];
     }
     
-//    [self backgroundLoadData];
 
 }
 
-- (void)backgroundLoadData {
-    AppData *appData = [AppData sharedInstance];
-    NSArray *messageNeedDownload = [appData messagesNeedDownloadFromIndex:_data.count];
-    if (messageNeedDownload.count == 0) {
-        NSArray *messages = [appData getMessagesInPage:_currentPage + 1];
-        for (id message in messages)
-            [_data addObject:message];
-        [self.tableView reloadData];
-    }
-    else {
-        [MessageLogic downloadMessages:messageNeedDownload];
-    }
-}
+//- (void)backgroundLoadData {
+//    AppData *appData = [AppData sharedInstance];
+//    NSArray *messageNeedDownload = [appData messagesNeedDownloadFromIndex:_data.count];
+//    if (messageNeedDownload.count == 0) {
+//        NSArray *messages = [appData getMessagesInPage:_currentPage + 1];
+//        for (id message in messages)
+//            [_data addObject:message];
+//        [self.tableView reloadData];
+//    }
+//    else {
+//        [MessageLogic downloadMessages:messageNeedDownload];
+//    }
+//}
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     CGPoint p = scrollView.contentOffset;
@@ -237,6 +233,8 @@
         [self timelineDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADMESSAGES])
         [self messageDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADUSERINFOS])
+        [self userInfoDidDownload:notification];
     FUNC_END();
 }
 
@@ -280,6 +278,7 @@
     if ([ret objectForKey:@"SUC"]) L(@"message download succ");
     else L(@"message download fail");
     NSDictionary *data = [ret objectForKey:@"DATA"];
+    NSMutableArray *uids = [[NSMutableArray alloc] init];
     AppData *appData = [AppData sharedInstance];
     int nowCount = _data.count;
     for (NSString *key in [[data allKeys] sortedArrayUsingSelector:@selector(compare:)]) {
@@ -303,8 +302,16 @@
                 [_data insertObject:message atIndex:nowCount];
             else [_data insertObject:message atIndex:_backgroubdLoadDataAtIndex];
         }
+        if (![uids containsObject:message.uid])
+            [uids addObject:message.uid];
     }
     [AppData saveData];
+    
+    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
+    if (userInfoNeedDownload.count) {
+        [UserSimpleLogic downloadUseInfos:userInfoNeedDownload];
+    }
+    
     if (_updateAtTop) {
         [self hideTopActivityIndicator];
 //        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -323,7 +330,28 @@
 //    L([notification.userInfo description]);
 }
 
-
+- (void)userInfoDidDownload:(NSNotification *)notification {
+    FUNC_START();
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"userInfo download succ");
+    else L(@"userInfo download fail");
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    AppData *appData = [AppData sharedInstance];
+    for (NSNumber *key in [data allKeys]) {
+        UserInfo *userInfo = [appData userInfoForId:[key intValue]];
+        NSDictionary *ui = [data objectForKey:key];
+        if ([userInfo.seq isEqualToNumber:[ui objectForKey:@"seq"]]) continue;
+        userInfo.uid = [ui objectForKey:@"uid"];
+        userInfo.username = [ui objectForKey:@"name"];
+        userInfo.birthday = [ui objectForKey:@"birthday"];
+        userInfo.sex = [ui objectForKey:@"sex"];
+        userInfo.hometown = [ui objectForKey:@"hometown"];
+        userInfo.seq = [ui objectForKey:@"seq"];
+    }
+    [AppData saveData];
+    [self.tableView reloadData];
+    FUNC_END();
+}
 
 - (UIActivityIndicatorView *)getActivityIndicator {
     if (!_activityIndicator) {

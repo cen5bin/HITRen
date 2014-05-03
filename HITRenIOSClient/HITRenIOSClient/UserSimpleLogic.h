@@ -21,4 +21,5 @@
 + (BOOL)downloadInfo;
 + (BOOL)updateInfo;
 + (BOOL)updateInfoFinished:(NSDictionary*)ret;
++ (BOOL)downloadUseInfos:(NSArray *)uids;
 @end

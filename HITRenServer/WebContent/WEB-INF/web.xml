@@ -54,6 +54,14 @@
     <servlet-name>DownloadUserInfo</servlet-name>
     <url-pattern>/DownloadUserInfo</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>DownloadUsersData</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.usersimplelogic.DownloadUsersDataServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadUsersData</servlet-name>
+    <url-pattern>/DownloadUsersData</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>ConcernUser</servlet-name>
     <servlet-class>cn.edu.hit.servlet.relationshiplogic.ConcernUserServlet</servlet-class>

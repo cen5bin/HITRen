@@ -5,6 +5,7 @@ package cn.edu.hit.logic;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,6 +16,8 @@ import cn.edu.hit.constant.Relationship;
 import cn.edu.hit.constant.TimeLine;
 import cn.edu.hit.constant.UserConstant;
 import cn.edu.hit.dao.DBController;
+import cn.edu.hit.dao.DataReader;
+import cn.edu.hit.dao.MemWorker;
 import cn.edu.hit.kit.LogKit;
 
 import com.mongodb.BasicDBObject;
@@ -119,6 +122,30 @@ public class UserSimpleLogic {
 		return true;
 	}
 	
+	public static boolean downloadUsersData(ArrayList<Integer> users) throws JSONException {
+		retData = new JSONObject();
+		JSONObject json = new JSONObject();
+		for (int i = users.size() - 1; i >= 0; i--) {
+			int uid = users.get(i);
+			String userInfo = DataReader.getUser(uid);
+			if (userInfo == null) continue;
+			json.put(uid+"", new JSONObject(userInfo));
+			users.remove(i);
+		}
+		BasicDBObject obj = new BasicDBObject(UserConstant.UID, new BasicDBObject("$in", users));
+		DBCursor cursor = DBController.query(UserConstant.COLLNAME, obj);
+		while (cursor.hasNext()) {
+			DBObject retObj = cursor.next();
+			logger.info(retObj.toString());
+			int uid = Integer.parseInt(retObj.get("uid").toString());
+			json.put(uid+"", retObj);
+			MemWorker.setUserInfo(uid, retObj.toString());
+		}
+		retData.put(HttpData.SUC, true);
+		retData.put(HttpData.DATA, json);
+		return true;
+	}
+	
 	// 为当前注册用户建立timeline
 	private static boolean createTimeline(int uid) {
 		BasicDBObject obj = new BasicDBObject(TimeLine.UID, uid);
@@ -200,5 +227,6 @@ public class UserSimpleLogic {
 	}
 	
 	public static JSONObject retData = null;
+	public static Logger logger = Logger.getRootLogger();
 	public static String retString = "";
 }

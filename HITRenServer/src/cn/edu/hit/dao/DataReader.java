@@ -87,4 +87,13 @@ public class DataReader {
 		return MemWorker.getMessageInfo(mid);
 	}
 	
+	/**
+	 * 从缓存获取用户信息
+	 * @param uid
+	 * @return
+	 */
+	public static String getUser(int uid) {
+		return MemWorker.getUserInfo(uid);
+	}
+	
 }
