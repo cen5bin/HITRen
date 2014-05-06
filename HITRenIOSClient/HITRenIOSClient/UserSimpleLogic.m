@@ -11,6 +11,7 @@
 #import "LogKit.h"
 #import "HttpData.h"
 #import "User.h"
+#import "XmppConnector.h"
 
 @implementation UserSimpleLogic
 
@@ -30,6 +31,10 @@
         return NO;
     }
     user.uid = [[ret objectForKey:@"uid"] intValue];
+    XmppConnector *connector = [XmppConnector sharedInstance];
+    connector.uid = user.uid;
+    connector.password = user.password;
+    [connector connect];
     LOG(@"login succ");
     FUNC_END();
     return YES;

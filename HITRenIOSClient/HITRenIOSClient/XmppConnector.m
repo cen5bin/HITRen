@@ -25,6 +25,9 @@ static XmppConnector* connector = nil;
     if (self = [super init]) {
         [self setupStream];
         [self loadConfigure];
+        uid = 35;
+        port = 5222;
+        self.password = @"123";
     }
     return self;
 }
@@ -33,6 +36,7 @@ static XmppConnector* connector = nil;
     NSString *filepath = [[NSBundle mainBundle] pathForResource:@"xmppserver" ofType:@"plist"];
     NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:filepath];
     serverIP = [data objectForKey:@"serverIP"];
+    serverIP = @"192.168.0.93";
     hostname = [data objectForKey:@"hostname"];
 }
 
@@ -42,7 +46,6 @@ static XmppConnector* connector = nil;
 }
 
 - (BOOL)connect {
-    uid = 35;
     port = 5222;
     [xmppStream setHostName:serverIP];
     [xmppStream setHostPort:port];
@@ -72,7 +75,7 @@ static XmppConnector* connector = nil;
 
 - (void)xmppStreamDidConnect:(XMPPStream *)sender {
     LOG(@"xmpp connect success");
-    if (![xmppStream authenticateWithPassword:@"123" error:nil])
+    if (![xmppStream authenticateWithPassword:self.password error:nil])
         LOG(@"xmpp authenticate failed");
 }
 

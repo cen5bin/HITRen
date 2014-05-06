@@ -17,8 +17,9 @@
     int port;
 }
 
-@property (assign, nonatomic) int uid;
-@property (assign, nonatomic) int port;
+@property (nonatomic) int uid;
+@property (nonatomic) int port;
+@property (strong, nonatomic) NSString *password;
 
 + (XmppConnector *)sharedInstance;
 - (id)init;

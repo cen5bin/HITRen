@@ -2,10 +2,12 @@ package cn.edu.hit.logic;
 
 
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
+import org.jivesoftware.smack.XMPPException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +21,7 @@ import cn.edu.hit.dao.DBController;
 import cn.edu.hit.dao.DataReader;
 import cn.edu.hit.dao.MemWorker;
 import cn.edu.hit.kit.LogKit;
+import cn.edu.hit.openfire.AccountManager;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
@@ -50,7 +53,7 @@ public class UserSimpleLogic {
 	}
 	
 	//注册功能
-	public static boolean register(String email, String password) throws JSONException, UnsupportedEncodingException {
+	public static boolean register(String email, String password) throws JSONException, XMPPException, IOException {
 		BasicDBObject obj = new BasicDBObject();
 		retData = new JSONObject();
 		obj.put(UserConstant.EMAIL, email);
@@ -91,6 +94,7 @@ public class UserSimpleLogic {
 			retData.put(HttpData.INFO, "notice 建立失败");
 			return false;
 		}
+		AccountManager.createAccount(uid, password);
 		retData.put(HttpData.SUC, true);
 		retData.put(UserConstant.UID, uid);
 		retData.put(UserConstant.SEQ, 1);
