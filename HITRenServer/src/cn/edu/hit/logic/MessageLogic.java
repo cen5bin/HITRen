@@ -234,17 +234,25 @@ public class MessageLogic {
 	 */
 	public static boolean cancelLikeTheMessage(int uid, int mid) throws JSONException {
 		retData = new JSONObject();
-		BasicDBObject oldObj = new BasicDBObject(Message.MID, mid);
-		BasicDBObject newObj = new BasicDBObject();
-		newObj = newObj.append("$pull", new BasicDBObject(Message.LIKEDLIST, new BasicDBObject(Message.UID, uid)));
-		newObj = newObj.append("$inc", new BasicDBObject(Message.SEQ, 1));
-		boolean ret = DBController.update(Message.COLLNAME, oldObj, newObj, false, false);
-		if (!ret) {
-			retData.put(HttpData.SUC, false);
-			return false;
-		}
-		DBObject retObj = DBController.queryOne(Message.COLLNAME, oldObj);
-		ret = MemWorker.setMessageInfo(mid, retObj.toString());
+//		BasicDBObject oldObj = new BasicDBObject(Message.MID, mid);
+//		BasicDBObject newObj = new BasicDBObject();
+//		newObj = newObj.append("$pull", new BasicDBObject(Message.LIKEDLIST, new BasicDBObject(Message.UID, uid)));
+//		newObj = newObj.append("$inc", new BasicDBObject(Message.SEQ, 1));
+//		boolean ret = DBController.update(Message.COLLNAME, oldObj, newObj, false, false);
+//		if (!ret) {
+//			retData.put(HttpData.SUC, false);
+//			return false;
+//		}
+//		DBObject retObj = DBController.queryOne(Message.COLLNAME, oldObj);
+//		ret = MemWorker.setMessageInfo(mid, retObj.toString());
+//		if (!ret) {
+//			retData.put(HttpData.SUC, false);
+//			return false;
+//		}
+		BasicDBObject oldObj = new BasicDBObject(LikedList.MID, mid);
+		BasicDBObject newObj = new BasicDBObject("$pull", new BasicDBObject(LikedList.LIST, uid));
+		newObj.put("$inc", new BasicDBObject(LikedList.SEQ, 1));
+		boolean ret = DBController.update(LikedList.COLLNAME, oldObj, newObj, false, false);
 		if (!ret) {
 			retData.put(HttpData.SUC, false);
 			return false;

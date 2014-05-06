@@ -16,6 +16,7 @@
 + (BOOL)downloadTimeline;
 + (BOOL)downloadMessages:(NSArray *)mids;
 + (BOOL)likeMessage:(int)mid;
++ (BOOL)dislikeMessage:(int)mid;
 
 
 @end

@@ -99,4 +99,20 @@
     return YES;
 }
 
++ (BOOL)dislikeMessage:(int)mid {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    User *user = [MessageLogic user];
+    [data setIntValue:mid forKey:@"mid"];
+    [data setIntValue:user.uid forKey:@"uid"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"CancelLikeTheMessage" withEventName:ASYNC_EVENT_LIKEMESSAGE];
+    if (!ret) {
+        L(@"CancelLikeMessage failed");
+        FUNC_END();
+        return NO;
+    }
+    FUNC_END();
+    return YES;
+}
+
 @end

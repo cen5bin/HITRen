@@ -387,7 +387,10 @@
 }
 
 - (void)dislikeMessage:(id)sender {
-    
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
+    Message *message = [_data objectAtIndex:indexPath.row];
+    [MessageLogic dislikeMessage:[message.mid intValue]];
+
 }
 
 - (void)commentMessage:(id)sender {
