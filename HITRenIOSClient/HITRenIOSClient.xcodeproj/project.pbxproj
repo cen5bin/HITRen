@@ -90,9 +90,11 @@
 		F8550F0118C4C251005E51FE /* p_btm3.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFC18C4C251005E51FE /* p_btm3.png */; };
 		F8550F0218C4C251005E51FE /* p_btm5.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFD18C4C251005E51FE /* p_btm5.png */; };
 		F8550F0318C4C251005E51FE /* p_btm4.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFE18C4C251005E51FE /* p_btm4.png */; };
+		F8696A801918BCA5008887AD /* liked1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8696A7F1918BCA5008887AD /* liked1.png */; };
 		F86B9E4918D8806900D71A7B /* me.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4818D8806900D71A7B /* me.png */; };
 		F86B9E4C18D8826400D71A7B /* me1.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4A18D8826400D71A7B /* me1.png */; };
 		F86B9E4D18D8826400D71A7B /* me2.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4B18D8826400D71A7B /* me2.png */; };
+		F8819FB619152D1C008BB814 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = F8819FB519152D1C008BB814 /* share.png */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
 		F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3918BC7C2800407521 /* LoginViewController.m */; };
@@ -302,9 +304,12 @@
 		F8550EFC18C4C251005E51FE /* p_btm3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm3.png; sourceTree = "<group>"; };
 		F8550EFD18C4C251005E51FE /* p_btm5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm5.png; sourceTree = "<group>"; };
 		F8550EFE18C4C251005E51FE /* p_btm4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm4.png; sourceTree = "<group>"; };
+		F8696A7C1918B47B008887AD /* MessageCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCellDelegate.h; sourceTree = "<group>"; };
+		F8696A7F1918BCA5008887AD /* liked1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liked1.png; sourceTree = "<group>"; };
 		F86B9E4818D8806900D71A7B /* me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me.png; sourceTree = "<group>"; };
 		F86B9E4A18D8826400D71A7B /* me1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me1.png; sourceTree = "<group>"; };
 		F86B9E4B18D8826400D71A7B /* me2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me2.png; sourceTree = "<group>"; };
+		F8819FB519152D1C008BB814 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB3518BC79EA00407521 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		F88BCB3618BC79EA00407521 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
@@ -909,6 +914,8 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8696A7F1918BCA5008887AD /* liked1.png */,
+				F8819FB519152D1C008BB814 /* share.png */,
 				F89DFB011914FA9E0043DD6B /* comment.png */,
 				F89DFAEF1914ED130043DD6B /* liked.png */,
 				F89B9C9818D6E8B0007DDDCC /* pic */,
@@ -964,6 +971,7 @@
 				F823B51E190666CD004D4514 /* ShortMessageCell.m */,
 				F89DFADF1913B0240043DD6B /* MoreMessageCell.h */,
 				F89DFAE01913B0240043DD6B /* MoreMessageCell.m */,
+				F8696A7C1918B47B008887AD /* MessageCellDelegate.h */,
 			);
 			name = component;
 			sourceTree = "<group>";
@@ -1126,6 +1134,7 @@
 				F842BB8919051BC600148848 /* Menu.xib in Resources */,
 				F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */,
 				F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */,
+				F8819FB619152D1C008BB814 /* share.png in Resources */,
 				F8550F0318C4C251005E51FE /* p_btm4.png in Resources */,
 				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,
 				F89DFAF01914ED130043DD6B /* liked.png in Resources */,
@@ -1147,6 +1156,7 @@
 				F8E9686118C5F96C00B9384B /* topbar2.png in Resources */,
 				F8550EFF18C4C251005E51FE /* p_btm1.png in Resources */,
 				F84B7DFD18BB43EB007FC2D5 /* xmppserver.plist in Resources */,
+				F8696A801918BCA5008887AD /* liked1.png in Resources */,
 				F8550F0218C4C251005E51FE /* p_btm5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

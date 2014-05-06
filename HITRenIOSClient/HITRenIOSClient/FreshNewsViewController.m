@@ -98,6 +98,12 @@
     L([message.time description]);
     cell.time.text = [format stringFromDate:message.time];
     
+    cell.delegate = self;
+//    [cell.likedButton addTarget:self action:@selector(likeMessage:) forControlEvents:UIControlEventTouchUpInside];
+//    [cell.commentButton addTarget:self action:@selector(commentMessage:) forControlEvents:UIControlEventTouchUpInside];
+//    [cell.shareButton addTarget:self action:@selector(shareMessage:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 调整cell中各个view的frame
     CGRect rect = cell.textView.frame;
     CGFloat height = rect.size.height;
     rect.size.height = [self calculateTextViewHeight:message.content];
@@ -359,6 +365,7 @@
     FUNC_END();
 }
 
+// 位于顶部的更新标志
 - (UIActivityIndicatorView *)getActivityIndicator {
     if (!_activityIndicator) {
         _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -369,6 +376,26 @@
     if (!_activityIndicator.isAnimating)
         [_activityIndicator startAnimating];
     return _activityIndicator;
+}
+
+- (void)likeMessage:(id)sender {
+//    return;
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
+    Message *message = [_data objectAtIndex:indexPath.row];
+    [MessageLogic likeMessage:[message.mid intValue]];
+//    L([indexPath description]);
+}
+
+- (void)dislikeMessage:(id)sender {
+    
+}
+
+- (void)commentMessage:(id)sender {
+    
+}
+
+- (void)shareMessage:(id)sender {
+    
 }
 
 - (void)didReceiveMemoryWarning

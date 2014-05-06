@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import cn.edu.hit.constant.Comment;
 import cn.edu.hit.constant.HttpData;
 import cn.edu.hit.constant.IDCounter;
+import cn.edu.hit.constant.LikedList;
 import cn.edu.hit.constant.Message;
 import cn.edu.hit.constant.TimeLine;
 import cn.edu.hit.dao.DBController;
@@ -31,6 +32,7 @@ import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.util.JSON;
 
 public class MessageLogic {
 	public static JSONObject retData;
@@ -179,27 +181,45 @@ public class MessageLogic {
 	 */
 	public static boolean likeTheMessage(int uid, int mid) throws Exception {
 		retData = new JSONObject();
-		BasicDBObject oldObj = new BasicDBObject(Message.MID, mid);
-		BasicDBObject newObj = new BasicDBObject();
-		BasicDBObject userInfo = new BasicDBObject();
-		userInfo.put(Message.LIKEDINFO.UID, uid);
+//		BasicDBObject oldObj = new BasicDBObject(Message.MID, mid);
+//		BasicDBObject newObj = new BasicDBObject();
+//		BasicDBObject userInfo = new BasicDBObject();
+//		userInfo.put(Message.LIKEDINFO.UID, uid);
+//		User user = DataReader.getLeastUserInfo(uid);
+////		userInfo.put(Message.LIKEDINFO.UNAME, user.getName());
+//		newObj.put("$push", new BasicDBObject().append(Message.LIKEDLIST, userInfo));
+//		newObj.put("$inc", new BasicDBObject(Message.SEQ, 1));
+//		boolean ret = DBController.update(Message.COLLNAME, oldObj, newObj, false, false);
+//		if (!ret) {
+//			retData.put(HttpData.SUC, false);
+//			return false;
+//		}
+//		DBObject retObj = DBController.queryOne(Message.COLLNAME, oldObj);
+//		ret = MemWorker.setMessageInfo(mid, retObj.toString());
+//		if (!ret) {
+//			retData.put(HttpData.SUC, false);
+//			return false;
+//		}
+		BasicDBObject oldObj = new BasicDBObject(LikedList.MID, mid);
+		BasicDBObject newObj = new BasicDBObject("$addToSet", new BasicDBObject(LikedList.LIST, uid));
+		newObj.put("$inc", new BasicDBObject(LikedList.SEQ, 1));
+		boolean ret = DBController.update(LikedList.COLLNAME, oldObj, newObj, true, false);
+		if (!ret) {
+			retData.put(HttpData.SUC, false);
+			return false;
+		}
+		int uid0 = 0;
+		String messageInfo = DataReader.getMessage(mid);
+		if (messageInfo != null) {
+			JSONObject json = new JSONObject(messageInfo);
+			uid0 = json.getInt("uid");
+		}
+		else {
+			DBObject retObj = DBController.queryOne(Message.COLLNAME, oldObj);
+			uid0 = Integer.parseInt(retObj.get(Message.UID).toString());
+		}
 		User user = DataReader.getLeastUserInfo(uid);
-//		userInfo.put(Message.LIKEDINFO.UNAME, user.getName());
-		newObj.put("$push", new BasicDBObject().append(Message.LIKEDLIST, userInfo));
-		newObj.put("$inc", new BasicDBObject(Message.SEQ, 1));
-		boolean ret = DBController.update(Message.COLLNAME, oldObj, newObj, false, false);
-		if (!ret) {
-			retData.put(HttpData.SUC, false);
-			return false;
-		}
-		DBObject retObj = DBController.queryOne(Message.COLLNAME, oldObj);
-		ret = MemWorker.setMessageInfo(mid, retObj.toString());
-		if (!ret) {
-			retData.put(HttpData.SUC, false);
-			return false;
-		}
-		
-		int uid0 = Integer.parseInt(retObj.get(Message.UID).toString());
+//		int uid0 = Integer.parseInt(retObj.get(Message.UID).toString());
 		TipsPusher.messageIsLikedByUser(uid0, uid, user.getName(), "", mid);
 		retData.put(HttpData.SUC, true);
 		return true;

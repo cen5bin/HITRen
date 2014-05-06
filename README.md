@@ -34,6 +34,9 @@ HITRen
 - 取消点赞: [CancelLikeTheMessageServlet.java][20], 参数： `uid`, `mid`:被取消点赞的状态
 - 评论状态: [CommentMessageServlet.java][21], 参数: `uid`评论者, `mid`: 被评论的状态, `type`:评论类型，0表示直接评论状态，1表示回复某人, 如果`type`是1，则有字段`reuid`表示被回复的uid,`content`表示回复内容 
 - 分享状态: [ShareMessageServlet.java][22], 参数: `uid`分享者, `mid`被分享的状态，`content`分享时的描述, `gnames`分享给这些分组的好友看，数组为空表示分享给所有好友看
+- 下载timeline:[DownloadTimelineServlet.java][23], 参数: `seq`timeline的seq
+- 下载状态数据:[DownloadMessagesServlet.java][24], 参数: `mids`
+
 
 
 ---
@@ -77,3 +80,5 @@ HITRen
 [20]:HITRenServer/src/cn/edu/hit/servlet/messagelogic/CancelLikeTheMessageServlet.java
 [21]:HITRenServer/src/cn/edu/hit/servlet/messagelogic/CommentMessageServlet.java
 [22]:HITRenServer/src/cn/edu/hit/servlet/messagelogic/ShareMessageServlet.java
+[23]:HITRenServer/src/cn/edu/hit/servlet/messagelogic/DownloadTimelineServlet.java
+[24]:HITRenServer/src/cn/edu/hit/servlet/messagelogic/DownloadMessagesServlet.java

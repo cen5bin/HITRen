@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageCellDelegate.h"
 
-@interface FreshNewsViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate> {
+@interface FreshNewsViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MessageCellDelegate> {
     NSMutableArray* _data;
     UIActivityIndicatorView *_activityIndicator;
     BOOL _timelineDownloading;

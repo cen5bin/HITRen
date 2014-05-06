@@ -11,7 +11,7 @@
 static NSString *IP = //@"10.9.180.121";
 //@"127.0.0.1";
 @"192.168.0.93";
-//@"192.168.1.105";
+//@"192.168.1.115";
 
 static NSString *SERVER_NAME = @"HITRenServer";
 static int PORT = 8080;

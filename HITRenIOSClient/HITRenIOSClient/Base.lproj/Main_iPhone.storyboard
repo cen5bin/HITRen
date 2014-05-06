@@ -192,6 +192,9 @@
                                                                         <color key="titleColor" red="0.094117656350135803" green="0.086274512112140656" blue="0.54117649793624878" alpha="1" colorSpace="deviceRGB"/>
                                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="likeMessage:" destination="i7I-z3-HIe" eventType="touchUpInside" id="8pB-yn-dLr"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xNl-TJ-VFe">
                                                                     <rect key="frame" x="102" y="6" width="102" height="25"/>
@@ -201,15 +204,21 @@
                                                                         <color key="titleColor" red="0.094117656349999995" green="0.086274512110000007" blue="0.5411764979" alpha="1" colorSpace="deviceRGB"/>
                                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="commentMessage:" destination="i7I-z3-HIe" eventType="touchUpInside" id="p0k-oa-r6E"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lzl-VQ-8Nf">
                                                                     <rect key="frame" x="204" y="6" width="102" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                    <state key="normal" title="分享">
+                                                                    <state key="normal" title="分享" image="share.png">
                                                                         <color key="titleColor" red="0.094117656349999995" green="0.086274512110000007" blue="0.5411764979" alpha="1" colorSpace="deviceRGB"/>
                                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="shareMessage:" destination="i7I-z3-HIe" eventType="touchUpInside" id="uAw-Di-Kfu"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.031372550874948502" green="0.011764707043766975" blue="0.035294119268655777" alpha="0.059999999999999998" colorSpace="deviceRGB"/>
@@ -222,7 +231,10 @@
                                         <connections>
                                             <outlet property="bgView" destination="BpI-2d-0Xp" id="vmc-vo-coK"/>
                                             <outlet property="cellBar" destination="p3i-mL-cre" id="eqI-Mg-Pmb"/>
+                                            <outlet property="commentButton" destination="xNl-TJ-VFe" id="DS5-E6-nkm"/>
+                                            <outlet property="likedButton" destination="XsZ-1s-ZN7" id="w9p-i1-j55"/>
                                             <outlet property="picture" destination="BVc-Nk-cue" id="bl2-YI-pq9"/>
+                                            <outlet property="shareButton" destination="lzl-VQ-8Nf" id="0X6-q2-AY1"/>
                                             <outlet property="textView" destination="50O-xH-0Kc" id="sYM-t0-dCd"/>
                                             <outlet property="time" destination="lwS-nf-4B4" id="MrG-7k-Q0q"/>
                                             <outlet property="username" destination="eqz-2q-cao" id="XBT-xq-T6T"/>
@@ -1229,6 +1241,7 @@
         <image name="p_btm3.png" width="1181" height="173"/>
         <image name="p_btm4.png" width="1181" height="173"/>
         <image name="password.png" width="496" height="76"/>
+        <image name="share.png" width="204" height="50"/>
         <image name="topbar0.png" width="640" height="91"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

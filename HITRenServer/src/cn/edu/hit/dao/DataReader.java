@@ -31,7 +31,7 @@ public class DataReader {
 			if (retObj == null)
 				return null;
 			name = retObj.get(UserConstant.NAME).toString();
-			MemWorker.setUserInfo(uid, retObj.toString());
+//			MemWorker.setUserInfo(uid, retObj.toString());
 		}
 		User user = new User();
 		user.setUid(uid);
