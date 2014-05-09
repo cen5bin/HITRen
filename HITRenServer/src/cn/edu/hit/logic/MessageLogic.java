@@ -63,7 +63,7 @@ public class MessageLogic {
 		obj.put(Message.TIME, now);
 		obj.put(Message.SEQ, 1);
 //		sobj.put(Message.COMMENTLIST, new ArrayList<String>());
-		obj.put(Message.LIKEDLIST, new ArrayList<String>());
+//		obj.put(Message.LIKEDLIST, new ArrayList<String>());
 		obj.put(Message.SHATECOUNT, 0);
 		obj.put(Message.TYPE, type);
 		obj.put(Message.CONTENT, message);

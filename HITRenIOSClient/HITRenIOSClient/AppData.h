@@ -8,16 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@class Timeline, Message, UserInfo;
+@class Timeline, Message, UserInfo, Notice, NoticeObject;
 @interface AppData : NSObject {
     Timeline *_timeline;
     NSMutableDictionary *_messages;
     NSMutableDictionary *_userInfos;
+    NSMutableDictionary *_notices;
+    NSMutableArray *_noticeLine;
+//    NSMutableArray *_activityLine;
     
 //    NSMutableArray *_messageList;
 }
 
 @property (nonatomic, strong, getter = getTimeline) Timeline *timeline;
+@property (nonatomic, strong, getter = getNoticeLine) NSMutableArray *noticeLine;
 //@property (nonatomic, strong) NSMutableDictionary *userInfos;
 //@property (nonatomic, strong, getter = getMessageList) NSMutableArray *messageList;
 
@@ -33,6 +37,14 @@
 - (NSArray *)getMessagesInPage:(int)page;
 - (NSArray *)userInfosNeedDownload:(NSArray *)uids;
 - (UserInfo *)readUserInfoForId:(int)uid;
+
+- (Notice *)newNotice;
+- (Notice *)lastNoticeOfUid:(int)uid;
+- (void)addNoticeObject:(NoticeObject *)noticeObject inNotice:(Notice *)notice;
+- (void)addNoticeObject:(NoticeObject *)noticeObject from:(int)uid;
++ (NSString *)stringOfNoticeObject:(NoticeObject *)noticeObject;
+- (NSString *)lastNoticeStringOfUid:(int)uid;
+- (Notice *)activitiesAtIndex:(int)index;
 
 //- (UserInfo *)getUserInfo:(int)uid;
 

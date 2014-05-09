@@ -11,6 +11,7 @@
 #import "Message.h"
 #import "Comment.h"
 #import "UserInfo.h"
+#import "Notice.h"
 
 //static NSMutableArray *_messages;
 //static Timeline *_timeline;
@@ -74,6 +75,59 @@
     request.fetchLimit = 1;
     NSArray *array = [context executeFetchRequest:request error:nil];
     if (array && array.count) return [array objectAtIndex:0];
+    return nil;
+}
+
++ (Notice *)getNoticeOfUid:(int)uid atIndex:(int)index {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Notice" inManagedObjectContext:context];
+    request.entity = entity;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid == %d and index = %d", uid, index];
+    request.predicate = predicate;
+    request.fetchLimit = 1;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return [array objectAtIndex:0];
+    return nil;
+}
+
++ (Notice *)getNotice {
+    NSManagedObjectContext *context = [DBController context];
+    Notice *notice = [NSEntityDescription insertNewObjectForEntityForName:@"Notice" inManagedObjectContext:context];
+    return notice;
+}
+
++ (Notice *)getLastNoticeOfUid:(int)uid {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Notice" inManagedObjectContext:context];
+    request.entity = entity;
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:NO];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid == %d", uid];
+    request.predicate = predicate;
+    request.fetchLimit = 1;
+    request.sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return [array objectAtIndex:0];
+    Notice *notice = [DataManager getNotice];
+    notice.index = [NSNumber numberWithInt:1];
+    notice.uid = [NSNumber numberWithInt:uid];
+    return notice;
+}
+
++ (Notice *)activitiesAtIndex:(int)index {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Notice" inManagedObjectContext:context];
+    request.entity = entity;
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:NO];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid == 0"];
+    request.predicate = predicate;
+    request.fetchLimit = index + 1;
+    request.sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return [array lastObject];
     return nil;
 }
 

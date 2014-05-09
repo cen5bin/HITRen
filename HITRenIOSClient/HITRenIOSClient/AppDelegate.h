@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@class XMPPDataManager;
+@interface AppDelegate : UIResponder <UIApplicationDelegate> {
+    XMPPDataManager *_xmppDataManager;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

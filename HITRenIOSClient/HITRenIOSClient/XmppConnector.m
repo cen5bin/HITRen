@@ -85,8 +85,9 @@ static XmppConnector* connector = nil;
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
+//    [[message elementForName:@"body"] ∂]
     NSString *msg = [[message elementForName:@"body"] stringValue];
-    L(msg);
+    [[NSNotificationCenter defaultCenter] postNotificationName:XMPP_MESSAGE_RECEIVED object:msg];
 }
 
 @end

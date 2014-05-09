@@ -11,6 +11,8 @@
 #import "Timeline.h"
 #import "Message.h"
 #import "UserInfo.h"
+#import "Notice.h"
+#import "NoticeObject.h"
 //#import "MessageLogic.h"
 
 static AppData *appData;
@@ -18,12 +20,14 @@ static AppData *appData;
 @implementation AppData
 
 @synthesize timeline = _timeline;
+@synthesize noticeLine = _noticeLine;
 
 - (id)init {
     if (self = [super init]) {
         [self loadMessageInPage:0];
 //        self.userInfos = [[NSMutableDictionary alloc] init];
         _userInfos = [[NSMutableDictionary alloc] init];
+        _notices = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -40,6 +44,14 @@ static AppData *appData;
 
 + (Message *)newMessage {
     return [DataManager getMessage];
+}
+
+- (NSMutableArray *)getNoticeLine {
+    if (_noticeLine) return _noticeLine;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    _noticeLine = [userDefaults objectForKey:@"noticeLine"];
+    if (!_noticeLine) _noticeLine = [[NSMutableArray alloc] init];
+    return _noticeLine;
 }
 
 - (Timeline*)getTimeline {
@@ -116,6 +128,7 @@ static AppData *appData;
     return userInfo;
 }
 
+// 当前需要下载的用户信息，返回所有的uid，传递不确定是否需要下载的uid
 - (NSArray *)userInfosNeedDownload:(NSArray *)uids {
     NSMutableArray *ret = [[NSMutableArray alloc] init];
     for (NSNumber *uid in uids) {
@@ -125,6 +138,79 @@ static AppData *appData;
     return ret;
 }
 
+
+
+- (Notice *)newNotice{
+    return [DataManager getNotice];
+}
+
+- (Notice *)lastNoticeOfUid:(int)uid {
+    Notice *notice = [DataManager getLastNoticeOfUid:uid];
+    if ([notice full]) {
+        int index = [notice.index intValue];
+        notice = [self newNotice];
+        notice.index = [NSNumber numberWithInt:index+1];
+    }
+    return notice;
+}
+
+- (void)addNoticeObject:(NoticeObject *)noticeObject inNotice:(Notice *)notice{
+    if ([notice full]) {
+        int index = [notice.index intValue];
+        notice = [self newNotice];
+        notice.index = [NSNumber numberWithInt:index+1];
+    }
+    [notice addNotice:noticeObject];
+}
+
+- (void)addNoticeObject:(NoticeObject *)noticeObject from:(int)uid{
+    NSNumber *uid0 = [NSNumber numberWithInt:uid];
+    Notice *notice = [_notices objectForKey:uid0];
+    if (!notice) {
+        notice = [self lastNoticeOfUid:uid];
+        [_notices setObject:notice forKey:uid0];
+    }
+    if ([notice full]) {
+        int index = [notice.index intValue];
+        notice = [self newNotice];
+        notice.index = [NSNumber numberWithInt:index+1];
+        [_notices setObject:notice forKey:uid0];
+    }
+    [notice addNotice:noticeObject];
+    [AppData saveData];
+    if (uid == 0) return;
+    if ([self.noticeLine containsObject:uid0])
+        [self.noticeLine removeObject:uid0];
+    [self.noticeLine insertObject:uid0 atIndex:0];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:self.noticeLine forKey:@"noticeLine"];
+    [userDefaults synchronize];
+}
+
++ (NSString *)stringOfNoticeObject:(NoticeObject *)noticeObject {
+    int type = noticeObject.type;
+    NSString *ret = @"";
+    if (type == 1) {
+        NSDictionary *dic = noticeObject.content;
+//        NSString *username = [[dic objectForKey:@"by"] objectForKey:@"name"];
+        NSString *message = [[dic objectForKey:@"message"] objectForKey:@"content"];
+        NSString *op = @"";
+        int type0 = [[dic objectForKey:@"type"] intValue];
+        if (type0 == 1) op = @"赞";
+        ret = [NSString stringWithFormat:@"%@了你的状态:\"%@\"", op, message];
+    }
+    return ret;
+}
+
+- (NSString *)lastNoticeStringOfUid:(int)uid {
+    Notice *notice = [self lastNoticeOfUid:uid];
+    NoticeObject *obj = [notice.notices lastObject];
+    return [AppData stringOfNoticeObject:obj];
+}
+
+- (Notice *)activitiesAtIndex:(int)index{
+    return [DataManager activitiesAtIndex:index];
+}
 //- (UserInfo *)getUserInfo:(int)uid {
 //    
 //}

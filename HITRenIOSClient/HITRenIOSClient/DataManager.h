@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DBController.h"
 
-@class Timeline, Message, UserInfo;
+@class Timeline, Message, UserInfo, Notice;
 @interface DataManager : NSObject
 
 + (Timeline *)timeline;
@@ -17,6 +17,13 @@
 + (UserInfo *)getUserInfo;
 + (UserInfo *)getUserInfoOfUid:(int)uid;
 + (NSArray *)messagesInPage:(int)page;
+
++ (Notice *)getNoticeOfUid:(int)uid atIndex:(int)index;
++ (Notice *)getLastNoticeOfUid:(int)uid;
++ (Notice *)getNotice;
++ (Notice *)activitiesAtIndex:(int)index;
+
+
 + (void)deleteEntity:(NSManagedObject *)entity;
 + (void)save;
 

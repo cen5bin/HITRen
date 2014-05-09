@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "XmppConnector.h"
 #import "DBController.h"
+#import "XMPPDataManager.h"
 
 
 @implementation AppDelegate
@@ -18,7 +19,10 @@
     // Override point for customization after application launch.
 //    [[XmppConnector sharedInstance] connect];
     [DBController deleteFile];
-
+    _xmppDataManager = [[XMPPDataManager alloc] init];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[[NSMutableArray alloc] init] forKey:@"noticeLine"];
+    [userDefaults synchronize];
     
 //    NSString* tmp = @" {\"asd\" : \"1\",\"aaa\":1} ";
 //    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[tmp dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] options:NSJSONReadingMutableLeaves error:nil];

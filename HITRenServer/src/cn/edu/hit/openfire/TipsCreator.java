@@ -3,6 +3,8 @@ package cn.edu.hit.openfire;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cn.edu.hit.dao.DataManager;
+
 enum SNSPushMessageType {
 	LIKED,
 	COMMENTED,
@@ -12,7 +14,7 @@ enum SNSPushMessageType {
 
 class SNSPushMessageField {
 	protected final static String TYPE = "type";
-	protected final static String MID = "mid";
+	protected final static String MESSAGE = "message";
 	protected final static String BY = "by";
 	protected final static String BY_UID = "uid";
 	protected final static String BY_NAME = "name";
@@ -20,7 +22,13 @@ class SNSPushMessageField {
 	
 }
 
+class PushMessageField {
+	protected final static String TYPE = "type";
+	protected final static String CONTRNT = "content";
+}
+
 public class TipsCreator {
+	
 	
 	protected static String createSNSPushMessage(SNSPushMessageType type, int uid, String name) throws JSONException {
 		return createSNSPushMessage(type, uid, name, "", -1);
@@ -38,13 +46,16 @@ public class TipsCreator {
 		else if (type == SNSPushMessageType.REPORTED)
 			type0 = 4;
 		retObj.put(SNSPushMessageField.TYPE, type0);
-		retObj.put(SNSPushMessageField.MID, mid);
+		retObj.put(SNSPushMessageField.MESSAGE, DataManager.getMessage(mid, true));
 		JSONObject by = new JSONObject();
 		by.put(SNSPushMessageField.BY_UID, uid);
 		by.put(SNSPushMessageField.BY_NAME, name);
 		by.put(SNSPushMessageField.BY_PIC, pic);
 		retObj.put(SNSPushMessageField.BY, by);
-		return retObj.toString();
+		JSONObject json = new JSONObject();
+		json.put(PushMessageField.TYPE, 1);
+		json.put(PushMessageField.CONTRNT, retObj);
+		return json.toString();
 	}
 	
 	

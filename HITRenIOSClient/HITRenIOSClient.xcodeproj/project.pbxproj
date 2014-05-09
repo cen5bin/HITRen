@@ -91,9 +91,14 @@
 		F8550F0218C4C251005E51FE /* p_btm5.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFD18C4C251005E51FE /* p_btm5.png */; };
 		F8550F0318C4C251005E51FE /* p_btm4.png in Resources */ = {isa = PBXBuildFile; fileRef = F8550EFE18C4C251005E51FE /* p_btm4.png */; };
 		F8696A801918BCA5008887AD /* liked1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8696A7F1918BCA5008887AD /* liked1.png */; };
+		F8696A831918CAD8008887AD /* NoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8696A821918CAD8008887AD /* NoticeCell.m */; };
+		F8696A861918D95D008887AD /* Notice.m in Sources */ = {isa = PBXBuildFile; fileRef = F8696A851918D95D008887AD /* Notice.m */; };
+		F8696A891918D9AC008887AD /* NoticeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F8696A881918D9AC008887AD /* NoticeObject.m */; };
+		F8696A8C1918FA55008887AD /* XMPPDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8696A8B1918FA55008887AD /* XMPPDataManager.m */; };
 		F86B9E4918D8806900D71A7B /* me.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4818D8806900D71A7B /* me.png */; };
 		F86B9E4C18D8826400D71A7B /* me1.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4A18D8826400D71A7B /* me1.png */; };
 		F86B9E4D18D8826400D71A7B /* me2.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4B18D8826400D71A7B /* me2.png */; };
+		F87209C3191CB53E00FAC7A1 /* NoticeViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F87209C2191CB53E00FAC7A1 /* NoticeViewBar.m */; };
 		F8819FB619152D1C008BB814 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = F8819FB519152D1C008BB814 /* share.png */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
@@ -132,7 +137,7 @@
 		F8E9687018C6DCB500B9384B /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9686F18C6DCB500B9384B /* email.png */; };
 		F8E9687218C6DE4F00B9384B /* password.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9687118C6DE4F00B9384B /* password.png */; };
 		F8E9687618C7055E00B9384B /* UIFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687518C7055E00B9384B /* UIFunctions.m */; };
-		F8E9687918C709CB00B9384B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687818C709CB00B9384B /* MessageViewController.m */; };
+		F8E9687918C709CB00B9384B /* NoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687818C709CB00B9384B /* NoticeViewController.m */; };
 		F8E9687C18C70AAD00B9384B /* ToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687B18C70AAD00B9384B /* ToolsViewController.m */; };
 		F8E9687F18C70B0700B9384B /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9687E18C70B0700B9384B /* CalendarViewController.m */; };
 		F8E9688218C70B5700B9384B /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9688118C70B5700B9384B /* PersonViewController.m */; };
@@ -306,9 +311,19 @@
 		F8550EFE18C4C251005E51FE /* p_btm4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_btm4.png; sourceTree = "<group>"; };
 		F8696A7C1918B47B008887AD /* MessageCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCellDelegate.h; sourceTree = "<group>"; };
 		F8696A7F1918BCA5008887AD /* liked1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liked1.png; sourceTree = "<group>"; };
+		F8696A811918CAD8008887AD /* NoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeCell.h; sourceTree = "<group>"; };
+		F8696A821918CAD8008887AD /* NoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCell.m; sourceTree = "<group>"; };
+		F8696A841918D95D008887AD /* Notice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notice.h; sourceTree = "<group>"; };
+		F8696A851918D95D008887AD /* Notice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notice.m; sourceTree = "<group>"; };
+		F8696A871918D9AC008887AD /* NoticeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeObject.h; sourceTree = "<group>"; };
+		F8696A881918D9AC008887AD /* NoticeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeObject.m; sourceTree = "<group>"; };
+		F8696A8A1918FA55008887AD /* XMPPDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDataManager.h; sourceTree = "<group>"; };
+		F8696A8B1918FA55008887AD /* XMPPDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDataManager.m; sourceTree = "<group>"; };
 		F86B9E4818D8806900D71A7B /* me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me.png; sourceTree = "<group>"; };
 		F86B9E4A18D8826400D71A7B /* me1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me1.png; sourceTree = "<group>"; };
 		F86B9E4B18D8826400D71A7B /* me2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me2.png; sourceTree = "<group>"; };
+		F87209C1191CB53E00FAC7A1 /* NoticeViewBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeViewBar.h; sourceTree = "<group>"; };
+		F87209C2191CB53E00FAC7A1 /* NoticeViewBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeViewBar.m; sourceTree = "<group>"; };
 		F8819FB519152D1C008BB814 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB3518BC79EA00407521 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -368,8 +383,8 @@
 		F8E9687118C6DE4F00B9384B /* password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = password.png; sourceTree = "<group>"; };
 		F8E9687418C7055E00B9384B /* UIFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFunctions.h; sourceTree = "<group>"; };
 		F8E9687518C7055E00B9384B /* UIFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFunctions.m; sourceTree = "<group>"; };
-		F8E9687718C709CB00B9384B /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
-		F8E9687818C709CB00B9384B /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		F8E9687718C709CB00B9384B /* NoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeViewController.h; sourceTree = "<group>"; };
+		F8E9687818C709CB00B9384B /* NoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeViewController.m; sourceTree = "<group>"; };
 		F8E9687A18C70AAD00B9384B /* ToolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolsViewController.h; sourceTree = "<group>"; };
 		F8E9687B18C70AAD00B9384B /* ToolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolsViewController.m; sourceTree = "<group>"; };
 		F8E9687D18C70B0700B9384B /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
@@ -537,6 +552,10 @@
 				F89DFADD191372E60043DD6B /* Message.m */,
 				F89DFAE2191494AD0043DD6B /* UserInfo.h */,
 				F89DFAE3191494AD0043DD6B /* UserInfo.m */,
+				F8696A841918D95D008887AD /* Notice.h */,
+				F8696A851918D95D008887AD /* Notice.m */,
+				F8696A871918D9AC008887AD /* NoticeObject.h */,
+				F8696A881918D9AC008887AD /* NoticeObject.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -572,8 +591,8 @@
 				F88BCB4118BC947F00407521 /* MainViewController.m */,
 				F8E9686818C5FC3900B9384B /* FreshNewsViewController.h */,
 				F8E9686918C5FC3900B9384B /* FreshNewsViewController.m */,
-				F8E9687718C709CB00B9384B /* MessageViewController.h */,
-				F8E9687818C709CB00B9384B /* MessageViewController.m */,
+				F8E9687718C709CB00B9384B /* NoticeViewController.h */,
+				F8E9687818C709CB00B9384B /* NoticeViewController.m */,
 				F8E9687A18C70AAD00B9384B /* ToolsViewController.h */,
 				F8E9687B18C70AAD00B9384B /* ToolsViewController.m */,
 				F8E9687D18C70B0700B9384B /* CalendarViewController.h */,
@@ -876,6 +895,8 @@
 		F84B7DF718BB3F5E007FC2D5 /* xmpp */ = {
 			isa = PBXGroup;
 			children = (
+				F8696A8A1918FA55008887AD /* XMPPDataManager.h */,
+				F8696A8B1918FA55008887AD /* XMPPDataManager.m */,
 				F84B7D6118BB3C6A007FC2D5 /* XMPPFramework */,
 				F84B7DF818BB3F81007FC2D5 /* XmppConnector.h */,
 				F84B7DF918BB3F81007FC2D5 /* XmppConnector.m */,
@@ -972,6 +993,10 @@
 				F89DFADF1913B0240043DD6B /* MoreMessageCell.h */,
 				F89DFAE01913B0240043DD6B /* MoreMessageCell.m */,
 				F8696A7C1918B47B008887AD /* MessageCellDelegate.h */,
+				F8696A811918CAD8008887AD /* NoticeCell.h */,
+				F8696A821918CAD8008887AD /* NoticeCell.m */,
+				F87209C1191CB53E00FAC7A1 /* NoticeViewBar.h */,
+				F87209C2191CB53E00FAC7A1 /* NoticeViewBar.m */,
 			);
 			name = component;
 			sourceTree = "<group>";
@@ -1213,6 +1238,7 @@
 				F89DFAE4191494AD0043DD6B /* UserInfo.m in Sources */,
 				F88BCB4218BC947F00407521 /* MainViewController.m in Sources */,
 				F80B0D5C18744C17003E72DC /* TestUserSimpleLogic.m in Sources */,
+				F8696A831918CAD8008887AD /* NoticeCell.m in Sources */,
 				F84B7DE118BB3C8D007FC2D5 /* GCDAsyncSocket.m in Sources */,
 				F84B7DEB18BB3C8D007FC2D5 /* DDXMLDocument.m in Sources */,
 				F80B0D50187426F2003E72DC /* TestHttpTransfer.m in Sources */,
@@ -1242,11 +1268,12 @@
 				F84B7DD618BB3C8D007FC2D5 /* XMPPMessage.m in Sources */,
 				F80B0D47187426F2003E72DC /* BaseLogic.m in Sources */,
 				F84B7DCB18BB3C8D007FC2D5 /* XMPPDeprecatedPlainAuthentication.m in Sources */,
+				F8696A861918D95D008887AD /* Notice.m in Sources */,
 				F84B7DE418BB3C8D007FC2D5 /* DDFileLogger.m in Sources */,
 				F84B7DDB18BB3C8D007FC2D5 /* DDList.m in Sources */,
 				F84B7DCC18BB3C8D007FC2D5 /* XMPPDigestMD5Authentication.m in Sources */,
 				F8A0F78B191363FE008A64AB /* AppData.m in Sources */,
-				F8E9687918C709CB00B9384B /* MessageViewController.m in Sources */,
+				F8E9687918C709CB00B9384B /* NoticeViewController.m in Sources */,
 				F84B7DDE18BB3C8D007FC2D5 /* XMPPIDTracker.m in Sources */,
 				F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */,
 				F84B7DDC18BB3C8D007FC2D5 /* GCDMulticastDelegate.m in Sources */,
@@ -1264,6 +1291,7 @@
 				F84B7DEA18BB3C8D007FC2D5 /* NSString+DDXML.m in Sources */,
 				F80B0D52187426F2003E72DC /* UserSimpleLogic.m in Sources */,
 				F89964FD18FD50F200D7FA44 /* GroupChooserViewController.m in Sources */,
+				F8696A891918D9AC008887AD /* NoticeObject.m in Sources */,
 				F84B7DDA18BB3C8D007FC2D5 /* XMPPStream.m in Sources */,
 				F89964E818FCF11A00D7FA44 /* FriendsGroupViewController.m in Sources */,
 				F84B7DD218BB3C8D007FC2D5 /* NSXMLElement+XMPP.m in Sources */,
@@ -1275,7 +1303,9 @@
 				F80B0D49187426F2003E72DC /* HttpTransfer.m in Sources */,
 				F84B7DE018BB3C8D007FC2D5 /* XMPPStringPrep.m in Sources */,
 				F892372A18F3A62D00658F47 /* HITRenData.xcdatamodeld in Sources */,
+				F87209C3191CB53E00FAC7A1 /* NoticeViewBar.m in Sources */,
 				F80B0D48187426F2003E72DC /* HttpData.m in Sources */,
+				F8696A8C1918FA55008887AD /* XMPPDataManager.m in Sources */,
 				F8E9687618C7055E00B9384B /* UIFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
