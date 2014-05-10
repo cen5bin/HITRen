@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/HttpTransfer.m"
-            timestampString = "419738057.344016"
+            timestampString = "421393527.209117"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "-requestServerForNSDataWithPostMethod:AndServletName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/HttpTransfer.m"
-            timestampString = "419738057.344016"
+            timestampString = "421393527.209117"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "-requestServerForNSDataWithPostMethod:AndServletName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/HttpTransfer.m"
-            timestampString = "419738057.344016"
+            timestampString = "421393527.209117"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "-asyncRequestServerForNSDataWithPostMethod:AndServletName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/FreshNewsViewController.m"
-            timestampString = "421049815.34569"
+            timestampString = "421396460.902363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "350"
-            endingLineNumber = "350"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "-userInfoDidDownload:"
             landmarkType = "5">
          </BreakpointContent>

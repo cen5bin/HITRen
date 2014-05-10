@@ -30,4 +30,6 @@
 - (BOOL)asyncRequestServerForNSDataWithPostMethod:(NSString *)requestString AndServletName:(NSString *)servlet;
 - (BOOL)asyncRequestServerForNSDataWithGetMethod:(NSString *)requestString AndServletName:(NSString *)servlet;
 
+- (BOOL)uploadImages:(NSArray*)images to:(NSString *)servlet;
+
 @end

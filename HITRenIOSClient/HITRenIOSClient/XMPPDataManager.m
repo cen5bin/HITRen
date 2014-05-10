@@ -40,10 +40,30 @@
     AppData *appData = [AppData sharedInstance];
     [appData addNoticeObject:object from:0];
     [AppData saveData];
+    [self sendNotice:@"aaa"];
 }
 
 - (void)dealWithChatMessage:(NSDictionary *)dic {
     
+}
+
+- (void)sendNotice:(NSString *)string {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    if (notification) {
+        notification.fireDate = [[NSDate date] dateByAddingTimeInterval:5];
+        notification.repeatInterval = 0;
+        
+        notification.timeZone = [NSTimeZone defaultTimeZone];
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.alertBody = string;
+//        notification.alertAction = string;
+//        notification.hasAction = YES;
+//        notification.alertBody = string;
+        
+        notification.applicationIconBadgeNumber = 1;
+//        [[UIApplication sharedApplication]presentLocalNotificationNow:notification];
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
 }
 
 @end

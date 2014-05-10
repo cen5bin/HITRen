@@ -16,6 +16,7 @@
 #import "AppData.h"
 #import "Message.h"
 #import "UserInfo.h"
+#import "UploadLogic.h"
 
 @interface FreshNewsViewController ()
 
@@ -59,6 +60,8 @@
         [self beginToDownloadTimeline];
     }
     else _moreMessageCell = 1;
+    
+//    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

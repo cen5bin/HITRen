@@ -23,6 +23,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:[[NSMutableArray alloc] init] forKey:@"noticeLine"];
     [userDefaults synchronize];
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
 //    NSString* tmp = @" {\"asd\" : \"1\",\"aaa\":1} ";
 //    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[tmp dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES] options:NSJSONReadingMutableLeaves error:nil];

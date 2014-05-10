@@ -16,6 +16,10 @@ static NSString *IP = //@"10.9.180.121";
 static NSString *SERVER_NAME = @"HITRenServer";
 static int PORT = 8080;
 
+static NSString *BOUNDARY_STRING = @"AaB03x";
+NSString *BOUNDARY;
+NSString *END;
+
 static HttpTransfer *transfer;
 
 @implementation HttpTransfer
@@ -28,6 +32,14 @@ static HttpTransfer *transfer;
 
 + (HttpTransfer *)transfer {
     return [[HttpTransfer alloc] init];
+}
+
+- (id)init {
+    if (self = [super init]) {
+        BOUNDARY = [NSString stringWithFormat:@"--%@",BOUNDARY_STRING];
+        END = [NSString stringWithFormat:@"%@--",BOUNDARY];
+    }
+    return self;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -129,6 +141,33 @@ static HttpTransfer *transfer;
 - (BOOL) asyncGet:(NSString *)string to:(NSString *)servlet {
     
     return [self asyncRequestServerForNSDataWithGetMethod:string AndServletName:servlet];
+}
+
+- (BOOL)uploadImages:(NSArray*)images to:(NSString *)servlet {
+    NSString *urlString = [NSString stringWithFormat:@"http://%@:%d/%@/%@",IP, PORT, SERVER_NAME, servlet];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];//[NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
+    request.URL = url;
+    
+    NSMutableData *data = [NSMutableData data];
+    for (NSDictionary *dic in images) {
+        NSMutableString *body = [[NSMutableString alloc] init];
+        [body appendFormat:@"%@\r\n", BOUNDARY];
+        [body appendFormat:@"Content-Disposition: form-data; name=\"pic\"; filename=\"%@\"\r\n",[dic objectForKey:@"filename"]];
+        [body appendFormat:@"Content-Type: image/png\r\n\r\n"];
+        NSData *imageData = UIImagePNGRepresentation([dic objectForKey:@"image"]);
+        [data appendData:[body dataUsingEncoding:NSUTF8StringEncoding]];
+        [data appendData:imageData];
+        [data appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    [data appendData:[END dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString *content=[[NSString alloc]initWithFormat:@"multipart/form-data; boundary=%@",BOUNDARY_STRING];
+    [request setValue:content forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:data];
+    [request setHTTPMethod:@"POST"];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    return conn != nil;
 }
 
 @end

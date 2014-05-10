@@ -54,7 +54,7 @@
     <servlet-name>DownloadUserInfo</servlet-name>
     <url-pattern>/DownloadUserInfo</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>DownloadUsersData</servlet-name>
     <servlet-class>cn.edu.hit.servlet.usersimplelogic.DownloadUsersDataServlet</servlet-class>
   </servlet>
@@ -221,5 +221,13 @@
   <servlet-mapping>
     <servlet-name>DownloadTimeline</servlet-name>
     <url-pattern>/DownloadTimeline</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UploadImages</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.upload.UploadImagesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadImages</servlet-name>
+    <url-pattern>/UploadImages</url-pattern>
   </servlet-mapping>
 </web-app>
