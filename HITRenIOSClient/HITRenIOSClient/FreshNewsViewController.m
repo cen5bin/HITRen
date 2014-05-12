@@ -356,7 +356,7 @@
         NSDictionary *dic = [data objectForKey:mid];
         LikedList *likedList = [appData getLikedListOfMid:[mid intValue]];
         likedList.seq = [dic objectForKey:@"seq"];
-        likedList.userList = [dic objectForKey:@"list"];
+        likedList.userList = [[NSMutableArray alloc] initWithArray:[dic objectForKey:@"list"]];
         [likedList update];
     }
     [AppData saveData];
@@ -458,6 +458,15 @@
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     Message *message = [_data objectAtIndex:indexPath.row];
     [MessageLogic likeMessage:[message.mid intValue]];
+    LikedList *likedList = [[AppData sharedInstance] getLikedListOfMid:[message.mid intValue]];
+    User *user = [MessageLogic user];
+    [likedList.userList addObject:[NSNumber numberWithInt:user.uid]];
+    [likedList update];
+    [AppData saveData];
+    [self.tableView reloadData];
+    
+//    ShortMessageCell *cell = (ShortMessageCell *)sender;
+    
 //    L([indexPath description]);
 }
 
@@ -465,6 +474,13 @@
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     Message *message = [_data objectAtIndex:indexPath.row];
     [MessageLogic dislikeMessage:[message.mid intValue]];
+    LikedList *likedList = [[AppData sharedInstance] getLikedListOfMid:[message.mid intValue]];
+    User *user = [MessageLogic user];
+    if ([likedList.userList containsObject:[NSNumber numberWithInt:user.uid]])
+        [likedList.userList removeObject:[NSNumber numberWithInt:user.uid]];
+    [likedList update];
+    [AppData saveData];
+    [self.tableView reloadData];
 
 }
 
