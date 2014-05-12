@@ -312,8 +312,8 @@
 }
 
 - (void)hideTopActivityIndicator {
-    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
     _activityIndicator.hidden = YES;
+    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 - (void)timelineDidDownload:(NSNotification *)notification {
@@ -403,7 +403,8 @@
     }
     
     if (_updateAtTop) {
-        [self hideTopActivityIndicator];
+        [self performSelector:@selector(hideTopActivityIndicator) withObject:nil afterDelay:0.0];
+//        [self hideTopActivityIndicator];
     }
     _updateAtTop = NO;
     _moreMessageCell = 1;
