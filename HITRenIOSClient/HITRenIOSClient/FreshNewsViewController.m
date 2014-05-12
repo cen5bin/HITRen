@@ -207,12 +207,21 @@
 // 到达indexPath时处理的工作
 - (void)workAtIndexpath:(NSIndexPath *)indexPath {
     LOG(@"current %d max %d", _currentPage, _maxDataLoadedPage);
+    int row = indexPath.row;
+    int tmp = row / PAGE_MESSAGE_COUNT;
+    AppData *appData = [AppData sharedInstance];
+    if (_currentPage != tmp) {
+        int len = PAGE_MESSAGE_COUNT;
+        if (appData.timeline.mids.count - tmp * PAGE_MESSAGE_COUNT < PAGE_MESSAGE_COUNT)
+            len = appData.timeline.mids.count - tmp * PAGE_MESSAGE_COUNT;
+        [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(tmp*PAGE_MESSAGE_COUNT, len)]];
+    }
+    _currentPage = tmp;//row / PAGE_MESSAGE_COUNT;
     if (_currentPage < _maxDataLoadedPage) return;
     if (_backgroubdLoadWorking) return;
     _backgroubdLoadWorking = YES;
-    int row = indexPath.row;
-    _currentPage = row / PAGE_MESSAGE_COUNT;
-    AppData *appData = [AppData sharedInstance];
+    
+    
     if (_data.count - row < 15) {
         L(@"< 15");
         NSArray *messageNeedDownload = [appData messagesNeedDownloadFromIndex:_data.count];
