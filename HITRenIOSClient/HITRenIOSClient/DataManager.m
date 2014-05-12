@@ -12,6 +12,7 @@
 #import "Comment.h"
 #import "UserInfo.h"
 #import "Notice.h"
+#import "LikedList.h"
 
 //static NSMutableArray *_messages;
 //static Timeline *_timeline;
@@ -129,6 +130,50 @@
     NSArray *array = [context executeFetchRequest:request error:nil];
     if (array && array.count) return [array lastObject];
     return nil;
+}
+
++ (NSArray *)getLikedList:(NSArray *)mids {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"LikedList" inManagedObjectContext:context];
+    request.entity = entity;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    [string appendString:@"{"];
+    for (int i = 0; i < mids.count; i++) {
+        if (i) [string appendString:@","];
+        [string appendString:[NSString stringWithFormat:@"%d", [[mids objectAtIndex:i] intValue]]];
+    }
+    [string appendString:@"}"];
+    L(string);
+    NSString *tmp = [NSString stringWithFormat:@"mid IN %@", string];
+    L(tmp);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mid IN {1,2}"];
+    request.predicate = predicate;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return [array lastObject];
+    return nil;
+
+}
+
++ (LikedList *)getLikedList {
+    NSManagedObjectContext *context = [DBController context];
+    LikedList *likedList = [NSEntityDescription insertNewObjectForEntityForName:@"LikedList" inManagedObjectContext:context];
+    return likedList;
+}
+
++ (LikedList *)getLikedListOfMid:(int)mid {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"LikedList" inManagedObjectContext:context];
+    request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mid == %d",mid];
+    request.predicate = predicate;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return [array lastObject];
+    LikedList *likedList = [DataManager getLikedList];
+    likedList.mid = [NSNumber numberWithInt:mid];
+    return likedList;
+
 }
 
 + (void)deleteEntity:(NSManagedObject *)entity {

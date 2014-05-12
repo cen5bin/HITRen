@@ -36,7 +36,7 @@ static XmppConnector* connector = nil;
     NSString *filepath = [[NSBundle mainBundle] pathForResource:@"xmppserver" ofType:@"plist"];
     NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:filepath];
     serverIP = [data objectForKey:@"serverIP"];
-    serverIP = @"192.168.0.93";
+    serverIP = SERVER_IP;//@"192.168.1.151";
     hostname = [data objectForKey:@"hostname"];
 }
 

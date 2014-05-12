@@ -10,10 +10,16 @@
 #import <CoreData/CoreData.h>
 
 
-@interface LikedList : NSManagedObject
+@interface LikedList : NSManagedObject {
+    NSMutableArray *_userList;
+}
 
 @property (nonatomic, retain) NSNumber * mid;
 @property (nonatomic, retain) NSNumber * seq;
 @property (nonatomic, retain) NSData * list;
 
+@property (nonatomic, retain, getter = getUserlist) NSMutableArray *userList;
+
+
+- (void)update;
 @end

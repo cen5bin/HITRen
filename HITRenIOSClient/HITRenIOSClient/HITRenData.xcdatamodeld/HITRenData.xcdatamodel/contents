@@ -6,6 +6,11 @@
         <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="messageInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="comment" inverseEntity="Message" syncable="YES"/>
     </entity>
+    <entity name="LikedList" representedClassName="LikedList" syncable="YES">
+        <attribute name="list" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="mid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Message" representedClassName="Message" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="likedlist" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -37,8 +42,9 @@
     <elements>
         <element name="Comment" positionX="-5247" positionY="-1008" width="128" height="103"/>
         <element name="Message" positionX="-5481" positionY="-1170" width="128" height="178"/>
+        <element name="Notice" positionX="-5490" positionY="-918" width="128" height="88"/>
         <element name="Timeline" positionX="-5294" positionY="-1171" width="128" height="73"/>
-        <element name="UserInfo" positionX="-5555" positionY="-961" width="128" height="133"/>
-        <element name="Notice" positionX="-5375" positionY="-880" width="128" height="88"/>
+        <element name="UserInfo" positionX="-5670" positionY="-961" width="128" height="133"/>
+        <element name="LikedList" positionX="-5339" positionY="-889" width="128" height="88"/>
     </elements>
 </model>

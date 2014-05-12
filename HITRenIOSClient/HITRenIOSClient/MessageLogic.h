@@ -17,6 +17,7 @@
 + (BOOL)downloadMessages:(NSArray *)mids;
 + (BOOL)likeMessage:(int)mid;
 + (BOOL)dislikeMessage:(int)mid;
++ (BOOL)downloadLikedList:(NSArray *)mids;
 
 
 @end

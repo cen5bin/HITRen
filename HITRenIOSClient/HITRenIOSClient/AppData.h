@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class Timeline, Message, UserInfo, Notice, NoticeObject;
+@class Timeline, Message, UserInfo, Notice, NoticeObject,LikedList;
 @interface AppData : NSObject {
     Timeline *_timeline;
     NSMutableDictionary *_messages;
     NSMutableDictionary *_userInfos;
     NSMutableDictionary *_notices;
     NSMutableArray *_noticeLine;
+    NSMutableDictionary *_likedLists;
 //    NSMutableArray *_activityLine;
     
 //    NSMutableArray *_messageList;
@@ -45,6 +46,9 @@
 + (NSString *)stringOfNoticeObject:(NoticeObject *)noticeObject;
 - (NSString *)lastNoticeStringOfUid:(int)uid;
 - (Notice *)activitiesAtIndex:(int)index;
+
+- (NSArray *)likedListNeedDownload:(NSArray *)mids;
+- (LikedList *)getLikedListOfMid:(int)mid;
 
 //- (UserInfo *)getUserInfo:(int)uid;
 

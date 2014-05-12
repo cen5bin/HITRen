@@ -158,17 +158,34 @@ public class MessageLogic {
 	}
 	
 	/**
-	 * 下载状态数据
-	 * @param uid
-	 * @param gseq
-	 * @param useq
-	 * @param index 开始找的状态下标
+	 * 下载点赞信息
+	 * @param datas
 	 * @return
+	 * @throws JSONException
 	 */
-	public static boolean downloadMessages(int uid, int gseq, int index) {
+	public static boolean downloadLikedList(ArrayList<JSONObject> datas) throws JSONException {
 		retData = new JSONObject();
-		
-		
+		ArrayList<Integer> mids = new ArrayList<Integer>();
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for (JSONObject json : datas) {
+			int mid = json.getInt("mid");
+			int seq = json.getInt("seq");
+			map.put(mid, seq);
+			mids.add(json.getInt("mid"));
+		}
+		BasicDBObject obj = new BasicDBObject(LikedList.MID, new BasicDBObject("$in", mids));
+		DBCursor cursor = DBController.query(LikedList.COLLNAME, obj);
+		JSONObject ret = new JSONObject();
+		while (cursor.hasNext()) {
+			DBObject retObj = cursor.next();
+			int seq0 = map.get(retObj.get(LikedList.MID));
+			int seq1 = Integer.parseInt(retObj.get(LikedList.SEQ).toString());
+			if (seq0 >= seq1) continue;
+			ret.put(retObj.get(LikedList.MID).toString(), retObj);
+			logger.info(retObj);
+		}
+		retData.put(HttpData.SUC, true);
+		retData.put(HttpData.DATA, ret);
 		return true;
 	}
 	
@@ -181,25 +198,6 @@ public class MessageLogic {
 	 */
 	public static boolean likeTheMessage(int uid, int mid) throws Exception {
 		retData = new JSONObject();
-//		BasicDBObject oldObj = new BasicDBObject(Message.MID, mid);
-//		BasicDBObject newObj = new BasicDBObject();
-//		BasicDBObject userInfo = new BasicDBObject();
-//		userInfo.put(Message.LIKEDINFO.UID, uid);
-//		User user = DataReader.getLeastUserInfo(uid);
-////		userInfo.put(Message.LIKEDINFO.UNAME, user.getName());
-//		newObj.put("$push", new BasicDBObject().append(Message.LIKEDLIST, userInfo));
-//		newObj.put("$inc", new BasicDBObject(Message.SEQ, 1));
-//		boolean ret = DBController.update(Message.COLLNAME, oldObj, newObj, false, false);
-//		if (!ret) {
-//			retData.put(HttpData.SUC, false);
-//			return false;
-//		}
-//		DBObject retObj = DBController.queryOne(Message.COLLNAME, oldObj);
-//		ret = MemWorker.setMessageInfo(mid, retObj.toString());
-//		if (!ret) {
-//			retData.put(HttpData.SUC, false);
-//			return false;
-//		}
 		BasicDBObject oldObj = new BasicDBObject(LikedList.MID, mid);
 		BasicDBObject newObj = new BasicDBObject("$addToSet", new BasicDBObject(LikedList.LIST, uid));
 		newObj.put("$inc", new BasicDBObject(LikedList.SEQ, 1));
@@ -234,21 +232,6 @@ public class MessageLogic {
 	 */
 	public static boolean cancelLikeTheMessage(int uid, int mid) throws JSONException {
 		retData = new JSONObject();
-//		BasicDBObject oldObj = new BasicDBObject(Message.MID, mid);
-//		BasicDBObject newObj = new BasicDBObject();
-//		newObj = newObj.append("$pull", new BasicDBObject(Message.LIKEDLIST, new BasicDBObject(Message.UID, uid)));
-//		newObj = newObj.append("$inc", new BasicDBObject(Message.SEQ, 1));
-//		boolean ret = DBController.update(Message.COLLNAME, oldObj, newObj, false, false);
-//		if (!ret) {
-//			retData.put(HttpData.SUC, false);
-//			return false;
-//		}
-//		DBObject retObj = DBController.queryOne(Message.COLLNAME, oldObj);
-//		ret = MemWorker.setMessageInfo(mid, retObj.toString());
-//		if (!ret) {
-//			retData.put(HttpData.SUC, false);
-//			return false;
-//		}
 		BasicDBObject oldObj = new BasicDBObject(LikedList.MID, mid);
 		BasicDBObject newObj = new BasicDBObject("$pull", new BasicDBObject(LikedList.LIST, uid));
 		newObj.put("$inc", new BasicDBObject(LikedList.SEQ, 1));
@@ -389,6 +372,8 @@ public class MessageLogic {
 		TipsPusher.messageIsReportedByUser(message.getUid(), uid, user.getName(), user.getPic(), mid);
 		return true;
 	}
+	
+	
 	
 	/**
 	 * 为每一条状态生成一个mid

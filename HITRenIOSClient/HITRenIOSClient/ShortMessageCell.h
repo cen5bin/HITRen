@@ -21,12 +21,18 @@
 @property (strong, nonatomic) IBOutlet UIButton *commentButton;
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
 
+@property (strong, nonatomic) IBOutlet UITextView *likedListView;
+@property (strong, nonatomic) IBOutlet UITextView *commentListView;
+
 
 @property (strong, nonatomic) id<MessageCellDelegate> delegate;
 @property (nonatomic) BOOL liked;
+@property (strong, nonatomic) NSMutableArray *likedList;
 
 - (IBAction)likeMessage:(id)sender;
 - (IBAction)commentMessage:(id)sender;
 - (IBAction)shareMessage:(id)sender;
+
+- (void)update;
 
 @end

@@ -12,6 +12,7 @@
 #import "HttpTransfer.h"
 #import "Timeline.h"
 #import "DataManager.h"
+#import "AppData.h"
 
 @implementation MessageLogic
 
@@ -111,6 +112,23 @@
         FUNC_END();
         return NO;
     }
+    FUNC_END();
+    return YES;
+}
+
++ (BOOL)downloadLikedList:(NSArray *)mids {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    AppData *appData = [AppData sharedInstance];
+    [data setValue:[appData likedListNeedDownload:mids] forKey:@"datas"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadLikedList" withEventName:ASYNC_EVENT_DOWNLOADLIKEDLIST];
+    if (!ret) {
+        L(@"DownloadLikedList failed");
+        FUNC_END();
+        return NO;
+    }
+
+//    NSArray *likedList = []
     FUNC_END();
     return YES;
 }

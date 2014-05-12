@@ -100,6 +100,7 @@
 		F86B9E4D18D8826400D71A7B /* me2.png in Resources */ = {isa = PBXBuildFile; fileRef = F86B9E4B18D8826400D71A7B /* me2.png */; };
 		F87209C3191CB53E00FAC7A1 /* NoticeViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F87209C2191CB53E00FAC7A1 /* NoticeViewBar.m */; };
 		F87209C6191DE57400FAC7A1 /* UploadLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F87209C5191DE57400FAC7A1 /* UploadLogic.m */; };
+		F87209C9191E11E400FAC7A1 /* LikedList.m in Sources */ = {isa = PBXBuildFile; fileRef = F87209C8191E11E400FAC7A1 /* LikedList.m */; };
 		F8819FB619152D1C008BB814 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = F8819FB519152D1C008BB814 /* share.png */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
@@ -327,6 +328,8 @@
 		F87209C2191CB53E00FAC7A1 /* NoticeViewBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeViewBar.m; sourceTree = "<group>"; };
 		F87209C4191DE57400FAC7A1 /* UploadLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadLogic.h; sourceTree = "<group>"; };
 		F87209C5191DE57400FAC7A1 /* UploadLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadLogic.m; sourceTree = "<group>"; };
+		F87209C7191E11E400FAC7A1 /* LikedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikedList.h; sourceTree = "<group>"; };
+		F87209C8191E11E400FAC7A1 /* LikedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikedList.m; sourceTree = "<group>"; };
 		F8819FB519152D1C008BB814 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB3518BC79EA00407521 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -559,6 +562,8 @@
 				F8696A851918D95D008887AD /* Notice.m */,
 				F8696A871918D9AC008887AD /* NoticeObject.h */,
 				F8696A881918D9AC008887AD /* NoticeObject.m */,
+				F87209C7191E11E400FAC7A1 /* LikedList.h */,
+				F87209C8191E11E400FAC7A1 /* LikedList.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1269,6 +1274,7 @@
 				F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */,
 				F84B7DD018BB3C8D007FC2D5 /* NSData+XMPP.m in Sources */,
 				F8E9688518C714C200B9384B /* RegisterViewController.m in Sources */,
+				F87209C9191E11E400FAC7A1 /* LikedList.m in Sources */,
 				F84B7DD318BB3C8D007FC2D5 /* XMPPElement.m in Sources */,
 				F84B7DED18BB3C8D007FC2D5 /* DDXMLNode.m in Sources */,
 				F84B7DD618BB3C8D007FC2D5 /* XMPPMessage.m in Sources */,

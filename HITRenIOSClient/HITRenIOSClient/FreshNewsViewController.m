@@ -17,6 +17,7 @@
 #import "Message.h"
 #import "UserInfo.h"
 #import "UploadLogic.h"
+#import "LikedList.h"
 
 @interface FreshNewsViewController ()
 
@@ -85,6 +86,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         return cell;
     }
+    
     ShortMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (!cell)
         cell = [[ShortMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -98,13 +100,23 @@
     
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    L([message.time description]);
     cell.time.text = [format stringFromDate:message.time];
     
     cell.delegate = self;
-//    [cell.likedButton addTarget:self action:@selector(likeMessage:) forControlEvents:UIControlEventTouchUpInside];
-//    [cell.commentButton addTarget:self action:@selector(commentMessage:) forControlEvents:UIControlEventTouchUpInside];
-//    [cell.shareButton addTarget:self action:@selector(shareMessage:) forControlEvents:UIControlEventTouchUpInside];
+    LikedList *likedList = [appData getLikedListOfMid:[message.mid intValue]];
+    cell.likedList = [[NSMutableArray alloc] init];
+    for (NSNumber *uid in likedList.userList) {
+        UserInfo *userInfo0 = [appData readUserInfoForId:[uid intValue]];
+        if (userInfo0.username)
+            [cell.likedList addObject:userInfo0.username];
+
+    }
+    User *user = [UserSimpleLogic user];
+    if ([likedList.userList containsObject:[NSNumber numberWithInt:user.uid]])
+        cell.liked = YES;
+    else
+        cell.liked = NO;
+    [cell update];
     
     // 调整cell中各个view的frame
     CGRect rect = cell.textView.frame;
@@ -118,13 +130,49 @@
     rect = cell.cellBar.frame;
     rect.origin.y += tmp;
     cell.cellBar.frame = rect;
+    
+    rect = cell.likedListView.frame;
+    rect.origin.y += tmp;
+    cell.likedListView.frame = rect;
+    
+    rect = cell.commentListView.frame;
+    rect.origin.y += tmp;
+    cell.commentListView.frame = rect;
+    
+    if (cell.likedList.count == 0) {
+        if (cell.likedListView.hidden) return cell;
+        cell.likedListView.hidden = YES;
+        rect = cell.commentListView.frame;
+        rect.origin.y -= LIKEDLISTVIEW_HEIGHT;
+        cell.commentListView.frame = rect;
+        rect = cell.bgView.frame;
+        rect.size.height -= LIKEDLISTVIEW_HEIGHT;
+        cell.bgView.frame = rect;
+    }
+    else {
+        if (!cell.likedListView.hidden) return cell;
+        cell.likedListView.hidden = NO;
+        rect = cell.commentListView.frame;
+        rect.origin.y += LIKEDLISTVIEW_HEIGHT;
+        cell.commentListView.frame = rect;
+        rect = cell.bgView.frame;
+        rect.size.height += LIKEDLISTVIEW_HEIGHT;
+        cell.bgView.frame = rect;
+    }
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == _data.count) return 50;
+    CGFloat ret = 0;
     Message *message = [_data objectAtIndex:indexPath.row];
-    return SHORTMESSAGRCELL_HEIGHT + [self calculateTextViewHeight:message.content] - TEXTVIEW_HEIGHT;
+    ret = SHORTMESSAGRCELL_HEIGHT + [self calculateTextViewHeight:message.content] - TEXTVIEW_HEIGHT;
+    AppData *appData = [AppData sharedInstance];
+    LikedList *likedList = [appData getLikedListOfMid:[message.mid intValue]];
+    if (likedList.userList.count == 0)
+        ret -= LIKEDLISTVIEW_HEIGHT;
+    return ret;
 }
 
 - (CGFloat)calculateTextViewHeight:(NSString *)string {
@@ -249,6 +297,8 @@
         [self messageDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADUSERINFOS])
         [self userInfoDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADLIKEDLIST])
+        [self likedListDidDownload:notification];
     FUNC_END();
 }
 
@@ -281,10 +331,27 @@
     appData.timeline.seq = [NSNumber numberWithInt:seq];
     [AppData saveData];
     NSArray *messageNeedDownload = [appData messagesNeedDownload];
-    L([messageNeedDownload description]);
     [MessageLogic downloadMessages:messageNeedDownload];
+    [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
 //    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
     _timelineDownloading = NO;
+}
+
+- (void)likedListDidDownload:(NSNotification *)notification {
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"likedlist download succ");
+    else L(@"likedlist download fail");
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    AppData *appData = [AppData sharedInstance];
+    for (NSNumber *mid in [data allKeys]) {
+        NSDictionary *dic = [data objectForKey:mid];
+        LikedList *likedList = [appData getLikedListOfMid:[mid intValue]];
+        likedList.seq = [dic objectForKey:@"seq"];
+        likedList.userList = [dic objectForKey:@"list"];
+        [likedList update];
+    }
+    [AppData saveData];
+    [self.tableView reloadData];
 }
 
 - (void)messageDidDownload:(NSNotification *)notification {
@@ -304,7 +371,6 @@
         message.content = [obj objectForKey:@"content"];
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
         format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        L([obj objectForKey:@"time"]);
         message.time = [format dateFromString:[obj objectForKey:@"time"]];
         message.type = [obj objectForKey:@"type"];
         message.sharedCount = [obj objectForKey:@"sharedcount"];
@@ -329,9 +395,6 @@
     
     if (_updateAtTop) {
         [self hideTopActivityIndicator];
-//        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
-//        [_activityIndicator stopAnimating];
-//        _activityIndicator.hidden = YES;
     }
     _updateAtTop = NO;
     _moreMessageCell = 1;

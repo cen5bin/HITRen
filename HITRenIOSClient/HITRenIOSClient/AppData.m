@@ -13,6 +13,7 @@
 #import "UserInfo.h"
 #import "Notice.h"
 #import "NoticeObject.h"
+#import "LikedList.h"
 //#import "MessageLogic.h"
 
 static AppData *appData;
@@ -28,6 +29,7 @@ static AppData *appData;
 //        self.userInfos = [[NSMutableDictionary alloc] init];
         _userInfos = [[NSMutableDictionary alloc] init];
         _notices = [[NSMutableDictionary alloc] init];
+        _likedLists = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -210,6 +212,44 @@ static AppData *appData;
 
 - (Notice *)activitiesAtIndex:(int)index{
     return [DataManager activitiesAtIndex:index];
+}
+
+- (NSArray *)likedListNeedDownload:(NSArray *)mids {
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:mids];
+    NSMutableArray *ret = [[NSMutableArray alloc] init];
+    NSArray *likedLists = [DataManager getLikedList:mids];
+    
+    for (LikedList *likedList in likedLists) {
+        [ret addObject:@{@"mid":likedList.mid, @"seq":likedList.seq}];
+        [array removeObject:likedList.mid];
+    }
+    
+    for (NSNumber *mid in array) {
+        NSDictionary *dic = @{ @"mid": mid, @"seq":[NSNumber numberWithInteger:0]};
+        L([dic description]);
+        [ret addObject:dic];
+    }
+    
+//    for (id mid in mids) {
+//        LikedList *likedList = [_likedLists objectForKey:mid];
+//        if (!likedList) {
+//            [array addObject:mid];
+//            continue;
+//        }
+//        NSDictionary *dic = @{@"mid":mid,@"seq":likedList.seq};
+//        [ret addObject:dic];
+//    }
+//    NSArray *likedLists = [DataManager getLikedList:array];
+//    for (LikedList *likedList in likedLists) {
+//        [_likedLists setObject:likedList forKey:likedList.mid];
+//        NSDictionary *dic = @{@"mid":likedList.mid,@"seq":likedList.seq};
+//        [ret addObject:dic];
+//    }
+    return ret;
+}
+
+- (LikedList *)getLikedListOfMid:(int)mid {
+    return [DataManager getLikedListOfMid:mid];
 }
 //- (UserInfo *)getUserInfo:(int)uid {
 //    

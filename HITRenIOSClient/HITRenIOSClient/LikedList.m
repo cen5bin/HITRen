@@ -14,5 +14,17 @@
 @dynamic mid;
 @dynamic seq;
 @dynamic list;
+@synthesize userList = _userList;
+
+- (NSMutableArray *)getUserlist {
+    if (_userList) return _userList;
+    if (self.list) _userList = [NSKeyedUnarchiver unarchiveObjectWithData:self.list];
+    else _userList = [[NSMutableArray alloc] init];
+    return _userList;
+}
+
+- (void)update {
+    self.list = [NSKeyedArchiver archivedDataWithRootObject:self.userList];
+}
 
 @end
