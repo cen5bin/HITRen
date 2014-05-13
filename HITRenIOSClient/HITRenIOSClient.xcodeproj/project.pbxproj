@@ -129,6 +129,8 @@
 		F8A5FD57191218930091939B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A5FD56191218930091939B /* CoreData.framework */; };
 		F8A5FD5B1912192F0091939B /* DBController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A5FD5A1912192F0091939B /* DBController.m */; };
 		F8A5FD5E19121DAE0091939B /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A5FD5D19121DAE0091939B /* DataManager.m */; };
+		F8C564C51921DC1300695094 /* keyboardtoolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C564C41921DC1300695094 /* keyboardtoolbar.xib */; };
+		F8C564C81921DD0200695094 /* KeyboardToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C564C71921DD0200695094 /* KeyboardToolBar.m */; };
 		F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685C18C5F96C00B9384B /* topbar0.png */; };
 		F8E9686018C5F96C00B9384B /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685D18C5F96C00B9384B /* topbar1.png */; };
 		F8E9686118C5F96C00B9384B /* topbar2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685E18C5F96C00B9384B /* topbar2.png */; };
@@ -375,6 +377,10 @@
 		F8A5FD5A1912192F0091939B /* DBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBController.m; sourceTree = "<group>"; };
 		F8A5FD5C19121DAE0091939B /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		F8A5FD5D19121DAE0091939B /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		F8C564C41921DC1300695094 /* keyboardtoolbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = keyboardtoolbar.xib; sourceTree = "<group>"; };
+		F8C564C61921DD0200695094 /* KeyboardToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardToolBar.h; sourceTree = "<group>"; };
+		F8C564C71921DD0200695094 /* KeyboardToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardToolBar.m; sourceTree = "<group>"; };
+		F8C564C91922033B00695094 /* KeyboardToolBarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardToolBarDelegate.h; sourceTree = "<group>"; };
 		F8E9685C18C5F96C00B9384B /* topbar0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar0.png; sourceTree = "<group>"; };
 		F8E9685D18C5F96C00B9384B /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
 		F8E9685E18C5F96C00B9384B /* topbar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar2.png; sourceTree = "<group>"; };
@@ -987,6 +993,7 @@
 		F88F989118C1E86C009CE742 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
 				F842BB8A19051BD700148848 /* menu */,
 				F88F989218C1E910009CE742 /* BtmToolBar.h */,
 				F88F989318C1E910009CE742 /* BtmToolBar.m */,
@@ -1057,6 +1064,17 @@
 				F8A0F78A191363FE008A64AB /* AppData.m */,
 			);
 			name = Dao;
+			sourceTree = "<group>";
+		};
+		F8C564C31921DBEA00695094 /* keyboardtoolbar */ = {
+			isa = PBXGroup;
+			children = (
+				F8C564C41921DC1300695094 /* keyboardtoolbar.xib */,
+				F8C564C61921DD0200695094 /* KeyboardToolBar.h */,
+				F8C564C71921DD0200695094 /* KeyboardToolBar.m */,
+				F8C564C91922033B00695094 /* KeyboardToolBarDelegate.h */,
+			);
+			name = keyboardtoolbar;
 			sourceTree = "<group>";
 		};
 		F8E9686B18C6DB4B00B9384B /* button */ = {
@@ -1170,6 +1188,7 @@
 				F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */,
 				F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */,
 				F8819FB619152D1C008BB814 /* share.png in Resources */,
+				F8C564C51921DC1300695094 /* keyboardtoolbar.xib in Resources */,
 				F8550F0318C4C251005E51FE /* p_btm4.png in Resources */,
 				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,
 				F89DFAF01914ED130043DD6B /* liked.png in Resources */,
@@ -1314,6 +1333,7 @@
 				F84B7DCF18BB3C8D007FC2D5 /* XMPPXOAuth2Google.m in Sources */,
 				F80B0D49187426F2003E72DC /* HttpTransfer.m in Sources */,
 				F84B7DE018BB3C8D007FC2D5 /* XMPPStringPrep.m in Sources */,
+				F8C564C81921DD0200695094 /* KeyboardToolBar.m in Sources */,
 				F892372A18F3A62D00658F47 /* HITRenData.xcdatamodeld in Sources */,
 				F87209C3191CB53E00FAC7A1 /* NoticeViewBar.m in Sources */,
 				F80B0D48187426F2003E72DC /* HttpData.m in Sources */,

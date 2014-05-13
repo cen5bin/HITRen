@@ -226,25 +226,9 @@ static AppData *appData;
     
     for (NSNumber *mid in array) {
         NSDictionary *dic = @{ @"mid": mid, @"seq":[NSNumber numberWithInteger:0]};
-        L([dic description]);
         [ret addObject:dic];
     }
     
-//    for (id mid in mids) {
-//        LikedList *likedList = [_likedLists objectForKey:mid];
-//        if (!likedList) {
-//            [array addObject:mid];
-//            continue;
-//        }
-//        NSDictionary *dic = @{@"mid":mid,@"seq":likedList.seq};
-//        [ret addObject:dic];
-//    }
-//    NSArray *likedLists = [DataManager getLikedList:array];
-//    for (LikedList *likedList in likedLists) {
-//        [_likedLists setObject:likedList forKey:likedList.mid];
-//        NSDictionary *dic = @{@"mid":likedList.mid,@"seq":likedList.seq};
-//        [ret addObject:dic];
-//    }
     return ret;
 }
 

@@ -146,15 +146,15 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShortMessageCell" rowHeight="280" id="i7I-z3-HIe" customClass="ShortMessageCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="280"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShortMessageCell" rowHeight="305" id="i7I-z3-HIe" customClass="ShortMessageCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="305"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i7I-z3-HIe" id="B9E-WP-cgK">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="305"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="BpI-2d-0Xp">
-                                                    <rect key="frame" x="7" y="5" width="306" height="259"/>
+                                                    <rect key="frame" x="7" y="5" width="306" height="295"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty.png" id="BVc-Nk-cue">
@@ -185,13 +185,6 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                        </textView>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="aaa" selectable="NO" id="gFQ-A6-0kF">
-                                                            <rect key="frame" x="0.0" y="223" width="306" height="36"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                         <view contentMode="scaleToFill" id="p3i-mL-cre">
@@ -237,6 +230,29 @@
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="deviceRGB"/>
                                                         </view>
+                                                        <view contentMode="scaleToFill" id="VRq-0z-Ojd">
+                                                            <rect key="frame" x="0.0" y="223" width="306" height="70"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="aaa" selectable="NO" id="gFQ-A6-0kF">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="306" height="36"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                </textView>
+                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="  我也说一句..." minimumFontSize="17" id="Deu-UG-8Va">
+                                                                    <rect key="frame" x="8" y="36" width="290" height="30"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="i7I-z3-HIe" id="LDc-7X-j7k"/>
+                                                                    </connections>
+                                                                </textField>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -245,7 +261,9 @@
                                         <connections>
                                             <outlet property="bgView" destination="BpI-2d-0Xp" id="vmc-vo-coK"/>
                                             <outlet property="cellBar" destination="p3i-mL-cre" id="eqI-Mg-Pmb"/>
+                                            <outlet property="commentBgView" destination="VRq-0z-Ojd" id="kkD-PX-teu"/>
                                             <outlet property="commentButton" destination="xNl-TJ-VFe" id="DS5-E6-nkm"/>
+                                            <outlet property="commentField" destination="Deu-UG-8Va" id="oLA-Zb-SPC"/>
                                             <outlet property="commentListView" destination="gFQ-A6-0kF" id="JSF-Og-y7d"/>
                                             <outlet property="likedButton" destination="XsZ-1s-ZN7" id="w9p-i1-j55"/>
                                             <outlet property="likedListView" destination="dqo-xC-9Rz" id="N2H-0S-W5D"/>
@@ -257,7 +275,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MoreMessageCell" rowHeight="50" id="5MH-Hw-yGq" customClass="MoreMessageCell">
-                                        <rect key="frame" x="0.0" y="302" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="327" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5MH-Hw-yGq" id="cmc-7Q-erO">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>

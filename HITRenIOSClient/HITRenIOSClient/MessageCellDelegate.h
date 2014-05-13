@@ -15,4 +15,5 @@
 - (void)dislikeMessage:(id)sender;
 - (void)commentMessage:(id)sender;
 - (void)shareMessage:(id)sender;
+- (void)beginToComment:(id)sender;
 @end

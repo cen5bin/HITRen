@@ -18,6 +18,7 @@
 #import "UserInfo.h"
 #import "UploadLogic.h"
 #import "LikedList.h"
+#import "KeyboardToolBar.h"
 
 @interface FreshNewsViewController ()
 
@@ -47,7 +48,13 @@
     _maxDataLoadedPage = 0;
     _backgroubdLoadData = NO;
     _backgroubdLoadWorking = NO;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    
+    NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"keyboardtoolbar" owner:self options:nil];
+    _keyboardToolBar = [nibViews objectAtIndex:0];
+    _keyboardToolBar.delegate = self;
     
     AppData *appData = [AppData sharedInstance];
     if (appData.timeline.mids.count == 0) {
@@ -63,6 +70,28 @@
     else _moreMessageCell = 1;
     
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
+}
+
+- (void)keyboardFrameDidChanged:(NSNotification *)notification {
+    NSDictionary *info = [notification userInfo];
+    NSValue *value = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect rect = [value CGRectValue];
+    LOG(@"%f %f %f %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+    if (rect.origin.y >= self.view.frame.size.height) {
+        _keyboardToolBar.hidden = YES;
+        if (_keyboardToolBar.superview) [_keyboardToolBar removeFromSuperview];
+    }
+    else {
+        _keyboardToolBar.hidden = NO;
+        CGRect rect0 = _keyboardToolBar.frame;
+        rect0.origin.y = rect.origin.y - _keyboardToolBar.frame.size.height;
+        _keyboardToolBar.frame = rect0;
+        if (!_keyboardToolBar.superview)
+//            [_keyboardToolBar removeFromSuperview];
+            [self.view.window addSubview:_keyboardToolBar];
+//        [_keyboardToolBar becomeFirstResponder];
+    }
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -135,16 +164,16 @@
     rect.origin.y += tmp;
     cell.likedListView.frame = rect;
     
-    rect = cell.commentListView.frame;
+    rect = cell.commentBgView.frame;
     rect.origin.y += tmp;
-    cell.commentListView.frame = rect;
+    cell.commentBgView.frame = rect;
     
     if (cell.likedList.count == 0) {
         if (cell.likedListView.hidden) return cell;
         cell.likedListView.hidden = YES;
-        rect = cell.commentListView.frame;
+        rect = cell.commentBgView.frame;
         rect.origin.y -= LIKEDLISTVIEW_HEIGHT;
-        cell.commentListView.frame = rect;
+        cell.commentBgView.frame = rect;
         rect = cell.bgView.frame;
         rect.size.height -= LIKEDLISTVIEW_HEIGHT;
         cell.bgView.frame = rect;
@@ -152,9 +181,9 @@
     else {
         if (!cell.likedListView.hidden) return cell;
         cell.likedListView.hidden = NO;
-        rect = cell.commentListView.frame;
+        rect = cell.commentBgView.frame;
         rect.origin.y += LIKEDLISTVIEW_HEIGHT;
-        cell.commentListView.frame = rect;
+        cell.commentBgView.frame = rect;
         rect = cell.bgView.frame;
         rect.size.height += LIKEDLISTVIEW_HEIGHT;
         cell.bgView.frame = rect;
@@ -182,6 +211,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    L(@"scoll");
     CGPoint p = scrollView.contentOffset;
     if (p.y < -35) {
         UIView *view = [self getActivityIndicator];
@@ -190,6 +220,10 @@
         [self beginToDownloadTimeline];
         return;
     }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [_keyboardToolBar resignFirstResponder];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -491,6 +525,16 @@
 
 - (void)shareMessage:(id)sender {
     
+}
+
+- (void)beginToComment:(id)sender {
+    ShortMessageCell *cell = (ShortMessageCell *)sender;
+    [_keyboardToolBar becomeFirstResponder];
+//    _firstResponder = cell.commentField;
+}
+
+- (void)sendText:(NSString *)text {
+    L(text);
 }
 
 - (void)didReceiveMemoryWarning

@@ -25,3 +25,4 @@ void drawStringWithFontInRect(NSString *string, UIFont *font, CGRect rect) {
     rect1.origin.y += (rect.size.height - size.height) / 2;
     [string drawInRect:rect1 withFont:font lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentCenter];
 }
+

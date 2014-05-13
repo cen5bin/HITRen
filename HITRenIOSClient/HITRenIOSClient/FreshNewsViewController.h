@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MessageCellDelegate.h"
+#import "KeyboardToolBarDelegate.h"
 
-@interface FreshNewsViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MessageCellDelegate> {
+@class KeyboardToolBar;
+@interface FreshNewsViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MessageCellDelegate, KeyboardToolBarDelegate> {
     NSMutableArray* _data;
     UIActivityIndicatorView *_activityIndicator;
     BOOL _timelineDownloading;
@@ -22,6 +24,9 @@
     int _backgroubdLoadDataAtIndex;
     int _maxDataLoadedPage; //最大的加载过数据的页面号，如果拉取过新的timeline，需要将其置为0
     
+    id _firstResponder;
+    
+    KeyboardToolBar *_keyboardToolBar;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
