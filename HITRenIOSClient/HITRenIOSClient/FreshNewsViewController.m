@@ -207,7 +207,7 @@
 - (CGFloat)calculateTextViewHeight:(NSString *)string {
     UIFont *font = [UIFont systemFontOfSize:14];
     CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(TEXTVIEW_WIDTH-5, FLT_MAX)];
-    return size.height + 8;
+    return size.height + 16;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -528,13 +528,17 @@
 }
 
 - (void)beginToComment:(id)sender {
-    ShortMessageCell *cell = (ShortMessageCell *)sender;
+    int index = [self.tableView indexPathForCell:sender].row;
+    Message *message = [_data objectAtIndex:index];
+    _commentingMid = [message.mid intValue];
+//    ShortMessageCell *cell = (ShortMessageCell *)sender;
     [_keyboardToolBar becomeFirstResponder];
 //    _firstResponder = cell.commentField;
 }
 
 - (void)sendText:(NSString *)text {
-    L(text);
+    [MessageLogic commentMessage:_commentingMid withContent:text];
+    [_keyboardToolBar resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

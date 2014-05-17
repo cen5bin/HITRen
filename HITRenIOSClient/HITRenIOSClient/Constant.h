@@ -29,6 +29,7 @@
 #define ASYNC_EVENT_DOWNLOADUSERINFOS @"HITRenAsyncDataDownloadUserInfos" //下载用户基本信息
 #define ASYNC_EVENT_LIKEMESSAGE @"HITRenAsyncDataLikeMessage" //点赞
 #define ASYNC_EVENT_DOWNLOADLIKEDLIST @"HITRenAsyncDataDownloadLikedList" //下载点赞信息
+#define ASYNC_EVENT_COMMENTMESSAGE @"HITRenAsyncDataCommentMessage" //下载点赞信息
 
 
 

@@ -49,7 +49,9 @@ public class CommentMessageServlet extends HttpServlet {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
 			int mid = json.getInt("mid");
-			int type = json.getInt("type");
+			int type = 0;
+			if (json.has("type"))
+				type = json.getInt("type");
 			String content = json.getString("content");
 			int reuid = -1;
 			if (type == 1)

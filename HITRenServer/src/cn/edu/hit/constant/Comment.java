@@ -8,7 +8,7 @@ public class Comment {
 	public static final String LIST = "list";
 	
 	public static final String UID = UserConstant.UID;
-	public static final String REUID = UserConstant.UID;
+	public static final String REUID = "reuid";
 	public static final String CONTENT = "content";
 	public static final String TIME = "time";
 }
