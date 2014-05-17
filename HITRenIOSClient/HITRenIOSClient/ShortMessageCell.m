@@ -33,6 +33,7 @@
     self.likedListView.layer.borderWidth = self.bgView.layer.borderWidth;
     self.commentField.layer.borderWidth = 1;
     self.commentField.layer.borderColor = [UIColor colorWithRed:tmp/255 green:tmp/255 blue:tmp/255 alpha:1].CGColor;
+    
 
 //    self.likedList = [[NSMutableArray alloc] init];
 //    self.likedList.contentOffset = CGPointMake(0, 10);
@@ -41,6 +42,11 @@
 //    self.bgView.layer.shadowOpacity = 0.4;
 //    [self.likedButton setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"liked1" ofType:@"png"]] forState:UIControlStateHighlighted];
     
+}
+
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    return NO;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

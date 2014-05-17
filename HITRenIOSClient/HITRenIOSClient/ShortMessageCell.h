@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MessageCellDelegate.h"
 
-@interface ShortMessageCell : UITableViewCell <UITextFieldDelegate>
+@interface ShortMessageCell : UITableViewCell <UITextFieldDelegate,UITextViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *picture;
 @property (strong, nonatomic) IBOutlet UILabel *username;
 @property (strong, nonatomic) IBOutlet UILabel *time;
