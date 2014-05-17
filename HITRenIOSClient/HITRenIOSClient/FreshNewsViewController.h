@@ -28,7 +28,9 @@
     
     
     KeyboardToolBar *_keyboardToolBar;
+    
     int _commentingMid;
+    int _reuid;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

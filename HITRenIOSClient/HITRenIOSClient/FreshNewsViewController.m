@@ -70,6 +70,8 @@
     }
     else _moreMessageCell = 1;
     
+    _reuid = -1;
+    
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
 }
 
@@ -632,7 +634,24 @@
 }
 
 - (void)sendText:(NSString *)text {
-    [MessageLogic commentMessage:_commentingMid withContent:text];
+    AppData *appData = [AppData sharedInstance];
+    Comment *comment = [appData getCommentOfMid:_commentingMid];
+    User *user = [MessageLogic user];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:[NSNumber numberWithInt: user.uid] forKey:@"uid"];
+    [dic setObject:[NSNumber numberWithInt:_reuid] forKey:@"reuid"];
+    [dic setObject:text forKey:@"content"];
+    [comment.commentList addObject:dic];
+    [comment update];
+    [AppData saveData];
+    [self.tableView reloadData];
+    if (_reuid == -1)
+        [MessageLogic commentMessage:_commentingMid withContent:text];
+    else {
+        
+        _reuid = -1;
+    }
+    
     [_keyboardToolBar resignFirstResponder];
 }
 
