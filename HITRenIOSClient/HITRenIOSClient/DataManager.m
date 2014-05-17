@@ -144,15 +144,14 @@
         [string appendString:[NSString stringWithFormat:@"%d", [[mids objectAtIndex:i] intValue]]];
     }
     [string appendString:@"}"];
-    L(string);
     NSString *tmp = [NSString stringWithFormat:@"mid IN %@", string];
-    L(tmp);
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mid IN {1,2}"];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mid IN {1,2}"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:tmp];
     request.predicate = predicate;
     NSArray *array = [context executeFetchRequest:request error:nil];
-    if (array && array.count) return [array lastObject];
-    return nil;
-
+    L([array description]);
+    if (array && array.count) return array;//[array lastObject];
+    return [NSArray array];
 }
 
 + (LikedList *)getLikedList {
@@ -174,6 +173,47 @@
     likedList.mid = [NSNumber numberWithInt:mid];
     return likedList;
 
+}
+
++ (NSArray *)getCommentList:(NSArray *)mids {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:context];
+    request.entity = entity;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    [string appendString:@"{"];
+    for (int i = 0; i < mids.count; i++) {
+        if (i) [string appendString:@","];
+        [string appendString:[NSString stringWithFormat:@"%d", [[mids objectAtIndex:i] intValue]]];
+    }
+    [string appendString:@"}"];
+    NSString *tmp = [NSString stringWithFormat:@"cid IN %@", string];
+    //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mid IN {1,2}"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:tmp];
+    request.predicate = predicate;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return array;//[array lastObject];
+    return [NSArray array];
+}
+
++ (Comment *)getCommentOfMid:(int)mid {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:context];
+    request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"cid == %d",mid];
+    request.predicate = predicate;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return [array lastObject];
+    Comment *comment = [DataManager getComment];
+    comment.cid = [NSNumber numberWithInt:mid];
+    return comment;
+}
+
++ (Comment *)getComment {
+    NSManagedObjectContext *context = [DBController context];
+    Comment *comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:context];
+    return comment;
 }
 
 + (void)deleteEntity:(NSManagedObject *)entity {

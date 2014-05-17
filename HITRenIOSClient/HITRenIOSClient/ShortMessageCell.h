@@ -30,11 +30,13 @@
 @property (strong, nonatomic) id<MessageCellDelegate> delegate;
 @property (nonatomic) BOOL liked;
 @property (strong, nonatomic) NSMutableArray *likedList;
+@property (strong, nonatomic) NSMutableArray *commentList;
 
 - (IBAction)likeMessage:(id)sender;
 - (IBAction)commentMessage:(id)sender;
 - (IBAction)shareMessage:(id)sender;
 
-- (void)update;
+- (void)update; //点赞信息的更新
+- (void)updateCommentList; //评论信息的更新
 
 @end

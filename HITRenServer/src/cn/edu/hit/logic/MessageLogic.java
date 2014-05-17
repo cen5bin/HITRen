@@ -190,6 +190,52 @@ public class MessageLogic {
 	}
 	
 	/**
+	 * 下载评论列表
+	 * @param mids
+	 * @return
+	 * @throws JSONException 
+	 */
+//	public static boolean downloadCommentList(ArrayList<Integer> mids) throws JSONException {
+//		retData = new JSONObject();
+//		BasicDBObject obj1 = new BasicDBObject(Comment.CID, new BasicDBObject("$in", mids));
+//		BasicDBObject obj2 = new BasicDBObject(Comment.LIST, new BasicDBObject("$slice", -20));
+//		DBCursor cursor = DBController.query(Comment.COLLNAME, obj1, obj2);
+//		JSONObject ret = new JSONObject();
+//		while (cursor.hasNext()) {
+//			DBObject retObj = cursor.next();
+//			ret.put(retObj.get(Comment.CID).toString(), retObj);
+//		}
+//		retData.put(HttpData.SUC, true);
+//		retData.put(HttpData.DATA, ret);
+//		return true;
+//	}
+	
+	public static boolean downloadCommentList(ArrayList<JSONObject> datas) throws JSONException {
+		retData = new JSONObject();
+		ArrayList<Integer> mids = new ArrayList<Integer>();
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for (JSONObject data : datas) {
+			mids.add(data.getInt("mid"));
+			map.put(data.getInt("mid"), data.getInt("seq"));
+		}
+		BasicDBObject obj1 = new BasicDBObject(Comment.CID, new BasicDBObject("$in", mids));
+		BasicDBObject obj2 = new BasicDBObject(Comment.LIST, new BasicDBObject("$slice", -20));
+		DBCursor cursor = DBController.query(Comment.COLLNAME, obj1, obj2);
+		JSONObject ret = new JSONObject();
+		while (cursor.hasNext()) {
+			DBObject retObj = cursor.next();
+			logger.info(retObj);
+			int seq0 = map.get(retObj.get(Comment.CID));
+			int seq = Integer.parseInt(retObj.get(Comment.SEQ).toString());
+			if (seq0 >= seq) continue;
+			ret.put(retObj.get(Comment.CID).toString(), retObj);
+		}
+		retData.put(HttpData.SUC, true);
+		retData.put(HttpData.DATA, ret);
+		return true;
+	}
+	
+	/**
 	 * 用户uid为状态mid点赞
 	 * @param uid 点赞者
 	 * @param mid 被点赞的状态

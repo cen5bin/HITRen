@@ -19,6 +19,7 @@
 #import "UploadLogic.h"
 #import "LikedList.h"
 #import "KeyboardToolBar.h"
+#import "Comment.h"
 
 @interface FreshNewsViewController ()
 
@@ -35,12 +36,12 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 //    _data = [[NSMutableArray alloc] initWithObjects:@"asd", @"aaa", nil];
     _data = [[NSMutableArray alloc] init];
+    _comments = [[NSMutableDictionary alloc] init];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
     self.tableView.decelerationRate = 0.5;
@@ -132,6 +133,8 @@
     cell.time.text = [format stringFromDate:message.time];
     
     cell.delegate = self;
+    
+    //点赞信息
     LikedList *likedList = [appData getLikedListOfMid:[message.mid intValue]];
     cell.likedList = [[NSMutableArray alloc] init];
     for (NSNumber *uid in likedList.userList) {
@@ -140,6 +143,8 @@
             [cell.likedList addObject:userInfo0.username];
 
     }
+    BOOL hasLikedList = cell.likedList.count > 0;
+    
     User *user = [UserSimpleLogic user];
     if ([likedList.userList containsObject:[NSNumber numberWithInt:user.uid]])
         cell.liked = YES;
@@ -147,71 +152,127 @@
         cell.liked = NO;
     [cell update];
     
+    //评论列表
+    BOOL hasComment = NO;
+    CGFloat commentViewHeight = 0;
+    NSDictionary *dic = [_comments objectForKey:message.mid];
+    if (dic) {
+        hasComment = YES;
+        commentViewHeight = [[dic objectForKey:@"height"] floatValue];
+    }
+    cell.commentList = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic0 in [dic objectForKey:@"list"]) {
+        NSMutableDictionary *tmp = [NSMutableDictionary dictionary];
+        UserInfo *userInfo = [appData readUserInfoForId:[[dic0 objectForKey:@"uid"] intValue]];
+        [tmp setObject:userInfo.username forKey:@"user"];
+        NSNumber *reuid = [dic0 objectForKey:@"reuid"];
+        if ([reuid intValue] != -1) {
+            userInfo = [appData readUserInfoForId:[reuid intValue]];
+            [tmp setObject:userInfo.username forKey:@"reuser"];
+        }
+        [tmp setObject:[dic0 objectForKey:@"content"] forKey:@"content"];
+        [cell.commentList addObject:tmp];
+    }
+    [cell updateCommentList];
+    
+    
     // 调整cell中各个view的frame
+    CGFloat bgh = SHORTMESSAGECELL_BGVIEW_HEIGHT;
     CGRect rect = cell.textView.frame;
-    CGFloat height = rect.size.height;
     rect.size.height = [self calculateTextViewHeight:message.content];
     cell.textView.frame = rect;
-    CGFloat tmp = rect.size.height - height;
-    rect = cell.bgView.frame;
-    rect.size.height += tmp;
-    cell.bgView.frame = rect;
     rect = cell.cellBar.frame;
-    rect.origin.y += tmp;
+    rect.origin.y = CGRectGetMaxY(cell.textView.frame);
     cell.cellBar.frame = rect;
+    CGFloat origin_y = CGRectGetMaxY(rect);
+    if (!hasLikedList) cell.likedListView.hidden = YES;
+    else {
+        cell.likedListView.hidden = NO;
+        rect = cell.likedListView.frame;
+        rect.origin.y = origin_y;
+        cell.likedListView.frame = rect;
+        origin_y = CGRectGetMaxY(rect);
+    }
     
-    rect = cell.likedListView.frame;
-    rect.origin.y += tmp;
-    cell.likedListView.frame = rect;
-    
-    rect = cell.commentBgView.frame;
-    rect.origin.y += tmp;
-    cell.commentBgView.frame = rect;
-    
-    if (cell.likedList.count == 0) {
-        if (cell.likedListView.hidden) return cell;
-        cell.likedListView.hidden = YES;
-        rect = cell.commentBgView.frame;
-        rect.origin.y -= LIKEDLISTVIEW_HEIGHT;
-        cell.commentBgView.frame = rect;
-        rect = cell.bgView.frame;
-        rect.size.height -= LIKEDLISTVIEW_HEIGHT;
-        cell.bgView.frame = rect;
+    if (!hasComment) {
+        cell.commentBgView.hidden = YES;
+        bgh = origin_y;
     }
     else {
-        if (!cell.likedListView.hidden) return cell;
-        cell.likedListView.hidden = NO;
+        cell.commentBgView.hidden = NO;
+       
+        rect = cell.commentListView.frame;
+        rect.origin.y = 0;
+        rect.size.height = commentViewHeight;
+        cell.commentListView.frame = rect;
+        rect = cell.commentField.frame;
+        rect.origin.y = CGRectGetMaxY(cell.commentListView.frame);
+        cell.commentField.frame = rect;
         rect = cell.commentBgView.frame;
-        rect.origin.y += LIKEDLISTVIEW_HEIGHT;
+        rect.origin.y = origin_y;
+        rect.size.height = CGRectGetMaxY(cell.commentField.frame)+6;
         cell.commentBgView.frame = rect;
-        rect = cell.bgView.frame;
-        rect.size.height += LIKEDLISTVIEW_HEIGHT;
-        cell.bgView.frame = rect;
+        bgh = CGRectGetMaxY(rect);
     }
-    
+    rect = cell.bgView.frame;
+    rect.size.height = bgh;
+    cell.bgView.frame = rect;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == _data.count) return 50;
-    CGFloat ret = 0;
     Message *message = [_data objectAtIndex:indexPath.row];
-    ret = SHORTMESSAGRCELL_HEIGHT + [self calculateTextViewHeight:message.content] - TEXTVIEW_HEIGHT;
+    CGFloat ret = 60 + [self calculateTextViewHeight:message.content] + 37;
+    
+    
+    
+//    ret = SHORTMESSAGRCELL_HEIGHT + [self calculateTextViewHeight:message.content] - TEXTVIEW_HEIGHT;
     AppData *appData = [AppData sharedInstance];
     LikedList *likedList = [appData getLikedListOfMid:[message.mid intValue]];
-    if (likedList.userList.count == 0)
-        ret -= LIKEDLISTVIEW_HEIGHT;
+    if (likedList.userList.count)
+        ret += LIKEDLISTVIEW_HEIGHT;
+    Comment *comment = [appData getCommentOfMid:[message.mid intValue]];
+    if (comment.commentList.count == 0) return ret + 5;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in comment.commentList) {
+        NSNumber *uid = [dic objectForKey:@"uid"];
+        NSNumber *reuid = [dic objectForKey:@"reuid"];
+        UserInfo *userInfo1 = [appData readUserInfoForId:[uid intValue]];
+        if (!userInfo1) continue;
+        if ([reuid intValue] != -1) {
+            UserInfo *userInfo2 = [appData readUserInfoForId:[reuid intValue]];
+            if (!userInfo2) continue;
+            NSString *tmp = [NSString stringWithFormat:@"%@回复%@: %@\n", userInfo1.username, userInfo2.username, [dic objectForKey:@"content"]];
+            [string appendString:tmp];
+        }
+        [string appendString:[NSString stringWithFormat:@"%@: %@\n", userInfo1.username, [dic objectForKey:@"content"]]];
+        [list addObject:dic];
+    }
+    if (list.count) {
+        CGFloat height = [self calculateCommentViewHeight:string];
+        [_comments setObject:@{@"list":list, @"height": [NSNumber numberWithFloat:height]} forKey:message.mid];
+        ret += [self calculateCommentViewHeight:string] + 34 + 4 ;
+    }
+    ret += 5;;
+    
     return ret;
 }
 
 - (CGFloat)calculateTextViewHeight:(NSString *)string {
     UIFont *font = [UIFont systemFontOfSize:14];
-    CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(TEXTVIEW_WIDTH-5, FLT_MAX)];
+    CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(TEXTVIEW_WIDTH-20, FLT_MAX)];
+    return size.height + 20;
+}
+
+- (CGFloat)calculateCommentViewHeight:(NSString *)string {
+    UIFont *font = [UIFont boldSystemFontOfSize:15];
+    CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(COMMENTLISTVIEW_WIDTH-5, FLT_MAX)];
     return size.height + 16;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    L(@"scoll");
     CGPoint p = scrollView.contentOffset;
     if (p.y < -35) {
         UIView *view = [self getActivityIndicator];
@@ -249,6 +310,7 @@
         if (appData.timeline.mids.count - tmp * PAGE_MESSAGE_COUNT < PAGE_MESSAGE_COUNT)
             len = appData.timeline.mids.count - tmp * PAGE_MESSAGE_COUNT;
         [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(tmp*PAGE_MESSAGE_COUNT, len)]];
+        [MessageLogic downloadCommentList:[appData.timeline.mids subarrayWithRange:NSMakeRange(tmp*PAGE_MESSAGE_COUNT, len)]];
     }
     _currentPage = tmp;//row / PAGE_MESSAGE_COUNT;
     if (_currentPage < _maxDataLoadedPage) return;
@@ -279,7 +341,6 @@
         _backgroubdLoadWorking = NO;
         return;
     }
-    L(@"work1");
     Message *message1 = [_data objectAtIndex:_currentPage * PAGE_MESSAGE_COUNT];
     Message *message2 = [_data objectAtIndex:_currentPage * PAGE_MESSAGE_COUNT + 1];
     
@@ -342,6 +403,8 @@
         [self userInfoDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADLIKEDLIST])
         [self likedListDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADCOMMENTLIST])
+        [self commentListDidDownload:notification];
     FUNC_END();
 }
 
@@ -376,6 +439,7 @@
     NSArray *messageNeedDownload = [appData messagesNeedDownload];
     [MessageLogic downloadMessages:messageNeedDownload];
     [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
+    [MessageLogic downloadCommentList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
 //    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
     _timelineDownloading = NO;
 }
@@ -395,6 +459,37 @@
     }
     [AppData saveData];
     [self.tableView reloadData];
+}
+
+- (void)commentListDidDownload:(NSNotification *)notification {
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"commentlist download succ");
+    else L(@"commentlist download fail");
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    AppData *appData = [AppData sharedInstance];
+    NSMutableArray *uids = [[NSMutableArray alloc] init];
+    for (NSNumber *mid in [data allKeys]) {
+        NSDictionary *dic = [data objectForKey:mid];
+        L([dic description]);
+        Comment *comment = [appData getCommentOfMid:[mid intValue]];
+        comment.seq = [dic objectForKey:@"seq"];
+        comment.commentList = [[NSMutableArray alloc] initWithArray:[dic objectForKey:@"list"]];
+        for (NSDictionary *cc in comment.commentList) {
+//            L([cc description]);
+            NSNumber *uid = [cc objectForKey:@"uid"];
+            if (uid && ![uids containsObject:uid]) [uids addObject:uid];
+            uid = [cc objectForKey:@"reuid"];
+            if (uid && [uid intValue] != -1 && ![uids containsObject:uid]) [uids addObject:uid];
+        }
+        [comment update];
+    }
+    [AppData saveData];
+    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
+    if (userInfoNeedDownload.count) {
+        [UserSimpleLogic downloadUseInfos:userInfoNeedDownload];
+    }
+    
+//    [self.tableView reloadData];
 }
 
 - (void)messageDidDownload:(NSNotification *)notification {

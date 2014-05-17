@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Timeline, Message, UserInfo, Notice, NoticeObject,LikedList;
+@class Timeline, Message, UserInfo, Notice, NoticeObject,LikedList,Comment;
 @interface AppData : NSObject {
     Timeline *_timeline;
     NSMutableDictionary *_messages;
@@ -50,6 +50,8 @@
 - (NSArray *)likedListNeedDownload:(NSArray *)mids;
 - (LikedList *)getLikedListOfMid:(int)mid;
 
+- (NSArray *)commentListNeedDownload:(NSArray *)mids;
+- (Comment *)getCommentOfMid:(int)mid;
 //- (UserInfo *)getUserInfo:(int)uid;
 
 //- (void)insertMessage:(Message *)message;

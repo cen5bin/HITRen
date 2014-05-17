@@ -12,7 +12,8 @@
 
 @class KeyboardToolBar;
 @interface FreshNewsViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MessageCellDelegate, KeyboardToolBarDelegate> {
-    NSMutableArray* _data;
+    NSMutableArray* _data;  //存的是message
+    NSMutableDictionary* _comments; //存的是评论，每个元素是个dic
     UIActivityIndicatorView *_activityIndicator;
     BOOL _timelineDownloading;
     int _currentPage;

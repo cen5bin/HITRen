@@ -230,12 +230,20 @@
     <servlet-name>UploadImages</servlet-name>
     <url-pattern>/UploadImages</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>DownloadLikedList</servlet-name>
     <servlet-class>cn.edu.hit.servlet.messagelogic.DownloadLikedListServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DownloadLikedList</servlet-name>
     <url-pattern>/DownloadLikedList</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadCommentList</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.messagelogic.DownloadCommentListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadCommentList</servlet-name>
+    <url-pattern>/DownloadCommentList</url-pattern>
   </servlet-mapping>
 </web-app>

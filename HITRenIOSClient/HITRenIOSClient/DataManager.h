@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DBController.h"
 
-@class Timeline, Message, UserInfo, Notice,LikedList;
+@class Timeline, Message, UserInfo, Notice,LikedList,Comment;
 @interface DataManager : NSObject
 
 + (Timeline *)timeline;
@@ -26,6 +26,10 @@
 + (NSArray *)getLikedList:(NSArray *)mids;
 + (LikedList *)getLikedListOfMid:(int)mid;
 + (LikedList *)getLikedList;
+
++ (NSArray *)getCommentList:(NSArray *)mids;
++ (Comment *)getCommentOfMid:(int)mid;
++ (Comment *)getComment;
 
 
 + (void)deleteEntity:(NSManagedObject *)entity;

@@ -34,6 +34,10 @@ public class DBController {
 		return db.getCollection(collname).find(obj);
 	}
 	
+	public static DBCursor query(String collname, BasicDBObject obj1, BasicDBObject obj2) {
+		return db.getCollection(collname).find(obj1, obj2);
+	}
+	
 	public static DBObject queryOne(String collname, BasicDBObject obj) {
 		return db.getCollection(collname).findOne(obj);
 	}

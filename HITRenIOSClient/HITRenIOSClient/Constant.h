@@ -16,6 +16,9 @@
 #define TEXTVIEW_HEIGHT 90   //状态中的textView默认高度
 #define SHORTMESSAGRCELL_HEIGHT 305 //shortmessage cell 的默认高度
 #define LIKEDLISTVIEW_HEIGHT 36 //点赞列表高度
+#define COMMENTLISTVIEW_HEIGHT 70 //评论列表的高度
+#define COMMENTLISTVIEW_WIDTH 306 //评论列表宽度
+#define SHORTMESSAGECELL_BGVIEW_HEIGHT 293 //单元格背景view高度
 
 
 #define PAGE_ACTIVITY_COUNT 20 // 一页有多少动态消息，点赞之类的
@@ -29,7 +32,8 @@
 #define ASYNC_EVENT_DOWNLOADUSERINFOS @"HITRenAsyncDataDownloadUserInfos" //下载用户基本信息
 #define ASYNC_EVENT_LIKEMESSAGE @"HITRenAsyncDataLikeMessage" //点赞
 #define ASYNC_EVENT_DOWNLOADLIKEDLIST @"HITRenAsyncDataDownloadLikedList" //下载点赞信息
-#define ASYNC_EVENT_COMMENTMESSAGE @"HITRenAsyncDataCommentMessage" //下载点赞信息
+#define ASYNC_EVENT_COMMENTMESSAGE @"HITRenAsyncDataCommentMessage" //评论
+#define ASYNC_EVENT_DOWNLOADCOMMENTLIST @"HITRenAsyncDataDownloadCommentList" //下载评论
 
 
 

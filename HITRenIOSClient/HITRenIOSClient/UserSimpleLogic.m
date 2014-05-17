@@ -142,7 +142,7 @@
     [data setValue:user.password forKey:@"password"];
     [data setValue:user.birthday forKey:@"birthday"];
     [data setValue:user.hometown forKey:@"hometown"];
-    [data setValue:user.username forKey:@"username"];
+    [data setValue:user.username forKey:@"name"];
     [data setIntValue:user.seq forKey:@"seq"];
     [data setIntValue:user.uid forKey:@"uid"];
     [data setIntValue:user.status forKey:@"status"];

@@ -150,4 +150,20 @@
     return YES;
 }
 
++ (BOOL)downloadCommentList:(NSArray *)mids {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    AppData *appData = [AppData sharedInstance];
+    [data setValue:[appData commentListNeedDownload:mids] forKey:@"datas"];
+//    [data setValue:mids forKey:@"mids"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadCommentList" withEventName:ASYNC_EVENT_DOWNLOADCOMMENTLIST];
+    if (!ret) {
+        L(@"DownloadCommentList failed");
+        FUNC_END();
+        return NO;
+    }
+    FUNC_END();
+    return YES;
+}
+
 @end

@@ -101,6 +101,7 @@
 		F87209C3191CB53E00FAC7A1 /* NoticeViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F87209C2191CB53E00FAC7A1 /* NoticeViewBar.m */; };
 		F87209C6191DE57400FAC7A1 /* UploadLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F87209C5191DE57400FAC7A1 /* UploadLogic.m */; };
 		F87209C9191E11E400FAC7A1 /* LikedList.m in Sources */ = {isa = PBXBuildFile; fileRef = F87209C8191E11E400FAC7A1 /* LikedList.m */; };
+		F8723EBF1927035200828B5C /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = F8723EBE1927035200828B5C /* Comment.m */; };
 		F8819FB619152D1C008BB814 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = F8819FB519152D1C008BB814 /* share.png */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
@@ -118,7 +119,6 @@
 		F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964F918FD331200D7FA44 /* FriendInfoViewController.m */; };
 		F89964FD18FD50F200D7FA44 /* GroupChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */; };
 		F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F89B9C9D18D6EC73007DDDCC /* empty.png */; };
-		F89DFADB19136EC20043DD6B /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFADA19136EC20043DD6B /* Comment.m */; };
 		F89DFADE191372E60043DD6B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFADD191372E60043DD6B /* Message.m */; };
 		F89DFAE11913B0240043DD6B /* MoreMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFAE01913B0240043DD6B /* MoreMessageCell.m */; };
 		F89DFAE4191494AD0043DD6B /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFAE3191494AD0043DD6B /* UserInfo.m */; };
@@ -332,6 +332,8 @@
 		F87209C5191DE57400FAC7A1 /* UploadLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadLogic.m; sourceTree = "<group>"; };
 		F87209C7191E11E400FAC7A1 /* LikedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikedList.h; sourceTree = "<group>"; };
 		F87209C8191E11E400FAC7A1 /* LikedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikedList.m; sourceTree = "<group>"; };
+		F8723EBD1927035200828B5C /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		F8723EBE1927035200828B5C /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		F8819FB519152D1C008BB814 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB3518BC79EA00407521 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -358,8 +360,6 @@
 		F89964FB18FD50F200D7FA44 /* GroupChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChooserViewController.h; sourceTree = "<group>"; };
 		F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChooserViewController.m; sourceTree = "<group>"; };
 		F89B9C9D18D6EC73007DDDCC /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
-		F89DFAD919136EC20043DD6B /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
-		F89DFADA19136EC20043DD6B /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		F89DFADC191372E60043DD6B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		F89DFADD191372E60043DD6B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		F89DFADF1913B0240043DD6B /* MoreMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreMessageCell.h; sourceTree = "<group>"; };
@@ -558,8 +558,6 @@
 				F80B0D3A187426F2003E72DC /* RelationShip.m */,
 				F8A5FD53191217FA0091939B /* Timeline.h */,
 				F8A5FD54191217FA0091939B /* Timeline.m */,
-				F89DFAD919136EC20043DD6B /* Comment.h */,
-				F89DFADA19136EC20043DD6B /* Comment.m */,
 				F89DFADC191372E60043DD6B /* Message.h */,
 				F89DFADD191372E60043DD6B /* Message.m */,
 				F89DFAE2191494AD0043DD6B /* UserInfo.h */,
@@ -570,6 +568,8 @@
 				F8696A881918D9AC008887AD /* NoticeObject.m */,
 				F87209C7191E11E400FAC7A1 /* LikedList.h */,
 				F87209C8191E11E400FAC7A1 /* LikedList.m */,
+				F8723EBD1927035200828B5C /* Comment.h */,
+				F8723EBE1927035200828B5C /* Comment.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1276,7 +1276,6 @@
 				F8E9688218C70B5700B9384B /* PersonViewController.m in Sources */,
 				F84B7DE318BB3C8D007FC2D5 /* DDASLLogger.m in Sources */,
 				F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */,
-				F89DFADB19136EC20043DD6B /* Comment.m in Sources */,
 				F84B7DE218BB3C8D007FC2D5 /* DDAbstractDatabaseLogger.m in Sources */,
 				F89DFADE191372E60043DD6B /* Message.m in Sources */,
 				F80B0D51187426F2003E72DC /* User.m in Sources */,
@@ -1314,6 +1313,7 @@
 				F84B7DD718BB3C8D007FC2D5 /* XMPPModule.m in Sources */,
 				F8E9687C18C70AAD00B9384B /* ToolsViewController.m in Sources */,
 				F8E9686718C5FBBC00B9384B /* TestView.m in Sources */,
+				F8723EBF1927035200828B5C /* Comment.m in Sources */,
 				F84B7DD818BB3C8D007FC2D5 /* XMPPParser.m in Sources */,
 				F8E9687F18C70B0700B9384B /* CalendarViewController.m in Sources */,
 				F8A5FD5E19121DAE0091939B /* DataManager.m in Sources */,

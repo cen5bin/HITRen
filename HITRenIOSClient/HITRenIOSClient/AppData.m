@@ -14,6 +14,7 @@
 #import "Notice.h"
 #import "NoticeObject.h"
 #import "LikedList.h"
+#import "Comment.h"
 //#import "MessageLogic.h"
 
 static AppData *appData;
@@ -234,6 +235,27 @@ static AppData *appData;
 
 - (LikedList *)getLikedListOfMid:(int)mid {
     return [DataManager getLikedListOfMid:mid];
+}
+
+- (NSArray *)commentListNeedDownload:(NSArray *)mids {
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:mids];
+    NSMutableArray *ret = [[NSMutableArray alloc] init];
+    NSArray *commentList = [DataManager getCommentList:mids];
+    
+    for (Comment *comment in commentList) {
+        [ret addObject:@{@"mid":comment.cid, @"seq":comment.seq}];
+        [array removeObject:comment.cid];
+    }
+    
+    for (NSNumber *mid in array) {
+        NSDictionary *dic = @{ @"mid": mid, @"seq":[NSNumber numberWithInteger:0]};
+        [ret addObject:dic];
+    }
+    return ret;
+}
+
+- (Comment *)getCommentOfMid:(int)mid {
+    return [DataManager getCommentOfMid:mid];
 }
 //- (UserInfo *)getUserInfo:(int)uid {
 //    

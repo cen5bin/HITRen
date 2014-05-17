@@ -101,4 +101,61 @@
     [self.likedListView setAttributedText:ret];
 }
 
+- (void)updateCommentList {
+    if (!self.commentList || !self.commentList.count) return;
+    
+    UIFont *font1 = [UIFont boldSystemFontOfSize:15];
+    UIFont *font2 = [UIFont systemFontOfSize:14];
+    
+    UIColor *color1 = [UIColor colorWithRed:0.21f green:0.26f blue:0.51f alpha:1.00f];
+    UIColor *color2 = [UIColor blackColor];
+    
+    NSMutableAttributedString *ret = [[NSMutableAttributedString alloc] init];
+    for (NSDictionary *dic in self.commentList) {
+        NSMutableAttributedString *string = [self aText:[dic objectForKey:@"user"]];
+        [self setString:string withColor:color1];
+        [self setString:string withFont:font1];
+        [ret appendAttributedString:string];
+        
+        if ([[dic allKeys] containsObject:@"reuser"]) {
+            string = [self aText:@"回复"];
+            [self setString:string withFont:font2];
+            [self setString:string withColor:color2];
+            [ret appendAttributedString:string];
+            string = [self aText:[dic objectForKey:@"reuser"]];
+            [self setString:string withColor:color1];
+            [self setString:string withFont:font1];
+            [ret appendAttributedString:string];
+        }
+        string = [self aText:@": "];
+        [self setString:string withColor:color1];
+        [self setString:string withFont:font1];
+        [ret appendAttributedString:string];
+        
+        string = [self aText:[dic objectForKey:@"content"]];
+        [self setString:string withFont:font2];
+        [self setString:string withColor:color2];
+        [ret appendAttributedString:string];
+        
+        string = [self aText:@"\n"];
+        [self setString:string withColor:color2];
+        [self setString:string withFont:font1];
+        [ret appendAttributedString:string];
+    }
+    [self.commentListView setAttributedText:ret];
+    
+}
+
+
+- (void)setString:(NSMutableAttributedString *)string withColor:(UIColor *)color {
+    [string addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, string.length)];
+}
+
+- (void)setString:(NSMutableAttributedString *)string withFont:(UIFont *)font {
+    [string addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, string.length)];
+}
+
+- (NSMutableAttributedString *)aText:(NSString *)string {
+    return [[NSMutableAttributedString alloc] initWithString:string];
+}
 @end
