@@ -67,5 +67,7 @@
 
 - (IBAction)send:(id)sender {
     [self.delegate sendText:self.textView.text];
+    self.textView.text = @"";
+    [self textViewDidChange:self.textView];
 }
 @end
