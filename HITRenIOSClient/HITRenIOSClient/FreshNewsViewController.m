@@ -635,7 +635,12 @@
     _commentingMid = [message.mid intValue];
     ShortMessageCell *cell = (ShortMessageCell *)sender;
     _reuid = cell.targetUid;
-    LOG(@"reuid %d", _reuid);
+    if (_reuid != -1) {
+        UserInfo *userInfo = [[AppData sharedInstance] readUserInfoForId:_reuid];
+        _keyboardToolBar.placeHolder = [NSString stringWithFormat:@"回复 %@:", userInfo.username];
+    }
+    else _keyboardToolBar.placeHolder = @"";
+//    LOG(@"reuid %d", _reuid);
     [_keyboardToolBar becomeFirstResponder];
 //    _firstResponder = cell.commentField;
 }
