@@ -50,6 +50,9 @@
     self.noticeViewBar.layer.borderWidth = 0.5;
     self.noticeViewBar.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
+    CGRect rect = self.scrollView.frame;
+    self.scrollView.contentSize = CGSizeMake(rect.size.width * 2, rect.size.height);
+    
     FUNC_END();
 }
 
@@ -107,6 +110,10 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint p = scrollView.contentOffset;
+    if (scrollView == self.scrollView) {
+//        int page = floor((p.x - self.view.frame.size.width / 2) / self.view.frame.size.width) + 1;
+        return;
+    }
     if (p.y < 0) p.y = 0;
     else if (p.y > scrollView.contentSize.height - scrollView.frame.size.height)
         p.y = scrollView.contentSize.height - scrollView.frame.size.height;

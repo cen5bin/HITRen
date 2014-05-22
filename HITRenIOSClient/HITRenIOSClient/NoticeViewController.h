@@ -16,6 +16,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet NoticeViewBar *noticeViewBar;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITableView *activityTableView; //系统推送
 @property (strong, nonatomic) IBOutlet UITableView *noticeTableView;  //聊天消息
 
