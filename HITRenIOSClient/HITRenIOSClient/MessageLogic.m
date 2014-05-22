@@ -166,4 +166,23 @@
     return YES;
 }
 
++ (BOOL)replyUser:(int)reuid atMessage:(int)mid withContent:(NSString *)content {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    User *user = [MessageLogic user];
+    [data setIntValue:user.uid forKey:@"uid"];
+    [data setIntValue:1 forKey:@"type"];
+    [data setIntValue:reuid forKey:@"reuid"];
+    [data setValue:content forKey:@"content"];
+    [data setIntValue:mid forKey:@"mid"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"CommentMessage" withEventName:ASYNC_EVENT_COMMENTMESSAGE];
+    if (!ret) {
+        L(@"CommentMessage failed");
+        FUNC_END();
+        return NO;
+    }
+    FUNC_END();
+    return YES;
+}
+
 @end

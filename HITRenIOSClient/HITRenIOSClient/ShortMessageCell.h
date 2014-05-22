@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MessageCellDelegate.h"
+#import "CommentListViewDelegate.h"
 
-@interface ShortMessageCell : UITableViewCell <UITextFieldDelegate,UITextViewDelegate>
+@class CommentListView;
+@interface ShortMessageCell : UITableViewCell <UITextFieldDelegate,UITextViewDelegate,CommentListViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *picture;
 @property (strong, nonatomic) IBOutlet UILabel *username;
 @property (strong, nonatomic) IBOutlet UILabel *time;
@@ -22,7 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
 
 @property (strong, nonatomic) IBOutlet UITextView *likedListView;
-@property (strong, nonatomic) IBOutlet UITextView *commentListView;
+@property (strong, nonatomic) IBOutlet CommentListView *commentListView;
 @property (strong, nonatomic) IBOutlet UITextField *commentField;
 @property (strong, nonatomic) IBOutlet UIView *commentBgView;
 
@@ -30,7 +32,9 @@
 @property (strong, nonatomic) id<MessageCellDelegate> delegate;
 @property (nonatomic) BOOL liked;
 @property (strong, nonatomic) NSMutableArray *likedList;
-@property (strong, nonatomic) NSMutableArray *commentList;
+@property (strong, nonatomic) NSMutableArray *commentList; //评论列表，每个单元是个dic
+@property (strong, nonatomic) NSMutableArray *userList;    //评论列表中每一列中的uid
+@property (nonatomic) int targetUid;
 
 - (IBAction)likeMessage:(id)sender;
 - (IBAction)commentMessage:(id)sender;

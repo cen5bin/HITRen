@@ -102,6 +102,7 @@
 		F87209C6191DE57400FAC7A1 /* UploadLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F87209C5191DE57400FAC7A1 /* UploadLogic.m */; };
 		F87209C9191E11E400FAC7A1 /* LikedList.m in Sources */ = {isa = PBXBuildFile; fileRef = F87209C8191E11E400FAC7A1 /* LikedList.m */; };
 		F8723EBF1927035200828B5C /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = F8723EBE1927035200828B5C /* Comment.m */; };
+		F8723EC31927C7CA00828B5C /* CommentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8723EC21927C7CA00828B5C /* CommentListView.m */; };
 		F8819FB619152D1C008BB814 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = F8819FB519152D1C008BB814 /* share.png */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
@@ -334,6 +335,8 @@
 		F87209C8191E11E400FAC7A1 /* LikedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikedList.m; sourceTree = "<group>"; };
 		F8723EBD1927035200828B5C /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		F8723EBE1927035200828B5C /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		F8723EC11927C7CA00828B5C /* CommentListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentListView.h; sourceTree = "<group>"; };
+		F8723EC21927C7CA00828B5C /* CommentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentListView.m; sourceTree = "<group>"; };
 		F8819FB519152D1C008BB814 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB3518BC79EA00407521 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -359,6 +362,7 @@
 		F89964F918FD331200D7FA44 /* FriendInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendInfoViewController.m; sourceTree = "<group>"; };
 		F89964FB18FD50F200D7FA44 /* GroupChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChooserViewController.h; sourceTree = "<group>"; };
 		F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChooserViewController.m; sourceTree = "<group>"; };
+		F899C93B192E4CCC00CB3D17 /* CommentListViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentListViewDelegate.h; sourceTree = "<group>"; };
 		F89B9C9D18D6EC73007DDDCC /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		F89DFADC191372E60043DD6B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		F89DFADD191372E60043DD6B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
@@ -937,6 +941,21 @@
 			path = libidn;
 			sourceTree = "<group>";
 		};
+		F8723EC01927C77200828B5C /* messagecell */ = {
+			isa = PBXGroup;
+			children = (
+				F8696A7C1918B47B008887AD /* MessageCellDelegate.h */,
+				F89DFADF1913B0240043DD6B /* MoreMessageCell.h */,
+				F89DFAE01913B0240043DD6B /* MoreMessageCell.m */,
+				F823B51D190666CD004D4514 /* ShortMessageCell.h */,
+				F823B51E190666CD004D4514 /* ShortMessageCell.m */,
+				F8723EC11927C7CA00828B5C /* CommentListView.h */,
+				F8723EC21927C7CA00828B5C /* CommentListView.m */,
+				F899C93B192E4CCC00CB3D17 /* CommentListViewDelegate.h */,
+			);
+			name = messagecell;
+			sourceTree = "<group>";
+		};
 		F88BCB2E18BB7A4100407521 /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,6 +1012,7 @@
 		F88F989118C1E86C009CE742 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				F8723EC01927C77200828B5C /* messagecell */,
 				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
 				F842BB8A19051BD700148848 /* menu */,
 				F88F989218C1E910009CE742 /* BtmToolBar.h */,
@@ -1003,11 +1023,6 @@
 				F8E9686618C5FBBC00B9384B /* TestView.m */,
 				F892372D18F3C85A00658F47 /* HometownPicker.h */,
 				F892372E18F3C85A00658F47 /* HometownPicker.m */,
-				F823B51D190666CD004D4514 /* ShortMessageCell.h */,
-				F823B51E190666CD004D4514 /* ShortMessageCell.m */,
-				F89DFADF1913B0240043DD6B /* MoreMessageCell.h */,
-				F89DFAE01913B0240043DD6B /* MoreMessageCell.m */,
-				F8696A7C1918B47B008887AD /* MessageCellDelegate.h */,
 				F8696A811918CAD8008887AD /* NoticeCell.h */,
 				F8696A821918CAD8008887AD /* NoticeCell.m */,
 				F87209C1191CB53E00FAC7A1 /* NoticeViewBar.h */,
@@ -1334,6 +1349,7 @@
 				F80B0D49187426F2003E72DC /* HttpTransfer.m in Sources */,
 				F84B7DE018BB3C8D007FC2D5 /* XMPPStringPrep.m in Sources */,
 				F8C564C81921DD0200695094 /* KeyboardToolBar.m in Sources */,
+				F8723EC31927C7CA00828B5C /* CommentListView.m in Sources */,
 				F892372A18F3A62D00658F47 /* HITRenData.xcdatamodeld in Sources */,
 				F87209C3191CB53E00FAC7A1 /* NoticeViewBar.m in Sources */,
 				F80B0D48187426F2003E72DC /* HttpData.m in Sources */,

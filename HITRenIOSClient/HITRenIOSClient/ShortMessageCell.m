@@ -8,6 +8,7 @@
 
 #import "ShortMessageCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CommentListView.h"
 
 @implementation ShortMessageCell
 
@@ -33,8 +34,10 @@
     self.likedListView.layer.borderWidth = self.bgView.layer.borderWidth;
     self.commentField.layer.borderWidth = 1;
     self.commentField.layer.borderColor = [UIColor colorWithRed:tmp/255 green:tmp/255 blue:tmp/255 alpha:1].CGColor;
+    self.commentListView.commentListViewDelegate = self;
     
 
+    self.targetUid = -1;
 //    self.likedList = [[NSMutableArray alloc] init];
 //    self.likedList.contentOffset = CGPointMake(0, 10);
 //    self.bgView.layer.shadowOffset = CGSizeMake(-0.5, 0);
@@ -50,7 +53,16 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+//    self.targetUid = -1;
     [self.delegate beginToComment:self];
+}
+
+- (void)tappedAtLine:(int)line {
+    self.targetUid = [[self.userList objectAtIndex:line-1] intValue];
+    [self.commentField becomeFirstResponder];
+//    [self.delegate beginToComment:self];
+    self.targetUid = -1;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -70,13 +82,18 @@
 }
 
 - (IBAction)commentMessage:(id)sender {
-    [self.delegate commentMessage:self];
+    self.targetUid = -1;
+    [self.commentField becomeFirstResponder];
+
+//    [self.delegate beginToComment:self];
+//    [self.delegate commentMessage:self];
 }
 
 - (IBAction)shareMessage:(id)sender {
     [self.delegate shareMessage:self];
 }
 
+// 更新的是点赞列表
 - (void)update {
     UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.liked? @"liked1":@"liked" ofType:@"png"]];
     [self.likedButton setImage:image forState:UIControlStateNormal];

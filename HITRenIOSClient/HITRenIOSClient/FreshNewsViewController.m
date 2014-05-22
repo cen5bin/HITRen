@@ -20,6 +20,7 @@
 #import "LikedList.h"
 #import "KeyboardToolBar.h"
 #import "Comment.h"
+#import "CommentListView.h"
 
 @interface FreshNewsViewController ()
 
@@ -163,6 +164,7 @@
         commentViewHeight = [[dic objectForKey:@"height"] floatValue];
     }
     cell.commentList = [[NSMutableArray alloc] init];
+    cell.userList = [[NSMutableArray alloc] init];
     for (NSDictionary *dic0 in [dic objectForKey:@"list"]) {
         NSMutableDictionary *tmp = [NSMutableDictionary dictionary];
         UserInfo *userInfo = [appData readUserInfoForId:[[dic0 objectForKey:@"uid"] intValue]];
@@ -174,6 +176,7 @@
         }
         [tmp setObject:[dic0 objectForKey:@"content"] forKey:@"content"];
         [cell.commentList addObject:tmp];
+        [cell.userList addObject:[dic0 objectForKey:@"uid"]];
     }
     [cell updateCommentList];
     
@@ -249,6 +252,7 @@
             NSString *tmp = [NSString stringWithFormat:@"%@回复%@: %@\n", userInfo1.username, userInfo2.username, [dic objectForKey:@"content"]];
             [string appendString:tmp];
         }
+        else
         [string appendString:[NSString stringWithFormat:@"%@: %@\n", userInfo1.username, [dic objectForKey:@"content"]]];
         [list addObject:dic];
     }
@@ -271,6 +275,7 @@
 - (CGFloat)calculateCommentViewHeight:(NSString *)string {
     UIFont *font = [UIFont boldSystemFontOfSize:15];
     CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(COMMENTLISTVIEW_WIDTH-5, FLT_MAX)];
+    LOG(@"%f", size.height + 16);
     return size.height + 16;
 }
 
@@ -628,7 +633,9 @@
     int index = [self.tableView indexPathForCell:sender].row;
     Message *message = [_data objectAtIndex:index];
     _commentingMid = [message.mid intValue];
-//    ShortMessageCell *cell = (ShortMessageCell *)sender;
+    ShortMessageCell *cell = (ShortMessageCell *)sender;
+    _reuid = cell.targetUid;
+    LOG(@"reuid %d", _reuid);
     [_keyboardToolBar becomeFirstResponder];
 //    _firstResponder = cell.commentField;
 }
@@ -648,7 +655,7 @@
     if (_reuid == -1)
         [MessageLogic commentMessage:_commentingMid withContent:text];
     else {
-        
+        [MessageLogic replyUser:_reuid atMessage:_commentingMid withContent:text];
         _reuid = -1;
     }
     
