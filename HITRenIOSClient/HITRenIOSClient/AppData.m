@@ -200,6 +200,7 @@ static AppData *appData;
         NSString *op = @"";
         int type0 = [[dic objectForKey:@"type"] intValue];
         if (type0 == 1) op = @"赞";
+        else if (type0 == 2) op = @"评论";
         ret = [NSString stringWithFormat:@"%@了你的状态:\"%@\"", op, message];
     }
     return ret;
