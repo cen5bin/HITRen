@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CommentListViewDelegate.h"
+#import "KeyboardToolBarDelegate.h"
 
-@class Message, CommentListView;
-@interface MessageDetailViewController : UIViewController <CommentListViewDelegate,UIScrollViewDelegate>
+@class Message, CommentListView,KeyboardToolBar;
+@interface MessageDetailViewController : UIViewController <CommentListViewDelegate,UIScrollViewDelegate,KeyboardToolBarDelegate,UITextViewDelegate> {
+    KeyboardToolBar *_keyboardToolBar;
+}
 
 
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
@@ -39,5 +42,6 @@
 - (void)update;
 - (void)updateCommentList;
 - (IBAction)likeMessage:(id)sender;
+- (IBAction)beginToComment:(id)sender;
 
 @end

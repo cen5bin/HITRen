@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VariablesViewState
    version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[MessageDetailViewController sendText:]:MessageDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "userInfo.username">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
 </VariablesViewState>

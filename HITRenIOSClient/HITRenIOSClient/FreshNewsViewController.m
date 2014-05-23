@@ -86,7 +86,6 @@
     NSDictionary *info = [notification userInfo];
     NSValue *value = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect rect = [value CGRectValue];
-    LOG(@"%f %f %f %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
     if (rect.origin.y >= self.view.frame.size.height) {
         _keyboardToolBar.hidden = YES;
         if (_keyboardToolBar.superview) [_keyboardToolBar removeFromSuperview];

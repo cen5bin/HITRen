@@ -15,6 +15,8 @@
 #import "MessageLogic.h"
 #import "LikedList.h"
 #import "UserInfo.h"
+#import "KeyboardToolBar.h"
+#import "Comment.h"
 
 @interface MessageDetailViewController ()
 
@@ -42,6 +44,32 @@
     self.likedListView.layer.borderWidth = 0.5;
     self.likedListView.layer.borderColor = [UIColor colorWithRed:tmp/255 green:tmp/255 blue:tmp/255 alpha:1].CGColor;
     self.commentListView.commentListViewDelegate = self;
+    
+    NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"keyboardtoolbar" owner:self options:nil];
+    _keyboardToolBar = [nibViews objectAtIndex:0];
+    _keyboardToolBar.delegate = self;
+    
+    self.targetUid = -1;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
+}
+
+- (void)keyboardFrameDidChanged:(NSNotification *)notification {
+    NSDictionary *info = [notification userInfo];
+    NSValue *value = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect rect = [value CGRectValue];
+    if (rect.origin.y >= self.view.frame.size.height) {
+        _keyboardToolBar.hidden = YES;
+        if (_keyboardToolBar.superview) [_keyboardToolBar removeFromSuperview];
+    }
+    else {
+        _keyboardToolBar.hidden = NO;
+        CGRect rect0 = _keyboardToolBar.frame;
+        rect0.origin.y = rect.origin.y - _keyboardToolBar.frame.size.height;
+        _keyboardToolBar.frame = rect0;
+        if (!_keyboardToolBar.superview)
+            [self.view.window addSubview:_keyboardToolBar];
+    }
 
 }
 
@@ -93,7 +121,11 @@
             size.height = CGRectGetMaxY(rect);
             self.scrollView.contentSize = size;
         }
-        else self.scrollView.contentSize = self.scrollView.frame.size;
+        else {
+            CGSize size = self.scrollView.frame.size;
+            size.height += 1;
+            self.scrollView.contentSize = size;
+        }
     }
     else {
         self.commentListView.hidden = YES;
@@ -114,8 +146,18 @@
 
 - (void)tappedAtLine:(int)line {
     self.targetUid = [[self.userList objectAtIndex:line-1] intValue];
+    if (self.targetUid != -1) {
+        UserInfo *userInfo = [[AppData sharedInstance] readUserInfoForId:self.targetUid];
+        _keyboardToolBar.placeHolder = [NSString stringWithFormat:@"回复 %@:", userInfo.username];
+    }
+    else _keyboardToolBar.placeHolder = @"";
+    [self beginToComment:nil];
     //    [self.delegate beginToComment:self];
-    self.targetUid = -1;
+//    self.targetUid = -1;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    return NO;
 }
 
 
@@ -126,6 +168,7 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+//    [_keyboardToolBar resignFirstResponder];
     UITouch *touch = [touches anyObject];
     CGPoint p = [touch locationInView:self.view];
     if (CGRectContainsPoint(self.topBar.frame, p)) {
@@ -242,26 +285,68 @@
 
 }
 
+- (IBAction)beginToComment:(id)sender {
+    if (!_keyboardToolBar.superview) {
+        CGRect rect = _keyboardToolBar.frame;
+        rect.origin.y = -100;
+        _keyboardToolBar.frame = rect;
+        [self.view.window addSubview:_keyboardToolBar];
+    }
+    else _keyboardToolBar.hidden = NO;
+    [_keyboardToolBar becomeFirstResponder];
+    
+}
+
 
 - (void)setString:(NSMutableAttributedString *)string withColor:(UIColor *)color {
     [string addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, string.length)];
 }
-
 - (void)setString:(NSMutableAttributedString *)string withFont:(UIFont *)font {
     [string addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, string.length)];
 }
-
 - (NSMutableAttributedString *)aText:(NSString *)string {
     return [[NSMutableAttributedString alloc] initWithString:string];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_keyboardToolBar resignFirstResponder];
     CGPoint p = scrollView.contentOffset;
     if (p.y < 0) p.y = 0;
 //    else if (p.y + scrollView.frame.size.height > scrollView.contentSize.height) p.y = scrollView.contentSize.height - scrollView.frame.size.height;
     scrollView.contentOffset = p;
     
 }
-
+- (void)sendText:(NSString *)text {
+    AppData *appData = [AppData sharedInstance];
+    Comment *comment = [appData getCommentOfMid:[self.message.mid intValue]];
+    User *user = [MessageLogic user];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:[NSNumber numberWithInt: user.uid] forKey:@"uid"];
+    [dic setObject:[NSNumber numberWithInt:self.targetUid] forKey:@"reuid"];
+    [dic setObject:text forKey:@"content"];
+    [comment.commentList addObject:dic];
+    [comment update];
+    [AppData saveData];
+    NSMutableDictionary *dic1 = [[NSMutableDictionary alloc] init];
+    UserInfo *userInfo = [appData readUserInfoForId:user.uid];
+    [dic1 setObject:userInfo.username forKey:@"user"];
+    if (self.targetUid != -1) {
+        userInfo = [appData readUserInfoForId:self.targetUid];
+        [dic1 setObject:userInfo.username forKey:@"reuser"];
+    }
+    [dic1 setObject:text forKey:@"content"];
+    [self.commentList addObject:dic1];
+    [self updateCommentList];
+    [self.userList addObject:[NSNumber numberWithInt:user.uid]];
+    [self loadContent];
+    if (self.targetUid == -1)
+        [MessageLogic commentMessage:[self.message.mid intValue] withContent:text];
+    else {
+        [MessageLogic replyUser:self.targetUid atMessage:[self.message.mid intValue] withContent:text];
+        self.targetUid = -1;
+    }
+    
+    [_keyboardToolBar resignFirstResponder];
+}
 
 @end
