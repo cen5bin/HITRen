@@ -192,7 +192,6 @@
     }
     [cell updateCommentList];
     
-    
     // 调整cell中各个view的frame
     CGFloat bgh = SHORTMESSAGECELL_BGVIEW_HEIGHT;
     CGRect rect = cell.textView.frame;
