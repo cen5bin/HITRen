@@ -79,6 +79,20 @@
     return nil;
 }
 
++ (Message *)getMessageOfMid:(int)mid {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Message" inManagedObjectContext:context];
+    request.entity = entity;
+    request.fetchLimit = 1;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mid == %d", mid];
+    request.predicate = predicate;
+    NSArray *res = [context executeFetchRequest:request error:nil];
+    if (res && res.count)
+    return [res objectAtIndex:0];
+    return nil;
+}
+
 + (Notice *)getNoticeOfUid:(int)uid atIndex:(int)index {
     NSManagedObjectContext *context = [DBController context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];

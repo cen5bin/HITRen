@@ -21,6 +21,7 @@ import cn.edu.hit.constant.LikedList;
 import cn.edu.hit.constant.Message;
 import cn.edu.hit.constant.TimeLine;
 import cn.edu.hit.dao.DBController;
+import cn.edu.hit.dao.DataManager;
 import cn.edu.hit.dao.DataReader;
 import cn.edu.hit.dao.MemWorker;
 import cn.edu.hit.kit.LogKit;
@@ -316,8 +317,10 @@ public class MessageLogic {
 		}
 		int uid1 = reuid;
 		if (uid1 == -1) {
-			cn.edu.hit.model.Message message = DataReader.getMessageInfo(mid);
-			uid1 = message.getUid();
+			JSONObject json = DataManager.getMessage(mid);
+//			cn.edu.hit.model.Message message = DataReader.getMessageInfo(mid);
+			logger.info(json);
+			uid1 = json.getInt(Message.UID);
 		}
 		User user = DataReader.getLeastUserInfo(uid);
 		TipsPusher.messageIsCommentedByUser(uid1, uid, user.getName(), user.getPic(), mid);

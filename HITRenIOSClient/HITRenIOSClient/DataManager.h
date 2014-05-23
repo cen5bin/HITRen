@@ -16,7 +16,9 @@
 + (Message *)getMessage;
 + (UserInfo *)getUserInfo;
 + (UserInfo *)getUserInfoOfUid:(int)uid;
+
 + (NSArray *)messagesInPage:(int)page;
++ (Message *)getMessageOfMid:(int)mid;
 
 + (Notice *)getNoticeOfUid:(int)uid atIndex:(int)index;
 + (Notice *)getLastNoticeOfUid:(int)uid;

@@ -1,5 +1,6 @@
 package cn.edu.hit.dao;
 
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,11 +29,13 @@ public class DataManager {
 	 */
 	public static JSONObject getMessage(int mid, boolean cache) throws JSONException {
 		String info = DataReader.getMessage(mid);
-		if (info !=null) return new JSONObject(info);
+		if (info !=null && info != "") return new JSONObject(info);
 		BasicDBObject obj = new BasicDBObject(Message.MID, mid);
 		DBObject retObj = DBController.queryOne(Message.COLLNAME, obj);
 		if (cache)
 			MemWorker.setMessageInfo(mid, retObj.toString());
-		return new JSONObject(retObj);
+		return new JSONObject(retObj.toString());
 	}
+	
+	private static Logger logger = Logger.getRootLogger();
 }

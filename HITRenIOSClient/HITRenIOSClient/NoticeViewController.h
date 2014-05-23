@@ -23,6 +23,6 @@
 @property (nonatomic) int flag;
 
 
-- (IBAction)swipe:(UISwipeGestureRecognizer *)sender;
+//- (IBAction)swipe:(UISwipeGestureRecognizer *)sender;
 
 @end

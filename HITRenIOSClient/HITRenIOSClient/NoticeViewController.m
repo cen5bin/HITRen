@@ -13,6 +13,12 @@
 #import "NoticeObject.h"
 #import "NoticeViewBar.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Message.h"
+#import "Comment.h"
+#import "LikedList.h"
+#import "MessageDetailViewController.h"
+#import "UserInfo.h"
+#import "MessageLogic.h"
 
 @interface NoticeViewController ()
 
@@ -37,15 +43,8 @@
     
     self.flag = 0;
     AppData *appData = [AppData sharedInstance];
-    Notice *notice = [appData activitiesAtIndex:0];
-    _activies = [[NSMutableArray alloc] initWithArray:notice.notices];
-    _notices = appData.noticeLine;
     
-//    if (self.flag == 1)
-//        _data = appData.noticeLine;
-//    else if (self.flag == 0){
-//       
-//    }
+    _notices = appData.noticeLine;
     
     self.noticeViewBar.layer.borderWidth = 0.5;
     self.noticeViewBar.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -54,6 +53,18 @@
     self.scrollView.contentSize = CGSizeMake(rect.size.width * 2, rect.size.height);
     
     FUNC_END();
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    AppData *appData = [AppData sharedInstance];
+    Notice *notice = [appData activitiesAtIndex:0];
+    NSArray *array = notice.notices;
+    _activies = [[NSMutableArray alloc] init];
+    for (id obj in array)
+        [_activies insertObject:obj atIndex:0];
+//    _activies = [[NSMutableArray alloc] initWithArray:notice.notices];
+    [self.activityTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,7 +122,6 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint p = scrollView.contentOffset;
     if (scrollView == self.scrollView) {
-//        int page = floor((p.x - self.view.frame.size.width / 2) / self.view.frame.size.width) + 1;
         return;
     }
     if (p.y < 0) p.y = 0;
@@ -121,44 +131,100 @@
     scrollView.contentOffset = p;
 }
 
-
-
-- (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
-    static BOOL working = NO;
-    if (working) return;
-    working = YES;
-    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
-        L(@"left");
-        if (self.flag == 1) return;
-        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-            CGRect frame = self.view.frame;
-            CGRect rect1 = self.activityTableView.frame;
-            CGRect rect2 = self.noticeTableView.frame;
-            rect1.origin.x -= CGRectGetWidth(frame);
-            rect2.origin.x -= CGRectGetWidth(frame);
-            self.activityTableView.frame = rect1;
-            self.noticeTableView.frame = rect2;
-        } completion:^(BOOL finished){
-            self.flag = 1;
-            working = NO;
-        }];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.activityTableView) {
+        NoticeObject *object = [_activies objectAtIndex:indexPath.row];
+        NSDictionary *dic = object.content;
+        NSDictionary *m = [dic objectForKey:@"message"];
+        int mid = [[m objectForKey:@"mid"] intValue];
+        [self showMessageDetailViewOfMid:mid];
     }
-    else if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
-        L(@"right");
-        if (self.flag == 0) return;
-        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-            CGRect frame = self.view.frame;
-            CGRect rect1 = self.activityTableView.frame;
-            CGRect rect2 = self.noticeTableView.frame;
-            rect1.origin.x += CGRectGetWidth(frame);
-            rect2.origin.x += CGRectGetWidth(frame);
-            self.activityTableView.frame = rect1;
-            self.noticeTableView.frame = rect2;
-        } completion:^(BOOL finished){
-            self.flag = 0;
-            working = NO;
-        }];
-
+    else if (tableView == self.noticeTableView) {
+        
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+- (void)showMessageDetailViewOfMid:(int)mid {
+    AppData *appData = [AppData sharedInstance];
+    MessageDetailViewController *controller = getViewControllerOfName(@"MessageDetail");
+    Message *message = [appData readMessageForId:mid];
+    controller.message = message;
+    LikedList *likedList = [appData getLikedListOfMid:mid];
+    controller.likedList = [[NSMutableArray alloc] init];
+    for (int i = likedList.userList.count - 1; i >= 0; i--)
+    {
+        NSNumber *uid = [likedList.userList objectAtIndex:i];
+        UserInfo *userInfo0 = [appData readUserInfoForId:[uid intValue]];
+        if (userInfo0.username)
+            [controller.likedList addObject:userInfo0.username];
+    }
+    Comment *comment = [appData getCommentOfMid:mid];
+    controller.commentList = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in comment.commentList) {
+        int uid = [[dic objectForKey:@"uid"] intValue];
+        int reuid = [[dic objectForKey:@"reuid"] intValue];
+        NSMutableDictionary *tmp = [[NSMutableDictionary alloc] init];
+        UserInfo *userInfo1 = [appData readUserInfoForId:uid];
+        if (!userInfo1) continue;
+        [tmp setObject:userInfo1.username forKey:@"user"];
+        if (reuid != -1) {
+            UserInfo *userInfo2 = [appData readUserInfoForId:reuid];
+            if (!userInfo2) continue;
+            [tmp setObject:userInfo2.username forKey:@"reuser"];
+        }
+        [tmp setObject:[dic objectForKey:@"content"] forKey:@"content"];
+        [controller.commentList addObject:tmp];
+    }
+    User *user = [MessageLogic user];
+    if ([likedList.userList containsObject:[NSNumber numberWithInt:user.uid]])
+        controller.liked = YES;
+    else controller.liked = NO;
+    [controller update];
+    [controller updateCommentList];
+    
+    
+    [self.navigationController pushViewController:controller animated:YES];
+    
+
+}
+
+//- (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
+//    static BOOL working = NO;
+//    if (working) return;
+//    working = YES;
+//    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+//        L(@"left");
+//        if (self.flag == 1) return;
+//        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+//            CGRect frame = self.view.frame;
+//            CGRect rect1 = self.activityTableView.frame;
+//            CGRect rect2 = self.noticeTableView.frame;
+//            rect1.origin.x -= CGRectGetWidth(frame);
+//            rect2.origin.x -= CGRectGetWidth(frame);
+//            self.activityTableView.frame = rect1;
+//            self.noticeTableView.frame = rect2;
+//        } completion:^(BOOL finished){
+//            self.flag = 1;
+//            working = NO;
+//        }];
+//    }
+//    else if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
+//        L(@"right");
+//        if (self.flag == 0) return;
+//        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+//            CGRect frame = self.view.frame;
+//            CGRect rect1 = self.activityTableView.frame;
+//            CGRect rect2 = self.noticeTableView.frame;
+//            rect1.origin.x += CGRectGetWidth(frame);
+//            rect2.origin.x += CGRectGetWidth(frame);
+//            self.activityTableView.frame = rect1;
+//            self.noticeTableView.frame = rect2;
+//        } completion:^(BOOL finished){
+//            self.flag = 0;
+//            working = NO;
+//        }];
+//
+//    }
+//}
 @end

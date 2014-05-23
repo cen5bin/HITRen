@@ -38,6 +38,7 @@
 - (NSArray *)getMessagesInPage:(int)page;
 - (NSArray *)userInfosNeedDownload:(NSArray *)uids;
 - (UserInfo *)readUserInfoForId:(int)uid;
+- (Message *)readMessageForId:(int)mid;
 
 - (Notice *)newNotice;
 - (Notice *)lastNoticeOfUid:(int)uid;

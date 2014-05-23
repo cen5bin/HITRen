@@ -131,6 +131,12 @@ static AppData *appData;
     return userInfo;
 }
 
+- (Message *)readMessageForId:(int)mid {
+    Message *message = [_messages objectForKey:[NSNumber numberWithInt:mid]];
+    if (message) return message;
+    return [DataManager getMessageOfMid:mid];
+}
+
 // 当前需要下载的用户信息，返回所有的uid，传递不确定是否需要下载的uid
 - (NSArray *)userInfosNeedDownload:(NSArray *)uids {
     NSMutableArray *ret = [[NSMutableArray alloc] init];

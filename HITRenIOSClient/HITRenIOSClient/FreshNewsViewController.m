@@ -150,7 +150,9 @@
     //点赞信息
     LikedList *likedList = [appData getLikedListOfMid:[message.mid intValue]];
     cell.likedList = [[NSMutableArray alloc] init];
-    for (NSNumber *uid in likedList.userList) {
+    for (int i = likedList.userList.count - 1; i >= 0; i--) {
+//    for (NSNumber *uid in likedList.userList) {
+        NSNumber *uid = [likedList.userList objectAtIndex:i];
         UserInfo *userInfo0 = [appData readUserInfoForId:[uid intValue]];
         if (userInfo0.username)
             [cell.likedList addObject:userInfo0.username];
