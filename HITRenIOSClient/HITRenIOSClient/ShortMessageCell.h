@@ -11,7 +11,9 @@
 #import "CommentListViewDelegate.h"
 
 @class CommentListView;
-@interface ShortMessageCell : UITableViewCell <UITextFieldDelegate,UITextViewDelegate,CommentListViewDelegate>
+@interface ShortMessageCell : UITableViewCell <UITextFieldDelegate,UITextViewDelegate,CommentListViewDelegate> {
+    UITapGestureRecognizer *_tapGestureRecognizer;
+}
 @property (strong, nonatomic) IBOutlet UIImageView *picture;
 @property (strong, nonatomic) IBOutlet UILabel *username;
 @property (strong, nonatomic) IBOutlet UILabel *time;

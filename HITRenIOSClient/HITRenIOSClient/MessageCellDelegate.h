@@ -16,4 +16,5 @@
 - (void)commentMessage:(id)sender;
 - (void)shareMessage:(id)sender;
 - (void)beginToComment:(id)sender;
+- (void)willShowMessageDetail:(id)sender;
 @end

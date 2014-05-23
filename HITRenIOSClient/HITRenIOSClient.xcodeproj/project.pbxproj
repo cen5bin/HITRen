@@ -119,6 +119,7 @@
 		F89964F718FD2C3600D7FA44 /* base2.png in Resources */ = {isa = PBXBuildFile; fileRef = F89964F418FD2C3600D7FA44 /* base2.png */; };
 		F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964F918FD331200D7FA44 /* FriendInfoViewController.m */; };
 		F89964FD18FD50F200D7FA44 /* GroupChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */; };
+		F899C93E192F269900CB3D17 /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F899C93D192F269900CB3D17 /* MessageDetailViewController.m */; };
 		F89B9C9E18D6EC73007DDDCC /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F89B9C9D18D6EC73007DDDCC /* empty.png */; };
 		F89DFADE191372E60043DD6B /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFADD191372E60043DD6B /* Message.m */; };
 		F89DFAE11913B0240043DD6B /* MoreMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F89DFAE01913B0240043DD6B /* MoreMessageCell.m */; };
@@ -363,6 +364,8 @@
 		F89964FB18FD50F200D7FA44 /* GroupChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupChooserViewController.h; sourceTree = "<group>"; };
 		F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupChooserViewController.m; sourceTree = "<group>"; };
 		F899C93B192E4CCC00CB3D17 /* CommentListViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentListViewDelegate.h; sourceTree = "<group>"; };
+		F899C93C192F269900CB3D17 /* MessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailViewController.h; sourceTree = "<group>"; };
+		F899C93D192F269900CB3D17 /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
 		F89B9C9D18D6EC73007DDDCC /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		F89DFADC191372E60043DD6B /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		F89DFADD191372E60043DD6B /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
@@ -629,6 +632,8 @@
 				F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */,
 				F823B5171906313E004D4514 /* SendShortMessageViewController.h */,
 				F823B5181906313E004D4514 /* SendShortMessageViewController.m */,
+				F899C93C192F269900CB3D17 /* MessageDetailViewController.h */,
+				F899C93D192F269900CB3D17 /* MessageDetailViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1299,6 +1304,7 @@
 				F87209C6191DE57400FAC7A1 /* UploadLogic.m in Sources */,
 				F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */,
 				F84B7DD418BB3C8D007FC2D5 /* XMPPIQ.m in Sources */,
+				F899C93E192F269900CB3D17 /* MessageDetailViewController.m in Sources */,
 				F89DFAE11913B0240043DD6B /* MoreMessageCell.m in Sources */,
 				F84B7DEC18BB3C8D007FC2D5 /* DDXMLElement.m in Sources */,
 				F84B7DCD18BB3C8D007FC2D5 /* XMPPPlainAuthentication.m in Sources */,

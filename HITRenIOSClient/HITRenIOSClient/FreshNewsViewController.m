@@ -21,6 +21,7 @@
 #import "KeyboardToolBar.h"
 #import "Comment.h"
 #import "CommentListView.h"
+#import "MessageDetailViewController.h"
 
 @interface FreshNewsViewController ()
 
@@ -267,6 +268,7 @@
     return ret;
 }
 
+
 - (CGFloat)calculateTextViewHeight:(NSString *)string {
     UIFont *font = [UIFont systemFontOfSize:14];
     CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(TEXTVIEW_WIDTH-20, FLT_MAX)];
@@ -276,7 +278,6 @@
 - (CGFloat)calculateCommentViewHeight:(NSString *)string {
     UIFont *font = [UIFont boldSystemFontOfSize:15];
     CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(COMMENTLISTVIEW_WIDTH-5, FLT_MAX)];
-    LOG(@"%f", size.height + 16);
     return size.height + 16;
 }
 
@@ -611,6 +612,22 @@
 - (void)commentMessage:(id)sender {
     
 }
+
+- (void)willShowMessageDetail:(id)sender {
+    int index = [self.tableView indexPathForCell:sender].row;
+    ShortMessageCell *cell = (ShortMessageCell *)sender;
+    Message *message = [_data objectAtIndex:index];
+    MessageDetailViewController *controller = getViewControllerOfName(@"MessageDetail");
+    controller.message = message;
+    controller.liked = cell.liked;
+    controller.likedList = cell.likedList;
+    controller.commentList = cell.commentList;
+    controller.userList = cell.userList;
+//    [controller update];
+//    [controller updateCommentList];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 
 - (void)shareMessage:(id)sender {
     
