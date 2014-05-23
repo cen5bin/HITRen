@@ -69,8 +69,11 @@
         [self.tableView setContentOffset:CGPointMake(0, -35) animated:NO];
         [self beginToDownloadTimeline];
     }
-    else _moreMessageCell = 1;
-    
+    else {
+        _currentPage = 0;
+        _data = [[NSMutableArray alloc] initWithArray:[appData getMessagesInPage:0]];
+        _moreMessageCell = 1;
+    }
     _reuid = -1;
     
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
@@ -91,9 +94,7 @@
         rect0.origin.y = rect.origin.y - _keyboardToolBar.frame.size.height;
         _keyboardToolBar.frame = rect0;
         if (!_keyboardToolBar.superview)
-//            [_keyboardToolBar removeFromSuperview];
             [self.view.window addSubview:_keyboardToolBar];
-//        [_keyboardToolBar becomeFirstResponder];
     }
     
 }
@@ -373,20 +374,6 @@
     
 
 }
-
-//- (void)backgroundLoadData {
-//    AppData *appData = [AppData sharedInstance];
-//    NSArray *messageNeedDownload = [appData messagesNeedDownloadFromIndex:_data.count];
-//    if (messageNeedDownload.count == 0) {
-//        NSArray *messages = [appData getMessagesInPage:_currentPage + 1];
-//        for (id message in messages)
-//            [_data addObject:message];
-//        [self.tableView reloadData];
-//    }
-//    else {
-//        [MessageLogic downloadMessages:messageNeedDownload];
-//    }
-//}
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     CGPoint p = scrollView.contentOffset;

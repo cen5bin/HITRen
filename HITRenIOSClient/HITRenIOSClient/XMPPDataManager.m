@@ -22,6 +22,8 @@
 
 - (void)dataReceived:(NSNotification *)notification {
     NSString *string = notification.object;
+    L(string);
+    if ([string isEqualToString:@"a"]) [self sendNotice:@"aaa1"];
     NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
     L([dic description]);

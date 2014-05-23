@@ -41,8 +41,36 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+//    UIApplication *app = [UIApplication sharedApplication];
+//    UIBackgroundTaskIdentifier taskID;
+//    taskID = [app beginBackgroundTaskWithExpirationHandler:^{
+//        [app endBackgroundTask:taskID];
+//    }];
+    BOOL backgroundAccepted = [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{ [self backgroundHandler]; }];
+    if (backgroundAccepted)
+    {
+        NSLog(@"VOIP backgrounding accepted");
+    }
+    [self backgroundHandler];
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)backgroundHandler {
+    UIApplication *app = [UIApplication sharedApplication];
+    __block UIBackgroundTaskIdentifier taskID;
+    taskID = [app beginBackgroundTaskWithExpirationHandler:^{
+        [app endBackgroundTask:taskID];
+        taskID = UIBackgroundTaskInvalid;
+    }];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        while (1) {
+            sleep(1);
+        }
+    
+    });
+    L(@"asd");
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

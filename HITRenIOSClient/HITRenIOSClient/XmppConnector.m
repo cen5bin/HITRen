@@ -8,6 +8,7 @@
 
 #import "XmppConnector.h"
 #import "LogKit.h"
+#import <CFNetwork/CFNetwork.h>
 
 static XmppConnector* connector = nil;
 
@@ -88,6 +89,16 @@ static XmppConnector* connector = nil;
 //    [[message elementForName:@"body"] ∂]
     NSString *msg = [[message elementForName:@"body"] stringValue];
     [[NSNotificationCenter defaultCenter] postNotificationName:XMPP_MESSAGE_RECEIVED object:msg];
+}
+
+
+- (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket {
+    L(@"yes123456");
+//    CFReadStreamSetProperty([socket readStream], kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
+//    CFWriteStreamSetProperty([socket writeStream], kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
+    [socket performBlock:^{
+        [socket enableBackgroundingOnSocket];
+    }];
 }
 
 @end
