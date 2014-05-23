@@ -31,6 +31,8 @@
     
     int _commentingMid;
     int _reuid;
+    
+    BOOL _loadDetail;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

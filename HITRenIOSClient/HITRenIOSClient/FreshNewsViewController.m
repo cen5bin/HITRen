@@ -77,6 +77,8 @@
     }
     _reuid = -1;
     
+    _loadDetail = NO;
+    
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
 }
 
@@ -100,6 +102,13 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (_loadDetail) {
+        [self.tableView reloadData];
+        _loadDetail = NO;
+    }
+}
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
@@ -415,6 +424,7 @@
         [self hideTopActivityIndicator];
 //        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
         _timelineDownloading = NO;
+        [self.tableView reloadData];
         return;
     }
     _maxDataLoadedPage = 0;
@@ -589,10 +599,6 @@
     [likedList update];
     [AppData saveData];
     [self.tableView reloadData];
-    
-//    ShortMessageCell *cell = (ShortMessageCell *)sender;
-    
-//    L([indexPath description]);
 }
 
 - (void)dislikeMessage:(id)sender {
@@ -623,6 +629,7 @@
     controller.likedList = cell.likedList;
     controller.commentList = cell.commentList;
     controller.userList = cell.userList;
+    _loadDetail = YES;
 //    [controller update];
 //    [controller updateCommentList];
     [self.navigationController pushViewController:controller animated:YES];

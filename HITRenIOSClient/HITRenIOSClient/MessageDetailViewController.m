@@ -12,6 +12,9 @@
 #import "UserInfo.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CommentListView.h"
+#import "MessageLogic.h"
+#import "LikedList.h"
+#import "UserInfo.h"
 
 @interface MessageDetailViewController ()
 
@@ -28,8 +31,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     CGFloat tmp = 220;
@@ -37,12 +39,18 @@
     self.cellBar.layer.borderWidth = 0.5;
     self.scrollView.layer.borderWidth = 0.5;
     self.scrollView.layer.borderColor = [UIColor colorWithRed:tmp/255 green:tmp/255 blue:tmp/255 alpha:1].CGColor;
+    self.likedListView.layer.borderWidth = 0.5;
+    self.likedListView.layer.borderColor = [UIColor colorWithRed:tmp/255 green:tmp/255 blue:tmp/255 alpha:1].CGColor;
     self.commentListView.commentListViewDelegate = self;
 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self loadContent];
+}
+
+- (void)loadContent {
     AppData *appData = [AppData sharedInstance];
     UserInfo *userInfo = [appData readUserInfoForId:[self.message.uid intValue]];
     self.usernameLabel.text = userInfo.username;
@@ -90,6 +98,7 @@
     else {
         self.commentListView.hidden = YES;
     }
+
 }
 
 - (CGFloat)calculateCommentViewHeight:(NSString *)string {
@@ -97,7 +106,6 @@
     CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(COMMENTLISTVIEW_WIDTH-5, FLT_MAX)];
     return size.height + 16;
 }
-
 - (CGFloat)calculateTextViewHeight:(NSString *)string {
     UIFont *font = [UIFont systemFontOfSize:14];
     CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(TEXTVIEW_WIDTH-20, FLT_MAX)];
@@ -125,7 +133,6 @@
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
             [self.navigationController popViewControllerAnimated:YES];
-//            [self dismissViewControllerAnimated:YES completion:^(void){}];
         }
         else if (p.x >= CGRectGetMaxX(self.topBar.frame)-50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
@@ -209,6 +216,30 @@
     }
     [self.commentListView setAttributedText:ret];
     
+}
+
+- (IBAction)likeMessage:(id)sender {
+    self.liked = !self.liked;
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:self.liked? @"liked1":@"liked" ofType:@"png"]];
+    [self.likedButton setImage:image forState:UIControlStateNormal];
+    LikedList *likedList = [[AppData sharedInstance] getLikedListOfMid:[self.message.mid intValue]];
+    User *user = [MessageLogic user];
+    UserInfo *userInfo = [[AppData sharedInstance] readUserInfoForId:user.uid];
+    if (self.liked) {
+        [MessageLogic likeMessage:[self.message.mid intValue]];
+        [likedList.userList addObject:[NSNumber numberWithInt:user.uid]];
+        [self.likedList insertObject:userInfo.username atIndex:0];
+    }
+    else {
+        [MessageLogic dislikeMessage:[self.message.mid intValue]];
+        [likedList.userList removeObject:[NSNumber numberWithInt:user.uid]];
+        [self.likedList removeObject:userInfo.username];
+    }
+    [likedList update];
+    [AppData saveData];
+    [self update];
+    [self loadContent];
+
 }
 
 

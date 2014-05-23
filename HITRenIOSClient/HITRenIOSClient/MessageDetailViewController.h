@@ -38,5 +38,6 @@
 
 - (void)update;
 - (void)updateCommentList;
+- (IBAction)likeMessage:(id)sender;
 
 @end
