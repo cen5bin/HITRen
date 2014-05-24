@@ -13,6 +13,7 @@
 #import "Timeline.h"
 #import "DataManager.h"
 #import "AppData.h"
+#import "XmppConnector.h"
 
 @implementation MessageLogic
 
@@ -181,6 +182,13 @@
         FUNC_END();
         return NO;
     }
+    FUNC_END();
+    return YES;
+}
+
++ (BOOL)sendMessage:(NSString *)message toUid:(int)uid {
+    FUNC_START();
+    [[XmppConnector sharedInstance] sendMessage:message toUid:uid];
     FUNC_END();
     return YES;
 }

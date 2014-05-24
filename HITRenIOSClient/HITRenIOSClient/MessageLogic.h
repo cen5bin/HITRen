@@ -21,5 +21,6 @@
 + (BOOL)commentMessage:(int)mid withContent:(NSString *)content;
 + (BOOL)downloadCommentList:(NSArray *)mids;
 + (BOOL)replyUser:(int)reuid atMessage:(int)mid withContent:(NSString *)content;
++ (BOOL)sendMessage:(NSString *)message toUid:(int)uid;
 
 @end

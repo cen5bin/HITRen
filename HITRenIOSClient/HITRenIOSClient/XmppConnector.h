@@ -15,6 +15,7 @@
     NSString *hostname;
     int uid;
     int port;
+    NSMutableArray *_messageQueue;
 }
 
 @property (nonatomic) int uid;
@@ -29,5 +30,6 @@
 - (void)disconnect;
 - (void)goOnline;
 - (void)goOffline;
+- (BOOL)sendMessage:(NSString *)message toUid:(int)uid;
 
 @end

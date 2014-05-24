@@ -29,6 +29,8 @@ static XmppConnector* connector = nil;
         uid = 35;
         port = 5222;
         self.password = @"123";
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didConnected) name:XMPP_CONNECT_SUCC object:nil];
+        _messageQueue = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -37,7 +39,7 @@ static XmppConnector* connector = nil;
     NSString *filepath = [[NSBundle mainBundle] pathForResource:@"xmppserver" ofType:@"plist"];
     NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:filepath];
     serverIP = [data objectForKey:@"serverIP"];
-    serverIP = SERVER_IP;//@"192.168.1.151";
+    serverIP = SERVER_IP;
     hostname = [data objectForKey:@"hostname"];
 }
 
@@ -82,6 +84,7 @@ static XmppConnector* connector = nil;
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
     LOG(@"xmpp authenticate success");
+    [[NSNotificationCenter defaultCenter] postNotificationName:XMPP_CONNECT_SUCC object:nil userInfo:nil];
     [self goOnline];
 }
 
@@ -91,14 +94,41 @@ static XmppConnector* connector = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:XMPP_MESSAGE_RECEIVED object:msg];
 }
 
-
-- (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket {
-    L(@"yes123456");
-//    CFReadStreamSetProperty([socket readStream], kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
-//    CFWriteStreamSetProperty([socket writeStream], kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
-    [socket performBlock:^{
-        [socket enableBackgroundingOnSocket];
-    }];
+- (BOOL)sendMessage:(NSString *)message toUid:(int)uid0 {
+    if (!xmppStream.isConnected&&!xmppStream.isConnecting) [self connect];
+    if (!xmppStream.isConnected) {
+        [_messageQueue addObject:@{@"message":message, @"uid":[NSNumber numberWithInt:uid0]}];
+        return NO;
+    }
+    NSXMLElement *element = [NSXMLElement elementWithName:@"body"];
+    [element setStringValue:message];
+    NSString *jid = [NSString stringWithFormat:@"hitrenuid%d@%@", uid0, hostname];
+    NSXMLElement *m = [NSXMLElement elementWithName:@"message"];
+    [m addAttributeWithName:@"to" stringValue:jid];
+    [m addChild:element];
+    [xmppStream sendElement:m];
+    return YES;
 }
+
+- (void)didConnected {
+    while (_messageQueue.count) {
+        NSDictionary *dic = [_messageQueue objectAtIndex:0];
+        if (![self sendMessage:[dic objectForKey:@"message"] toUid:[[dic objectForKey:@"uid"] intValue]]) {
+            [_messageQueue insertObject:[_messageQueue lastObject] atIndex:0];
+            [_messageQueue removeLastObject];
+            break;
+        }
+        [_messageQueue removeObjectAtIndex:0];
+    }
+}
+
+//- (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket {
+//    L(@"yes123456");
+////    CFReadStreamSetProperty([socket readStream], kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
+////    CFWriteStreamSetProperty([socket writeStream], kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
+//    [socket performBlock:^{
+//        [socket enableBackgroundingOnSocket];
+//    }];
+//}
 
 @end
