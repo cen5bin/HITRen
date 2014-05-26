@@ -86,8 +86,10 @@ public class OpenfireConnector {
 		
 		config = new ConnectionConfiguration(hostname, port, IP);
 		config.setReconnectionAllowed(true);
-		config.setCompressionEnabled(true);
-		config.setSASLAuthenticationEnabled(true);
+//		config.setCompressionEnabled(true);
+//		config.setSASLAuthenticationEnabled(true);
+		config.setSASLAuthenticationEnabled(false);
+		config.setSecurityMode(ConnectionConfiguration.SecurityMode.disabled); 
 	}
 	
 	private void connectToOpenfire() throws XMPPException {

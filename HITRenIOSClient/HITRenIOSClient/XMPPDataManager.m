@@ -22,8 +22,6 @@
 
 - (void)dataReceived:(NSNotification *)notification {
     NSString *string = notification.object;
-    L(string);
-    if ([string isEqualToString:@"a"]) [self sendNotice:@"aaa1"];
     NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
     L([dic description]);
@@ -42,13 +40,21 @@
     AppData *appData = [AppData sharedInstance];
     [appData addNoticeObject:object from:0];
     [AppData saveData];
-    [self sendNotice:@"aaa"];
 }
 
 - (void)dealWithChatMessage:(NSDictionary *)dic {
-    
+    L(@"chat");
+    LOG(@"from uid %d", [[dic objectForKey:@"uid"] intValue]);
+    NoticeObject *object = [[NoticeObject alloc] init];
+    object.content = dic;
+    object.type = 1;
+    AppData *appData = [AppData sharedInstance];
+    [appData addNoticeObject:object from:[[dic objectForKey:@"uid"] intValue]];
+    [AppData saveData];
 }
 
+
+//本地推送
 - (void)sendNotice:(NSString *)string {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     if (notification) {

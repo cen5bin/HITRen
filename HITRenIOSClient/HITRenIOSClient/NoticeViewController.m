@@ -19,6 +19,7 @@
 #import "MessageDetailViewController.h"
 #import "UserInfo.h"
 #import "MessageLogic.h"
+#import "ChatViewController.h"
 
 @interface NoticeViewController ()
 
@@ -92,6 +93,7 @@
     CGFloat tmp = 220;
     cell.contentView.layer.borderColor = [UIColor colorWithRed:tmp/255 green:tmp/255 blue:tmp/255 alpha:1].CGColor;
     
+    AppData *appData = [AppData sharedInstance];
     
     if (tableView == self.activityTableView) {
         NoticeObject *object = [_activies objectAtIndex:indexPath.row];
@@ -102,7 +104,13 @@
         cell.lastNotice.text = [AppData stringOfNoticeObject:object];
     }
     else if (tableView == self.noticeTableView) {
-        
+        int uid = [[_notices objectAtIndex:indexPath.row] intValue];
+        UserInfo *userInfo = [appData readUserInfoForId:uid];
+        cell.username.text = userInfo.username;
+        Notice *notice = [appData lastNoticeOfUid:uid];
+        NoticeObject *obj = [notice.notices lastObject];
+        L([obj.content description]);
+        cell.lastNotice.text = [obj.content objectForKey:@"text"];
     }
     
     
@@ -140,11 +148,13 @@
         [self showMessageDetailViewOfMid:mid];
     }
     else if (tableView == self.noticeTableView) {
-        
+        ChatViewController *controller = getViewControllerOfName(@"ChatView");
+        [self.navigationController pushViewController:controller animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+// 展示某条状态的详细信息
 - (void)showMessageDetailViewOfMid:(int)mid {
     AppData *appData = [AppData sharedInstance];
     MessageDetailViewController *controller = getViewControllerOfName(@"MessageDetail");

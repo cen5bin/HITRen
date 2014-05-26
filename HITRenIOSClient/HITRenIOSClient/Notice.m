@@ -23,7 +23,7 @@ const int max_count = 20;
 - (void)addNotice:(NoticeObject *)notice {
     [self.notices addObject:notice];
     self.data = [NSKeyedArchiver archivedDataWithRootObject:self.notices];
-    [DataManager save];
+//    [DataManager save];
 //    self.data = [NSKeyedArchiver = ]
 }
 

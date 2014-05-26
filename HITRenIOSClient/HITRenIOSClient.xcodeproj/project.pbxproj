@@ -36,6 +36,9 @@
 		F80B0D52187426F2003E72DC /* UserSimpleLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D46187426F2003E72DC /* UserSimpleLogic.m */; };
 		F80B0D5C18744C17003E72DC /* TestUserSimpleLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D5B18744C17003E72DC /* TestUserSimpleLogic.m */; };
 		F80B0D5F187452A0003E72DC /* TestMessageLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F80B0D5E187452A0003E72DC /* TestMessageLogic.m */; };
+		F8107C6819331A4D0073C169 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107C6719331A4D0073C169 /* ChatViewController.m */; };
+		F8107C6B1933505A0073C169 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107C6A1933505A0073C169 /* ChatCell.m */; };
+		F8107C821933A0F90073C169 /* bubble1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107C811933A0F90073C169 /* bubble1.png */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -210,6 +213,11 @@
 		F80B0D5B18744C17003E72DC /* TestUserSimpleLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUserSimpleLogic.m; sourceTree = "<group>"; };
 		F80B0D5D187452A0003E72DC /* TestMessageLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMessageLogic.h; sourceTree = "<group>"; };
 		F80B0D5E187452A0003E72DC /* TestMessageLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestMessageLogic.m; sourceTree = "<group>"; };
+		F8107C6619331A4D0073C169 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		F8107C6719331A4D0073C169 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		F8107C691933505A0073C169 /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
+		F8107C6A1933505A0073C169 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
+		F8107C811933A0F90073C169 /* bubble1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble1.png; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -634,6 +642,8 @@
 				F823B5181906313E004D4514 /* SendShortMessageViewController.m */,
 				F899C93C192F269900CB3D17 /* MessageDetailViewController.h */,
 				F899C93D192F269900CB3D17 /* MessageDetailViewController.m */,
+				F8107C6619331A4D0073C169 /* ChatViewController.h */,
+				F8107C6719331A4D0073C169 /* ChatViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -651,6 +661,14 @@
 				F8FC7F4818751A0800842DC5 /* TestRelationship.m */,
 			);
 			name = TestCode;
+			sourceTree = "<group>";
+		};
+		F8107C6C19335B470073C169 /* bubble */ = {
+			isa = PBXGroup;
+			children = (
+				F8107C811933A0F90073C169 /* bubble1.png */,
+			);
+			name = bubble;
 			sourceTree = "<group>";
 		};
 		F842BB8A19051BD700148848 /* menu */ = {
@@ -973,6 +991,7 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8107C6C19335B470073C169 /* bubble */,
 				F8696A7F1918BCA5008887AD /* liked1.png */,
 				F8819FB519152D1C008BB814 /* share.png */,
 				F89DFB011914FA9E0043DD6B /* comment.png */,
@@ -1032,6 +1051,8 @@
 				F8696A821918CAD8008887AD /* NoticeCell.m */,
 				F87209C1191CB53E00FAC7A1 /* NoticeViewBar.h */,
 				F87209C2191CB53E00FAC7A1 /* NoticeViewBar.m */,
+				F8107C691933505A0073C169 /* ChatCell.h */,
+				F8107C6A1933505A0073C169 /* ChatCell.m */,
 			);
 			name = component;
 			sourceTree = "<group>";
@@ -1210,6 +1231,7 @@
 				F8819FB619152D1C008BB814 /* share.png in Resources */,
 				F8C564C51921DC1300695094 /* keyboardtoolbar.xib in Resources */,
 				F8550F0318C4C251005E51FE /* p_btm4.png in Resources */,
+				F8107C821933A0F90073C169 /* bubble1.png in Resources */,
 				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,
 				F89DFAF01914ED130043DD6B /* liked.png in Resources */,
 				F80B0D0B1874269D003E72DC /* Main_iPhone.storyboard in Resources */,
@@ -1280,6 +1302,7 @@
 				F80B0D4D187426F2003E72DC /* RelationshipLogic.m in Sources */,
 				F84B7DC918BB3C8D007FC2D5 /* XMPPAnonymousAuthentication.m in Sources */,
 				F89964EB18FD0F6A00D7FA44 /* FriendsListViewController.m in Sources */,
+				F8107C6819331A4D0073C169 /* ChatViewController.m in Sources */,
 				F84B7DE718BB3C8D007FC2D5 /* ContextFilterLogFormatter.m in Sources */,
 				F842BB8D19051C3B00148848 /* MenuView.m in Sources */,
 				F80B0D041874269D003E72DC /* main.m in Sources */,
@@ -1327,6 +1350,7 @@
 				F8E9687918C709CB00B9384B /* NoticeViewController.m in Sources */,
 				F84B7DDE18BB3C8D007FC2D5 /* XMPPIDTracker.m in Sources */,
 				F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */,
+				F8107C6B1933505A0073C169 /* ChatCell.m in Sources */,
 				F84B7DDC18BB3C8D007FC2D5 /* GCDMulticastDelegate.m in Sources */,
 				F892372F18F3C85A00658F47 /* HometownPicker.m in Sources */,
 				F80B0D4B187426F2003E72DC /* MessageLogic.m in Sources */,

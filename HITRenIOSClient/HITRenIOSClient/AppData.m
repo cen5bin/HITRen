@@ -52,7 +52,7 @@ static AppData *appData;
 - (NSMutableArray *)getNoticeLine {
     if (_noticeLine) return _noticeLine;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    _noticeLine = [userDefaults objectForKey:@"noticeLine"];
+    _noticeLine = [[NSMutableArray alloc]initWithArray:[userDefaults objectForKey:@"noticeLine"]];
     if (!_noticeLine) _noticeLine = [[NSMutableArray alloc] init];
     return _noticeLine;
 }

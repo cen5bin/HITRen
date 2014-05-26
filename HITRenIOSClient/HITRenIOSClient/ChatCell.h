@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChatCell : UITableViewCell
+@interface ChatCell : UITableViewCell {
+    UIImage *_bubble;
+    UIImageView *_bubbleImageView;
+}
 
+@property (strong, nonatomic) IBOutlet UIImageView *pic;
+
+@property (strong, nonatomic) NSString *text;
+- (void)show;
+
++ (CGFloat)calculateCellHeight:(NSString *)text;
 @end

@@ -49,6 +49,7 @@ static XmppConnector* connector = nil;
 }
 
 - (BOOL)connect {
+    if (xmppStream.isConnected || xmppStream.isConnecting) return YES;
     port = 5222;
     [xmppStream setHostName:serverIP];
     [xmppStream setHostPort:port];
@@ -100,11 +101,20 @@ static XmppConnector* connector = nil;
         [_messageQueue addObject:@{@"message":message, @"uid":[NSNumber numberWithInt:uid0]}];
         return NO;
     }
-    NSXMLElement *element = [NSXMLElement elementWithName:@"body"];
-    [element setStringValue:message];
+    NSMutableDictionary *body = [[NSMutableDictionary alloc] init];
+    [body setObject:[NSNumber numberWithInt:0] forKey:@"type"];
+    NSMutableDictionary *content = [[NSMutableDictionary alloc] init];
+    [content setObject:[NSNumber numberWithInt:self.uid] forKey:@"uid"];
+    [content setObject:message forKey:@"text"];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    [content setObject:[format stringFromDate:[NSDate date]] forKey:@"date"];
+    [body setObject:content forKey:@"content"];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:body options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jid = [NSString stringWithFormat:@"hitrenuid%d@%@", uid0, hostname];
     NSXMLElement *m = [NSXMLElement elementWithName:@"message"];
     [m addAttributeWithName:@"to" stringValue:jid];
+    NSXMLElement *element = [NSXMLElement elementWithName:@"body" stringValue:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
     [m addChild:element];
     [xmppStream sendElement:m];
     return YES;
