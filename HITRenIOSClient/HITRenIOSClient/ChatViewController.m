@@ -41,13 +41,11 @@
     AppData *appData = [AppData sharedInstance];
     Notice *notice = [appData lastNoticeOfUid:[self.userInfo.uid intValue]];
     _datas = [[NSMutableArray alloc] initWithArray:notice.notices];
-//    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"keyboardtoolbar" owner:self options:nil];
     _keyboardToolBar = getViewFromNib(@"keyboardtoolbar", self);
     _keyboardToolBarAtBottom = getViewFromNib(@"keyboardtoolbar", self);
     _keyboardToolBar.delegate = self;
     _keyboardToolBarAtBottom.delegate = self;
     CGRect rect = _keyboardToolBarAtBottom.frame;
-    LOG(@"%f", self.view.frame.size.height);
     CGRect rect1 = [self.view convertRect:self.view.frame toView:self.view.window];
     rect.origin.y = rect1.size.height - rect.size.height;
     _keyboardToolBarAtBottom.frame = rect;
@@ -115,7 +113,6 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     if (!_keyboardToolBarIsDisappearing) {
-        L(@"asd");
         _keyboardToolBarIsDisappearing = YES;
         [_keyboardToolBar resignFirstResponderNotHideAtOnce];
     }

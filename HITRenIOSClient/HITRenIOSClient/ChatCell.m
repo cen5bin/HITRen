@@ -26,7 +26,8 @@
 }
 
 - (void)awakeFromNib {
-    _bubble = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bubble1" ofType:@"png"]];
+    self.isReply = YES;
+    _bubble = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:!self.isReply? @"bubble1":@"bubble2" ofType:@"png"]];
     _bubbleImageView = [[UIImageView alloc] initWithImage:[_bubble stretchableImageWithLeftCapWidth:30 topCapHeight:35]];
 }
 
@@ -38,6 +39,12 @@
 }
 
 - (void)show {
+    CGRect rect = self.pic.frame;
+    if (self.isReply)
+        rect.origin.x = CGRectGetMaxX(self.contentView.frame) - 8 - rect.size.width;
+    else
+        rect.origin.x = 8;
+    self.pic.frame = rect;
     [self makeBubble];
     [self.contentView addSubview:_bubbleImageView];
 }
@@ -52,13 +59,17 @@
 
     CGFloat width = [ChatCell calculateWidth:self.text];
     if (width < MAX_BUBBLETEXTVIEW_WIDTH) {
-        _bubbleImageView.frame = CGRectMake(CGRectGetMaxX(self.pic.frame)+5, self.pic.frame.origin.y, width + 20, MIN_BUBBLE_HEIGHT);
-        textView.frame = CGRectMake(15, MARGIN_TEXTVIEW_UP_DOWN, width, MIN_TEXTVIEW_HEIGHT);
+        CGFloat origin_x = self.isReply?CGRectGetMinX(self.pic.frame) - 5 - (width + 20) : CGRectGetMaxX(self.pic.frame)+5;
+        _bubbleImageView.frame = CGRectMake(origin_x, self.pic.frame.origin.y, width + 20, MIN_BUBBLE_HEIGHT);
+        origin_x = self.isReply?3:15;
+        textView.frame = CGRectMake(origin_x, MARGIN_TEXTVIEW_UP_DOWN, width, MIN_TEXTVIEW_HEIGHT);
     }
     else {
         CGFloat height = [ChatCell calculateHeight:self.text];
-        _bubbleImageView.frame = CGRectMake(CGRectGetMaxX(self.pic.frame)+5, self.pic.frame.origin.y, MAX_BUBBLETEXTVIEW_WIDTH+20, height + 2 * MARGIN_TEXTVIEW_UP_DOWN);
-        textView.frame = CGRectMake(15, MARGIN_TEXTVIEW_UP_DOWN, MAX_BUBBLETEXTVIEW_WIDTH, height);
+        CGFloat origin_x = self.isReply?CGRectGetMinX(self.pic.frame) - 5 - (MAX_BUBBLETEXTVIEW_WIDTH + 20) : CGRectGetMaxX(self.pic.frame)+5;
+        _bubbleImageView.frame = CGRectMake(origin_x, self.pic.frame.origin.y, MAX_BUBBLETEXTVIEW_WIDTH+20, height + 2 * MARGIN_TEXTVIEW_UP_DOWN);
+        origin_x = self.isReply?3:15;
+        textView.frame = CGRectMake(origin_x, MARGIN_TEXTVIEW_UP_DOWN, MAX_BUBBLETEXTVIEW_WIDTH, height);
     }
     [_bubbleImageView addSubview:textView];
 }

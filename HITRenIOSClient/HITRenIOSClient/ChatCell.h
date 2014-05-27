@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *pic;
 
 @property (strong, nonatomic) NSString *text;
+@property (nonatomic) BOOL isReply;
 - (void)show;
 
 + (CGFloat)calculateCellHeight:(NSString *)text;

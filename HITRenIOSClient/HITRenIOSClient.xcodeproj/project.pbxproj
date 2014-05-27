@@ -39,6 +39,7 @@
 		F8107C6819331A4D0073C169 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107C6719331A4D0073C169 /* ChatViewController.m */; };
 		F8107C6B1933505A0073C169 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107C6A1933505A0073C169 /* ChatCell.m */; };
 		F8107C821933A0F90073C169 /* bubble1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107C811933A0F90073C169 /* bubble1.png */; };
+		F8107C8C19346D730073C169 /* bubble2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107C8B19346D730073C169 /* bubble2.png */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -218,6 +219,7 @@
 		F8107C691933505A0073C169 /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
 		F8107C6A1933505A0073C169 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		F8107C811933A0F90073C169 /* bubble1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble1.png; sourceTree = "<group>"; };
+		F8107C8B19346D730073C169 /* bubble2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble2.png; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 		F8107C6C19335B470073C169 /* bubble */ = {
 			isa = PBXGroup;
 			children = (
+				F8107C8B19346D730073C169 /* bubble2.png */,
 				F8107C811933A0F90073C169 /* bubble1.png */,
 			);
 			name = bubble;
@@ -1231,6 +1234,7 @@
 				F8819FB619152D1C008BB814 /* share.png in Resources */,
 				F8C564C51921DC1300695094 /* keyboardtoolbar.xib in Resources */,
 				F8550F0318C4C251005E51FE /* p_btm4.png in Resources */,
+				F8107C8C19346D730073C169 /* bubble2.png in Resources */,
 				F8107C821933A0F90073C169 /* bubble1.png in Resources */,
 				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,
 				F89DFAF01914ED130043DD6B /* liked.png in Resources */,
