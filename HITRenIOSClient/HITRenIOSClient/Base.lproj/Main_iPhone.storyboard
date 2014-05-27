@@ -1156,6 +1156,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="WIM-IM-HTa" id="J06-4C-dDo"/>
+                        <outlet property="topBar" destination="F0h-Wf-5Mh" id="tvb-jV-bbZ"/>
                         <outlet property="username" destination="nbb-yQ-BZY" id="0u1-gk-V0Y"/>
                     </connections>
                 </viewController>

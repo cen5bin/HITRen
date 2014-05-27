@@ -42,6 +42,7 @@
 
 - (Notice *)newNotice;
 - (Notice *)lastNoticeOfUid:(int)uid;
+- (Notice *)getNoticeOfUid:(int)uid atIndex:(int)index;
 - (void)addNoticeObject:(NoticeObject *)noticeObject inNotice:(Notice *)notice;
 - (void)addNoticeObject:(NoticeObject *)noticeObject from:(int)uid;
 + (NSString *)stringOfNoticeObject:(NoticeObject *)noticeObject;

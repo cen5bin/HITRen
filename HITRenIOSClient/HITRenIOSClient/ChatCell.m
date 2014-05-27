@@ -26,7 +26,7 @@
 }
 
 - (void)awakeFromNib {
-    self.isReply = YES;
+//    self.isReply = YES;
     _bubble = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:!self.isReply? @"bubble1":@"bubble2" ofType:@"png"]];
     _bubbleImageView = [[UIImageView alloc] initWithImage:[_bubble stretchableImageWithLeftCapWidth:30 topCapHeight:35]];
 }
@@ -50,7 +50,10 @@
 }
 //
 - (void)makeBubble {
-    for (UIView *view in _bubbleImageView.subviews) [view removeFromSuperview];
+     _bubble = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:!self.isReply? @"bubble1":@"bubble2" ofType:@"png"]];
+    if (_bubbleImageView.superview) [_bubbleImageView removeFromSuperview];
+    _bubbleImageView = [[UIImageView alloc] initWithImage:[_bubble stretchableImageWithLeftCapWidth:30 topCapHeight:35]];
+//    for (UIView *view in _bubbleImageView.subviews) [view removeFromSuperview];
     UITextView *textView = [[UITextView alloc] init];
     textView.backgroundColor = [UIColor clearColor];
     textView.textColor = [UIColor whiteColor];
@@ -80,7 +83,6 @@
 }
 
 + (CGFloat)calculateWidth:(NSString *)text {
-    L(text);
     CGSize size = [text sizeWithFont:[UIFont boldSystemFontOfSize:16] constrainedToSize:CGSizeMake(FLT_MAX, MIN_TEXTVIEW_HEIGHT) lineBreakMode:NSLineBreakByWordWrapping];
     return size.width + 16;
 

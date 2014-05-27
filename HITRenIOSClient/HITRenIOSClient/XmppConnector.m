@@ -95,42 +95,65 @@ static XmppConnector* connector = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:XMPP_MESSAGE_RECEIVED object:msg];
 }
 
-- (BOOL)sendMessage:(NSString *)message toUid:(int)uid0 {
+//- (BOOL)sendMessage:(NSString *)message toUid:(int)uid0 {
+//    if (!xmppStream.isConnected&&!xmppStream.isConnecting) [self connect];
+//    if (!xmppStream.isConnected) {
+//        [_messageQueue addObject:@{@"message":message, @"uid":[NSNumber numberWithInt:uid0]}];
+//        return NO;
+//    }
+//    NSMutableDictionary *body = [[NSMutableDictionary alloc] init];
+//    [body setObject:[NSNumber numberWithInt:0] forKey:@"type"];
+//    NSMutableDictionary *content = [[NSMutableDictionary alloc] init];
+//    [content setObject:[NSNumber numberWithInt:self.uid] forKey:@"uid"];
+//    [content setObject:message forKey:@"text"];
+//    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+//    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+//    [content setObject:[format stringFromDate:[NSDate date]] forKey:@"date"];
+//    [body setObject:content forKey:@"content"];
+//    NSData *data = [NSJSONSerialization dataWithJSONObject:body options:NSJSONWritingPrettyPrinted error:nil];
+//    NSString *jid = [NSString stringWithFormat:@"hitrenuid%d@%@", uid0, hostname];
+//    NSXMLElement *m = [NSXMLElement elementWithName:@"message"];
+//    [m addAttributeWithName:@"to" stringValue:jid];
+//    NSXMLElement *element = [NSXMLElement elementWithName:@"body" stringValue:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+//    [m addChild:element];
+//    [xmppStream sendElement:m];
+//    return YES;
+//}
+
+- (BOOL)sendMessage:(id)message {
     if (!xmppStream.isConnected&&!xmppStream.isConnecting) [self connect];
     if (!xmppStream.isConnected) {
-        [_messageQueue addObject:@{@"message":message, @"uid":[NSNumber numberWithInt:uid0]}];
+        [_messageQueue addObject:message];
         return NO;
     }
-    NSMutableDictionary *body = [[NSMutableDictionary alloc] init];
-    [body setObject:[NSNumber numberWithInt:0] forKey:@"type"];
-    NSMutableDictionary *content = [[NSMutableDictionary alloc] init];
-    [content setObject:[NSNumber numberWithInt:self.uid] forKey:@"uid"];
-    [content setObject:message forKey:@"text"];
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    [content setObject:[format stringFromDate:[NSDate date]] forKey:@"date"];
-    [body setObject:content forKey:@"content"];
-    NSData *data = [NSJSONSerialization dataWithJSONObject:body options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *jid = [NSString stringWithFormat:@"hitrenuid%d@%@", uid0, hostname];
-    NSXMLElement *m = [NSXMLElement elementWithName:@"message"];
-    [m addAttributeWithName:@"to" stringValue:jid];
-    NSXMLElement *element = [NSXMLElement elementWithName:@"body" stringValue:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
-    [m addChild:element];
-    [xmppStream sendElement:m];
+    [xmppStream sendElement:message];
     return YES;
+}
+
+- (NSString *)getHostname {
+    return hostname;
 }
 
 - (void)didConnected {
     while (_messageQueue.count) {
-        NSDictionary *dic = [_messageQueue objectAtIndex:0];
-        if (![self sendMessage:[dic objectForKey:@"message"] toUid:[[dic objectForKey:@"uid"] intValue]]) {
-            [_messageQueue insertObject:[_messageQueue lastObject] atIndex:0];
-            [_messageQueue removeLastObject];
+        id message = [_messageQueue objectAtIndex:0];
+        if (![self sendMessage:message])
             break;
-        }
         [_messageQueue removeObjectAtIndex:0];
     }
 }
+
+//- (void)didConnected {
+//    while (_messageQueue.count) {
+//        NSDictionary *dic = [_messageQueue objectAtIndex:0];
+//        if (![self sendMessage:[dic objectForKey:@"message"] toUid:[[dic objectForKey:@"uid"] intValue]]) {
+//            [_messageQueue insertObject:[_messageQueue lastObject] atIndex:0];
+//            [_messageQueue removeLastObject];
+//            break;
+//        }
+//        [_messageQueue removeObjectAtIndex:0];
+//    }
+//}
 
 //- (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket {
 //    L(@"yes123456");

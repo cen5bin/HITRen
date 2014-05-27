@@ -14,6 +14,7 @@
 #import "DataManager.h"
 #import "AppData.h"
 #import "XmppConnector.h"
+#import "NoticeObject.h"
 
 @implementation MessageLogic
 
@@ -188,7 +189,32 @@
 
 + (BOOL)sendMessage:(NSString *)message toUid:(int)uid {
     FUNC_START();
-    [[XmppConnector sharedInstance] sendMessage:message toUid:uid];
+    User *user = [MessageLogic user];
+    
+    NSMutableDictionary *body = [[NSMutableDictionary alloc] init];
+    [body setObject:[NSNumber numberWithInt:0] forKey:@"type"];
+    NSMutableDictionary *content = [[NSMutableDictionary alloc] init];
+    [content setObject:[NSNumber numberWithInt:user.uid] forKey:@"uid"];
+    [content setObject:message forKey:@"text"];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    [content setObject:[format stringFromDate:[NSDate date]] forKey:@"date"];
+    [body setObject:content forKey:@"content"];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:body options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jid = [NSString stringWithFormat:@"hitrenuid%d@%@", uid, [[XmppConnector sharedInstance] getHostname]];
+    NSXMLElement *m = [NSXMLElement elementWithName:@"message"];
+    [m addAttributeWithName:@"to" stringValue:jid];
+    NSXMLElement *element = [NSXMLElement elementWithName:@"body" stringValue:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+    [m addChild:element];
+    [[XmppConnector sharedInstance] sendMessage:m];
+    
+    NoticeObject *obj = [[NoticeObject alloc] init];
+    obj.content = content;
+    obj.date = [content objectForKey:@"date"];
+    obj.type = 0;
+    obj.isReply = YES;
+    AppData *appData = [AppData sharedInstance];
+    [appData addNoticeObject:obj from:uid];
     FUNC_END();
     return YES;
 }

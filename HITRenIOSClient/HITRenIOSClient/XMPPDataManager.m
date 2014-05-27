@@ -43,14 +43,13 @@
 }
 
 - (void)dealWithChatMessage:(NSDictionary *)dic {
-    L(@"chat");
-    LOG(@"from uid %d", [[dic objectForKey:@"uid"] intValue]);
     NoticeObject *object = [[NoticeObject alloc] init];
     object.content = dic;
     object.type = 1;
     AppData *appData = [AppData sharedInstance];
     [appData addNoticeObject:object from:[[dic objectForKey:@"uid"] intValue]];
     [AppData saveData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:XMPP_CHATMESSAGE_RECEIVED object:nil];
 }
 
 

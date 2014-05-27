@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *username;
+@property (strong, nonatomic) IBOutlet UIImageView *topBar;
+
 @property (strong, nonatomic) UserInfo *userInfo;
 
 @end

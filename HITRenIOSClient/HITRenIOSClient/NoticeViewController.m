@@ -66,6 +66,7 @@
         [_activies insertObject:obj atIndex:0];
 //    _activies = [[NSMutableArray alloc] initWithArray:notice.notices];
     [self.activityTableView reloadData];
+    [self.noticeTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning

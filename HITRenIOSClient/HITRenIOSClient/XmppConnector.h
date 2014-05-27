@@ -30,6 +30,8 @@
 - (void)disconnect;
 - (void)goOnline;
 - (void)goOffline;
-- (BOOL)sendMessage:(NSString *)message toUid:(int)uid;
+//- (BOOL)sendMessage:(NSString *)message toUid:(int)uid;
+- (BOOL)sendMessage:(id)message;
+- (NSString *)getHostname;
 
 @end

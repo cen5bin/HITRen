@@ -12,6 +12,7 @@
 @property (strong, nonatomic) NSDate *date;
 @property (nonatomic) int type;
 @property (strong, nonatomic) NSDictionary *content;
+@property (nonatomic) BOOL isReply;
 
 - (id)init;
 

@@ -13,6 +13,7 @@
 #import "NoticeObject.h"
 #import "UserInfo.h"
 #import "KeyboardToolBar.h"
+#import "MessageLogic.h"
 
 @interface ChatViewController ()
 
@@ -35,6 +36,7 @@
 	// Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:XMPP_CHATMESSAGE_RECEIVED object:nil];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
     self.username.text = self.userInfo.username;
@@ -42,6 +44,7 @@
     Notice *notice = [appData lastNoticeOfUid:[self.userInfo.uid intValue]];
     _datas = [[NSMutableArray alloc] initWithArray:notice.notices];
     _keyboardToolBar = getViewFromNib(@"keyboardtoolbar", self);
+    _keyboardToolBar.hidden = YES;
     _keyboardToolBarAtBottom = getViewFromNib(@"keyboardtoolbar", self);
     _keyboardToolBar.delegate = self;
     _keyboardToolBarAtBottom.delegate = self;
@@ -50,6 +53,7 @@
     rect.origin.y = rect1.size.height - rect.size.height;
     _keyboardToolBarAtBottom.frame = rect;
     [self.view addSubview:_keyboardToolBarAtBottom];
+    [self scrollToBottom];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
@@ -62,6 +66,7 @@
         if (_keyboardToolBar.superview) [_keyboardToolBar removeFromSuperview];
         _keyboardToolBarIsDisappearing = NO;
         _keyboardToolBarAtBottom.hidden = NO;
+        [self.tableView reloadData];
     }];
 
 }
@@ -70,8 +75,7 @@
     NSDictionary *info = [notification userInfo];
     NSValue *value = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect rect = [value CGRectValue];
-    if (rect.origin.y >= self.view.frame.size.height) {
-    }
+    if (rect.origin.y >= self.view.frame.size.height) return;
     else {
         _keyboardToolBarAtBottom.hidden = YES;
         _keyboardToolBar.hidden = NO;
@@ -81,7 +85,50 @@
         if (!_keyboardToolBar.superview)
             [self.view.window addSubview:_keyboardToolBar];
         [_keyboardToolBar becomeFirstResponder];
+        [self.tableView reloadData];
+        [self scrollToBottom];
     }
+}
+
+- (void)reloadData {
+    AppData *appData = [AppData sharedInstance];
+    Notice *notice = [appData lastNoticeOfUid:[self.userInfo.uid intValue]];
+    if (notice.notices.count > 10)
+        _datas = [[NSMutableArray alloc] initWithArray:notice.notices];
+    else {
+        Notice *notice1 = [appData getNoticeOfUid:[self.userInfo.uid intValue] atIndex:[notice.index intValue]-1];
+        _datas = [[NSMutableArray alloc] init];
+        for (id obj in notice1.notices) [_datas addObject:obj];
+        for (id obj in notice.notices) [_datas addObject:obj];
+    }
+    [self.tableView reloadData];
+    [self scrollToBottom];
+}
+
+- (void)scrollToBottom {
+    CGRect rect = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForItem:_datas.count-1 inSection:0]];
+    rect = [self.tableView convertRect:rect toView:self.view.window];
+    if (_keyboardToolBar.hidden) {
+        CGFloat tmp = CGRectGetMaxY(rect) - _keyboardToolBarAtBottom.frame.origin.y;
+        if (tmp < 0) return;
+        CGPoint p = self.tableView.contentOffset;
+        p.y += tmp;
+        [self.tableView setContentOffset:p animated:NO];
+    }
+    else {
+        CGFloat tmp = CGRectGetMaxY(rect) - _keyboardToolBar.frame.origin.y;
+        if (tmp < 0) return;
+        CGPoint p = self.tableView.contentOffset;
+        p.y += tmp;
+        [self.tableView setContentOffset:p animated:NO];
+    }
+
+}
+
+- (void)sendText:(NSString *)text {
+    [MessageLogic sendMessage:text toUid:[self.userInfo.uid intValue]];
+    _keyboardToolBar.textView.text = @"";
+    [self reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,6 +151,7 @@
     if (!cell) cell = [[ChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     NoticeObject *obj = [_datas objectAtIndex:indexPath.row];
     cell.text = [obj.content objectForKey:@"text"];
+    cell.isReply = obj.isReply;
     [cell show];
     return cell;
 }
@@ -112,6 +160,7 @@
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    L(@"asd");
     if (!_keyboardToolBarIsDisappearing) {
         _keyboardToolBarIsDisappearing = YES;
         [_keyboardToolBar resignFirstResponderNotHideAtOnce];
@@ -121,7 +170,27 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NoticeObject *obj = [_datas objectAtIndex:indexPath.row];
-    return [ChatCell calculateCellHeight:[obj.content objectForKey:@"text"]];
+    CGFloat tmp = 0;
+    if (indexPath.row == _datas.count - 1 && _keyboardToolBar.hidden) tmp = _keyboardToolBarAtBottom.frame.size.height;
+    return [ChatCell calculateCellHeight:[obj.content objectForKey:@"text"]] + tmp;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint p = [touch locationInView:self.view];
+    if (CGRectContainsPoint(self.topBar.frame, p)) {
+        if (p.x <= 50) {
+            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
+            self.topBar.image = image;
+            [_keyboardToolBar resignFirstResponder];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else if (p.x >= CGRectGetMaxX(self.topBar.frame)-50) {
+            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+            self.topBar.image = image;
+        }
+    }
+
 }
 
 

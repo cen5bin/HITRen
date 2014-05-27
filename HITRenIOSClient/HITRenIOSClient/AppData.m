@@ -163,6 +163,10 @@ static AppData *appData;
     return notice;
 }
 
+- (Notice *)getNoticeOfUid:(int)uid atIndex:(int)index {
+    return [DataManager getNoticeOfUid:uid atIndex:index];
+}
+
 - (void)addNoticeObject:(NoticeObject *)noticeObject inNotice:(Notice *)notice{
     if ([notice full]) {
         int index = [notice.index intValue];
@@ -183,6 +187,7 @@ static AppData *appData;
         int index = [notice.index intValue];
         notice = [self newNotice];
         notice.index = [NSNumber numberWithInt:index+1];
+        notice.uid = uid0;
         [_notices setObject:notice forKey:uid0];
     }
     [notice addNotice:noticeObject];
