@@ -22,6 +22,7 @@
 
 - (IBAction)send:(id)sender;
 - (void)resignFirstResponder;
+- (void)resignFirstResponderNotHideAtOnce;
 - (void)becomeFirstResponder;
 
 @end

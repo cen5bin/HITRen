@@ -75,6 +75,10 @@
     [self.textView resignFirstResponder];
 }
 
+- (void)resignFirstResponderNotHideAtOnce {
+    [self.textView resignFirstResponder];
+}
+
 - (void)becomeFirstResponder {
     [self.textView becomeFirstResponder];
     if (!self.textView.text.length) {

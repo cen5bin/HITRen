@@ -1,5 +1,6 @@
 package cn.edu.hit.servlet.usersimplelogic;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -45,6 +46,11 @@ public class LoginServlet extends BaseServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+//		File file = new File("/Users/cen5bin/a.txt");
+//		PrintWriter pw = new PrintWriter(file);
+//		pw.write("asd");
+//		pw.close();
+//		file.createNewFile();
 //		MemWorker.setUserInfo(11, "asdsad123");
 //		String s = MemWorker.getUserInfo(11);
 //		System.out.println(s);

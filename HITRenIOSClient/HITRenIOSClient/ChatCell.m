@@ -69,6 +69,7 @@
 }
 
 + (CGFloat)calculateWidth:(NSString *)text {
+    L(text);
     CGSize size = [text sizeWithFont:[UIFont boldSystemFontOfSize:16] constrainedToSize:CGSizeMake(FLT_MAX, MIN_TEXTVIEW_HEIGHT) lineBreakMode:NSLineBreakByWordWrapping];
     return size.width + 16;
 
@@ -77,7 +78,7 @@
 + (CGFloat)calculateCellHeight:(NSString *)text {
     CGFloat widht = [ChatCell calculateWidth:text];
     if (widht < MAX_BUBBLETEXTVIEW_WIDTH) return MIN_BUBBLE_HEIGHT + 16;
-    CGFloat height = [ChatCell calculateCellHeight:text] + MARGIN_TEXTVIEW_UP_DOWN * 2;
+    CGFloat height = [ChatCell calculateHeight:text] + MARGIN_TEXTVIEW_UP_DOWN * 2;
     return height + 16;
 }
 

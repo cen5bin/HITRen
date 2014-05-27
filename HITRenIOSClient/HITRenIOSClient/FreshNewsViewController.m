@@ -641,7 +641,7 @@
 }
 
 - (void)beginToComment:(id)sender {
-    [MessageLogic sendMessage:@"asddsadadsa" toUid:281];
+    [MessageLogic sendMessage:@"你好你好你好你好你好你好你好你好你好你好你好你好你好你好" toUid:281];
     int index = [self.tableView indexPathForCell:sender].row;
     Message *message = [_data objectAtIndex:index];
     _commentingMid = [message.mid intValue];

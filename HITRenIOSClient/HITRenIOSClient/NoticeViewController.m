@@ -149,6 +149,10 @@
     }
     else if (tableView == self.noticeTableView) {
         ChatViewController *controller = getViewControllerOfName(@"ChatView");
+        AppData *appData = [AppData sharedInstance];
+        int uid = [[appData.noticeLine objectAtIndex:indexPath.row] intValue];
+        UserInfo *userInfo = [appData readUserInfoForId:uid];
+        controller.userInfo = userInfo;
         [self.navigationController pushViewController:controller animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

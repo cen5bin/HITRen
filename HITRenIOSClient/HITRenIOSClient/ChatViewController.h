@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KeyboardToolBarDelegate.h"
 
-@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@class UserInfo,KeyboardToolBar;
+@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,KeyboardToolBarDelegate,UIScrollViewDelegate> {
+    NSMutableArray *_datas;
+    KeyboardToolBar *_keyboardToolBar;
+    KeyboardToolBar *_keyboardToolBarAtBottom;
+    
+    BOOL _keyboardToolBarIsDisappearing;
+}
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UILabel *username;
+@property (strong, nonatomic) UserInfo *userInfo;
 
 @end

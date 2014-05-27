@@ -26,3 +26,8 @@ void drawStringWithFontInRect(NSString *string, UIFont *font, CGRect rect) {
     [string drawInRect:rect1 withFont:font lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentCenter];
 }
 
+id getViewFromNib(NSString *name, id owner) {
+    NSArray *array = [[NSBundle mainBundle] loadNibNamed: name owner:owner options:nil];
+    return [array objectAtIndex:0];
+}
+
