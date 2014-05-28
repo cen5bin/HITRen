@@ -8,6 +8,14 @@
 
 #import "MainViewController.h"
 
-@interface ToolsViewController : MainViewController
+@interface ToolsViewController : MainViewController <UITableViewDataSource, UITableViewDelegate> {
+    NSMutableArray *_data;
+}
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+// section 0
+@property (strong, nonatomic) IBOutlet UITableViewCell *secondHandCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *lookForCell;
+
 
 @end

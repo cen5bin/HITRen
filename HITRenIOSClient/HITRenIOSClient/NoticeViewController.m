@@ -70,6 +70,7 @@
 //    _activies = [[NSMutableArray alloc] initWithArray:notice.notices];
     [self.activityTableView reloadData];
     [self.noticeTableView reloadData];
+    [self.contactView willLoad];
 }
 
 - (void)didReceiveMemoryWarning
