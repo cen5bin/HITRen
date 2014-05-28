@@ -34,6 +34,7 @@
 #define ASYNC_EVENT_DOWNLOADLIKEDLIST @"HITRenAsyncDataDownloadLikedList" //下载点赞信息
 #define ASYNC_EVENT_COMMENTMESSAGE @"HITRenAsyncDataCommentMessage" //评论
 #define ASYNC_EVENT_DOWNLOADCOMMENTLIST @"HITRenAsyncDataDownloadCommentList" //下载评论
+#define ASYNC_EVENT_DOWNLOADCONTACT @"HITRenAsyncDataDownloadContact" //下载通讯录
 
 
 

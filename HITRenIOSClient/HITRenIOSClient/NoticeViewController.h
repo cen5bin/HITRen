@@ -8,7 +8,7 @@
 
 #import "MainViewController.h"
 
-@class NoticeViewBar;
+@class NoticeViewBar,ContactView;
 @interface NoticeViewController : MainViewController <UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate> {
 //    NSMutableArray *_data;
     NSMutableArray *_activies;
@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITableView *activityTableView; //系统推送
 @property (strong, nonatomic) IBOutlet UITableView *noticeTableView;  //聊天消息
+@property (strong, nonatomic) IBOutlet ContactView *contactView; //通讯录
+
 
 @property (nonatomic) int flag;
 

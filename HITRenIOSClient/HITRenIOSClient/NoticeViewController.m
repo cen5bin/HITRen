@@ -20,6 +20,7 @@
 #import "UserInfo.h"
 #import "MessageLogic.h"
 #import "ChatViewController.h"
+#import "ContactView.h"
 
 @interface NoticeViewController ()
 
@@ -51,7 +52,7 @@
     self.noticeViewBar.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
     CGRect rect = self.scrollView.frame;
-    self.scrollView.contentSize = CGSizeMake(rect.size.width * 2, rect.size.height);
+    self.scrollView.contentSize = CGSizeMake(rect.size.width * 3, rect.size.height);
     
     FUNC_END();
 }
@@ -131,6 +132,9 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint p = scrollView.contentOffset;
     if (scrollView == self.scrollView) {
+        if (scrollView.contentOffset.x > 320 && scrollView.contentOffset.x < 640)
+            [self.contactView willLoad];
+//        LOG(@"%f", scrollView.contentOffset.x);
         return;
     }
     if (p.y < 0) p.y = 0;

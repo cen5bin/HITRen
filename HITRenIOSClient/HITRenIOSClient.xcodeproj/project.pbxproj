@@ -40,6 +40,11 @@
 		F8107C6B1933505A0073C169 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107C6A1933505A0073C169 /* ChatCell.m */; };
 		F8107C8F19348CBB0073C169 /* bubble1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107C8D19348CBB0073C169 /* bubble1.png */; };
 		F8107C9019348CBB0073C169 /* bubble2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107C8E19348CBB0073C169 /* bubble2.png */; };
+		F8107C931935C0C40073C169 /* ContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107C921935C0C40073C169 /* ContactView.m */; };
+		F8107C961935C33B0073C169 /* ContactPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107C951935C33B0073C169 /* ContactPersonCell.m */; };
+		F8107CA31935D8050073C169 /* arrow1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CA21935D8050073C169 /* arrow1.png */; };
+		F8107CA51935D8870073C169 /* arrow2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CA41935D8870073C169 /* arrow2.png */; };
+		F8107CA81935D92A0073C169 /* ContactGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107CA71935D92A0073C169 /* ContactGroupCell.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -220,6 +225,14 @@
 		F8107C6A1933505A0073C169 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		F8107C8D19348CBB0073C169 /* bubble1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble1.png; sourceTree = "<group>"; };
 		F8107C8E19348CBB0073C169 /* bubble2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble2.png; sourceTree = "<group>"; };
+		F8107C911935C0C40073C169 /* ContactView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactView.h; sourceTree = "<group>"; };
+		F8107C921935C0C40073C169 /* ContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactView.m; sourceTree = "<group>"; };
+		F8107C941935C33B0073C169 /* ContactPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactPersonCell.h; sourceTree = "<group>"; };
+		F8107C951935C33B0073C169 /* ContactPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactPersonCell.m; sourceTree = "<group>"; };
+		F8107CA21935D8050073C169 /* arrow1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow1.png; sourceTree = "<group>"; };
+		F8107CA41935D8870073C169 /* arrow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow2.png; sourceTree = "<group>"; };
+		F8107CA61935D92A0073C169 /* ContactGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactGroupCell.h; sourceTree = "<group>"; };
+		F8107CA71935D92A0073C169 /* ContactGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactGroupCell.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -674,6 +687,28 @@
 			name = bubble;
 			sourceTree = "<group>";
 		};
+		F8107C971935D2D20073C169 /* ContactView */ = {
+			isa = PBXGroup;
+			children = (
+				F8107C911935C0C40073C169 /* ContactView.h */,
+				F8107C921935C0C40073C169 /* ContactView.m */,
+				F8107C941935C33B0073C169 /* ContactPersonCell.h */,
+				F8107C951935C33B0073C169 /* ContactPersonCell.m */,
+				F8107CA61935D92A0073C169 /* ContactGroupCell.h */,
+				F8107CA71935D92A0073C169 /* ContactGroupCell.m */,
+			);
+			name = ContactView;
+			sourceTree = "<group>";
+		};
+		F8107C9D1935D6C30073C169 /* arrow */ = {
+			isa = PBXGroup;
+			children = (
+				F8107CA21935D8050073C169 /* arrow1.png */,
+				F8107CA41935D8870073C169 /* arrow2.png */,
+			);
+			name = arrow;
+			sourceTree = "<group>";
+		};
 		F842BB8A19051BD700148848 /* menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -994,6 +1029,7 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8107C9D1935D6C30073C169 /* arrow */,
 				F8107C6C19335B470073C169 /* bubble */,
 				F8696A7F1918BCA5008887AD /* liked1.png */,
 				F8819FB519152D1C008BB814 /* share.png */,
@@ -1039,6 +1075,7 @@
 		F88F989118C1E86C009CE742 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				F8107C971935D2D20073C169 /* ContactView */,
 				F8723EC01927C77200828B5C /* messagecell */,
 				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
 				F842BB8A19051BD700148848 /* menu */,
@@ -1240,6 +1277,7 @@
 				F89DFAF01914ED130043DD6B /* liked.png in Resources */,
 				F80B0D0B1874269D003E72DC /* Main_iPhone.storyboard in Resources */,
 				F89DFB021914FA9E0043DD6B /* comment.png in Resources */,
+				F8107CA51935D8870073C169 /* arrow2.png in Resources */,
 				F8E9687018C6DCB500B9384B /* email.png in Resources */,
 				F8E9686018C5F96C00B9384B /* topbar1.png in Resources */,
 				F89964F718FD2C3600D7FA44 /* base2.png in Resources */,
@@ -1254,6 +1292,7 @@
 				F8550F0118C4C251005E51FE /* p_btm3.png in Resources */,
 				F86B9E4918D8806900D71A7B /* me.png in Resources */,
 				F8E9686118C5F96C00B9384B /* topbar2.png in Resources */,
+				F8107CA31935D8050073C169 /* arrow1.png in Resources */,
 				F8550EFF18C4C251005E51FE /* p_btm1.png in Resources */,
 				F84B7DFD18BB43EB007FC2D5 /* xmppserver.plist in Resources */,
 				F8696A801918BCA5008887AD /* liked1.png in Resources */,
@@ -1322,6 +1361,7 @@
 				F84B7DDD18BB3C8D007FC2D5 /* RFImageToDataTransformer.m in Sources */,
 				F8E9688218C70B5700B9384B /* PersonViewController.m in Sources */,
 				F84B7DE318BB3C8D007FC2D5 /* DDASLLogger.m in Sources */,
+				F8107C961935C33B0073C169 /* ContactPersonCell.m in Sources */,
 				F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */,
 				F84B7DE218BB3C8D007FC2D5 /* DDAbstractDatabaseLogger.m in Sources */,
 				F89DFADE191372E60043DD6B /* Message.m in Sources */,
@@ -1382,11 +1422,13 @@
 				F84B7DCF18BB3C8D007FC2D5 /* XMPPXOAuth2Google.m in Sources */,
 				F80B0D49187426F2003E72DC /* HttpTransfer.m in Sources */,
 				F84B7DE018BB3C8D007FC2D5 /* XMPPStringPrep.m in Sources */,
+				F8107CA81935D92A0073C169 /* ContactGroupCell.m in Sources */,
 				F8C564C81921DD0200695094 /* KeyboardToolBar.m in Sources */,
 				F8723EC31927C7CA00828B5C /* CommentListView.m in Sources */,
 				F892372A18F3A62D00658F47 /* HITRenData.xcdatamodeld in Sources */,
 				F87209C3191CB53E00FAC7A1 /* NoticeViewBar.m in Sources */,
 				F80B0D48187426F2003E72DC /* HttpData.m in Sources */,
+				F8107C931935C0C40073C169 /* ContactView.m in Sources */,
 				F8696A8C1918FA55008887AD /* XMPPDataManager.m in Sources */,
 				F8E9687618C7055E00B9384B /* UIFunctions.m in Sources */,
 			);

@@ -271,6 +271,22 @@
     return YES;
 }
 
++ (BOOL)asyncDownloadInfo {
+    FUNC_START();
+    HttpData *data = [HttpData data];//[[HttpData alloc] init];
+    User *user = [RelationshipLogic user];
+    [data setIntValue:user.uid forKey:@"uid"];
+    [data setIntValue:user.relationShip.seq forKey:@"seq"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadRelationshipInfo" withEventName:ASYNC_EVENT_DOWNLOADCONTACT];
+    if (!ret) {
+        LOG(@"downloadRelationshipInfo fail");
+        return NO;
+    }
+    FUNC_END();
+    return YES;
+
+}
+
 + (NSMutableArray *)downloadFriendsInfo:(NSArray *)users {
     FUNC_START();
     HttpData *data = [HttpData data];

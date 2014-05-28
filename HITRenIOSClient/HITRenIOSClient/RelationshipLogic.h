@@ -31,6 +31,8 @@
 - (BOOL)recoverUserFromBlacklist:(int)uid;
 - (BOOL)recoverUsersFromBlacklist:(NSArray *)users;
 + (BOOL)downloadInfo;
++ (BOOL)asyncDownloadInfo;
 + (NSMutableArray *)downloadFriendsInfo:(NSArray *)users;
++ (void)unPackRelationshipInfoData:(NSDictionary *)dic;
 
 @end
