@@ -45,6 +45,8 @@
 		F8107CA31935D8050073C169 /* arrow1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CA21935D8050073C169 /* arrow1.png */; };
 		F8107CA51935D8870073C169 /* arrow2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CA41935D8870073C169 /* arrow2.png */; };
 		F8107CA81935D92A0073C169 /* ContactGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107CA71935D92A0073C169 /* ContactGroupCell.m */; };
+		F8107CAB19363EA30073C169 /* SecondTradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107CAA19363EA30073C169 /* SecondTradeViewController.m */; };
+		F8107CAE19363F370073C169 /* GoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107CAD19363F370073C169 /* GoodsCell.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -233,6 +235,10 @@
 		F8107CA41935D8870073C169 /* arrow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow2.png; sourceTree = "<group>"; };
 		F8107CA61935D92A0073C169 /* ContactGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactGroupCell.h; sourceTree = "<group>"; };
 		F8107CA71935D92A0073C169 /* ContactGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactGroupCell.m; sourceTree = "<group>"; };
+		F8107CA919363EA30073C169 /* SecondTradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondTradeViewController.h; sourceTree = "<group>"; };
+		F8107CAA19363EA30073C169 /* SecondTradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondTradeViewController.m; sourceTree = "<group>"; };
+		F8107CAC19363F370073C169 /* GoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCell.h; sourceTree = "<group>"; };
+		F8107CAD19363F370073C169 /* GoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCell.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -659,6 +665,8 @@
 				F899C93D192F269900CB3D17 /* MessageDetailViewController.m */,
 				F8107C6619331A4D0073C169 /* ChatViewController.h */,
 				F8107C6719331A4D0073C169 /* ChatViewController.m */,
+				F8107CA919363EA30073C169 /* SecondTradeViewController.h */,
+				F8107CAA19363EA30073C169 /* SecondTradeViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1093,6 +1101,8 @@
 				F87209C2191CB53E00FAC7A1 /* NoticeViewBar.m */,
 				F8107C691933505A0073C169 /* ChatCell.h */,
 				F8107C6A1933505A0073C169 /* ChatCell.m */,
+				F8107CAC19363F370073C169 /* GoodsCell.h */,
+				F8107CAD19363F370073C169 /* GoodsCell.m */,
 			);
 			name = component;
 			sourceTree = "<group>";
@@ -1347,6 +1357,7 @@
 				F89964EB18FD0F6A00D7FA44 /* FriendsListViewController.m in Sources */,
 				F8107C6819331A4D0073C169 /* ChatViewController.m in Sources */,
 				F84B7DE718BB3C8D007FC2D5 /* ContextFilterLogFormatter.m in Sources */,
+				F8107CAE19363F370073C169 /* GoodsCell.m in Sources */,
 				F842BB8D19051C3B00148848 /* MenuView.m in Sources */,
 				F80B0D041874269D003E72DC /* main.m in Sources */,
 				F80B0D4C187426F2003E72DC /* RelationShip.m in Sources */,
@@ -1370,6 +1381,7 @@
 				F8A5FD55191217FA0091939B /* Timeline.m in Sources */,
 				F87209C6191DE57400FAC7A1 /* UploadLogic.m in Sources */,
 				F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */,
+				F8107CAB19363EA30073C169 /* SecondTradeViewController.m in Sources */,
 				F84B7DD418BB3C8D007FC2D5 /* XMPPIQ.m in Sources */,
 				F899C93E192F269900CB3D17 /* MessageDetailViewController.m in Sources */,
 				F89DFAE11913B0240043DD6B /* MoreMessageCell.m in Sources */,

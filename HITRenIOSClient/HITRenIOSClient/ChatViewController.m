@@ -161,7 +161,6 @@
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    L(@"asd");
     if (!_keyboardToolBarIsDisappearing) {
         _keyboardToolBarIsDisappearing = YES;
         [_keyboardToolBar resignFirstResponderNotHideAtOnce];
