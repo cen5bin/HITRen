@@ -10,7 +10,7 @@
 #import "MenuDelegate.h"
 
 @class SecondHandMenu;
-@interface SecondTradeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,MenuDelegate> {
+@interface SecondTradeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, MenuDelegate, UIScrollViewDelegate> {
     NSMutableArray *_data;
     SecondHandMenu *_menu;
 }

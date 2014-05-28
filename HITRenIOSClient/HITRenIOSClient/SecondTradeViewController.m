@@ -33,7 +33,7 @@
     _data = [[NSMutableArray alloc] init];
     _menu = getViewFromNib(@"secondhandmenu", self);
     CGRect rect = _menu.frame;
-    rect.origin.y = CGRectGetMaxY(self.topBar.frame) ;
+    rect.origin.y = CGRectGetMaxY(self.topBar.frame) -2;
     rect.origin.x = CGRectGetMaxX(self.view.frame) - rect.size.width -2;
     _menu.frame = rect;
     [self.view addSubview:_menu];
@@ -57,7 +57,25 @@
     return cell;
 }
 
+- (void)hideMenu {
+    static BOOL isWorking = NO;
+    if (isWorking) return;
+    isWorking = YES;
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_menu.alpha = 0; } completion:^(BOOL finished){_menu.alpha = 1; _menu.hidden = YES; isWorking = NO;}];
+}
 
+- (void)showMenu {
+    static BOOL isWorking = NO;
+    if (isWorking) return;
+    isWorking = YES;
+    _menu.hidden = NO;
+    _menu.alpha = 0;
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_menu.alpha = 1; } completion:^(BOOL finished){ isWorking = NO;}];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self hideMenu];
+}
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
@@ -82,6 +100,8 @@
 
 
 - (IBAction)moreButtonClicked:(id)sender {
-    _menu.hidden = !_menu.hidden;
+    if (!_menu.hidden) [self hideMenu];
+    else [self showMenu];
+//    _menu.hidden = !_menu.hidden;
 }
 @end
