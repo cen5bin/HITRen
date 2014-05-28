@@ -51,6 +51,8 @@
     _isLoading = YES;
     [RelationshipLogic asyncDownloadInfo];
     UIView *view = [self getActivityIndicator];
+    LOG(@"%f %f", view.frame.origin.x, view.frame.origin.y);
+//    view.frame = CGRectMake(100, 100, 100, 100);
     if (!view.superview)
         [self addSubview:view];
 //    [self setContentOffset:CGPointMake(0, -35) animated:NO];
@@ -191,7 +193,7 @@
     if (!_activityIndicator) {
         _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         CGFloat len = 30;
-        _activityIndicator.frame = CGRectMake(CGRectGetMidX(self.frame)-len / 2, len, len, len);
+        _activityIndicator.frame = CGRectMake(CGRectGetWidth(self.frame)/2-len / 2, len, len, len);
     }
     _activityIndicator.hidden = NO;
     if (!_activityIndicator.isAnimating)
