@@ -106,6 +106,7 @@
 }
 
 - (void)scrollToBottom {
+    if (_datas.count == 0) return;
     CGRect rect = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForItem:_datas.count-1 inSection:0]];
     rect = [self.tableView convertRect:rect toView:self.view.window];
     if (_keyboardToolBar.hidden) {

@@ -24,6 +24,7 @@
 #import "UserSimpleLogic.h"
 #import "AppData.h"
 #import "UserInfo.h"
+#import "ChatViewController.h"
 
 
 #define SECTIONVIEW_HEIGHT 40
@@ -94,7 +95,10 @@
         NSArray *uids = [appData userInfosNeedDownload:array];
         [UserSimpleLogic  downloadUseInfos:uids];
     }
-    else if ([[dic objectForKey:@"INFO"] isEqualToString:@"newest"]) L(@"contact download succ");
+    else if ([[dic objectForKey:@"INFO"] isEqualToString:@"newest"]) {
+        L(@"contact download succ");
+        [self hideTopActivityIndicator];
+    }
     else L(@"contact download failed");
 }
 
@@ -153,7 +157,13 @@
     NSDictionary *dic = [_datas objectAtIndex:indexPath.row];
     int type = [[dic objectForKey:@"type"] intValue];
     if (type == 1) { //表示点到的是人
-        
+        ChatViewController *controller = getViewControllerOfName(@"ChatView");
+        AppData *appData = [AppData sharedInstance];
+        int uid = [[dic objectForKey:@"uid"] intValue];
+        UserInfo *userInfo = [appData readUserInfoForId:uid];
+        controller.userInfo = userInfo;
+        [self.parentController.navigationController pushViewController:controller animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     else {  //表示点到的是分组
         NSMutableDictionary *tmpDic = [[NSMutableDictionary alloc] initWithDictionary:dic];
@@ -202,7 +212,9 @@
 }
 
 - (void)hideTopActivityIndicator {
-    _activityIndicator.hidden = YES;
-    [self setContentOffset:CGPointMake(0, 0) animated:YES];
+//    _activityIndicator.hidden = YES;
+    if (_activityIndicator.superview) [_activityIndicator removeFromSuperview];
+    _isLoading = NO;
+//    [self setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 @end

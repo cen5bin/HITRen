@@ -16,6 +16,7 @@
     UIActivityIndicatorView *_activityIndicator;
 }
 
+@property (strong, nonatomic) UIViewController *parentController;
 - (void)willLoad;
 
 @end

@@ -54,6 +54,8 @@
     CGRect rect = self.scrollView.frame;
     self.scrollView.contentSize = CGSizeMake(rect.size.width * 3, rect.size.height);
     
+    self.contactView.parentController = self;
+    
     FUNC_END();
 }
 
@@ -218,42 +220,4 @@
 
 }
 
-//- (IBAction)swipe:(UISwipeGestureRecognizer *)sender {
-//    static BOOL working = NO;
-//    if (working) return;
-//    working = YES;
-//    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
-//        L(@"left");
-//        if (self.flag == 1) return;
-//        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-//            CGRect frame = self.view.frame;
-//            CGRect rect1 = self.activityTableView.frame;
-//            CGRect rect2 = self.noticeTableView.frame;
-//            rect1.origin.x -= CGRectGetWidth(frame);
-//            rect2.origin.x -= CGRectGetWidth(frame);
-//            self.activityTableView.frame = rect1;
-//            self.noticeTableView.frame = rect2;
-//        } completion:^(BOOL finished){
-//            self.flag = 1;
-//            working = NO;
-//        }];
-//    }
-//    else if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
-//        L(@"right");
-//        if (self.flag == 0) return;
-//        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-//            CGRect frame = self.view.frame;
-//            CGRect rect1 = self.activityTableView.frame;
-//            CGRect rect2 = self.noticeTableView.frame;
-//            rect1.origin.x += CGRectGetWidth(frame);
-//            rect2.origin.x += CGRectGetWidth(frame);
-//            self.activityTableView.frame = rect1;
-//            self.noticeTableView.frame = rect2;
-//        } completion:^(BOOL finished){
-//            self.flag = 0;
-//            working = NO;
-//        }];
-//
-//    }
-//}
 @end
