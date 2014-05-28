@@ -12,6 +12,8 @@
 #import "HttpData.h"
 #import "User.h"
 #import "XmppConnector.h"
+#import "AppData.h"
+#import "UserInfo.h"
 
 @implementation UserSimpleLogic
 
@@ -171,6 +173,26 @@
     user.sex = [[userDefaults objectForKey:@"sex"] intValue];
     user.birthday = [userDefaults objectForKey:@"birthday"];
     user.hometown = [userDefaults objectForKey:@"hometown"];
+}
+
+
++ (void)userInfosDidDownload:(NSDictionary *)data {
+    AppData *appData = [AppData sharedInstance];
+    for (NSNumber *key in [data allKeys]) {
+        UserInfo *userInfo = [appData userInfoForId:[key intValue]];
+        NSDictionary *ui = [data objectForKey:key];
+        if ([userInfo.seq isEqualToNumber:[ui objectForKey:@"seq"]]) continue;
+        userInfo.uid = [ui objectForKey:@"uid"];
+        userInfo.username = [ui objectForKey:@"name"];
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        format.dateFormat = @"yyyy-MM-dd";
+        userInfo.birthday = [format dateFromString:[ui objectForKey:@"birthday"]];
+        userInfo.sex = [ui objectForKey:@"sex"];
+        userInfo.hometown = [ui objectForKey:@"hometown"];
+        userInfo.seq = [ui objectForKey:@"seq"];
+    }
+    [AppData saveData];
+
 }
 
 @end

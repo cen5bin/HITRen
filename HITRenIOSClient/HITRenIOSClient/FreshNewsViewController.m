@@ -82,6 +82,12 @@
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    FUNC_START();
+    FUNC_END();
+}
+
 - (void)keyboardFrameDidChanged:(NSNotification *)notification {
     NSDictionary *info = [notification userInfo];
     NSValue *value = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
@@ -558,19 +564,20 @@
     if ([ret objectForKey:@"SUC"]) L(@"userInfo download succ");
     else L(@"userInfo download fail");
     NSDictionary *data = [ret objectForKey:@"DATA"];
-    AppData *appData = [AppData sharedInstance];
-    for (NSNumber *key in [data allKeys]) {
-        UserInfo *userInfo = [appData userInfoForId:[key intValue]];
-        NSDictionary *ui = [data objectForKey:key];
-        if ([userInfo.seq isEqualToNumber:[ui objectForKey:@"seq"]]) continue;
-        userInfo.uid = [ui objectForKey:@"uid"];
-        userInfo.username = [ui objectForKey:@"name"];
-        userInfo.birthday = [ui objectForKey:@"birthday"];
-        userInfo.sex = [ui objectForKey:@"sex"];
-        userInfo.hometown = [ui objectForKey:@"hometown"];
-        userInfo.seq = [ui objectForKey:@"seq"];
-    }
-    [AppData saveData];
+    [UserSimpleLogic userInfosDidDownload:data];
+//    AppData *appData = [AppData sharedInstance];
+//    for (NSNumber *key in [data allKeys]) {
+//        UserInfo *userInfo = [appData userInfoForId:[key intValue]];
+//        NSDictionary *ui = [data objectForKey:key];
+//        if ([userInfo.seq isEqualToNumber:[ui objectForKey:@"seq"]]) continue;
+//        userInfo.uid = [ui objectForKey:@"uid"];
+//        userInfo.username = [ui objectForKey:@"name"];
+//        userInfo.birthday = [ui objectForKey:@"birthday"];
+//        userInfo.sex = [ui objectForKey:@"sex"];
+//        userInfo.hometown = [ui objectForKey:@"hometown"];
+//        userInfo.seq = [ui objectForKey:@"seq"];
+//    }
+//    [AppData saveData];
     [self.tableView reloadData];
     FUNC_END();
 }

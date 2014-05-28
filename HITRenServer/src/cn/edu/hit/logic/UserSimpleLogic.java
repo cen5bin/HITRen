@@ -136,7 +136,9 @@ public class UserSimpleLogic {
 			json.put(uid+"", new JSONObject(userInfo));
 			users.remove(i);
 		}
+		logger.info(users);
 		BasicDBObject obj = new BasicDBObject(UserConstant.UID, new BasicDBObject("$in", users));
+		logger.info(obj);
 		DBCursor cursor = DBController.query(UserConstant.COLLNAME, obj);
 		while (cursor.hasNext()) {
 			DBObject retObj = cursor.next();

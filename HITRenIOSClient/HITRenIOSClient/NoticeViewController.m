@@ -132,8 +132,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint p = scrollView.contentOffset;
     if (scrollView == self.scrollView) {
-        if (scrollView.contentOffset.x > 320 && scrollView.contentOffset.x < 640)
-            [self.contactView willLoad];
+//        if (scrollView.contentOffset.x > 320 && scrollView.contentOffset.x < 640)
+//            [self.contactView willLoad];
 //        LOG(@"%f", scrollView.contentOffset.x);
         return;
     }
@@ -142,6 +142,16 @@
         p.y = scrollView.contentSize.height - scrollView.frame.size.height;
     if (p.y < 0) p.y = 0;
     scrollView.contentOffset = p;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.scrollView) {
+        if (scrollView.contentOffset.x >=640)
+            [self.contactView willLoad];
+        //        LOG(@"%f", scrollView.contentOffset.x);
+        return;
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

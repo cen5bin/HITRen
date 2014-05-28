@@ -13,6 +13,7 @@
     NSMutableDictionary *_list;
     NSMutableArray *_datas;
     BOOL _isLoading;
+    UIActivityIndicatorView *_activityIndicator;
 }
 
 - (void)willLoad;
