@@ -47,6 +47,12 @@
 		F8107CA81935D92A0073C169 /* ContactGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107CA71935D92A0073C169 /* ContactGroupCell.m */; };
 		F8107CAB19363EA30073C169 /* SecondTradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107CAA19363EA30073C169 /* SecondTradeViewController.m */; };
 		F8107CAE19363F370073C169 /* GoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107CAD19363F370073C169 /* GoodsCell.m */; };
+		F8107CB0193643BC0073C169 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CAF193643BC0073C169 /* more.png */; };
+		F8107CB319364C830073C169 /* secondhandmenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8107CB219364C830073C169 /* secondhandmenu.xib */; };
+		F8107CB919364E310073C169 /* SecondHandMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107CB819364E310073C169 /* SecondHandMenu.m */; };
+		F8107CBB193653490073C169 /* basemenu.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBA193653490073C169 /* basemenu.png */; };
+		F8107CBE1936547F0073C169 /* basemenu1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBC1936547F0073C169 /* basemenu1.png */; };
+		F8107CBF1936547F0073C169 /* basemenu2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBD1936547F0073C169 /* basemenu2.png */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -239,6 +245,13 @@
 		F8107CAA19363EA30073C169 /* SecondTradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondTradeViewController.m; sourceTree = "<group>"; };
 		F8107CAC19363F370073C169 /* GoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCell.h; sourceTree = "<group>"; };
 		F8107CAD19363F370073C169 /* GoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCell.m; sourceTree = "<group>"; };
+		F8107CAF193643BC0073C169 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		F8107CB219364C830073C169 /* secondhandmenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = secondhandmenu.xib; sourceTree = "<group>"; };
+		F8107CB719364E310073C169 /* SecondHandMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondHandMenu.h; sourceTree = "<group>"; };
+		F8107CB819364E310073C169 /* SecondHandMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondHandMenu.m; sourceTree = "<group>"; };
+		F8107CBA193653490073C169 /* basemenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu.png; sourceTree = "<group>"; };
+		F8107CBC1936547F0073C169 /* basemenu1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu1.png; sourceTree = "<group>"; };
+		F8107CBD1936547F0073C169 /* basemenu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu2.png; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -717,6 +730,26 @@
 			name = arrow;
 			sourceTree = "<group>";
 		};
+		F8107CB119364C680073C169 /* secondhand */ = {
+			isa = PBXGroup;
+			children = (
+				F8107CB219364C830073C169 /* secondhandmenu.xib */,
+				F8107CB719364E310073C169 /* SecondHandMenu.h */,
+				F8107CB819364E310073C169 /* SecondHandMenu.m */,
+			);
+			name = secondhand;
+			sourceTree = "<group>";
+		};
+		F8107CB419364CCC0073C169 /* menu */ = {
+			isa = PBXGroup;
+			children = (
+				F8107CBC1936547F0073C169 /* basemenu1.png */,
+				F8107CBD1936547F0073C169 /* basemenu2.png */,
+				F8107CBA193653490073C169 /* basemenu.png */,
+			);
+			name = menu;
+			sourceTree = "<group>";
+		};
 		F842BB8A19051BD700148848 /* menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1037,6 +1070,7 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8107CB419364CCC0073C169 /* menu */,
 				F8107C9D1935D6C30073C169 /* arrow */,
 				F8107C6C19335B470073C169 /* bubble */,
 				F8696A7F1918BCA5008887AD /* liked1.png */,
@@ -1083,6 +1117,7 @@
 		F88F989118C1E86C009CE742 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				F8107CB119364C680073C169 /* secondhand */,
 				F8107C971935D2D20073C169 /* ContactView */,
 				F8723EC01927C77200828B5C /* messagecell */,
 				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
@@ -1171,6 +1206,7 @@
 		F8E9686B18C6DB4B00B9384B /* button */ = {
 			isa = PBXGroup;
 			children = (
+				F8107CAF193643BC0073C169 /* more.png */,
 				F8E9686C18C6DB6A00B9384B /* loginbutton0.png */,
 			);
 			name = button;
@@ -1280,9 +1316,11 @@
 				F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */,
 				F8819FB619152D1C008BB814 /* share.png in Resources */,
 				F8C564C51921DC1300695094 /* keyboardtoolbar.xib in Resources */,
+				F8107CB319364C830073C169 /* secondhandmenu.xib in Resources */,
 				F8550F0318C4C251005E51FE /* p_btm4.png in Resources */,
 				F8107C9019348CBB0073C169 /* bubble2.png in Resources */,
 				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,
+				F8107CB0193643BC0073C169 /* more.png in Resources */,
 				F8107C8F19348CBB0073C169 /* bubble1.png in Resources */,
 				F89DFAF01914ED130043DD6B /* liked.png in Resources */,
 				F80B0D0B1874269D003E72DC /* Main_iPhone.storyboard in Resources */,
@@ -1290,6 +1328,7 @@
 				F8107CA51935D8870073C169 /* arrow2.png in Resources */,
 				F8E9687018C6DCB500B9384B /* email.png in Resources */,
 				F8E9686018C5F96C00B9384B /* topbar1.png in Resources */,
+				F8107CBB193653490073C169 /* basemenu.png in Resources */,
 				F89964F718FD2C3600D7FA44 /* base2.png in Resources */,
 				F8E9686D18C6DB6A00B9384B /* loginbutton0.png in Resources */,
 				F892372C18F3C6DF00658F47 /* hometowns.plist in Resources */,
@@ -1298,9 +1337,11 @@
 				F89964F518FD2C3600D7FA44 /* base0.png in Resources */,
 				F89964F618FD2C3600D7FA44 /* base1.png in Resources */,
 				F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */,
+				F8107CBF1936547F0073C169 /* basemenu2.png in Resources */,
 				F84B7DE918BB3C8D007FC2D5 /* README.txt in Resources */,
 				F8550F0118C4C251005E51FE /* p_btm3.png in Resources */,
 				F86B9E4918D8806900D71A7B /* me.png in Resources */,
+				F8107CBE1936547F0073C169 /* basemenu1.png in Resources */,
 				F8E9686118C5F96C00B9384B /* topbar2.png in Resources */,
 				F8107CA31935D8050073C169 /* arrow1.png in Resources */,
 				F8550EFF18C4C251005E51FE /* p_btm1.png in Resources */,
@@ -1423,6 +1464,7 @@
 				F84B7DEA18BB3C8D007FC2D5 /* NSString+DDXML.m in Sources */,
 				F80B0D52187426F2003E72DC /* UserSimpleLogic.m in Sources */,
 				F89964FD18FD50F200D7FA44 /* GroupChooserViewController.m in Sources */,
+				F8107CB919364E310073C169 /* SecondHandMenu.m in Sources */,
 				F8696A891918D9AC008887AD /* NoticeObject.m in Sources */,
 				F84B7DDA18BB3C8D007FC2D5 /* XMPPStream.m in Sources */,
 				F89964E818FCF11A00D7FA44 /* FriendsGroupViewController.m in Sources */,

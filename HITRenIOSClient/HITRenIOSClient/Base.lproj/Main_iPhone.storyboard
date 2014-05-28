@@ -743,6 +743,17 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aiF-Ue-89A">
+                                <rect key="frame" x="274" y="2" width="43" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Button" image="more.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="moreButtonClicked:" destination="fpy-uz-jc6" eventType="touchUpInside" id="Y4S-kz-1BF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="deviceRGB"/>
                     </view>
@@ -754,7 +765,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sp1-wB-MT1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3348" y="788"/>
+            <point key="canvasLocation" x="3354" y="762"/>
         </scene>
         <!--Calendar View Controller - 日程-->
         <scene sceneID="j7h-ok-K1M">
@@ -1816,6 +1827,7 @@
         <image name="liked.png" width="204" height="50"/>
         <image name="loginbutton0.png" width="496" height="88"/>
         <image name="me.png" width="640" height="91"/>
+        <image name="more.png" width="96" height="91"/>
         <image name="p_btm1.png" width="1181" height="173"/>
         <image name="p_btm2.png" width="1181" height="173"/>
         <image name="p_btm3.png" width="1181" height="173"/>

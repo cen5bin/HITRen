@@ -9,6 +9,7 @@
 #import "SecondTradeViewController.h"
 #import "GoodsCell.h"
 #import "AppData.h"
+#import "SecondHandMenu.h"
 
 @interface SecondTradeViewController ()
 
@@ -30,6 +31,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     _data = [[NSMutableArray alloc] init];
+    _menu = getViewFromNib(@"secondhandmenu", self);
+    CGRect rect = _menu.frame;
+    rect.origin.y = CGRectGetMaxY(self.topBar.frame) ;
+    rect.origin.x = CGRectGetMaxX(self.view.frame) - rect.size.width -2;
+    _menu.frame = rect;
+    [self.view addSubview:_menu];
+    _menu.hidden = YES;
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -59,10 +68,6 @@
             self.topBar.image = image;
             [self.navigationController popViewControllerAnimated:YES];
         }
-        else if (p.x >= CGRectGetMaxX(self.topBar.frame)-50) {
-            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
-            self.topBar.image = image;
-        }
     }
     
 }
@@ -76,4 +81,7 @@
 
 
 
+- (IBAction)moreButtonClicked:(id)sender {
+    _menu.hidden = !_menu.hidden;
+}
 @end

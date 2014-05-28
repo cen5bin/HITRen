@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuDelegate.h"
 
-@interface SecondTradeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
+@class SecondHandMenu;
+@interface SecondTradeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,MenuDelegate> {
     NSMutableArray *_data;
+    SecondHandMenu *_menu;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
+
+- (IBAction)moreButtonClicked:(id)sender;
 
 @end
