@@ -449,6 +449,7 @@
     [AppData saveData];
     NSArray *messageNeedDownload = [appData messagesNeedDownload];
     [MessageLogic downloadMessages:messageNeedDownload];
+    L([messageNeedDownload description]);
     [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
     [MessageLogic downloadCommentList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
 //    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];

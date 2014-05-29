@@ -85,6 +85,8 @@ static AppData *appData;
 }
 
 - (Message *)privateMessageForId:(int)mid {
+    
+    
     NSNumber *mid0 = [NSNumber numberWithInt:mid];
     return [_messages objectForKey:mid0];
 }
@@ -101,7 +103,8 @@ static AppData *appData;
     int count0 = count;
     if (count0 > PAGE_MESSAGE_COUNT) count0 = PAGE_MESSAGE_COUNT;
     for (int i = 0; i < count0 && i + index < count ; i++) {
-        if ([self privateMessageForId:[[self.timeline.mids objectAtIndex:i + index] intValue]]) break;
+        if ([DataManager getMessageOfMid:[[self.timeline.mids objectAtIndex:i + index] intValue]]) break;
+//        if ([self privateMessageForId:[[self.timeline.mids objectAtIndex:i + index] intValue]]) break;
         [ret addObject:[self.timeline.mids objectAtIndex:i + index]];
     }
     return ret;

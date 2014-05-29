@@ -9,7 +9,7 @@
 #ifndef HITRenIOSClient_Constant_h
 #define HITRenIOSClient_Constant_h
 
-#define SERVER_IP @"192.168.1.109"//@"172.17.219.148"
+#define SERVER_IP @"192.168.0.93"//@"172.17.219.148"
 
 #define PAGE_MESSAGE_COUNT 30 //一页有多少状态
 #define TEXTVIEW_WIDTH 290     //状态中的textView宽度
@@ -43,6 +43,6 @@
 #define XMPP_CHATMESSAGE_RECEIVED @"XMPP_CHATMESSAGE_RECEIVED"
 
 #define BACKGROUND_COLOR [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1]
-#define VIEW_BORDER_COLOR 
+#define VIEW_BORDER_COLOR
 
 #endif
