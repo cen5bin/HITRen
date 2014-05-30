@@ -49,6 +49,12 @@ static HttpTransfer *transfer;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     L(@"finished loading");
+    if (_downloadImage) {
+        NSDictionary *dic = @{@"imagedata": self.data};
+        [[NSNotificationCenter defaultCenter] postNotificationName:ASYNCDATALOADED object:_eventName userInfo:dic];
+        _downloadImage = NO;
+        return;
+    }
     NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:self.data options:NSJSONReadingMutableLeaves error:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:ASYNCDATALOADED object:_eventName userInfo:dic];
 //    [[NSNotificationCenter defaultCenter] po]
@@ -169,6 +175,12 @@ static HttpTransfer *transfer;
     [request setHTTPMethod:@"POST"];
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     return conn != nil;
+}
+
+- (BOOL)downloadImage:(NSString *)image {
+    _downloadImage = YES;
+    [self asyncPost:image to:@"DownloadImage" withEventName:ASYNC_EVENT_DOWNLOADIMAGE];
+    return YES;
 }
 
 @end

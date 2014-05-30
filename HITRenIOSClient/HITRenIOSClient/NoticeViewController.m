@@ -56,6 +56,7 @@
     
     self.contactView.parentController = self;
     
+    
     FUNC_END();
 }
 

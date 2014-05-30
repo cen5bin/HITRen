@@ -272,8 +272,28 @@ static AppData *appData;
 - (Comment *)getCommentOfMid:(int)mid {
     return [DataManager getCommentOfMid:mid];
 }
-//- (UserInfo *)getUserInfo:(int)uid {
-//    
-//}
+
+
+//保存图片
+- (void)storeImage:(UIImage *)image withFilename:(NSString *)filename {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSArray* array = [fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *docURL = [array objectAtIndex:0];
+    NSURL *imageURL = [docURL URLByAppendingPathComponent:@"images"];
+    if (![fm fileExistsAtPath:[imageURL absoluteString]])
+        [fm createDirectoryAtURL:imageURL withIntermediateDirectories:YES attributes:nil error:nil];
+    NSURL *targetURL = [imageURL URLByAppendingPathComponent:filename];
+    [UIImagePNGRepresentation(image) writeToURL:targetURL atomically:YES];
+}
+
+//获取图片，如果图片不存在则返回nil
+- (UIImage *)getImage:(NSString *)filename {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSArray* array = [fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *docURL = [array objectAtIndex:0];
+    NSURL *targetURL = [[docURL URLByAppendingPathComponent:@"images"] URLByAppendingPathComponent:filename];
+    if (![fm fileExistsAtPath:[targetURL absoluteString]]) return nil;
+    return [UIImage imageWithData:[NSData dataWithContentsOfURL:targetURL]];
+}
 
 @end

@@ -246,4 +246,13 @@
     <servlet-name>DownloadCommentList</servlet-name>
     <url-pattern>/DownloadCommentList</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>DownloadImage</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.upload.DownloadImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadImage</servlet-name>
+    <url-pattern>/DownloadImage</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

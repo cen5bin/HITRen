@@ -8,6 +8,7 @@
 
 #import "UploadLogic.h"
 #import "User.h"
+#import "HttpData.h"
 
 @implementation UploadLogic
 
@@ -30,5 +31,16 @@
     NSString *string = [NSString stringWithFormat:@"%03d%010d%.0lf.png",rand % 1000,uid, (tmp*100)];
     rand++;
     return string;
+}
+
++ (BOOL)downloadImage:(NSString *)filename {
+    HttpData *data = [HttpData data];
+    [data setValue:filename forKey:@"filename"];
+    BOOL ret = [[HttpTransfer transfer] downloadImage:[data getJsonString]];
+    if (!ret) {
+        L(@"download image failed");
+        return NO;
+    }
+    return YES;
 }
 @end

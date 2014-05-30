@@ -12,6 +12,7 @@
 
 @interface HttpTransfer : NSURLConnection<NSURLConnectionDataDelegate> {
     NSString *_eventName;
+    BOOL _downloadImage;
 }
 
 + (HttpTransfer *)sharedInstance;
@@ -31,5 +32,6 @@
 - (BOOL)asyncRequestServerForNSDataWithGetMethod:(NSString *)requestString AndServletName:(NSString *)servlet;
 
 - (BOOL)uploadImages:(NSArray*)images to:(NSString *)servlet;
+- (BOOL)downloadImage:(NSString *)image;
 
 @end

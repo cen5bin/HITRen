@@ -79,6 +79,7 @@
     
     _loadDetail = NO;
     
+//    [UploadLogic downloadImage:@"bubble2.png"];
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
 }
 
@@ -415,6 +416,15 @@
         [self likedListDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADCOMMENTLIST])
         [self commentListDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE]) {
+//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
+//        [[AppData sharedInstance] storeImage:[UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]] withFilename:@"a.png"];
+////        imageView.image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
+//        imageView.image = [[AppData sharedInstance] getImage:@"a.png"];
+//        
+//        [self.view.window addSubview:imageView];
+        
+    }
     FUNC_END();
 }
 

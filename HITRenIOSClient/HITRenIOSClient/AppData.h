@@ -54,6 +54,9 @@
 
 - (NSArray *)commentListNeedDownload:(NSArray *)mids;
 - (Comment *)getCommentOfMid:(int)mid;
+
+- (void)storeImage:(UIImage *)image withFilename:(NSString *)filename;
+- (UIImage *)getImage:(NSString *)filename;
 //- (UserInfo *)getUserInfo:(int)uid;
 
 //- (void)insertMessage:(Message *)message;
