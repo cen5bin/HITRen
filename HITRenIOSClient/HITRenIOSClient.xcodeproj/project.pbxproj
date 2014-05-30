@@ -150,6 +150,8 @@
 		F8A5FD5E19121DAE0091939B /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A5FD5D19121DAE0091939B /* DataManager.m */; };
 		F8C564C51921DC1300695094 /* keyboardtoolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C564C41921DC1300695094 /* keyboardtoolbar.xib */; };
 		F8C564C81921DD0200695094 /* KeyboardToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C564C71921DD0200695094 /* KeyboardToolBar.m */; };
+		F8D7482E1938638200829CDA /* UploadGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D7482D1938638200829CDA /* UploadGoodsViewController.m */; };
+		F8D7483419386DC700829CDA /* addimage.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D7483319386DC700829CDA /* addimage.png */; };
 		F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685C18C5F96C00B9384B /* topbar0.png */; };
 		F8E9686018C5F96C00B9384B /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685D18C5F96C00B9384B /* topbar1.png */; };
 		F8E9686118C5F96C00B9384B /* topbar2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685E18C5F96C00B9384B /* topbar2.png */; };
@@ -430,6 +432,9 @@
 		F8C564C61921DD0200695094 /* KeyboardToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardToolBar.h; sourceTree = "<group>"; };
 		F8C564C71921DD0200695094 /* KeyboardToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardToolBar.m; sourceTree = "<group>"; };
 		F8C564C91922033B00695094 /* KeyboardToolBarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardToolBarDelegate.h; sourceTree = "<group>"; };
+		F8D7482C1938638200829CDA /* UploadGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadGoodsViewController.h; sourceTree = "<group>"; };
+		F8D7482D1938638200829CDA /* UploadGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadGoodsViewController.m; sourceTree = "<group>"; };
+		F8D7483319386DC700829CDA /* addimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addimage.png; sourceTree = "<group>"; };
 		F8E9685C18C5F96C00B9384B /* topbar0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar0.png; sourceTree = "<group>"; };
 		F8E9685D18C5F96C00B9384B /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
 		F8E9685E18C5F96C00B9384B /* topbar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar2.png; sourceTree = "<group>"; };
@@ -680,6 +685,8 @@
 				F8107C6719331A4D0073C169 /* ChatViewController.m */,
 				F8107CA919363EA30073C169 /* SecondTradeViewController.h */,
 				F8107CAA19363EA30073C169 /* SecondTradeViewController.m */,
+				F8D7482C1938638200829CDA /* UploadGoodsViewController.h */,
+				F8D7482D1938638200829CDA /* UploadGoodsViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1206,6 +1213,7 @@
 		F8E9686B18C6DB4B00B9384B /* button */ = {
 			isa = PBXGroup;
 			children = (
+				F8D7483319386DC700829CDA /* addimage.png */,
 				F8107CAF193643BC0073C169 /* more.png */,
 				F8E9686C18C6DB6A00B9384B /* loginbutton0.png */,
 			);
@@ -1328,6 +1336,7 @@
 				F8107CA51935D8870073C169 /* arrow2.png in Resources */,
 				F8E9687018C6DCB500B9384B /* email.png in Resources */,
 				F8E9686018C5F96C00B9384B /* topbar1.png in Resources */,
+				F8D7483419386DC700829CDA /* addimage.png in Resources */,
 				F8107CBB193653490073C169 /* basemenu.png in Resources */,
 				F89964F718FD2C3600D7FA44 /* base2.png in Resources */,
 				F8E9686D18C6DB6A00B9384B /* loginbutton0.png in Resources */,
@@ -1460,6 +1469,7 @@
 				F8E9687F18C70B0700B9384B /* CalendarViewController.m in Sources */,
 				F8A5FD5E19121DAE0091939B /* DataManager.m in Sources */,
 				F80B0D4A187426F2003E72DC /* LogKit.m in Sources */,
+				F8D7482E1938638200829CDA /* UploadGoodsViewController.m in Sources */,
 				F84B7DFA18BB3F81007FC2D5 /* XmppConnector.m in Sources */,
 				F84B7DEA18BB3C8D007FC2D5 /* NSString+DDXML.m in Sources */,
 				F80B0D52187426F2003E72DC /* UserSimpleLogic.m in Sources */,

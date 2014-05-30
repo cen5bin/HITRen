@@ -38,6 +38,7 @@
     _menu.frame = rect;
     [self.view addSubview:_menu];
     _menu.hidden = YES;
+    _menu.delegate = self;
 
 }
 
@@ -98,6 +99,18 @@
 }
 
 
+- (void)menuDidChooseAtIndex:(int)index {
+    if (index == 0) {
+        //发布商品
+        UIViewController *controller = getViewControllerOfName(@"UploadGoods");
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if (index == 1) {
+        //搜索商品
+    }
+    
+    [self hideMenu];
+}
 
 - (IBAction)moreButtonClicked:(id)sender {
     if (!_menu.hidden) [self hideMenu];
