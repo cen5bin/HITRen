@@ -7,6 +7,8 @@
 //
 
 #import "UploadGoodsViewController.h"
+#import "UploadLogic.h"
+#import "TradeLogic.h"
 
 @interface UploadGoodsViewController ()
 
@@ -27,6 +29,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferCompleted:) name:ASYNCDATALOADED object:nil];
     _cells = [NSMutableArray arrayWithObjects:self.goodsNameCell,self.goodsPriceCell,self.goodsPicCell, self.goodsDescriptionCell, nil];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -70,9 +73,28 @@
 }
 
 - (IBAction)releaseGoods:(id)sender {
+    [self hideKeyboard];
     UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
     self.topBar.image = image;
     [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+    if (!self.namefield.text || !self.namefield.text.length)
+        alert(@"错误", @"商品名称不能为空", self);
+    else if (!self.pricefield.text || !self.pricefield.text.length)
+        alert(@"错误", @"商品价格不能为空", self);
+    else {
+        if (_pics.count)
+            [UploadLogic uploadImages:_pics];
+        else {
+            NSDictionary *dic = @{
+                                  @"name":self.namefield.text,
+                                  @"price":self.pricefield.text,
+                                  @"description":self.descriptiontextView.text,
+                                  @"pics":[NSArray array]
+                                  };
+            [TradeLogic uploadGoodsInfo:dic];
+        }
+    }
+
 }
 
 - (void)clearTopBar {
@@ -106,14 +128,18 @@
         return;
     }
     CGRect rect = self.addPicButton.frame;
-    rect.origin.x += CGRectGetWidth(rect) + 10;
+    rect.origin.x += CGRectGetWidth(rect) + 12;
     self.addPicButton.frame = rect;
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+- (void)hideKeyboard {
     [self.namefield resignFirstResponder];
     [self.pricefield resignFirstResponder];
     [self.descriptiontextView resignFirstResponder];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self hideKeyboard];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -123,5 +149,21 @@
         [self.pricefield becomeFirstResponder];
     else if ([_cells objectAtIndex:indexPath.row] == self.goodsDescriptionCell)
         [self.descriptiontextView becomeFirstResponder];
+}
+
+- (void)transferCompleted:(NSNotification *)noticifition {
+    if ([noticifition.object isEqualToString:ASYNC_EVENT_UPLOADIMAGE]) {
+        L(@"asd");
+        NSDictionary *dic = @{
+                              @"name":self.namefield.text,
+                              @"price":self.pricefield.text,
+                              @"description":self.descriptiontextView.text,
+                              @"pics":[noticifition.userInfo objectForKey:@"DATA"]
+                              };
+        [TradeLogic uploadGoodsInfo:dic];
+    }
+    else if ([noticifition.object isEqualToString:ASYNC_EVENT_UPLOADGOODSINFO]) {
+        L([noticifition.userInfo description]);
+    }
 }
 @end

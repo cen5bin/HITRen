@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,8 +19,12 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import cn.edu.hit.constant.HttpData;
 import cn.edu.hit.kit.FileKit;
+import cn.edu.hit.logic.UserSimpleLogic;
 import cn.edu.hit.servlet.kit.BaseServlet;
 
 /**
@@ -52,6 +58,7 @@ public class UploadImagesServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ArrayList<String> filenames = new ArrayList<String>();
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		String upload = FileKit.getUpload();
 		String temp = System.getProperty("java.io.tmpdir");  
@@ -74,6 +81,7 @@ public class UploadImagesServlet extends BaseServlet {
                     try  
                     {  
                         inputStream2File(is, upload + item.getName());  
+                        filenames.add(item.getName());
                     } catch (Exception e)  
                     {  
                         e.printStackTrace();  
@@ -84,6 +92,18 @@ public class UploadImagesServlet extends BaseServlet {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		JSONObject json = new JSONObject();
+		try {
+			json.put(HttpData.SUC, true);
+			json.put(HttpData.DATA, filenames);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		out.print(json);
 		
 	}
 	

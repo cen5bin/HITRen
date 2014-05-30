@@ -933,7 +933,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w53-7Q-ce9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3748" y="753"/>
+            <point key="canvasLocation" x="3683" y="697"/>
         </scene>
         <!--Calendar View Controller - 日程-->
         <scene sceneID="j7h-ok-K1M">

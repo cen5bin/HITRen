@@ -53,6 +53,7 @@
 		F8107CBB193653490073C169 /* basemenu.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBA193653490073C169 /* basemenu.png */; };
 		F8107CBE1936547F0073C169 /* basemenu1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBC1936547F0073C169 /* basemenu1.png */; };
 		F8107CBF1936547F0073C169 /* basemenu2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBD1936547F0073C169 /* basemenu2.png */; };
+		F8148BCE1938BBC5000F5C9F /* TradeLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BCD1938BBC5000F5C9F /* TradeLogic.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -254,6 +255,8 @@
 		F8107CBA193653490073C169 /* basemenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu.png; sourceTree = "<group>"; };
 		F8107CBC1936547F0073C169 /* basemenu1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu1.png; sourceTree = "<group>"; };
 		F8107CBD1936547F0073C169 /* basemenu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu2.png; sourceTree = "<group>"; };
+		F8148BCC1938BBC5000F5C9F /* TradeLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeLogic.h; sourceTree = "<group>"; };
+		F8148BCD1938BBC5000F5C9F /* TradeLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeLogic.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -595,6 +598,8 @@
 				F80B0D46187426F2003E72DC /* UserSimpleLogic.m */,
 				F87209C4191DE57400FAC7A1 /* UploadLogic.h */,
 				F87209C5191DE57400FAC7A1 /* UploadLogic.m */,
+				F8148BCC1938BBC5000F5C9F /* TradeLogic.h */,
+				F8148BCD1938BBC5000F5C9F /* TradeLogic.m */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -1428,6 +1433,7 @@
 				F89DFADE191372E60043DD6B /* Message.m in Sources */,
 				F80B0D51187426F2003E72DC /* User.m in Sources */,
 				F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */,
+				F8148BCE1938BBC5000F5C9F /* TradeLogic.m in Sources */,
 				F8A5FD55191217FA0091939B /* Timeline.m in Sources */,
 				F87209C6191DE57400FAC7A1 /* UploadLogic.m in Sources */,
 				F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */,

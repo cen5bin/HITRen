@@ -9,13 +9,16 @@
 #import "UploadLogic.h"
 #import "User.h"
 #import "HttpData.h"
+#import "AppData.h"
 
 @implementation UploadLogic
 
 + (BOOL)uploadImages:(NSArray *)images {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (UIImage *image in images) {
-        NSDictionary *dic = @{@"filename":[UploadLogic filename],@"image":image};
+        NSString *filename = [UploadLogic filename];
+        NSDictionary *dic = @{@"filename":filename,@"image":image};
+        [[AppData sharedInstance] storeImage:image withFilename:filename];
         [array addObject:dic];
     }
     return [[HttpTransfer transfer] uploadImages:array to:@"UploadImages"];

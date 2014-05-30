@@ -173,6 +173,7 @@ static HttpTransfer *transfer;
     [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:data];
     [request setHTTPMethod:@"POST"];
+    _eventName = ASYNC_EVENT_UPLOADIMAGE;
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     return conn != nil;
 }

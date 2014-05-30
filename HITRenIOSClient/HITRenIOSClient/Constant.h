@@ -9,7 +9,7 @@
 #ifndef HITRenIOSClient_Constant_h
 #define HITRenIOSClient_Constant_h
 
-#define SERVER_IP @"172.17.240.165"//@"172.17.219.148"
+#define SERVER_IP @"192.168.1.109"//@"172.17.219.148"
 
 #define PAGE_MESSAGE_COUNT 30 //一页有多少状态
 #define TEXTVIEW_WIDTH 290     //状态中的textView宽度
@@ -36,6 +36,9 @@
 #define ASYNC_EVENT_DOWNLOADCOMMENTLIST @"HITRenAsyncDataDownloadCommentList" //下载评论
 #define ASYNC_EVENT_DOWNLOADCONTACT @"HITRenAsyncDataDownloadContact" //下载通讯录
 #define ASYNC_EVENT_DOWNLOADIMAGE @"HITRenAsyncDataDownloadImage" //下载图片
+#define ASYNC_EVENT_UPLOADIMAGE @"HITRenAsyncDataUploadImage" //上传图片
+#define ASYNC_EVENT_UPLOADGOODSINFO @"HITRenAsyncDataUploadGoodsInfo" //上传商品信息
+
 
 
 
