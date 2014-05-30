@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Comment" representedClassName="Comment" syncable="YES">
         <attribute name="cid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="list" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="messageInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="comment" inverseEntity="Message" syncable="YES"/>
+    </entity>
+    <entity name="GoodsInfo" representedClassName="GoodsInfo" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pics" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="GoodsLine" representedClassName="GoodsLine" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="LikedList" representedClassName="LikedList" syncable="YES">
         <attribute name="list" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -46,5 +58,7 @@
         <element name="Notice" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Timeline" positionX="0" positionY="0" width="0" height="0"/>
         <element name="UserInfo" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="GoodsLine" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="GoodsInfo" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

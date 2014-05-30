@@ -13,6 +13,10 @@
 @interface SecondTradeViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, MenuDelegate, UIScrollViewDelegate> {
     NSMutableArray *_data;
     SecondHandMenu *_menu;
+    UIActivityIndicatorView *_activityIndicator;
+    
+    int _currentPage;
+    BOOL _isDownload;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;

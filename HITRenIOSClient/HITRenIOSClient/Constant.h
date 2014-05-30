@@ -23,6 +23,8 @@
 
 #define PAGE_ACTIVITY_COUNT 20 // 一页有多少动态消息，点赞之类的
 
+#define PAGE_GOODS_COUNT 20 //一页有多少商品
+
 #define ASYNCDATALOADED @"HITRenAsyncDataFinishedLoading"
 
 #define ASYNC_EVENT_UPDATEUSETINFO @"HITRenAsyncDataUpdataUserInfo"
@@ -38,7 +40,8 @@
 #define ASYNC_EVENT_DOWNLOADIMAGE @"HITRenAsyncDataDownloadImage" //下载图片
 #define ASYNC_EVENT_UPLOADIMAGE @"HITRenAsyncDataUploadImage" //上传图片
 #define ASYNC_EVENT_UPLOADGOODSINFO @"HITRenAsyncDataUploadGoodsInfo" //上传商品信息
-
+#define ASYNC_EVENT_DOWNLOADGOODSLINE @"HITRenAsyncDataDownloadGoodsLine" //下载商品线
+#define ASYNC_EVENT_DOWNLOADGOODSINFO @"HITRenAsyncDataDownloadGoodsInfo" //下载商品数据
 
 
 

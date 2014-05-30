@@ -254,12 +254,28 @@
     <servlet-name>DownloadImage</servlet-name>
     <url-pattern>/DownloadImage</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>UploadGoodsInfo</servlet-name>
     <servlet-class>cn.edu.hit.servlet.trade.UploadGoodsInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UploadGoodsInfo</servlet-name>
     <url-pattern>/UploadGoodsInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadGoodsInfo</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.trade.DownloadGoodsInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadGoodsInfo</servlet-name>
+    <url-pattern>/DownloadGoodsInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadGoodsLine</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.trade.DownloadGoodsLineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadGoodsLine</servlet-name>
+    <url-pattern>/DownloadGoodsLine</url-pattern>
   </servlet-mapping>
 </web-app>

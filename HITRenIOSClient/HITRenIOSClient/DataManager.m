@@ -13,6 +13,7 @@
 #import "UserInfo.h"
 #import "Notice.h"
 #import "LikedList.h"
+#import "GoodsLine.h"
 
 //static NSMutableArray *_messages;
 //static Timeline *_timeline;
@@ -229,6 +230,68 @@
     Comment *comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:context];
     return comment;
 }
+
++ (GoodsLine *)goodsLine {
+    FUNC_START();
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"GoodsLine" inManagedObjectContext:context];
+    request.entity = entity;
+    NSArray *res = [context executeFetchRequest:request error:nil];
+    if (!res || res.count == 0) {
+        GoodsLine *goodsLine = [NSEntityDescription insertNewObjectForEntityForName:@"GoodsLine" inManagedObjectContext:context];
+        goodsLine.seq = 0;
+        goodsLine.data = nil;
+        [context save:nil];
+        FUNC_END();
+        return goodsLine;
+    }
+    FUNC_END();
+    return [res objectAtIndex:0];
+}
+
++ (NSArray *)getGoodsList:(NSArray *)gids {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"GoodsInfo" inManagedObjectContext:context];
+    request.entity = entity;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    [string appendString:@"{"];
+    for (int i = 0; i < gids.count; i++) {
+        if (i) [string appendString:@","];
+        [string appendString:[NSString stringWithFormat:@"%d", [[gids objectAtIndex:i] intValue]]];
+    }
+    [string appendString:@"}"];
+    NSString *tmp = [NSString stringWithFormat:@"gid IN %@", string];
+    //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mid IN {1,2}"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:tmp];
+    request.predicate = predicate;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return array;//[array lastObject];
+    return [NSArray array];
+
+}
+
++ (GoodsInfo *)getGoodsInfo {
+    NSManagedObjectContext *context = [DBController context];
+    GoodsInfo *goodsInfo = [NSEntityDescription insertNewObjectForEntityForName:@"GoodsInfo" inManagedObjectContext:context];
+    return goodsInfo;
+
+}
+
++ (GoodsInfo *)getGoodsInfoOfGid:(int)gid {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"GoodsInfo" inManagedObjectContext:context];
+    request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"gid == %d", gid];
+    request.predicate = predicate;
+    request.fetchLimit = 1;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return [array objectAtIndex:0];
+    return nil;
+}
+
 
 + (void)deleteEntity:(NSManagedObject *)entity {
     NSManagedObjectContext *context = [DBController context];

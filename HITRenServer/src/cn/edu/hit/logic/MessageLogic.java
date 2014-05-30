@@ -1,16 +1,13 @@
 package cn.edu.hit.logic;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,7 +30,6 @@ import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.util.JSON;
 
 public class MessageLogic {
 	public static JSONObject retData;
@@ -135,7 +131,7 @@ public class MessageLogic {
 	public static boolean downloadMessages(ArrayList<Integer>mids) throws JSONException {
 		retData = new JSONObject();
 		JSONObject json = new JSONObject();
-		Map<Integer, String> data = new HashMap<Integer, String>();
+//		Map<Integer, String> data = new HashMap<Integer, String>();
 		for (int i = mids.size()-1; i >= 0; i--) {
 			int mid = mids.get(i);
 			String info = DataReader.getMessage(mid);

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Timeline, Message, UserInfo, Notice, NoticeObject,LikedList,Comment;
+@class Timeline, Message, UserInfo, Notice, NoticeObject,LikedList,Comment,GoodsLine, GoodsInfo;
 @interface AppData : NSObject {
     Timeline *_timeline;
     NSMutableDictionary *_messages;
@@ -16,6 +16,7 @@
     NSMutableDictionary *_notices;
     NSMutableArray *_noticeLine;
     NSMutableDictionary *_likedLists;
+    GoodsLine *_goodsLine;
 //    NSMutableArray *_activityLine;
     
 //    NSMutableArray *_messageList;
@@ -23,6 +24,7 @@
 
 @property (nonatomic, strong, getter = getTimeline) Timeline *timeline;
 @property (nonatomic, strong, getter = getNoticeLine) NSMutableArray *noticeLine;
+@property (nonatomic, strong, getter = getGoodsLine) GoodsLine *goodsLine;
 //@property (nonatomic, strong) NSMutableDictionary *userInfos;
 //@property (nonatomic, strong, getter = getMessageList) NSMutableArray *messageList;
 
@@ -57,6 +59,10 @@
 
 - (void)storeImage:(UIImage *)image withFilename:(NSString *)filename;
 - (UIImage *)getImage:(NSString *)filename;
+
+- (NSArray *)goodsInfoNeedDownload:(NSArray *)gids;
+- (GoodsInfo *)newGoodsInfo;
+- (GoodsInfo *)getGoodsInfoOfGid:(int)gid;
 //- (UserInfo *)getUserInfo:(int)uid;
 
 //- (void)insertMessage:(Message *)message;

@@ -54,6 +54,8 @@
 		F8107CBE1936547F0073C169 /* basemenu1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBC1936547F0073C169 /* basemenu1.png */; };
 		F8107CBF1936547F0073C169 /* basemenu2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBD1936547F0073C169 /* basemenu2.png */; };
 		F8148BCE1938BBC5000F5C9F /* TradeLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BCD1938BBC5000F5C9F /* TradeLogic.m */; };
+		F8148BD11938CCF5000F5C9F /* GoodsLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BD01938CCF5000F5C9F /* GoodsLine.m */; };
+		F8148BD41938E265000F5C9F /* GoodsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BD31938E265000F5C9F /* GoodsInfo.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -257,6 +259,10 @@
 		F8107CBD1936547F0073C169 /* basemenu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu2.png; sourceTree = "<group>"; };
 		F8148BCC1938BBC5000F5C9F /* TradeLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeLogic.h; sourceTree = "<group>"; };
 		F8148BCD1938BBC5000F5C9F /* TradeLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeLogic.m; sourceTree = "<group>"; };
+		F8148BCF1938CCF5000F5C9F /* GoodsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsLine.h; sourceTree = "<group>"; };
+		F8148BD01938CCF5000F5C9F /* GoodsLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsLine.m; sourceTree = "<group>"; };
+		F8148BD21938E265000F5C9F /* GoodsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsInfo.h; sourceTree = "<group>"; };
+		F8148BD31938E265000F5C9F /* GoodsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfo.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -629,6 +635,10 @@
 				F87209C8191E11E400FAC7A1 /* LikedList.m */,
 				F8723EBD1927035200828B5C /* Comment.h */,
 				F8723EBE1927035200828B5C /* Comment.m */,
+				F8148BCF1938CCF5000F5C9F /* GoodsLine.h */,
+				F8148BD01938CCF5000F5C9F /* GoodsLine.m */,
+				F8148BD21938E265000F5C9F /* GoodsInfo.h */,
+				F8148BD31938E265000F5C9F /* GoodsInfo.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1420,6 +1430,7 @@
 				F88BCB4218BC947F00407521 /* MainViewController.m in Sources */,
 				F80B0D5C18744C17003E72DC /* TestUserSimpleLogic.m in Sources */,
 				F8696A831918CAD8008887AD /* NoticeCell.m in Sources */,
+				F8148BD11938CCF5000F5C9F /* GoodsLine.m in Sources */,
 				F84B7DE118BB3C8D007FC2D5 /* GCDAsyncSocket.m in Sources */,
 				F84B7DEB18BB3C8D007FC2D5 /* DDXMLDocument.m in Sources */,
 				F80B0D50187426F2003E72DC /* TestHttpTransfer.m in Sources */,
@@ -1445,6 +1456,7 @@
 				F84B7DCD18BB3C8D007FC2D5 /* XMPPPlainAuthentication.m in Sources */,
 				F84B7DCE18BB3C8D007FC2D5 /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				F88F989418C1E910009CE742 /* BtmToolBar.m in Sources */,
+				F8148BD41938E265000F5C9F /* GoodsInfo.m in Sources */,
 				F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */,
 				F84B7DD018BB3C8D007FC2D5 /* NSData+XMPP.m in Sources */,
 				F8E9688518C714C200B9384B /* RegisterViewController.m in Sources */,

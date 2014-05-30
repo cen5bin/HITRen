@@ -9,6 +9,8 @@
 #import "TradeLogic.h"
 #import "HttpData.h"
 #import "User.h"
+#import "AppData.h"
+#import "GoodsLine.h"
 
 @implementation TradeLogic
 
@@ -26,6 +28,38 @@
         L(@"upload goods info failed");
         FUNC_END();
        return NO;
+    }
+    FUNC_END();
+    return YES;
+}
+
++ (BOOL)downloadGoodsLine {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    AppData *appData = [AppData sharedInstance];
+    [data setIntValue:[appData.goodsLine.seq intValue] forKey:@"seq"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadGoodsLine" withEventName:ASYNC_EVENT_DOWNLOADGOODSLINE];
+    if (!ret) {
+        L(@"download goodsline failed");
+        FUNC_END();
+        return NO;
+    }
+
+    FUNC_END();
+    return YES;
+}
+
++ (BOOL)downloadGoodsInfo:(NSArray *)gids {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    AppData *appData = [AppData sharedInstance];
+    NSArray *tmp = [appData goodsInfoNeedDownload:gids];
+    [data setValue:tmp forKey:@"gids"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadGoodsInfo" withEventName:ASYNC_EVENT_DOWNLOADGOODSINFO];
+    if (!ret) {
+        L(@"download goodsInfo failed");
+        FUNC_END();
+        return NO;
     }
     FUNC_END();
     return YES;

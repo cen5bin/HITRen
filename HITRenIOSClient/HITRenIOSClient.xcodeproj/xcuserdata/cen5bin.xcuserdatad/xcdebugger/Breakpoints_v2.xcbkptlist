@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/AppData.m"
-            timestampString = "423024720.576717"
+            timestampString = "423160406.506152"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "-messagesNeedDownload"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/DataManager.m"
-            timestampString = "422554153.589608"
+            timestampString = "423160406.506152"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "+getLikedList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/AppData.m"
-            timestampString = "423024720.576717"
+            timestampString = "423160406.506152"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-likedListNeedDownload:"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/AppData.m"
-            timestampString = "423024720.576717"
+            timestampString = "423160406.506152"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "-likedListNeedDownload:"
             landmarkType = "5">
          </BreakpointContent>
@@ -271,6 +271,82 @@
             endingLineNumber = "321"
             landmarkName = "-sendText:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HITRenIOSClient/SecondTradeViewController.m"
+            timestampString = "423163028.292142"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-goodsLineDidDownload:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HITRenIOSClient/SecondTradeViewController.m"
+            timestampString = "423163013.569508"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-goodsLineDidDownload:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SecondTradeViewController goodsLineDidDownload:]"
+                  moduleName = "HITRenIOSClient"
+                  urlString = "file:///Users/cen5bin/project/HITRen/HITRenIOSClient/HITRenIOSClient/SecondTradeViewController.m"
+                  timestampString = "423163013.576088"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "2578">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SecondTradeViewController goodsLineDidDownload:]"
+                  moduleName = "HITRenIOSClient"
+                  urlString = "file:///Users/cen5bin/project/HITRen/HITRenIOSClient/HITRenIOSClient/SecondTradeViewController.m"
+                  timestampString = "423163013.576429"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "2660">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SecondTradeViewController goodsLineDidDownload:]"
+                  moduleName = "HITRenIOSClient"
+                  urlString = "file:///Users/cen5bin/project/HITRen/HITRenIOSClient/HITRenIOSClient/SecondTradeViewController.m"
+                  timestampString = "423163013.57661"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "2828">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -8,5 +8,6 @@ public class Goods {
 	public static final String PRICE = "price";
 	public static final String PICS = "pics";
 	public static final String DESCRIPTION = "description";
+	public static final String TIME = "time";
 	public static final String UID = UserConstant.UID;
 }

@@ -15,6 +15,8 @@
 #import "NoticeObject.h"
 #import "LikedList.h"
 #import "Comment.h"
+#import "GoodsLine.h"
+#import "GoodsInfo.h"
 //#import "MessageLogic.h"
 
 static AppData *appData;
@@ -23,6 +25,7 @@ static AppData *appData;
 
 @synthesize timeline = _timeline;
 @synthesize noticeLine = _noticeLine;
+@synthesize goodsLine = _goodsLine;
 
 - (id)init {
     if (self = [super init]) {
@@ -273,6 +276,12 @@ static AppData *appData;
     return [DataManager getCommentOfMid:mid];
 }
 
+- (GoodsLine *)getGoodsLine {
+    if (_goodsLine) return _goodsLine;
+    _goodsLine = [DataManager goodsLine];
+    return _goodsLine;
+}
+
 
 //保存图片
 - (void)storeImage:(UIImage *)image withFilename:(NSString *)filename {
@@ -296,4 +305,21 @@ static AppData *appData;
     return [UIImage imageWithData:[NSData dataWithContentsOfURL:targetURL]];
 }
 
+- (NSArray *)goodsInfoNeedDownload:(NSArray *)gids {
+    NSMutableArray *tmp = [[NSMutableArray alloc] initWithArray:gids];
+    NSArray *array = [DataManager getGoodsList:tmp];
+    if (!array || !array.count) return gids;
+    for (GoodsInfo *gi in array) {
+        if ([tmp containsObject:gi.gid]) [tmp removeObject:gi.gid];
+    }
+    return tmp;
+}
+
+- (GoodsInfo *)newGoodsInfo {
+    return [DataManager getGoodsInfo];
+}
+
+- (GoodsInfo *)getGoodsInfoOfGid:(int)gid {
+    return [DataManager getGoodsInfoOfGid:gid];
+}
 @end

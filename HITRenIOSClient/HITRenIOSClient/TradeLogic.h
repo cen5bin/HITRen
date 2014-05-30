@@ -11,4 +11,6 @@
 @interface TradeLogic : BaseLogic
 
 + (BOOL)uploadGoodsInfo:(NSDictionary *)dic;
++ (BOOL)downloadGoodsLine;
++ (BOOL)downloadGoodsInfo:(NSArray *)gids;
 @end

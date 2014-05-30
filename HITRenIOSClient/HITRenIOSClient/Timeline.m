@@ -22,7 +22,6 @@
         return _mids;
     }
     _mids = [NSKeyedUnarchiver unarchiveObjectWithData:self.data];
-    L([_mids description]);
     return _mids;
 }
 

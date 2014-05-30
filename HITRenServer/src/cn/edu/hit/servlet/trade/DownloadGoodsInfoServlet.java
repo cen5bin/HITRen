@@ -18,17 +18,16 @@ import cn.edu.hit.kit.DataKit;
 import cn.edu.hit.logic.TradeLogic;
 
 /**
- * Servlet implementation class UploadGoodsInfoServlet
- * 参数，uid，name（字符串），price（字符串），pics（字符串数组，内存图片名），description（字符串）
+ * Servlet implementation class DownloadGoodsInfoServlet
  */
-@WebServlet("/UploadGoodsInfoServlet")
-public class UploadGoodsInfoServlet extends HttpServlet {
+@WebServlet("/DownloadGoodsInfoServlet")
+public class DownloadGoodsInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UploadGoodsInfoServlet() {
+    public DownloadGoodsInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,15 +47,11 @@ public class UploadGoodsInfoServlet extends HttpServlet {
 		String data = DataKit.getDataFromClient(request.getReader());
 		try {
 			JSONObject json = new JSONObject(data);
-			int uid = json.getInt("uid");
-			String name = json.getString("name");
-			String price = json.getString("price");
-			String desc = json.getString("description");
-			JSONArray pics0 = json.getJSONArray("pics");
-			ArrayList<String> pics = new ArrayList<String>();
-			for (int i = 0; i < pics0.length(); i++)
-				pics.add(pics0.getString(i));
-			TradeLogic.uploadGoodsInfo(uid, name, price, pics, desc);
+			JSONArray gids0 = json.getJSONArray("gids");
+			ArrayList<Integer> gids = new ArrayList<Integer>();
+			for (int i = 0; i < gids0.length(); i++)
+				gids.add(gids0.getInt(i));
+			TradeLogic.downloadGoodsInfo(gids);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(TradeLogic.retData);

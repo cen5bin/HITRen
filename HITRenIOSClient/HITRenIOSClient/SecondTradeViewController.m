@@ -10,6 +10,9 @@
 #import "GoodsCell.h"
 #import "AppData.h"
 #import "SecondHandMenu.h"
+#import "TradeLogic.h"
+#import "GoodsLine.h"
+#import "GoodsInfo.h"
 
 @interface SecondTradeViewController ()
 
@@ -39,7 +42,70 @@
     [self.view addSubview:_menu];
     _menu.hidden = YES;
     _menu.delegate = self;
+    
+    UIView *view = [self getActivityIndicator];
+    [self.view addSubview:view];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    [TradeLogic downloadGoodsLine];
+    _currentPage = 0;
 
+}
+
+
+- (void)dataDidDownload:(NSNotification *)notification {
+    if ([notification.object isEqualToString: ASYNC_EVENT_DOWNLOADGOODSLINE])
+        [self goodsLineDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADGOODSINFO])
+        [self goodsInfoDidDownload:notification];
+}
+
+- (void)goodsLineDidDownload:(NSNotification *)notification {
+    _currentPage = 0;
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"goodsline download succ");
+    else L(@"goodsline download fail");
+    if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
+        [self.tableView reloadData];
+        return;
+    }
+    AppData *appData = [AppData sharedInstance];
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    NSArray *gids = [data objectForKey:@"gids"];
+    appData.goodsLine.seq = [data objectForKey:@"seq"];
+    L([gids description]);
+    if (gids.count == 0) return;
+    int index = 0;
+    if (appData.goodsLine.gids.count)
+        index = [gids indexOfObject:[appData.goodsLine.gids objectAtIndex:0]];
+    if (index == NSNotFound) index = 0;
+    for (int i = index; i < gids.count; i++)
+        [appData.goodsLine.gids insertObject:[gids objectAtIndex:i] atIndex:0];
+    [appData.goodsLine update];
+    int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
+    [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+}
+
+- (void)goodsInfoDidDownload:(NSNotification *)notification {
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"download goodsinfo succ");
+    else L(@"download goodsinfo fail");
+    NSDictionary *goodsInfos = [ret objectForKey:@"DATA"];
+    AppData *appData = [AppData sharedInstance];
+    for (NSNumber *gid in [goodsInfos allKeys]) {
+        GoodsInfo *gi = [appData newGoodsInfo];
+        NSDictionary *dic = [goodsInfos objectForKey:gid];
+        gi.gid = [dic objectForKey:@"gid"];
+        gi.name = [dic objectForKey:@"name"];
+        gi.desc = [dic objectForKey:@"description"];
+        gi.picNames = [dic objectForKey:@"pics"];
+        gi.price = [dic objectForKey:@"price"];
+        [gi update];
+    }
+    [AppData saveData];
+    int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
+    _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+    [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -55,6 +121,14 @@
     GoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifer forIndexPath:indexPath];
     if (!cell)
         cell = [[GoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifer];
+    NSNumber *gid = [_data objectAtIndex:indexPath.row];
+    AppData *appData = [AppData sharedInstance];
+    GoodsInfo *goodsInfo = [appData getGoodsInfoOfGid:[gid intValue]];
+    if (goodsInfo) {
+        cell.goodsName.text = goodsInfo.name;
+        cell.goodsPrice.text = goodsInfo.price;
+        cell.goodsDesc.text = goodsInfo.desc;
+    }
     return cell;
 }
 
@@ -117,4 +191,22 @@
     else [self showMenu];
 //    _menu.hidden = !_menu.hidden;
 }
+
+- (UIActivityIndicatorView *)getActivityIndicator {
+    if (!_activityIndicator) {
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        CGFloat len = 30;
+        _activityIndicator.frame = CGRectMake(CGRectGetMidX(self.view.frame)-len / 2, -len, len, len);
+    }
+    _activityIndicator.hidden = NO;
+    if (!_activityIndicator.isAnimating)
+        [_activityIndicator startAnimating];
+    return _activityIndicator;
+}
+
+- (void)hideTopActivityIndicator {
+    _activityIndicator.hidden = YES;
+    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
 @end
