@@ -30,6 +30,7 @@
     _cells = [NSMutableArray arrayWithObjects:self.goodsNameCell,self.goodsPriceCell,self.goodsPicCell, self.goodsDescriptionCell, nil];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor clearColor];
+    _pics = [[NSMutableArray alloc] init];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -68,4 +69,59 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)releaseGoods:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+}
+
+- (void)clearTopBar {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+    self.topBar.image = image;
+
+}
+
+- (IBAction)addPic:(id)sender {
+    if (_pics.count == 4) return;
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    UIImage * image=[info objectForKey:UIImagePickerControllerEditedImage];
+    [self performSelector:@selector(picDidSelect:) withObject:image afterDelay:0.0];
+}
+
+- (void)picDidSelect:(UIImage *)image {
+    [_pics addObject:image];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.addPicButton.frame];
+    imageView.image = image;
+    [self.goodsPicCell.contentView addSubview:imageView];
+    if (_pics.count == 4) {
+        self.addPicButton.hidden = YES;
+        return;
+    }
+    CGRect rect = self.addPicButton.frame;
+    rect.origin.x += CGRectGetWidth(rect) + 10;
+    self.addPicButton.frame = rect;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.namefield resignFirstResponder];
+    [self.pricefield resignFirstResponder];
+    [self.descriptiontextView resignFirstResponder];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([_cells objectAtIndex:indexPath.row] == self.goodsNameCell)
+        [self.namefield becomeFirstResponder];
+    else if ([_cells objectAtIndex:indexPath.row] == self.goodsPriceCell)
+        [self.pricefield becomeFirstResponder];
+    else if ([_cells objectAtIndex:indexPath.row] == self.goodsDescriptionCell)
+        [self.descriptiontextView becomeFirstResponder];
+}
 @end

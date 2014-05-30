@@ -793,7 +793,7 @@
                                 <sections>
                                     <tableViewSection id="Gyw-sv-DjO">
                                         <cells>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5JF-8M-0nk">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5JF-8M-0nk">
                                                 <rect key="frame" x="0.0" y="10" width="320" height="45"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5JF-8M-0nk" id="1fc-pn-voI">
@@ -816,7 +816,7 @@
                                                     </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="AZ6-tv-AQn">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="AZ6-tv-AQn">
                                                 <rect key="frame" x="0.0" y="55" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AZ6-tv-AQn" id="xHh-Ts-A5H">
@@ -840,12 +840,12 @@
                                                             <rect key="frame" x="69" y="7" width="221" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                                         </textField>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="109" id="5f3-fF-SRa">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="109" id="5f3-fF-SRa">
                                                 <rect key="frame" x="0.0" y="99" width="320" height="109"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5f3-fF-SRa" id="gyb-UL-ClD">
@@ -866,11 +866,14 @@
                                                             <state key="normal" title="Button" image="addimage.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="addPic:" destination="uUk-Pj-3Gl" eventType="touchUpInside" id="ZOV-J6-kAn"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="160" id="O6z-nl-i8J">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="160" id="O6z-nl-i8J">
                                                 <rect key="frame" x="0.0" y="208" width="320" height="161"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O6z-nl-i8J" id="OpP-FA-JDD">
@@ -901,14 +904,29 @@
                                     <outlet property="delegate" destination="uUk-Pj-3Gl" id="8gt-bg-vei"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="59C-JV-f77">
+                                <rect key="frame" x="274" y="1" width="46" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="发布">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="releaseGoods:" destination="uUk-Pj-3Gl" eventType="touchUpInside" id="O7h-EY-hVF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <connections>
+                        <outlet property="addPicButton" destination="H9K-gV-uKk" id="chn-xJ-Yzy"/>
+                        <outlet property="descriptiontextView" destination="wZh-of-bSg" id="qmA-rs-9Oj"/>
                         <outlet property="goodsDescriptionCell" destination="O6z-nl-i8J" id="jF3-Ka-afR"/>
                         <outlet property="goodsNameCell" destination="5JF-8M-0nk" id="j8k-kk-O1E"/>
                         <outlet property="goodsPicCell" destination="5f3-fF-SRa" id="Cnd-DO-G54"/>
                         <outlet property="goodsPriceCell" destination="AZ6-tv-AQn" id="EJJ-i0-xto"/>
+                        <outlet property="namefield" destination="xu2-AJ-srp" id="PPn-ur-9wr"/>
+                        <outlet property="pricefield" destination="ysR-bC-dJ9" id="T5O-Ua-mTa"/>
                         <outlet property="tableView" destination="hq9-Ae-G0t" id="fsf-8C-wSQ"/>
                         <outlet property="topBar" destination="aen-8P-Efs" id="KOH-ev-iE1"/>
                     </connections>
