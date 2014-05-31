@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSData * pics;
 @property (nonatomic, retain) NSString * time;
 @property (nonatomic, retain) NSString * price;
+@property (nonatomic, retain) NSNumber * uid;
 
 @property (nonatomic, retain, getter = getPicNames) NSMutableArray *picNames;
 

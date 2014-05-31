@@ -14,6 +14,8 @@
     NSMutableArray *_data;
     SecondHandMenu *_menu;
     UIActivityIndicatorView *_activityIndicator;
+    NSMutableSet *_downloadingImages;
+    
     
     int _currentPage;
     BOOL _isDownload;

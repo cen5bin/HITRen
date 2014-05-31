@@ -13,6 +13,7 @@
 @interface HttpTransfer : NSURLConnection<NSURLConnectionDataDelegate> {
     NSString *_eventName;
     BOOL _downloadImage;
+    NSString *_imageName;
 }
 
 + (HttpTransfer *)sharedInstance;

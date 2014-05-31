@@ -13,6 +13,7 @@
 #import "TradeLogic.h"
 #import "GoodsLine.h"
 #import "GoodsInfo.h"
+#import "UploadLogic.h"
 
 @interface SecondTradeViewController ()
 
@@ -43,6 +44,8 @@
     _menu.hidden = YES;
     _menu.delegate = self;
     
+    _downloadingImages = [[NSMutableSet alloc] init];
+    
     UIView *view = [self getActivityIndicator];
     [self.view addSubview:view];
     
@@ -58,6 +61,20 @@
         [self goodsLineDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADGOODSINFO])
         [self goodsInfoDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
+        [self imageDidDownload:notification];
+}
+
+- (void)imageDidDownload:(NSNotification *)notification {
+    L(@"asd");
+    UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
+    L([notification.userInfo objectForKey:@"imagename"]);
+    L([image description]);
+    [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
+    UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
+    view.image = [[AppData sharedInstance] getImage:[notification.userInfo objectForKey:@"imagename"]];
+    [self.view addSubview:view];
+    [self.tableView reloadData];
 }
 
 - (void)goodsLineDidDownload:(NSNotification *)notification {
@@ -100,6 +117,7 @@
         gi.desc = [dic objectForKey:@"description"];
         gi.picNames = [dic objectForKey:@"pics"];
         gi.price = [dic objectForKey:@"price"];
+        gi.uid = [dic objectForKey:@"uid"];
         [gi update];
     }
     [AppData saveData];
@@ -128,7 +146,25 @@
         cell.goodsName.text = goodsInfo.name;
         cell.goodsPrice.text = goodsInfo.price;
         cell.goodsDesc.text = goodsInfo.desc;
+        NSArray *pics = goodsInfo.picNames;
+        if (pics.count) {
+            NSString *showImage = [pics objectAtIndex:0];
+            L(showImage);
+            UIImage *image = [appData getImage:showImage];
+            if (image == nil) {
+                L(@"error");
+                if (![_downloadingImages containsObject:showImage]) {
+                    [UploadLogic downloadImage:showImage];
+                    [_downloadingImages addObject:showImage];
+                }
+            }
+            else {
+                cell.pic.image = image;
+                L(@"yes");
+            }
+        }
     }
+    L(@"zzzz");
     return cell;
 }
 

@@ -59,6 +59,7 @@
 
 - (void)storeImage:(UIImage *)image withFilename:(NSString *)filename;
 - (UIImage *)getImage:(NSString *)filename;
++ (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
 
 - (NSArray *)goodsInfoNeedDownload:(NSArray *)gids;
 - (GoodsInfo *)newGoodsInfo;

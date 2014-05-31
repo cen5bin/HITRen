@@ -24,7 +24,6 @@ import org.json.JSONObject;
 
 import cn.edu.hit.constant.HttpData;
 import cn.edu.hit.kit.FileKit;
-import cn.edu.hit.logic.UserSimpleLogic;
 import cn.edu.hit.servlet.kit.BaseServlet;
 
 /**
@@ -140,5 +139,6 @@ public class UploadImagesServlet extends BaseServlet {
           
     }  
   
-
+    
+    
 }

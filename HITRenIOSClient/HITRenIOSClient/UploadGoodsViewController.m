@@ -9,6 +9,7 @@
 #import "UploadGoodsViewController.h"
 #import "UploadLogic.h"
 #import "TradeLogic.h"
+#import "AppData.h"
 
 @interface UploadGoodsViewController ()
 
@@ -104,7 +105,7 @@
 }
 
 - (IBAction)addPic:(id)sender {
-    if (_pics.count == 4) return;
+    if (_pics.count == 5) return;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -119,11 +120,14 @@
 }
 
 - (void)picDidSelect:(UIImage *)image {
-    [_pics addObject:image];
+    UIImage *newImage = _pics.count==0?[AppData imageWithImage:image scaledToSize:CGSizeMake(160, 160)]:image;
+    
+    [_pics addObject:newImage];
+    if (_pics.count == 1) [_pics addObject:image];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.addPicButton.frame];
-    imageView.image = image;
+    imageView.image = newImage;
     [self.goodsPicCell.contentView addSubview:imageView];
-    if (_pics.count == 4) {
+    if (_pics.count == 5) {
         self.addPicButton.hidden = YES;
         return;
     }

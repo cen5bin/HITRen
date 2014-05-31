@@ -292,7 +292,9 @@ static AppData *appData;
     if (![fm fileExistsAtPath:[imageURL absoluteString]])
         [fm createDirectoryAtURL:imageURL withIntermediateDirectories:YES attributes:nil error:nil];
     NSURL *targetURL = [imageURL URLByAppendingPathComponent:filename];
-    [UIImagePNGRepresentation(image) writeToURL:targetURL atomically:YES];
+    BOOL ret = [UIImagePNGRepresentation(image) writeToURL:targetURL atomically:YES];
+    if (ret) L(@"write image succ");
+    else L(@"write image fail");
 }
 
 //获取图片，如果图片不存在则返回nil
@@ -301,8 +303,24 @@ static AppData *appData;
     NSArray* array = [fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSURL *docURL = [array objectAtIndex:0];
     NSURL *targetURL = [[docURL URLByAppendingPathComponent:@"images"] URLByAppendingPathComponent:filename];
-    if (![fm fileExistsAtPath:[targetURL absoluteString]]) return nil;
+//    if (![fm fileExistsAtPath:[targetURL absoluteString]]) return nil;
     return [UIImage imageWithData:[NSData dataWithContentsOfURL:targetURL]];
+}
+
+//对图片尺寸进行压缩--
++ (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // End the context
+    UIGraphicsEndImageContext();
+    // Return the new image.
+    return newImage;
 }
 
 - (NSArray *)goodsInfoNeedDownload:(NSArray *)gids {

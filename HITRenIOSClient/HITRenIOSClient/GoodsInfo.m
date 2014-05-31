@@ -17,6 +17,7 @@
 @dynamic pics;
 @dynamic time;
 @dynamic price;
+@dynamic uid;
 @synthesize picNames = _picNames;
 
 - (NSMutableArray *)getPicNames {
