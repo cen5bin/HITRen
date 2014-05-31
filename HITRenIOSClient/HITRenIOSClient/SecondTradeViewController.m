@@ -67,12 +67,7 @@
 
 - (void)imageDidDownload:(NSNotification *)notification {
     UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
-    L([notification.userInfo objectForKey:@"imagename"]);
-   
     [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
-//    UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
-//    view.image = [[AppData sharedInstance] getImage:[notification.userInfo objectForKey:@"imagename"]];
-//    [self.view addSubview:view];
     [_downloadingImages removeObject:[notification.userInfo objectForKey:@"imagename"]];
     [self.tableView reloadData];
 }
@@ -94,13 +89,14 @@
     NSArray *gids = [data objectForKey:@"gids"];
     appData.goodsLine.seq = [data objectForKey:@"seq"];
     L([gids description]);
+    L([appData.goodsLine.gids description]);
     if (gids.count == 0) return;
     int index = 0;
     if (appData.goodsLine.gids.count)
         index = [gids indexOfObject:[appData.goodsLine.gids objectAtIndex:0]];
     LOG(@"index %d", index);
     if (index == NSNotFound) index = 0;
-    for (int i = index; i < gids.count; i++)
+    for (int i = index + 1; i < gids.count; i++)
         [appData.goodsLine.gids insertObject:[gids objectAtIndex:i] atIndex:0];
     [appData.goodsLine update];
     int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
@@ -127,6 +123,7 @@
     [AppData saveData];
     int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
     _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+    L([_data description]);
     [self.tableView reloadData];
 }
 
@@ -165,16 +162,16 @@
             }
             else {
                 cell.noImageLabel.hidden = YES;
-                cell.pic.image = image;
-                L(@"yes");
             }
+            cell.pic.image = image;
         }
         else {
+            cell.pic.image = nil;
             cell.noImageLabel.text = @"无图片";
             cell.noImageLabel.hidden = NO;
         }
     }
-    L(@"zzzz");
+   
     return cell;
 }
 
