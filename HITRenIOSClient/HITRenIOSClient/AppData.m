@@ -301,8 +301,7 @@ static AppData *appData;
     NSArray* array = [fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSURL *docURL = [array objectAtIndex:0];
     NSURL *targetURL = [[docURL URLByAppendingPathComponent:@"images"] URLByAppendingPathComponent:filename];
-//    if (![fm fileExistsAtPath:[targetURL absoluteString]]) return nil;
-    L([targetURL description]);
+
     return [UIImage imageWithData:[NSData dataWithContentsOfURL:targetURL]];
 }
 

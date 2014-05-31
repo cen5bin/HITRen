@@ -49,6 +49,8 @@
     UIView *view = [self getActivityIndicator];
     [self.view addSubview:view];
     
+    self.tableView.decelerationRate = 0.5;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
     
 
@@ -133,7 +135,7 @@
         _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
     else {
         _maxLoadedPage++;
-        count = PAGE_GOODS_COUNT * _maxLoadedPage > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT * _maxLoadedPage;
+        count = PAGE_GOODS_COUNT * (_maxLoadedPage+1) > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT * (_maxLoadedPage+1);
         _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
         _backgroundWorking = NO;
     }
@@ -219,6 +221,11 @@
         [self workAtIndexpath:indexPath];
     }
 }
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
+    [self workAtIndexpath:indexPath];
+}
+
 
 - (void)workAtIndexpath:(NSIndexPath *)indexPath {
     int index = indexPath.row;
