@@ -23,6 +23,13 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:[[NSMutableArray alloc] init] forKey:@"noticeLine"];
     [userDefaults synchronize];
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSArray* array = [fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *docURL = [array objectAtIndex:0];
+    NSURL *imageURL = [docURL URLByAppendingPathComponent:@"images"];
+    [fm removeItemAtURL:imageURL error:nil];
+    
 //    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
 //    NSString* tmp = @" {\"asd\" : \"1\",\"aaa\":1} ";

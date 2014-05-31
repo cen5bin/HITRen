@@ -14,4 +14,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *goodsPrice;
 @property (strong, nonatomic) IBOutlet UITextView *goodsDesc;
 
+@property (strong, nonatomic) IBOutlet UILabel *noImageLabel;
+
+
 @end

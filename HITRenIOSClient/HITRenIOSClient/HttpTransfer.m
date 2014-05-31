@@ -7,6 +7,7 @@
 //
 
 #import "HttpTransfer.h"
+#import "HttpData.h"
 
 static NSString *IP = //@"10.9.180.121";
 //@"127.0.0.1";
@@ -181,7 +182,9 @@ static HttpTransfer *transfer;
 - (BOOL)downloadImage:(NSString *)image {
     _downloadImage = YES;
     _imageName = image;
-    [self asyncPost:image to:@"DownloadImage" withEventName:ASYNC_EVENT_DOWNLOADIMAGE];
+    HttpData *data = [HttpData data];
+    [data setValue:image forKey:@"filename"];
+    [self asyncPost:[data getJsonString] to:@"DownloadImage" withEventName:ASYNC_EVENT_DOWNLOADIMAGE];
     return YES;
 }
 

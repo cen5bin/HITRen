@@ -37,9 +37,7 @@
 }
 
 + (BOOL)downloadImage:(NSString *)filename {
-    HttpData *data = [HttpData data];
-    [data setValue:filename forKey:@"filename"];
-    BOOL ret = [[HttpTransfer transfer] downloadImage:[data getJsonString]];
+    BOOL ret = [[HttpTransfer transfer] downloadImage:filename];
     if (!ret) {
         L(@"download image failed");
         return NO;

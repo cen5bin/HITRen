@@ -718,12 +718,20 @@
                                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无图片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fF7-vM-YqH">
+                                                    <rect key="frame" x="10" y="39" width="80" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="goodsDesc" destination="NVv-5h-dQV" id="LqZ-5E-MIj"/>
                                             <outlet property="goodsName" destination="sRF-OX-ehV" id="nPR-Lb-nE5"/>
                                             <outlet property="goodsPrice" destination="F8h-f7-Plx" id="JUQ-0F-hmS"/>
+                                            <outlet property="noImageLabel" destination="fF7-vM-YqH" id="8Rr-wj-Q1b"/>
                                             <outlet property="pic" destination="K8N-a2-xAn" id="9op-19-1IU"/>
                                         </connections>
                                     </tableViewCell>

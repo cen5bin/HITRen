@@ -292,6 +292,8 @@ static AppData *appData;
     if (![fm fileExistsAtPath:[imageURL absoluteString]])
         [fm createDirectoryAtURL:imageURL withIntermediateDirectories:YES attributes:nil error:nil];
     NSURL *targetURL = [imageURL URLByAppendingPathComponent:filename];
+    L(filename);
+    L([targetURL description]);
     BOOL ret = [UIImagePNGRepresentation(image) writeToURL:targetURL atomically:YES];
     if (ret) L(@"write image succ");
     else L(@"write image fail");
@@ -304,6 +306,7 @@ static AppData *appData;
     NSURL *docURL = [array objectAtIndex:0];
     NSURL *targetURL = [[docURL URLByAppendingPathComponent:@"images"] URLByAppendingPathComponent:filename];
 //    if (![fm fileExistsAtPath:[targetURL absoluteString]]) return nil;
+    L([targetURL description]);
     return [UIImage imageWithData:[NSData dataWithContentsOfURL:targetURL]];
 }
 

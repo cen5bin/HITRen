@@ -66,14 +66,14 @@
 }
 
 - (void)imageDidDownload:(NSNotification *)notification {
-    L(@"asd");
     UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
     L([notification.userInfo objectForKey:@"imagename"]);
-    L([image description]);
+   
     [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
-    UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
-    view.image = [[AppData sharedInstance] getImage:[notification.userInfo objectForKey:@"imagename"]];
-    [self.view addSubview:view];
+//    UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
+//    view.image = [[AppData sharedInstance] getImage:[notification.userInfo objectForKey:@"imagename"]];
+//    [self.view addSubview:view];
+    [_downloadingImages removeObject:[notification.userInfo objectForKey:@"imagename"]];
     [self.tableView reloadData];
 }
 
@@ -82,11 +82,14 @@
     NSDictionary *ret = notification.userInfo;
     if ([ret objectForKey:@"SUC"]) L(@"goodsline download succ");
     else L(@"goodsline download fail");
+    AppData *appData = [AppData sharedInstance];
     if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
+        int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
+        _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
         [self.tableView reloadData];
         return;
     }
-    AppData *appData = [AppData sharedInstance];
+
     NSDictionary *data = [ret objectForKey:@"DATA"];
     NSArray *gids = [data objectForKey:@"gids"];
     appData.goodsLine.seq = [data objectForKey:@"seq"];
@@ -95,6 +98,7 @@
     int index = 0;
     if (appData.goodsLine.gids.count)
         index = [gids indexOfObject:[appData.goodsLine.gids objectAtIndex:0]];
+    LOG(@"index %d", index);
     if (index == NSNotFound) index = 0;
     for (int i = index; i < gids.count; i++)
         [appData.goodsLine.gids insertObject:[gids objectAtIndex:i] atIndex:0];
@@ -149,23 +153,33 @@
         NSArray *pics = goodsInfo.picNames;
         if (pics.count) {
             NSString *showImage = [pics objectAtIndex:0];
-            L(showImage);
+            
             UIImage *image = [appData getImage:showImage];
             if (image == nil) {
-                L(@"error");
                 if (![_downloadingImages containsObject:showImage]) {
                     [UploadLogic downloadImage:showImage];
                     [_downloadingImages addObject:showImage];
+                    cell.noImageLabel.text = @"正在加载";
+                    cell.noImageLabel.hidden = NO;
                 }
             }
             else {
+                cell.noImageLabel.hidden = YES;
                 cell.pic.image = image;
                 L(@"yes");
             }
         }
+        else {
+            cell.noImageLabel.text = @"无图片";
+            cell.noImageLabel.hidden = NO;
+        }
     }
     L(@"zzzz");
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
 }
 
 - (void)hideMenu {
