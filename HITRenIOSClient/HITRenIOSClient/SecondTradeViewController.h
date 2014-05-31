@@ -18,7 +18,10 @@
     
     
     int _currentPage;
+    int _maxLoadedPage;
     BOOL _isDownload;
+    BOOL _backgroundWorking;
+    BOOL _downloadFromTop;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;

@@ -35,6 +35,7 @@
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor clearColor];
     _pics = [[NSMutableArray alloc] init];
+    _isWorking = NO;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -74,6 +75,8 @@
 }
 
 - (IBAction)releaseGoods:(id)sender {
+    if (_isWorking) return;
+    _isWorking = YES;
     [self hideKeyboard];
     UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
     self.topBar.image = image;
@@ -83,6 +86,8 @@
     else if (!self.pricefield.text || !self.pricefield.text.length)
         alert(@"错误", @"商品价格不能为空", self);
     else {
+        UIView *view = [self getActivityIndicator];
+        if (!view.superview) [self.tableView addSubview:view];
         if (_pics.count)
             [UploadLogic uploadImages:_pics];
         else {
@@ -94,8 +99,9 @@
                                   };
             [TradeLogic uploadGoodsInfo:dic];
         }
+        return;
     }
-
+    _isWorking = NO;
 }
 
 - (void)clearTopBar {
@@ -157,7 +163,6 @@
 
 - (void)transferCompleted:(NSNotification *)noticifition {
     if ([noticifition.object isEqualToString:ASYNC_EVENT_UPLOADIMAGE]) {
-        L(@"asd");
         NSDictionary *dic = @{
                               @"name":self.namefield.text,
                               @"price":self.pricefield.text,
@@ -168,6 +173,31 @@
     }
     else if ([noticifition.object isEqualToString:ASYNC_EVENT_UPLOADGOODSINFO]) {
         L([noticifition.userInfo description]);
+        [self hideTopActivityIndicator];
+        if (self == self.navigationController.topViewController)
+            [self.navigationController popViewControllerAnimated:YES];
+//        if (self.view.su)
     }
 }
+
+- (UIActivityIndicatorView *)getActivityIndicator {
+    if (!_activityIndicator) {
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        CGFloat len = 30;
+        _activityIndicator.frame = CGRectMake(CGRectGetMidX(self.view.frame)-len / 2, len, len, len);
+    }
+    _activityIndicator.hidden = NO;
+    if (!_activityIndicator.isAnimating)
+        [_activityIndicator startAnimating];
+    return _activityIndicator;
+}
+
+
+
+- (void)hideTopActivityIndicator {
+    _activityIndicator.hidden = YES;
+//    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+
 @end

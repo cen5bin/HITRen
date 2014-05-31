@@ -50,11 +50,18 @@
     [self.view addSubview:view];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
-    [TradeLogic downloadGoodsLine];
-    _currentPage = 0;
+    
 
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [TradeLogic downloadGoodsLine];
+    _currentPage = 0;
+    _maxLoadedPage = 0;
+    _backgroundWorking = NO;
+    _downloadFromTop = YES;
+}
 
 - (void)dataDidDownload:(NSNotification *)notification {
     if ([notification.object isEqualToString: ASYNC_EVENT_DOWNLOADGOODSLINE])
@@ -122,8 +129,15 @@
     }
     [AppData saveData];
     int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
-    _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
-    L([_data description]);
+    if (_downloadFromTop)
+        _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+    else {
+        _maxLoadedPage++;
+        count = PAGE_GOODS_COUNT * _maxLoadedPage > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT * _maxLoadedPage;
+        _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+        _backgroundWorking = NO;
+    }
+    _downloadFromTop = NO;
     [self.tableView reloadData];
 }
 
@@ -197,6 +211,28 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self hideMenu];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
+        [self workAtIndexpath:indexPath];
+    }
+}
+
+- (void)workAtIndexpath:(NSIndexPath *)indexPath {
+    int index = indexPath.row;
+    _currentPage = index / PAGE_GOODS_COUNT;
+    if (_currentPage < _maxLoadedPage) return;
+    int tmp = index % PAGE_GOODS_COUNT;
+    if (tmp < PAGE_GOODS_COUNT * 2 / 3) return;
+    AppData *appData = [AppData sharedInstance];
+    int count = appData.goodsLine.gids.count - (_currentPage + 1) * PAGE_GOODS_COUNT;
+    if (count > PAGE_GOODS_COUNT) count = PAGE_GOODS_COUNT;
+    if (count < 0) return;
+    _backgroundWorking = YES;
+    [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(PAGE_GOODS_COUNT * (_currentPage + 1), count)]];
+
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

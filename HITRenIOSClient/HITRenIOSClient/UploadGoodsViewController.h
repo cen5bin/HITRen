@@ -11,6 +11,8 @@
 @interface UploadGoodsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIScrollViewDelegate> {
     NSMutableArray *_cells;
     NSMutableArray *_pics;
+    UIActivityIndicatorView *_activityIndicator;
+    BOOL _isWorking;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *goodsNameCell;
