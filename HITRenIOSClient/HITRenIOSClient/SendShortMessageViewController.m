@@ -8,6 +8,10 @@
 
 #import "SendShortMessageViewController.h"
 #import "MessageLogic.h"
+#import <QuartzCore/QuartzCore.h>
+#import "AppData.h"
+
+#define MAX_PIC_COUNT 9
 
 @interface SendShortMessageViewController ()
 
@@ -28,9 +32,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.textView.layer.borderColor = VIEW_BORDER_COLOR.CGColor;
+    self.textView.layer.borderWidth = 0.5;
+    self.textView.layer.cornerRadius = 5;
+    self.imageContainer.layer.borderWidth = 0.5;
+    self.imageContainer.layer.borderColor = VIEW_BORDER_COLOR.CGColor;
+    self.imageContainer.layer.cornerRadius = 5;
+    
+    _pics = [[NSMutableArray alloc] init];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.textView resignFirstResponder];
     UITouch *touch = [touches anyObject];
     CGPoint p = [touch locationInView:self.view];
     if (CGRectContainsPoint(self.topBar.frame, p)) {
@@ -72,5 +85,48 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)addPic:(id)sender {
+    if (_pics.count == MAX_PIC_COUNT * 2) return;
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    UIImage * image=[info objectForKey:UIImagePickerControllerEditedImage];
+    [self performSelector:@selector(picDidSelect:) withObject:image afterDelay:0.0];
+}
+
+- (void)picDidSelect:(UIImage *)image {
+    self.addPicLabel.hidden = YES;
+    UIImage *newImage = [AppData imageWithImage:image scaledToSize:CGSizeMake(160, 160)];
+    
+    [_pics addObject:newImage];
+    [_pics addObject:image];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.addPicButton.frame];
+    imageView.image = newImage;
+    [self.imageContainer addSubview:imageView];
+    
+    if (_pics.count == MAX_PIC_COUNT * 2) {
+        self.addPicButton.hidden = YES;
+        return;
+    }
+    int tmp1 = _pics.count / 2 % 4;
+    int tmp2 = (_pics.count / 2) / 4;
+    CGRect rect = self.imageContainer.frame;
+    rect.size.height = (tmp2 + 1) * 70 + 10;
+    self.imageContainer.frame = rect;
+    
+    rect = self.addPicButton.frame;
+    rect.origin.x = (tmp1) % 4 * 70 + 10;
+    rect.origin.y = tmp2 * 70 + 10;
+    self.addPicButton.frame = rect;
+}
+
+
 
 @end

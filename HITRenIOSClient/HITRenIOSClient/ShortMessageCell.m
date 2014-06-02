@@ -24,6 +24,7 @@
 - (void)awakeFromNib {
     self.bgView.layer.borderWidth = 0.5;
     self.bgView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.bgView.layer.cornerRadius = 5;
     CGFloat tmp = 220;
     self.cellBar.layer.borderColor = [UIColor colorWithRed:tmp/255 green:tmp/255 blue:tmp/255 alpha:1].CGColor;
     self.cellBar.layer.borderWidth = self.bgView.layer.borderWidth;

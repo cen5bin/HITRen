@@ -8,6 +8,14 @@
 
 #import "KeyboardToolBar.h"
 #import <QuartzCore/QuartzCore.h>
+#import "EmotionView.h"
+
+#define KEYBOARD_H 216
+#define EMOTION_COUNT 107
+#define PAGE_EMOTION_COUNT 21
+#define LINE_EMOTION_COUNT 7
+#define LINE_NUM 3
+#define PAGE_NUN (EMOTION_COUNT/(PAGE_EMOTION_COUNT-1)+1)
 
 @implementation KeyboardToolBar
 
@@ -24,6 +32,10 @@
     self.textView.layer.borderWidth = 1;
     CGFloat tmp = 220.0;
     self.textView.layer.borderColor = [UIColor colorWithRed:tmp / 255 green:tmp / 255 blue:tmp / 255 alpha:1].CGColor;
+    self.textView.layer.cornerRadius = 5;
+    self.sendButton.layer.borderWidth = 1;
+    self.sendButton.layer.borderColor = [UIColor clearColor].CGColor;
+    self.sendButton.layer.cornerRadius = 5;
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleHeight;//自适应高度
 //    _empty = YES;
     CGRect rect = self.textView.frame;
@@ -32,6 +44,8 @@
     _placeHolderLabel.textColor = [UIColor colorWithRed:tmp/255 green:tmp/255 blue:tmp/255 alpha:1];
     _placeHolderLabel.font = [UIFont systemFontOfSize:15];
     _placeHolderLabel.backgroundColor = [UIColor clearColor];
+    self.emotionButtonState = NO;
+//    _emotionView = [EmotionView sharedInstance];
 }
 
 /*
@@ -93,5 +107,18 @@
     [self.delegate sendText:self.textView.text];
     self.textView.text = @"";
     [self textViewDidChange:self.textView];
+}
+
+- (IBAction)emotionButtonClicked:(id)sender {
+//    [self becomeFirstResponder];
+    self.emotionButtonState = !self.emotionButtonState;
+    [self.delegate emotionButtonClicked];
+//    CGRect rect = self.frame;
+//    CGRect rect1 = _emotionView.frame;
+//    rect1.origin.y = 100;//CGRectGetMaxY(rect);
+//    _emotionView.frame = rect1;
+//    if (!_emotionView.superview)
+//        [self.window addSubview:_emotionView];
+    
 }
 @end

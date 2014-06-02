@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SendShortMessageViewController : UIViewController<UITextViewDelegate>
+@interface SendShortMessageViewController : UIViewController<UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+    NSMutableArray *_pics;
+}
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) IBOutlet UILabel *countLabel;
+@property (strong, nonatomic) IBOutlet UIView *imageContainer;
+@property (strong, nonatomic) IBOutlet UIButton *addPicButton;
+@property (strong, nonatomic) IBOutlet UILabel *addPicLabel;
+
+- (IBAction)addPic:(id)sender;
+
 
 @end

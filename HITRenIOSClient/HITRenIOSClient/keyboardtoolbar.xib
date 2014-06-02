@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="c71-hh-lhq">
-                    <rect key="frame" x="40" y="6" width="202" height="33"/>
+                    <rect key="frame" x="42" y="6" width="202" height="33"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -21,8 +21,8 @@
                         <outlet property="delegate" destination="zPA-fR-NVq" id="OQJ-go-SpE"/>
                     </connections>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="h8k-YZ-Fo9">
-                    <rect key="frame" x="253" y="8" width="56" height="30"/>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="h8k-YZ-Fo9">
+                    <rect key="frame" x="253" y="6" width="56" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="发表" backgroundImage="loginbutton0.png">
@@ -30,6 +30,16 @@
                     </state>
                     <connections>
                         <action selector="send:" destination="zPA-fR-NVq" eventType="touchUpInside" id="UGq-Ak-B6a"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0qB-ro-6Yx">
+                    <rect key="frame" x="3" y="6" width="33" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="emotionbutton.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="emotionButtonClicked:" destination="zPA-fR-NVq" eventType="touchUpInside" id="Rma-7g-Sco"/>
                     </connections>
                 </button>
             </subviews>
@@ -42,6 +52,7 @@
         </view>
     </objects>
     <resources>
+        <image name="emotionbutton.png" width="106" height="106"/>
         <image name="loginbutton0.png" width="496" height="88"/>
     </resources>
 </document>

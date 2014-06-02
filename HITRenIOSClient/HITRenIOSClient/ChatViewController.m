@@ -14,6 +14,7 @@
 #import "UserInfo.h"
 #import "KeyboardToolBar.h"
 #import "MessageLogic.h"
+#import "EmotionView.h"
 
 @interface ChatViewController ()
 
@@ -130,6 +131,18 @@
     [MessageLogic sendMessage:text toUid:[self.userInfo.uid intValue]];
     _keyboardToolBar.textView.text = @"";
     [self reloadData];
+}
+
+- (void)emotionButtonClicked {
+    if (!_keyboardToolBar.emotionButtonState) return;
+    
+    _emotionView = [EmotionView sharedInstance];
+    CGRect rect = _emotionView.frame;
+    rect.origin.y = 0;//CGRectGetMaxY(_keyboardToolBar.frame);
+    LOG(@"%f", rect.origin.y);
+    _emotionView.frame = rect;
+    if (_emotionView.superview) [_emotionView removeFromSuperview];
+    [self.view.window addSubview:_emotionView];
 }
 
 - (void)didReceiveMemoryWarning

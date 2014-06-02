@@ -12,6 +12,7 @@
 @interface KeyboardToolBar : UIView <UITextViewDelegate> {
 //    BOOL _empty;
     UILabel *_placeHolderLabel;
+    UIScrollView *_emotionView;
 }
 
 @property (strong, nonatomic) IBOutlet UITextView *textView;
@@ -19,8 +20,11 @@
 
 @property (strong, nonatomic) id<KeyboardToolBarDelegate> delegate;
 @property (strong, nonatomic) NSString *placeHolder;
+@property (nonatomic) BOOL emotionButtonState;
 
 - (IBAction)send:(id)sender;
+- (IBAction)emotionButtonClicked:(id)sender;
+
 - (void)resignFirstResponder;
 - (void)resignFirstResponderNotHideAtOnce;
 - (void)becomeFirstResponder;

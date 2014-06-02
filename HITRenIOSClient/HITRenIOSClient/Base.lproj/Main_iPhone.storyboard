@@ -136,7 +136,7 @@
                                                     <rect key="frame" x="7" y="5" width="306" height="293"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty.png" id="BVc-Nk-cue">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="h0.jpg" id="BVc-Nk-cue">
                                                             <rect key="frame" x="10" y="8" width="40" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
@@ -1018,11 +1018,40 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" id="VhL-b4-hJ6">
+                                <rect key="frame" x="14" y="237" width="293" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mQu-PM-C2C">
+                                        <rect key="frame" x="10" y="10" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Button" image="addimage.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addPic:" destination="UPa-4O-BNU" eventType="touchUpInside" id="P9e-B4-W9d"/>
+                                            <action selector="addPic:" destination="uUk-Pj-3Gl" eventType="touchUpInside" id="pjd-Au-Sdb"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加照片" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UHc-f8-54s">
+                                        <rect key="frame" x="79" y="30" width="68" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="addPicButton" destination="mQu-PM-C2C" id="ghn-MZ-Nwz"/>
+                        <outlet property="addPicLabel" destination="UHc-f8-54s" id="fBF-Uu-eTY"/>
                         <outlet property="countLabel" destination="yY5-kZ-9PG" id="upk-HJ-C2d"/>
+                        <outlet property="imageContainer" destination="VhL-b4-hJ6" id="Z8F-rB-hIa"/>
                         <outlet property="textView" destination="JFD-Zj-aex" id="q8Y-mX-bbY"/>
                         <outlet property="topBar" destination="m1f-4a-aO9" id="gL1-00-GO3"/>
                     </connections>
@@ -2247,6 +2276,7 @@
         <image name="comment.png" width="204" height="50"/>
         <image name="email.png" width="496" height="76"/>
         <image name="empty.png" width="224" height="224"/>
+        <image name="h0.jpg" width="100" height="100"/>
         <image name="liked.png" width="204" height="50"/>
         <image name="loginbutton0.png" width="496" height="88"/>
         <image name="me.png" width="640" height="91"/>

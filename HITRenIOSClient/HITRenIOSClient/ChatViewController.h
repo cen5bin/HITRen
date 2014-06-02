@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "KeyboardToolBarDelegate.h"
 
-@class UserInfo,KeyboardToolBar;
+@class UserInfo,KeyboardToolBar, EmotionView;
 @interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,KeyboardToolBarDelegate,UIScrollViewDelegate> {
     NSMutableArray *_datas;
     KeyboardToolBar *_keyboardToolBar;
     KeyboardToolBar *_keyboardToolBarAtBottom;
+    EmotionView *_emotionView;
     
     BOOL _keyboardToolBarIsDisappearing;
 }

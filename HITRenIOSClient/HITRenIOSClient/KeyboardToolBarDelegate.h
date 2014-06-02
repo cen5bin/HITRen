@@ -11,5 +11,6 @@
 @protocol KeyboardToolBarDelegate <NSObject>
 
 - (void)sendText:(NSString*)text;
+- (void)emotionButtonClicked;
 
 @end
