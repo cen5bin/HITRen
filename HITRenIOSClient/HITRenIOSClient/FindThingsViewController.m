@@ -123,7 +123,7 @@
         ti.name = [dic objectForKey:@"name"];
         ti.desc = [dic objectForKey:@"description"];
         ti.picNames = [dic objectForKey:@"pics"];
-        
+        ti.time = [dic objectForKey:@"time"];
         ti.uid = [dic objectForKey:@"uid"];
         [ti update];
     }
@@ -194,7 +194,7 @@
     ThingsInfo *thingsInfo = [appData getThingsInfoOfTid:[tid intValue]];
     if (thingsInfo) {
         cell.thingName.text = thingsInfo.name;
-        
+        cell.releaseTime.text = thingsInfo.time;
         cell.thingDescription.text = thingsInfo.desc;
         NSArray *pics = thingsInfo.picNames;
         if (pics.count) {
