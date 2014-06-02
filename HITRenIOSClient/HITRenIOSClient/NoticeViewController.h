@@ -13,6 +13,9 @@
 //    NSMutableArray *_data;
     NSMutableArray *_activies;
     NSMutableArray *_notices;
+    
+    UILabel *_noDataLabel1;
+    UILabel *_noDataLabel2;
 }
 
 @property (strong, nonatomic) IBOutlet NoticeViewBar *noticeViewBar;

@@ -57,6 +57,15 @@
     self.contactView.parentController = self;
     
     
+    _noDataLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, CGRectGetWidth(self.view.frame), 30)];
+    _noDataLabel1.text = @"暂时没有动态";
+    _noDataLabel1.textAlignment = NSTextAlignmentCenter;
+    _noDataLabel1.textColor = [UIColor lightGrayColor];
+    
+    _noDataLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, CGRectGetWidth(self.view.frame), 30)];
+    _noDataLabel2.text = @"暂时没有对话";
+    _noDataLabel2.textAlignment = NSTextAlignmentCenter;
+    _noDataLabel2.textColor = [UIColor lightGrayColor];
     FUNC_END();
 }
 
@@ -85,8 +94,25 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (tableView == self.activityTableView) return _activies.count;
-    if (tableView == self.noticeTableView) return _notices.count;
+    if (tableView == self.activityTableView) {
+        int ret = _activies.count;
+        if (!ret) {
+            if (!_noDataLabel1.superview)
+                [tableView addSubview:_noDataLabel1];
+        }
+        else if (_noDataLabel1.superview) [_noDataLabel1 removeFromSuperview];
+        return _activies.count;
+    }
+    if (tableView == self.noticeTableView) {
+        int ret = _notices.count;
+        if (!ret) {
+            if (!_noDataLabel2.superview)
+                [tableView addSubview:_noDataLabel2];
+        }
+        else if (_noDataLabel2.superview) [_noDataLabel2 removeFromSuperview];
+
+        return _notices.count;
+    }
     return 0;
 }
 
