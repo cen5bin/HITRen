@@ -68,7 +68,7 @@
     _activies = [[NSMutableArray alloc] init];
     for (id obj in array)
         [_activies insertObject:obj atIndex:0];
-//    _activies = [[NSMutableArray alloc] initWithArray:notice.notices];
+
     [self.activityTableView reloadData];
     [self.noticeTableView reloadData];
     [self.contactView willLoad];

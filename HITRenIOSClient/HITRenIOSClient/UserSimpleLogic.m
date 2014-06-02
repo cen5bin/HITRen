@@ -114,6 +114,10 @@
 
 + (BOOL)downloadUseInfos:(NSArray *)uids {
     FUNC_START();
+//    if (!uids.count) {
+//        FUNC_END();
+//        return YES;
+//    }
     HttpData *data = [HttpData data];
     [data setValue:uids forKey:@"uids"];
     BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadUsersData" withEventName:ASYNC_EVENT_DOWNLOADUSERINFOS];
