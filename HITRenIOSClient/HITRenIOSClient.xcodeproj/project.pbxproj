@@ -60,6 +60,10 @@
 		F8148BDA193A2248000F5C9F /* ThingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BD9193A2248000F5C9F /* ThingCell.m */; };
 		F8148BDD193A23CF000F5C9F /* findthingsmenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8148BDC193A23CF000F5C9F /* findthingsmenu.xib */; };
 		F8148BE0193A242C000F5C9F /* FindThingsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BDF193A242C000F5C9F /* FindThingsMenu.m */; };
+		F8148BE3193A29B5000F5C9F /* ThingsLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BE2193A29B5000F5C9F /* ThingsLine.m */; };
+		F8148BE6193A29B6000F5C9F /* ThingsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BE5193A29B6000F5C9F /* ThingsInfo.m */; };
+		F8148BE9193A325E000F5C9F /* FindLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BE8193A325E000F5C9F /* FindLogic.m */; };
+		F8148BEC193C4B7E000F5C9F /* UploadThingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BEB193C4B7E000F5C9F /* UploadThingViewController.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -274,6 +278,14 @@
 		F8148BDC193A23CF000F5C9F /* findthingsmenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = findthingsmenu.xib; sourceTree = "<group>"; };
 		F8148BDE193A242C000F5C9F /* FindThingsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindThingsMenu.h; sourceTree = "<group>"; };
 		F8148BDF193A242C000F5C9F /* FindThingsMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindThingsMenu.m; sourceTree = "<group>"; };
+		F8148BE1193A29B5000F5C9F /* ThingsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThingsLine.h; sourceTree = "<group>"; };
+		F8148BE2193A29B5000F5C9F /* ThingsLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingsLine.m; sourceTree = "<group>"; };
+		F8148BE4193A29B6000F5C9F /* ThingsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThingsInfo.h; sourceTree = "<group>"; };
+		F8148BE5193A29B6000F5C9F /* ThingsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingsInfo.m; sourceTree = "<group>"; };
+		F8148BE7193A325E000F5C9F /* FindLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindLogic.h; sourceTree = "<group>"; };
+		F8148BE8193A325E000F5C9F /* FindLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindLogic.m; sourceTree = "<group>"; };
+		F8148BEA193C4B7E000F5C9F /* UploadThingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadThingViewController.h; sourceTree = "<group>"; };
+		F8148BEB193C4B7E000F5C9F /* UploadThingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadThingViewController.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -617,6 +629,8 @@
 				F87209C5191DE57400FAC7A1 /* UploadLogic.m */,
 				F8148BCC1938BBC5000F5C9F /* TradeLogic.h */,
 				F8148BCD1938BBC5000F5C9F /* TradeLogic.m */,
+				F8148BE7193A325E000F5C9F /* FindLogic.h */,
+				F8148BE8193A325E000F5C9F /* FindLogic.m */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -650,6 +664,10 @@
 				F8148BD01938CCF5000F5C9F /* GoodsLine.m */,
 				F8148BD21938E265000F5C9F /* GoodsInfo.h */,
 				F8148BD31938E265000F5C9F /* GoodsInfo.m */,
+				F8148BE4193A29B6000F5C9F /* ThingsInfo.h */,
+				F8148BE5193A29B6000F5C9F /* ThingsInfo.m */,
+				F8148BE1193A29B5000F5C9F /* ThingsLine.h */,
+				F8148BE2193A29B5000F5C9F /* ThingsLine.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -715,6 +733,8 @@
 				F8D7482D1938638200829CDA /* UploadGoodsViewController.m */,
 				F8148BD5193A21C4000F5C9F /* FindThingsViewController.h */,
 				F8148BD6193A21C4000F5C9F /* FindThingsViewController.m */,
+				F8148BEA193C4B7E000F5C9F /* UploadThingViewController.h */,
+				F8148BEB193C4B7E000F5C9F /* UploadThingViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1461,6 +1481,7 @@
 				F8148BD11938CCF5000F5C9F /* GoodsLine.m in Sources */,
 				F84B7DE118BB3C8D007FC2D5 /* GCDAsyncSocket.m in Sources */,
 				F84B7DEB18BB3C8D007FC2D5 /* DDXMLDocument.m in Sources */,
+				F8148BE9193A325E000F5C9F /* FindLogic.m in Sources */,
 				F80B0D50187426F2003E72DC /* TestHttpTransfer.m in Sources */,
 				F84B7DE518BB3C8D007FC2D5 /* DDLog.m in Sources */,
 				F84B7DDD18BB3C8D007FC2D5 /* RFImageToDataTransformer.m in Sources */,
@@ -1484,6 +1505,7 @@
 				F84B7DEC18BB3C8D007FC2D5 /* DDXMLElement.m in Sources */,
 				F84B7DCD18BB3C8D007FC2D5 /* XMPPPlainAuthentication.m in Sources */,
 				F84B7DCE18BB3C8D007FC2D5 /* XMPPXFacebookPlatformAuthentication.m in Sources */,
+				F8148BEC193C4B7E000F5C9F /* UploadThingViewController.m in Sources */,
 				F88F989418C1E910009CE742 /* BtmToolBar.m in Sources */,
 				F8148BD41938E265000F5C9F /* GoodsInfo.m in Sources */,
 				F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */,
@@ -1497,6 +1519,7 @@
 				F80B0D47187426F2003E72DC /* BaseLogic.m in Sources */,
 				F84B7DCB18BB3C8D007FC2D5 /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				F8696A861918D95D008887AD /* Notice.m in Sources */,
+				F8148BE6193A29B6000F5C9F /* ThingsInfo.m in Sources */,
 				F84B7DE418BB3C8D007FC2D5 /* DDFileLogger.m in Sources */,
 				F84B7DDB18BB3C8D007FC2D5 /* DDList.m in Sources */,
 				F84B7DCC18BB3C8D007FC2D5 /* XMPPDigestMD5Authentication.m in Sources */,
@@ -1542,6 +1565,7 @@
 				F80B0D48187426F2003E72DC /* HttpData.m in Sources */,
 				F8107C931935C0C40073C169 /* ContactView.m in Sources */,
 				F8696A8C1918FA55008887AD /* XMPPDataManager.m in Sources */,
+				F8148BE3193A29B5000F5C9F /* ThingsLine.m in Sources */,
 				F8E9687618C7055E00B9384B /* UIFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,7 +14,8 @@
 #import "Notice.h"
 #import "LikedList.h"
 #import "GoodsLine.h"
-
+#import "ThingsInfo.h"
+#import "ThingsLine.h"
 //static NSMutableArray *_messages;
 //static Timeline *_timeline;
 
@@ -292,6 +293,64 @@
     return nil;
 }
 
++ (ThingsLine *)thingsLine {
+    FUNC_START();
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ThingsLine" inManagedObjectContext:context];
+    request.entity = entity;
+    NSArray *res = [context executeFetchRequest:request error:nil];
+    if (!res || res.count == 0) {
+        ThingsLine *thingsLine = [NSEntityDescription insertNewObjectForEntityForName:@"ThingsLine" inManagedObjectContext:context];
+        thingsLine.seq = 0;
+        thingsLine.data = nil;
+        [context save:nil];
+        FUNC_END();
+        return thingsLine;
+    }
+    FUNC_END();
+    return [res objectAtIndex:0];
+}
+
++ (NSArray *)getThingsList:(NSArray *)tids {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ThingsInfo" inManagedObjectContext:context];
+    request.entity = entity;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    [string appendString:@"{"];
+    for (int i = 0; i < tids.count; i++) {
+        if (i) [string appendString:@","];
+        [string appendString:[NSString stringWithFormat:@"%d", [[tids objectAtIndex:i] intValue]]];
+    }
+    [string appendString:@"}"];
+    NSString *tmp = [NSString stringWithFormat:@"tid IN %@", string];
+    //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mid IN {1,2}"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:tmp];
+    request.predicate = predicate;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return array;//[array lastObject];
+    return [NSArray array];
+}
+
++ (ThingsInfo *)getThingsInfo {
+    NSManagedObjectContext *context = [DBController context];
+    ThingsInfo *thingsInfo = [NSEntityDescription insertNewObjectForEntityForName:@"ThingsInfo" inManagedObjectContext:context];
+    return thingsInfo;
+}
+
++ (ThingsInfo *)getThingsInfoOfTid:(int)tid {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ThingsInfo" inManagedObjectContext:context];
+    request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tid == %d", tid];
+    request.predicate = predicate;
+    request.fetchLimit = 1;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return [array objectAtIndex:0];
+    return nil;
+}
 
 + (void)deleteEntity:(NSManagedObject *)entity {
     NSManagedObjectContext *context = [DBController context];

@@ -58,6 +58,7 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [TradeLogic downloadGoodsLine];
     _currentPage = 0;
     _maxLoadedPage = 0;

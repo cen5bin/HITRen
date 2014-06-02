@@ -10,4 +10,5 @@ public class IDCounter {
 	public static final String UID = UserConstant.UID;
 	public static final String MID = Message.MID;
 	public static final String GID = Goods.GID;
+	public static final String TID = Thing.TID;
 }

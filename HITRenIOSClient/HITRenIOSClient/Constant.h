@@ -9,7 +9,7 @@
 #ifndef HITRenIOSClient_Constant_h
 #define HITRenIOSClient_Constant_h
 
-#define SERVER_IP @"192.168.1.109"//@"172.17.219.148"
+#define SERVER_IP @"192.168.1.108"//@"172.17.219.148"
 
 #define PAGE_MESSAGE_COUNT 30 //一页有多少状态
 #define TEXTVIEW_WIDTH 290     //状态中的textView宽度
@@ -24,6 +24,8 @@
 #define PAGE_ACTIVITY_COUNT 20 // 一页有多少动态消息，点赞之类的
 
 #define PAGE_GOODS_COUNT 20 //一页有多少商品
+
+#define PAGE_THINGS_COUNT 20 // 一页有多少物品
 
 #define ASYNCDATALOADED @"HITRenAsyncDataFinishedLoading"
 
@@ -42,7 +44,9 @@
 #define ASYNC_EVENT_UPLOADGOODSINFO @"HITRenAsyncDataUploadGoodsInfo" //上传商品信息
 #define ASYNC_EVENT_DOWNLOADGOODSLINE @"HITRenAsyncDataDownloadGoodsLine" //下载商品线
 #define ASYNC_EVENT_DOWNLOADGOODSINFO @"HITRenAsyncDataDownloadGoodsInfo" //下载商品数据
-
+#define ASYNC_EVENT_UPLOADTHINGSINFO @"HITRenAsyncDataUploadThingsInfo" //上传物品信息
+#define ASYNC_EVENT_DOWNLOADTHINGSLINE @"HITRenAsyncDataDownloadThingsLine" //下载物品线
+#define ASYNC_EVENT_DOWNLOADTHINGSINFO @"HITRenAsyncDataDownloadThingsInfo" //下载物品数据
 
 
 #define XMPP_MESSAGE_RECEIVED @"XMPP_MESSAGE_RECEIVED"

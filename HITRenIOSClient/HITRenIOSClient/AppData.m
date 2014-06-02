@@ -17,6 +17,8 @@
 #import "Comment.h"
 #import "GoodsLine.h"
 #import "GoodsInfo.h"
+#import "ThingsLine.h"
+#import "ThingsInfo.h"
 //#import "MessageLogic.h"
 
 static AppData *appData;
@@ -26,6 +28,7 @@ static AppData *appData;
 @synthesize timeline = _timeline;
 @synthesize noticeLine = _noticeLine;
 @synthesize goodsLine = _goodsLine;
+@synthesize thingsLine = _thingsLine;
 
 - (id)init {
     if (self = [super init]) {
@@ -282,6 +285,12 @@ static AppData *appData;
     return _goodsLine;
 }
 
+- (ThingsLine *)getThingsLine {
+    if (_thingsLine) return _thingsLine;
+    _thingsLine = [DataManager thingsLine];
+    return _thingsLine;
+}
+
 
 //保存图片
 - (void)storeImage:(UIImage *)image withFilename:(NSString *)filename {
@@ -337,5 +346,23 @@ static AppData *appData;
 
 - (GoodsInfo *)getGoodsInfoOfGid:(int)gid {
     return [DataManager getGoodsInfoOfGid:gid];
+}
+
+- (NSArray *)thingsInfoNeedDownload:(NSArray *)tids {
+    NSMutableArray *tmp = [[NSMutableArray alloc] initWithArray:tids];
+    NSArray *array = [DataManager getThingsList:tmp];
+    if (!array || !array.count) return tids;
+    for (ThingsInfo *ti in array) {
+        if ([tmp containsObject:ti.tid]) [tmp removeObject:ti.tid];
+    }
+    return tmp;
+}
+
+- (ThingsInfo *)newThingsInfo {
+    return [DataManager getThingsInfo];
+}
+
+- (ThingsInfo *)getThingsInfoOfTid:(int)tid {
+    return [DataManager getThingsInfoOfTid:tid];
 }
 @end

@@ -10,6 +10,10 @@
 #import "FindThingsMenu.h"
 #import "AppData.h"
 #import "ThingCell.h"
+#import "FindLogic.h"
+#import "ThingsLine.h"
+#import "ThingsInfo.h"
+#import "UploadLogic.h"
 
 @interface FindThingsViewController ()
 
@@ -48,11 +52,101 @@
     self.tableView.decelerationRate = 0.5;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    
+    
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [FindLogic downloadThingsLine];
+    _currentPage = 0;
+    _maxLoadedPage = 0;
+    _backgroundWorking = NO;
+    _downloadFromTop = YES;
+}
+
+
 - (void)dataDidDownload:(NSNotification *)notification {
+    if ([notification.object isEqualToString: ASYNC_EVENT_DOWNLOADTHINGSLINE])
+        [self thingsLineDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADTHINGSINFO])
+        [self thingsInfoDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
+        [self imageDidDownload:notification];
+
     
+}
+
+- (void)thingsLineDidDownload:(NSNotification *)notification {
+    _currentPage = 0;
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"thingsline download succ");
+    else L(@"thingsline download fail");
+    AppData *appData = [AppData sharedInstance];
+    if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
+        int count = PAGE_THINGS_COUNT > appData.thingsLine.tids.count ? appData.thingsLine.tids.count : PAGE_THINGS_COUNT;
+        _data = [[NSMutableArray alloc] initWithArray:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
+        [self.tableView reloadData];
+        return;
+    }
+    
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    NSArray *tids = [data objectForKey:@"tids"];
+    appData.thingsLine.seq = [data objectForKey:@"seq"];
+    L([tids description]);
+    L([appData.thingsLine.tids description]);
+    if (tids.count == 0) return;
+    int index = 0;
+    if (appData.thingsLine.tids.count)
+        index = [tids indexOfObject:[appData.thingsLine.tids objectAtIndex:0]];
+    LOG(@"index %d", index);
+    if (index == NSNotFound) index = 0;
+    for (int i = index + 1; i < tids.count; i++)
+        [appData.thingsLine.tids insertObject:[tids objectAtIndex:i] atIndex:0];
+    [appData.thingsLine update];
+    int count = PAGE_THINGS_COUNT > appData.thingsLine.tids.count ? appData.thingsLine.tids.count : PAGE_THINGS_COUNT;
+    [FindLogic downloadThingsInfo:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
+//    [TradeLogic downloadGoodsInfo:[appData.goodsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
+}
+
+- (void)thingsInfoDidDownload:(NSNotification *)notification {
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"download thingsinfo succ");
+    else L(@"download thingsinfo fail");
+    NSDictionary *thingsInfos = [ret objectForKey:@"DATA"];
+    AppData *appData = [AppData sharedInstance];
+    for (NSNumber *tid in [thingsInfos allKeys]) {
+        ThingsInfo *ti = [appData newThingsInfo];
+        NSDictionary *dic = [thingsInfos objectForKey:tid];
+        ti.tid = [dic objectForKey:@"tid"];
+        ti.name = [dic objectForKey:@"name"];
+        ti.desc = [dic objectForKey:@"description"];
+        ti.picNames = [dic objectForKey:@"pics"];
+        
+        ti.uid = [dic objectForKey:@"uid"];
+        [ti update];
+    }
+    [AppData saveData];
+    int count = PAGE_THINGS_COUNT > appData.thingsLine.tids.count ? appData.thingsLine.tids.count : PAGE_THINGS_COUNT;
+    if (_downloadFromTop)
+        _data = [[NSMutableArray alloc] initWithArray:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
+    else {
+        _maxLoadedPage++;
+        count = PAGE_THINGS_COUNT * (_maxLoadedPage+1) > appData.thingsLine.tids.count ? appData.thingsLine.tids.count : PAGE_THINGS_COUNT * (_maxLoadedPage+1);
+        _data = [[NSMutableArray alloc] initWithArray:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
+        _backgroundWorking = NO;
+    }
+    _downloadFromTop = NO;
+    [self.tableView reloadData];
+
+}
+
+- (void)imageDidDownload:(NSNotification *)notification {
+    UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
+    [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
+    [_downloadingImages removeObject:[notification.userInfo objectForKey:@"imagename"]];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,8 +189,69 @@
     ThingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (!cell)
         cell = [[ThingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    NSNumber *tid = [_data objectAtIndex:indexPath.row];
+    AppData *appData = [AppData sharedInstance];
+    ThingsInfo *thingsInfo = [appData getThingsInfoOfTid:[tid intValue]];
+    if (thingsInfo) {
+        cell.thingName.text = thingsInfo.name;
+        
+        cell.thingDescription.text = thingsInfo.desc;
+        NSArray *pics = thingsInfo.picNames;
+        if (pics.count) {
+            NSString *showImage = [pics objectAtIndex:0];
+            
+            UIImage *image = [appData getImage:showImage];
+            if (image == nil) {
+                if (![_downloadingImages containsObject:showImage]) {
+                    [UploadLogic downloadImage:showImage];
+                    [_downloadingImages addObject:showImage];
+                    cell.noImageLabel.text = @"正在加载";
+                    cell.noImageLabel.hidden = NO;
+                }
+            }
+            else {
+                cell.noImageLabel.hidden = YES;
+            }
+            cell.pic.image = image;
+        }
+        else {
+            cell.pic.image = nil;
+            cell.noImageLabel.text = @"无图片";
+            cell.noImageLabel.hidden = NO;
+        }
+    }
+    
     return cell;
 }
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
+        [self workAtIndexpath:indexPath];
+    }
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
+    [self workAtIndexpath:indexPath];
+}
+
+
+- (void)workAtIndexpath:(NSIndexPath *)indexPath {
+    int index = indexPath.row;
+    _currentPage = index / PAGE_THINGS_COUNT;
+    if (_currentPage < _maxLoadedPage) return;
+    int tmp = index % PAGE_THINGS_COUNT;
+    if (tmp < PAGE_THINGS_COUNT * 2 / 3) return;
+    AppData *appData = [AppData sharedInstance];
+    int count = appData.thingsLine.tids.count - (_currentPage + 1) * PAGE_THINGS_COUNT;
+    if (count > PAGE_THINGS_COUNT) count = PAGE_THINGS_COUNT;
+    if (count < 0) return;
+    _backgroundWorking = YES;
+    [FindLogic downloadThingsInfo:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(PAGE_THINGS_COUNT * (_currentPage + 1), count)]];
+//    [TradeLogic downloadGoodsInfo:[appData.goodsLine.tids subarrayWithRange:NSMakeRange(PAGE_THINGS_COUNT * (_currentPage + 1), count)]];
+    
+}
+
 
 - (IBAction)moreButtonClicked:(id)sender {
     if (!_menu.hidden) [self hideMenu];
@@ -107,7 +262,7 @@
 - (void)menuDidChooseAtIndex:(int)index {
     if (index == 0) {
         //发布信息
-        UIViewController *controller = getViewControllerOfName(@"UploadGoods");
+        UIViewController *controller = getViewControllerOfName(@"UploadThing");
         [self.navigationController pushViewController:controller animated:YES];
     }
     else if (index == 1) {
@@ -116,6 +271,19 @@
     
     [self hideMenu];
 
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint p = [touch locationInView:self.view];
+    if (CGRectContainsPoint(self.topBar.frame, p)) {
+        if (p.x <= 50) {
+            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
+            self.topBar.image = image;
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+    
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

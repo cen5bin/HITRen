@@ -40,6 +40,18 @@
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
+    <entity name="ThingsInfo" representedClassName="ThingsInfo" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pics" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="tid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="ThingsLine" representedClassName="ThingsLine" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Timeline" representedClassName="Timeline" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -61,5 +73,7 @@
         <element name="UserInfo" positionX="0" positionY="0" width="0" height="0"/>
         <element name="GoodsLine" positionX="0" positionY="0" width="0" height="0"/>
         <element name="GoodsInfo" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ThingsLine" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ThingsInfo" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

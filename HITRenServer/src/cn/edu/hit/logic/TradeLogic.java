@@ -9,7 +9,6 @@ import cn.edu.hit.constant.Goods;
 import cn.edu.hit.constant.GoodsLine;
 import cn.edu.hit.constant.HttpData;
 import cn.edu.hit.constant.IDCounter;
-import cn.edu.hit.constant.TimeLine;
 import cn.edu.hit.dao.DBController;
 import cn.edu.hit.kit.TimeKit;
 
@@ -78,7 +77,7 @@ public class TradeLogic extends BaseLogic {
 		retData = new JSONObject();
 		BasicDBObject obj1 = new BasicDBObject(GoodsLine.UID, 0);
 		int[] range = {0, 10000};
-		BasicDBObject obj2 = new BasicDBObject(TimeLine.LIST, new BasicDBObject("$slice", range));
+		BasicDBObject obj2 = new BasicDBObject(GoodsLine.LIST, new BasicDBObject("$slice", range));
 		DBObject retObj = DBController.queryOne(GoodsLine.COLLNAME, obj1, obj2);
 		if (retObj == null) {
 			retData.put(HttpData.SUC, false);

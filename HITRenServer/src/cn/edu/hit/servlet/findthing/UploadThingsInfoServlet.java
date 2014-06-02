@@ -1,7 +1,8 @@
-package cn.edu.hit.servlet.messagelogic;
+package cn.edu.hit.servlet.findthing;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,25 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.edu.hit.kit.DataKit;
-import cn.edu.hit.logic.MessageLogic;
-import cn.edu.hit.logic.RelationshipLogic;
+import cn.edu.hit.logic.FindLogic;
 
 /**
- * Servlet implementation class CommentMessageServlet
- * 评论状态
- * 参数：uid,mid,type(0表示直接回复的状态，1表示回复某人的评论),如果type为1，则还有字段reuid表示被回复的uid。 content字段表示回复的内容
+ * Servlet implementation class UploadThingsInfoServlet
  */
-@WebServlet("/CommentMessageServlet")
-public class CommentMessageServlet extends HttpServlet {
+@WebServlet("/UploadThingsInfoServlet")
+public class UploadThingsInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentMessageServlet() {
+    public UploadThingsInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,19 +48,17 @@ public class CommentMessageServlet extends HttpServlet {
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");
-			int mid = json.getInt("mid");
-			int type = 0;
-			if (json.has("type"))
-				type = json.getInt("type");
-			String content = json.getString("content");
-			int reuid = -1;
-			if (type == 1)
-				reuid = json.getInt("reuid");
-			MessageLogic.commentMessage(uid, mid, reuid, content);
+			String name = json.getString("name");
+			String desc = json.getString("description");
+			JSONArray pics0 = json.getJSONArray("pics");
+			ArrayList<String> pics = new ArrayList<String>();
+			for (int i = 0; i < pics0.length(); i++)
+				pics.add(pics0.getString(i));
+			FindLogic.uploadThingsInfo(uid, name, pics, desc);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
-			out.print(MessageLogic.retData);
-		} catch (Exception e) {
+			out.print(FindLogic.retData);
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
