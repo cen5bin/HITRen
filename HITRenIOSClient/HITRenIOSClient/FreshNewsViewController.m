@@ -488,6 +488,7 @@
 - (void)imageDidDownload:(NSNotification *)notification {
     UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
     [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
+    [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
     [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
     [self.tableView reloadData];
 }
@@ -710,6 +711,7 @@
     ShortMessageCell *cell = (ShortMessageCell *)sender;
     Message *message = [_data objectAtIndex:index];
     MessageDetailViewController *controller = getViewControllerOfName(@"MessageDetail");
+    controller.downloadingImageSet = _downloadingImageSet;
     controller.message = message;
     controller.liked = cell.liked;
     controller.likedList = cell.likedList;

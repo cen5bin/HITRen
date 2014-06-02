@@ -1187,6 +1187,11 @@
                                             <outlet property="delegate" destination="tkW-n2-TUg" id="CRf-Vr-H8R"/>
                                         </connections>
                                     </textView>
+                                    <view contentMode="scaleToFill" id="YLv-1H-ffa">
+                                        <rect key="frame" x="0.0" y="150" width="306" height="0.0"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
                                     <view contentMode="scaleToFill" id="ERd-Jw-cRs">
                                         <rect key="frame" x="0.0" y="150" width="306" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1277,6 +1282,7 @@
                     <connections>
                         <outlet property="cellBar" destination="ERd-Jw-cRs" id="koA-nv-ud5"/>
                         <outlet property="commentListView" destination="fFf-6l-Ikc" id="uxh-jd-tTP"/>
+                        <outlet property="imageContainer" destination="YLv-1H-ffa" id="znp-CY-ylq"/>
                         <outlet property="likedButton" destination="p5h-sR-LhO" id="iQg-eJ-OUc"/>
                         <outlet property="likedListView" destination="1pv-Go-RoG" id="O4O-iy-Wh0"/>
                         <outlet property="pic" destination="mJH-2c-p7C" id="IIb-Lt-Qwt"/>

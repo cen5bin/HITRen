@@ -17,6 +17,7 @@
 #import "UserInfo.h"
 #import "KeyboardToolBar.h"
 #import "Comment.h"
+#import "UploadLogic.h"
 
 @interface MessageDetailViewController ()
 
@@ -52,7 +53,23 @@
     self.targetUid = -1;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+//    _downloadingImageSet = [[NSMutableSet alloc] init];
 }
+
+- (void)dataDidDownload:(NSNotification *)notification {
+    if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
+        [self imageDidDownload:notification];
+}
+
+- (void)imageDidDownload:(NSNotification *)notification {
+    UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
+    [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
+    [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
+    [self loadContent];
+//    [self.tableView reloadData];
+}
+
 
 - (void)keyboardFrameDidChanged:(NSNotification *)notification {
     NSDictionary *info = [notification userInfo];
@@ -94,11 +111,58 @@
     rect.size.height = [self calculateTextViewHeight:self.textView.text];
     self.textView.frame = rect;
     
+    CGFloat origin_y = CGRectGetMaxY(rect);
+    
+    Message *message = self.message;
+    int imageSize = message.picNames.count / 2;
+    CGFloat max_height = 0;
+    for (int i = 0; i < imageSize; i++) {
+        CGRect rect;
+        CGFloat width = CGRectGetWidth(self.scrollView.frame);
+        if (imageSize == 1) rect = CGRectMake((width - ONEIMAGE_HEIGHT)/2, 0, ONEIMAGE_HEIGHT, ONEIMAGE_HEIGHT);
+        else if (imageSize == 2) rect = CGRectMake((width-TWOIMAGE_HEIGHT*2-BETWEEN_IMAGE)/2+i*(TWOIMAGE_HEIGHT+BETWEEN_IMAGE), 0, TWOIMAGE_HEIGHT, TWOIMAGE_HEIGHT);
+        else if (imageSize == 4) rect = CGRectMake((width-TWOIMAGE_HEIGHT*2-BETWEEN_IMAGE)/2+i%2*(TWOIMAGE_HEIGHT+BETWEEN_IMAGE), (TWOIMAGE_HEIGHT+BETWEEN_IMAGE)*(i/2), TWOIMAGE_HEIGHT, TWOIMAGE_HEIGHT);
+        else {
+            int line = i / 3;
+            CGFloat tmp = (width - SMALLIMAGE_HEIGHT * 3 - 2 * BETWEEN_IMAGE) / 2;
+            rect = CGRectMake((BETWEEN_IMAGE+SMALLIMAGE_HEIGHT)*(i%3)+tmp, (BETWEEN_IMAGE+SMALLIMAGE_HEIGHT)*line, SMALLIMAGE_HEIGHT, SMALLIMAGE_HEIGHT);
+        }
+        if (CGRectGetMaxY(rect)+BOTTOM_HEIGHT>max_height) max_height = CGRectGetMaxY(rect) + BOTTOM_HEIGHT;
+        UIImage *image = [appData getImage:[message.picNames objectAtIndex:i*2]];
+        if (image) {
+            UIImageView *view = [[UIImageView alloc] initWithImage:image];
+            view.frame = rect;
+            [self.imageContainer addSubview:view];
+        }
+        else {
+            UIView *view = getViewFromNib(@"loadingimageview", self);
+            view.frame = rect;
+            [self.imageContainer addSubview:view];
+            if (![_downloadingImageSet containsObject:[message.picNames objectAtIndex:i*2]]) {
+                [_downloadingImageSet addObject:[message.picNames objectAtIndex:i*2]];
+                [UploadLogic downloadImage:[message.picNames objectAtIndex:i*2]];
+            }
+        }
+    }
+    if (message.picNames.count == 0) {
+        self.imageContainer.hidden = YES;
+    }
+    else {
+        self.imageContainer.hidden = NO;
+        rect = self.imageContainer.frame;
+        rect.origin.y = origin_y;
+        rect.size.height = max_height;
+        self.imageContainer.frame = rect;
+        origin_y = CGRectGetMaxY(rect);
+    }
+
+    
+    
     rect = self.cellBar.frame;
-    rect.origin.y = CGRectGetMaxY(self.textView.frame);
+    rect.origin.y = origin_y;//CGRectGetMaxY(self.textView.frame);
     self.cellBar.frame = rect;
     
-    CGFloat origin_y = CGRectGetMaxY(rect);
+    origin_y = CGRectGetMaxY(rect);
     if (self.likedList.count) {
         self.likedListView.hidden = NO;
         rect = self.likedListView.frame;

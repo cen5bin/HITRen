@@ -13,6 +13,7 @@
 @class Message, CommentListView,KeyboardToolBar;
 @interface MessageDetailViewController : UIViewController <CommentListViewDelegate,UIScrollViewDelegate,KeyboardToolBarDelegate,UITextViewDelegate> {
     KeyboardToolBar *_keyboardToolBar;
+//    NSMutableSet *_downloadingImageSet;
 }
 
 
@@ -29,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *likedListView;
 @property (strong, nonatomic) IBOutlet CommentListView *commentListView;
 
+@property (strong, nonatomic) IBOutlet UIView *imageContainer;
 
 
 @property (strong, nonatomic) Message *message;
@@ -38,6 +40,7 @@
 @property (strong, nonatomic) NSMutableArray *userList;    //评论列表中每一列中的uid
 @property (nonatomic) int targetUid;
 
+@property (strong, nonatomic) NSMutableSet *downloadingImageSet;
 
 - (void)update;
 - (void)updateCommentList;
