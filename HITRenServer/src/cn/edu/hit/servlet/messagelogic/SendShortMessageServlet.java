@@ -21,7 +21,7 @@ import cn.edu.hit.logic.RelationshipLogic;
 /**
  * Servlet implementation class SendShortMessageServlet
  * 发短状态
- * 参数 uid， message， auth（可见范围，为0表示全部人可见，为1表示部分人可见），如果auth=1，还得发送gnames表示可见的分组
+ * 参数 uid， message， auth（可见范围，为0表示全部人可见，为1表示部分人可见），如果auth=1，还得发送gnames表示可见的分组, pics
  */
 @WebServlet("/SendShortMessageServlet")
 public class SendShortMessageServlet extends HttpServlet {
@@ -59,7 +59,14 @@ public class SendShortMessageServlet extends HttpServlet {
 				for (int i = 0; i < gnames0.length(); i++)
 				gnames.add(gnames0.getString(i));
 			}
-			MessageLogic.sendShortMessage(uid, message, gnames);
+			ArrayList<String> pics = new ArrayList<String>();
+			if (json.has("pics")) {
+				JSONArray pics0 = json.getJSONArray("pics");
+				for (int i = 0; i < pics0.length(); i++)
+					pics.add(pics0.getString(i));
+			}
+			
+			MessageLogic.sendShortMessage(uid, message, gnames, pics);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(MessageLogic.retData);

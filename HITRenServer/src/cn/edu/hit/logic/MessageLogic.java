@@ -43,7 +43,7 @@ public class MessageLogic {
 	 * @return
 	 * @throws JSONException
 	 */
-	public static boolean sendShortMessage(int uid, String message, ArrayList<String> gnames) throws JSONException {
+	public static boolean sendShortMessage(int uid, String message, ArrayList<String> gnames, ArrayList<String> pics) throws JSONException {
 		retData = new JSONObject();
 		int mid = createMid();
 		if (mid == -1) {
@@ -64,6 +64,7 @@ public class MessageLogic {
 		obj.put(Message.SHATECOUNT, 0);
 		obj.put(Message.TYPE, type);
 		obj.put(Message.CONTENT, message);
+		obj.put(Message.PICS, pics);
 		DBController.addObj(Message.COLLNAME, obj);
 		MemWorker.setMessageInfo(mid, obj.toString());
 		MessageLogic.addMessageToSelf(uid, mid);

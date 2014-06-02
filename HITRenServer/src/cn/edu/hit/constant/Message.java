@@ -26,4 +26,5 @@ public class Message {
 	}
 	public static final String CONTENT = "content";
 	public static final String PRE = "pre";
+	public static final String PICS = "pics";
 }

@@ -25,6 +25,26 @@
     return ret;
 }
 
++ (BOOL)sendShortMessage:(NSString *)message andPics:(NSArray *)pics {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    User *user = [MessageLogic user];
+    [data setIntValue:user.uid forKey:@"uid"];
+    [data setValue:message forKey:@"message"];
+    [data setIntValue:0 forKey:@"auth"];
+    [data setValue:pics forKey:@"pics"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"SendShortMessage" withEventName:ASYNC_EVENT_SENDSHORTMESSAGE];
+    if (!ret) {
+        LOG(@"SendShortMessage fail");
+        FUNC_END();
+        return NO;
+    }
+    LOG(@"SendShortMessage succ");
+    FUNC_END();
+    return YES;
+
+}
+
 + (BOOL)sendShortMessage:(NSString *)message toGroup:(NSString *)gname {
     FUNC_START();
     BOOL ret = [MessageLogic sendShortMessage:message toGroups:[NSArray arrayWithObjects:gname, nil]];

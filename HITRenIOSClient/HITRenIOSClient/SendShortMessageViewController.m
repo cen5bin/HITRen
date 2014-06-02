@@ -10,6 +10,7 @@
 #import "MessageLogic.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppData.h"
+#import "UploadLogic.h"
 
 #define MAX_PIC_COUNT 9
 
@@ -32,6 +33,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferCompleted:) name:ASYNCDATALOADED object:nil];
     self.textView.layer.borderColor = VIEW_BORDER_COLOR.CGColor;
     self.textView.layer.borderWidth = 0.5;
     self.textView.layer.cornerRadius = 5;
@@ -66,8 +68,11 @@
 
                 return;
             }
-            [MessageLogic sendShortMessage:self.textView.text];
-            [self dismissViewControllerAnimated:YES completion:^(void){}];
+            if (_pics.count == 0) {
+                [MessageLogic sendShortMessage:self.textView.text andPics:[NSArray array]];
+                [self dismissViewControllerAnimated:YES completion:^(void){}];
+            }
+            else [UploadLogic uploadImages:_pics];
         }
     }
 }
@@ -127,6 +132,14 @@
     self.addPicButton.frame = rect;
 }
 
+- (void)transferCompleted:(NSNotification *)noticifition {
+    if ([noticifition.object isEqualToString:ASYNC_EVENT_UPLOADIMAGE]) {
+        [MessageLogic sendShortMessage:self.textView.text andPics:[noticifition.userInfo objectForKey:@"DATA"]];
+    }
+    else if ([noticifition.object isEqualToString:ASYNC_EVENT_SENDSHORTMESSAGE]) {
+        [self dismissViewControllerAnimated:YES completion:^(void){}];
+    }
+}
 
 
 @end
