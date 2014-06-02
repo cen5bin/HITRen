@@ -194,6 +194,8 @@
 		F8148CEE193C6691000F5C9F /* f106.gif in Resources */ = {isa = PBXBuildFile; fileRef = F8148C81193C6691000F5C9F /* f106.gif */; };
 		F8148CF0193C6E25000F5C9F /* emotionbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148CEF193C6E25000F5C9F /* emotionbutton.png */; };
 		F8148CF3193C73A7000F5C9F /* EmotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148CF2193C73A7000F5C9F /* EmotionView.m */; };
+		F8148CF5193CDC0E000F5C9F /* loadingimageview.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8148CF4193CDC0E000F5C9F /* loadingimageview.xib */; };
+		F8148CF8193CDCC6000F5C9F /* LoadingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148CF7193CDCC6000F5C9F /* LoadingImageView.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -547,6 +549,9 @@
 		F8148CEF193C6E25000F5C9F /* emotionbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emotionbutton.png; sourceTree = "<group>"; };
 		F8148CF1193C73A7000F5C9F /* EmotionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionView.h; sourceTree = "<group>"; };
 		F8148CF2193C73A7000F5C9F /* EmotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionView.m; sourceTree = "<group>"; };
+		F8148CF4193CDC0E000F5C9F /* loadingimageview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = loadingimageview.xib; sourceTree = "<group>"; };
+		F8148CF6193CDCC6000F5C9F /* LoadingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingImageView.h; sourceTree = "<group>"; };
+		F8148CF7193CDCC6000F5C9F /* LoadingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingImageView.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1522,6 +1527,9 @@
 				F8723EC11927C7CA00828B5C /* CommentListView.h */,
 				F8723EC21927C7CA00828B5C /* CommentListView.m */,
 				F899C93B192E4CCC00CB3D17 /* CommentListViewDelegate.h */,
+				F8148CF4193CDC0E000F5C9F /* loadingimageview.xib */,
+				F8148CF6193CDCC6000F5C9F /* LoadingImageView.h */,
+				F8148CF7193CDCC6000F5C9F /* LoadingImageView.m */,
 			);
 			name = messagecell;
 			sourceTree = "<group>";
@@ -1787,6 +1795,7 @@
 				F8148C96193C6691000F5C9F /* f018.gif in Resources */,
 				F8148CD7193C6691000F5C9F /* f083.gif in Resources */,
 				F8148C83193C6691000F5C9F /* emotion_del_normal.png in Resources */,
+				F8148CF5193CDC0E000F5C9F /* loadingimageview.xib in Resources */,
 				F8148CC8193C6691000F5C9F /* f068.gif in Resources */,
 				F8148CDA193C6691000F5C9F /* f086.gif in Resources */,
 				F8148CA4193C6691000F5C9F /* f032.gif in Resources */,
@@ -2063,6 +2072,7 @@
 				F84B7DCC18BB3C8D007FC2D5 /* XMPPDigestMD5Authentication.m in Sources */,
 				F8A0F78B191363FE008A64AB /* AppData.m in Sources */,
 				F8E9687918C709CB00B9384B /* NoticeViewController.m in Sources */,
+				F8148CF8193CDCC6000F5C9F /* LoadingImageView.m in Sources */,
 				F84B7DDE18BB3C8D007FC2D5 /* XMPPIDTracker.m in Sources */,
 				F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */,
 				F8107C6B1933505A0073C169 /* ChatCell.m in Sources */,

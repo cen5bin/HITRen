@@ -13,6 +13,7 @@
 
 @interface Message : NSManagedObject {
     NSMutableArray *_likedList;
+    NSMutableArray *_picNames;
 }
 
 @property (nonatomic, retain) NSNumber * mid;
@@ -23,8 +24,13 @@
 @property (nonatomic, retain) NSNumber * type;
 @property (nonatomic, retain) NSNumber * sharedCount;
 @property (nonatomic, retain) NSNumber * seq;
+@property (nonatomic, retain) NSData *pics;
 @property (nonatomic, retain) Comment *comment;
 
 @property (nonatomic, retain, getter = getLikedList, setter = setLikedList:) NSMutableArray *likedList;
+
+@property (nonatomic, retain, getter = getPicNames) NSMutableArray *picNames;
+
+- (void)update;
 
 @end

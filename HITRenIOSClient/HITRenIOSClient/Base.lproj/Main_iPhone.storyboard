@@ -163,6 +163,11 @@
                                                                 <outlet property="delegate" destination="i7I-z3-HIe" id="BIG-nV-fBm"/>
                                                             </connections>
                                                         </textView>
+                                                        <view contentMode="scaleToFill" id="lji-uC-5Pp">
+                                                            <rect key="frame" x="0.0" y="150" width="306" height="0.0"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                        </view>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="点赞列表" id="dqo-xC-9Rz">
                                                             <rect key="frame" x="0.0" y="187" width="306" height="36"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -254,6 +259,7 @@
                                             <outlet property="commentButton" destination="xNl-TJ-VFe" id="DS5-E6-nkm"/>
                                             <outlet property="commentField" destination="Deu-UG-8Va" id="oLA-Zb-SPC"/>
                                             <outlet property="commentListView" destination="gFQ-A6-0kF" id="JSF-Og-y7d"/>
+                                            <outlet property="imageContainer" destination="lji-uC-5Pp" id="r6R-Fr-SxP"/>
                                             <outlet property="likedButton" destination="XsZ-1s-ZN7" id="w9p-i1-j55"/>
                                             <outlet property="likedListView" destination="dqo-xC-9Rz" id="N2H-0S-W5D"/>
                                             <outlet property="picture" destination="BVc-Nk-cue" id="bl2-YI-pq9"/>
@@ -1058,7 +1064,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ynn-0K-HyB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2328" y="222"/>
+            <point key="canvasLocation" x="2311" y="168"/>
         </scene>
         <!--Friends Group View Controller-->
         <scene sceneID="RcS-L1-5qr">

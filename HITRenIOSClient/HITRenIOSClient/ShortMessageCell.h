@@ -30,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *commentField;
 @property (strong, nonatomic) IBOutlet UIView *commentBgView;
 
+@property (strong, nonatomic) IBOutlet UIView *imageContainer;
 
 @property (strong, nonatomic) id<MessageCellDelegate> delegate;
 @property (nonatomic) BOOL liked;

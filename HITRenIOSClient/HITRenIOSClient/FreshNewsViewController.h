@@ -25,7 +25,7 @@
     int _backgroubdLoadDataAtIndex;
     int _maxDataLoadedPage; //最大的加载过数据的页面号，如果拉取过新的timeline，需要将其置为0
     
-    
+    NSMutableSet *_downloadingImageSet;
     
     KeyboardToolBar *_keyboardToolBar;
     

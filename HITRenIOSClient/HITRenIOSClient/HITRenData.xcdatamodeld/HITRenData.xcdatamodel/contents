@@ -28,6 +28,7 @@
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="likedlist" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="mid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="pics" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="sharedCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>

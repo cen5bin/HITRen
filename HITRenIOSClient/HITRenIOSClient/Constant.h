@@ -19,7 +19,8 @@
 #define COMMENTLISTVIEW_HEIGHT 70 //评论列表的高度
 #define COMMENTLISTVIEW_WIDTH 306 //评论列表宽度
 #define SHORTMESSAGECELL_BGVIEW_HEIGHT 293 //单元格背景view高度
-
+#define SMALLIMAGE_HEIGHT 80 //状态中小图片的高度
+#define BETWEEN_IMAGE 5 // 图片间距
 
 #define PAGE_ACTIVITY_COUNT 20 // 一页有多少动态消息，点赞之类的
 

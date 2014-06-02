@@ -22,6 +22,7 @@
 #import "Comment.h"
 #import "CommentListView.h"
 #import "MessageDetailViewController.h"
+#import "LoadingImageView.h"
 
 @interface FreshNewsViewController ()
 
@@ -78,6 +79,7 @@
     _reuid = -1;
     
     _loadDetail = NO;
+    _downloadingImageSet = [[NSMutableSet alloc] init];
     
 //    [UploadLogic downloadImage:@"bubble2.png"];
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
@@ -153,6 +155,43 @@
     cell.time.text = [format stringFromDate:message.time];
     
     cell.delegate = self;
+    {
+        CGRect rect = cell.imageContainer.frame;
+        rect.size.height = 0;
+        [cell.imageContainer removeFromSuperview];
+        cell.imageContainer = [[UIView alloc] initWithFrame:rect];
+        [cell.bgView addSubview:cell.imageContainer];
+    }
+    
+    int imageSize = message.picNames.count / 2;
+    CGFloat max_height = 0;
+    for (int i = 0; i < imageSize; i++) {
+        CGRect rect;
+        CGFloat width = CGRectGetWidth(cell.bgView.frame);
+        if (imageSize == 1) rect = CGRectMake((width - 240)/2, 0, 240, 240);
+        else if (imageSize == 2) rect = CGRectMake((width-240-BETWEEN_IMAGE)/2+i*(120+BETWEEN_IMAGE), 0, 120, 120);
+        else {
+            int line = i / 3;
+            CGFloat tmp = (width - SMALLIMAGE_HEIGHT * 3 - 2 * BETWEEN_IMAGE) / 2;
+            rect = CGRectMake((BETWEEN_IMAGE+SMALLIMAGE_HEIGHT)*(i%3)+tmp, (BETWEEN_IMAGE+SMALLIMAGE_HEIGHT)*line, SMALLIMAGE_HEIGHT, SMALLIMAGE_HEIGHT);
+        }
+        if (CGRectGetMaxY(rect)+15>max_height) max_height = CGRectGetMaxY(rect) + 15;
+        UIImage *image = [appData getImage:[message.picNames objectAtIndex:i*2]];
+        if (image) {
+            UIImageView *view = [[UIImageView alloc] initWithImage:image];
+                        view.frame = rect;
+            [cell.imageContainer addSubview:view];
+        }
+        else {
+            UIView *view = getViewFromNib(@"loadingimageview", self);
+            view.frame = rect;
+            [cell.imageContainer addSubview:view];
+            if (![_downloadingImageSet containsObject:[message.picNames objectAtIndex:i*2]]) {
+                [_downloadingImageSet addObject:[message.picNames objectAtIndex:i*2]];
+                [UploadLogic downloadImage:[message.picNames objectAtIndex:i*2]];
+            }
+        }
+    }
     
     //点赞信息
     LikedList *likedList = [appData getLikedListOfMid:[message.mid intValue]];
@@ -204,10 +243,25 @@
     CGRect rect = cell.textView.frame;
     rect.size.height = [self calculateTextViewHeight:message.content];
     cell.textView.frame = rect;
-    rect = cell.cellBar.frame;
-    rect.origin.y = CGRectGetMaxY(cell.textView.frame);
-    cell.cellBar.frame = rect;
     CGFloat origin_y = CGRectGetMaxY(rect);
+    
+    if (message.picNames.count == 0) {
+        cell.imageContainer.hidden = YES;
+    }
+    else {
+        cell.imageContainer.hidden = NO;
+        rect = cell.imageContainer.frame;
+        rect.origin.y = origin_y;
+        rect.size.height = max_height;
+        cell.imageContainer.frame = rect;
+        origin_y = CGRectGetMaxY(rect);
+    }
+    
+    rect = cell.cellBar.frame;
+    rect.origin.y = origin_y;//CGRectGetMaxY(cell.textView.frame);
+    cell.cellBar.frame = rect;
+    origin_y = CGRectGetMaxY(rect);
+    
     if (!hasLikedList) cell.likedListView.hidden = YES;
     else {
         cell.likedListView.hidden = NO;
@@ -240,6 +294,8 @@
     rect = cell.bgView.frame;
     rect.size.height = bgh;
     cell.bgView.frame = rect;
+    
+    LOG(@"row %d %f", indexPath.row, rect.size.height);
     return cell;
 }
 
@@ -255,6 +311,14 @@
     LikedList *likedList = [appData getLikedListOfMid:[message.mid intValue]];
     if (likedList.userList.count)
         ret += LIKEDLISTVIEW_HEIGHT;
+    if (message.picNames.count) {
+        const CGFloat x = 15;
+        if (message.picNames.count/2 >= 3)
+            ret+=(BETWEEN_IMAGE+SMALLIMAGE_HEIGHT)*((message.picNames.count/2-1)/3+1)-BETWEEN_IMAGE+x;
+        else if (message.picNames.count/2 == 1)
+            ret+=240+x;
+        else ret+=120+x;
+    }
     Comment *comment = [appData getCommentOfMid:[message.mid intValue]];
     if (comment.commentList.count == 0) return ret + 5;
     NSMutableString *string = [[NSMutableString alloc] init];
@@ -279,11 +343,9 @@
         [_comments setObject:@{@"list":list, @"height": [NSNumber numberWithFloat:height]} forKey:message.mid];
         ret += [self calculateCommentViewHeight:string] + 34 + 4 ;
     }
-    ret += 5;;
-    
+    ret += 5;
     return ret;
 }
-
 
 - (CGFloat)calculateTextViewHeight:(NSString *)string {
     UIFont *font = [UIFont systemFontOfSize:14];
@@ -416,17 +478,18 @@
         [self likedListDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADCOMMENTLIST])
         [self commentListDidDownload:notification];
-    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE]) {
-//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
-//        [[AppData sharedInstance] storeImage:[UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]] withFilename:@"a.png"];
-////        imageView.image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
-//        imageView.image = [[AppData sharedInstance] getImage:@"a.png"];
-//        
-//        [self.view.window addSubview:imageView];
-        
-    }
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
+        [self imageDidDownload:notification];
     FUNC_END();
 }
+
+- (void)imageDidDownload:(NSNotification *)notification {
+    UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
+    [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
+    [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
+    [self.tableView reloadData];
+}
+
 
 - (void)hideTopActivityIndicator {
     _activityIndicator.hidden = YES;
@@ -536,6 +599,9 @@
         message.sharedCount = [obj objectForKey:@"sharedcount"];
         message.likedList = [obj objectForKey:@"likedlist"];
         message.uid = [obj objectForKey:@"uid"];
+        message.picNames = [obj objectForKey:@"pics"];
+        if (!message.picNames) message.picNames = [NSMutableArray array];
+        [message update];
         if (!_backgroubdLoadData)
         [_data insertObject:message atIndex:0];
         else {
