@@ -168,14 +168,15 @@
     for (int i = 0; i < imageSize; i++) {
         CGRect rect;
         CGFloat width = CGRectGetWidth(cell.bgView.frame);
-        if (imageSize == 1) rect = CGRectMake((width - 240)/2, 0, 240, 240);
-        else if (imageSize == 2) rect = CGRectMake((width-240-BETWEEN_IMAGE)/2+i*(120+BETWEEN_IMAGE), 0, 120, 120);
+        if (imageSize == 1) rect = CGRectMake((width - ONEIMAGE_HEIGHT)/2, 0, ONEIMAGE_HEIGHT, ONEIMAGE_HEIGHT);
+        else if (imageSize == 2) rect = CGRectMake((width-TWOIMAGE_HEIGHT*2-BETWEEN_IMAGE)/2+i*(TWOIMAGE_HEIGHT+BETWEEN_IMAGE), 0, TWOIMAGE_HEIGHT, TWOIMAGE_HEIGHT);
+        else if (imageSize == 4) rect = CGRectMake((width-TWOIMAGE_HEIGHT*2-BETWEEN_IMAGE)/2+i%2*(TWOIMAGE_HEIGHT+BETWEEN_IMAGE), (TWOIMAGE_HEIGHT+BETWEEN_IMAGE)*(i/2), TWOIMAGE_HEIGHT, TWOIMAGE_HEIGHT);
         else {
             int line = i / 3;
             CGFloat tmp = (width - SMALLIMAGE_HEIGHT * 3 - 2 * BETWEEN_IMAGE) / 2;
             rect = CGRectMake((BETWEEN_IMAGE+SMALLIMAGE_HEIGHT)*(i%3)+tmp, (BETWEEN_IMAGE+SMALLIMAGE_HEIGHT)*line, SMALLIMAGE_HEIGHT, SMALLIMAGE_HEIGHT);
         }
-        if (CGRectGetMaxY(rect)+15>max_height) max_height = CGRectGetMaxY(rect) + 15;
+        if (CGRectGetMaxY(rect)+BOTTOM_HEIGHT>max_height) max_height = CGRectGetMaxY(rect) + BOTTOM_HEIGHT;
         UIImage *image = [appData getImage:[message.picNames objectAtIndex:i*2]];
         if (image) {
             UIImageView *view = [[UIImageView alloc] initWithImage:image];
@@ -312,12 +313,13 @@
     if (likedList.userList.count)
         ret += LIKEDLISTVIEW_HEIGHT;
     if (message.picNames.count) {
-        const CGFloat x = 15;
-        if (message.picNames.count/2 >= 3)
+        const CGFloat x = BOTTOM_HEIGHT;
+        if (message.picNames.count/2 >= 3 && message.picNames.count/2!=4)
             ret+=(BETWEEN_IMAGE+SMALLIMAGE_HEIGHT)*((message.picNames.count/2-1)/3+1)-BETWEEN_IMAGE+x;
         else if (message.picNames.count/2 == 1)
-            ret+=240+x;
-        else ret+=120+x;
+            ret+=ONEIMAGE_HEIGHT+x;
+        else if (message.picNames.count/2 == 2) ret+=TWOIMAGE_HEIGHT+x;
+        else ret+= TWOIMAGE_HEIGHT*2+BETWEEN_IMAGE+x;
     }
     Comment *comment = [appData getCommentOfMid:[message.mid intValue]];
     if (comment.commentList.count == 0) return ret + 5;
