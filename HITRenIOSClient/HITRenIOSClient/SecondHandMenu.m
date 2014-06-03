@@ -7,6 +7,7 @@
 //
 
 #import "SecondHandMenu.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation SecondHandMenu
 
@@ -27,6 +28,12 @@
     // Drawing code
 }
 */
+
+- (void)awakeFromNib {
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowOffset = CGSizeMake(1, 1);
+    self.layer.shadowOpacity = 2;
+}
 
 - (IBAction)releaseGoods:(id)sender {
     [self.delegate menuDidChooseAtIndex:0];

@@ -10,7 +10,7 @@
 #import "MessageCellDelegate.h"
 #import "KeyboardToolBarDelegate.h"
 
-@class KeyboardToolBar;
+@class KeyboardToolBar,FreshNewsMenu;
 @interface FreshNewsViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MessageCellDelegate, KeyboardToolBarDelegate> {
     NSMutableArray* _data;  //存的是message
     NSMutableDictionary* _comments; //存的是评论，每个元素是个dic
@@ -28,6 +28,7 @@
     NSMutableSet *_downloadingImageSet;
     
     KeyboardToolBar *_keyboardToolBar;
+    FreshNewsMenu *_menu;
     
     int _commentingMid;
     int _reuid;

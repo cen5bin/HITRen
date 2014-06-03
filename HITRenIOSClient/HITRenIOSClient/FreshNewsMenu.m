@@ -1,15 +1,15 @@
 //
-//  FindThingsMenu.m
+//  FreshNewsMenu.m
 //  HITRenIOSClient
 //
-//  Created by wubincen on 14-5-31.
+//  Created by wubincen on 14-6-3.
 //  Copyright (c) 2014年 wubincen. All rights reserved.
 //
 
-#import "FindThingsMenu.h"
+#import "FreshNewsMenu.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation FindThingsMenu
+@implementation FreshNewsMenu
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -35,21 +35,21 @@
     self.layer.shadowOpacity = 2;
 }
 
-- (IBAction)releaseInfo:(id)sender {
+- (IBAction)button1TouchUpInside:(id)sender {
     [self.delegate menuDidChooseAtIndex:0];
     self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu" ofType:@"png"]];
 }
 
-- (IBAction)searchInfo:(id)sender {
+- (IBAction)button2TouchUpInside:(id)sender {
     [self.delegate menuDidChooseAtIndex:1];
     self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu" ofType:@"png"]];
 }
 
-- (IBAction)releaseInfoTouchDown:(id)sender {
+- (IBAction)button1TouchDown:(id)sender {
     self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu1" ofType:@"png"]];
 }
 
-- (IBAction)searchInfoTouchDown:(id)sender {
+- (IBAction)button2TouchDown:(id)sender {
     self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu2" ofType:@"png"]];
 
 }

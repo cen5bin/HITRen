@@ -24,6 +24,7 @@
 #import "MessageDetailViewController.h"
 #import "LoadingImageView.h"
 #import "EmotionView.h"
+#import "FreshNewsMenu.h"
 
 @interface FreshNewsViewController ()
 
@@ -87,8 +88,64 @@
     _loadDetail = NO;
     _downloadingImageSet = [[NSMutableSet alloc] init];
     
+    _menu = getViewFromNib(@"freshnewsmenu", self);
+    CGRect rect = _menu.frame;
+    rect.origin.y = CGRectGetMaxY(self.topToolBar.frame) -2;
+    rect.origin.x = CGRectGetMaxX(self.view.frame) - rect.size.width -2;
+    _menu.frame = rect;
+    [self.view addSubview:_menu];
+    _menu.hidden = YES;
+    _menu.delegate = self;
 //    [UploadLogic downloadImage:@"bubble2.png"];
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    FUNC_START();
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self.view];
+    if (CGRectContainsPoint(self.topToolBar.frame, point)) {
+        if (point.x <= 50) {
+            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"topbar2" ofType:@"png"]];
+            self.topToolBar.image = image;
+        }
+        else if (point.x > CGRectGetMaxX(self.topToolBar.frame) - 50)
+            [self menuButtonClicked];
+    }
+    else if (CGRectContainsPoint(self.btmToolBar.frame, point)) {
+        int index = [self.btmToolBar calIndex:point];
+        UIViewController *controller = getViewControllerOfName([NSString stringWithFormat:@"mainview%d", index]);
+        UINavigationController *navigateController = self.navigationController;
+        if (index != 5)
+            [self.navigationController popViewControllerAnimated:NO];
+        [navigateController pushViewController:controller animated:NO];
+    }
+
+    FUNC_END();
+}
+
+- (void)menuButtonClicked {
+    if (!_menu.hidden) [self hideMenu];
+    else [self showMenu];
+//    showed = !showed;
+}
+- (void)showMenu {
+    static BOOL isWorking = NO;
+    if (isWorking) return;
+    isWorking = YES;
+    
+    _menu.hidden = NO;
+    _menu.alpha = 0;
+    self.topToolBar.image = [UIImage imageNamed:@"topbar1.png"];
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_menu.alpha = 1; } completion:^(BOOL finished){ isWorking = NO;}];
+}
+
+- (void)hideMenu {
+    static BOOL isWorking = NO;
+    if (isWorking) return;
+    isWorking = YES;
+    self.topToolBar.image = [UIImage imageNamed:@"topbar0.png"];
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_menu.alpha = 0; } completion:^(BOOL finished){_menu.alpha = 1; _menu.hidden = YES; isWorking = NO;}];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -377,6 +434,7 @@
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self hideMenu];
     [_keyboardToolBar resignFirstResponder];
 }
 
@@ -548,15 +606,22 @@
     if ([ret objectForKey:@"SUC"]) L(@"likedlist download succ");
     else L(@"likedlist download fail");
     NSDictionary *data = [ret objectForKey:@"DATA"];
+    NSMutableArray *uids = [[NSMutableArray alloc] init];
     AppData *appData = [AppData sharedInstance];
     for (NSNumber *mid in [data allKeys]) {
         NSDictionary *dic = [data objectForKey:mid];
         LikedList *likedList = [appData getLikedListOfMid:[mid intValue]];
         likedList.seq = [dic objectForKey:@"seq"];
         likedList.userList = [[NSMutableArray alloc] initWithArray:[dic objectForKey:@"list"]];
+        for (NSNumber *uid in likedList.userList)
+            if (![uids containsObject:uid]) [uids addObject:uid];
         [likedList update];
     }
     [AppData saveData];
+    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
+    if (userInfoNeedDownload.count) {
+        [UserSimpleLogic downloadUseInfos:userInfoNeedDownload from:NSStringFromClass(self.class)];
+    }
     [self.tableView reloadData];
 }
 

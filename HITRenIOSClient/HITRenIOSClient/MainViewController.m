@@ -49,15 +49,15 @@
             [self.navigationController popViewControllerAnimated:NO];
         [navigateController pushViewController:controller animated:NO];
     }
-    else if (CGRectContainsPoint(self.topToolBar.frame, point)) {
-        if (point.x <= 50) {
-            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"topbar2" ofType:@"png"]];
-            self.topToolBar.image = image;
-//            [self.navigationController popViewControllerAnimated:YES];
-        }
-        else if (point.x > CGRectGetMaxX(self.topToolBar.frame) - 50)
-            [self showMenu];
-    }
+//    else if (CGRectContainsPoint(self.topToolBar.frame, point)) {
+//        if (point.x <= 50) {
+//            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"topbar2" ofType:@"png"]];
+//            self.topToolBar.image = image;
+////            [self.navigationController popViewControllerAnimated:YES];
+//        }
+//        else if (point.x > CGRectGetMaxX(self.topToolBar.frame) - 50)
+//            [self showMenu];
+//    }
     FUNC_END();
 }
 
