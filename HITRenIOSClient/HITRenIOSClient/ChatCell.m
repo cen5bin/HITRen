@@ -7,6 +7,7 @@
 //
 
 #import "ChatCell.h"
+#import "EmotionTextView.h"
 
 #define MAX_BUBBLETEXTVIEW_WIDTH 176
 #define MIN_CELL_HEIGHT 56
@@ -54,21 +55,23 @@
     if (_bubbleImageView.superview) [_bubbleImageView removeFromSuperview];
     _bubbleImageView = [[UIImageView alloc] initWithImage:[_bubble stretchableImageWithLeftCapWidth:30 topCapHeight:35]];
 //    for (UIView *view in _bubbleImageView.subviews) [view removeFromSuperview];
-    UITextView *textView = [[UITextView alloc] init];
+    EmotionTextView *textView = [[EmotionTextView alloc] initWithFrame:CGRectMake(0, 0, MAX_BUBBLETEXTVIEW_WIDTH, 0)];
     textView.backgroundColor = [UIColor clearColor];
     textView.textColor = [UIColor whiteColor];
     textView.font = [UIFont boldSystemFontOfSize:16];
+    textView.len = 30;
+    textView.color = [UIColor whiteColor];
     textView.text = self.text;
-
-    CGFloat width = [ChatCell calculateWidth:self.text];
+    [textView work];
+    CGFloat width = textView.width;//[ChatCell calculateWidth:self.text];
     if (width < MAX_BUBBLETEXTVIEW_WIDTH) {
         CGFloat origin_x = self.isReply?CGRectGetMinX(self.pic.frame) - 5 - (width + 20) : CGRectGetMaxX(self.pic.frame)+5;
-        _bubbleImageView.frame = CGRectMake(origin_x, self.pic.frame.origin.y, width + 20, MIN_BUBBLE_HEIGHT);
+        _bubbleImageView.frame = CGRectMake(origin_x, self.pic.frame.origin.y, width + 20, textView.height+2*MARGIN_TEXTVIEW_UP_DOWN);
         origin_x = self.isReply?3:15;
-        textView.frame = CGRectMake(origin_x, MARGIN_TEXTVIEW_UP_DOWN, width, MIN_TEXTVIEW_HEIGHT);
+        textView.frame = CGRectMake(origin_x, MARGIN_TEXTVIEW_UP_DOWN, width, textView.height);
     }
     else {
-        CGFloat height = [ChatCell calculateHeight:self.text];
+        CGFloat height = textView.height;//[ChatCell calculateHeight:self.text];
         CGFloat origin_x = self.isReply?CGRectGetMinX(self.pic.frame) - 5 - (MAX_BUBBLETEXTVIEW_WIDTH + 20) : CGRectGetMaxX(self.pic.frame)+5;
         _bubbleImageView.frame = CGRectMake(origin_x, self.pic.frame.origin.y, MAX_BUBBLETEXTVIEW_WIDTH+20, height + 2 * MARGIN_TEXTVIEW_UP_DOWN);
         origin_x = self.isReply?3:15;
@@ -89,6 +92,11 @@
 }
 
 + (CGFloat)calculateCellHeight:(NSString *)text {
+    EmotionTextView *tmp = [[EmotionTextView alloc] initWithFrame:CGRectMake(0, 0, MAX_BUBBLETEXTVIEW_WIDTH, 0)];
+    tmp.text = text;
+    tmp.font = [UIFont boldSystemFontOfSize:16];
+    [tmp work];
+    return tmp.height + MARGIN_TEXTVIEW_UP_DOWN * 2 + 16;
     CGFloat widht = [ChatCell calculateWidth:text];
     if (widht < MAX_BUBBLETEXTVIEW_WIDTH) return MIN_BUBBLE_HEIGHT + 16;
     CGFloat height = [ChatCell calculateHeight:text] + MARGIN_TEXTVIEW_UP_DOWN * 2;

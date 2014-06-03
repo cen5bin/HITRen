@@ -10,11 +10,14 @@
 
 @interface EmotionTextView : UITextView <UITextViewDelegate> {
     BOOL _realDraw;
+    int _lineCount;
 }
 
 @property (nonatomic) CGFloat len;
 @property (strong, nonatomic) UIFont *font;
+@property (strong, nonatomic) UIColor *color;
 @property (nonatomic) CGFloat height;
+@property (nonatomic) CGFloat width;
 
 + (NSArray *)getEmotions;
 - (void)work;

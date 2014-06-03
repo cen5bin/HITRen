@@ -13,6 +13,7 @@
 
 #define DEFAULT_LEN 40
 #define DEFAULT_FONT [UIFont systemFontOfSize:15]
+#define DEFAULT_COLOR [UIColor blackColor]
 
 static NSArray *emotions = nil;
 
@@ -31,6 +32,9 @@ static NSArray *emotions = nil;
         // Initialization code
         self.delegate = self;
         _realDraw = NO;
+        self.font = nil;
+        self.len = 0;
+        self.color = nil;
     }
     return self;
 }
@@ -42,8 +46,10 @@ static NSArray *emotions = nil;
 - (void)work {
     FUNC_START();
     // Drawing code
+    _lineCount = 0;
     if (self.len == 0) self.len = DEFAULT_LEN;
     if (self.font == nil) self.font = DEFAULT_FONT;
+    if (self.color == nil) self.color = DEFAULT_COLOR;
     NSMutableArray *array = [NSMutableArray array];
     [self analyzeText:self.text toResult:array];
     CGFloat nowX = 8;
@@ -92,6 +98,7 @@ static NSArray *emotions = nil;
                     if (nowX+size.width>width-8) tail = mid - 1;
                     else head = mid;
                 }
+                t = [tmpString substringWithRange:NSMakeRange(0, head+1)];
                 if (max_h < size.height) max_h = size.height;
                 [tmp addObject:t];
                 nowX+=size.width;
@@ -107,6 +114,8 @@ static NSArray *emotions = nil;
     }
     if (tmp.count) [self draw:tmp withLineHeight:max_h andNowY:nowY];
     self.height = max_h + nowY + 8;
+    if (_lineCount == 1) self.width = nowX + 8;
+    else self.width = width;
 //    self.text = @"";
     FUNC_END();
 
@@ -116,11 +125,13 @@ static NSArray *emotions = nil;
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     _realDraw = YES;
+    [self.color set];
     [self work];
     self.text = @"";
 }
 
 - (void)draw:(NSArray *)tmp withLineHeight:(CGFloat)h andNowY:(CGFloat)nowY{
+    _lineCount++;
     if (!_realDraw) return;
     CGFloat nowX = 8;
     for (id obj in tmp) {
