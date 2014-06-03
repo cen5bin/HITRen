@@ -199,6 +199,7 @@
 		F8148CFE193E004A000F5C9F /* freshnewsmenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8148CFD193E004A000F5C9F /* freshnewsmenu.xib */; };
 		F8148D01193E00C6000F5C9F /* FreshNewsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D00193E00C6000F5C9F /* FreshNewsMenu.m */; };
 		F8148D03193E057A000F5C9F /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D02193E057A000F5C9F /* topbar1.png */; };
+		F8148D07193E20B1000F5C9F /* EmotionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D06193E20B1000F5C9F /* EmotionTextView.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -558,6 +559,8 @@
 		F8148CFF193E00C6000F5C9F /* FreshNewsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreshNewsMenu.h; sourceTree = "<group>"; };
 		F8148D00193E00C6000F5C9F /* FreshNewsMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreshNewsMenu.m; sourceTree = "<group>"; };
 		F8148D02193E057A000F5C9F /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
+		F8148D05193E20B1000F5C9F /* EmotionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionTextView.h; sourceTree = "<group>"; };
+		F8148D06193E20B1000F5C9F /* EmotionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionTextView.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1238,6 +1241,15 @@
 			name = freshnews;
 			sourceTree = "<group>";
 		};
+		F8148D04193E2086000F5C9F /* emotionTextView */ = {
+			isa = PBXGroup;
+			children = (
+				F8148D05193E20B1000F5C9F /* EmotionTextView.h */,
+				F8148D06193E20B1000F5C9F /* EmotionTextView.m */,
+			);
+			name = emotionTextView;
+			sourceTree = "<group>";
+		};
 		F842BB8A19051BD700148848 /* menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1610,6 +1622,7 @@
 		F88F989118C1E86C009CE742 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D04193E2086000F5C9F /* emotionTextView */,
 				F8148CFC193E0031000F5C9F /* freshnews */,
 				F8148BDB193A2386000F5C9F /* findthings */,
 				F8107CB119364C680073C169 /* secondhand */,
@@ -2053,6 +2066,7 @@
 				F8107C961935C33B0073C169 /* ContactPersonCell.m in Sources */,
 				F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */,
 				F84B7DE218BB3C8D007FC2D5 /* DDAbstractDatabaseLogger.m in Sources */,
+				F8148D07193E20B1000F5C9F /* EmotionTextView.m in Sources */,
 				F89DFADE191372E60043DD6B /* Message.m in Sources */,
 				F80B0D51187426F2003E72DC /* User.m in Sources */,
 				F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */,

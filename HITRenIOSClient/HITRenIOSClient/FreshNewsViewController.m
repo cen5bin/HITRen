@@ -25,6 +25,7 @@
 #import "LoadingImageView.h"
 #import "EmotionView.h"
 #import "FreshNewsMenu.h"
+#import "EmotionTextView.h"
 
 @interface FreshNewsViewController ()
 
@@ -54,6 +55,10 @@
     _maxDataLoadedPage = 0;
     _backgroubdLoadData = NO;
     _backgroubdLoadWorking = NO;
+    
+    
+    
+    return;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
@@ -182,6 +187,20 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    EmotionTextView *textView = [[EmotionTextView alloc] initWithFrame:CGRectMake(0, 100, 220, 0)];
+    textView.text = @"asdadasd[委屈][敲打]adsa[微笑]你好你好[微笑]你好你好你好你好你好";
+    textView.len = 30;
+    textView.font = [UIFont boldSystemFontOfSize:16];
+    CGRect rect = textView.frame;
+    [textView work];
+    rect.size.height = textView.height;
+    textView.frame = rect;
+//    [textView drawRect:textView.frame];
+//    textView.backgroundColor = [UIColor blackColor];
+//    [textView setNeedsDisplay];
+    [self.view.window addSubview:textView];
+    LOG(@"%f", textView.height);
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
