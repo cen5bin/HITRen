@@ -120,6 +120,10 @@ static AppData *appData;
     return [DataManager messagesInPage:page];
 }
 
+- (Message *)getMessageOfMid:(int)mid {
+    return [DataManager getMessageOfMid:mid];
+}
+
 - (UserInfo *)userInfoForId:(int)uid {
     NSNumber *uid0 = [NSNumber numberWithInt:uid];
     UserInfo *userInfo = [_userInfos objectForKey:uid0];

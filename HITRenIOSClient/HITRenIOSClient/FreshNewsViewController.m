@@ -74,7 +74,12 @@
     }
     else {
         _currentPage = 0;
-        _data = [[NSMutableArray alloc] initWithArray:[appData getMessagesInPage:0]];
+        _data = [[NSMutableArray alloc] init];
+        NSArray *array = [[NSMutableArray alloc] initWithArray:[appData getMessagesInPage:0]];
+        for (Message *message in array)
+            [_data addObject:message.mid];
+        _data = [[NSMutableArray alloc] initWithArray:[[[_data sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator] allObjects]];
+
         _moreMessageCell = 1;
     }
     _reuid = -1;
@@ -142,10 +147,11 @@
     ShortMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (!cell)
         cell = [[ShortMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    Message *message = [_data objectAtIndex:indexPath.row];
+    AppData *appData = [AppData sharedInstance];
+    Message *message =  [appData getMessageOfMid: [[_data objectAtIndex:indexPath.row] intValue]];
     cell.textView.text = message.content;
     
-    AppData *appData = [AppData sharedInstance];
+    
     UserInfo *userInfo = [appData readUserInfoForId:[message.uid intValue]];
     if (userInfo)
         cell.username.text = userInfo.username;
@@ -302,7 +308,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == _data.count) return 50;
-    Message *message = [_data objectAtIndex:indexPath.row];
+    Message *message = [[AppData sharedInstance] getMessageOfMid:[[_data objectAtIndex:indexPath.row] intValue] ];
     CGFloat ret = 60 + [self calculateTextViewHeight:message.content] + 37;
     
 //    ret = SHORTMESSAGRCELL_HEIGHT + [self calculateTextViewHeight:message.content] - TEXTVIEW_HEIGHT;
@@ -408,8 +414,8 @@
         NSArray *messageNeedDownload = [appData messagesNeedDownloadFromIndex:_data.count];
         if (messageNeedDownload.count == 0) {
             NSArray *messages = [appData getMessagesInPage:_currentPage + 1];
-            for (id message in messages)
-                [_data addObject:message];
+            for (Message *message in messages)
+                [_data addObject:message.mid];
             [self.tableView reloadData];
             _backgroubdLoadWorking = NO;
             _maxDataLoadedPage = _currentPage + 1;
@@ -426,8 +432,10 @@
         _backgroubdLoadWorking = NO;
         return;
     }
-    Message *message1 = [_data objectAtIndex:_currentPage * PAGE_MESSAGE_COUNT];
-    Message *message2 = [_data objectAtIndex:_currentPage * PAGE_MESSAGE_COUNT + 1];
+    int mid1 = [[_data objectAtIndex:_currentPage * PAGE_MESSAGE_COUNT] intValue];
+    int mid2 = [[_data objectAtIndex:_currentPage * PAGE_MESSAGE_COUNT + 1] intValue];
+    Message *message1 = [appData getMessageOfMid:mid1];
+    Message *message2 = [appData getMessageOfMid:mid2];
     
     int index1 = [appData.timeline.mids indexOfObject:message1.mid];
     int index2 = [appData.timeline.mids indexOfObject:message2.mid];
@@ -437,7 +445,7 @@
         NSArray *messages = [appData getMessagesInPage:_currentPage + 1];
         for (Message *message in messages) {
             if ([message2.mid isEqualToNumber:message.mid]) break;
-            [_data addObject:message];
+            [_data addObject:message.mid];
         }
         [self.tableView reloadData];
         _backgroubdLoadWorking = NO;
@@ -529,9 +537,9 @@
     [MessageLogic downloadMessages:messageNeedDownload];
     LOG(@"messageneeddownload %@", [messageNeedDownload description]);
     
-    [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
-    [MessageLogic downloadCommentList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
-//    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+//    [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
+//    [MessageLogic downloadCommentList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
+
     _timelineDownloading = NO;
 }
 
@@ -590,7 +598,7 @@
     NSDictionary *data = [ret objectForKey:@"DATA"];
     NSMutableArray *uids = [[NSMutableArray alloc] init];
     AppData *appData = [AppData sharedInstance];
-    int nowCount = _data.count;
+//    int nowCount = _data.count;
     for (NSString *key in [[data allKeys] sortedArrayUsingSelector:@selector(compare:)]) {
         NSDictionary *obj = [data objectForKey:key];
         Message *message = [appData messgeForId:[key intValue]];
@@ -608,17 +616,29 @@
         message.picNames = [obj objectForKey:@"pics"];
         if (!message.picNames) message.picNames = [NSMutableArray array];
         [message update];
-        if (!_backgroubdLoadData)
-        [_data insertObject:message atIndex:0];
-        else {
-            if (_backgroubdLoadDataAtIndex == -1)
-                [_data insertObject:message atIndex:nowCount];
-            else [_data insertObject:message atIndex:_backgroubdLoadDataAtIndex];
-        }
+        if (![_data containsObject:message.mid])
+            [_data addObject:message.mid];
+//        if (!_backgroubdLoadData)
+//        [_data insertObject:message atIndex:0];
+//        else {
+//            if (_backgroubdLoadDataAtIndex == -1)
+//                [_data insertObject:message atIndex:nowCount];
+//            else [_data insertObject:message atIndex:_backgroubdLoadDataAtIndex];
+//        }
         if (![uids containsObject:message.uid])
             [uids addObject:message.uid];
     }
     [AppData saveData];
+    _data =  [[NSMutableArray alloc] initWithArray:[[[_data sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator] allObjects]];
+    [self.tableView reloadData];
+    
+    int count = _data.count - PAGE_MESSAGE_COUNT * _currentPage;
+    if (count > PAGE_MESSAGE_COUNT) count = PAGE_MESSAGE_COUNT;
+    [MessageLogic downloadLikedList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)]];
+    [MessageLogic downloadCommentList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)]];
+
+    
+    //[_data sortedArrayUsingSelector:@selector(compare:)];
     
     NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
     if (userInfoNeedDownload.count) {
@@ -668,7 +688,7 @@
 - (void)likeMessage:(id)sender {
 //    return;
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
-    Message *message = [_data objectAtIndex:indexPath.row];
+    Message *message = [[AppData sharedInstance]getMessageOfMid: [[_data objectAtIndex:indexPath.row] intValue] ];
     [MessageLogic likeMessage:[message.mid intValue]];
     LikedList *likedList = [[AppData sharedInstance] getLikedListOfMid:[message.mid intValue]];
     User *user = [MessageLogic user];
@@ -680,7 +700,7 @@
 
 - (void)dislikeMessage:(id)sender {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
-    Message *message = [_data objectAtIndex:indexPath.row];
+    Message *message = [[AppData sharedInstance] getMessageOfMid:[[_data objectAtIndex:indexPath.row] intValue] ];
     [MessageLogic dislikeMessage:[message.mid intValue]];
     LikedList *likedList = [[AppData sharedInstance] getLikedListOfMid:[message.mid intValue]];
     User *user = [MessageLogic user];
@@ -699,7 +719,8 @@
 - (void)willShowMessageDetail:(id)sender {
     int index = [self.tableView indexPathForCell:sender].row;
     ShortMessageCell *cell = (ShortMessageCell *)sender;
-    Message *message = [_data objectAtIndex:index];
+    Message *message = [[AppData sharedInstance] getMessageOfMid:[[_data objectAtIndex:index] intValue] ];
+
     MessageDetailViewController *controller = getViewControllerOfName(@"MessageDetail");
     controller.downloadingImageSet = _downloadingImageSet;
     controller.message = message;
@@ -721,7 +742,7 @@
 - (void)beginToComment:(id)sender {
     [MessageLogic sendMessage:@"你好你好你好你好你好你好你好你好你好你好你好你好你好你好" toUid:281];
     int index = [self.tableView indexPathForCell:sender].row;
-    Message *message = [_data objectAtIndex:index];
+    Message *message = [[AppData sharedInstance] getMessageOfMid:[[_data objectAtIndex:index] intValue] ];
     _commentingMid = [message.mid intValue];
     ShortMessageCell *cell = (ShortMessageCell *)sender;
     _reuid = cell.targetUid;

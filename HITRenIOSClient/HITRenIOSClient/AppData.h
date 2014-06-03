@@ -43,6 +43,7 @@
 - (NSArray *)userInfosNeedDownload:(NSArray *)uids;
 - (UserInfo *)readUserInfoForId:(int)uid;
 - (Message *)readMessageForId:(int)mid;
+- (Message *)getMessageOfMid:(int)mid;
 
 - (Notice *)newNotice;
 - (Notice *)lastNoticeOfUid:(int)uid;
