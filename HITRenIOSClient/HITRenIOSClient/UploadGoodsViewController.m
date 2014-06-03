@@ -89,7 +89,7 @@
         UIView *view = [self getActivityIndicator];
         if (!view.superview) [self.tableView addSubview:view];
         if (_pics.count)
-            [UploadLogic uploadImages:_pics];
+            [UploadLogic uploadImages:_pics from:NSStringFromClass(self.class)];
         else {
             NSDictionary *dic = @{
                                   @"name":self.namefield.text,
@@ -162,6 +162,9 @@
 }
 
 - (void)transferCompleted:(NSNotification *)noticifition {
+    NSDictionary *dic = noticifition.userInfo;
+    NSString *string = [dic objectForKey:@"fromclass"];
+    if (string && ![string isEqualToString:@""] && ![string isEqualToString:NSStringFromClass(self.class)]) return;
     if ([noticifition.object isEqualToString:ASYNC_EVENT_UPLOADIMAGE]) {
         NSDictionary *dic = @{
                               @"name":self.namefield.text,

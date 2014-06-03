@@ -140,7 +140,7 @@
             [self.imageContainer addSubview:view];
             if (![_downloadingImageSet containsObject:[message.picNames objectAtIndex:i*2]]) {
                 [_downloadingImageSet addObject:[message.picNames objectAtIndex:i*2]];
-                [UploadLogic downloadImage:[message.picNames objectAtIndex:i*2]];
+                [UploadLogic downloadImage:[message.picNames objectAtIndex:i*2] from:NSStringFromClass(self.class)];
             }
         }
     }

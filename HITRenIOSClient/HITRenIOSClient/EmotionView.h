@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class KeyboardToolBar;
 @interface EmotionView : UIScrollView {
     UITapGestureRecognizer *_tapRecognizer;
+    NSArray *_emotionText;
 }
 
 + (id)sharedInstance;
+@property (nonatomic, strong) KeyboardToolBar *keyboardToolBar;
+
 
 @end

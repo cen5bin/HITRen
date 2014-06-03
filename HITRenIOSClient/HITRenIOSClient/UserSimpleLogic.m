@@ -112,7 +112,7 @@
     return YES;
 }
 
-+ (BOOL)downloadUseInfos:(NSArray *)uids {
++ (BOOL)downloadUseInfos:(NSArray *)uids from:(NSString *)classname{
     FUNC_START();
 //    if (!uids.count) {
 //        FUNC_END();
@@ -120,7 +120,7 @@
 //    }
     HttpData *data = [HttpData data];
     [data setValue:uids forKey:@"uids"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadUsersData" withEventName:ASYNC_EVENT_DOWNLOADUSERINFOS];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadUsersData" withEventName:ASYNC_EVENT_DOWNLOADUSERINFOS fromClass:classname];
     if (!ret) {
         L(@"download userinfos fail");
         return NO;

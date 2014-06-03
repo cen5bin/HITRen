@@ -125,7 +125,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _data.count + _moreMessageCell;
 }
@@ -190,7 +189,7 @@
             [cell.imageContainer addSubview:view];
             if (![_downloadingImageSet containsObject:[message.picNames objectAtIndex:i*2]]) {
                 [_downloadingImageSet addObject:[message.picNames objectAtIndex:i*2]];
-                [UploadLogic downloadImage:[message.picNames objectAtIndex:i*2]];
+                [UploadLogic downloadImage:[message.picNames objectAtIndex:i*2] from:NSStringFromClass(self.class)];
             }
         }
     }
@@ -306,8 +305,6 @@
     Message *message = [_data objectAtIndex:indexPath.row];
     CGFloat ret = 60 + [self calculateTextViewHeight:message.content] + 37;
     
-    
-    
 //    ret = SHORTMESSAGRCELL_HEIGHT + [self calculateTextViewHeight:message.content] - TEXTVIEW_HEIGHT;
     AppData *appData = [AppData sharedInstance];
     LikedList *likedList = [appData getLikedListOfMid:[message.mid intValue]];
@@ -407,9 +404,7 @@
     if (_backgroubdLoadWorking) return;
     _backgroubdLoadWorking = YES;
     
-    
     if (_data.count - row < 15) {
-        L(@"< 15");
         NSArray *messageNeedDownload = [appData messagesNeedDownloadFromIndex:_data.count];
         if (messageNeedDownload.count == 0) {
             NSArray *messages = [appData getMessagesInPage:_currentPage + 1];
@@ -471,6 +466,12 @@
 
 - (void)dataDidDownload:(NSNotification *)notification {
     FUNC_START();
+    NSDictionary *dic = notification.userInfo;
+    NSString *string = [dic objectForKey:@"fromclass"];
+    if (string && ![string isEqualToString:@""] && ![string isEqualToString:NSStringFromClass(self.class)])  {
+        FUNC_END();
+        return;
+    }
     if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADTIMELINE])
         [self timelineDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADMESSAGES])
@@ -526,7 +527,8 @@
     [AppData saveData];
     NSArray *messageNeedDownload = [appData messagesNeedDownload];
     [MessageLogic downloadMessages:messageNeedDownload];
-    L([messageNeedDownload description]);
+    LOG(@"messageneeddownload %@", [messageNeedDownload description]);
+    
     [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
     [MessageLogic downloadCommentList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
 //    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -575,7 +577,7 @@
     [AppData saveData];
     NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
     if (userInfoNeedDownload.count) {
-        [UserSimpleLogic downloadUseInfos:userInfoNeedDownload];
+        [UserSimpleLogic downloadUseInfos:userInfoNeedDownload from:NSStringFromClass(self.class)];
     }
     
 //    [self.tableView reloadData];
@@ -620,7 +622,7 @@
     
     NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
     if (userInfoNeedDownload.count) {
-        [UserSimpleLogic downloadUseInfos:userInfoNeedDownload];
+        [UserSimpleLogic downloadUseInfos:userInfoNeedDownload from:NSStringFromClass(self.class)];
     }
     
     if (_updateAtTop) {
@@ -646,19 +648,6 @@
     else L(@"userInfo download fail");
     NSDictionary *data = [ret objectForKey:@"DATA"];
     [UserSimpleLogic userInfosDidDownload:data];
-//    AppData *appData = [AppData sharedInstance];
-//    for (NSNumber *key in [data allKeys]) {
-//        UserInfo *userInfo = [appData userInfoForId:[key intValue]];
-//        NSDictionary *ui = [data objectForKey:key];
-//        if ([userInfo.seq isEqualToNumber:[ui objectForKey:@"seq"]]) continue;
-//        userInfo.uid = [ui objectForKey:@"uid"];
-//        userInfo.username = [ui objectForKey:@"name"];
-//        userInfo.birthday = [ui objectForKey:@"birthday"];
-//        userInfo.sex = [ui objectForKey:@"sex"];
-//        userInfo.hometown = [ui objectForKey:@"hometown"];
-//        userInfo.seq = [ui objectForKey:@"seq"];
-//    }
-//    [AppData saveData];
     [self.tableView reloadData];
     FUNC_END();
 }
@@ -777,7 +766,8 @@
 - (void)emotionButtonClicked {
     if (_keyboardToolBar.emotionButtonState) {
         [_keyboardToolBar resignFirstResponder];
-        UIView *view = [EmotionView sharedInstance];
+        EmotionView *view = [EmotionView sharedInstance];
+        view.keyboardToolBar = _keyboardToolBar;
         CGRect rect = view.frame;
         rect.origin = CGPointMake(0, 0);
         view.frame  = rect;
@@ -789,6 +779,10 @@
         [_keyboardToolBar.textView setInputView:nil];
         [_keyboardToolBar becomeFirstResponder];
     }
+    
+}
+
+- (void)emotionDidSelected:(NSDictionary *)info {
     
 }
 

@@ -62,4 +62,9 @@
 #define BACKGROUND_COLOR [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1]
 #define VIEW_BORDER_COLOR [UIColor colorWithRed:220.0/255 green:220.0/255 blue:220.0/255 alpha:1]
 
+
+#define EMOTION_BEGIN @"[/"
+#define EMOTION_END @"]"
+
+
 #endif

@@ -7,6 +7,7 @@
 //
 
 #import "EmotionView.h"
+#import "KeyboardToolBar.h"
 #define KEYBOARD_H 216
 #define KEYBOARD_W 320
 #define EMOTION_COUNT 107
@@ -56,6 +57,7 @@ static EmotionView *emotionView = nil;
         self.showsVerticalScrollIndicator = NO;
         self.pagingEnabled = YES;
         self.backgroundColor = BACKGROUND_COLOR;
+        _emotionText = [NSArray arrayWithObjects:@"[呲牙]",@"[调皮]",@"[流汗]",@"[偷笑]",@"[再见]",@"[敲打]",@"[擦汗]",@"[猪头]",@"[玫瑰]",@"[流泪]",@"[大哭]",@"[嘘]",@"[酷]",@"[抓狂]",@"[委屈]",@"[便便]",@"[炸弹]",@"[菜刀]",@"[可爱]",@"[色]",@"[害羞]",@"[得意]",@"[吐]",@"[微笑]",@"[发怒]",@"[尴尬]",@"[惊恐]",@"[冷汗]",@"[爱心]",@"[示爱]",@"[白眼]",@"[傲慢]",@"[难过]",@"[惊讶]",@"[疑问]",@"[睡]",@"[亲亲]",@"[憨笑]",@"[爱情]",@"[衰]",@"[撇嘴]",@"[阴险]",@"[奋斗]",@"[发呆]",@"[右哼哼]",@"[拥抱]",@"[坏笑]",@"[飞吻]",@"[鄙视]",@"[晕]",@"[大兵]",@"[可怜]",@"[强]",@"[弱]",@"[握手]",@"[胜利]",@"[抱拳]",@"[凋谢]",@"[饭]",@"[蛋糕]",@"[西瓜]",@"[啤酒]",@"[飘虫]",@"[勾引]",@"[OK]",@"[爱你]",@"[咖啡]",@"[钱]",@"[月亮]",@"[美女]",@"[刀]",@"[发抖]",@"[差劲]",@"[拳头]",@"[心碎]",@"[太阳]",@"[礼物]",@"[足球]",@"[骷髅]",@"[挥手]",@"[闪电]",@"[饥饿]",@"[困]",@"[咒骂]",@"[折磨]",@"[抠鼻]",@"[鼓掌]",@"[糗大了]",@"[左哼哼]",@"[哈欠]",@"[快哭了]",@"[吓]",@"[篮球]",@"[乒乓球]",@"[NO]",@"[跳跳]",@"[怄火]",@"[转圈]",@"[磕头]",@"[回头]",@"[跳绳]",@"[激动]",@"[街舞]",@"[献吻]",@"[左太极]",@"[右太极]",@"[闭嘴]", nil];
     }
     
     _tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
@@ -76,12 +78,32 @@ static EmotionView *emotionView = nil;
     else index = (tmp - 45) / 46 + 1;
     int line = p.y / 54;
     index = PAGE_EMOTION_COUNT * page + line * LINE_EMOTION_COUNT + index;
-    NSString *filename = [NSString stringWithFormat:@"f%3d", index];
-    L(filename);
+    NSString *filename = [NSString stringWithFormat:@"f%03d", index];
+    
     UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:filename ofType:@"gif"]];
-    UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, IMAGE_W, IMAGE_W)];
-    view.image = image;
-    [self.window addSubview:view];
+    filename = [[NSBundle mainBundle] pathForResource:filename ofType:@"gif"];
+    [self.keyboardToolBar.textView insertText:[_emotionText objectAtIndex:index]];
+    
+//    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
+//    
+//    [webView loadHTMLString:[NSString stringWithFormat:@"<img src='%@.gif'/>", [NSString stringWithFormat:@"f%03d", index]] baseURL:[NSURL fileURLWithPath:filename]];
+//    [self.window addSubview:webView];
+//   
+//    webView.scalesPageToFit = YES;
+//    CGRect frame = webView.frame;
+//    frame.size.width = 768;
+//    frame.size.height = 1;
+//    
+//    //    wb.scrollView.scrollEnabled = NO;
+//    webView.frame = frame;
+    
+//    frame.size.height = webView.scrollView.contentSize.height;
+    
+//    NSLog(@"frame = %@", [NSValue valueWithCGRect:frame]);
+//    webView.frame = frame;
+//    UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, IMAGE_W, IMAGE_W)];
+//    view.image = image;
+//    [self.window addSubview:view];
 }
 
 /*

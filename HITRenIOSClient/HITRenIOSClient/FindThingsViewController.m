@@ -68,6 +68,9 @@
 
 
 - (void)dataDidDownload:(NSNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    NSString *string = [dic objectForKey:@"fromclass"];
+    if (string && ![string isEqualToString:@""] && ![string isEqualToString:NSStringFromClass(self.class)]) return;
     if ([notification.object isEqualToString: ASYNC_EVENT_DOWNLOADTHINGSLINE])
         [self thingsLineDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADTHINGSINFO])
@@ -203,7 +206,7 @@
             UIImage *image = [appData getImage:showImage];
             if (image == nil) {
                 if (![_downloadingImages containsObject:showImage]) {
-                    [UploadLogic downloadImage:showImage];
+                    [UploadLogic downloadImage:showImage from:NSStringFromClass(self.class)];
                     [_downloadingImages addObject:showImage];
                     cell.noImageLabel.text = @"正在加载";
                     cell.noImageLabel.hidden = NO;

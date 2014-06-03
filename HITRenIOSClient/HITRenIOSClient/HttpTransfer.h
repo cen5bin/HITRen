@@ -14,6 +14,7 @@
     NSString *_eventName;
     BOOL _downloadImage;
     NSString *_imageName;
+    NSString *_className;
 }
 
 + (HttpTransfer *)sharedInstance;
@@ -26,13 +27,14 @@
 - (NSMutableDictionary *) syncGet:(NSString *)string to:(NSString *)servlet;
 
 - (BOOL)asyncPost:(NSString *)string to:(NSString *)servlet withEventName:(NSString *)eventName;
+- (BOOL)asyncPost:(NSString *)string to:(NSString *)servlet withEventName:(NSString *)eventName fromClass:(NSString *)classname;
 - (BOOL) asyncPost:(NSString *)string to:(NSString *)servlet;
 - (BOOL) asyncGet:(NSString *)string to:(NSString *)servlet;
 
 - (BOOL)asyncRequestServerForNSDataWithPostMethod:(NSString *)requestString AndServletName:(NSString *)servlet;
 - (BOOL)asyncRequestServerForNSDataWithGetMethod:(NSString *)requestString AndServletName:(NSString *)servlet;
 
-- (BOOL)uploadImages:(NSArray*)images to:(NSString *)servlet;
-- (BOOL)downloadImage:(NSString *)image;
+- (BOOL)uploadImages:(NSArray*)images to:(NSString *)servlet from:(NSString *)classname;
+- (BOOL)downloadImage:(NSString *)image from:(NSString *)classname;
 
 @end

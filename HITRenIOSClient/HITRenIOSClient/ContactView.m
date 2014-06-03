@@ -58,6 +58,9 @@
 }
 
 - (void)asyncDataDidDownload:(NSNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    NSString *string = [dic objectForKey:@"fromclass"];
+    if (string && ![string isEqualToString:@""] && ![string isEqualToString:NSStringFromClass(self.class)]) return;
     if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADCONTACT])
         [self contactDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADUSERINFOS])
@@ -85,7 +88,7 @@
     }
     AppData *appData = [AppData sharedInstance];
     NSArray *uids = [appData userInfosNeedDownload:array];
-    [UserSimpleLogic  downloadUseInfos:uids];
+    [UserSimpleLogic  downloadUseInfos:uids from:NSStringFromClass(self.class)];
 }
 
 - (void)contactDidDownload:(NSNotification *)notification {
@@ -93,29 +96,6 @@
     if ([[dic objectForKey:@"SUC"] boolValue]) {
         L(@"contact download succ");
         [RelationshipLogic unPackRelationshipInfoData:[dic objectForKey:@"DATA"]];
-//        L([[dic objectForKey:@"DATA"] description]);
-//        _groups = [[NSMutableArray alloc] init];
-//        _list = [[NSMutableDictionary alloc] init];
-//        _datas = [[NSMutableArray alloc] init];
-//        User *user = [RelationshipLogic user];
-//        NSMutableArray *array = [[NSMutableArray alloc] init];
-//        for (NSDictionary *dic in user.relationShip.concerList) {
-////            [_groups addObject:[dic objectForKey:@"gname"]];
-//            NSString *gname = [dic objectForKey:@"gname"];
-//            if ([gname isEqualToString:@"ALL"]) gname = @"所有好友";
-//            else if ([gname isEqualToString:@"default"]) gname = @"未分组";
-//            if ([gname isEqualToString:@"所有好友"])
-//                [_datas insertObject:@{@"type":[NSNumber numberWithInt:2],@"showlist":[NSNumber numberWithBool:NO], @"gname":gname} atIndex:0];
-//            else [_datas addObject:@{@"type":[NSNumber numberWithInt:2],@"showlist":[NSNumber numberWithBool:NO], @"gname":gname}];
-//            NSArray *userlist = [dic objectForKey:@"userlist"];
-//            for (NSNumber *uid in userlist)
-//                if (![array containsObject:uid])
-//                    [array addObject:uid];
-//            [_list setObject:userlist forKey:gname];
-//        }
-//        AppData *appData = [AppData sharedInstance];
-//        NSArray *uids = [appData userInfosNeedDownload:array];
-//        [UserSimpleLogic  downloadUseInfos:uids];
         [self loadData];
     }
     else if ([[dic objectForKey:@"INFO"] isEqualToString:@"newest"]) {

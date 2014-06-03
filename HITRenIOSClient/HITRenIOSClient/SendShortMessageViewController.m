@@ -72,7 +72,7 @@
                 [MessageLogic sendShortMessage:self.textView.text andPics:[NSArray array]];
                 [self dismissViewControllerAnimated:YES completion:^(void){}];
             }
-            else [UploadLogic uploadImages:_pics];
+            else [UploadLogic uploadImages:_pics from:NSStringFromClass(self.class)];
         }
     }
 }

@@ -10,7 +10,7 @@
 
 @interface UploadLogic : BaseLogic
 
-+ (BOOL)uploadImages:(NSArray *)images;
-+ (BOOL)downloadImage:(NSString *)filename;
++ (BOOL)uploadImages:(NSArray *)images from:(NSString *)classname;
++ (BOOL)downloadImage:(NSString *)filename from:(NSString *)classname;
 
 @end

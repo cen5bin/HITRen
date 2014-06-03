@@ -13,7 +13,7 @@
 
 @implementation UploadLogic
 
-+ (BOOL)uploadImages:(NSArray *)images {
++ (BOOL)uploadImages:(NSArray *)images from:(NSString *)classname{
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (UIImage *image in images) {
         NSString *filename = [UploadLogic filename];
@@ -21,7 +21,7 @@
         [[AppData sharedInstance] storeImage:image withFilename:filename];
         [array addObject:dic];
     }
-    return [[HttpTransfer transfer] uploadImages:array to:@"UploadImages"];
+    return [[HttpTransfer transfer] uploadImages:array to:@"UploadImages" from:(NSString *)classname];
 }
 
 
@@ -36,8 +36,8 @@
     return string;
 }
 
-+ (BOOL)downloadImage:(NSString *)filename {
-    BOOL ret = [[HttpTransfer transfer] downloadImage:filename];
++ (BOOL)downloadImage:(NSString *)filename from:(NSString *)classname{
+    BOOL ret = [[HttpTransfer transfer] downloadImage:filename from:classname];
     if (!ret) {
         L(@"download image failed");
         return NO;

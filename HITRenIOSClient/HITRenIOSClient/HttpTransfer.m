@@ -56,7 +56,8 @@ static HttpTransfer *transfer;
         _downloadImage = NO;
         return;
     }
-    NSMutableDictionary *dic = [NSJSONSerialization JSONObjectWithData:self.data options:NSJSONReadingMutableLeaves error:nil];
+    NSMutableDictionary *dic =  [[NSMutableDictionary alloc]initWithDictionary: [NSJSONSerialization JSONObjectWithData:self.data options:NSJSONReadingMutableLeaves error:nil]];
+    [dic setObject:_className forKey:@"fromclass"];
     [[NSNotificationCenter defaultCenter] postNotificationName:ASYNCDATALOADED object:_eventName userInfo:dic];
 //    [[NSNotificationCenter defaultCenter] po]
 }
@@ -137,7 +138,14 @@ static HttpTransfer *transfer;
 }
 
 - (BOOL)asyncPost:(NSString *)string to:(NSString *)servlet withEventName:(NSString *)eventName {
+    return [self asyncPost:string to:servlet withEventName:eventName fromClass:@""];
+//    _eventName = eventName;
+//    return [self asyncRequestServerForNSDataWithPostMethod:string AndServletName:servlet];
+}
+
+- (BOOL)asyncPost:(NSString *)string to:(NSString *)servlet withEventName:(NSString *)eventName fromClass:(NSString *)classname{
     _eventName = eventName;
+    _className = classname;
     return [self asyncRequestServerForNSDataWithPostMethod:string AndServletName:servlet];
 }
 
@@ -151,7 +159,7 @@ static HttpTransfer *transfer;
     return [self asyncRequestServerForNSDataWithGetMethod:string AndServletName:servlet];
 }
 
-- (BOOL)uploadImages:(NSArray*)images to:(NSString *)servlet {
+- (BOOL)uploadImages:(NSArray*)images to:(NSString *)servlet from:(NSString *)classname{
     NSString *urlString = [NSString stringWithFormat:@"http://%@:%d/%@/%@",IP, PORT, SERVER_NAME, servlet];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];//[NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
@@ -175,16 +183,17 @@ static HttpTransfer *transfer;
     [request setHTTPBody:data];
     [request setHTTPMethod:@"POST"];
     _eventName = ASYNC_EVENT_UPLOADIMAGE;
+    _className = classname;
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     return conn != nil;
 }
 
-- (BOOL)downloadImage:(NSString *)image {
+- (BOOL)downloadImage:(NSString *)image from:(NSString *)classname{
     _downloadImage = YES;
     _imageName = image;
     HttpData *data = [HttpData data];
     [data setValue:image forKey:@"filename"];
-    [self asyncPost:[data getJsonString] to:@"DownloadImage" withEventName:ASYNC_EVENT_DOWNLOADIMAGE];
+    [self asyncPost:[data getJsonString] to:@"DownloadImage" withEventName:ASYNC_EVENT_DOWNLOADIMAGE fromClass:classname];
     return YES;
 }
 

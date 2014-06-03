@@ -10,7 +10,10 @@
 
 @protocol KeyboardToolBarDelegate <NSObject>
 
+
+@optional
 - (void)sendText:(NSString*)text;
 - (void)emotionButtonClicked;
+- (void)emotionDidSelected:(NSDictionary *)info;
 
 @end
