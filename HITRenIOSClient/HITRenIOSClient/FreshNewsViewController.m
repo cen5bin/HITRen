@@ -23,6 +23,7 @@
 #import "CommentListView.h"
 #import "MessageDetailViewController.h"
 #import "LoadingImageView.h"
+#import "EmotionView.h"
 
 @interface FreshNewsViewController ()
 
@@ -771,6 +772,24 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)emotionButtonClicked {
+    if (_keyboardToolBar.emotionButtonState) {
+        [_keyboardToolBar resignFirstResponder];
+        UIView *view = [EmotionView sharedInstance];
+        CGRect rect = view.frame;
+        rect.origin = CGPointMake(0, 0);
+        view.frame  = rect;
+        [_keyboardToolBar.textView setInputView:view];
+        [_keyboardToolBar becomeFirstResponder];
+    }
+    else {
+        [_keyboardToolBar resignFirstResponder];
+        [_keyboardToolBar.textView setInputView:nil];
+        [_keyboardToolBar becomeFirstResponder];
+    }
+    
 }
 
 @end

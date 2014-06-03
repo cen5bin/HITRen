@@ -302,7 +302,7 @@ static AppData *appData;
         [fm createDirectoryAtURL:imageURL withIntermediateDirectories:YES attributes:nil error:nil];
     NSURL *targetURL = [imageURL URLByAppendingPathComponent:filename];
     if (![fm fileExistsAtPath:[NSString stringWithFormat:@"%@/Documents/images/%@",NSHomeDirectory(),filename]])
-        [UIImagePNGRepresentation(image) writeToURL:targetURL atomically:YES];			
+        [UIImagePNGRepresentation(image) writeToURL:targetURL atomically:YES];
 }
 
 //获取图片，如果图片不存在则返回nil
