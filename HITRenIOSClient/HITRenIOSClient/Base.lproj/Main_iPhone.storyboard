@@ -1101,6 +1101,7 @@
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="单击输入时间" textAlignment="right" minimumFontSize="17" id="Td8-HV-jDk">
                                                             <rect key="frame" x="61" y="8" width="226" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="textColor" red="0.81960784310000001" green="0.81960784310000001" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
@@ -1120,9 +1121,10 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="单击输入地点" textAlignment="right" minimumFontSize="17" id="DRS-iS-enT">
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="单击输入地点" textAlignment="right" minimumFontSize="17" id="DRS-iS-enT">
                                                             <rect key="frame" x="61" y="7" width="226" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="textColor" red="0.81960784310000001" green="0.81960784310000001" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
@@ -1186,9 +1188,11 @@
                     <connections>
                         <outlet property="eventCell" destination="lDx-eq-Clr" id="z1m-aq-JcZ"/>
                         <outlet property="placeCell" destination="iea-Z5-vSr" id="pku-vY-pyj"/>
+                        <outlet property="placeField" destination="DRS-iS-enT" id="XMg-cP-k3E"/>
                         <outlet property="tableView" destination="OAh-2i-wXy" id="qng-RW-EiZ"/>
                         <outlet property="textView" destination="5eg-vh-ZC1" id="Rc9-cA-nmp"/>
                         <outlet property="timeCell" destination="cVY-td-thE" id="oFb-MD-7ey"/>
+                        <outlet property="timeField" destination="Td8-HV-jDk" id="YMO-8r-deH"/>
                         <outlet property="topBar" destination="KN1-dv-T6S" id="UKz-Lq-gMF"/>
                     </connections>
                 </viewController>

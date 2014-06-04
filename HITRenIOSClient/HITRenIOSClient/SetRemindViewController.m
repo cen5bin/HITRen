@@ -69,8 +69,8 @@
         if (p.x <= 50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
-            if (self.selectedIndex && [self.reminds containsObject:[NSNumber numberWithInt:self.selectedIndex]])
-                [self.reminds removeObject:[NSNumber numberWithInt:self.selectedIndex]];
+//            if (self.selectedIndex && [self.reminds containsObject:[NSNumber numberWithInt:self.selectedIndex]])
+//                [self.reminds removeObject:[NSNumber numberWithInt:self.selectedIndex]];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }

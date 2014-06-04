@@ -74,24 +74,77 @@
         UIView *view = [_cells objectAtIndex:indexPath.row];
         return view.frame.size.height;
     }
-    return 50;
+    return 46;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         SetRemindViewController *controller = getViewControllerOfName(@"SetRemind");
         controller.reminds = self.reminds;
+        if (indexPath.row != 0)
+            controller.selectedIndex = [[self.reminds objectAtIndex:indexPath.row-1] intValue];
+        else controller.selectedIndex = 0;
         [self.navigationController pushViewController:controller animated:YES];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     else {
         id obj = [_cells objectAtIndex:indexPath.row];
         if (obj == self.eventCell) [self.textView becomeFirstResponder];
+        if (obj == self.placeCell) [self.placeField becomeFirstResponder];
+        else if (obj == self.timeCell) [self showDataPicker];
         
     }
     
 }
 
+- (void)dateValueChanged {
+    NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+    [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
+    self.timeField.text = [formater stringFromDate:_datePicker.date];
+}
+
+- (void)resignAll {
+    [self.textView resignFirstResponder];
+    [self.placeField resignFirstResponder];
+}
+
+- (void)showDataPicker {
+    [self resignAll];
+    if (_datePicker && _datePicker.superview) return;
+    if (!_datePicker) {
+        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame), 0, 0)];
+        _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        [_datePicker addTarget:self action:@selector(dateValueChanged) forControlEvents:UIControlEventValueChanged];
+    }
+    if (!self.timeField.text || [self.timeField.text isEqualToString:@""]) {
+        NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+        [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
+        self.timeField.text = [formater stringFromDate:[NSDate date]];
+    }
+    else {
+        NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+        [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
+        _datePicker.date = [formater dateFromString:self.timeField.text];
+    }
+    
+    _datePicker.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), 0, 0);
+    [self.view addSubview:_datePicker];
+    
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+        CGRect rect = _datePicker.frame;
+        rect.origin.y -= rect.size.height;
+        _datePicker.frame = rect;
+    } completion:^(BOOL finished) {}];
+}
+
+- (void)hideDatePicker {
+    if (!_datePicker || !_datePicker.superview) return;
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+        CGRect rect = _datePicker.frame;
+        rect.origin.y += rect.size.height;
+        _datePicker.frame = rect;
+    } completion:^(BOOL finished) {[_datePicker removeFromSuperview];}];
+}
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
@@ -108,6 +161,8 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.textView resignFirstResponder];
+    [self.placeField resignFirstResponder];
+    [self hideDatePicker];
 }
 
 - (void)didReceiveMemoryWarning

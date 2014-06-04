@@ -10,8 +10,8 @@
 
 @interface AddCalendarViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate> {
     NSMutableArray *_cells;
-    
     NSMutableArray *_data;
+    UIDatePicker *_datePicker;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -24,6 +24,8 @@
 
 @property (strong, nonatomic) NSMutableArray *reminds;
 
+@property (strong, nonatomic) IBOutlet UITextField *timeField;
+@property (strong, nonatomic) IBOutlet UITextField *placeField;
 
 
 @end
