@@ -53,7 +53,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.selectedIndex && [self.reminds containsObject:[NSNumber numberWithInt:self.selectedIndex]])
+    [self.reminds removeObject:[NSNumber numberWithInt:self.selectedIndex]];
     self.selectedIndex  = indexPath.row;
+    if (self.selectedIndex && ![self.reminds containsObject:[NSNumber numberWithInt:self.selectedIndex]])
+        [self.reminds addObject:[NSNumber numberWithInt:self.selectedIndex]];
     [tableView reloadData];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -65,6 +69,8 @@
         if (p.x <= 50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
+            if (self.selectedIndex && [self.reminds containsObject:[NSNumber numberWithInt:self.selectedIndex]])
+                [self.reminds removeObject:[NSNumber numberWithInt:self.selectedIndex]];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
@@ -78,5 +84,9 @@
 }
 
 - (IBAction)confirmed:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 @end

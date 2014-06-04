@@ -1155,7 +1155,7 @@
                                     </tableViewSection>
                                     <tableViewSection id="ifZ-2a-Pf6">
                                         <cells>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RemindCell" textLabel="u8c-YJ-8sS" detailTextLabel="6aY-dC-sRb" rowHeight="50" style="IBUITableViewCellStyleSubtitle" id="Jcg-Mo-elN">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RemindCell" textLabel="u8c-YJ-8sS" rowHeight="50" style="IBUITableViewCellStyleDefault" id="Jcg-Mo-elN">
                                                 <rect key="frame" x="0.0" y="255" width="320" height="52"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jcg-Mo-elN" id="hSm-gH-oSx">
@@ -1163,17 +1163,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="添加提醒" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u8c-YJ-8sS">
-                                                            <rect key="frame" x="10" y="5" width="72" height="22"/>
+                                                            <rect key="frame" x="10" y="0.0" width="280" height="49"/>
                                                             <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </label>
-                                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6aY-dC-sRb">
-                                                            <rect key="frame" x="10" y="27" width="28" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </label>
                                                     </subviews>
@@ -2575,7 +2568,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ee-Tu-OYs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3182" y="1544"/>
+            <point key="canvasLocation" x="3061" y="1530"/>
         </scene>
     </scenes>
     <resources>

@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) int selectedIndex;
+@property (strong, nonatomic) NSMutableArray *reminds;
 
 
 - (IBAction)confirmed:(id)sender;

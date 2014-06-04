@@ -7,6 +7,7 @@
 //
 
 #import "AddCalendarViewController.h"
+#import "SetRemindViewController.h"
 
 @interface AddCalendarViewController ()
 
@@ -28,12 +29,19 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     _cells = [NSMutableArray arrayWithObjects:self.timeCell,self.placeCell,self.eventCell, nil];
-    _reminds = [[NSMutableArray alloc] init];
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = BACKGROUND_COLOR;
+    
+    self.reminds = [[NSMutableArray alloc] init];
+    
+    _data = [[NSMutableArray alloc] initWithObjects:@"无",@"事件发生时",@"5分钟前",@"15分钟前",@"30分钟前",@"1小时前",@"2小时前",@"1天前",@"2天前", nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
@@ -41,7 +49,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) return _cells.count;
-    return _reminds.count + 1;
+    return self.reminds.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -49,10 +57,13 @@
     static NSString *CellIdentifer = @"RemindCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifer];
     if (!cell)
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifer];
-    if (indexPath.row == _reminds.count) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifer];
+    if (indexPath.row == 0)
         cell.textLabel.text = @"添加提醒";
-        cell.detailTextLabel.text = @"时间";
+    else {
+        NSString *string = [_data objectAtIndex:[[self.reminds objectAtIndex:indexPath.row - 1] intValue]];
+        cell.textLabel.text = [NSString stringWithFormat:@"提醒%d: %@", indexPath.row, string];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     return cell;
@@ -68,7 +79,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        UIViewController *controller = getViewControllerOfName(@"SetRemind");
+        SetRemindViewController *controller = getViewControllerOfName(@"SetRemind");
+        controller.reminds = self.reminds;
         [self.navigationController pushViewController:controller animated:YES];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
