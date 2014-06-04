@@ -48,14 +48,7 @@
 //    _emotionView = [EmotionView sharedInstance];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+
 
 
 - (void)textViewDidChange:(UITextView *)textView {
@@ -75,6 +68,10 @@
     rect = self.sendButton.frame;
     rect.origin.y = CGRectGetHeight(self.frame)/2-self.sendButton.frame.size.height/2;
     self.sendButton.frame = rect;
+    
+    rect = self.emotionButton.frame;
+    rect.origin.y = CGRectGetHeight(self.frame)/2-self.emotionButton.frame.size.height/2;
+    self.emotionButton.frame = rect;
 }
 
 
@@ -86,6 +83,8 @@
 
 - (void)resignFirstResponder {
     self.hidden = YES;
+//    self.textView.inputView = nil;
+//    self.emotionButtonState = NO;
     [self.textView resignFirstResponder];
 }
 

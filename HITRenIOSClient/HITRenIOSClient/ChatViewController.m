@@ -58,6 +58,7 @@
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
+    return;
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGRect rect1 = _keyboardToolBar.frame;
         rect1.origin.y = _keyboardToolBarAtBottom.frame.origin.y;//rect.origin.y - rect1.size.height;
@@ -76,7 +77,15 @@
     NSDictionary *info = [notification userInfo];
     NSValue *value = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect rect = [value CGRectValue];
-    if (rect.origin.y >= self.view.frame.size.height) return;
+    if (rect.origin.y >= self.view.frame.size.height) {
+        _keyboardToolBar.hidden = YES;
+        if (_keyboardToolBar.superview) [_keyboardToolBar removeFromSuperview];
+        _keyboardToolBarIsDisappearing = NO;
+        _keyboardToolBarAtBottom.hidden = NO;
+//        [_keyboardToolBarAtBottom resignFirstResponder];
+        [self.tableView reloadData];
+        return;
+    }
     else {
         _keyboardToolBarAtBottom.hidden = YES;
         _keyboardToolBar.hidden = NO;
@@ -134,15 +143,22 @@
 }
 
 - (void)emotionButtonClicked {
-    if (!_keyboardToolBar.emotionButtonState) return;
-    
-    _emotionView = [EmotionView sharedInstance];
-    CGRect rect = _emotionView.frame;
-    rect.origin.y = 0;//CGRectGetMaxY(_keyboardToolBar.frame);
-    LOG(@"%f", rect.origin.y);
-    _emotionView.frame = rect;
-    if (_emotionView.superview) [_emotionView removeFromSuperview];
-    [self.view.window addSubview:_emotionView];
+    if (_keyboardToolBar.emotionButtonState) {
+        [_keyboardToolBar resignFirstResponder];
+        EmotionView *view = [EmotionView sharedInstance];
+        view.keyboardToolBar = _keyboardToolBar;
+        CGRect rect = view.frame;
+        rect.origin = CGPointMake(0, 0);
+        view.frame  = rect;
+        [_keyboardToolBar.textView setInputView:view];
+        [_keyboardToolBar becomeFirstResponder];
+    }
+    else {
+        [self hideKeyboardToolBar];
+        [_keyboardToolBar becomeFirstResponder];
+//        [self performSelector:@selector(showKeyboardToolBar) withObject:nil afterDelay:0.0];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -173,9 +189,29 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 }
 
+- (void)hideKeyboardToolBar {
+    [_keyboardToolBar.textView setInputView:nil];
+    [_keyboardToolBar becomeFirstResponder];
+    [_keyboardToolBar resignFirstResponder];
+}
+
+- (void)showKeyboardToolBar {
+    [_keyboardToolBar becomeFirstResponder];
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self hideKeyboardToolBar];
+    return;
+    _keyboardToolBar.textView.inputView = nil;
+    [_keyboardToolBar becomeFirstResponder];
+//    _keyboardToolBar.hidden = YES;
+    UIView *view = [EmotionView sharedInstance];
+    if (view.superview) [view removeFromSuperview];
+    if (_keyboardToolBar.superview) [_keyboardToolBar removeFromSuperview];
     if (!_keyboardToolBarIsDisappearing) {
         _keyboardToolBarIsDisappearing = YES;
+        _keyboardToolBar.textView.inputView = nil;
+        [_keyboardToolBar resignFirstResponder];
         [_keyboardToolBar resignFirstResponderNotHideAtOnce];
     }
 
@@ -205,6 +241,7 @@
     }
 
 }
+
 
 
 

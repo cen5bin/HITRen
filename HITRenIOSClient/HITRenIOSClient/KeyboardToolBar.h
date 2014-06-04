@@ -17,6 +17,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) IBOutlet UIButton *sendButton;
+@property (strong, nonatomic) IBOutlet UIButton *emotionButton;
 
 @property (strong, nonatomic) id<KeyboardToolBarDelegate> delegate;
 @property (strong, nonatomic) NSString *placeHolder;

@@ -46,6 +46,7 @@
             <color key="backgroundColor" red="0.25882354378700256" green="0.25882354378700256" blue="0.25882354378700256" alpha="0.84999999999999998" colorSpace="deviceRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="emotionButton" destination="0qB-ro-6Yx" id="GdM-Dk-SNB"/>
                 <outlet property="sendButton" destination="h8k-YZ-Fo9" id="c7v-Ad-xt2"/>
                 <outlet property="textView" destination="c71-hh-lhq" id="ndY-rE-zWx"/>
             </connections>

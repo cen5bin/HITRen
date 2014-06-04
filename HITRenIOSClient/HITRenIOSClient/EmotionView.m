@@ -80,9 +80,9 @@ static EmotionView *emotionView = nil;
     index = PAGE_EMOTION_COUNT * page + line * LINE_EMOTION_COUNT + index;
     NSString *filename = [NSString stringWithFormat:@"f%03d", index];
     
-    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:filename ofType:@"gif"]];
     filename = [[NSBundle mainBundle] pathForResource:filename ofType:@"gif"];
     [self.keyboardToolBar.textView insertText:[_emotionText objectAtIndex:index]];
+    [self.keyboardToolBar textViewDidChange:self.keyboardToolBar.textView];
     
 //    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
 //    
