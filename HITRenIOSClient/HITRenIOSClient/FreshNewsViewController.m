@@ -455,7 +455,8 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self hideMenu];
-    [_keyboardToolBar resignFirstResponder];
+//    [_keyboardToolBar resignFirstResponder];
+    [self hideKeyboardToolBar];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -881,11 +882,17 @@
         [_keyboardToolBar becomeFirstResponder];
     }
     else {
-        [_keyboardToolBar resignFirstResponder];
-        [_keyboardToolBar.textView setInputView:nil];
+        [self hideKeyboardToolBar];
         [_keyboardToolBar becomeFirstResponder];
+        //        [self performSelector:@selector(showKeyboardToolBar) withObject:nil afterDelay:0.0];
     }
-    
+}
+
+- (void)hideKeyboardToolBar {
+    [_keyboardToolBar.textView setInputView:nil];
+    [_keyboardToolBar becomeFirstResponder];
+    [_keyboardToolBar resignFirstResponder];
+    _keyboardToolBar.emotionButtonState = NO;
 }
 
 - (void)emotionDidSelected:(NSDictionary *)info {

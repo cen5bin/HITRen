@@ -193,6 +193,7 @@
     [_keyboardToolBar.textView setInputView:nil];
     [_keyboardToolBar becomeFirstResponder];
     [_keyboardToolBar resignFirstResponder];
+    _keyboardToolBar.emotionButtonState = NO;
 }
 
 - (void)showKeyboardToolBar {
