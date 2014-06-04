@@ -8,6 +8,10 @@
 
 #import "MainViewController.h"
 
-@interface CalendarViewController : MainViewController
+@interface CalendarViewController : MainViewController <UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIImageView *topBar;
+
+- (IBAction)addCalendar:(id)sender;
 
 @end

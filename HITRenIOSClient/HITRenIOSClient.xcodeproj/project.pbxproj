@@ -200,6 +200,12 @@
 		F8148D01193E00C6000F5C9F /* FreshNewsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D00193E00C6000F5C9F /* FreshNewsMenu.m */; };
 		F8148D03193E057A000F5C9F /* topbar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D02193E057A000F5C9F /* topbar1.png */; };
 		F8148D07193E20B1000F5C9F /* EmotionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D06193E20B1000F5C9F /* EmotionTextView.m */; };
+		F8148D09193F626A000F5C9F /* calendarcellbg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D08193F626A000F5C9F /* calendarcellbg.png */; };
+		F8148D0C193F639C000F5C9F /* CalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D0B193F639C000F5C9F /* CalendarCell.m */; };
+		F8148D10193F66F0000F5C9F /* calendarcellbg2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D0F193F66F0000F5C9F /* calendarcellbg2.png */; };
+		F8148D12193F67B0000F5C9F /* calendarcellbg1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D11193F67B0000F5C9F /* calendarcellbg1.png */; };
+		F8148D16193F6D20000F5C9F /* AddCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D15193F6D20000F5C9F /* AddCalendarViewController.m */; };
+		F8148D19193F7569000F5C9F /* SetRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D18193F7569000F5C9F /* SetRemindViewController.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -561,6 +567,15 @@
 		F8148D02193E057A000F5C9F /* topbar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar1.png; sourceTree = "<group>"; };
 		F8148D05193E20B1000F5C9F /* EmotionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionTextView.h; sourceTree = "<group>"; };
 		F8148D06193E20B1000F5C9F /* EmotionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionTextView.m; sourceTree = "<group>"; };
+		F8148D08193F626A000F5C9F /* calendarcellbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendarcellbg.png; sourceTree = "<group>"; };
+		F8148D0A193F639C000F5C9F /* CalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCell.h; sourceTree = "<group>"; };
+		F8148D0B193F639C000F5C9F /* CalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCell.m; sourceTree = "<group>"; };
+		F8148D0F193F66F0000F5C9F /* calendarcellbg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendarcellbg2.png; sourceTree = "<group>"; };
+		F8148D11193F67B0000F5C9F /* calendarcellbg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendarcellbg1.png; sourceTree = "<group>"; };
+		F8148D14193F6D20000F5C9F /* AddCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCalendarViewController.h; sourceTree = "<group>"; };
+		F8148D15193F6D20000F5C9F /* AddCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCalendarViewController.m; sourceTree = "<group>"; };
+		F8148D17193F7569000F5C9F /* SetRemindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetRemindViewController.h; sourceTree = "<group>"; };
+		F8148D18193F7569000F5C9F /* SetRemindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetRemindViewController.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1009,6 +1024,10 @@
 				F8148BD6193A21C4000F5C9F /* FindThingsViewController.m */,
 				F8148BEA193C4B7E000F5C9F /* UploadThingViewController.h */,
 				F8148BEB193C4B7E000F5C9F /* UploadThingViewController.m */,
+				F8148D14193F6D20000F5C9F /* AddCalendarViewController.h */,
+				F8148D15193F6D20000F5C9F /* AddCalendarViewController.m */,
+				F8148D17193F7569000F5C9F /* SetRemindViewController.h */,
+				F8148D18193F7569000F5C9F /* SetRemindViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1248,6 +1267,16 @@
 				F8148D06193E20B1000F5C9F /* EmotionTextView.m */,
 			);
 			name = emotionTextView;
+			sourceTree = "<group>";
+		};
+		F8148D13193F6A21000F5C9F /* calendarCell */ = {
+			isa = PBXGroup;
+			children = (
+				F8148D0F193F66F0000F5C9F /* calendarcellbg2.png */,
+				F8148D11193F67B0000F5C9F /* calendarcellbg1.png */,
+				F8148D08193F626A000F5C9F /* calendarcellbg.png */,
+			);
+			name = calendarCell;
 			sourceTree = "<group>";
 		};
 		F842BB8A19051BD700148848 /* menu */ = {
@@ -1573,6 +1602,7 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D13193F6A21000F5C9F /* calendarCell */,
 				F8148C14193C667F000F5C9F /* emotion */,
 				F8148BED193C6648000F5C9F /* headpic */,
 				F8107CB419364CCC0073C169 /* menu */,
@@ -1648,6 +1678,8 @@
 				F8107CAD19363F370073C169 /* GoodsCell.m */,
 				F8148BD8193A2248000F5C9F /* ThingCell.h */,
 				F8148BD9193A2248000F5C9F /* ThingCell.m */,
+				F8148D0A193F639C000F5C9F /* CalendarCell.h */,
+				F8148D0B193F639C000F5C9F /* CalendarCell.m */,
 			);
 			name = component;
 			sourceTree = "<group>";
@@ -1866,6 +1898,7 @@
 				F8148C0F193C665C000F5C9F /* h14.jpg in Resources */,
 				F8C564C51921DC1300695094 /* keyboardtoolbar.xib in Resources */,
 				F8148CD3193C6691000F5C9F /* f079.gif in Resources */,
+				F8148D10193F66F0000F5C9F /* calendarcellbg2.png in Resources */,
 				F8107CB319364C830073C169 /* secondhandmenu.xib in Resources */,
 				F8148C09193C665C000F5C9F /* h8.jpg in Resources */,
 				F8148CD1193C6691000F5C9F /* f077.gif in Resources */,
@@ -1931,6 +1964,7 @@
 				F892372C18F3C6DF00658F47 /* hometowns.plist in Resources */,
 				F8148CDB193C6691000F5C9F /* f087.gif in Resources */,
 				F8148CD2193C6691000F5C9F /* f078.gif in Resources */,
+				F8148D09193F626A000F5C9F /* calendarcellbg.png in Resources */,
 				F8148C85193C6691000F5C9F /* f001.gif in Resources */,
 				F8148C8D193C6691000F5C9F /* f009.gif in Resources */,
 				F86B9E4D18D8826400D71A7B /* me2.png in Resources */,
@@ -1963,6 +1997,7 @@
 				F8107CBE1936547F0073C169 /* basemenu1.png in Resources */,
 				F8148CC6193C6691000F5C9F /* f066.gif in Resources */,
 				F8148CE2193C6691000F5C9F /* f094.gif in Resources */,
+				F8148D12193F67B0000F5C9F /* calendarcellbg1.png in Resources */,
 				F8148C90193C6691000F5C9F /* f012.gif in Resources */,
 				F8148CC3193C6691000F5C9F /* f063.gif in Resources */,
 				F8148C94193C6691000F5C9F /* f016.gif in Resources */,
@@ -2029,6 +2064,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8148D16193F6D20000F5C9F /* AddCalendarViewController.m in Sources */,
 				F8E9686418C5F9B800B9384B /* TopToolBar.m in Sources */,
 				F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */,
 				F8E9686A18C5FC3900B9384B /* FreshNewsViewController.m in Sources */,
@@ -2066,6 +2102,7 @@
 				F8107C961935C33B0073C169 /* ContactPersonCell.m in Sources */,
 				F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */,
 				F84B7DE218BB3C8D007FC2D5 /* DDAbstractDatabaseLogger.m in Sources */,
+				F8148D0C193F639C000F5C9F /* CalendarCell.m in Sources */,
 				F8148D07193E20B1000F5C9F /* EmotionTextView.m in Sources */,
 				F89DFADE191372E60043DD6B /* Message.m in Sources */,
 				F80B0D51187426F2003E72DC /* User.m in Sources */,
@@ -2098,6 +2135,7 @@
 				F84B7DCB18BB3C8D007FC2D5 /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				F8696A861918D95D008887AD /* Notice.m in Sources */,
 				F8148BE6193A29B6000F5C9F /* ThingsInfo.m in Sources */,
+				F8148D19193F7569000F5C9F /* SetRemindViewController.m in Sources */,
 				F84B7DE418BB3C8D007FC2D5 /* DDFileLogger.m in Sources */,
 				F84B7DDB18BB3C8D007FC2D5 /* DDList.m in Sources */,
 				F84B7DCC18BB3C8D007FC2D5 /* XMPPDigestMD5Authentication.m in Sources */,
