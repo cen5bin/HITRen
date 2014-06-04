@@ -95,6 +95,7 @@
     EmotionTextView *tmp = [[EmotionTextView alloc] initWithFrame:CGRectMake(0, 0, MAX_BUBBLETEXTVIEW_WIDTH, 0)];
     tmp.text = text;
     tmp.font = [UIFont boldSystemFontOfSize:16];
+    tmp.len = 30;
     [tmp work];
     return tmp.height + MARGIN_TEXTVIEW_UP_DOWN * 2 + 16;
     CGFloat widht = [ChatCell calculateWidth:text];

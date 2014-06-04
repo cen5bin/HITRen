@@ -77,7 +77,8 @@ static EmotionView *emotionView = nil;
     if (tmp <= 45) index = 0;
     else index = (tmp - 45) / 46 + 1;
     int line = p.y / 54;
-    index = PAGE_EMOTION_COUNT * page + line * LINE_EMOTION_COUNT + index;
+    index = (PAGE_EMOTION_COUNT-1) * page + line * LINE_EMOTION_COUNT + index;
+    LOG(@"%d", index);
     NSString *filename = [NSString stringWithFormat:@"f%03d", index];
     
     filename = [[NSBundle mainBundle] pathForResource:filename ofType:@"gif"];

@@ -99,6 +99,7 @@ static NSArray *emotions = nil;
                     else head = mid;
                 }
                 t = [tmpString substringWithRange:NSMakeRange(0, head+1)];
+                size = [t sizeWithFont:self.font constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame), self.len)];
                 if (max_h < size.height) max_h = size.height;
                 [tmp addObject:t];
                 nowX+=size.width;
@@ -141,6 +142,10 @@ static NSArray *emotions = nil;
             nowX += size.width;
         }
         else if ([obj isKindOfClass:[UIImage class]]) {
+//            UIImageView *view0 = [[UIImageView alloc] init];
+//            view0.image = obj;
+//            view0.frame = CGRectMake(nowX, nowY+h-self.len, self.len, self.len);
+//            [self addSubview:view0];
             [obj drawInRect:CGRectMake(nowX, nowY+h-self.len, self.len, self.len)];
             nowX += self.len;
         }

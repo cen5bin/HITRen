@@ -189,7 +189,7 @@
     [super viewDidAppear:animated];
     return;
     EmotionTextView *textView = [[EmotionTextView alloc] initWithFrame:CGRectMake(0, 100, 176, 0)];
-    textView.text = @"你好好";
+    textView.text = @"你";
     textView.len = 30;
     textView.font = [UIFont boldSystemFontOfSize:16];
     CGRect rect = textView.frame;
