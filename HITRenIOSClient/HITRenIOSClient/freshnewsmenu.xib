@@ -8,15 +8,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="m0C-xx-SCj" customClass="FreshNewsMenu">
-            <rect key="frame" x="0.0" y="0.0" width="117" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="122" height="109"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="basemenu.png" translatesAutoresizingMaskIntoConstraints="NO" id="coS-JG-fky">
-                    <rect key="frame" x="0.0" y="0.0" width="117" height="100"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="basemenu0.png" translatesAutoresizingMaskIntoConstraints="NO" id="coS-JG-fky">
+                    <rect key="frame" x="0.0" y="0.0" width="122" height="109"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lkl-fT-LWg">
-                    <rect key="frame" x="0.0" y="62" width="117" height="37"/>
+                    <rect key="frame" x="0.0" y="60" width="117" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" title="加好友">
@@ -28,7 +28,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7V-Jg-bbg">
-                    <rect key="frame" x="0.0" y="17" width="117" height="37"/>
+                    <rect key="frame" x="0.0" y="14" width="117" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" title="发状态">
@@ -47,6 +47,6 @@
         </view>
     </objects>
     <resources>
-        <image name="basemenu.png" width="234" height="200"/>
+        <image name="basemenu0.png" width="245" height="205"/>
     </resources>
 </document>

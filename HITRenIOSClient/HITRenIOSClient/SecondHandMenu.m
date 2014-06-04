@@ -30,19 +30,19 @@
 */
 
 - (void)awakeFromNib {
-    self.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.layer.shadowOffset = CGSizeMake(1, 1);
-    self.layer.shadowOpacity = 2;
+//    self.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.layer.shadowOffset = CGSizeMake(1, 1);
+//    self.layer.shadowOpacity = 2;
 }
 
 - (IBAction)releaseGoods:(id)sender {
     [self.delegate menuDidChooseAtIndex:0];
-    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu" ofType:@"png"]];
+    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu0" ofType:@"png"]];
 }
 
 - (IBAction)searchGoods:(id)sender {
     [self.delegate menuDidChooseAtIndex:1];
-    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu" ofType:@"png"]];
+    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu0" ofType:@"png"]];
 }
 
 - (IBAction)releaseGoodsTouchDown:(id)sender {

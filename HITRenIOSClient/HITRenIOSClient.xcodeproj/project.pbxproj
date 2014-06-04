@@ -51,8 +51,6 @@
 		F8107CB319364C830073C169 /* secondhandmenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8107CB219364C830073C169 /* secondhandmenu.xib */; };
 		F8107CB919364E310073C169 /* SecondHandMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F8107CB819364E310073C169 /* SecondHandMenu.m */; };
 		F8107CBB193653490073C169 /* basemenu.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBA193653490073C169 /* basemenu.png */; };
-		F8107CBE1936547F0073C169 /* basemenu1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBC1936547F0073C169 /* basemenu1.png */; };
-		F8107CBF1936547F0073C169 /* basemenu2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8107CBD1936547F0073C169 /* basemenu2.png */; };
 		F8148BCE1938BBC5000F5C9F /* TradeLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BCD1938BBC5000F5C9F /* TradeLogic.m */; };
 		F8148BD11938CCF5000F5C9F /* GoodsLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BD01938CCF5000F5C9F /* GoodsLine.m */; };
 		F8148BD41938E265000F5C9F /* GoodsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148BD31938E265000F5C9F /* GoodsInfo.m */; };
@@ -206,6 +204,9 @@
 		F8148D12193F67B0000F5C9F /* calendarcellbg1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D11193F67B0000F5C9F /* calendarcellbg1.png */; };
 		F8148D16193F6D20000F5C9F /* AddCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D15193F6D20000F5C9F /* AddCalendarViewController.m */; };
 		F8148D19193F7569000F5C9F /* SetRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D18193F7569000F5C9F /* SetRemindViewController.m */; };
+		F8148D21193F90A4000F5C9F /* basemenu0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D20193F90A4000F5C9F /* basemenu0.png */; };
+		F8148D24193F9195000F5C9F /* basemenu1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D22193F9195000F5C9F /* basemenu1.png */; };
+		F8148D25193F9195000F5C9F /* basemenu2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D23193F9195000F5C9F /* basemenu2.png */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -404,8 +405,6 @@
 		F8107CB719364E310073C169 /* SecondHandMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondHandMenu.h; sourceTree = "<group>"; };
 		F8107CB819364E310073C169 /* SecondHandMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondHandMenu.m; sourceTree = "<group>"; };
 		F8107CBA193653490073C169 /* basemenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu.png; sourceTree = "<group>"; };
-		F8107CBC1936547F0073C169 /* basemenu1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu1.png; sourceTree = "<group>"; };
-		F8107CBD1936547F0073C169 /* basemenu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu2.png; sourceTree = "<group>"; };
 		F8148BCC1938BBC5000F5C9F /* TradeLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeLogic.h; sourceTree = "<group>"; };
 		F8148BCD1938BBC5000F5C9F /* TradeLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeLogic.m; sourceTree = "<group>"; };
 		F8148BCF1938CCF5000F5C9F /* GoodsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsLine.h; sourceTree = "<group>"; };
@@ -576,6 +575,9 @@
 		F8148D15193F6D20000F5C9F /* AddCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCalendarViewController.m; sourceTree = "<group>"; };
 		F8148D17193F7569000F5C9F /* SetRemindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetRemindViewController.h; sourceTree = "<group>"; };
 		F8148D18193F7569000F5C9F /* SetRemindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetRemindViewController.m; sourceTree = "<group>"; };
+		F8148D20193F90A4000F5C9F /* basemenu0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu0.png; sourceTree = "<group>"; };
+		F8148D22193F9195000F5C9F /* basemenu1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu1.png; sourceTree = "<group>"; };
+		F8148D23193F9195000F5C9F /* basemenu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu2.png; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1091,8 +1093,9 @@
 		F8107CB419364CCC0073C169 /* menu */ = {
 			isa = PBXGroup;
 			children = (
-				F8107CBC1936547F0073C169 /* basemenu1.png */,
-				F8107CBD1936547F0073C169 /* basemenu2.png */,
+				F8148D20193F90A4000F5C9F /* basemenu0.png */,
+				F8148D22193F9195000F5C9F /* basemenu1.png */,
+				F8148D23193F9195000F5C9F /* basemenu2.png */,
 				F8107CBA193653490073C169 /* basemenu.png */,
 			);
 			name = menu;
@@ -1959,6 +1962,7 @@
 				F8148CCD193C6691000F5C9F /* f073.gif in Resources */,
 				F8148C13193C665C000F5C9F /* h18.jpg in Resources */,
 				F8148C10193C665C000F5C9F /* h15.jpg in Resources */,
+				F8148D25193F9195000F5C9F /* basemenu2.png in Resources */,
 				F8148CC1193C6691000F5C9F /* f061.gif in Resources */,
 				F8148C06193C665C000F5C9F /* h5.jpg in Resources */,
 				F892372C18F3C6DF00658F47 /* hometowns.plist in Resources */,
@@ -1978,13 +1982,13 @@
 				F8148CE3193C6691000F5C9F /* f095.gif in Resources */,
 				F89964F618FD2C3600D7FA44 /* base1.png in Resources */,
 				F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */,
-				F8107CBF1936547F0073C169 /* basemenu2.png in Resources */,
 				F8148CCA193C6691000F5C9F /* f070.gif in Resources */,
 				F8148CC0193C6691000F5C9F /* f060.gif in Resources */,
 				F8148CA3193C6691000F5C9F /* f031.gif in Resources */,
 				F84B7DE918BB3C8D007FC2D5 /* README.txt in Resources */,
 				F8148C12193C665C000F5C9F /* h17.jpg in Resources */,
 				F8550F0118C4C251005E51FE /* p_btm3.png in Resources */,
+				F8148D24193F9195000F5C9F /* basemenu1.png in Resources */,
 				F8148CB6193C6691000F5C9F /* f050.gif in Resources */,
 				F8148CE5193C6691000F5C9F /* f097.gif in Resources */,
 				F8148BDD193A23CF000F5C9F /* findthingsmenu.xib in Resources */,
@@ -1994,7 +1998,7 @@
 				F86B9E4918D8806900D71A7B /* me.png in Resources */,
 				F8148CE6193C6691000F5C9F /* f098.gif in Resources */,
 				F8148CA7193C6691000F5C9F /* f035.gif in Resources */,
-				F8107CBE1936547F0073C169 /* basemenu1.png in Resources */,
+				F8148D21193F90A4000F5C9F /* basemenu0.png in Resources */,
 				F8148CC6193C6691000F5C9F /* f066.gif in Resources */,
 				F8148CE2193C6691000F5C9F /* f094.gif in Resources */,
 				F8148D12193F67B0000F5C9F /* calendarcellbg1.png in Resources */,
