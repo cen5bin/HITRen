@@ -211,6 +211,10 @@
 		F8148D2B19401FBC000F5C9F /* EventLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D2A19401FBC000F5C9F /* EventLogic.m */; };
 		F8148D2D194022CD000F5C9F /* calendarcellbg3.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D2C194022CD000F5C9F /* calendarcellbg3.png */; };
 		F8148D3019402FF6000F5C9F /* EventLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D2F19402FF6000F5C9F /* EventLine.m */; };
+		F8148D391940B6BA000F5C9F /* null.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D381940B6BA000F5C9F /* null.png */; };
+		F8148D3B1940BA1E000F5C9F /* leftarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D3A1940BA1E000F5C9F /* leftarrow.png */; };
+		F8148D3E1940C0E8000F5C9F /* FullImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D3D1940C0E8000F5C9F /* FullImageViewController.m */; };
+		F8148D411940C52A000F5C9F /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D401940C52A000F5C9F /* MyImageView.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -589,6 +593,12 @@
 		F8148D2C194022CD000F5C9F /* calendarcellbg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendarcellbg3.png; sourceTree = "<group>"; };
 		F8148D2E19402FF6000F5C9F /* EventLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventLine.h; sourceTree = "<group>"; };
 		F8148D2F19402FF6000F5C9F /* EventLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventLine.m; sourceTree = "<group>"; };
+		F8148D381940B6BA000F5C9F /* null.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = null.png; sourceTree = "<group>"; };
+		F8148D3A1940BA1E000F5C9F /* leftarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftarrow.png; sourceTree = "<group>"; };
+		F8148D3C1940C0E8000F5C9F /* FullImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullImageViewController.h; sourceTree = "<group>"; };
+		F8148D3D1940C0E8000F5C9F /* FullImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullImageViewController.m; sourceTree = "<group>"; };
+		F8148D3F1940C52A000F5C9F /* MyImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyImageView.h; sourceTree = "<group>"; };
+		F8148D401940C52A000F5C9F /* MyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyImageView.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1336,6 +1346,8 @@
 				F823B5181906313E004D4514 /* SendShortMessageViewController.m */,
 				F899C93C192F269900CB3D17 /* MessageDetailViewController.h */,
 				F899C93D192F269900CB3D17 /* MessageDetailViewController.m */,
+				F8148D3C1940C0E8000F5C9F /* FullImageViewController.h */,
+				F8148D3D1940C0E8000F5C9F /* FullImageViewController.m */,
 			);
 			name = freshnews;
 			sourceTree = "<group>";
@@ -1663,6 +1675,7 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D381940B6BA000F5C9F /* null.png */,
 				F8148D13193F6A21000F5C9F /* calendarCell */,
 				F8148C14193C667F000F5C9F /* emotion */,
 				F8148BED193C6648000F5C9F /* headpic */,
@@ -1741,6 +1754,8 @@
 				F8148BD9193A2248000F5C9F /* ThingCell.m */,
 				F8148D0A193F639C000F5C9F /* CalendarCell.h */,
 				F8148D0B193F639C000F5C9F /* CalendarCell.m */,
+				F8148D3F1940C52A000F5C9F /* MyImageView.h */,
+				F8148D401940C52A000F5C9F /* MyImageView.m */,
 			);
 			name = component;
 			sourceTree = "<group>";
@@ -1811,6 +1826,7 @@
 		F8E9686B18C6DB4B00B9384B /* button */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D3A1940BA1E000F5C9F /* leftarrow.png */,
 				F8148CEF193C6E25000F5C9F /* emotionbutton.png */,
 				F8D7483319386DC700829CDA /* addimage.png */,
 				F8107CAF193643BC0073C169 /* more.png */,
@@ -1969,6 +1985,7 @@
 				F8107C9019348CBB0073C169 /* bubble2.png in Resources */,
 				F8148C88193C6691000F5C9F /* f004.gif in Resources */,
 				F8148CBF193C6691000F5C9F /* f059.gif in Resources */,
+				F8148D3B1940BA1E000F5C9F /* leftarrow.png in Resources */,
 				F80B0D131874269D003E72DC /* Images.xcassets in Resources */,
 				F8148CD6193C6691000F5C9F /* f082.gif in Resources */,
 				F8148C95193C6691000F5C9F /* f017.gif in Resources */,
@@ -2060,6 +2077,7 @@
 				F8148CC6193C6691000F5C9F /* f066.gif in Resources */,
 				F8148CE2193C6691000F5C9F /* f094.gif in Resources */,
 				F8148D12193F67B0000F5C9F /* calendarcellbg1.png in Resources */,
+				F8148D391940B6BA000F5C9F /* null.png in Resources */,
 				F8148C90193C6691000F5C9F /* f012.gif in Resources */,
 				F8148CC3193C6691000F5C9F /* f063.gif in Resources */,
 				F8148C94193C6691000F5C9F /* f016.gif in Resources */,
@@ -2245,6 +2263,8 @@
 				F8C564C81921DD0200695094 /* KeyboardToolBar.m in Sources */,
 				F8723EC31927C7CA00828B5C /* CommentListView.m in Sources */,
 				F892372A18F3A62D00658F47 /* HITRenData.xcdatamodeld in Sources */,
+				F8148D411940C52A000F5C9F /* MyImageView.m in Sources */,
+				F8148D3E1940C0E8000F5C9F /* FullImageViewController.m in Sources */,
 				F87209C3191CB53E00FAC7A1 /* NoticeViewBar.m in Sources */,
 				F80B0D48187426F2003E72DC /* HttpData.m in Sources */,
 				F8107C931935C0C40073C169 /* ContactView.m in Sources */,

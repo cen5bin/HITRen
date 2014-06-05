@@ -39,7 +39,7 @@
     [data setIntValue:[[[AppData sharedInstance] getEventLine].seq intValue] forKey:@"seq"];
     LOG(@"seq %d", [[[AppData sharedInstance] getEventLine].seq intValue]);
     BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadEventLine" withEventName:ASYNC_EVENT_DOWNLOADEVENTLINE];
-    if (ret) {
+    if (!ret) {
         L(@"download eventline fail");
         return NO;
     }
@@ -52,7 +52,7 @@
     HttpData *data = [HttpData data];
     [data setValue:tmp forKey:@"datas"];
     BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadEventInfos" withEventName:ASYNC_EVENT_DOWNLOADEVENTSINFO];
-    if (ret) {
+    if (!ret) {
         L(@"download eventinfo fail");
         return NO;
     }

@@ -12,6 +12,7 @@
 #import "EventLine.h"
 #import "Event.h"
 #import "EventLogic.h"
+#import "AddCalendarViewController.h"
 
 @interface CalendarViewController ()
 
@@ -40,6 +41,7 @@
     _data = [[NSMutableArray alloc] init];
     NSArray *tmp = [[AppData sharedInstance] getEventInPage:0];
     for (Event *event in tmp)
+    if (![_data containsObject:event.eid])
         [_data addObject:event.eid];
     [self.tableView reloadData];
 }
@@ -61,6 +63,7 @@
     if ([dic objectForKey:@"SUC"]) L(@"downlaod eventline succ");
     else L(@"download eventline fail");
     if ([[dic objectForKey:@"INFO"] isEqualToString:@"newest"]) {
+        L(@"newest");
         [self.tableView reloadData];
         return;
     }
@@ -120,7 +123,8 @@
     for (int i = 0; i <= _currentPage; i++) {
         NSArray *tmp = [appData getEventInPage:i];
         for (Event *event in tmp)
-            [_data addObject:event.eid];
+            if (![_data containsObject:event.eid])
+                [_data addObject:event.eid];
     }
     [self.tableView reloadData];
 }
@@ -172,6 +176,13 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *eid = [_data objectAtIndex:indexPath.row];
+    AddCalendarViewController *controller = getViewControllerOfName(@"AddCalendar");
+    controller.eid = eid;
+    [self.navigationController pushViewController:controller animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
@@ -190,7 +201,8 @@
 - (IBAction)addCalendar:(id)sender {
     UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"topbar1" ofType:@"png"]];
     self.topBar.image = image;
-    UIViewController *controller = getViewControllerOfName(@"AddCalendar");
+    AddCalendarViewController *controller = getViewControllerOfName(@"AddCalendar");
+    controller.eid = nil;
     [self.navigationController pushViewController:controller animated:YES];
     [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
 }

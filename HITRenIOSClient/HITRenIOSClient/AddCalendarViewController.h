@@ -28,7 +28,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *timeField;
 @property (strong, nonatomic) IBOutlet UITextField *placeField;
 
-@property (nonatomic) int eid;
+@property (strong, nonatomic) NSString *eid;
 
 
 - (IBAction)releaseEvent:(id)sender;

@@ -419,7 +419,7 @@
     [string appendString:@"{"];
     for (int i = 0; i < eids.count; i++) {
         if (i) [string appendString:@","];
-        [string appendString:[NSString stringWithFormat:@"%d", [[eids objectAtIndex:i] intValue]]];
+        [string appendString:[NSString stringWithFormat:@"\"%@\"", [eids objectAtIndex:i]]];
     }
     [string appendString:@"}"];
     NSString *tmp = [NSString stringWithFormat:@"eid IN %@", string];

@@ -37,10 +37,30 @@
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = BACKGROUND_COLOR;
     
+    _times = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:5],[NSNumber numberWithInt:15],[NSNumber numberWithInt:30],[NSNumber numberWithInt:60],[NSNumber numberWithInt:120],[NSNumber numberWithInt:1440],[NSNumber numberWithInt:2880], nil];
+    _data = [[NSMutableArray alloc] initWithObjects:@"无",@"事件发生时",@"5分钟前",@"15分钟前",@"30分钟前",@"1小时前",@"2小时前",@"1天前",@"2天前", nil];
+    
     self.reminds = [[NSMutableArray alloc] init];
     
-    _data = [[NSMutableArray alloc] initWithObjects:@"无",@"事件发生时",@"5分钟前",@"15分钟前",@"30分钟前",@"1小时前",@"2小时前",@"1天前",@"2天前", nil];
-    _times = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:5],[NSNumber numberWithInt:15],[NSNumber numberWithInt:30],[NSNumber numberWithInt:60],[NSNumber numberWithInt:120],[NSNumber numberWithInt:1440],[NSNumber numberWithInt:2880], nil];
+    if (self.eid) {
+        AppData *appData = [AppData sharedInstance];
+        Event *event = [appData getEventOfEid:self.eid];
+        if (!event) return;
+        self.placeField.text = event.place;
+        for (NSNumber *remind in event.remindTimes) {
+            int index = [_times indexOfObject:remind];
+            if (!index)continue;
+            [self.reminds addObject:[NSNumber numberWithInt:index]];
+        }
+        NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+        formater.dateFormat = @"yyyy-MM-dd HH:mm";
+        self.timeField.text = [formater stringFromDate:event.time];
+        self.textView.text = event.desc;
+    }
+    
+        
+
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -181,7 +201,9 @@
     self.topBar.image = image;
     AppData *appData = [AppData sharedInstance];
     Event *event = [appData newEvent];
-    event.eid = [self makeEid];
+    if (!self.eid)
+        event.eid = [self makeEid];
+    else event.eid = self.eid;
     NSDateFormatter *formater = [[NSDateFormatter alloc] init];
     formater.dateFormat = @"yyyy-MM-dd HH:mm";
     event.time = [formater dateFromString:self.timeField.text];

@@ -34,6 +34,8 @@
     int _reuid;
     
     BOOL _loadDetail;
+    
+    UITapGestureRecognizer *_tapGestureRecognizer;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

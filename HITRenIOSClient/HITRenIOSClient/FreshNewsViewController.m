@@ -26,6 +26,8 @@
 #import "EmotionView.h"
 #import "FreshNewsMenu.h"
 #import "EmotionTextView.h"
+#import "MyImageView.h"
+#import "FullImageViewController.h"
 
 @interface FreshNewsViewController ()
 
@@ -56,7 +58,7 @@
     _backgroubdLoadData = NO;
     _backgroubdLoadWorking = NO;
     
-    
+    _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
     
 //    return;
     
@@ -105,6 +107,18 @@
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
 }
 
+- (void)imageTapped:(UITapGestureRecognizer *)recognizer {
+    L(@"asd");
+    MyImageView *view = (MyImageView *)recognizer.view;
+    AppData *appData = [AppData sharedInstance];
+    Message *message = [appData getMessageOfMid:[[_data objectAtIndex:view.indexPath.row] intValue]];
+//    L(@"asd");
+    FullImageViewController *controller = getViewControllerOfName(@"FullImage");
+    controller.picNames = message.picNames;
+    controller.nowIndex = view.index;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     FUNC_START();
     UITouch *touch = [touches anyObject];
@@ -144,7 +158,6 @@
     self.topToolBar.image = [UIImage imageNamed:@"topbar1.png"];
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_menu.alpha = 1; } completion:^(BOOL finished){ isWorking = NO;}];
 }
-
 - (void)hideMenu {
     static BOOL isWorking = NO;
     if (isWorking) return;
@@ -262,8 +275,13 @@
         if (CGRectGetMaxY(rect)+BOTTOM_HEIGHT>max_height) max_height = CGRectGetMaxY(rect) + BOTTOM_HEIGHT;
         UIImage *image = [appData getImage:[message.picNames objectAtIndex:i*2]];
         if (image) {
-            UIImageView *view = [[UIImageView alloc] initWithImage:image];
+            MyImageView *view = [[MyImageView alloc] initWithImage:image];
                         view.frame = rect;
+            view.userInteractionEnabled = YES;
+            view.index = i;
+            view.indexPath = indexPath;
+            UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
+            [view addGestureRecognizer:gestureRecognizer];
             [cell.imageContainer addSubview:view];
         }
         else {
@@ -576,6 +594,7 @@
 
 - (void)imageDidDownload:(NSNotification *)notification {
     UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
+    if (!image) image = [UIImage imageNamed:@"null.png"];
     [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
     [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
     [self.tableView reloadData];
