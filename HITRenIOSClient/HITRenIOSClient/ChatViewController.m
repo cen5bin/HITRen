@@ -232,7 +232,8 @@
         if (p.x <= 50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
-            [_keyboardToolBar resignFirstResponder];
+            [self hideKeyboardToolBar];
+//            [_keyboardToolBar resignFirstResponder];
             [self.navigationController popViewControllerAnimated:YES];
         }
         else if (p.x >= CGRectGetMaxX(self.topBar.frame)-50) {
