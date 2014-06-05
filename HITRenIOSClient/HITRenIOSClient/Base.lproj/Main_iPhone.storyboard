@@ -993,7 +993,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendarcellbg1.png" id="CQp-Ur-JF8">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendarcellbg3.png" id="CQp-Ur-JF8">
                                                     <rect key="frame" x="0.0" y="6" width="320" height="81"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -1077,6 +1077,9 @@
                                 <state key="normal" title="发布">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="releaseEvent:" destination="m1l-GW-fM6" eventType="touchUpInside" id="Qmo-uc-CJI"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="OAh-2i-wXy">
                                 <rect key="frame" x="0.0" y="46" width="320" height="502"/>
@@ -2579,7 +2582,7 @@
         <image name="addimage.png" width="140" height="140"/>
         <image name="arrow1.png" width="80" height="80"/>
         <image name="base0.png" width="640" height="91"/>
-        <image name="calendarcellbg1.png" width="640" height="148"/>
+        <image name="calendarcellbg3.png" width="640" height="148"/>
         <image name="comment.png" width="204" height="50"/>
         <image name="email.png" width="496" height="76"/>
         <image name="empty.png" width="224" height="224"/>

@@ -207,6 +207,10 @@
 		F8148D21193F90A4000F5C9F /* basemenu0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D20193F90A4000F5C9F /* basemenu0.png */; };
 		F8148D24193F9195000F5C9F /* basemenu1.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D22193F9195000F5C9F /* basemenu1.png */; };
 		F8148D25193F9195000F5C9F /* basemenu2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D23193F9195000F5C9F /* basemenu2.png */; };
+		F8148D28194019C2000F5C9F /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D27194019C2000F5C9F /* Event.m */; };
+		F8148D2B19401FBC000F5C9F /* EventLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D2A19401FBC000F5C9F /* EventLogic.m */; };
+		F8148D2D194022CD000F5C9F /* calendarcellbg3.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D2C194022CD000F5C9F /* calendarcellbg3.png */; };
+		F8148D3019402FF6000F5C9F /* EventLine.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D2F19402FF6000F5C9F /* EventLine.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -578,6 +582,13 @@
 		F8148D20193F90A4000F5C9F /* basemenu0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu0.png; sourceTree = "<group>"; };
 		F8148D22193F9195000F5C9F /* basemenu1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu1.png; sourceTree = "<group>"; };
 		F8148D23193F9195000F5C9F /* basemenu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basemenu2.png; sourceTree = "<group>"; };
+		F8148D26194019C2000F5C9F /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		F8148D27194019C2000F5C9F /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		F8148D2919401FBC000F5C9F /* EventLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventLogic.h; sourceTree = "<group>"; };
+		F8148D2A19401FBC000F5C9F /* EventLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventLogic.m; sourceTree = "<group>"; };
+		F8148D2C194022CD000F5C9F /* calendarcellbg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendarcellbg3.png; sourceTree = "<group>"; };
+		F8148D2E19402FF6000F5C9F /* EventLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventLine.h; sourceTree = "<group>"; };
+		F8148D2F19402FF6000F5C9F /* EventLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventLine.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -922,6 +933,8 @@
 				F8148BCD1938BBC5000F5C9F /* TradeLogic.m */,
 				F8148BE7193A325E000F5C9F /* FindLogic.h */,
 				F8148BE8193A325E000F5C9F /* FindLogic.m */,
+				F8148D2919401FBC000F5C9F /* EventLogic.h */,
+				F8148D2A19401FBC000F5C9F /* EventLogic.m */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -959,6 +972,10 @@
 				F8148BE5193A29B6000F5C9F /* ThingsInfo.m */,
 				F8148BE1193A29B5000F5C9F /* ThingsLine.h */,
 				F8148BE2193A29B5000F5C9F /* ThingsLine.m */,
+				F8148D26194019C2000F5C9F /* Event.h */,
+				F8148D27194019C2000F5C9F /* Event.m */,
+				F8148D2E19402FF6000F5C9F /* EventLine.h */,
+				F8148D2F19402FF6000F5C9F /* EventLine.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -992,14 +1009,8 @@
 				F88BCB3918BC7C2800407521 /* LoginViewController.m */,
 				F88BCB4018BC947F00407521 /* MainViewController.h */,
 				F88BCB4118BC947F00407521 /* MainViewController.m */,
-				F8E9686818C5FC3900B9384B /* FreshNewsViewController.h */,
-				F8E9686918C5FC3900B9384B /* FreshNewsViewController.m */,
 				F8E9687718C709CB00B9384B /* NoticeViewController.h */,
 				F8E9687818C709CB00B9384B /* NoticeViewController.m */,
-				F8E9687A18C70AAD00B9384B /* ToolsViewController.h */,
-				F8E9687B18C70AAD00B9384B /* ToolsViewController.m */,
-				F8E9687D18C70B0700B9384B /* CalendarViewController.h */,
-				F8E9687E18C70B0700B9384B /* CalendarViewController.m */,
 				F8E9688018C70B5700B9384B /* PersonViewController.h */,
 				F8E9688118C70B5700B9384B /* PersonViewController.m */,
 				F8E9688318C714C200B9384B /* RegisterViewController.h */,
@@ -1012,24 +1023,11 @@
 				F89964F918FD331200D7FA44 /* FriendInfoViewController.m */,
 				F89964FB18FD50F200D7FA44 /* GroupChooserViewController.h */,
 				F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */,
-				F823B5171906313E004D4514 /* SendShortMessageViewController.h */,
-				F823B5181906313E004D4514 /* SendShortMessageViewController.m */,
-				F899C93C192F269900CB3D17 /* MessageDetailViewController.h */,
-				F899C93D192F269900CB3D17 /* MessageDetailViewController.m */,
 				F8107C6619331A4D0073C169 /* ChatViewController.h */,
 				F8107C6719331A4D0073C169 /* ChatViewController.m */,
-				F8107CA919363EA30073C169 /* SecondTradeViewController.h */,
-				F8107CAA19363EA30073C169 /* SecondTradeViewController.m */,
-				F8D7482C1938638200829CDA /* UploadGoodsViewController.h */,
-				F8D7482D1938638200829CDA /* UploadGoodsViewController.m */,
-				F8148BD5193A21C4000F5C9F /* FindThingsViewController.h */,
-				F8148BD6193A21C4000F5C9F /* FindThingsViewController.m */,
-				F8148BEA193C4B7E000F5C9F /* UploadThingViewController.h */,
-				F8148BEB193C4B7E000F5C9F /* UploadThingViewController.m */,
-				F8148D14193F6D20000F5C9F /* AddCalendarViewController.h */,
-				F8148D15193F6D20000F5C9F /* AddCalendarViewController.m */,
-				F8148D17193F7569000F5C9F /* SetRemindViewController.h */,
-				F8148D18193F7569000F5C9F /* SetRemindViewController.m */,
+				F8148D35194035A2000F5C9F /* freshnews */,
+				F8148D341940356F000F5C9F /* tools */,
+				F8148D31194034E5000F5C9F /* calendar */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1276,10 +1274,70 @@
 			isa = PBXGroup;
 			children = (
 				F8148D0F193F66F0000F5C9F /* calendarcellbg2.png */,
+				F8148D2C194022CD000F5C9F /* calendarcellbg3.png */,
 				F8148D11193F67B0000F5C9F /* calendarcellbg1.png */,
 				F8148D08193F626A000F5C9F /* calendarcellbg.png */,
 			);
 			name = calendarCell;
+			sourceTree = "<group>";
+		};
+		F8148D31194034E5000F5C9F /* calendar */ = {
+			isa = PBXGroup;
+			children = (
+				F8E9687D18C70B0700B9384B /* CalendarViewController.h */,
+				F8E9687E18C70B0700B9384B /* CalendarViewController.m */,
+				F8148D14193F6D20000F5C9F /* AddCalendarViewController.h */,
+				F8148D15193F6D20000F5C9F /* AddCalendarViewController.m */,
+				F8148D17193F7569000F5C9F /* SetRemindViewController.h */,
+				F8148D18193F7569000F5C9F /* SetRemindViewController.m */,
+			);
+			name = calendar;
+			sourceTree = "<group>";
+		};
+		F8148D321940351C000F5C9F /* findthing */ = {
+			isa = PBXGroup;
+			children = (
+				F8148BD5193A21C4000F5C9F /* FindThingsViewController.h */,
+				F8148BD6193A21C4000F5C9F /* FindThingsViewController.m */,
+				F8148BEA193C4B7E000F5C9F /* UploadThingViewController.h */,
+				F8148BEB193C4B7E000F5C9F /* UploadThingViewController.m */,
+			);
+			name = findthing;
+			sourceTree = "<group>";
+		};
+		F8148D3319403546000F5C9F /* secondtrade */ = {
+			isa = PBXGroup;
+			children = (
+				F8107CA919363EA30073C169 /* SecondTradeViewController.h */,
+				F8107CAA19363EA30073C169 /* SecondTradeViewController.m */,
+				F8D7482C1938638200829CDA /* UploadGoodsViewController.h */,
+				F8D7482D1938638200829CDA /* UploadGoodsViewController.m */,
+			);
+			name = secondtrade;
+			sourceTree = "<group>";
+		};
+		F8148D341940356F000F5C9F /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				F8E9687A18C70AAD00B9384B /* ToolsViewController.h */,
+				F8E9687B18C70AAD00B9384B /* ToolsViewController.m */,
+				F8148D3319403546000F5C9F /* secondtrade */,
+				F8148D321940351C000F5C9F /* findthing */,
+			);
+			name = tools;
+			sourceTree = "<group>";
+		};
+		F8148D35194035A2000F5C9F /* freshnews */ = {
+			isa = PBXGroup;
+			children = (
+				F8E9686818C5FC3900B9384B /* FreshNewsViewController.h */,
+				F8E9686918C5FC3900B9384B /* FreshNewsViewController.m */,
+				F823B5171906313E004D4514 /* SendShortMessageViewController.h */,
+				F823B5181906313E004D4514 /* SendShortMessageViewController.m */,
+				F899C93C192F269900CB3D17 /* MessageDetailViewController.h */,
+				F899C93D192F269900CB3D17 /* MessageDetailViewController.m */,
+			);
+			name = freshnews;
 			sourceTree = "<group>";
 		};
 		F842BB8A19051BD700148848 /* menu */ = {
@@ -2027,6 +2085,7 @@
 				F8148C82193C6691000F5C9F /* emotion_del_down.png in Resources */,
 				F8148CCE193C6691000F5C9F /* f074.gif in Resources */,
 				F8107CA31935D8050073C169 /* arrow1.png in Resources */,
+				F8148D2D194022CD000F5C9F /* calendarcellbg3.png in Resources */,
 				F8550EFF18C4C251005E51FE /* p_btm1.png in Resources */,
 				F84B7DFD18BB43EB007FC2D5 /* xmppserver.plist in Resources */,
 				F8696A801918BCA5008887AD /* liked1.png in Resources */,
@@ -2072,6 +2131,7 @@
 				F8E9686418C5F9B800B9384B /* TopToolBar.m in Sources */,
 				F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */,
 				F8E9686A18C5FC3900B9384B /* FreshNewsViewController.m in Sources */,
+				F8148D28194019C2000F5C9F /* Event.m in Sources */,
 				F84B7DD518BB3C8D007FC2D5 /* XMPPJID.m in Sources */,
 				F8148BE0193A242C000F5C9F /* FindThingsMenu.m in Sources */,
 				F80B0D4F187426F2003E72DC /* Teacher.m in Sources */,
@@ -2095,6 +2155,7 @@
 				F80B0D5C18744C17003E72DC /* TestUserSimpleLogic.m in Sources */,
 				F8696A831918CAD8008887AD /* NoticeCell.m in Sources */,
 				F8148BD11938CCF5000F5C9F /* GoodsLine.m in Sources */,
+				F8148D3019402FF6000F5C9F /* EventLine.m in Sources */,
 				F84B7DE118BB3C8D007FC2D5 /* GCDAsyncSocket.m in Sources */,
 				F84B7DEB18BB3C8D007FC2D5 /* DDXMLDocument.m in Sources */,
 				F8148BE9193A325E000F5C9F /* FindLogic.m in Sources */,
@@ -2145,6 +2206,7 @@
 				F84B7DCC18BB3C8D007FC2D5 /* XMPPDigestMD5Authentication.m in Sources */,
 				F8A0F78B191363FE008A64AB /* AppData.m in Sources */,
 				F8E9687918C709CB00B9384B /* NoticeViewController.m in Sources */,
+				F8148D2B19401FBC000F5C9F /* EventLogic.m in Sources */,
 				F8148CF8193CDCC6000F5C9F /* LoadingImageView.m in Sources */,
 				F84B7DDE18BB3C8D007FC2D5 /* XMPPIDTracker.m in Sources */,
 				F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */,

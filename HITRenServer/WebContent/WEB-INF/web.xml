@@ -286,7 +286,7 @@
     <servlet-name>DownloadThingsLine</servlet-name>
     <url-pattern>/DownloadThingsLine</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>DownloadThingsInfo</servlet-name>
     <servlet-class>cn.edu.hit.servlet.findthing.DownloadThingsInfoServlet</servlet-class>
   </servlet>
@@ -294,12 +294,36 @@
     <servlet-name>DownloadThingsInfo</servlet-name>
     <url-pattern>/DownloadThingsInfo</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>UploadThingsInfo</servlet-name>
     <servlet-class>cn.edu.hit.servlet.findthing.UploadThingsInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UploadThingsInfo</servlet-name>
     <url-pattern>/UploadThingsInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UploadEvent</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.calendar.UploadEventServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadEvent</servlet-name>
+    <url-pattern>/UploadEvent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadEventLine</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.calendar.DownloadEventLineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadEventLine</servlet-name>
+    <url-pattern>/DownloadEventLine</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadEventInfos</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.calendar.DownloadEventInfosServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadEventInfos</servlet-name>
+    <url-pattern>/DownloadEventInfos</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -57,6 +57,9 @@ public class DownloadImageServlet extends HttpServlet {
 		 // 获取图片绝对路径  
         String path = FileKit.getUpload();  
         File file = new File(path + filename);  
+        if (!file.exists()) {
+        	return;
+        }
         //设置头信息,内容处理的方式,attachment以附件的形式打开,就是进行下载,并设置下载文件的命名  
         response.setHeader("Content-Disposition","attachment;filename="+file.getName());  
         // 创建文件输入流  

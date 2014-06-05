@@ -16,6 +16,7 @@
 #import "GoodsLine.h"
 #import "ThingsInfo.h"
 #import "ThingsLine.h"
+#import "EventLine.h"
 //static NSMutableArray *_messages;
 //static Timeline *_timeline;
 
@@ -165,7 +166,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:tmp];
     request.predicate = predicate;
     NSArray *array = [context executeFetchRequest:request error:nil];
-    L([array description]);
+   
     if (array && array.count) return array;//[array lastObject];
     return [NSArray array];
 }
@@ -350,6 +351,85 @@
     NSArray *array = [context executeFetchRequest:request error:nil];
     if (array && array.count) return [array objectAtIndex:0];
     return nil;
+}
+
++ (EventLine *)eventLineOfUid:(int)uid {
+    
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"EventLine" inManagedObjectContext:context];
+    request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid == %d", uid];
+    request.predicate = predicate;
+    request.fetchLimit = 1;
+    NSArray *res = [context executeFetchRequest:request error:nil];
+    if (!res || res.count == 0) {
+        EventLine *eventLine = [NSEntityDescription insertNewObjectForEntityForName:@"EventLine" inManagedObjectContext:context];
+        eventLine.seq = 0;
+        eventLine.list = nil;
+        eventLine.uid = [NSNumber numberWithInt:uid];
+        [context save:nil];
+        
+        return eventLine;
+    }
+    
+    return [res objectAtIndex:0];
+}
+
++ (Event *)getEvent {
+    NSManagedObjectContext *context = [DBController context];
+    Event *event = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:context];
+    return event;
+}
+
++ (Event *)getEventOfEid:(NSString *)eid {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:context];
+    request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"eid == %@", eid];
+    request.predicate = predicate;
+    request.fetchLimit = 1;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return [array objectAtIndex:0];
+    return nil;
+}
+
++ (NSArray *)getEventsInPage:(int)page {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:context];
+    request.entity = entity;
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"time" ascending:NO];
+    NSArray *array = [NSArray arrayWithObjects:sortDescriptor, nil];
+    request.sortDescriptors = array;
+    request.fetchOffset = page * PAGE_EVENT_COUNT;
+    request.fetchLimit = PAGE_EVENT_COUNT;
+    NSArray *res = [context executeFetchRequest:request error:nil];
+    return res;
+
+}
+
++ (NSArray *)getEvents:(NSArray *)eids {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:context];
+    request.entity = entity;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    [string appendString:@"{"];
+    for (int i = 0; i < eids.count; i++) {
+        if (i) [string appendString:@","];
+        [string appendString:[NSString stringWithFormat:@"%d", [[eids objectAtIndex:i] intValue]]];
+    }
+    [string appendString:@"}"];
+    NSString *tmp = [NSString stringWithFormat:@"eid IN %@", string];
+    //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mid IN {1,2}"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:tmp];
+    request.predicate = predicate;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return array;//[array lastObject];
+    return [NSArray array];
+
 }
 
 + (void)deleteEntity:(NSManagedObject *)entity {

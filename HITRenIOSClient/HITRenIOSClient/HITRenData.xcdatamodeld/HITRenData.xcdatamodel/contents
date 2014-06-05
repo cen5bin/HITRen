@@ -6,6 +6,19 @@
         <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="messageInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="comment" inverseEntity="Message" syncable="YES"/>
     </entity>
+    <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reminds" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="EventLine" representedClassName="EventLine" syncable="YES">
+        <attribute name="list" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="GoodsInfo" representedClassName="GoodsInfo" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -76,5 +89,7 @@
         <element name="GoodsInfo" positionX="0" positionY="0" width="0" height="0"/>
         <element name="ThingsLine" positionX="0" positionY="0" width="0" height="0"/>
         <element name="ThingsInfo" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="EventLine" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

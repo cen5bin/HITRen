@@ -9,6 +9,9 @@
 #import "CalendarViewController.h"
 #import "AppData.h"
 #import "CalendarCell.h"
+#import "EventLine.h"
+#import "Event.h"
+#import "EventLogic.h"
 
 @interface CalendarViewController ()
 
@@ -31,6 +34,112 @@
 	// Do any additional setup after loading the view.
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = BACKGROUND_COLOR;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    _currentPage = 0;
+    _maxLoadedPage = 0;
+    _data = [[NSMutableArray alloc] init];
+    NSArray *tmp = [[AppData sharedInstance] getEventInPage:0];
+    for (Event *event in tmp)
+        [_data addObject:event.eid];
+    [self.tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [EventLogic downloadEventLine];
+}
+
+- (void)dataDidDownload:(NSNotification *)notification {
+    if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADEVENTLINE])
+        [self eventLineDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADEVENTSINFO])
+        [self eventInfosDidDownload:notification];
+}
+
+- (void)eventLineDidDownload:(NSNotification *)notification {
+    _currentPage = 0;
+    NSDictionary *dic = notification.userInfo;
+    if ([dic objectForKey:@"SUC"]) L(@"downlaod eventline succ");
+    else L(@"download eventline fail");
+    if ([[dic objectForKey:@"INFO"] isEqualToString:@"newest"]) {
+        [self.tableView reloadData];
+        return;
+    }
+    AppData *appData = [AppData sharedInstance];
+    NSDictionary *data = [dic objectForKey:@"DATA"];
+    L([data description]);
+    appData.eventLine.seq = [data objectForKey:@"seq"];
+    NSArray *eids = [data objectForKey:@"eids"];
+    int index = 0;
+    if (appData.eventLine.eids.count)
+        index = [eids indexOfObject:[appData.eventLine.eids objectAtIndex:0]];
+    if (index == NSNotFound) index = 0;
+    for (int i = index; i < eids.count; i++) {
+        if ([appData.eventLine.eids containsObject:[eids objectAtIndex:i]])
+            [appData.eventLine.eids removeObject:[eids objectAtIndex:i]];
+//        if (appData.eventLine.eids.count)
+            [appData.eventLine.eids insertObject:[eids objectAtIndex:i] atIndex:0];
+//        else [appData.eventLine.eids addObject:[eids objectAtIndex:i]];
+    }
+    [appData.eventLine update];
+    [AppData saveData];
+    L([appData.eventLine.eids description]);
+    
+    int count = appData.eventLine.eids.count;
+    if (count > PAGE_EVENT_COUNT) count = PAGE_EVENT_COUNT;
+    NSMutableArray *tmp = [NSMutableArray arrayWithArray:[appData.eventLine.eids subarrayWithRange:NSMakeRange(0, count)]];
+    count = _data.count;
+    if (count > PAGE_EVENT_COUNT) count = PAGE_EVENT_COUNT;
+    for (int i = 0; i < count; i++)
+        if (![tmp containsObject:[_data objectAtIndex:i]]) [tmp addObject:[_data objectAtIndex:i]];
+    [EventLogic downloadEventInfos:tmp];
+}
+
+- (void)eventInfosDidDownload:(NSNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    if ([dic objectForKey:@"SUC"]) L(@"download event infos succ");
+    else L(@"download event infos fail");
+    NSDictionary *data = [dic objectForKey:@"DATA"];
+    AppData *appData = [AppData sharedInstance];
+    NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+    formater.dateFormat = @"yyyy-MM-dd HH:mm";
+    for (NSString *eid in [data allKeys]) {
+        Event *event = [appData getEventOfEid:eid];
+        if (!event) event = [appData newEvent];
+        NSDictionary *tmp = [data objectForKey:eid];
+        L([tmp description]);
+        event.eid = [tmp objectForKey:@"eid"];
+        event.place = [tmp objectForKey:@"place"];
+        event.desc = [tmp objectForKey:@"description"];
+        event.remindTimes = [tmp objectForKey:@"reminds"];
+        event.seq = [tmp objectForKey:@"seq"];
+        event.time = [formater dateFromString:[tmp objectForKey:@"time"]];
+        [event update];
+    }
+    [AppData saveData];
+    _data = [[NSMutableArray alloc] init];
+    for (int i = 0; i <= _currentPage; i++) {
+        NSArray *tmp = [appData getEventInPage:i];
+        for (Event *event in tmp)
+            [_data addObject:event.eid];
+    }
+    [self.tableView reloadData];
+}
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
+        [self workAtIndexpath:indexPath];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
+    [self workAtIndexpath:indexPath];
+}
+
+- (void)workAtIndexpath:(NSIndexPath *)indexPath {
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,7 +153,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return _data.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -52,6 +161,14 @@
     CalendarCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (!cell)
         cell = [[CalendarCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    NSString *eid = [_data objectAtIndex:indexPath.row];
+    AppData *appData = [AppData sharedInstance];
+    Event *event = [appData getEventOfEid:eid];
+    NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+    formater.dateFormat = @"yyyy-MM-dd HH:mm";
+    cell.timeLabel.text = [formater stringFromDate:event.time];
+    cell.placeLabel.text = event.place;
+    cell.detailLabel.text = event.desc;
     return cell;
 }
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Timeline, Message, UserInfo, Notice, NoticeObject,LikedList,Comment,GoodsLine, GoodsInfo,ThingsInfo, ThingsLine;
+@class Timeline, Message, UserInfo, Notice, NoticeObject,LikedList,Comment,GoodsLine, GoodsInfo,ThingsInfo, ThingsLine, Event, EventLine;
 @interface AppData : NSObject {
     Timeline *_timeline;
     NSMutableDictionary *_messages;
@@ -18,6 +18,7 @@
     NSMutableDictionary *_likedLists;
     GoodsLine *_goodsLine;
     ThingsLine *_thingsLine;
+    EventLine *_eventLine;
 //    NSMutableArray *_activityLine;
     
 //    NSMutableArray *_messageList;
@@ -27,11 +28,14 @@
 @property (nonatomic, strong, getter = getNoticeLine) NSMutableArray *noticeLine;
 @property (nonatomic, strong, getter = getGoodsLine) GoodsLine *goodsLine;
 @property (nonatomic, strong, getter = getThingsLine) ThingsLine *thingsLine;
+@property (nonatomic, strong, getter = getEventLine) EventLine *eventLine;
 //@property (nonatomic, strong) NSMutableDictionary *userInfos;
 //@property (nonatomic, strong, getter = getMessageList) NSMutableArray *messageList;
 
 + (id)sharedInstance;
 + (void)saveData;
+
+- (int)getUid;
 
 + (Message *)newMessage;
 - (id)init;
@@ -72,6 +76,10 @@
 - (ThingsInfo *)newThingsInfo;
 - (ThingsInfo *)getThingsInfoOfTid:(int)tid;
 
+- (Event *)newEvent;
+- (Event *)getEventOfEid:(NSString *)eid;
+- (NSArray *)getEventInPage:(int)page;
+- (NSArray *)eventInfosNeedDownload:(NSArray *)array;
 //- (UserInfo *)getUserInfo:(int)uid;
 
 //- (void)insertMessage:(Message *)message;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DBController.h"
 
-@class Timeline, Message, UserInfo, Notice,LikedList,Comment,GoodsLine,GoodsInfo,ThingsInfo,ThingsLine;
+@class Timeline, Message, UserInfo, Notice,LikedList,Comment,GoodsLine,GoodsInfo,ThingsInfo,ThingsLine,Event,EventLine;
 @interface DataManager : NSObject
 
 + (Timeline *)timeline;
@@ -43,6 +43,11 @@
 + (ThingsInfo *)getThingsInfo;
 + (ThingsInfo *)getThingsInfoOfTid:(int)tid;
 
++ (EventLine *)eventLineOfUid:(int)uid;
++ (Event *)getEvent;
++ (Event *)getEventOfEid:(NSString *)eid;
++ (NSArray *)getEventsInPage:(int)page;
++ (NSArray *)getEvents:(NSArray *)eids;
 
 + (void)deleteEntity:(NSManagedObject *)entity;
 + (void)save;

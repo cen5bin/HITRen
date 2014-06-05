@@ -8,6 +8,10 @@
 
 #import "AddCalendarViewController.h"
 #import "SetRemindViewController.h"
+#import "AppData.h"
+#import "Event.h"
+#import "EventLogic.h"
+#import "User.h"
 
 @interface AddCalendarViewController ()
 
@@ -36,6 +40,7 @@
     self.reminds = [[NSMutableArray alloc] init];
     
     _data = [[NSMutableArray alloc] initWithObjects:@"无",@"事件发生时",@"5分钟前",@"15分钟前",@"30分钟前",@"1小时前",@"2小时前",@"1天前",@"2天前", nil];
+    _times = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:5],[NSNumber numberWithInt:15],[NSNumber numberWithInt:30],[NSNumber numberWithInt:60],[NSNumber numberWithInt:120],[NSNumber numberWithInt:1440],[NSNumber numberWithInt:2880], nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -171,4 +176,42 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)releaseEvent:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
+    AppData *appData = [AppData sharedInstance];
+    Event *event = [appData newEvent];
+    event.eid = [self makeEid];
+    NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+    formater.dateFormat = @"yyyy-MM-dd HH:mm";
+    event.time = [formater dateFromString:self.timeField.text];
+    event.desc = self.textView.text;
+    event.place = self.placeField.text;
+    NSMutableArray *tmp = [[NSMutableArray alloc] init];
+    for (NSNumber *index in self.reminds)
+        [tmp addObject:[_times objectAtIndex:[index intValue]]];
+    event.remindTimes = tmp;
+    [event update];
+    [AppData saveData];
+    NSDictionary *dic = @{@"eid":event.eid, @"time":self.timeField.text, @"place":event.place, @"description":event.desc, @"reminds":tmp};
+    [EventLogic uploadEvent:dic];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+ }
+
+- (void)clearTopBar {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+    self.topBar.image = image;
+}
+
+- (NSString *)makeEid {
+    static int rand = 1;
+    User *user = [EventLogic user];
+    int uid = user.uid;
+    NSDate *date = [NSDate date];
+    double tmp = [date timeIntervalSince1970];
+    NSString *string = [NSString stringWithFormat:@"%03d%010d%.0lf",rand % 1000,uid, (tmp*100)];
+    rand++;
+    return string;
+}
 @end

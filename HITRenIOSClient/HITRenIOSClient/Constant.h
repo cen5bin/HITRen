@@ -33,6 +33,8 @@
 
 #define PAGE_THINGS_COUNT 20 // 一页有多少物品
 
+#define PAGE_EVENT_COUNT 20 // 一页多少日程
+
 #define ASYNCDATALOADED @"HITRenAsyncDataFinishedLoading"
 
 #define ASYNC_EVENT_UPDATEUSETINFO @"HITRenAsyncDataUpdataUserInfo"
@@ -45,14 +47,24 @@
 #define ASYNC_EVENT_COMMENTMESSAGE @"HITRenAsyncDataCommentMessage" //评论
 #define ASYNC_EVENT_DOWNLOADCOMMENTLIST @"HITRenAsyncDataDownloadCommentList" //下载评论
 #define ASYNC_EVENT_DOWNLOADCONTACT @"HITRenAsyncDataDownloadContact" //下载通讯录
+
 #define ASYNC_EVENT_DOWNLOADIMAGE @"HITRenAsyncDataDownloadImage" //下载图片
 #define ASYNC_EVENT_UPLOADIMAGE @"HITRenAsyncDataUploadImage" //上传图片
+
 #define ASYNC_EVENT_UPLOADGOODSINFO @"HITRenAsyncDataUploadGoodsInfo" //上传商品信息
 #define ASYNC_EVENT_DOWNLOADGOODSLINE @"HITRenAsyncDataDownloadGoodsLine" //下载商品线
 #define ASYNC_EVENT_DOWNLOADGOODSINFO @"HITRenAsyncDataDownloadGoodsInfo" //下载商品数据
+
 #define ASYNC_EVENT_UPLOADTHINGSINFO @"HITRenAsyncDataUploadThingsInfo" //上传物品信息
 #define ASYNC_EVENT_DOWNLOADTHINGSLINE @"HITRenAsyncDataDownloadThingsLine" //下载物品线
 #define ASYNC_EVENT_DOWNLOADTHINGSINFO @"HITRenAsyncDataDownloadThingsInfo" //下载物品数据
+
+#define ASYNC_EVENT_DOWNLOADEVENTSINFO @"HITRenAsyncDataDownloadEventsInfo" //下载日程信息
+#define ASYNC_EVENT_UPLOADEVENT @"HITRenAsyncDataUploadEvent" //上传日程
+#define ASYNC_EVENT_DOWNLOADEVENTLINE @"HITRenAsyncDataDownloadEventLine" //下载日程线
+
+
+
 
 
 #define XMPP_MESSAGE_RECEIVED @"XMPP_MESSAGE_RECEIVED"

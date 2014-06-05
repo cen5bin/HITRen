@@ -19,6 +19,8 @@
 #import "GoodsInfo.h"
 #import "ThingsLine.h"
 #import "ThingsInfo.h"
+#import "Event.h"
+#import "EventLine.h"
 //#import "MessageLogic.h"
 
 static AppData *appData;
@@ -29,6 +31,7 @@ static AppData *appData;
 @synthesize noticeLine = _noticeLine;
 @synthesize goodsLine = _goodsLine;
 @synthesize thingsLine = _thingsLine;
+@synthesize eventLine = _eventLine;
 
 - (id)init {
     if (self = [super init]) {
@@ -51,6 +54,11 @@ static AppData *appData;
     [DataManager save];
 }
 
+- (int)getUid {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [[userDefaults objectForKey:@"uid"] intValue];
+}
+
 + (Message *)newMessage {
     return [DataManager getMessage];
 }
@@ -64,7 +72,7 @@ static AppData *appData;
 }
 
 - (Timeline*)getTimeline {
-    if (_timeline) return _timeline;
+//    if (_timeline) return _timeline;
     _timeline = [DataManager timeline];
     return _timeline;
 }
@@ -370,4 +378,41 @@ static AppData *appData;
 - (ThingsInfo *)getThingsInfoOfTid:(int)tid {
     return [DataManager getThingsInfoOfTid:tid];
 }
+
+- (Event *)newEvent {
+    return [DataManager getEvent];
+}
+
+- (Event *)getEventOfEid:(NSString *)eid {
+    return [DataManager getEventOfEid:eid];
+}
+
+- (EventLine *)getEventLine {
+//    if (_eventLine) return _eventLine;
+    _eventLine = [DataManager eventLineOfUid:[self getUid]];
+    return _eventLine;
+}
+
+- (NSArray *)getEventInPage:(int)page {
+    return [DataManager getEventsInPage:page];
+}
+
+- (NSArray *)eventInfosNeedDownload:(NSArray *)eids {
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:eids];
+    NSMutableArray *ret = [[NSMutableArray alloc] init];
+    NSArray *events = [DataManager getEvents:array];
+    
+    for (Event *event in events) {
+        [ret addObject:@{@"eid":event.eid, @"seq":event.seq}];
+        [array removeObject:event.eid];
+    }
+    
+    for (id eid in array) {
+        NSDictionary *dic = @{ @"eid": eid, @"seq":[NSNumber numberWithInteger:0]};
+        [ret addObject:dic];
+    }
+    return ret;
+
+}
+
 @end

@@ -8,7 +8,12 @@
 
 #import "MainViewController.h"
 
-@interface CalendarViewController : MainViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CalendarViewController : MainViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate> {
+    NSMutableArray *_data;
+    int _currentPage;
+    int _maxLoadedPage;
+}
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 

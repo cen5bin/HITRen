@@ -577,7 +577,6 @@
 - (void)imageDidDownload:(NSNotification *)notification {
     UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
     [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
-    [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
     [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
     [self.tableView reloadData];
 }
@@ -655,7 +654,7 @@
     NSMutableArray *uids = [[NSMutableArray alloc] init];
     for (NSNumber *mid in [data allKeys]) {
         NSDictionary *dic = [data objectForKey:mid];
-        L([dic description]);
+        
         Comment *comment = [appData getCommentOfMid:[mid intValue]];
         comment.seq = [dic objectForKey:@"seq"];
         comment.commentList = [[NSMutableArray alloc] initWithArray:[dic objectForKey:@"list"]];
