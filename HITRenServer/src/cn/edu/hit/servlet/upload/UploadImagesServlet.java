@@ -46,7 +46,6 @@ public class UploadImagesServlet extends BaseServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DiskFileItemFactory factory = new DiskFileItemFactory();
 		String upload = this.getServletContext().getRealPath("/upload/");
 		logger.info(FileKit.getWebRoot());
 		logger.info(upload);

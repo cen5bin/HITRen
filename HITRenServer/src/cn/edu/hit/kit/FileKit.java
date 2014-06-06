@@ -16,7 +16,7 @@ public class FileKit {
 			webRoot = URLDecoder.decode(url, "utf-8");
 			WEB_INF = webRoot+"WEB-INF/";
 			conf = WEB_INF+"conf/";
-			upload = WEB_INF + "upload/";
+			upload = webRoot + "../upload/";
 			
 			File file = new File(upload);
 			if (!file.exists())
