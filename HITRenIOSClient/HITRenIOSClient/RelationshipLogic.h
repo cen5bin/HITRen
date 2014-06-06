@@ -22,8 +22,8 @@
 + (BOOL)deleteUsers:(NSArray *)users fromGroup:(NSString *)gname;
 + (BOOL)deleteUser:(int)uid fromGroup:(NSString *)gname;
 
-- (BOOL)addGroup:(NSString *)gname;
-- (BOOL)deleteGroup:(NSString *)gname;
++ (BOOL)addGroup:(NSString *)gname;
++ (BOOL)deleteGroup:(NSString *)gname;
 - (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2;
 - (BOOL)deleteConcernedUser:(int)uid;
 - (BOOL)moveUserToBlacklist:(int)uid;

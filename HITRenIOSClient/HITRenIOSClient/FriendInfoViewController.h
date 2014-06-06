@@ -33,4 +33,5 @@
 @property (strong, nonatomic) NSDictionary *data;
 @property (strong, nonatomic) NSString *gname; // 当前选中的这个人是在哪个跟组里选的
 
+
 @end

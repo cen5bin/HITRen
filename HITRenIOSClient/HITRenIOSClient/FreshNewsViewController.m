@@ -108,7 +108,6 @@
 }
 
 - (void)imageTapped:(UITapGestureRecognizer *)recognizer {
-    L(@"asd");
     MyImageView *view = (MyImageView *)recognizer.view;
     AppData *appData = [AppData sharedInstance];
     Message *message = [appData getMessageOfMid:[[_data objectAtIndex:view.indexPath.row] intValue]];
@@ -116,6 +115,14 @@
     FullImageViewController *controller = getViewControllerOfName(@"FullImage");
     controller.picNames = message.picNames;
     controller.nowIndex = view.index;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)headPicTapped:(UITapGestureRecognizer *)recognizer {
+    MyImageView *view = (MyImageView *)recognizer.view;
+    AppData *appData = [AppData sharedInstance];
+    Message *message = [appData getMessageOfMid:[[_data objectAtIndex:view.indexPath.row] intValue]];
+    UIViewController *controller = getViewControllerOfName(@"ContactView");
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -209,12 +216,7 @@
     [textView work];
     rect.size.height = textView.height;
     textView.frame = rect;
-//    [textView drawRect:textView.frame];
-//    textView.backgroundColor = [UIColor blackColor];
-//    [textView setNeedsDisplay];
     [self.view.window addSubview:textView];
-    LOG(@"%f", textView.height);
-
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -245,7 +247,10 @@
     UserInfo *userInfo = [appData readUserInfoForId:[message.uid intValue]];
     if (userInfo)
         cell.username.text = userInfo.username;
-    
+    cell.picture.indexPath = indexPath;
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headPicTapped:)];
+    cell.picture.userInteractionEnabled = YES;
+    [cell.picture addGestureRecognizer:gesture];
     if (userInfo.pic && ![userInfo.pic isEqualToString:@""]) {
         if ([[userInfo.pic substringToIndex:1] isEqualToString:@"h"])
             cell.picture.image = [UIImage imageNamed:userInfo.pic];

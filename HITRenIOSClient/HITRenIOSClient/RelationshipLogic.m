@@ -40,13 +40,12 @@
     return YES;
 }
 
-- (BOOL)addGroup:(NSString *)gname {
++ (BOOL)addGroup:(NSString *)gname {
     FUNC_START();
     HttpData *data = [[HttpData alloc] init];
     [data setIntValue:self.user.uid forKey:@"uid"];
     [data setValue:gname forKey:@"gname"];
-    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:request to:@"AddConcernlistGroup"];
+    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"AddConcernlistGroup"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"addConcernlistGroup fail");
         FUNC_END();
@@ -57,13 +56,12 @@
     return  YES;
 }
 
-- (BOOL)deleteGroup:(NSString *)gname {
++ (BOOL)deleteGroup:(NSString *)gname {
     FUNC_START();
     HttpData *data = [[HttpData alloc]init];
     [data setIntValue:self.user.uid forKey:@"uid"];
     [data setValue:gname forKey:@"gname"];
-    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:request to:@"DeleteConcernlistGroup"];
+    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"DeleteConcernlistGroup"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"deleteConcernlistGroup fail");
         FUNC_END();

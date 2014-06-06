@@ -22,7 +22,7 @@ void testConcernUser(int uid) {
 //    [logic signUp];
     [UserSimpleLogic login];
     RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
-    [logic1 addGroup:@"asd"];
+//    [logic1 addGroup:@"asd"];
 //    for (int i = 40; i < 50; i++)
     [logic1 concernUser:uid inGroup:@"asd"];
 //    [logic1 concernUser:<#(int)#> inGroups:<#(NSArray *)#>]

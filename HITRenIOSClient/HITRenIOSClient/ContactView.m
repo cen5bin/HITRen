@@ -76,7 +76,7 @@
     for (NSDictionary *dic in user.relationShip.concerList) {
         NSString *gname = [dic objectForKey:@"gname"];
         if ([gname isEqualToString:@"ALL"]) gname = @"所有好友";
-        else if ([gname isEqualToString:@"default"]) gname = @"未分组";
+        else if ([gname isEqualToString:@"default"]) gname = @"默认分组";
         if ([gname isEqualToString:@"所有好友"])
             [_datas insertObject:@{@"type":[NSNumber numberWithInt:2],@"showlist":[NSNumber numberWithBool:NO], @"gname":gname} atIndex:0];
         else [_datas addObject:@{@"type":[NSNumber numberWithInt:2],@"showlist":[NSNumber numberWithBool:NO], @"gname":gname}];

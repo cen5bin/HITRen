@@ -217,6 +217,15 @@
 		F8148D411940C52A000F5C9F /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D401940C52A000F5C9F /* MyImageView.m */; };
 		F8148D471941A59F000F5C9F /* HeadPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D461941A59F000F5C9F /* HeadPicViewController.m */; };
 		F8148D4B1941A781000F5C9F /* HeadPicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D4A1941A781000F5C9F /* HeadPicCell.m */; };
+		F8148D4E1941ED52000F5C9F /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D4D1941ED52000F5C9F /* ContactViewController.m */; };
+		F8148D581941F395000F5C9F /* base3.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D551941F395000F5C9F /* base3.png */; };
+		F8148D591941F395000F5C9F /* base4.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D561941F395000F5C9F /* base4.png */; };
+		F8148D5A1941F395000F5C9F /* base5.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D571941F395000F5C9F /* base5.png */; };
+		F8148D5E1941F503000F5C9F /* ManageGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D5D1941F503000F5C9F /* ManageGroupViewController.m */; };
+		F8148D6119420308000F5C9F /* MyActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8148D6019420308000F5C9F /* MyActivityIndicatorView.xib */; };
+		F8148D64194203D7000F5C9F /* MyActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D63194203D7000F5C9F /* MyActivityIndicatorView.m */; };
+		F8148D6719420901000F5C9F /* textbox.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8148D6619420901000F5C9F /* textbox.xib */; };
+		F8148D6C19420C76000F5C9F /* TextBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D6B19420C76000F5C9F /* TextBox.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -605,6 +614,20 @@
 		F8148D461941A59F000F5C9F /* HeadPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadPicViewController.m; sourceTree = "<group>"; };
 		F8148D491941A781000F5C9F /* HeadPicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadPicCell.h; sourceTree = "<group>"; };
 		F8148D4A1941A781000F5C9F /* HeadPicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadPicCell.m; sourceTree = "<group>"; };
+		F8148D4C1941ED52000F5C9F /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
+		F8148D4D1941ED52000F5C9F /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
+		F8148D551941F395000F5C9F /* base3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base3.png; sourceTree = "<group>"; };
+		F8148D561941F395000F5C9F /* base4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base4.png; sourceTree = "<group>"; };
+		F8148D571941F395000F5C9F /* base5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base5.png; sourceTree = "<group>"; };
+		F8148D5C1941F503000F5C9F /* ManageGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageGroupViewController.h; sourceTree = "<group>"; };
+		F8148D5D1941F503000F5C9F /* ManageGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageGroupViewController.m; sourceTree = "<group>"; };
+		F8148D6019420308000F5C9F /* MyActivityIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyActivityIndicatorView.xib; sourceTree = "<group>"; };
+		F8148D62194203D7000F5C9F /* MyActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyActivityIndicatorView.h; sourceTree = "<group>"; };
+		F8148D63194203D7000F5C9F /* MyActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyActivityIndicatorView.m; sourceTree = "<group>"; };
+		F8148D6619420901000F5C9F /* textbox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = textbox.xib; sourceTree = "<group>"; };
+		F8148D6A19420C76000F5C9F /* TextBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBox.h; sourceTree = "<group>"; };
+		F8148D6B19420C76000F5C9F /* TextBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBox.m; sourceTree = "<group>"; };
+		F8148D6D19420CDD000F5C9F /* TextBoxDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextBoxDelegate.h; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1040,6 +1063,7 @@
 				F8148D35194035A2000F5C9F /* 新鲜事界面 */,
 				F8148D341940356F000F5C9F /* 工具界面 */,
 				F8148D31194034E5000F5C9F /* 日程界面 */,
+				F8148D5B1941F4E7000F5C9F /* 通讯录 */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1384,6 +1408,38 @@
 				F8148D4A1941A781000F5C9F /* HeadPicCell.m */,
 			);
 			name = "头像选取";
+			sourceTree = "<group>";
+		};
+		F8148D5B1941F4E7000F5C9F /* 通讯录 */ = {
+			isa = PBXGroup;
+			children = (
+				F8148D4C1941ED52000F5C9F /* ContactViewController.h */,
+				F8148D4D1941ED52000F5C9F /* ContactViewController.m */,
+				F8148D5C1941F503000F5C9F /* ManageGroupViewController.h */,
+				F8148D5D1941F503000F5C9F /* ManageGroupViewController.m */,
+			);
+			name = "通讯录";
+			sourceTree = "<group>";
+		};
+		F8148D5F194202DA000F5C9F /* myActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				F8148D6019420308000F5C9F /* MyActivityIndicatorView.xib */,
+				F8148D62194203D7000F5C9F /* MyActivityIndicatorView.h */,
+				F8148D63194203D7000F5C9F /* MyActivityIndicatorView.m */,
+			);
+			name = myActivityIndicatorView;
+			sourceTree = "<group>";
+		};
+		F8148D65194208C7000F5C9F /* textBox */ = {
+			isa = PBXGroup;
+			children = (
+				F8148D6619420901000F5C9F /* textbox.xib */,
+				F8148D6A19420C76000F5C9F /* TextBox.h */,
+				F8148D6B19420C76000F5C9F /* TextBox.m */,
+				F8148D6D19420CDD000F5C9F /* TextBoxDelegate.h */,
+			);
+			name = textBox;
 			sourceTree = "<group>";
 		};
 		F842BB8A19051BD700148848 /* menu */ = {
@@ -1735,6 +1791,9 @@
 				F89964F218FD2C3600D7FA44 /* base0.png */,
 				F89964F318FD2C3600D7FA44 /* base1.png */,
 				F89964F418FD2C3600D7FA44 /* base2.png */,
+				F8148D551941F395000F5C9F /* base3.png */,
+				F8148D561941F395000F5C9F /* base4.png */,
+				F8148D571941F395000F5C9F /* base5.png */,
 				F89964DF18FCEFA000D7FA44 /* my friends */,
 				F89964DE18FCEF7E00D7FA44 /* me */,
 				F8E9685C18C5F96C00B9384B /* topbar0.png */,
@@ -1760,6 +1819,8 @@
 		F88F989118C1E86C009CE742 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D65194208C7000F5C9F /* textBox */,
+				F8148D5F194202DA000F5C9F /* myActivityIndicatorView */,
 				F8148D04193E2086000F5C9F /* emotionTextView */,
 				F8148CFC193E0031000F5C9F /* freshnews */,
 				F8148BDB193A2386000F5C9F /* findthings */,
@@ -1980,6 +2041,7 @@
 				F8148CEA193C6691000F5C9F /* f102.gif in Resources */,
 				F8148C04193C665C000F5C9F /* h3.jpg in Resources */,
 				F8148CB1193C6691000F5C9F /* f045.gif in Resources */,
+				F8148D581941F395000F5C9F /* base3.png in Resources */,
 				F8148CAC193C6691000F5C9F /* f040.gif in Resources */,
 				F8148C05193C665C000F5C9F /* h4.jpg in Resources */,
 				F8148CD4193C6691000F5C9F /* f080.gif in Resources */,
@@ -2032,6 +2094,7 @@
 				F8148CAB193C6691000F5C9F /* f039.gif in Resources */,
 				F8148CBD193C6691000F5C9F /* f057.gif in Resources */,
 				F8148C8B193C6691000F5C9F /* f007.gif in Resources */,
+				F8148D591941F395000F5C9F /* base4.png in Resources */,
 				F8148CBE193C6691000F5C9F /* f058.gif in Resources */,
 				F8148CAE193C6691000F5C9F /* f042.gif in Resources */,
 				F8148C92193C6691000F5C9F /* f014.gif in Resources */,
@@ -2046,6 +2109,8 @@
 				F8148CBC193C6691000F5C9F /* f056.gif in Resources */,
 				F8148C86193C6691000F5C9F /* f002.gif in Resources */,
 				F8107CA51935D8870073C169 /* arrow2.png in Resources */,
+				F8148D5A1941F395000F5C9F /* base5.png in Resources */,
+				F8148D6119420308000F5C9F /* MyActivityIndicatorView.xib in Resources */,
 				F8148C9C193C6691000F5C9F /* f024.gif in Resources */,
 				F8148C0D193C665C000F5C9F /* h12.jpg in Resources */,
 				F8E9687018C6DCB500B9384B /* email.png in Resources */,
@@ -2102,6 +2167,7 @@
 				F8148CE5193C6691000F5C9F /* f097.gif in Resources */,
 				F8148BDD193A23CF000F5C9F /* findthingsmenu.xib in Resources */,
 				F8148C87193C6691000F5C9F /* f003.gif in Resources */,
+				F8148D6719420901000F5C9F /* textbox.xib in Resources */,
 				F8148C91193C6691000F5C9F /* f013.gif in Resources */,
 				F8148C0E193C665C000F5C9F /* h13.jpg in Resources */,
 				F86B9E4918D8806900D71A7B /* me.png in Resources */,
@@ -2209,6 +2275,7 @@
 				F8148BD11938CCF5000F5C9F /* GoodsLine.m in Sources */,
 				F8148D3019402FF6000F5C9F /* EventLine.m in Sources */,
 				F84B7DE118BB3C8D007FC2D5 /* GCDAsyncSocket.m in Sources */,
+				F8148D6C19420C76000F5C9F /* TextBox.m in Sources */,
 				F84B7DEB18BB3C8D007FC2D5 /* DDXMLDocument.m in Sources */,
 				F8148BE9193A325E000F5C9F /* FindLogic.m in Sources */,
 				F80B0D50187426F2003E72DC /* TestHttpTransfer.m in Sources */,
@@ -2226,6 +2293,7 @@
 				F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */,
 				F8148BCE1938BBC5000F5C9F /* TradeLogic.m in Sources */,
 				F8A5FD55191217FA0091939B /* Timeline.m in Sources */,
+				F8148D5E1941F503000F5C9F /* ManageGroupViewController.m in Sources */,
 				F87209C6191DE57400FAC7A1 /* UploadLogic.m in Sources */,
 				F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */,
 				F8107CAB19363EA30073C169 /* SecondTradeViewController.m in Sources */,
@@ -2237,6 +2305,7 @@
 				F8148BD7193A21C4000F5C9F /* FindThingsViewController.m in Sources */,
 				F84B7DEC18BB3C8D007FC2D5 /* DDXMLElement.m in Sources */,
 				F84B7DCD18BB3C8D007FC2D5 /* XMPPPlainAuthentication.m in Sources */,
+				F8148D64194203D7000F5C9F /* MyActivityIndicatorView.m in Sources */,
 				F84B7DCE18BB3C8D007FC2D5 /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				F8148BEC193C4B7E000F5C9F /* UploadThingViewController.m in Sources */,
 				F88F989418C1E910009CE742 /* BtmToolBar.m in Sources */,
@@ -2252,6 +2321,7 @@
 				F84B7DD618BB3C8D007FC2D5 /* XMPPMessage.m in Sources */,
 				F80B0D47187426F2003E72DC /* BaseLogic.m in Sources */,
 				F84B7DCB18BB3C8D007FC2D5 /* XMPPDeprecatedPlainAuthentication.m in Sources */,
+				F8148D4E1941ED52000F5C9F /* ContactViewController.m in Sources */,
 				F8696A861918D95D008887AD /* Notice.m in Sources */,
 				F8148BE6193A29B6000F5C9F /* ThingsInfo.m in Sources */,
 				F8148D19193F7569000F5C9F /* SetRemindViewController.m in Sources */,
