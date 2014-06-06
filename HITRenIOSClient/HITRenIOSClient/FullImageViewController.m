@@ -35,12 +35,21 @@
     [self updateTopLabel];
     self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.frame)*(self.picNames.count / 2), CGRectGetHeight(self.view.frame));
     self.scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.view.frame)*self.nowIndex, 0);
-//    AppData *appData = [AppData sharedInstance];
-//    UIImage *image = [appData getImage:[self imageNameAtIndex:self.nowIndex]];
-//    if (!image) {
-//        [_downloadingImageSet addObject:[self imageNameAtIndex:self.nowIndex]];
-//        [UploadLogic downloadImage:[self imageNameAtIndex:self.nowIndex] from:NSStringFromClass(self.class)];
-//    }
+//    self.scrollView.maximumZoomScale = 4;
+//    self.scrollView.minimumZoomScale = 0.25;
+    
+    _picScrollViews = [[NSMutableArray alloc] init];
+    CGRect rect = self.scrollView.frame;
+    for (int i =0; i < self.picNames.count/2; i++) {
+        UIScrollView *view = [[UIScrollView alloc] initWithFrame:rect];
+        [self.scrollView addSubview:view];
+        [_picScrollViews addObject:view];
+        view.delegate = self;
+        view.maximumZoomScale = 4;
+        view.minimumZoomScale = 0.25;
+        rect.origin.x += CGRectGetWidth(rect);
+    }
+    
     [self reloadView];
 }
 
@@ -73,7 +82,9 @@
         [_loadedImageIndex addObject:[NSNumber numberWithInt:self.nowIndex]];
         UIImageView *view = [[UIImageView alloc] initWithImage:image];
         view.frame =[self makeImageRectAtIndex:self.nowIndex];
-        [self.scrollView addSubview:view];
+        view.tag = 1000 + self.nowIndex;
+        UIView *scrollView = [_picScrollViews objectAtIndex:self.nowIndex];
+        [scrollView addSubview:view];
         return;
     }
     if (!image && ![_downloadingImageSet containsObject:filename]) {
@@ -92,14 +103,14 @@
 }
 
 - (CGRect)makeImageRectAtIndex:(int)index {
-    return CGRectMake(20+index*320, 100, 280, 280);
+    return CGRectMake(20, 100, 280, 280);
 }
 
 - (void)addIndicatorAtIndex:(int)index {
     UIActivityIndicatorView *activityIndicator = [_activityIndicators objectForKey:[NSNumber numberWithInt:index]];
     if (activityIndicator && activityIndicator.superview) return;
     if (!activityIndicator) {
-        CGRect rect = [self makeImageRectAtIndex:index];
+        CGRect rect = self.scrollView.frame;//[self makeImageRectAtIndex:index];
         CGFloat len = 50;
         CGRect rect1 = CGRectMake(CGRectGetMidX(rect)-len/2, CGRectGetMidY(rect)-len/2, len, len);
         activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -107,15 +118,28 @@
         [activityIndicator startAnimating];
         [_activityIndicators setObject:activityIndicator forKey:[NSNumber numberWithInt:index]];
     }
-    if (!activityIndicator.superview)
-        [self.scrollView addSubview:activityIndicator];
+    if (!activityIndicator.superview) {
+        UIView *view = [_picScrollViews objectAtIndex:index];
+        [view addSubview:activityIndicator];
+//        [self.scrollView addSubview:activityIndicator];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView != self.scrollView) return;
     int page = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
     self.nowIndex = page;
     [self updateTopLabel];
     [self reloadView];
+}
+
+- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
+//    if (scrollView == self.scrollView) return;
+    if (![_loadedImageIndex containsObject:[NSNumber numberWithInt:self.nowIndex]]) return;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return [scrollView viewWithTag:1000+self.nowIndex];
 }
 
 - (void)updateTopLabel {

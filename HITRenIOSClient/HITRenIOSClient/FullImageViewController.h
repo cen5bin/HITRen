@@ -12,6 +12,7 @@
     NSMutableSet *_downloadingImageSet;
     NSMutableSet *_loadedImageIndex;
     NSMutableDictionary *_activityIndicators;
+    NSMutableArray *_picScrollViews;
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *topLabel;
