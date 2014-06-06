@@ -72,7 +72,7 @@ static AppData *appData;
 }
 
 - (Timeline*)getTimeline {
-//    if (_timeline) return _timeline;
+    if (_timeline) return _timeline;
     _timeline = [DataManager timeline];
     return _timeline;
 }

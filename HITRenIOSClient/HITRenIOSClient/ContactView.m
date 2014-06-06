@@ -25,6 +25,8 @@
 #import "AppData.h"
 #import "UserInfo.h"
 #import "ChatViewController.h"
+#import "MyActivityIndicatorView.h"
+#import "UploadLogic.h"
 
 
 #define SECTIONVIEW_HEIGHT 40
@@ -45,15 +47,19 @@
     self.dataSource = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncDataDidDownload:) name:ASYNCDATALOADED object:nil];
     _isLoading = NO;
+    _myActivityIndicator = getViewFromNib(@"MyActivityIndicatorView", self);
+    _downloadingImageSet = [[NSMutableSet alloc] init];
 }
 
 - (void)willLoad {
     if (_isLoading) return;
     _isLoading = YES;
     [RelationshipLogic asyncDownloadInfo];
-    UIView *view = [self getActivityIndicator];
-    if (!view.superview)
-        [self addSubview:view];
+//    UIView *view = [self getActivityIndicator];
+//    if (!view.superview)
+//        [self addSubview:view];
+    _myActivityIndicator.textLabel.text = @"正在加载";
+    [_myActivityIndicator showInView:self.parentController.view];
 
 }
 
@@ -65,6 +71,16 @@
         [self contactDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADUSERINFOS])
         [self userInfosDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
+        [self imageDidDownload:notification];
+}
+
+- (void)imageDidDownload:(NSNotification *)notification {
+    UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
+    if (!image) image = [UIImage imageNamed:@"null.png"];
+    [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
+    [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
+    [self reloadData];
 }
 
 - (void)loadData {
@@ -105,6 +121,7 @@
         
     }
     else L(@"contact download failed");
+    [_myActivityIndicator hide];
 }
 
 - (void)userInfosDidDownload:(NSNotification *)notification {
@@ -134,6 +151,25 @@
         ContactPersonCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1 forIndexPath:indexPath];
         cell.username.text = [dic objectForKey:@"username"];
         cell.stateLabel.text = @"";
+        AppData *appData = [AppData sharedInstance];
+        int uid = [[dic objectForKey:@"uid"] intValue];
+        UserInfo *userInfo = [appData readUserInfoForId:uid];
+        NSString *filename = userInfo.pic;
+        if (!userInfo.pic||!userInfo.pic.length)
+            cell.pic.image = [UIImage imageNamed:@"empty.png"];
+        else if ([[filename substringToIndex:1] isEqualToString:@"h"])
+            cell.pic.image = [UIImage imageNamed:filename];
+        else {
+            UIImage *image = [appData getImage:filename];
+            if (image) cell.pic.image = [UIImage imageNamed:filename];
+            else if (![_downloadingImageSet containsObject:filename]) {
+                [_downloadingImageSet addObject:filename];
+                [UploadLogic downloadImage:filename from:NSStringFromClass(self.class)];
+            }
+
+        }
+        
+        
         return cell;
     }
     else {
@@ -185,7 +221,7 @@
             int index = indexPath.row;
             for (NSNumber *uid in userlist) {
                 UserInfo *userInfo = [appData getUserInfoOfUid:[uid intValue]];
-                L(userInfo.username);
+                
                 NSDictionary *tmp = @{@"username":userInfo.username, @"uid":userInfo.uid,@"type":[NSNumber numberWithInt:1]};
                 if (last) [_datas addObject:tmp];
                 else [_datas insertObject:tmp atIndex:++index];

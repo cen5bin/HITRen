@@ -38,9 +38,11 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    UIView *view = [self getActivityIndicator];
-    if (!view.superview)
-        [self.view addSubview:view];
+//    UIView *view = [self getActivityIndicator];
+//    if (!view.superview)
+//        [self.view addSubview:view];
+    _myActivityIndicator.textLabel.text = @"正在加载";
+    [_myActivityIndicator showInView:self.view];
     [RelationshipLogic asyncDownloadInfo];
 }
 
@@ -89,6 +91,7 @@
     NSString *gname = [[_data objectAtIndex:indexPath.row] objectForKey:@"gname"];
     if ([gname isEqualToString:@"default"]) gname = @"默认分组(不可删除)";
     cell.textLabel.text = gname;
+    cell.textLabel.font = [UIFont systemFontOfSize:17];
     return cell;
 }
 

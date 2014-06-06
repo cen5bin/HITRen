@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class MyActivityIndicatorView;
 @interface ContactView : UITableView <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate> {
     NSMutableArray *_groups;
     NSMutableDictionary *_list;
     NSMutableArray *_datas;
     BOOL _isLoading;
     UIActivityIndicatorView *_activityIndicator;
+    MyActivityIndicatorView *_myActivityIndicator;
+    NSMutableSet *_downloadingImageSet;
 }
 
 @property (strong, nonatomic) UIViewController *parentController; //包含他的父亲viewController

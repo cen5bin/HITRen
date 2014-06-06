@@ -252,7 +252,9 @@
     cell.picture.userInteractionEnabled = YES;
     [cell.picture addGestureRecognizer:gesture];
     if (userInfo.pic && ![userInfo.pic isEqualToString:@""]) {
-        if ([[userInfo.pic substringToIndex:1] isEqualToString:@"h"])
+        if (!userInfo.pic||!userInfo.pic.length)
+            cell.picture.image = [UIImage imageNamed:@"empty.png"];
+        else if ([[userInfo.pic substringToIndex:1] isEqualToString:@"h"])
             cell.picture.image = [UIImage imageNamed:userInfo.pic];
         else {
             UIImage *image = [appData getImage:userInfo.pic];
