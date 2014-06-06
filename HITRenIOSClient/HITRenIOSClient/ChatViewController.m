@@ -236,15 +236,22 @@
 //            [_keyboardToolBar resignFirstResponder];
             [self.navigationController popViewControllerAnimated:YES];
         }
-        else if (p.x >= CGRectGetMaxX(self.topBar.frame)-50) {
-            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
-            self.topBar.image = image;
-        }
+//        else if (p.x >= CGRectGetMaxX(self.topBar.frame)-50) {
+//            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+//            self.topBar.image = image;
+//        }
     }
 
 }
 
 
+- (void)clearTopBar {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+    self.topBar.image = image;
+}
 
-
+- (IBAction)manButtonClicked:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
+}
 @end

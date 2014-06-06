@@ -28,6 +28,7 @@
 #import "EmotionTextView.h"
 #import "MyImageView.h"
 #import "FullImageViewController.h"
+#import "WriterInfoView.h"
 
 @interface FreshNewsViewController ()
 
@@ -103,6 +104,8 @@
     [self.view addSubview:_menu];
     _menu.hidden = YES;
     _menu.delegate = self;
+    
+    _writerInfoView = getViewFromNib(@"writer", self);
 //    [UploadLogic downloadImage:@"bubble2.png"];
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
 }
@@ -122,12 +125,18 @@
     MyImageView *view = (MyImageView *)recognizer.view;
     AppData *appData = [AppData sharedInstance];
     Message *message = [appData getMessageOfMid:[[_data objectAtIndex:view.indexPath.row] intValue]];
+    UserInfo *userInfo = [appData getUserInfoOfUid:[message.uid intValue]];
+    _writerInfoView.userInfo = userInfo;
+    [_writerInfoView hide];
+    [_writerInfoView showInView:self.view];
+    return;
     UIViewController *controller = getViewControllerOfName(@"ContactView");
     [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     FUNC_START();
+    [_writerInfoView hide];
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
     if (CGRectContainsPoint(self.topToolBar.frame, point)) {
@@ -146,6 +155,8 @@
             [self.navigationController popViewControllerAnimated:NO];
         [navigateController pushViewController:controller animated:NO];
     }
+    
+//    [self.view.nextResponder touchesBegan:touches withEvent:event];
 
     FUNC_END();
 }
@@ -417,7 +428,7 @@
     rect.size.height = bgh;
     cell.bgView.frame = rect;
     
-    LOG(@"row %d %f", indexPath.row, rect.size.height);
+    LOG(@"row %ld %f", (long)indexPath.row, rect.size.height);
     return cell;
 }
 

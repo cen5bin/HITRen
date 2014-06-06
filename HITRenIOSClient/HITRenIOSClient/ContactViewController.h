@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @class ContactView;
-@interface ContactViewController : UIViewController
+@interface ContactViewController : UIViewController {
+    BOOL _managing;
+}
+
 @property (strong, nonatomic) IBOutlet ContactView *contactView;
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 - (IBAction)manageGroup:(id)sender;

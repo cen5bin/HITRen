@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "MessageCellDelegate.h"
 #import "KeyboardToolBarDelegate.h"
+#import "WriteInfoDelegate.h"
 
-@class KeyboardToolBar,FreshNewsMenu;
-@interface FreshNewsViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MessageCellDelegate, KeyboardToolBarDelegate> {
+@class KeyboardToolBar,FreshNewsMenu, WriterInfoView;
+@interface FreshNewsViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MessageCellDelegate, KeyboardToolBarDelegate,WriteInfoDelegate> {
     NSMutableArray* _data;  //存的是message
     NSMutableDictionary* _comments; //存的是评论，每个元素是个dic
     UIActivityIndicatorView *_activityIndicator;
@@ -36,6 +37,7 @@
     BOOL _loadDetail;
     
     UITapGestureRecognizer *_tapGestureRecognizer;
+    WriterInfoView *_writerInfoView;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

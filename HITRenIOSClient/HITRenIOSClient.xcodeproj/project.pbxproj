@@ -226,6 +226,10 @@
 		F8148D64194203D7000F5C9F /* MyActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D63194203D7000F5C9F /* MyActivityIndicatorView.m */; };
 		F8148D6719420901000F5C9F /* textbox.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8148D6619420901000F5C9F /* textbox.xib */; };
 		F8148D6C19420C76000F5C9F /* TextBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D6B19420C76000F5C9F /* TextBox.m */; };
+		F8148D6F19422AD4000F5C9F /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D6E19422AD4000F5C9F /* man.png */; };
+		F8148D7219422D16000F5C9F /* writer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7119422D16000F5C9F /* writer.xib */; };
+		F8148D7519423158000F5C9F /* WriterInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D7419423158000F5C9F /* WriterInfoView.m */; };
+		F8148D7819423933000F5C9F /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7719423933000F5C9F /* blue.png */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -628,6 +632,12 @@
 		F8148D6A19420C76000F5C9F /* TextBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBox.h; sourceTree = "<group>"; };
 		F8148D6B19420C76000F5C9F /* TextBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBox.m; sourceTree = "<group>"; };
 		F8148D6D19420CDD000F5C9F /* TextBoxDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextBoxDelegate.h; sourceTree = "<group>"; };
+		F8148D6E19422AD4000F5C9F /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
+		F8148D7119422D16000F5C9F /* writer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = writer.xib; sourceTree = "<group>"; };
+		F8148D7319423158000F5C9F /* WriterInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriterInfoView.h; sourceTree = "<group>"; };
+		F8148D7419423158000F5C9F /* WriterInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriterInfoView.m; sourceTree = "<group>"; };
+		F8148D761942329D000F5C9F /* WriteInfoDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WriteInfoDelegate.h; sourceTree = "<group>"; };
+		F8148D7719423933000F5C9F /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1092,7 +1102,7 @@
 			name = bubble;
 			sourceTree = "<group>";
 		};
-		F8107C971935D2D20073C169 /* ContactView */ = {
+		F8107C971935D2D20073C169 /* 通讯录 */ = {
 			isa = PBXGroup;
 			children = (
 				F8107C911935C0C40073C169 /* ContactView.h */,
@@ -1102,7 +1112,7 @@
 				F8107CA61935D92A0073C169 /* ContactGroupCell.h */,
 				F8107CA71935D92A0073C169 /* ContactGroupCell.m */,
 			);
-			name = ContactView;
+			name = "通讯录";
 			sourceTree = "<group>";
 		};
 		F8107C9D1935D6C30073C169 /* arrow */ = {
@@ -1440,6 +1450,17 @@
 				F8148D6D19420CDD000F5C9F /* TextBoxDelegate.h */,
 			);
 			name = textBox;
+			sourceTree = "<group>";
+		};
+		F8148D7019422CF6000F5C9F /* 作者 */ = {
+			isa = PBXGroup;
+			children = (
+				F8148D7119422D16000F5C9F /* writer.xib */,
+				F8148D7319423158000F5C9F /* WriterInfoView.h */,
+				F8148D7419423158000F5C9F /* WriterInfoView.m */,
+				F8148D761942329D000F5C9F /* WriteInfoDelegate.h */,
+			);
+			name = "作者";
 			sourceTree = "<group>";
 		};
 		F842BB8A19051BD700148848 /* menu */ = {
@@ -1819,13 +1840,14 @@
 		F88F989118C1E86C009CE742 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D7019422CF6000F5C9F /* 作者 */,
 				F8148D65194208C7000F5C9F /* textBox */,
 				F8148D5F194202DA000F5C9F /* myActivityIndicatorView */,
 				F8148D04193E2086000F5C9F /* emotionTextView */,
 				F8148CFC193E0031000F5C9F /* freshnews */,
 				F8148BDB193A2386000F5C9F /* findthings */,
 				F8107CB119364C680073C169 /* secondhand */,
-				F8107C971935D2D20073C169 /* ContactView */,
+				F8107C971935D2D20073C169 /* 通讯录 */,
 				F8723EC01927C77200828B5C /* messagecell */,
 				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
 				F842BB8A19051BD700148848 /* menu */,
@@ -1921,6 +1943,8 @@
 		F8E9686B18C6DB4B00B9384B /* button */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D7719423933000F5C9F /* blue.png */,
+				F8148D6E19422AD4000F5C9F /* man.png */,
 				F8148D3A1940BA1E000F5C9F /* leftarrow.png */,
 				F8148CEF193C6E25000F5C9F /* emotionbutton.png */,
 				F8D7483319386DC700829CDA /* addimage.png */,
@@ -2135,6 +2159,7 @@
 				F8148C01193C665C000F5C9F /* h0.jpg in Resources */,
 				F8148CCD193C6691000F5C9F /* f073.gif in Resources */,
 				F8148C13193C665C000F5C9F /* h18.jpg in Resources */,
+				F8148D7819423933000F5C9F /* blue.png in Resources */,
 				F8148C10193C665C000F5C9F /* h15.jpg in Resources */,
 				F8148D25193F9195000F5C9F /* basemenu2.png in Resources */,
 				F8148CC1193C6691000F5C9F /* f061.gif in Resources */,
@@ -2158,6 +2183,7 @@
 				F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */,
 				F8148CCA193C6691000F5C9F /* f070.gif in Resources */,
 				F8148CC0193C6691000F5C9F /* f060.gif in Resources */,
+				F8148D6F19422AD4000F5C9F /* man.png in Resources */,
 				F8148CA3193C6691000F5C9F /* f031.gif in Resources */,
 				F84B7DE918BB3C8D007FC2D5 /* README.txt in Resources */,
 				F8148C12193C665C000F5C9F /* h17.jpg in Resources */,
@@ -2204,6 +2230,7 @@
 				F8148CCE193C6691000F5C9F /* f074.gif in Resources */,
 				F8107CA31935D8050073C169 /* arrow1.png in Resources */,
 				F8148D2D194022CD000F5C9F /* calendarcellbg3.png in Resources */,
+				F8148D7219422D16000F5C9F /* writer.xib in Resources */,
 				F8550EFF18C4C251005E51FE /* p_btm1.png in Resources */,
 				F84B7DFD18BB43EB007FC2D5 /* xmppserver.plist in Resources */,
 				F8696A801918BCA5008887AD /* liked1.png in Resources */,
@@ -2287,6 +2314,7 @@
 				F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */,
 				F84B7DE218BB3C8D007FC2D5 /* DDAbstractDatabaseLogger.m in Sources */,
 				F8148D0C193F639C000F5C9F /* CalendarCell.m in Sources */,
+				F8148D7519423158000F5C9F /* WriterInfoView.m in Sources */,
 				F8148D07193E20B1000F5C9F /* EmotionTextView.m in Sources */,
 				F89DFADE191372E60043DD6B /* Message.m in Sources */,
 				F80B0D51187426F2003E72DC /* User.m in Sources */,

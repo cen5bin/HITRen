@@ -1922,6 +1922,17 @@
                                     <outlet property="delegate" destination="8JR-5P-EKL" id="mQZ-lH-vzC"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eVu-Oh-Svw">
+                                <rect key="frame" x="273" y="0.0" width="45" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" backgroundImage="man.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="manButtonClicked:" destination="8JR-5P-EKL" eventType="touchUpInside" id="ebJ-la-ewi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -2922,6 +2933,7 @@
         <image name="leftarrow.png" width="91" height="91"/>
         <image name="liked.png" width="204" height="50"/>
         <image name="loginbutton0.png" width="496" height="88"/>
+        <image name="man.png" width="173" height="173"/>
         <image name="more.png" width="96" height="91"/>
         <image name="p_btm1.png" width="1181" height="173"/>
         <image name="p_btm2.png" width="1181" height="173"/>

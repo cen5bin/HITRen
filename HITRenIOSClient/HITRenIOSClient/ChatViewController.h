@@ -24,5 +24,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 
 @property (strong, nonatomic) UserInfo *userInfo;
+- (IBAction)manButtonClicked:(id)sender;
 
 @end

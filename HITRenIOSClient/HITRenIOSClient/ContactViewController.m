@@ -29,10 +29,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.contactView.parentController = self;
+    _managing = NO;
+//    [self.contactView willLoad];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self.contactView willLoad];
+    [super viewDidAppear:animated];
+//    return;
+    if (_managing) L(@"yes");
+    else L(@"no");
+    if (!_managing)
+        [self.contactView willLoad];
+    _managing = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,6 +66,7 @@
 - (IBAction)manageGroup:(id)sender {
     UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
     self.topBar.image = image;
+    _managing = YES;
     UIViewController *controller = getViewControllerOfName(@"ManageGroup");
     [self.navigationController pushViewController:controller animated:YES];
     [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
