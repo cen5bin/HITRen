@@ -28,6 +28,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.contactView.parentController = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

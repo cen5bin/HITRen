@@ -184,7 +184,7 @@
             BOOL last = (indexPath.row == _datas.count-1);
             int index = indexPath.row;
             for (NSNumber *uid in userlist) {
-                UserInfo *userInfo = [appData readUserInfoForId:[uid intValue]];
+                UserInfo *userInfo = [appData getUserInfoOfUid:[uid intValue]];
                 L(userInfo.username);
                 NSDictionary *tmp = @{@"username":userInfo.username, @"uid":userInfo.uid,@"type":[NSNumber numberWithInt:1]};
                 if (last) [_datas addObject:tmp];

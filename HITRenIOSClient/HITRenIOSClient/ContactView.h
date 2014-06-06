@@ -16,7 +16,7 @@
     UIActivityIndicatorView *_activityIndicator;
 }
 
-@property (strong, nonatomic) UIViewController *parentController;
+@property (strong, nonatomic) UIViewController *parentController; //包含他的父亲viewController
 - (void)willLoad;
 
 @end
