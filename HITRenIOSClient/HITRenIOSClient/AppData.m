@@ -160,15 +160,35 @@ static AppData *appData;
 
 // 当前需要下载的用户信息，返回所有的uid，传递不确定是否需要下载的uid
 - (NSArray *)userInfosNeedDownload:(NSArray *)uids {
+    
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:uids];
     NSMutableArray *ret = [[NSMutableArray alloc] init];
-    for (NSNumber *uid in uids) {
-        if ([self readUserInfoForId:[uid intValue]]) continue;
-        [ret addObject:uid];
+    NSArray *userInfos = [DataManager getUserInfos:array];
+    
+    for (UserInfo *userInfo in userInfos) {
+        [ret addObject:@{@"uid":userInfo.uid, @"seq":userInfo.seq}];
+        [array removeObject:userInfo.uid];
+    }
+    
+    for (id uid in array) {
+        NSDictionary *dic = @{ @"uid": uid, @"seq":[NSNumber numberWithInteger:0]};
+        [ret addObject:dic];
     }
     return ret;
+
+    
+    
+//    NSMutableArray *ret = [[NSMutableArray alloc] init];
+//    for (NSNumber *uid in uids) {
+//        if ([self readUserInfoForId:[uid intValue]]) continue;
+//        [ret addObject:uid];
+//    }
+//    return ret;
 }
 
-
+- (UserInfo *)getUserInfoOfUid:(int)uid {
+    return [DataManager getUserInfoOfUid:uid];
+}
 
 - (Notice *)newNotice{
     return [DataManager getNotice];

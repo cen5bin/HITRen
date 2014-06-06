@@ -113,20 +113,30 @@
 }
 
 + (BOOL)downloadUseInfos:(NSArray *)uids from:(NSString *)classname{
-    FUNC_START();
+//    FUNC_START();
 //    if (!uids.count) {
 //        FUNC_END();
 //        return YES;
 //    }
     HttpData *data = [HttpData data];
-    [data setValue:uids forKey:@"uids"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadUsersData" withEventName:ASYNC_EVENT_DOWNLOADUSERINFOS fromClass:classname];
+    AppData *appData = [AppData sharedInstance];
+    NSArray *array = [appData userInfosNeedDownload:uids];
+    [data setValue:array forKey:@"datas"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"NewDownloadUserInfo" withEventName:ASYNC_EVENT_DOWNLOADUSERINFOS fromClass:classname];
     if (!ret) {
         L(@"download userinfos fail");
         return NO;
     }
-    FUNC_END();
     return YES;
+//    HttpData *data = [HttpData data];
+//    [data setValue:uids forKey:@"uids"];
+//    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadUsersData" withEventName:ASYNC_EVENT_DOWNLOADUSERINFOS fromClass:classname];
+//    if (!ret) {
+//        L(@"download userinfos fail");
+//        return NO;
+//    }
+//    FUNC_END();
+//    return YES;
 }
 
 + (void)save {

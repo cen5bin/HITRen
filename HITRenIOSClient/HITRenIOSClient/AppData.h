@@ -48,6 +48,7 @@
 - (UserInfo *)readUserInfoForId:(int)uid;
 - (Message *)readMessageForId:(int)mid;
 - (Message *)getMessageOfMid:(int)mid;
+- (UserInfo *)getUserInfoOfUid:(int)uid;
 
 - (Notice *)newNotice;
 - (Notice *)lastNoticeOfUid:(int)uid;

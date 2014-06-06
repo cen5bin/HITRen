@@ -3,8 +3,9 @@ package cn.edu.hit.logic;
 
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.jivesoftware.smack.XMPPException;
@@ -229,6 +230,33 @@ public class UserSimpleLogic {
 		}
 		retData.put(HttpData.SUC, true);
 		retData.put(HttpData.DATA, retObj);
+		return true;
+	}
+	
+	public static boolean newDownloadUserInfo(ArrayList<JSONObject> datas) throws JSONException {
+		retData = new JSONObject();
+		ArrayList<Integer> uids = new ArrayList<Integer>();
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		for (JSONObject json : datas) {
+			int mid = json.getInt("uid");
+			int seq = json.getInt("seq");
+			map.put(mid, seq);
+			uids.add(json.getInt("uid"));
+		}
+		BasicDBObject obj = new BasicDBObject(UserConstant.UID, new BasicDBObject("$in", uids));
+		DBCursor cursor = DBController.query(UserConstant.COLLNAME, obj);
+		JSONObject ret = new JSONObject();
+		while (cursor.hasNext()) {
+			DBObject retObj = cursor.next();
+			int seq0 = map.get(retObj.get(UserConstant.UID));
+			int seq1 = Integer.parseInt(retObj.get(UserConstant.SEQ).toString());
+			if (seq0 >= seq1) continue;
+			ret.put(retObj.get(UserConstant.UID).toString(), retObj);
+			logger.info(retObj);
+		}
+		retData.put(HttpData.SUC, true);
+		retData.put(HttpData.DATA, ret);
+
 		return true;
 	}
 	

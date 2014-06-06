@@ -319,6 +319,7 @@ public class MessageLogic {
 			logger.info(json);
 			uid1 = json.getInt(Message.UID);
 		}
+		retData.put(HttpData.SUC, true);
 		User user = DataReader.getLeastUserInfo(uid);
 		TipsPusher.messageIsCommentedByUser(uid1, uid, user.getName(), user.getPic(), mid);
 		return true;

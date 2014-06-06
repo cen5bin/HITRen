@@ -606,6 +606,22 @@
     [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
+- (void)refleshUserInfo {
+    int count = PAGE_MESSAGE_COUNT > _data.count ? _data.count : PAGE_MESSAGE_COUNT;
+    NSArray *tmp = [_data subarrayWithRange:NSMakeRange(0, count)];
+    AppData *appData = [AppData sharedInstance];
+    NSMutableArray *uids = [NSMutableArray array];
+    for (NSNumber *mid in tmp) {
+        Message *message = [appData readMessageForId:[mid intValue]];
+        [uids addObject:message.uid];
+    }
+//    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
+//    if (userInfoNeedDownload.count) {
+        [UserSimpleLogic downloadUseInfos:uids from:NSStringFromClass(self.class)];
+//    }
+
+}
+
 - (void)timelineDidDownload:(NSNotification *)notification {
     NSDictionary *ret = notification.userInfo;
     if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
@@ -613,6 +629,7 @@
         [self hideTopActivityIndicator];
 //        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
         _timelineDownloading = NO;
+        [self refleshUserInfo];
         [self.tableView reloadData];
         return;
     }
@@ -657,10 +674,10 @@
         [likedList update];
     }
     [AppData saveData];
-    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
-    if (userInfoNeedDownload.count) {
-        [UserSimpleLogic downloadUseInfos:userInfoNeedDownload from:NSStringFromClass(self.class)];
-    }
+//    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
+//    if (userInfoNeedDownload.count) {
+        [UserSimpleLogic downloadUseInfos:uids from:NSStringFromClass(self.class)];
+//    }
     [self.tableView reloadData];
 }
 
@@ -687,10 +704,10 @@
         [comment update];
     }
     [AppData saveData];
-    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
-    if (userInfoNeedDownload.count) {
-        [UserSimpleLogic downloadUseInfos:userInfoNeedDownload from:NSStringFromClass(self.class)];
-    }
+//    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
+//    if (userInfoNeedDownload.count) {
+        [UserSimpleLogic downloadUseInfos:uids from:NSStringFromClass(self.class)];
+//    }
     
 //    [self.tableView reloadData];
 }
@@ -744,10 +761,10 @@
     
     //[_data sortedArrayUsingSelector:@selector(compare:)];
     
-    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
-    if (userInfoNeedDownload.count) {
-        [UserSimpleLogic downloadUseInfos:userInfoNeedDownload from:NSStringFromClass(self.class)];
-    }
+//    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
+//    if (.count) {
+        [UserSimpleLogic downloadUseInfos:uids from:NSStringFromClass(self.class)];
+//    }
     
     if (_updateAtTop) {
         [self performSelector:@selector(hideTopActivityIndicator) withObject:nil afterDelay:0.0];

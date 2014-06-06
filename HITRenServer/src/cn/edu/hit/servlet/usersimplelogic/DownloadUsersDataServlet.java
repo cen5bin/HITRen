@@ -15,7 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.edu.hit.kit.DataKit;
-import cn.edu.hit.logic.MessageLogic;
 import cn.edu.hit.logic.UserSimpleLogic;
 
 /**
