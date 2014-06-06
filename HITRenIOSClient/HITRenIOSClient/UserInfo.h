@@ -18,5 +18,5 @@
 @property (nonatomic, retain) NSDate * birthday;
 @property (nonatomic, retain) NSString * hometown;
 @property (nonatomic, retain) NSNumber * seq;
-
+@property (nonatomic, retain) NSString *pic;
 @end

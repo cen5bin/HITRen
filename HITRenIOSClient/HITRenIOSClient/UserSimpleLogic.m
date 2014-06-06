@@ -147,6 +147,7 @@
     [userDefaults setObject:user.birthday forKey:@"birthday"];
     [userDefaults setObject:user.hometown forKey:@"hometown"];
     [userDefaults setObject:[NSNumber numberWithInt:user.sex] forKey:@"sex"];
+    [userDefaults setObject:user.pic forKey:@"pic"];
     [userDefaults synchronize];
 
 }
@@ -163,6 +164,7 @@
     [data setIntValue:user.uid forKey:@"uid"];
     [data setIntValue:user.status forKey:@"status"];
     [data setIntValue:user.sex forKey:@"sex"];
+    [data setValue:user.pic forKey:@"pic"];
     return data;
 }
 
@@ -177,6 +179,7 @@
     self.user.hometown = [dic objectForKey:@"hometown"];
     self.user.status = [[dic objectForKey:@"status"] intValue];
     self.user.uid = [[dic objectForKey:@"uid"] intValue];
+    self.user.pic = [dic objectForKey:@"pic"];
 }
 
 
@@ -187,6 +190,8 @@
     user.sex = [[userDefaults objectForKey:@"sex"] intValue];
     user.birthday = [userDefaults objectForKey:@"birthday"];
     user.hometown = [userDefaults objectForKey:@"hometown"];
+    user.email = [userDefaults objectForKey:@"email"];
+    user.pic = [userDefaults objectForKey:@"pic"];
 }
 
 
@@ -204,6 +209,7 @@
         userInfo.sex = [ui objectForKey:@"sex"];
         userInfo.hometown = [ui objectForKey:@"hometown"];
         userInfo.seq = [ui objectForKey:@"seq"];
+        userInfo.pic = [ui objectForKey:@"pic"];
     }
     [AppData saveData];
 

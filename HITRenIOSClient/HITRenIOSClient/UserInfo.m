@@ -17,5 +17,6 @@
 @dynamic birthday;
 @dynamic hometown;
 @dynamic seq;
+@dynamic pic;
 
 @end

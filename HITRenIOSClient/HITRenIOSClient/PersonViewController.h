@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 
 @class HometownPicker;
-@interface PersonViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate> {
+@interface PersonViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIActionSheetDelegate> {
     NSMutableArray *_tableCells;
     UIDatePicker *_datePicker;
     HometownPicker *_hometownPicker;
@@ -34,6 +34,7 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *jwcPasswordCell;
 
 
+@property (strong, nonatomic) IBOutlet UIImageView *pic;
 
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UITextField *username;
@@ -54,5 +55,6 @@
 @property (nonatomic) BOOL fromRegister;
 
 - (IBAction)buttonClicked:(id)sender;
+- (IBAction)save:(id)sender;
 
 @end

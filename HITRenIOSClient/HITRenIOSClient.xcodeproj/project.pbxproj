@@ -215,6 +215,8 @@
 		F8148D3B1940BA1E000F5C9F /* leftarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D3A1940BA1E000F5C9F /* leftarrow.png */; };
 		F8148D3E1940C0E8000F5C9F /* FullImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D3D1940C0E8000F5C9F /* FullImageViewController.m */; };
 		F8148D411940C52A000F5C9F /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D401940C52A000F5C9F /* MyImageView.m */; };
+		F8148D471941A59F000F5C9F /* HeadPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D461941A59F000F5C9F /* HeadPicViewController.m */; };
+		F8148D4B1941A781000F5C9F /* HeadPicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D4A1941A781000F5C9F /* HeadPicCell.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -599,6 +601,10 @@
 		F8148D3D1940C0E8000F5C9F /* FullImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullImageViewController.m; sourceTree = "<group>"; };
 		F8148D3F1940C52A000F5C9F /* MyImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyImageView.h; sourceTree = "<group>"; };
 		F8148D401940C52A000F5C9F /* MyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyImageView.m; sourceTree = "<group>"; };
+		F8148D451941A59F000F5C9F /* HeadPicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadPicViewController.h; sourceTree = "<group>"; };
+		F8148D461941A59F000F5C9F /* HeadPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadPicViewController.m; sourceTree = "<group>"; };
+		F8148D491941A781000F5C9F /* HeadPicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadPicCell.h; sourceTree = "<group>"; };
+		F8148D4A1941A781000F5C9F /* HeadPicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadPicCell.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1019,8 +1025,6 @@
 				F88BCB3918BC7C2800407521 /* LoginViewController.m */,
 				F88BCB4018BC947F00407521 /* MainViewController.h */,
 				F88BCB4118BC947F00407521 /* MainViewController.m */,
-				F8E9688018C70B5700B9384B /* PersonViewController.h */,
-				F8E9688118C70B5700B9384B /* PersonViewController.m */,
 				F8E9688318C714C200B9384B /* RegisterViewController.h */,
 				F8E9688418C714C200B9384B /* RegisterViewController.m */,
 				F89964E618FCF11A00D7FA44 /* FriendsGroupViewController.h */,
@@ -1031,10 +1035,11 @@
 				F89964F918FD331200D7FA44 /* FriendInfoViewController.m */,
 				F89964FB18FD50F200D7FA44 /* GroupChooserViewController.h */,
 				F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */,
-				F8148D431941A0AF000F5C9F /* notice */,
-				F8148D35194035A2000F5C9F /* freshnews */,
-				F8148D341940356F000F5C9F /* tools */,
-				F8148D31194034E5000F5C9F /* calendar */,
+				F8148D441941A222000F5C9F /* 个人界面 */,
+				F8148D431941A0AF000F5C9F /* 消息界面 */,
+				F8148D35194035A2000F5C9F /* 新鲜事界面 */,
+				F8148D341940356F000F5C9F /* 工具界面 */,
+				F8148D31194034E5000F5C9F /* 日程界面 */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1095,7 +1100,7 @@
 			name = secondhand;
 			sourceTree = "<group>";
 		};
-		F8107CB419364CCC0073C169 /* menu */ = {
+		F8107CB419364CCC0073C169 /* 菜单 */ = {
 			isa = PBXGroup;
 			children = (
 				F8148D20193F90A4000F5C9F /* basemenu0.png */,
@@ -1103,7 +1108,7 @@
 				F8148D23193F9195000F5C9F /* basemenu2.png */,
 				F8107CBA193653490073C169 /* basemenu.png */,
 			);
-			name = menu;
+			name = "菜单";
 			sourceTree = "<group>";
 		};
 		F8148BDB193A2386000F5C9F /* findthings */ = {
@@ -1116,7 +1121,7 @@
 			name = findthings;
 			sourceTree = "<group>";
 		};
-		F8148BED193C6648000F5C9F /* headpic */ = {
+		F8148BED193C6648000F5C9F /* 头像 */ = {
 			isa = PBXGroup;
 			children = (
 				F8148BEE193C665C000F5C9F /* h0.jpg */,
@@ -1139,10 +1144,10 @@
 				F8148BFF193C665C000F5C9F /* h17.jpg */,
 				F8148C00193C665C000F5C9F /* h18.jpg */,
 			);
-			name = headpic;
+			name = "头像";
 			sourceTree = "<group>";
 		};
-		F8148C14193C667F000F5C9F /* emotion */ = {
+		F8148C14193C667F000F5C9F /* 表情 */ = {
 			isa = PBXGroup;
 			children = (
 				F8148C15193C6691000F5C9F /* emotion_del_down.png */,
@@ -1255,7 +1260,7 @@
 				F8148C80193C6691000F5C9F /* f105.gif */,
 				F8148C81193C6691000F5C9F /* f106.gif */,
 			);
-			name = emotion;
+			name = "表情";
 			sourceTree = "<group>";
 		};
 		F8148CFC193E0031000F5C9F /* freshnews */ = {
@@ -1288,7 +1293,7 @@
 			name = calendarCell;
 			sourceTree = "<group>";
 		};
-		F8148D31194034E5000F5C9F /* calendar */ = {
+		F8148D31194034E5000F5C9F /* 日程界面 */ = {
 			isa = PBXGroup;
 			children = (
 				F8E9687D18C70B0700B9384B /* CalendarViewController.h */,
@@ -1298,7 +1303,7 @@
 				F8148D17193F7569000F5C9F /* SetRemindViewController.h */,
 				F8148D18193F7569000F5C9F /* SetRemindViewController.m */,
 			);
-			name = calendar;
+			name = "日程界面";
 			sourceTree = "<group>";
 		};
 		F8148D321940351C000F5C9F /* findthing */ = {
@@ -1323,7 +1328,7 @@
 			name = secondtrade;
 			sourceTree = "<group>";
 		};
-		F8148D341940356F000F5C9F /* tools */ = {
+		F8148D341940356F000F5C9F /* 工具界面 */ = {
 			isa = PBXGroup;
 			children = (
 				F8E9687A18C70AAD00B9384B /* ToolsViewController.h */,
@@ -1331,10 +1336,10 @@
 				F8148D3319403546000F5C9F /* secondtrade */,
 				F8148D321940351C000F5C9F /* findthing */,
 			);
-			name = tools;
+			name = "工具界面";
 			sourceTree = "<group>";
 		};
-		F8148D35194035A2000F5C9F /* freshnews */ = {
+		F8148D35194035A2000F5C9F /* 新鲜事界面 */ = {
 			isa = PBXGroup;
 			children = (
 				F8E9686818C5FC3900B9384B /* FreshNewsViewController.h */,
@@ -1346,10 +1351,10 @@
 				F8148D3C1940C0E8000F5C9F /* FullImageViewController.h */,
 				F8148D3D1940C0E8000F5C9F /* FullImageViewController.m */,
 			);
-			name = freshnews;
+			name = "新鲜事界面";
 			sourceTree = "<group>";
 		};
-		F8148D431941A0AF000F5C9F /* notice */ = {
+		F8148D431941A0AF000F5C9F /* 消息界面 */ = {
 			isa = PBXGroup;
 			children = (
 				F8E9687718C709CB00B9384B /* NoticeViewController.h */,
@@ -1357,7 +1362,28 @@
 				F8107C6619331A4D0073C169 /* ChatViewController.h */,
 				F8107C6719331A4D0073C169 /* ChatViewController.m */,
 			);
-			name = notice;
+			name = "消息界面";
+			sourceTree = "<group>";
+		};
+		F8148D441941A222000F5C9F /* 个人界面 */ = {
+			isa = PBXGroup;
+			children = (
+				F8148D481941A736000F5C9F /* 头像选取 */,
+				F8E9688018C70B5700B9384B /* PersonViewController.h */,
+				F8E9688118C70B5700B9384B /* PersonViewController.m */,
+			);
+			name = "个人界面";
+			sourceTree = "<group>";
+		};
+		F8148D481941A736000F5C9F /* 头像选取 */ = {
+			isa = PBXGroup;
+			children = (
+				F8148D451941A59F000F5C9F /* HeadPicViewController.h */,
+				F8148D461941A59F000F5C9F /* HeadPicViewController.m */,
+				F8148D491941A781000F5C9F /* HeadPicCell.h */,
+				F8148D4A1941A781000F5C9F /* HeadPicCell.m */,
+			);
+			name = "头像选取";
 			sourceTree = "<group>";
 		};
 		F842BB8A19051BD700148848 /* menu */ = {
@@ -1685,9 +1711,9 @@
 			children = (
 				F8148D381940B6BA000F5C9F /* null.png */,
 				F8148D13193F6A21000F5C9F /* calendarCell */,
-				F8148C14193C667F000F5C9F /* emotion */,
-				F8148BED193C6648000F5C9F /* headpic */,
-				F8107CB419364CCC0073C169 /* menu */,
+				F8148C14193C667F000F5C9F /* 表情 */,
+				F8148BED193C6648000F5C9F /* 头像 */,
+				F8107CB419364CCC0073C169 /* 菜单 */,
 				F8107C9D1935D6C30073C169 /* arrow */,
 				F8107C6C19335B470073C169 /* bubble */,
 				F8696A7F1918BCA5008887AD /* liked1.png */,
@@ -2203,9 +2229,11 @@
 				F87209C6191DE57400FAC7A1 /* UploadLogic.m in Sources */,
 				F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */,
 				F8107CAB19363EA30073C169 /* SecondTradeViewController.m in Sources */,
+				F8148D471941A59F000F5C9F /* HeadPicViewController.m in Sources */,
 				F84B7DD418BB3C8D007FC2D5 /* XMPPIQ.m in Sources */,
 				F899C93E192F269900CB3D17 /* MessageDetailViewController.m in Sources */,
 				F89DFAE11913B0240043DD6B /* MoreMessageCell.m in Sources */,
+				F8148D4B1941A781000F5C9F /* HeadPicCell.m in Sources */,
 				F8148BD7193A21C4000F5C9F /* FindThingsViewController.m in Sources */,
 				F84B7DEC18BB3C8D007FC2D5 /* DDXMLElement.m in Sources */,
 				F84B7DCD18BB3C8D007FC2D5 /* XMPPPlainAuthentication.m in Sources */,

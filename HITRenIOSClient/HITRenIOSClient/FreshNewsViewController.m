@@ -246,6 +246,19 @@
     if (userInfo)
         cell.username.text = userInfo.username;
     
+    if (userInfo.pic && ![userInfo.pic isEqualToString:@""]) {
+        if ([[userInfo.pic substringToIndex:1] isEqualToString:@"h"])
+            cell.picture.image = [UIImage imageNamed:userInfo.pic];
+        else {
+            UIImage *image = [appData getImage:userInfo.pic];
+            if (image) cell.picture.image = image;
+            else if (![_downloadingImageSet containsObject:userInfo.pic]) {
+                [_downloadingImageSet addObject:userInfo.pic];
+                [UploadLogic downloadImage:userInfo.pic from:NSStringFromClass(self.class)];
+            }
+        }
+    }
+    
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     cell.time.text = [format stringFromDate:message.time];

@@ -35,6 +35,8 @@
 
 #define PAGE_EVENT_COUNT 20 // 一页多少日程
 
+#define HEADPIC_COUNT 19 //系统头像数量
+
 #define ASYNCDATALOADED @"HITRenAsyncDataFinishedLoading"
 
 #define ASYNC_EVENT_UPDATEUSETINFO @"HITRenAsyncDataUpdataUserInfo"

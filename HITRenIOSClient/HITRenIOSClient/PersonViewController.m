@@ -9,6 +9,7 @@
 #import "PersonViewController.h"
 #import "User.h"
 #import "HometownPicker.h"
+#import "HeadPicViewController.h"
 
 @interface PersonViewController ()
 
@@ -51,8 +52,50 @@
    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     self.email.text = [userDefaults objectForKey:@"email"];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
+    self.pic.userInteractionEnabled = YES;
+    [self.pic addGestureRecognizer:tapGestureRecognizer];
+    if (!self.fromRegister) {
+        [UserSimpleLogic downloadInfo];
+    }
 
     FUNC_END();
+}
+
+- (void)imageTapped {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"设置头像"
+                                  delegate:self
+                                  cancelButtonTitle:@"取消"
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:@"系统自带", @"从相册选取",nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        HeadPicViewController *controller = getViewControllerOfName(@"ChooseHeadPic");
+        User *user = [UserSimpleLogic user];
+        if (user.pic && ![user.pic isEqualToString:@""]) {
+            for (int i = 0; i < HEADPIC_COUNT; i++)
+                if ([user.pic isEqualToString:[NSString stringWithFormat:@"h%d.jpg", i]]) {
+                    controller.selectedIndex = i;
+                    break;
+                }
+        }
+        [self.navigationController pushViewController:controller animated:YES];
+        
+    }else if (buttonIndex == 1) {
+        
+    }else if(buttonIndex == 2) {
+        
+    }else if(buttonIndex == 3) {
+        
+    }
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -61,9 +104,9 @@
     size.height += 75;
     self.tableView.contentSize = size;
     
-    if (!self.fromRegister) {
-        [UserSimpleLogic downloadInfo];
-    }
+//    if (!self.fromRegister) {
+//        [UserSimpleLogic downloadInfo];
+//    }
     
     User *user = [UserSimpleLogic user];
     if (user.birthday)
@@ -74,6 +117,8 @@
         self.username.text = user.username;
     if (user.sex)
         [self performSelector:@selector(doHighLight:) withObject:user.sex == 2?self.femaleButton:self.maleButton afterDelay:0.0];
+    if (user.pic && ![user.pic isEqualToString:@""])
+        self.pic.image = [UIImage imageNamed:user.pic];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -82,37 +127,39 @@
     if (CGRectContainsPoint(self.topBar.frame, [touch locationInView:self.view])) {
         CGPoint point = [touch locationInView:self.topBar];
         if (point.x <= 50) {
-            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"me2" ofType:@"png"]];
+            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
             UINavigationController *navigateController = self.navigationController;
 
             [self.navigationController popViewControllerAnimated:NO];
             if (self.fromRegister) {
-                L(@"got it");
                 FreshNewsViewController *controller = getViewControllerOfName(@"mainview3");
                 [navigateController pushViewController:controller animated:YES];
             }
         }
         else if (point.x > self.view.frame.size.width - 50) {
-            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"me1" ofType:@"png"]];
-            self.topBar.image = image;
-            [self hidePicker];
-            User *user = [UserSimpleLogic user];
-            if (_hometownChanged) user.hometown = self.hometown.titleLabel.text;
-            if (_birthdayChanged) user.birthday = self.birthday.titleLabel.text;
-            if (self.username.text && self.username.text.length) user.username = self.username.text;
-            if (self.maleButton.highlighted) user.sex = 1;
-            else if (self.femaleButton.highlighted) user.sex = 2;
-            
-            [UserSimpleLogic updateInfo];
-            
-            image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"me" ofType:@"png"]];
-            self.topBar.image = image;
+//            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"me1" ofType:@"png"]];
+//            self.topBar.image = image;
+//            [self hidePicker];
+//            User *user = [UserSimpleLogic user];
+//            if (_hometownChanged) user.hometown = self.hometown.titleLabel.text;
+//            if (_birthdayChanged) user.birthday = self.birthday.titleLabel.text;
+//            if (self.username.text && self.username.text.length) user.username = self.username.text;
+//            if (self.maleButton.highlighted) user.sex = 1;
+//            else if (self.femaleButton.highlighted) user.sex = 2;
+//            
+//            [UserSimpleLogic updateInfo];
+//            
+//            image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"me" ofType:@"png"]];
+//            self.topBar.image = image;
         }
         
     }
     FUNC_END();
 }
+
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [_tableCells count];
@@ -185,7 +232,7 @@
 }
 
 - (IBAction)buttonClicked:(id)sender {
-    L([sender description]);
+    
     if (sender == self.maleButton) {
         L(@"male");
         [self performSelector:@selector(doHighLight:) withObject:self.maleButton afterDelay:0.0];
@@ -240,6 +287,24 @@
             }
         }];
     }
+}
+
+- (IBAction)save:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
+    [self hidePicker];
+    User *user = [UserSimpleLogic user];
+    if (_hometownChanged) user.hometown = self.hometown.titleLabel.text;
+    if (_birthdayChanged) user.birthday = self.birthday.titleLabel.text;
+    if (self.username.text && self.username.text.length) user.username = self.username.text;
+    if (self.maleButton.highlighted) user.sex = 1;
+    else if (self.femaleButton.highlighted) user.sex = 2;
+    
+//    [UserSimpleLogic ]
+    [UserSimpleLogic updateInfo];
+    
+    image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+    self.topBar.image = image;
 }
 
 - (void)doHighLight:(UIButton *)b {

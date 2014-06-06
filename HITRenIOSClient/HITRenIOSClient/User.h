@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSString *hometown;
 @property (assign, nonatomic) int status;
 @property (assign, nonatomic) int seq;
+@property (strong, nonatomic) NSString *pic;
 
 //关系
 @property (strong, nonatomic) RelationShip *relationShip;
