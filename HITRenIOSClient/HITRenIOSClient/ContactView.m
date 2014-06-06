@@ -86,9 +86,9 @@
                 [array addObject:uid];
         [_list setObject:userlist forKey:gname];
     }
-    AppData *appData = [AppData sharedInstance];
-    NSArray *uids = [appData userInfosNeedDownload:array];
-    [UserSimpleLogic  downloadUseInfos:uids from:NSStringFromClass(self.class)];
+//    AppData *appData = [AppData sharedInstance];
+//    NSArray *uids = [appData userInfosNeedDownload:array];
+    [UserSimpleLogic  downloadUseInfos:array from:NSStringFromClass(self.class)];
 }
 
 - (void)contactDidDownload:(NSNotification *)notification {

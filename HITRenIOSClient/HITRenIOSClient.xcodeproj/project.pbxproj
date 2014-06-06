@@ -1019,8 +1019,6 @@
 				F88BCB3918BC7C2800407521 /* LoginViewController.m */,
 				F88BCB4018BC947F00407521 /* MainViewController.h */,
 				F88BCB4118BC947F00407521 /* MainViewController.m */,
-				F8E9687718C709CB00B9384B /* NoticeViewController.h */,
-				F8E9687818C709CB00B9384B /* NoticeViewController.m */,
 				F8E9688018C70B5700B9384B /* PersonViewController.h */,
 				F8E9688118C70B5700B9384B /* PersonViewController.m */,
 				F8E9688318C714C200B9384B /* RegisterViewController.h */,
@@ -1033,8 +1031,7 @@
 				F89964F918FD331200D7FA44 /* FriendInfoViewController.m */,
 				F89964FB18FD50F200D7FA44 /* GroupChooserViewController.h */,
 				F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */,
-				F8107C6619331A4D0073C169 /* ChatViewController.h */,
-				F8107C6719331A4D0073C169 /* ChatViewController.m */,
+				F8148D431941A0AF000F5C9F /* notice */,
 				F8148D35194035A2000F5C9F /* freshnews */,
 				F8148D341940356F000F5C9F /* tools */,
 				F8148D31194034E5000F5C9F /* calendar */,
@@ -1350,6 +1347,17 @@
 				F8148D3D1940C0E8000F5C9F /* FullImageViewController.m */,
 			);
 			name = freshnews;
+			sourceTree = "<group>";
+		};
+		F8148D431941A0AF000F5C9F /* notice */ = {
+			isa = PBXGroup;
+			children = (
+				F8E9687718C709CB00B9384B /* NoticeViewController.h */,
+				F8E9687818C709CB00B9384B /* NoticeViewController.m */,
+				F8107C6619331A4D0073C169 /* ChatViewController.h */,
+				F8107C6719331A4D0073C169 /* ChatViewController.m */,
+			);
+			name = notice;
 			sourceTree = "<group>";
 		};
 		F842BB8A19051BD700148848 /* menu */ = {
