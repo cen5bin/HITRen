@@ -230,6 +230,8 @@
 		F8148D7219422D16000F5C9F /* writer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7119422D16000F5C9F /* writer.xib */; };
 		F8148D7519423158000F5C9F /* WriterInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D7419423158000F5C9F /* WriterInfoView.m */; };
 		F8148D7819423933000F5C9F /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7719423933000F5C9F /* blue.png */; };
+		F8148D7C19423FCD000F5C9F /* buy.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7A19423FCD000F5C9F /* buy.png */; };
+		F8148D7D19423FCD000F5C9F /* lookfor.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7B19423FCD000F5C9F /* lookfor.png */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -638,6 +640,8 @@
 		F8148D7419423158000F5C9F /* WriterInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriterInfoView.m; sourceTree = "<group>"; };
 		F8148D761942329D000F5C9F /* WriteInfoDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WriteInfoDelegate.h; sourceTree = "<group>"; };
 		F8148D7719423933000F5C9F /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
+		F8148D7A19423FCD000F5C9F /* buy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buy.png; sourceTree = "<group>"; };
+		F8148D7B19423FCD000F5C9F /* lookfor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookfor.png; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1463,6 +1467,15 @@
 			name = "作者";
 			sourceTree = "<group>";
 		};
+		F8148D7919423FBA000F5C9F /* item */ = {
+			isa = PBXGroup;
+			children = (
+				F8148D7A19423FCD000F5C9F /* buy.png */,
+				F8148D7B19423FCD000F5C9F /* lookfor.png */,
+			);
+			name = item;
+			sourceTree = "<group>";
+		};
 		F842BB8A19051BD700148848 /* menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1786,6 +1799,7 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D7919423FBA000F5C9F /* item */,
 				F8148D381940B6BA000F5C9F /* null.png */,
 				F8148D13193F6A21000F5C9F /* calendarCell */,
 				F8148C14193C667F000F5C9F /* 表情 */,
@@ -2135,6 +2149,7 @@
 				F8107CA51935D8870073C169 /* arrow2.png in Resources */,
 				F8148D5A1941F395000F5C9F /* base5.png in Resources */,
 				F8148D6119420308000F5C9F /* MyActivityIndicatorView.xib in Resources */,
+				F8148D7D19423FCD000F5C9F /* lookfor.png in Resources */,
 				F8148C9C193C6691000F5C9F /* f024.gif in Resources */,
 				F8148C0D193C665C000F5C9F /* h12.jpg in Resources */,
 				F8E9687018C6DCB500B9384B /* email.png in Resources */,
@@ -2143,6 +2158,7 @@
 				F8148CE1193C6691000F5C9F /* f093.gif in Resources */,
 				F8148CE8193C6691000F5C9F /* f100.gif in Resources */,
 				F8107CBB193653490073C169 /* basemenu.png in Resources */,
+				F8148D7C19423FCD000F5C9F /* buy.png in Resources */,
 				F8148CB7193C6691000F5C9F /* f051.gif in Resources */,
 				F8148CDD193C6691000F5C9F /* f089.gif in Resources */,
 				F89964F718FD2C3600D7FA44 /* base2.png in Resources */,

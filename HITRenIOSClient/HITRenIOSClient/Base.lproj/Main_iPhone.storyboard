@@ -646,13 +646,17 @@
                                                     <rect key="frame" x="10" y="1" width="281" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="二手商品交易" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RaP-K6-tP9">
-                                                            <rect key="frame" x="51" y="14" width="102" height="21"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="二手交易" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RaP-K6-tP9">
+                                                            <rect key="frame" x="51" y="14" width="68" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="buy.png" id="Pp5-x4-fd1">
+                                                            <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -672,6 +676,10 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lookfor.png" id="EhQ-5e-5E1">
+                                                            <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -2926,6 +2934,7 @@
         <image name="arrow1.png" width="80" height="80"/>
         <image name="base0.png" width="640" height="91"/>
         <image name="base3.png" width="640" height="91"/>
+        <image name="buy.png" width="87" height="87"/>
         <image name="calendarcellbg3.png" width="640" height="148"/>
         <image name="comment.png" width="204" height="50"/>
         <image name="email.png" width="496" height="76"/>
@@ -2933,6 +2942,7 @@
         <image name="leftarrow.png" width="91" height="91"/>
         <image name="liked.png" width="204" height="50"/>
         <image name="loginbutton0.png" width="496" height="88"/>
+        <image name="lookfor.png" width="87" height="87"/>
         <image name="man.png" width="173" height="173"/>
         <image name="more.png" width="96" height="91"/>
         <image name="p_btm1.png" width="1181" height="173"/>
