@@ -172,7 +172,7 @@
     self.user.signature = [dic objectForKey:@"signature"];
     self.user.password = [dic objectForKey:@"password"];
     self.user.email = [dic objectForKey:@"email"];
-    self.user.username = [dic objectForKey:@"username"];
+    self.user.username = [dic objectForKey:@"name"];
     self.user.birthday = [dic objectForKey:@"birthday"];
     self.user.hometown = [dic objectForKey:@"hometown"];
     self.user.status = [[dic objectForKey:@"status"] intValue];
