@@ -130,30 +130,15 @@
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
             UINavigationController *navigateController = self.navigationController;
+            
+            [self.navigationController popViewControllerAnimated:!self.fromRegister];
 
-            [self.navigationController popViewControllerAnimated:NO];
+//            [self.navigationController popViewControllerAnimated:NO];
             if (self.fromRegister) {
                 FreshNewsViewController *controller = getViewControllerOfName(@"mainview3");
                 [navigateController pushViewController:controller animated:YES];
             }
         }
-        else if (point.x > self.view.frame.size.width - 50) {
-//            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"me1" ofType:@"png"]];
-//            self.topBar.image = image;
-//            [self hidePicker];
-//            User *user = [UserSimpleLogic user];
-//            if (_hometownChanged) user.hometown = self.hometown.titleLabel.text;
-//            if (_birthdayChanged) user.birthday = self.birthday.titleLabel.text;
-//            if (self.username.text && self.username.text.length) user.username = self.username.text;
-//            if (self.maleButton.highlighted) user.sex = 1;
-//            else if (self.femaleButton.highlighted) user.sex = 2;
-//            
-//            [UserSimpleLogic updateInfo];
-//            
-//            image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"me" ofType:@"png"]];
-//            self.topBar.image = image;
-        }
-        
     }
     FUNC_END();
 }
@@ -302,8 +287,12 @@
     
 //    [UserSimpleLogic ]
     [UserSimpleLogic updateInfo];
+//    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
     
-    image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+}
+
+- (void)clearTopBar {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
     self.topBar.image = image;
 }
 
@@ -329,7 +318,6 @@
     _birthdayChanged = YES;
     FUNC_END();
 }
-
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self hidePicker];
     [self resignAll];
@@ -365,8 +353,20 @@
 }
 
 - (void)dataDidFinishLoading:(NSNotification*)notification {
-    if ([notification.object isEqual:ASYNC_EVENT_UPDATEUSETINFO])
+    if ([notification.object isEqual:ASYNC_EVENT_UPDATEUSETINFO]) {
         [UserSimpleLogic updateInfoFinished:notification.userInfo];
+        [self clearTopBar];
+//        [self.navigationController popViewControllerAnimated:YES];
+        UINavigationController *navigateController = self.navigationController;
+        [self.navigationController popViewControllerAnimated:!self.fromRegister];
+        
+        //            [self.navigationController popViewControllerAnimated:NO];
+        if (self.fromRegister) {
+            FreshNewsViewController *controller = getViewControllerOfName(@"mainview3");
+            [navigateController pushViewController:controller animated:YES];
+        }
+
+    }
     
 }
 

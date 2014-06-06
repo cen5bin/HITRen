@@ -22,6 +22,7 @@
     _xmppDataManager = [[XMPPDataManager alloc] init];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:[[NSMutableArray alloc] init] forKey:@"noticeLine"];
+    [userDefaults setObject:@"" forKey:@"pic"];
     [userDefaults synchronize];
     
     NSFileManager *fm = [NSFileManager defaultManager];
