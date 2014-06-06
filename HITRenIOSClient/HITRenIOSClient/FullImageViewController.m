@@ -44,6 +44,8 @@
         UIScrollView *view = [[UIScrollView alloc] initWithFrame:rect];
         [self.scrollView addSubview:view];
         [_picScrollViews addObject:view];
+        view.showsHorizontalScrollIndicator = NO;
+        view.showsVerticalScrollIndicator = NO;
         view.delegate = self;
         view.maximumZoomScale = 4;
         view.minimumZoomScale = 0.25;
@@ -130,7 +132,10 @@
     int page = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
     self.nowIndex = page;
     [self updateTopLabel];
+    for (UIScrollView *view in _picScrollViews)
+        view.zoomScale = 1;
     [self reloadView];
+    
 }
 
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
