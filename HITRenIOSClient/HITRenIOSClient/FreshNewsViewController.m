@@ -136,6 +136,23 @@
     _writerInfoView.parentViewController = self;
     [_writerInfoView hide];
     [_writerInfoView showInView:self.view];
+    
+    if (userInfo.pic && ![userInfo.pic isEqualToString:@""]) {
+        if (!userInfo.pic||!userInfo.pic.length)
+            _writerInfoView.pic.image = [UIImage imageNamed:@"empty.png"];
+        else if ([[userInfo.pic substringToIndex:1] isEqualToString:@"h"])
+            _writerInfoView.pic.image = [UIImage imageNamed:userInfo.pic];
+        else {
+            UIImage *image = [appData getImage:userInfo.pic];
+            if (image)_writerInfoView.pic.image = image;
+            else if (![_downloadingImageSet containsObject:userInfo.pic]) {
+                [_downloadingImageSet addObject:userInfo.pic];
+                [UploadLogic downloadImage:userInfo.pic from:NSStringFromClass(self.class)];
+            }
+        }
+    }
+
+    
     return;
     UIViewController *controller = getViewControllerOfName(@"ContactView");
     [self.navigationController pushViewController:controller animated:YES];

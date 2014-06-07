@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/FreshNewsViewController.m"
-            timestampString = "423818712.427565"
+            timestampString = "423820872.295711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "859"
-            endingLineNumber = "859"
+            startingLineNumber = "876"
+            endingLineNumber = "876"
             landmarkName = "-userInfoDidDownload:"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/FreshNewsViewController.m"
-            timestampString = "423818712.427565"
+            timestampString = "423820872.295711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/FreshNewsViewController.m"
-            timestampString = "423818712.427565"
+            timestampString = "423820872.295711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "-keyboardFrameDidChanged:"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/FreshNewsViewController.m"
-            timestampString = "423818712.427565"
+            timestampString = "423820872.295711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "766"
-            endingLineNumber = "766"
+            startingLineNumber = "783"
+            endingLineNumber = "783"
             landmarkName = "-commentListDidDownload:"
             landmarkType = "5">
             <Locations>
@@ -420,11 +420,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/FreshNewsViewController.m"
-            timestampString = "423818712.427565"
+            timestampString = "423820872.295711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
+            startingLineNumber = "417"
+            endingLineNumber = "417"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -436,11 +436,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/FreshNewsViewController.m"
-            timestampString = "423818712.427565"
+            timestampString = "423820872.295711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "793"
-            endingLineNumber = "793"
+            startingLineNumber = "810"
+            endingLineNumber = "810"
             landmarkName = "-messageDidDownload:"
             landmarkType = "5">
          </BreakpointContent>
@@ -452,11 +452,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/FreshNewsViewController.m"
-            timestampString = "423818712.427565"
+            timestampString = "423820872.295711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "821"
-            endingLineNumber = "821"
+            startingLineNumber = "838"
+            endingLineNumber = "838"
             landmarkName = "-messageDidDownload:"
             landmarkType = "5">
          </BreakpointContent>
@@ -826,11 +826,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/FreshNewsViewController.m"
-            timestampString = "423818712.427565"
+            timestampString = "423820872.295711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "828"
-            endingLineNumber = "828"
+            startingLineNumber = "845"
+            endingLineNumber = "845"
             landmarkName = "-messageDidDownload:"
             landmarkType = "5">
             <Locations>
@@ -872,11 +872,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HITRenIOSClient/FreshNewsViewController.m"
-            timestampString = "423818712.427565"
+            timestampString = "423820872.295711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
