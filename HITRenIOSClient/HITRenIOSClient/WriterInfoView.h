@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *concernButton;
 @property (strong, nonatomic) IBOutlet UIButton *sendMessageButton;
+@property (strong, nonatomic) IBOutlet UIButton *homeButton;
+
 @property (strong, nonatomic) UIViewController *parentViewController;
 
 @property (strong, nonatomic) id <WriteInfoDelegate> delegate;

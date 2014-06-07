@@ -32,6 +32,7 @@
 #import "ChatViewController.h"
 #import "ChooseGroupViewController.h"
 #import "RelationshipLogic.h"
+#import "PersonInfoViewController.h"
 
 @interface FreshNewsViewController ()
 
@@ -1032,6 +1033,11 @@
     }
     else if (index == 1) {
         ChatViewController *controller = getViewControllerOfName(@"ChatView");
+        controller.userInfo = writerInfo.userInfo;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if (index == 2) {
+        PersonInfoViewController *controller = getViewControllerOfName(@"PersonInfo");
         controller.userInfo = writerInfo.userInfo;
         [self.navigationController pushViewController:controller animated:YES];
     }

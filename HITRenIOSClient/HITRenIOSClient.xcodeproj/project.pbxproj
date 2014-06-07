@@ -233,6 +233,9 @@
 		F8148D7C19423FCD000F5C9F /* buy.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7A19423FCD000F5C9F /* buy.png */; };
 		F8148D7D19423FCD000F5C9F /* lookfor.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7B19423FCD000F5C9F /* lookfor.png */; };
 		F8148D801942F0D4000F5C9F /* ChooseGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D7F1942F0D4000F5C9F /* ChooseGroupViewController.m */; };
+		F8148D8219430258000F5C9F /* personinfobackimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F8148D8119430258000F5C9F /* personinfobackimage.jpg */; };
+		F8148D8519430455000F5C9F /* PersonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D8419430455000F5C9F /* PersonInfoViewController.m */; };
+		F8148D87194309DF000F5C9F /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D86194309DF000F5C9F /* home.png */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -645,6 +648,10 @@
 		F8148D7B19423FCD000F5C9F /* lookfor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookfor.png; sourceTree = "<group>"; };
 		F8148D7E1942F0D4000F5C9F /* ChooseGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGroupViewController.h; sourceTree = "<group>"; };
 		F8148D7F1942F0D4000F5C9F /* ChooseGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGroupViewController.m; sourceTree = "<group>"; };
+		F8148D8119430258000F5C9F /* personinfobackimage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = personinfobackimage.jpg; sourceTree = "<group>"; };
+		F8148D8319430455000F5C9F /* PersonInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInfoViewController.h; sourceTree = "<group>"; };
+		F8148D8419430455000F5C9F /* PersonInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInfoViewController.m; sourceTree = "<group>"; };
+		F8148D86194309DF000F5C9F /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1075,12 +1082,14 @@
 				F89964F918FD331200D7FA44 /* FriendInfoViewController.m */,
 				F89964FB18FD50F200D7FA44 /* GroupChooserViewController.h */,
 				F89964FC18FD50F200D7FA44 /* GroupChooserViewController.m */,
-				F8148D441941A222000F5C9F /* 个人界面 */,
+				F8148D441941A222000F5C9F /* 个人信息设置界面 */,
 				F8148D431941A0AF000F5C9F /* 消息界面 */,
 				F8148D35194035A2000F5C9F /* 新鲜事界面 */,
 				F8148D341940356F000F5C9F /* 工具界面 */,
 				F8148D31194034E5000F5C9F /* 日程界面 */,
 				F8148D5B1941F4E7000F5C9F /* 通讯录 */,
+				F8148D8319430455000F5C9F /* PersonInfoViewController.h */,
+				F8148D8419430455000F5C9F /* PersonInfoViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1406,14 +1415,14 @@
 			name = "消息界面";
 			sourceTree = "<group>";
 		};
-		F8148D441941A222000F5C9F /* 个人界面 */ = {
+		F8148D441941A222000F5C9F /* 个人信息设置界面 */ = {
 			isa = PBXGroup;
 			children = (
 				F8148D481941A736000F5C9F /* 头像选取 */,
 				F8E9688018C70B5700B9384B /* PersonViewController.h */,
 				F8E9688118C70B5700B9384B /* PersonViewController.m */,
 			);
-			name = "个人界面";
+			name = "个人信息设置界面";
 			sourceTree = "<group>";
 		};
 		F8148D481941A736000F5C9F /* 头像选取 */ = {
@@ -1805,6 +1814,8 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D86194309DF000F5C9F /* home.png */,
+				F8148D8119430258000F5C9F /* personinfobackimage.jpg */,
 				F8148D7919423FBA000F5C9F /* item */,
 				F8148D381940B6BA000F5C9F /* null.png */,
 				F8148D13193F6A21000F5C9F /* calendarCell */,
@@ -2097,6 +2108,7 @@
 				F80B0D0E1874269D003E72DC /* Main_iPad.storyboard in Resources */,
 				F8550F0018C4C251005E51FE /* p_btm2.png in Resources */,
 				F842BB8919051BC600148848 /* Menu.xib in Resources */,
+				F8148D8219430258000F5C9F /* personinfobackimage.jpg in Resources */,
 				F8148C9E193C6691000F5C9F /* f026.gif in Resources */,
 				F8148CC4193C6691000F5C9F /* f064.gif in Resources */,
 				F8148CFE193E004A000F5C9F /* freshnewsmenu.xib in Resources */,
@@ -2162,6 +2174,7 @@
 				F8148C0C193C665C000F5C9F /* h11.jpg in Resources */,
 				F8148CE1193C6691000F5C9F /* f093.gif in Resources */,
 				F8148CE8193C6691000F5C9F /* f100.gif in Resources */,
+				F8148D87194309DF000F5C9F /* home.png in Resources */,
 				F8107CBB193653490073C169 /* basemenu.png in Resources */,
 				F8148D7C19423FCD000F5C9F /* buy.png in Resources */,
 				F8148CB7193C6691000F5C9F /* f051.gif in Resources */,
@@ -2330,6 +2343,7 @@
 				F84B7DE518BB3C8D007FC2D5 /* DDLog.m in Sources */,
 				F84B7DDD18BB3C8D007FC2D5 /* RFImageToDataTransformer.m in Sources */,
 				F8E9688218C70B5700B9384B /* PersonViewController.m in Sources */,
+				F8148D8519430455000F5C9F /* PersonInfoViewController.m in Sources */,
 				F84B7DE318BB3C8D007FC2D5 /* DDASLLogger.m in Sources */,
 				F8107C961935C33B0073C169 /* ContactPersonCell.m in Sources */,
 				F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */,

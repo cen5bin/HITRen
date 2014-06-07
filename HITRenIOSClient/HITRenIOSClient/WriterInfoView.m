@@ -29,6 +29,13 @@
     self.sendMessageButton.layer.cornerRadius = 5;
     self.concerned = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    self.pic.userInteractionEnabled = YES;
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
+    [self.pic addGestureRecognizer:gesture];
+}
+
+- (void)tapped {
+    [self.delegate writeInfo:self buttonClickedAtIndex:2];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -113,5 +120,7 @@
         [self.delegate writeInfo:self buttonClickedAtIndex:0];
     }
     else if (sender == self.sendMessageButton) [self.delegate writeInfo:self buttonClickedAtIndex:1];
+    else if (sender == self.homeButton)
+        [self.delegate writeInfo:self buttonClickedAtIndex:2];
 }
 @end

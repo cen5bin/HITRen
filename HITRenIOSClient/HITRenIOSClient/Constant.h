@@ -76,6 +76,12 @@
 #define BACKGROUND_COLOR [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1]
 #define VIEW_BORDER_COLOR [UIColor colorWithRed:220.0/255 green:220.0/255 blue:220.0/255 alpha:1]
 
+#define BLUE_BUTTON_BACKGROUNF [UIColor colorWithRed:0/255 green:122.0/255 blue:255.0/255 alpha:1]
+#define BLUE_BUTTON_BACKGROUNF1 [UIColor colorWithRed:12.0/255 green:89.0/255 blue:173.0/255 alpha:1]
+#define GREEN_BUTTON_BACKGROUNF [UIColor colorWithRed:96.0/255 green:210.0/255 blue:48.0/255 alpha:1]
+#define GREEN_BUTTON_BACKGROUNF1 [UIColor colorWithRed:81.0/255 green:180.0/255 blue:48.0/255 alpha:1]
+
+
 
 #define EMOTION_BEGIN @"[/"
 #define EMOTION_END @"]"
