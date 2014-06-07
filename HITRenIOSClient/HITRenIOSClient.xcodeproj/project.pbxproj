@@ -236,6 +236,9 @@
 		F8148D8219430258000F5C9F /* personinfobackimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F8148D8119430258000F5C9F /* personinfobackimage.jpg */; };
 		F8148D8519430455000F5C9F /* PersonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D8419430455000F5C9F /* PersonInfoViewController.m */; };
 		F8148D87194309DF000F5C9F /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D86194309DF000F5C9F /* home.png */; };
+		F8148D8A194374F1000F5C9F /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D89194374F1000F5C9F /* GoodsDetailViewController.m */; };
+		F8148D91194385E5000F5C9F /* imageleft.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D8F194385E5000F5C9F /* imageleft.png */; };
+		F8148D92194385E5000F5C9F /* imageright.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D90194385E5000F5C9F /* imageright.png */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -652,6 +655,10 @@
 		F8148D8319430455000F5C9F /* PersonInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInfoViewController.h; sourceTree = "<group>"; };
 		F8148D8419430455000F5C9F /* PersonInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInfoViewController.m; sourceTree = "<group>"; };
 		F8148D86194309DF000F5C9F /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		F8148D88194374F1000F5C9F /* GoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDetailViewController.h; sourceTree = "<group>"; };
+		F8148D89194374F1000F5C9F /* GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
+		F8148D8F194385E5000F5C9F /* imageleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageleft.png; sourceTree = "<group>"; };
+		F8148D90194385E5000F5C9F /* imageright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageright.png; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1374,6 +1381,8 @@
 				F8107CAA19363EA30073C169 /* SecondTradeViewController.m */,
 				F8D7482C1938638200829CDA /* UploadGoodsViewController.h */,
 				F8D7482D1938638200829CDA /* UploadGoodsViewController.m */,
+				F8148D88194374F1000F5C9F /* GoodsDetailViewController.h */,
+				F8148D89194374F1000F5C9F /* GoodsDetailViewController.m */,
 			);
 			name = "二手交易";
 			sourceTree = "<group>";
@@ -1814,6 +1823,8 @@
 		F88F986E18C17C41009CE742 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D8F194385E5000F5C9F /* imageleft.png */,
+				F8148D90194385E5000F5C9F /* imageright.png */,
 				F8148D86194309DF000F5C9F /* home.png */,
 				F8148D8119430258000F5C9F /* personinfobackimage.jpg */,
 				F8148D7919423FBA000F5C9F /* item */,
@@ -2195,6 +2206,7 @@
 				F8148C13193C665C000F5C9F /* h18.jpg in Resources */,
 				F8148D7819423933000F5C9F /* blue.png in Resources */,
 				F8148C10193C665C000F5C9F /* h15.jpg in Resources */,
+				F8148D92194385E5000F5C9F /* imageright.png in Resources */,
 				F8148D25193F9195000F5C9F /* basemenu2.png in Resources */,
 				F8148CC1193C6691000F5C9F /* f061.gif in Resources */,
 				F8148C06193C665C000F5C9F /* h5.jpg in Resources */,
@@ -2213,6 +2225,7 @@
 				F8148CCC193C6691000F5C9F /* f072.gif in Resources */,
 				F8148C0B193C665C000F5C9F /* h10.jpg in Resources */,
 				F8148CE3193C6691000F5C9F /* f095.gif in Resources */,
+				F8148D91194385E5000F5C9F /* imageleft.png in Resources */,
 				F89964F618FD2C3600D7FA44 /* base1.png in Resources */,
 				F80B0D021874269D003E72DC /* InfoPlist.strings in Resources */,
 				F8148CCA193C6691000F5C9F /* f070.gif in Resources */,
@@ -2342,6 +2355,7 @@
 				F80B0D50187426F2003E72DC /* TestHttpTransfer.m in Sources */,
 				F84B7DE518BB3C8D007FC2D5 /* DDLog.m in Sources */,
 				F84B7DDD18BB3C8D007FC2D5 /* RFImageToDataTransformer.m in Sources */,
+				F8148D8A194374F1000F5C9F /* GoodsDetailViewController.m in Sources */,
 				F8E9688218C70B5700B9384B /* PersonViewController.m in Sources */,
 				F8148D8519430455000F5C9F /* PersonInfoViewController.m in Sources */,
 				F84B7DE318BB3C8D007FC2D5 /* DDASLLogger.m in Sources */,

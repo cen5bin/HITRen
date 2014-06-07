@@ -14,6 +14,7 @@
 #import "GoodsLine.h"
 #import "GoodsInfo.h"
 #import "UploadLogic.h"
+#import "GoodsDetailViewController.h"
 
 @interface SecondTradeViewController ()
 
@@ -193,12 +194,21 @@
             cell.noImageLabel.hidden = NO;
         }
     }
-   
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 100;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSNumber *gid = [_data objectAtIndex:indexPath.row];
+    AppData *appData = [AppData sharedInstance];
+    GoodsInfo *goodsInfo = [appData getGoodsInfoOfGid:[gid intValue]];
+    GoodsDetailViewController *controller = getViewControllerOfName(@"GoodsDetail");
+    controller.goodsInfo = goodsInfo;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)hideMenu {
