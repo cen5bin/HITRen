@@ -16,6 +16,8 @@
     
     UILabel *_noDataLabel1;
     UILabel *_noDataLabel2;
+    
+    NSMutableSet *_downloadingImageSet;
 }
 
 @property (strong, nonatomic) IBOutlet NoticeViewBar *noticeViewBar;

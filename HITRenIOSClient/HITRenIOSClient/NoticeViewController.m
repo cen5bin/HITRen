@@ -21,6 +21,7 @@
 #import "MessageLogic.h"
 #import "ChatViewController.h"
 #import "ContactView.h"
+#import "UploadLogic.h"
 
 @interface NoticeViewController ()
 
@@ -66,8 +67,13 @@
     _noDataLabel2.text = @"暂时没有对话";
     _noDataLabel2.textAlignment = NSTextAlignmentCenter;
     _noDataLabel2.textColor = [UIColor lightGrayColor];
+    
+    _downloadingImageSet = [[NSMutableSet alloc] init];
+    
     FUNC_END();
 }
+
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -127,24 +133,41 @@
     
     AppData *appData = [AppData sharedInstance];
     
+    UserInfo *userInfo = nil;
     if (tableView == self.activityTableView) {
         NoticeObject *object = [_activies objectAtIndex:indexPath.row];
         NSDictionary *dic = object.content;
         if (object.type == 1) {
             cell.username.text = [[dic objectForKey:@"by"] objectForKey:@"name"];
+            int uid = [[[dic objectForKey:@"by"] objectForKey:@"uid"] intValue];
+            userInfo = [appData readUserInfoForId:uid];
         }
         cell.lastNotice.text = [AppData stringOfNoticeObject:object];
     }
     else if (tableView == self.noticeTableView) {
         int uid = [[_notices objectAtIndex:indexPath.row] intValue];
-        UserInfo *userInfo = [appData readUserInfoForId:uid];
+        userInfo = [appData readUserInfoForId:uid];
         cell.username.text = userInfo.username;
         Notice *notice = [appData lastNoticeOfUid:uid];
         NoticeObject *obj = [notice.notices lastObject];
         L([obj.content description]);
         cell.lastNotice.text = [obj.content objectForKey:@"text"];
     }
-    
+    if (userInfo.pic && ![userInfo.pic isEqualToString:@""]) {
+        if (!userInfo.pic||!userInfo.pic.length)
+            cell.pic.image = [UIImage imageNamed:@"empty.png"];
+        else if ([[userInfo.pic substringToIndex:1] isEqualToString:@"h"])
+            cell.pic.image = [UIImage imageNamed:userInfo.pic];
+        else {
+            UIImage *image = [appData getImage:userInfo.pic];
+            if (image) cell.pic.image = image;
+            else if (![_downloadingImageSet containsObject:userInfo.pic]) {
+                [_downloadingImageSet addObject:userInfo.pic];
+                [UploadLogic downloadImage:userInfo.pic from:NSStringFromClass(self.class)];
+            }
+        }
+    }
+
     
 //    int uid = [[_data objectAtIndex:indexPath.row] intValue];
 //    AppData *appData = [AppData sharedInstance];
@@ -158,6 +181,26 @@
    
     return cell;
 }
+
+- (void)dataDidDownload:(NSNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    NSString *string = [dic objectForKey:@"fromclass"];
+    if (string && ![string isEqualToString:@""] && ![string isEqualToString:NSStringFromClass(self.class)])  {
+        return;
+    }
+    if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
+        [self imageDidDownload:notification];
+}
+
+- (void)imageDidDownload:(NSNotification *)notification {
+    UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
+    if (!image) image = [UIImage imageNamed:@"null.png"];
+    [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
+    [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
+    [self.activityTableView reloadData];
+    [self.noticeTableView reloadData];
+}
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint p = scrollView.contentOffset;
