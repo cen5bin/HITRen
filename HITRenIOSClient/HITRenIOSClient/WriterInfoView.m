@@ -67,7 +67,7 @@
 }
 
 - (IBAction)buttonClicked:(id)sender {
-    
+    L(@"yes");
     if (sender == self.concernButton) [self.delegate writeInfo:self buttonClickedAtIndex:0];
     else if (sender == self.sendMessageButton) [self.delegate writeInfo:self buttonClickedAtIndex:1];
 }

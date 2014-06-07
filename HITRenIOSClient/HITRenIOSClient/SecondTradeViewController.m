@@ -103,16 +103,17 @@
     NSArray *gids = [data objectForKey:@"gids"];
     appData.goodsLine.seq = [data objectForKey:@"seq"];
     L([gids description]);
-    L([appData.goodsLine.gids description]);
+    
     if (gids.count == 0) return;
-    int index = 0;
+    int index = -1;
     if (appData.goodsLine.gids.count)
         index = [gids indexOfObject:[appData.goodsLine.gids objectAtIndex:0]];
     LOG(@"index %d", index);
-    if (index == NSNotFound) index = 0;
+    if (index == NSNotFound) index = -1;
     for (int i = index + 1; i < gids.count; i++)
         [appData.goodsLine.gids insertObject:[gids objectAtIndex:i] atIndex:0];
     [appData.goodsLine update];
+    L([appData.goodsLine.gids description]);
     int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
     [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
 }

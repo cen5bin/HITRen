@@ -1344,7 +1344,7 @@
 			name = "日程界面";
 			sourceTree = "<group>";
 		};
-		F8148D321940351C000F5C9F /* findthing */ = {
+		F8148D321940351C000F5C9F /* 寻物平台 */ = {
 			isa = PBXGroup;
 			children = (
 				F8148BD5193A21C4000F5C9F /* FindThingsViewController.h */,
@@ -1352,10 +1352,10 @@
 				F8148BEA193C4B7E000F5C9F /* UploadThingViewController.h */,
 				F8148BEB193C4B7E000F5C9F /* UploadThingViewController.m */,
 			);
-			name = findthing;
+			name = "寻物平台";
 			sourceTree = "<group>";
 		};
-		F8148D3319403546000F5C9F /* secondtrade */ = {
+		F8148D3319403546000F5C9F /* 二手交易 */ = {
 			isa = PBXGroup;
 			children = (
 				F8107CA919363EA30073C169 /* SecondTradeViewController.h */,
@@ -1363,7 +1363,7 @@
 				F8D7482C1938638200829CDA /* UploadGoodsViewController.h */,
 				F8D7482D1938638200829CDA /* UploadGoodsViewController.m */,
 			);
-			name = secondtrade;
+			name = "二手交易";
 			sourceTree = "<group>";
 		};
 		F8148D341940356F000F5C9F /* 工具界面 */ = {
@@ -1371,8 +1371,8 @@
 			children = (
 				F8E9687A18C70AAD00B9384B /* ToolsViewController.h */,
 				F8E9687B18C70AAD00B9384B /* ToolsViewController.m */,
-				F8148D3319403546000F5C9F /* secondtrade */,
-				F8148D321940351C000F5C9F /* findthing */,
+				F8148D3319403546000F5C9F /* 二手交易 */,
+				F8148D321940351C000F5C9F /* 寻物平台 */,
 			);
 			name = "工具界面";
 			sourceTree = "<group>";

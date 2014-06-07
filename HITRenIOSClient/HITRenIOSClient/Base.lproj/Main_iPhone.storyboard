@@ -811,7 +811,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sp1-wB-MT1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="910" y="191"/>
+            <point key="canvasLocation" x="880" y="182"/>
         </scene>
         <!--Upload Goods View Controller-->
         <scene sceneID="Rjb-VQ-slK">
