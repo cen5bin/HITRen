@@ -15,21 +15,21 @@
 
 @implementation RelationshipLogic
 
-+ (BOOL)concernUser:(int)uid inGroup:(NSString *)gname {
++ (BOOL)concernUser:(int)uid inGroup:(NSString *)gname fromClass:(NSString *)classname{
     FUNC_START();
-    BOOL ret = [RelationshipLogic concernUser:uid inGroups:[NSArray arrayWithObjects:gname, nil]];
+    BOOL ret = [RelationshipLogic concernUser:uid inGroups:[NSArray arrayWithObjects:gname, nil] fromClass:classname];
     FUNC_END();
     return ret;
 }
 
-+ (BOOL)concernUser:(int)uid inGroups:(NSArray *)gnames {
++ (BOOL)concernUser:(int)uid inGroups:(NSArray *)gnames fromClass:(NSString *)className{
     FUNC_START();
     HttpData *data = [[HttpData alloc] init];
     [data setIntValue:self.user.uid forKey:@"uid"];
     [data setIntValue:uid forKey:@"uid1"];
     [data setValue:gnames forKey:@"gnames"];
-    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"ConcernUser"];
-    if (![[ret objectForKey:@"SUC"] boolValue]) {
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"ConcernUser" withEventName:ASYNC_EVENT_CONCERNUSER fromClass:className];
+    if (!ret) {
         LOG(@"concernUser fail");
         FUNC_END();
         return NO;
@@ -267,13 +267,13 @@
     return YES;
 }
 
-+ (BOOL)asyncDownloadInfo {
++ (BOOL)asyncDownloadInfofromClass:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];//[[HttpData alloc] init];
     User *user = [RelationshipLogic user];
     [data setIntValue:user.uid forKey:@"uid"];
     [data setIntValue:user.relationShip.seq forKey:@"seq"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadRelationshipInfo" withEventName:ASYNC_EVENT_DOWNLOADCONTACT];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadRelationshipInfo" withEventName:ASYNC_EVENT_DOWNLOADCONTACT fromClass:classname];
     if (!ret) {
         LOG(@"downloadRelationshipInfo fail");
         return NO;
@@ -314,6 +314,24 @@
 //    }
 //    return array;
 //}
+
++ (BOOL)asyncDeleteConcernedUser:(int)uid fromClass:(NSString *)classname{
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    [data setIntValue:self.user.uid forKey:@"uid"];
+    [data setIntValue:uid forKey:@"uid1"];
+    //    [data setValue:[self getGroupsOfUser:uid] forKey:@"gnames"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DeleteConcernedUser" withEventName:ASYNC_EVENT_DELETECONCERNEDUSER fromClass:classname];
+    if (!ret) {
+        LOG(@"DeleteConcernedUser fail");
+        FUNC_END();
+        return NO;
+    }
+    LOG(@"DeleteConcernedUser succ");
+    FUNC_END();
+    return YES;
+
+}
 
 + (BOOL)uidIsConcerned:(int)uid {
     User *user = [RelationshipLogic user];

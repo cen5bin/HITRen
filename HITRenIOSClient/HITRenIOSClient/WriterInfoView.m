@@ -29,9 +29,23 @@
     self.sendMessageButton.layer.cornerRadius = 5;
     self.concerned = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(concernedStateChanged:) name:CONCERNEDINFO_CHANGED object:nil];
+    
     self.pic.userInteractionEnabled = YES;
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
     [self.pic addGestureRecognizer:gesture];
+    
+    self.usernameLabel.userInteractionEnabled = YES;
+    gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
+    [self.usernameLabel addGestureRecognizer:gesture];
+}
+
+- (void)concernedStateChanged:(NSNotification *)notification {
+    L(@"yes");
+    NSDictionary *ret = notification.userInfo;
+    if ([[ret objectForKey:@"uid"] intValue]!=[self.userInfo.uid intValue]) return;
+    self.concerned = [[ret objectForKey:@"concerned"] boolValue];
+    [self updateConcernedButton];
 }
 
 - (void)tapped {
@@ -69,7 +83,7 @@
 
 - (void)showInView:(UIView *)view {
 //    view.userInteractionEnabled = NO;
-    [RelationshipLogic asyncDownloadInfo];
+    [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
     self.usernameLabel.text = self.userInfo.username;
     _backgroundView = [[UIView alloc] initWithFrame:view.frame];
     _backgroundView.backgroundColor = [UIColor blackColor];

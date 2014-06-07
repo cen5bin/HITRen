@@ -54,7 +54,7 @@
 - (void)willLoad {
     if (_isLoading) return;
     _isLoading = YES;
-    [RelationshipLogic asyncDownloadInfo];
+    [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
 //    UIView *view = [self getActivityIndicator];
 //    if (!view.superview)
 //        [self addSubview:view];

@@ -12,6 +12,8 @@
 #import "UploadLogic.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ChatViewController.h"
+#import "RelationshipLogic.h"
+#import "ChooseGroupViewController.h"
 
 @interface PersonInfoViewController ()
 
@@ -47,6 +49,17 @@
     
     self.sendMessageButton.layer.cornerRadius = 5;
     self.concernButton.layer.cornerRadius = 5;
+    
+    self.concerned = [RelationshipLogic uidIsConcerned:[self.userInfo.uid intValue]];
+    [self updateConcernButton];
+    
+    _choosingGroup = NO;
+}
+
+- (void)updateConcernButton {
+    [self.concernButton setTitle:self.concerned?@"取消关注":@"关注Ta" forState:UIControlStateNormal];
+    self.concernButton.backgroundColor = self.concerned ? [UIColor darkGrayColor] : GREEN_BUTTON_BACKGROUNF;
+
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -57,6 +70,24 @@
     }
     if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
         [self imageDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_CONCERNUSER])
+        [self userDidConcerned:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DELETECONCERNEDUSER])
+        [self userDidDisConncerned:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADCONTACT])
+        [self contactDidDownload:notification];
+}
+
+- (void)contactDidDownload:(NSNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    
+    if ([[dic objectForKey:@"SUC"] boolValue]) {
+        [RelationshipLogic unPackRelationshipInfoData:[dic objectForKey:@"DATA"]];
+        self.concerned = [RelationshipLogic uidIsConcerned:[self.userInfo.uid intValue]];
+        [self updateConcernButton];
+
+    }
+
 }
 
 - (void)imageDidDownload:(NSNotification *)notification {
@@ -68,8 +99,27 @@
     [self.tableView reloadData];
 }
 
+- (void)userDidConcerned:(NSNotification *)notification {
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) {
+        self.concerned = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:CONCERNEDINFO_CHANGED object:nil userInfo:@{@"uid":self.userInfo.uid, @"concerned":[NSNumber numberWithBool:YES]}];
+    }
+    [self updateConcernButton];
+    
+}
+
+- (void)userDidDisConncerned:(NSNotification *)notification {
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) {
+        self.concerned = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:CONCERNEDINFO_CHANGED object:nil userInfo:@{@"uid":self.userInfo.uid, @"concerned":[NSNumber numberWithBool:NO]}];
+    }
+    [self updateConcernButton];
+}
 
 - (void)viewDidAppear:(BOOL)animated {
+    [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
     UserInfo *userInfo = self.userInfo;
     AppData *appData = [AppData sharedInstance];
     if (userInfo.pic && ![userInfo.pic isEqualToString:@""]) {
@@ -85,6 +135,14 @@
                 [UploadLogic downloadImage:userInfo.pic from:NSStringFromClass(self.class)];
             }
         }
+    }
+    if (_choosingGroup) {
+        _choosingGroup = NO;
+        [RelationshipLogic concernUser:[self.userInfo.uid intValue] inGroup:[ChooseGroupViewController choosedGroupName] fromClass:NSStringFromClass(self.class)];
+        //        if ([RelationshipLogic concernUser:[_writerInfoView.userInfo.uid intValue] inGroup:[ChooseGroupViewController choosedGroupName]]) {
+        //            _writerInfoView.concerned = YES;
+        //            [_writerInfoView updateConcernedButton];
+        //        }
     }
 
 }
@@ -143,9 +201,17 @@
         controller.userInfo = self.userInfo;
         self.sendMessageButton.backgroundColor = BLUE_BUTTON_BACKGROUNF1;
         [self.navigationController pushViewController:controller animated:YES];
-        
     }
     else if (sender == self.concernButton) {
+        if (self.concerned) {
+            [RelationshipLogic asyncDeleteConcernedUser:[self.userInfo.uid intValue] fromClass:NSStringFromClass(self.class)];
+            }
+        else {
+            self.concernButton.backgroundColor = GREEN_BUTTON_BACKGROUNF1;
+            UIViewController *controller = getViewControllerOfName(@"ChooseGroup");
+            _choosingGroup = YES;
+            [self.navigationController pushViewController:controller animated:YES];
+        }
         
     }
     [self performSelector:@selector(clearButton) withObject:nil afterDelay:0.1];

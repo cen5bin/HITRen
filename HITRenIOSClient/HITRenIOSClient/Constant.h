@@ -66,7 +66,13 @@
 #define ASYNC_EVENT_DOWNLOADEVENTLINE @"HITRenAsyncDataDownloadEventLine" //下载日程线
 
 
+#define ASYNC_EVENT_DELETECONCERNEDUSER @"HITRenAsyncDataDeleteConcernedUser" //取消关注
+#define ASYNC_EVENT_CONCERNUSER @"HITRenAsyncDataConcernUser" //关注
 
+
+
+//////////////////////////////
+#define CONCERNEDINFO_CHANGED @"ConcernedInfoChanged"  // 关注、取消关注某人的状态变化
 
 
 #define XMPP_MESSAGE_RECEIVED @"XMPP_MESSAGE_RECEIVED"

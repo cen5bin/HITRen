@@ -12,6 +12,7 @@
 @interface PersonInfoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     NSMutableArray *_cells;
     NSMutableSet *_downloadingImageSet;
+    BOOL _choosingGroup;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *pic;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -32,6 +33,8 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *sendMessageButton;
 @property (strong, nonatomic) IBOutlet UIButton *concernButton;
+
+@property (nonatomic) BOOL concerned;
 
 - (IBAction)moreButtonClicked:(id)sender;
 

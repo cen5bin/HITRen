@@ -43,7 +43,7 @@
 //        [self.view addSubview:view];
     _myActivityIndicator.textLabel.text = @"正在加载";
     [_myActivityIndicator showInView:self.view];
-    [RelationshipLogic asyncDownloadInfo];
+    [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -119,7 +119,7 @@
         _myActivityIndicator.textLabel.text = @"正在删除";
         [_myActivityIndicator showInView:self.view];
         if ([RelationshipLogic deleteGroup:_deletingGroup])
-            [RelationshipLogic asyncDownloadInfo];
+            [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
         else L(@"delete error");
 //        view.hidden = YES;
     }
@@ -191,7 +191,7 @@
         [_myActivityIndicator hide];
         [_myActivityIndicator showInView:self.view];
         if ([RelationshipLogic addGroup:gname])
-            [RelationshipLogic asyncDownloadInfo];
+            [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
     }
 }
 

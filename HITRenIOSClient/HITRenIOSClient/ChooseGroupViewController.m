@@ -50,11 +50,15 @@ static NSString *choosedGroupName = nil;
     //        [self.view addSubview:view];
     _myActivityIndicator.textLabel.text = @"正在加载";
     [_myActivityIndicator showInView:self.view];
-    [RelationshipLogic asyncDownloadInfo];
+    [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
-    
+    NSDictionary *dic = notification.userInfo;
+    NSString *string = [dic objectForKey:@"fromclass"];
+    if (string && ![string isEqualToString:@""] && ![string isEqualToString:NSStringFromClass(self.class)])  {
+        return;
+    }
     if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADCONTACT])
         [self contactDidDownload:notification];
 }
@@ -159,7 +163,7 @@ static NSString *choosedGroupName = nil;
         [_myActivityIndicator hide];
         [_myActivityIndicator showInView:self.view];
         if ([RelationshipLogic addGroup:gname])
-            [RelationshipLogic asyncDownloadInfo];
+            [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
     }
 }
 

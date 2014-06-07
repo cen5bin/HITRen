@@ -245,11 +245,11 @@
     [super viewDidAppear:animated];
     if (_choosingGroup) {
         _choosingGroup = NO;
-        if ([RelationshipLogic concernUser:[_writerInfoView.userInfo.uid intValue] inGroup:[ChooseGroupViewController choosedGroupName]]) {
-            _writerInfoView.concerned = YES;
-            [_writerInfoView updateConcernedButton];
-        }
-
+        [RelationshipLogic concernUser:[_writerInfoView.userInfo.uid intValue] inGroup:[ChooseGroupViewController choosedGroupName] fromClass:NSStringFromClass(self.class)];
+//        if ([RelationshipLogic concernUser:[_writerInfoView.userInfo.uid intValue] inGroup:[ChooseGroupViewController choosedGroupName]]) {
+//            _writerInfoView.concerned = YES;
+//            [_writerInfoView updateConcernedButton];
+//        }
     }
     return;
     EmotionTextView *textView = [[EmotionTextView alloc] initWithFrame:CGRectMake(0, 100, 176, 0)];
@@ -653,8 +653,15 @@
         [self commentListDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
         [self imageDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_CONCERNUSER]) {
+        NSDictionary *ret = notification.userInfo;
+        if ([ret objectForKey:@"SUC"]) _writerInfoView.concerned = YES;
+        [_writerInfoView updateConcernedButton];
+    }
     FUNC_END();
 }
+
+
 
 - (void)imageDidDownload:(NSNotification *)notification {
     UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
@@ -1039,6 +1046,7 @@
     else if (index == 2) {
         PersonInfoViewController *controller = getViewControllerOfName(@"PersonInfo");
         controller.userInfo = writerInfo.userInfo;
+        controller.concerned = writerInfo.concerned;
         [self.navigationController pushViewController:controller animated:YES];
     }
 }
