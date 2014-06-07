@@ -18,14 +18,19 @@
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *concernButton;
 @property (strong, nonatomic) IBOutlet UIButton *sendMessageButton;
+@property (strong, nonatomic) UIViewController *parentViewController;
 
 @property (strong, nonatomic) id <WriteInfoDelegate> delegate;
 @property (strong, nonatomic) UserInfo *userInfo;
+@property (nonatomic) BOOL concerned;
 
 - (IBAction)buttonClicked:(id)sender;
 
 - (void)showInView:(UIView *)view;
 - (void)hide;
 
+- (IBAction)concernButtonTouchDown:(id)sender;
+- (IBAction)sendMessageButtonTouchDown:(id)sender;
+- (void)updateConcernedButton;
 
 @end

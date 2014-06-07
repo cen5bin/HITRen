@@ -290,6 +290,10 @@ static AppData *appData;
     return [DataManager getLikedListOfMid:mid];
 }
 
+- (NSArray *)getLikedLists:(NSArray *)mids {
+    return [DataManager getLikedList:mids];
+}
+
 - (NSArray *)commentListNeedDownload:(NSArray *)mids {
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:mids];
     NSMutableArray *ret = [[NSMutableArray alloc] init];

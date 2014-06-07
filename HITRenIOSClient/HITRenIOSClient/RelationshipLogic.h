@@ -11,8 +11,8 @@
 
 @interface RelationshipLogic : BaseLogic
 
-- (BOOL)concernUser:(int)uid inGroup:(NSString *)gname;
-- (BOOL)concernUser:(int)uid inGroups:(NSArray *)gnames;
++ (BOOL)concernUser:(int)uid inGroup:(NSString *)gname;
++ (BOOL)concernUser:(int)uid inGroups:(NSArray *)gnames;
 + (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname toGroups:(NSArray *)gnames;
 + (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname0 toGroup:(NSString *)gname;
 + (BOOL)moveUser:(int)uid fromGroup:(NSString *)gname toGroups:(NSArray *)gnames;
@@ -25,7 +25,7 @@
 + (BOOL)addGroup:(NSString *)gname;
 + (BOOL)deleteGroup:(NSString *)gname;
 - (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2;
-- (BOOL)deleteConcernedUser:(int)uid;
++ (BOOL)deleteConcernedUser:(int)uid;
 - (BOOL)moveUserToBlacklist:(int)uid;
 - (BOOL)moveUsersToBlacklist:(NSArray *)users;
 - (BOOL)recoverUserFromBlacklist:(int)uid;
@@ -34,5 +34,6 @@
 + (BOOL)asyncDownloadInfo;
 + (NSMutableArray *)downloadFriendsInfo:(NSArray *)users;
 + (void)unPackRelationshipInfoData:(NSDictionary *)dic;
++ (BOOL)uidIsConcerned:(int)uid;
 
 @end

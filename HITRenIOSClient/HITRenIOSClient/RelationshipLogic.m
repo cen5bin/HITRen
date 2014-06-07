@@ -15,21 +15,20 @@
 
 @implementation RelationshipLogic
 
-- (BOOL)concernUser:(int)uid inGroup:(NSString *)gname {
++ (BOOL)concernUser:(int)uid inGroup:(NSString *)gname {
     FUNC_START();
-    BOOL ret = [self concernUser:uid inGroups:[NSArray arrayWithObjects:gname, nil]];
+    BOOL ret = [RelationshipLogic concernUser:uid inGroups:[NSArray arrayWithObjects:gname, nil]];
     FUNC_END();
     return ret;
 }
 
-- (BOOL)concernUser:(int)uid inGroups:(NSArray *)gnames {
++ (BOOL)concernUser:(int)uid inGroups:(NSArray *)gnames {
     FUNC_START();
     HttpData *data = [[HttpData alloc] init];
     [data setIntValue:self.user.uid forKey:@"uid"];
     [data setIntValue:uid forKey:@"uid1"];
     [data setValue:gnames forKey:@"gnames"];
-    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:request to:@"ConcernUser"];
+    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"ConcernUser"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"concernUser fail");
         FUNC_END();
@@ -182,14 +181,13 @@
     return ret;
 }
 
-- (BOOL)deleteConcernedUser:(int)uid {
++ (BOOL)deleteConcernedUser:(int)uid {
     FUNC_START();
     HttpData *data = [HttpData data];
     [data setIntValue:self.user.uid forKey:@"uid"];
     [data setIntValue:uid forKey:@"uid1"];
 //    [data setValue:[self getGroupsOfUser:uid] forKey:@"gnames"];
-    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:request to:@"DeleteConcernedUser"];
+    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"DeleteConcernedUser"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"DeleteConcernedUser fail");
         FUNC_END();
@@ -316,6 +314,15 @@
 //    }
 //    return array;
 //}
+
++ (BOOL)uidIsConcerned:(int)uid {
+    User *user = [RelationshipLogic user];
+    for (NSDictionary *dic in user.relationShip.concerList) {
+        NSArray *tmp = [dic objectForKey:@"userlist"];
+        if ([tmp containsObject:[NSNumber numberWithInt:uid]]) return YES;
+    }
+    return NO;
+}
 
 - (void)print {
     NSLog(@"seq: %d",self.user.relationShip.seq);

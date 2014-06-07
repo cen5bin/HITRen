@@ -21,10 +21,10 @@ void testConcernUser(int uid) {
 //    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
 //    [logic signUp];
     [UserSimpleLogic login];
-    RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
+//    RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
 //    [logic1 addGroup:@"asd"];
 //    for (int i = 40; i < 50; i++)
-    [logic1 concernUser:uid inGroup:@"asd"];
+//    [logic1 concernUser:uid inGroup:@"asd"];
 //    [logic1 concernUser:<#(int)#> inGroups:<#(NSArray *)#>]
 }
 
@@ -36,7 +36,7 @@ void testDeleteConcernedUser(int uid) {
     user.relationShip = relationShip;
 //    UserSimpleLogic *logic = [[UserSimpleLogic alloc] initWithUser:user];
     [UserSimpleLogic login];
-    RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
-    [logic1 deleteConcernedUser:uid];
+//    RelationshipLogic *logic1 = [[RelationshipLogic alloc] initWithUser:user];
+//    [logic1 deleteConcernedUser:uid];
 
 }

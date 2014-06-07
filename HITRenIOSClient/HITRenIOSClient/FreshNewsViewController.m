@@ -29,6 +29,9 @@
 #import "MyImageView.h"
 #import "FullImageViewController.h"
 #import "WriterInfoView.h"
+#import "ChatViewController.h"
+#import "ChooseGroupViewController.h"
+#import "RelationshipLogic.h"
 
 @interface FreshNewsViewController ()
 
@@ -106,6 +109,8 @@
     _menu.delegate = self;
     
     _writerInfoView = getViewFromNib(@"writer", self);
+    _writerInfoView.delegate = self;
+    _showingUid = -1;
 //    [UploadLogic downloadImage:@"bubble2.png"];
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
 }
@@ -126,7 +131,9 @@
     AppData *appData = [AppData sharedInstance];
     Message *message = [appData getMessageOfMid:[[_data objectAtIndex:view.indexPath.row] intValue]];
     UserInfo *userInfo = [appData getUserInfoOfUid:[message.uid intValue]];
+    _showingUid = [userInfo.uid intValue];
     _writerInfoView.userInfo = userInfo;
+    _writerInfoView.parentViewController = self;
     [_writerInfoView hide];
     [_writerInfoView showInView:self.view];
     return;
@@ -218,6 +225,14 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (_choosingGroup) {
+        _choosingGroup = NO;
+        if ([RelationshipLogic concernUser:[_writerInfoView.userInfo.uid intValue] inGroup:[ChooseGroupViewController choosedGroupName]]) {
+            _writerInfoView.concerned = YES;
+            [_writerInfoView updateConcernedButton];
+        }
+
+    }
     return;
     EmotionTextView *textView = [[EmotionTextView alloc] initWithFrame:CGRectMake(0, 100, 176, 0)];
     textView.text = @"你";
@@ -653,9 +668,32 @@
 
 }
 
+- (void)refleshOtherData {
+    int count = PAGE_MESSAGE_COUNT > _data.count ? _data.count : PAGE_MESSAGE_COUNT;
+    [MessageLogic downloadLikedList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)]];
+    [MessageLogic downloadCommentList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)]];
+//    NSArray *tmp = [_data subarrayWithRange:NSMakeRange(0, count)];
+//    AppData *appData = [AppData sharedInstance];
+//    NSArray*tmp1 = [appData getLikedLists:tmp];
+//    
+////    NSMutableArray *uids = [NSMutableArray array];
+////    for (NSNumber *mid in tmp) {
+////    
+////        Message *message = [appData readMessageForId:[mid intValue]];
+////        [uids addObject:message.uid];
+////    }
+//    //    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
+//    //    if (userInfoNeedDownload.count) {
+//    [UserSimpleLogic downloadUseInfos:uids from:NSStringFromClass(self.class)];
+//    //    }
+
+}
+
 - (void)timelineDidDownload:(NSNotification *)notification {
     NSDictionary *ret = notification.userInfo;
     if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
+        _currentPage = 0;
+        [self refleshOtherData];
         L(@"local timeline newest");
         [self hideTopActivityIndicator];
 //        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -740,7 +778,7 @@
         [UserSimpleLogic downloadUseInfos:uids from:NSStringFromClass(self.class)];
 //    }
     
-//    [self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)messageDidDownload:(NSNotification *)notification {
@@ -959,6 +997,27 @@
     [_keyboardToolBar becomeFirstResponder];
     [_keyboardToolBar resignFirstResponder];
     _keyboardToolBar.emotionButtonState = NO;
+}
+
+- (void)writeInfo:(WriterInfoView *)writerInfo buttonClickedAtIndex:(int)index {
+    if (index == 0) {
+        if (!writerInfo.concerned) {
+            UIViewController *controller = getViewControllerOfName(@"ChooseGroup");
+            _choosingGroup = YES;
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else {
+            if ([RelationshipLogic deleteConcernedUser:[writerInfo.userInfo.uid intValue]]) {
+                writerInfo.concerned = NO;
+                [writerInfo updateConcernedButton];
+            }
+        }
+    }
+    else if (index == 1) {
+        ChatViewController *controller = getViewControllerOfName(@"ChatView");
+        controller.userInfo = writerInfo.userInfo;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 - (void)emotionDidSelected:(NSDictionary *)info {

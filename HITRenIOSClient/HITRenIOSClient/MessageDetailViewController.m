@@ -55,11 +55,23 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
 //    _downloadingImageSet = [[NSMutableSet alloc] init];
+    [MessageLogic downloadCommentList:[NSArray arrayWithObjects:self.message.mid, nil]];
+    [MessageLogic downloadLikedList:[NSArray arrayWithObjects:self.message.mid, nil]];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    NSString *string = [dic objectForKey:@"fromclass"];
+    if (string && ![string isEqualToString:@""] && ![string isEqualToString:NSStringFromClass(self.class)])  {
+        FUNC_END();
+        return;
+    }
     if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
         [self imageDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADCOMMENTLIST])
+        [self commentListDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADLIKEDLIST])
+        [self likedListDidDownload:notification];
 }
 
 - (void)imageDidDownload:(NSNotification *)notification {
@@ -68,6 +80,61 @@
     [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
     [self loadContent];
 //    [self.tableView reloadData];
+}
+
+- (void)likedListDidDownload:(NSNotification *)notification {
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"likedlist download succ");
+    else L(@"likedlist download fail");
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    NSMutableArray *uids = [[NSMutableArray alloc] init];
+    AppData *appData = [AppData sharedInstance];
+    for (NSNumber *mid in [data allKeys]) {
+        NSDictionary *dic = [data objectForKey:mid];
+        LikedList *likedList = [appData getLikedListOfMid:[mid intValue]];
+        likedList.seq = [dic objectForKey:@"seq"];
+        likedList.userList = [[NSMutableArray alloc] initWithArray:[dic objectForKey:@"list"]];
+        for (NSNumber *uid in likedList.userList)
+            if (![uids containsObject:uid]) [uids addObject:uid];
+        [likedList update];
+    }
+    [AppData saveData];
+    //    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
+    //    if (userInfoNeedDownload.count) {
+    [UserSimpleLogic downloadUseInfos:uids from:NSStringFromClass(self.class)];
+    //    }
+    [self loadContent];
+}
+
+- (void)commentListDidDownload:(NSNotification *)notification {
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"commentlist download succ");
+    else L(@"commentlist download fail");
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    AppData *appData = [AppData sharedInstance];
+    NSMutableArray *uids = [[NSMutableArray alloc] init];
+    for (NSNumber *mid in [data allKeys]) {
+        NSDictionary *dic = [data objectForKey:mid];
+        
+        Comment *comment = [appData getCommentOfMid:[mid intValue]];
+        comment.seq = [dic objectForKey:@"seq"];
+        comment.commentList = [[NSMutableArray alloc] initWithArray:[dic objectForKey:@"list"]];
+        for (NSDictionary *cc in comment.commentList) {
+            //            L([cc description]);
+            NSNumber *uid = [cc objectForKey:@"uid"];
+            if (uid && ![uids containsObject:uid]) [uids addObject:uid];
+            uid = [cc objectForKey:@"reuid"];
+            if (uid && [uid intValue] != -1 && ![uids containsObject:uid]) [uids addObject:uid];
+        }
+        [comment update];
+    }
+    [AppData saveData];
+    //    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
+    //    if (userInfoNeedDownload.count) {
+    [UserSimpleLogic downloadUseInfos:uids from:NSStringFromClass(self.class)];
+    //    }
+    [self loadContent];
+    //    [self.tableView reloadData];
 }
 
 

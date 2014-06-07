@@ -61,6 +61,7 @@
 
 - (NSArray *)likedListNeedDownload:(NSArray *)mids;
 - (LikedList *)getLikedListOfMid:(int)mid;
+- (NSArray *)getLikedLists:(NSArray *)mids;
 
 - (NSArray *)commentListNeedDownload:(NSArray *)mids;
 - (Comment *)getCommentOfMid:(int)mid;

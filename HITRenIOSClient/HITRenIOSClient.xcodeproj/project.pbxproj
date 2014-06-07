@@ -232,6 +232,7 @@
 		F8148D7819423933000F5C9F /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7719423933000F5C9F /* blue.png */; };
 		F8148D7C19423FCD000F5C9F /* buy.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7A19423FCD000F5C9F /* buy.png */; };
 		F8148D7D19423FCD000F5C9F /* lookfor.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D7B19423FCD000F5C9F /* lookfor.png */; };
+		F8148D801942F0D4000F5C9F /* ChooseGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D7F1942F0D4000F5C9F /* ChooseGroupViewController.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -642,6 +643,8 @@
 		F8148D7719423933000F5C9F /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		F8148D7A19423FCD000F5C9F /* buy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buy.png; sourceTree = "<group>"; };
 		F8148D7B19423FCD000F5C9F /* lookfor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookfor.png; sourceTree = "<group>"; };
+		F8148D7E1942F0D4000F5C9F /* ChooseGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGroupViewController.h; sourceTree = "<group>"; };
+		F8148D7F1942F0D4000F5C9F /* ChooseGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGroupViewController.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1106,7 +1109,7 @@
 			name = bubble;
 			sourceTree = "<group>";
 		};
-		F8107C971935D2D20073C169 /* 通讯录 */ = {
+		F8107C971935D2D20073C169 /* 通讯录列表 */ = {
 			isa = PBXGroup;
 			children = (
 				F8107C911935C0C40073C169 /* ContactView.h */,
@@ -1116,7 +1119,7 @@
 				F8107CA61935D92A0073C169 /* ContactGroupCell.h */,
 				F8107CA71935D92A0073C169 /* ContactGroupCell.m */,
 			);
-			name = "通讯录";
+			name = "通讯录列表";
 			sourceTree = "<group>";
 		};
 		F8107C9D1935D6C30073C169 /* arrow */ = {
@@ -1427,10 +1430,13 @@
 		F8148D5B1941F4E7000F5C9F /* 通讯录 */ = {
 			isa = PBXGroup;
 			children = (
+				F8107C971935D2D20073C169 /* 通讯录列表 */,
 				F8148D4C1941ED52000F5C9F /* ContactViewController.h */,
 				F8148D4D1941ED52000F5C9F /* ContactViewController.m */,
 				F8148D5C1941F503000F5C9F /* ManageGroupViewController.h */,
 				F8148D5D1941F503000F5C9F /* ManageGroupViewController.m */,
+				F8148D7E1942F0D4000F5C9F /* ChooseGroupViewController.h */,
+				F8148D7F1942F0D4000F5C9F /* ChooseGroupViewController.m */,
 			);
 			name = "通讯录";
 			sourceTree = "<group>";
@@ -1861,7 +1867,6 @@
 				F8148CFC193E0031000F5C9F /* freshnews */,
 				F8148BDB193A2386000F5C9F /* findthings */,
 				F8107CB119364C680073C169 /* secondhand */,
-				F8107C971935D2D20073C169 /* 通讯录 */,
 				F8723EC01927C77200828B5C /* messagecell */,
 				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
 				F842BB8A19051BD700148848 /* menu */,
@@ -2403,6 +2408,7 @@
 				F89964E818FCF11A00D7FA44 /* FriendsGroupViewController.m in Sources */,
 				F84B7DD218BB3C8D007FC2D5 /* NSXMLElement+XMPP.m in Sources */,
 				F84B7DD918BB3C8D007FC2D5 /* XMPPPresence.m in Sources */,
+				F8148D801942F0D4000F5C9F /* ChooseGroupViewController.m in Sources */,
 				F80B0D5F187452A0003E72DC /* TestMessageLogic.m in Sources */,
 				F84B7DDF18BB3C8D007FC2D5 /* XMPPSRVResolver.m in Sources */,
 				F84B7DCA18BB3C8D007FC2D5 /* XMPPDeprecatedDigestAuthentication.m in Sources */,

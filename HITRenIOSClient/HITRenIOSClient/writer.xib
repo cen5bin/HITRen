@@ -26,6 +26,7 @@
                     </state>
                     <connections>
                         <action selector="buttonClicked:" destination="BnX-iG-iIS" eventType="touchUpInside" id="jqd-Gs-xWD"/>
+                        <action selector="concernButtonTouchDown:" destination="BnX-iG-iIS" eventType="touchDown" id="U27-sg-XwZ"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EO7-vk-Avx">
@@ -39,6 +40,7 @@
                     </state>
                     <connections>
                         <action selector="buttonClicked:" destination="BnX-iG-iIS" eventType="touchUpInside" id="a7l-5C-dNe"/>
+                        <action selector="sendMessageButtonTouchDown:" destination="BnX-iG-iIS" eventType="touchDown" id="S3N-tW-JbB"/>
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLo-CJ-EZs">

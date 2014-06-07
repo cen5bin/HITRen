@@ -12,7 +12,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *pic;
 @property (strong, nonatomic) IBOutlet UILabel *goodsName;
 @property (strong, nonatomic) IBOutlet UILabel *goodsPrice;
-@property (strong, nonatomic) IBOutlet UITextView *goodsDesc;
+@property (strong, nonatomic) IBOutlet UILabel *goodsDesc;
 
 @property (strong, nonatomic) IBOutlet UILabel *noImageLabel;
 

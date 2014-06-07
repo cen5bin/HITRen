@@ -38,6 +38,8 @@
     
     UITapGestureRecognizer *_tapGestureRecognizer;
     WriterInfoView *_writerInfoView;
+    int _showingUid;
+    BOOL _choosingGroup;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
