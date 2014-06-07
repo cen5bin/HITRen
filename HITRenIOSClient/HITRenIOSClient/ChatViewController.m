@@ -15,6 +15,8 @@
 #import "KeyboardToolBar.h"
 #import "MessageLogic.h"
 #import "EmotionView.h"
+#import "UploadLogic.h"
+#import "User.h"
 
 @interface ChatViewController ()
 
@@ -38,6 +40,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:XMPP_CHATMESSAGE_RECEIVED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor colorWithRed:235.0/255 green:235.0/255 blue:235.0/255 alpha:1];
     self.username.text = self.userInfo.username;
@@ -55,7 +58,60 @@
     _keyboardToolBarAtBottom.frame = rect;
     [self.view addSubview:_keyboardToolBarAtBottom];
     [self scrollToBottom];
+    
+    _downloadingImageSet = [[NSMutableSet alloc] init];
+    
+    User *user = [MessageLogic user];
+    _selfInfo = [appData readUserInfoForId:user.uid];
+    
+    if (_selfInfo.pic && _selfInfo.pic.length) {
+        if ([[_selfInfo.pic substringToIndex:1] isEqualToString:@"h"])
+            _selfImage = [UIImage imageNamed:_selfInfo.pic];
+        else {
+            _selfImage = [appData getImage:_selfInfo.pic];
+            if (!_selfImage && ![_downloadingImageSet containsObject:_selfInfo.pic]) {
+                [_downloadingImageSet addObject:_selfInfo.pic];
+                [UploadLogic downloadImage:_selfInfo.pic from:NSStringFromClass(self.class)];
+            }
+        }
+    }
+    
+    UserInfo *userInfo = self.userInfo;
+    if (userInfo.pic && userInfo.pic.length) {
+        if ([[userInfo.pic substringToIndex:1] isEqualToString:@"h"])
+            _otherImage = [UIImage imageNamed:userInfo.pic];
+        else {
+            _otherImage = [appData getImage:userInfo.pic];
+            if (!_otherImage && ![_downloadingImageSet containsObject:userInfo.pic]) {
+                [_downloadingImageSet addObject:userInfo.pic];
+                [UploadLogic downloadImage:userInfo.pic from:NSStringFromClass(self.class)];
+            }
+        }
+    }
 }
+
+- (void)dataDidDownload:(NSNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    NSString *string = [dic objectForKey:@"fromclass"];
+    if (string && ![string isEqualToString:@""] && ![string isEqualToString:NSStringFromClass(self.class)])  {
+        return;
+    }
+    if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
+        [self imageDidDownload:notification];
+}
+
+- (void)imageDidDownload:(NSNotification *)notification {
+    UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
+    if (!image) image = [UIImage imageNamed:@"empty.png"];
+    NSString *filename = [notification.userInfo objectForKey:@"imagename"];
+    [[AppData sharedInstance] storeImage:image withFilename: filename];
+    [_downloadingImageSet removeObject:filename];
+    if ([filename isEqualToString:_selfInfo.pic]) _selfImage = image;
+    else if ([filename isEqualToString:self.userInfo.pic]) _otherImage = image;
+    [self.tableView reloadData];
+}
+
+
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     return;
@@ -183,6 +239,16 @@
     cell.text = [obj.content objectForKey:@"text"];
     cell.isReply = obj.isReply;
     [cell show];
+    
+    UIImage *tmp = cell.isReply?_selfImage:_otherImage;
+    if (tmp)
+        cell.pic.image = tmp;
+    else cell.pic.image = [UIImage imageNamed:@"empty.png"];
+//    
+//    if (cell.isReply) {
+//        
+//    }
+    
     return cell;
 }
 

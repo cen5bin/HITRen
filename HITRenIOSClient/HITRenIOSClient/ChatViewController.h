@@ -17,6 +17,12 @@
     EmotionView *_emotionView;
     
     BOOL _keyboardToolBarIsDisappearing;
+    
+    NSMutableSet *_downloadingImageSet;
+    
+    UserInfo *_selfInfo;
+    UIImage *_selfImage;
+    UIImage *_otherImage;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
