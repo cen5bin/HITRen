@@ -17,6 +17,7 @@
 #import "EmotionView.h"
 #import "UploadLogic.h"
 #import "User.h"
+#import "PersonInfoViewController.h"
 
 @interface ChatViewController ()
 
@@ -88,6 +89,19 @@
             }
         }
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    _keyboardToolBarAtBottom.hidden = NO;
+//    L([_keyboardToolBarAtBottom description]);
+//    if (_keyboardToolBarAtBottom.superview) [_keyboardToolBarAtBottom removeFromSuperview];
+//    CGRect rect = _keyboardToolBarAtBottom.frame;
+//    CGRect rect1 = [self.view convertRect:self.view.frame toView:self.view.window];
+//    rect.origin.y = rect1.size.height - rect.size.height;
+//    _keyboardToolBarAtBottom.frame = rect;
+//    [self.view addSubview:_keyboardToolBarAtBottom];
+//    [self scrollToBottom];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -319,5 +333,14 @@
 - (IBAction)manButtonClicked:(id)sender {
     UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
     self.topBar.image = image;
+    [self hideKeyboardToolBar];
+    if (self.fromPersonInfoView) [self.navigationController popViewControllerAnimated:YES];
+    else {
+        PersonInfoViewController *controller = getViewControllerOfName(@"PersonInfo");
+        controller.userInfo = self.userInfo;
+        controller.fromChatView = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
 }
 @end

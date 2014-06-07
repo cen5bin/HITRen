@@ -35,6 +35,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *concernButton;
 
 @property (nonatomic) BOOL concerned;
+@property (nonatomic) BOOL fromChatView;
 
 - (IBAction)moreButtonClicked:(id)sender;
 

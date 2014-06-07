@@ -30,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 
 @property (strong, nonatomic) UserInfo *userInfo;
+@property (nonatomic) BOOL fromPersonInfoView;
 - (IBAction)manButtonClicked:(id)sender;
 
 @end

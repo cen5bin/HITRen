@@ -197,8 +197,13 @@
 
 - (IBAction)buttonClicked:(id)sender {
     if (sender == self.sendMessageButton) {
+        if (self.fromChatView) {
+            [self.navigationController popViewControllerAnimated:YES];
+            return;
+        }
         ChatViewController *controller = getViewControllerOfName(@"ChatView");
         controller.userInfo = self.userInfo;
+        controller.fromPersonInfoView = YES;
         self.sendMessageButton.backgroundColor = BLUE_BUTTON_BACKGROUNF1;
         [self.navigationController pushViewController:controller animated:YES];
     }
