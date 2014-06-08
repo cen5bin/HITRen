@@ -358,4 +358,13 @@
     <servlet-name>DownloadMyGoods</servlet-name>
     <url-pattern>/DownloadMyGoods</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>DownloadMyThings</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.findthing.DownloadMyThingsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadMyThings</servlet-name>
+    <url-pattern>/DownloadMyThings</url-pattern>
+  </servlet-mapping>
 </web-app>

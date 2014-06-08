@@ -19,6 +19,7 @@
     GoodsLine *_goodsLine;
     GoodsLine *_myGoodsLine;
     ThingsLine *_thingsLine;
+    ThingsLine *_myThingsLine;
     EventLine *_eventLine;
 //    NSMutableArray *_activityLine;
     
@@ -30,6 +31,7 @@
 @property (nonatomic, strong, getter = getGoodsLine) GoodsLine *goodsLine;
 @property (nonatomic, strong, getter = getMyGoodsLine) GoodsLine *myGoodsLine;
 @property (nonatomic, strong, getter = getThingsLine) ThingsLine *thingsLine;
+@property (nonatomic, strong, getter = getMyThingsLine) ThingsLine *myThingsLine;
 @property (nonatomic, strong, getter = getEventLine) EventLine *eventLine;
 //@property (nonatomic, strong) NSMutableDictionary *userInfos;
 //@property (nonatomic, strong, getter = getMessageList) NSMutableArray *messageList;

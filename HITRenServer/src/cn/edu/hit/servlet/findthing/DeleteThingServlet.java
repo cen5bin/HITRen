@@ -18,7 +18,7 @@ import cn.edu.hit.servlet.kit.BaseServlet;
 
 /**
  * Servlet implementation class DeleteThingServlet
- * 参数 tid
+ * 参数 tid, uid
  */
 @WebServlet("/DeleteThingServlet")
 public class DeleteThingServlet extends BaseServlet {
@@ -48,7 +48,8 @@ public class DeleteThingServlet extends BaseServlet {
 		try {
 			JSONObject json = new JSONObject(data);
 			int tid = json.getInt("tid");
-			JSONObject retData = FindLogic.deleteThing(tid);
+			int uid = json.getInt("uid");
+			JSONObject retData = FindLogic.deleteThing(uid, tid);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(retData);

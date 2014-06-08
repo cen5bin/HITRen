@@ -70,6 +70,8 @@
 + (BOOL)deleteThing:(int)tid {
     HttpData *data = [HttpData data];
     [data setIntValue:tid forKey:@"tid"];
+    User *user = [FindLogic user];
+    [data setIntValue: user.uid forKey:@"uid"];
     BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DeleteThing" withEventName:ASYNC_EVENT_DELETETHINGSINFO];
     if (!ret) {
         L(@"delete things info failed");
@@ -78,6 +80,22 @@
     }
     FUNC_END();
     return YES;
+}
+
++ (BOOL)downloadMyThingsLine {
+    HttpData *data = [HttpData data];
+    AppData *appData = [AppData sharedInstance];
+    [data setIntValue:[appData.myThingsLine.seq intValue] forKey:@"seq"];
+    [data setIntValue:[appData getUid] forKey:@"uid"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadMyThings" withEventName:ASYNC_EVENT_DOWNLOADMYTHINGSLINE];
+    if (!ret) {
+        L(@"delete my things info failed");
+        FUNC_END();
+        return NO;
+    }
+    FUNC_END();
+    return YES;
+    
 }
 
 @end

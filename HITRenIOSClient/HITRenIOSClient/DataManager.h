@@ -41,6 +41,7 @@
 + (GoodsInfo *)getGoodsInfoOfGid:(int)gid;
 
 + (ThingsLine *)thingsLine;
++ (ThingsLine *)thingsLineOfUid:(int)uid;
 + (NSArray *)getThingsList:(NSArray *)tids;
 + (ThingsInfo *)getThingsInfo;
 + (ThingsInfo *)getThingsInfoOfTid:(int)tid;

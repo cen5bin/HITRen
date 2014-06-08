@@ -33,6 +33,7 @@ static AppData *appData;
 @synthesize myGoodsLine = _myGoodsLine;
 @synthesize thingsLine = _thingsLine;
 @synthesize eventLine = _eventLine;
+@synthesize myThingsLine = _myThingsLine;
 
 - (id)init {
     if (self = [super init]) {
@@ -332,6 +333,12 @@ static AppData *appData;
     if (_thingsLine) return _thingsLine;
     _thingsLine = [DataManager thingsLine];
     return _thingsLine;
+}
+
+- (ThingsLine *)getMyThingsLine {
+    if (_myThingsLine) return _myThingsLine;
+    _myThingsLine = [DataManager thingsLineOfUid:[self getUid]];
+    return _myThingsLine;
 }
 
 

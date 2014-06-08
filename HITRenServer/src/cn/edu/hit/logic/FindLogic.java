@@ -35,7 +35,8 @@ public class FindLogic extends BaseLogic{
 			retData.put(HttpData.SUC, false);
 			return false;
 		}
-		addToThingssLine(tid);
+		addToThingssLine(0, tid);
+		addToThingssLine(uid, tid);
 		retData.put(HttpData.SUC, true);
 		return true;
 	}
@@ -54,50 +55,50 @@ public class FindLogic extends BaseLogic{
 		return true;
 	}
 	
-	public static boolean downloadThingsLine(int seq) throws JSONException {
-		logger.info("downloadThingsLine");
-		retData = new JSONObject();
-		BasicDBObject obj1 = new BasicDBObject(ThingsLine.UID, 0);
+	public static JSONObject downloadThingsLine(int seq) throws JSONException {
+		return downloadMyThingsLine(0, seq);
+	}
+	
+	public static JSONObject downloadMyThingsLine(int uid, int seq) throws JSONException {
+		JSONObject retJsonObject = new JSONObject();
+		BasicDBObject obj1 = new BasicDBObject(ThingsLine.UID, uid);
 		int[] range = {0, 10000};
 		BasicDBObject obj2 = new BasicDBObject(ThingsLine.LIST, new BasicDBObject("$slice", range));
 		DBObject retObj = DBController.queryOne(ThingsLine.COLLNAME, obj1, obj2);
 		if (retObj == null) {
-			retData.put(HttpData.SUC, false);
-			return false;
+			retJsonObject.put(HttpData.SUC, false);
+			return retJsonObject;
 		}
-		retData.put(HttpData.SUC, true);
+		retJsonObject.put(HttpData.SUC, true);
 		int seq0 = Integer.parseInt(retObj.get(ThingsLine.SEQ).toString());
 		if (seq == seq0) {
-			retData.put(HttpData.INFO, "newest");
-			return true;
+			retJsonObject.put(HttpData.INFO, "newest");
+			return retJsonObject;
 		}
 		JSONObject data = new JSONObject();
 		data.put("seq", seq0);
 		BasicDBList retList = (BasicDBList) retObj.get(ThingsLine.LIST);
 		data.put("tids", retList);
-//		int len = retList.size();
-//		if (len > seq0 - seq + 100)
-//			data.put("tids", retList.subList(0, seq0 - seq + 100));
-//		else
-//			data.put("tids", retList);
-//		logger.info(data);
-			retData.put(HttpData.DATA, data);	
-		return true;
-	}
-	
-	public static JSONObject deleteThing(int tid) throws JSONException {
-		JSONObject retJsonObject = new JSONObject();
-		BasicDBObject oldObj = new BasicDBObject(ThingsLine.UID, 0);
-		BasicDBObject newObj = new BasicDBObject("$pull", new BasicDBObject(ThingsLine.LIST, tid));
-		newObj.put("$inc", new BasicDBObject(ThingsLine.SEQ, 1));
-		if (!DBController.update(ThingsLine.COLLNAME, oldObj, newObj))
-			retJsonObject.put(HttpData.SUC, false);
-		retJsonObject.put(HttpData.SUC, true);
+		retJsonObject.put(HttpData.DATA, data);	
 		return retJsonObject;
 	}
 	
-	private static boolean addToThingssLine(int tid) {
-		BasicDBObject oldObj = new BasicDBObject(ThingsLine.UID, 0);
+	private static boolean deleteThingInThingsLine(int uid, int tid) {
+		BasicDBObject oldObj = new BasicDBObject(ThingsLine.UID, uid);
+		BasicDBObject newObj = new BasicDBObject("$pull", new BasicDBObject(ThingsLine.LIST, tid));
+		newObj.put("$inc", new BasicDBObject(ThingsLine.SEQ, 1));
+		return DBController.update(ThingsLine.COLLNAME, oldObj, newObj);
+	}
+	public static JSONObject deleteThing(int uid, int tid) throws JSONException {
+		JSONObject retJsonObject = new JSONObject();
+		if (deleteThingInThingsLine(0, tid) && deleteThingInThingsLine(uid, tid))
+			retJsonObject.put(HttpData.SUC, true);
+		retJsonObject.put(HttpData.SUC, false);
+		return retJsonObject;
+	}
+	
+	private static boolean addToThingssLine(int uid, int tid) {
+		BasicDBObject oldObj = new BasicDBObject(ThingsLine.UID, uid);
 		BasicDBObject newObj = new BasicDBObject();
 		newObj.put("$push", new BasicDBObject(ThingsLine.LIST, tid));
 		newObj.put("$inc", new BasicDBObject(ThingsLine.SEQ, 1));

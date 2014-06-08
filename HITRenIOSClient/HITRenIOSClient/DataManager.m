@@ -235,22 +235,6 @@
 
 + (GoodsLine *)goodsLine {
     return [DataManager goodsLineOfUid:0];
-//    FUNC_START();
-//    NSManagedObjectContext *context = [DBController context];
-//    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"GoodsLine" inManagedObjectContext:context];
-//    request.entity = entity;
-//    NSArray *res = [context executeFetchRequest:request error:nil];
-//    if (!res || res.count == 0) {
-//        GoodsLine *goodsLine = [NSEntityDescription insertNewObjectForEntityForName:@"GoodsLine" inManagedObjectContext:context];
-//        goodsLine.seq = 0;
-//        goodsLine.data = nil;
-//        [context save:nil];
-//        FUNC_END();
-//        return goodsLine;
-//    }
-//    FUNC_END();
-//    return [res objectAtIndex:0];
 }
 
 + (GoodsLine *)goodsLineOfUid:(int)uid {
@@ -318,21 +302,38 @@
 }
 
 + (ThingsLine *)thingsLine {
-    FUNC_START();
+    return [DataManager thingsLineOfUid:0];
+//    NSManagedObjectContext *context = [DBController context];
+//    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ThingsLine" inManagedObjectContext:context];
+//    request.entity = entity;
+//    NSArray *res = [context executeFetchRequest:request error:nil];
+//    if (!res || res.count == 0) {
+//        ThingsLine *thingsLine = [NSEntityDescription insertNewObjectForEntityForName:@"ThingsLine" inManagedObjectContext:context];
+//        thingsLine.seq = 0;
+//        thingsLine.data = nil;
+//        [context save:nil];
+//        return thingsLine;
+//    }
+//    return [res objectAtIndex:0];
+}
+
++ (ThingsLine *)thingsLineOfUid:(int)uid {
     NSManagedObjectContext *context = [DBController context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ThingsLine" inManagedObjectContext:context];
     request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid == %d", uid];
+    request.predicate = predicate;
     NSArray *res = [context executeFetchRequest:request error:nil];
     if (!res || res.count == 0) {
         ThingsLine *thingsLine = [NSEntityDescription insertNewObjectForEntityForName:@"ThingsLine" inManagedObjectContext:context];
         thingsLine.seq = 0;
         thingsLine.data = nil;
+        thingsLine.uid = [NSNumber numberWithInt:uid];
         [context save:nil];
-        FUNC_END();
         return thingsLine;
     }
-    FUNC_END();
     return [res objectAtIndex:0];
 }
 

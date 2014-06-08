@@ -14,5 +14,6 @@
 + (BOOL)downloadThingsLine;
 + (BOOL)downloadThingsInfo:(NSArray *)tids;
 + (BOOL)deleteThing:(int)tid;
++ (BOOL)downloadMyThingsLine;
 
 @end

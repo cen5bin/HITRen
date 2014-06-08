@@ -241,6 +241,7 @@
 		F8148D92194385E5000F5C9F /* imageright.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D90194385E5000F5C9F /* imageright.png */; };
 		F8148D951944BBFB000F5C9F /* ThingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D941944BBFB000F5C9F /* ThingsDetailViewController.m */; };
 		F8148D981944C58C000F5C9F /* MyGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D971944C58C000F5C9F /* MyGoodsViewController.m */; };
+		F8148D9B1944D3DD000F5C9F /* MyThingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D9A1944D3DD000F5C9F /* MyThingsViewController.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -665,6 +666,8 @@
 		F8148D941944BBFB000F5C9F /* ThingsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingsDetailViewController.m; sourceTree = "<group>"; };
 		F8148D961944C58C000F5C9F /* MyGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGoodsViewController.h; sourceTree = "<group>"; };
 		F8148D971944C58C000F5C9F /* MyGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGoodsViewController.m; sourceTree = "<group>"; };
+		F8148D991944D3DD000F5C9F /* MyThingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyThingsViewController.h; sourceTree = "<group>"; };
+		F8148D9A1944D3DD000F5C9F /* MyThingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyThingsViewController.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1174,14 +1177,14 @@
 			name = "菜单";
 			sourceTree = "<group>";
 		};
-		F8148BDB193A2386000F5C9F /* findthings */ = {
+		F8148BDB193A2386000F5C9F /* 菜单 */ = {
 			isa = PBXGroup;
 			children = (
 				F8148BDC193A23CF000F5C9F /* findthingsmenu.xib */,
 				F8148BDE193A242C000F5C9F /* FindThingsMenu.h */,
 				F8148BDF193A242C000F5C9F /* FindThingsMenu.m */,
 			);
-			name = findthings;
+			name = "菜单";
 			sourceTree = "<group>";
 		};
 		F8148BED193C6648000F5C9F /* 头像 */ = {
@@ -1372,12 +1375,15 @@
 		F8148D321940351C000F5C9F /* 寻物平台 */ = {
 			isa = PBXGroup;
 			children = (
+				F8148BDB193A2386000F5C9F /* 菜单 */,
 				F8148BD5193A21C4000F5C9F /* FindThingsViewController.h */,
 				F8148BD6193A21C4000F5C9F /* FindThingsViewController.m */,
 				F8148BEA193C4B7E000F5C9F /* UploadThingViewController.h */,
 				F8148BEB193C4B7E000F5C9F /* UploadThingViewController.m */,
 				F8148D931944BBFB000F5C9F /* ThingsDetailViewController.h */,
 				F8148D941944BBFB000F5C9F /* ThingsDetailViewController.m */,
+				F8148D991944D3DD000F5C9F /* MyThingsViewController.h */,
+				F8148D9A1944D3DD000F5C9F /* MyThingsViewController.m */,
 			);
 			name = "寻物平台";
 			sourceTree = "<group>";
@@ -1898,7 +1904,6 @@
 				F8148D5F194202DA000F5C9F /* myActivityIndicatorView */,
 				F8148D04193E2086000F5C9F /* emotionTextView */,
 				F8148CFC193E0031000F5C9F /* freshnews */,
-				F8148BDB193A2386000F5C9F /* findthings */,
 				F8723EC01927C77200828B5C /* messagecell */,
 				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
 				F842BB8A19051BD700148848 /* menu */,
@@ -2364,6 +2369,7 @@
 				F8148BE9193A325E000F5C9F /* FindLogic.m in Sources */,
 				F80B0D50187426F2003E72DC /* TestHttpTransfer.m in Sources */,
 				F84B7DE518BB3C8D007FC2D5 /* DDLog.m in Sources */,
+				F8148D9B1944D3DD000F5C9F /* MyThingsViewController.m in Sources */,
 				F84B7DDD18BB3C8D007FC2D5 /* RFImageToDataTransformer.m in Sources */,
 				F8148D8A194374F1000F5C9F /* GoodsDetailViewController.m in Sources */,
 				F8E9688218C70B5700B9384B /* PersonViewController.m in Sources */,

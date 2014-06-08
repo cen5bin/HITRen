@@ -14,18 +14,19 @@ import org.json.JSONObject;
 
 import cn.edu.hit.kit.DataKit;
 import cn.edu.hit.logic.FindLogic;
+import cn.edu.hit.servlet.kit.BaseServlet;
 
 /**
- * Servlet implementation class DownloadThingsLineServlet
+ * Servlet implementation class DownloadMyThingsServlet
  */
-@WebServlet("/DownloadThingsLineServlet")
-public class DownloadThingsLineServlet extends HttpServlet {
+@WebServlet("/DownloadMyThingsServlet")
+public class DownloadMyThingsServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DownloadThingsLineServlet() {
+    public DownloadMyThingsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,17 +44,21 @@ public class DownloadThingsLineServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String data = DataKit.getDataFromClient(request.getReader());
+		logger.info(data);
 		try {
 			JSONObject json = new JSONObject(data);
+			int uid = json.getInt("uid");
 			int seq = json.getInt("seq");
-			JSONObject retData = FindLogic.downloadThingsLine(seq);
+			JSONObject retData = FindLogic.downloadMyThingsLine(uid, seq);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(retData);
+			logger.info(retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 }
