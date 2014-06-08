@@ -42,6 +42,13 @@
     user.password = password;
     
     if ([UserSimpleLogic login]) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setValue:user.email forKey:@"email"];
+        [userDefaults setValue:user.password forKey:@"password"];
+        [userDefaults setInteger:user.uid forKey:@"uid"];
+        LOG(@"fuck uid %d", user.uid);
+        [userDefaults synchronize];
+
         MainViewController *controller = getViewControllerOfName(@"mainview3");
         [self.navigationController pushViewController:controller animated:YES];
     }
@@ -74,6 +81,7 @@
         [userDefaults setValue:user.email forKey:@"email"];
         [userDefaults setValue:user.password forKey:@"password"];
         [userDefaults setInteger:user.uid forKey:@"uid"];
+        LOG(@"fuck uid %d", user.uid);
         [userDefaults synchronize];
         MainViewController *controller = getViewControllerOfName(@"mainview3");
         [self.navigationController pushViewController:controller animated:YES];

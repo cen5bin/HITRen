@@ -47,10 +47,10 @@ public class DownloadGoodsLineServlet extends HttpServlet {
 		try {
 			JSONObject json = new JSONObject(data);
 			int seq = json.getInt("seq");
-			TradeLogic.downloadGoodsLine(seq);
+			JSONObject retData = TradeLogic.downloadGoodsLine(seq);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
-			out.print(TradeLogic.retData);
+			out.print(retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

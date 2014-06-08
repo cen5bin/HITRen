@@ -17,6 +17,7 @@
     NSMutableArray *_noticeLine;
     NSMutableDictionary *_likedLists;
     GoodsLine *_goodsLine;
+    GoodsLine *_myGoodsLine;
     ThingsLine *_thingsLine;
     EventLine *_eventLine;
 //    NSMutableArray *_activityLine;
@@ -27,6 +28,7 @@
 @property (nonatomic, strong, getter = getTimeline) Timeline *timeline;
 @property (nonatomic, strong, getter = getNoticeLine) NSMutableArray *noticeLine;
 @property (nonatomic, strong, getter = getGoodsLine) GoodsLine *goodsLine;
+@property (nonatomic, strong, getter = getMyGoodsLine) GoodsLine *myGoodsLine;
 @property (nonatomic, strong, getter = getThingsLine) ThingsLine *thingsLine;
 @property (nonatomic, strong, getter = getEventLine) EventLine *eventLine;
 //@property (nonatomic, strong) NSMutableDictionary *userInfos;

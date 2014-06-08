@@ -14,19 +14,20 @@ import org.json.JSONObject;
 
 import cn.edu.hit.kit.DataKit;
 import cn.edu.hit.logic.TradeLogic;
+import cn.edu.hit.servlet.kit.BaseServlet;
 
 /**
- * Servlet implementation class DeleteGoodsServlet
- * 参数 gid, uid
+ * Servlet implementation class DownloadMyGoodsServlet
+ * 参数uid, seq
  */
-@WebServlet("/DeleteGoodsServlet")
-public class DeleteGoodsServlet extends HttpServlet {
+@WebServlet("/DownloadMyGoodsServlet")
+public class DownloadMyGoodsServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteGoodsServlet() {
+    public DownloadMyGoodsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,14 +45,16 @@ public class DeleteGoodsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String data = DataKit.getDataFromClient(request.getReader());
+		logger.info(data);
 		try {
 			JSONObject json = new JSONObject(data);
-			int gid = json.getInt("gid");
 			int uid = json.getInt("uid");
-			JSONObject retData = TradeLogic.deleteGoods(uid, gid);
+			int seq = json.getInt("seq");
+			JSONObject retData = TradeLogic.downloadMyGoods(uid, seq);
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(retData);
+			logger.info(retData);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

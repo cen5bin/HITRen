@@ -16,6 +16,7 @@
 
 @property (nonatomic, retain) NSData * data;
 @property (nonatomic, retain) NSNumber * seq;
+@property (nonatomic, retain) NSNumber *uid;
 
 @property (nonatomic, retain, getter = getTids) NSMutableArray *tids;
 

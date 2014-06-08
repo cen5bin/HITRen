@@ -234,21 +234,44 @@
 }
 
 + (GoodsLine *)goodsLine {
-    FUNC_START();
+    return [DataManager goodsLineOfUid:0];
+//    FUNC_START();
+//    NSManagedObjectContext *context = [DBController context];
+//    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"GoodsLine" inManagedObjectContext:context];
+//    request.entity = entity;
+//    NSArray *res = [context executeFetchRequest:request error:nil];
+//    if (!res || res.count == 0) {
+//        GoodsLine *goodsLine = [NSEntityDescription insertNewObjectForEntityForName:@"GoodsLine" inManagedObjectContext:context];
+//        goodsLine.seq = 0;
+//        goodsLine.data = nil;
+//        [context save:nil];
+//        FUNC_END();
+//        return goodsLine;
+//    }
+//    FUNC_END();
+//    return [res objectAtIndex:0];
+}
+
++ (GoodsLine *)goodsLineOfUid:(int)uid {
+//    FUNC_START();
     NSManagedObjectContext *context = [DBController context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"GoodsLine" inManagedObjectContext:context];
     request.entity = entity;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid == %d", uid];
+    request.predicate = predicate;
     NSArray *res = [context executeFetchRequest:request error:nil];
     if (!res || res.count == 0) {
         GoodsLine *goodsLine = [NSEntityDescription insertNewObjectForEntityForName:@"GoodsLine" inManagedObjectContext:context];
         goodsLine.seq = 0;
         goodsLine.data = nil;
+        goodsLine.uid = [NSNumber numberWithInt:uid];
         [context save:nil];
         FUNC_END();
         return goodsLine;
     }
-    FUNC_END();
+//    FUNC_END();
     return [res objectAtIndex:0];
 }
 

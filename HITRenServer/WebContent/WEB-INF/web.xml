@@ -350,4 +350,12 @@
     <servlet-name>DeleteThing</servlet-name>
     <url-pattern>/DeleteThing</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DownloadMyGoods</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.trade.DownloadMyGoodsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadMyGoods</servlet-name>
+    <url-pattern>/DownloadMyGoods</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -35,6 +35,7 @@
 + (Comment *)getComment;
 
 + (GoodsLine *)goodsLine;
++ (GoodsLine *)goodsLineOfUid:(int)uid;
 + (NSArray *)getGoodsList:(NSArray *)gids;
 + (GoodsInfo *)getGoodsInfo;
 + (GoodsInfo *)getGoodsInfoOfGid:(int)gid;

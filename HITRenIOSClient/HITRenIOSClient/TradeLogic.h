@@ -14,4 +14,5 @@
 + (BOOL)downloadGoodsLine;
 + (BOOL)downloadGoodsInfo:(NSArray *)gids;
 + (BOOL)deleteGoods:(int)gid;
++ (BOOL)downloadMyGoods;
 @end

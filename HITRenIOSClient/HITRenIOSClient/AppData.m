@@ -30,6 +30,7 @@ static AppData *appData;
 @synthesize timeline = _timeline;
 @synthesize noticeLine = _noticeLine;
 @synthesize goodsLine = _goodsLine;
+@synthesize myGoodsLine = _myGoodsLine;
 @synthesize thingsLine = _thingsLine;
 @synthesize eventLine = _eventLine;
 
@@ -319,6 +320,12 @@ static AppData *appData;
     if (_goodsLine) return _goodsLine;
     _goodsLine = [DataManager goodsLine];
     return _goodsLine;
+}
+
+- (GoodsLine *)getMyGoodsLine {
+    if (_myGoodsLine) return _myGoodsLine;
+    _myGoodsLine = [DataManager goodsLineOfUid:[self getUid]];
+    return _myGoodsLine;
 }
 
 - (ThingsLine *)getThingsLine {

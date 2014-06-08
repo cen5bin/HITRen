@@ -67,13 +67,32 @@
 
 + (BOOL)deleteGoods:(int)gid {
     HttpData *data = [HttpData data];
+    User *user = [TradeLogic user];
     [data setIntValue:gid forKey:@"gid"];
+    [data setIntValue:user.uid forKey:@"uid"];
     BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DeleteGoods" withEventName:ASYNC_EVENT_DELETEGOODSINFO];
     if (!ret) {
         L(@"delete Goods failed");
         FUNC_END();
         return NO;
     }
+    FUNC_END();
+    return YES;
+}
+
++ (BOOL)downloadMyGoods {
+    FUNC_START();
+    HttpData *data = [HttpData data];
+    AppData *appData = [AppData sharedInstance];
+    [data setIntValue:[appData.goodsLine.seq intValue] forKey:@"seq"];
+    [data setIntValue:[appData getUid] forKey:@"uid"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadMyGoods" withEventName:ASYNC_EVENT_DOWNLOADMYGOODSLINE];
+    if (!ret) {
+        L(@"download mygoodsline failed");
+        FUNC_END();
+        return NO;
+    }
+    
     FUNC_END();
     return YES;
 }

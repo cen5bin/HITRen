@@ -1,12 +1,12 @@
 //
-//  SecondTradeViewController.m
+//  MyGoodsViewController.m
 //  HITRenIOSClient
 //
-//  Created by wubincen on 14-5-28.
+//  Created by wubincen on 14-6-9.
 //  Copyright (c) 2014年 wubincen. All rights reserved.
 //
 
-#import "SecondTradeViewController.h"
+#import "MyGoodsViewController.h"
 #import "GoodsCell.h"
 #import "AppData.h"
 #import "SecondHandMenu.h"
@@ -16,11 +16,11 @@
 #import "UploadLogic.h"
 #import "GoodsDetailViewController.h"
 
-@interface SecondTradeViewController ()
+@interface MyGoodsViewController ()
 
 @end
 
-@implementation SecondTradeViewController
+@implementation MyGoodsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,20 +47,20 @@
     
     _downloadingImages = [[NSMutableSet alloc] init];
     
-    UIView *view = [self getActivityIndicator];
-    [self.view addSubview:view];
+//    UIView *view = [self getActivityIndicator];
+//    [self.view addSubview:view];
     
     self.tableView.decelerationRate = 0.5;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
     
-
+    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [TradeLogic downloadGoodsLine];
+    [TradeLogic downloadMyGoods];
     _currentPage = 0;
     _maxLoadedPage = 0;
     _backgroundWorking = NO;
@@ -71,7 +71,7 @@
     NSDictionary *dic = notification.userInfo;
     NSString *string = [dic objectForKey:@"fromclass"];
     if (string && ![string isEqualToString:@""] && ![string isEqualToString:NSStringFromClass(self.class)]) return;
-    if ([notification.object isEqualToString: ASYNC_EVENT_DOWNLOADGOODSLINE])
+    if ([notification.object isEqualToString: ASYNC_EVENT_DOWNLOADMYGOODSLINE])
         [self goodsLineDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADGOODSINFO])
         [self goodsInfoDidDownload:notification];
@@ -94,29 +94,30 @@
     else L(@"goodsline download fail");
     AppData *appData = [AppData sharedInstance];
     if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
-        int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
-        _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+        int count = PAGE_GOODS_COUNT > appData.myGoodsLine.gids.count ? appData.myGoodsLine.gids.count : PAGE_GOODS_COUNT;
+        _data = [[NSMutableArray alloc] initWithArray:[appData.myGoodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
         [self.tableView reloadData];
         return;
     }
-
+    
     NSDictionary *data = [ret objectForKey:@"DATA"];
     NSArray *gids = [data objectForKey:@"gids"];
-    appData.goodsLine.seq = [data objectForKey:@"seq"];
+    
+    appData.myGoodsLine.seq = [data objectForKey:@"seq"];
     L([gids description]);
-    appData.goodsLine.gids = [NSMutableArray arrayWithArray:[[gids reverseObjectEnumerator] allObjects]];
-//    if (gids.count == 0) return;
-//    int index = -1;
-//    if (appData.goodsLine.gids.count)
-//        index = [gids indexOfObject:[appData.goodsLine.gids objectAtIndex:0]];
-//    LOG(@"index %d", index);
-//    if (index == NSNotFound) index = -1;
-//    for (int i = index + 1; i < gids.count; i++)
-//        [appData.goodsLine.gids insertObject:[gids objectAtIndex:i] atIndex:0];
-    [appData.goodsLine update];
-    L([appData.goodsLine.gids description]);
-    int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
-    [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+    appData.myGoodsLine.gids = [NSMutableArray arrayWithArray:[[gids reverseObjectEnumerator] allObjects]];
+    //    if (gids.count == 0) return;
+    //    int index = -1;
+    //    if (appData.myGoodsLine.gids.count)
+    //        index = [gids indexOfObject:[appData.myGoodsLine.gids objectAtIndex:0]];
+    //    LOG(@"index %d", index);
+    //    if (index == NSNotFound) index = -1;
+    //    for (int i = index + 1; i < gids.count; i++)
+    //        [appData.myGoodsLine.gids insertObject:[gids objectAtIndex:i] atIndex:0];
+    [appData.myGoodsLine update];
+    L([appData.myGoodsLine.gids description]);
+    int count = PAGE_GOODS_COUNT > appData.myGoodsLine.gids.count ? appData.myGoodsLine.gids.count : PAGE_GOODS_COUNT;
+    [TradeLogic downloadGoodsInfo:[appData.myGoodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
     [self.tableView reloadData];
 }
 
@@ -138,13 +139,13 @@
         [gi update];
     }
     [AppData saveData];
-    int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
+    int count = PAGE_GOODS_COUNT > appData.myGoodsLine.gids.count ? appData.myGoodsLine.gids.count : PAGE_GOODS_COUNT;
     if (_downloadFromTop)
-        _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+        _data = [[NSMutableArray alloc] initWithArray:[appData.myGoodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
     else {
         _maxLoadedPage++;
-        count = PAGE_GOODS_COUNT * (_maxLoadedPage+1) > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT * (_maxLoadedPage+1);
-        _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+        count = PAGE_GOODS_COUNT * (_maxLoadedPage+1) > appData.myGoodsLine.gids.count ? appData.myGoodsLine.gids.count : PAGE_GOODS_COUNT * (_maxLoadedPage+1);
+        _data = [[NSMutableArray alloc] initWithArray:[appData.myGoodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
         _backgroundWorking = NO;
     }
     _downloadFromTop = NO;
@@ -251,12 +252,12 @@
     int tmp = index % PAGE_GOODS_COUNT;
     if (tmp < PAGE_GOODS_COUNT * 2 / 3) return;
     AppData *appData = [AppData sharedInstance];
-    int count = appData.goodsLine.gids.count - (_currentPage + 1) * PAGE_GOODS_COUNT;
+    int count = appData.myGoodsLine.gids.count - (_currentPage + 1) * PAGE_GOODS_COUNT;
     if (count > PAGE_GOODS_COUNT) count = PAGE_GOODS_COUNT;
     if (count < 0) return;
     _backgroundWorking = YES;
-    [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(PAGE_GOODS_COUNT * (_currentPage + 1), count)]];
-
+    [TradeLogic downloadGoodsInfo:[appData.myGoodsLine.gids subarrayWithRange:NSMakeRange(PAGE_GOODS_COUNT * (_currentPage + 1), count)]];
+    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -264,12 +265,17 @@
     CGPoint p = [touch locationInView:self.view];
     if (CGRectContainsPoint(self.topBar.frame, p)) {
         if (p.x <= 50) {
-            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
+            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base4" ofType:@"png"]];
             self.topBar.image = image;
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
     
+}
+
+- (void)clearTopBar {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base3" ofType:@"png"]];
+    self.topBar.image = image;
 }
 
 
@@ -287,9 +293,7 @@
         [self.navigationController pushViewController:controller animated:YES];
     }
     else if (index == 1) {
-        //我的商品
-        UIViewController *controller = getViewControllerOfName(@"MyGoods");
-        [self.navigationController pushViewController:controller animated:YES];
+        //搜索商品
     }
     
     [self hideMenu];
@@ -298,7 +302,7 @@
 - (IBAction)moreButtonClicked:(id)sender {
     if (!_menu.hidden) [self hideMenu];
     else [self showMenu];
-//    _menu.hidden = !_menu.hidden;
+    //    _menu.hidden = !_menu.hidden;
 }
 
 - (UIActivityIndicatorView *)getActivityIndicator {
@@ -317,5 +321,13 @@
     _activityIndicator.hidden = YES;
     [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
+- (IBAction)addGoods:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base5" ofType:@"png"]];
+    self.topBar.image = image;
 
+    UIViewController *controller = getViewControllerOfName(@"UploadGoods");
+    [self.navigationController pushViewController:controller animated:YES];
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+    
+}
 @end

@@ -240,6 +240,7 @@
 		F8148D91194385E5000F5C9F /* imageleft.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D8F194385E5000F5C9F /* imageleft.png */; };
 		F8148D92194385E5000F5C9F /* imageright.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D90194385E5000F5C9F /* imageright.png */; };
 		F8148D951944BBFB000F5C9F /* ThingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D941944BBFB000F5C9F /* ThingsDetailViewController.m */; };
+		F8148D981944C58C000F5C9F /* MyGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D971944C58C000F5C9F /* MyGoodsViewController.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -662,6 +663,8 @@
 		F8148D90194385E5000F5C9F /* imageright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageright.png; sourceTree = "<group>"; };
 		F8148D931944BBFB000F5C9F /* ThingsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThingsDetailViewController.h; sourceTree = "<group>"; };
 		F8148D941944BBFB000F5C9F /* ThingsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingsDetailViewController.m; sourceTree = "<group>"; };
+		F8148D961944C58C000F5C9F /* MyGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyGoodsViewController.h; sourceTree = "<group>"; };
+		F8148D971944C58C000F5C9F /* MyGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGoodsViewController.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1150,14 +1153,14 @@
 			name = arrow;
 			sourceTree = "<group>";
 		};
-		F8107CB119364C680073C169 /* secondhand */ = {
+		F8107CB119364C680073C169 /* 菜单 */ = {
 			isa = PBXGroup;
 			children = (
 				F8107CB219364C830073C169 /* secondhandmenu.xib */,
 				F8107CB719364E310073C169 /* SecondHandMenu.h */,
 				F8107CB819364E310073C169 /* SecondHandMenu.m */,
 			);
-			name = secondhand;
+			name = "菜单";
 			sourceTree = "<group>";
 		};
 		F8107CB419364CCC0073C169 /* 菜单 */ = {
@@ -1382,12 +1385,15 @@
 		F8148D3319403546000F5C9F /* 二手交易 */ = {
 			isa = PBXGroup;
 			children = (
+				F8107CB119364C680073C169 /* 菜单 */,
 				F8107CA919363EA30073C169 /* SecondTradeViewController.h */,
 				F8107CAA19363EA30073C169 /* SecondTradeViewController.m */,
 				F8D7482C1938638200829CDA /* UploadGoodsViewController.h */,
 				F8D7482D1938638200829CDA /* UploadGoodsViewController.m */,
 				F8148D88194374F1000F5C9F /* GoodsDetailViewController.h */,
 				F8148D89194374F1000F5C9F /* GoodsDetailViewController.m */,
+				F8148D961944C58C000F5C9F /* MyGoodsViewController.h */,
+				F8148D971944C58C000F5C9F /* MyGoodsViewController.m */,
 			);
 			name = "二手交易";
 			sourceTree = "<group>";
@@ -1893,7 +1899,6 @@
 				F8148D04193E2086000F5C9F /* emotionTextView */,
 				F8148CFC193E0031000F5C9F /* freshnews */,
 				F8148BDB193A2386000F5C9F /* findthings */,
-				F8107CB119364C680073C169 /* secondhand */,
 				F8723EC01927C77200828B5C /* messagecell */,
 				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
 				F842BB8A19051BD700148848 /* menu */,
@@ -2455,6 +2460,7 @@
 				F892372A18F3A62D00658F47 /* HITRenData.xcdatamodeld in Sources */,
 				F8148D411940C52A000F5C9F /* MyImageView.m in Sources */,
 				F8148D3E1940C0E8000F5C9F /* FullImageViewController.m in Sources */,
+				F8148D981944C58C000F5C9F /* MyGoodsViewController.m in Sources */,
 				F87209C3191CB53E00FAC7A1 /* NoticeViewBar.m in Sources */,
 				F80B0D48187426F2003E72DC /* HttpData.m in Sources */,
 				F8107C931935C0C40073C169 /* ContactView.m in Sources */,

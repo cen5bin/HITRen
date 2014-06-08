@@ -13,6 +13,7 @@
 
 @dynamic data;
 @dynamic seq;
+@dynamic uid;
 
 @synthesize gids = _gids;
 

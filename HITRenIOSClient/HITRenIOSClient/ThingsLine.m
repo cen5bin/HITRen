@@ -13,6 +13,7 @@
 
 @dynamic data;
 @dynamic seq;
+@dynamic uid;
 @synthesize tids = _tids;
 
 - (NSMutableArray *)getTids {

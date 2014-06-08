@@ -31,6 +31,7 @@
     <entity name="GoodsLine" representedClassName="GoodsLine" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="LikedList" representedClassName="LikedList" syncable="YES">
         <attribute name="list" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -65,6 +66,7 @@
     <entity name="ThingsLine" representedClassName="ThingsLine" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Timeline" representedClassName="Timeline" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
