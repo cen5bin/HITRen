@@ -11,6 +11,9 @@
 #import "GoodsInfo.h"
 #import "AppData.h"
 #import "UploadLogic.h"
+#import "TradeLogic.h"
+#import "User.h"
+#import "MyActivityIndicatorView.h"
 
 @interface GoodsDetailViewController ()
 
@@ -74,6 +77,10 @@
     self.leftButton.hidden = YES;
     if (self.goodsInfo.picNames.count <= 2) self.rightButton.hidden = YES;
     
+    User *user = [TradeLogic user];
+    _mine = [self.goodsInfo.uid intValue] == user.uid;
+    _myActivityIndicatorView = getViewFromNib(@"MyActivityIndicatorView", self);
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -90,6 +97,10 @@
     }
     if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
         [self imageDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DELETEGOODSINFO]) {
+        [_myActivityIndicatorView hide];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)imageDidDownload:(NSNotification *)notification {
@@ -162,6 +173,25 @@
 
 
 - (IBAction)moreButtonClicked:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:_mine?@"删除商品":@"联系卖家" otherButtonTitles:nil, nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [actionSheet showInView:self.view];
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        if (_mine) {
+            _myActivityIndicatorView.textLabel.text = @"正在删除";
+            [_myActivityIndicatorView showInView:self.view];
+            [TradeLogic deleteGoods:[self.goodsInfo.gid intValue]];
+        }
+        else {
+            
+        }
+    }
 }
 
 - (IBAction)left:(id)sender {

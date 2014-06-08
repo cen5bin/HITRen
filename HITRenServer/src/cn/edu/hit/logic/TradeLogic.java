@@ -92,13 +92,26 @@ public class TradeLogic extends BaseLogic {
 		JSONObject data = new JSONObject();
 		data.put("seq", seq0);
 		BasicDBList retList = (BasicDBList) retObj.get(GoodsLine.LIST);
-		int len = retList.size();
-		if (len > seq0 - seq + 100)
-			data.put("gids", retList.subList(0, seq0 - seq + 100));
-		else
-			data.put("gids", retList);
+		data.put("gids", retList);
+		
+//		int len = retList.size();
+//		if (len > seq0 - seq + 100)
+//			data.put("gids", retList.subList(0, seq0 - seq + 100));
+//		else
+//			data.put("gids", retList);
 			retData.put(HttpData.DATA, data);	
 		return true;
+	}
+	
+	public static JSONObject deleteGoods(int gid) throws JSONException {
+		JSONObject retJsonObject = new JSONObject();
+		BasicDBObject oldObj = new BasicDBObject(GoodsLine.UID, 0);
+		BasicDBObject newObj = new BasicDBObject("$pull", new BasicDBObject(GoodsLine.LIST, gid));
+		newObj.put("$inc", new BasicDBObject(GoodsLine.SEQ, 1));
+		if (!DBController.update(GoodsLine.COLLNAME, oldObj, newObj))
+			retJsonObject.put(HttpData.SUC, false);
+		retJsonObject.put(HttpData.SUC, true);
+		return retJsonObject;
 	}
 	
 	private static boolean addToGoodsLine(int gid) {

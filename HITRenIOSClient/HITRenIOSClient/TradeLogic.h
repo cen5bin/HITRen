@@ -13,4 +13,5 @@
 + (BOOL)uploadGoodsInfo:(NSDictionary *)dic;
 + (BOOL)downloadGoodsLine;
 + (BOOL)downloadGoodsInfo:(NSArray *)gids;
++ (BOOL)deleteGoods:(int)gid;
 @end

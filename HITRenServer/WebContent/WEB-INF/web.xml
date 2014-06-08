@@ -326,7 +326,7 @@
     <servlet-name>DownloadEventInfos</servlet-name>
     <url-pattern>/DownloadEventInfos</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>NewDownloadUserInfo</servlet-name>
     <servlet-class>cn.edu.hit.servlet.usersimplelogic.NewDownloadUserInfoServlet</servlet-class>
   </servlet>
@@ -334,4 +334,15 @@
     <servlet-name>NewDownloadUserInfo</servlet-name>
     <url-pattern>/NewDownloadUserInfo</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>DeleteGoods</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.trade.DeleteGoodsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteGoods</servlet-name>
+    <url-pattern>/DeleteGoods</url-pattern>
+  </servlet-mapping>
+  
+  
+  
 </web-app>

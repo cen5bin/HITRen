@@ -64,4 +64,17 @@
     FUNC_END();
     return YES;
 }
+
++ (BOOL)deleteGoods:(int)gid {
+    HttpData *data = [HttpData data];
+    [data setIntValue:gid forKey:@"gid"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DeleteGoods" withEventName:ASYNC_EVENT_DELETEGOODSINFO];
+    if (!ret) {
+        L(@"delete Goods failed");
+        FUNC_END();
+        return NO;
+    }
+    FUNC_END();
+    return YES;
+}
 @end

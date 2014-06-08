@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class GoodsInfo;
-@interface GoodsDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate> {
+@class GoodsInfo, MyActivityIndicatorView;
+@interface GoodsDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIActionSheetDelegate> {
     NSMutableArray *_cells;
     NSMutableSet *_downloadingImageSet;
+    MyActivityIndicatorView *_myActivityIndicatorView;
+    BOOL _mine;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 
