@@ -71,6 +71,9 @@
     }
     else [_cells removeObject:self.picsCell];
     
+    self.leftButton.hidden = YES;
+    if (self.goodsInfo.picNames.count <= 2) self.rightButton.hidden = YES;
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -159,5 +162,24 @@
 
 
 - (IBAction)moreButtonClicked:(id)sender {
+}
+
+- (IBAction)left:(id)sender {
+    if (self.pageControl.currentPage) {
+        self.pageControl.currentPage--;
+        [self.scrollView setContentOffset:CGPointMake(self.pageControl.currentPage*CGRectGetWidth(self.scrollView.frame), 0) animated:YES];
+        if (self.pageControl.currentPage == 0) self.leftButton.hidden = YES;
+    }
+    self.rightButton.hidden = NO;
+}
+
+- (IBAction)right:(id)sender {
+    if (self.pageControl.currentPage<self.goodsInfo.picNames.count-2) {
+        self.pageControl.currentPage++;
+        [self.scrollView setContentOffset:CGPointMake(self.pageControl.currentPage*CGRectGetWidth(self.scrollView.frame), 0) animated:YES];
+        if (self.pageControl.currentPage == self.goodsInfo.picNames.count-2) self.rightButton.hidden = YES;
+    }
+    self.leftButton.hidden = NO;
+
 }
 @end

@@ -29,9 +29,13 @@
 
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 
+@property (strong, nonatomic) IBOutlet UIButton *leftButton;
+@property (strong, nonatomic) IBOutlet UIButton *rightButton;
 
 @property (strong, nonatomic) GoodsInfo *goodsInfo;
 
 - (IBAction)moreButtonClicked:(id)sender;
+- (IBAction)left:(id)sender;
+- (IBAction)right:(id)sender;
 
 @end
