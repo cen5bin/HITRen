@@ -67,4 +67,17 @@
     return YES;
 }
 
++ (BOOL)deleteThing:(int)tid {
+    HttpData *data = [HttpData data];
+    [data setIntValue:tid forKey:@"tid"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DeleteThing" withEventName:ASYNC_EVENT_DELETETHINGSINFO];
+    if (!ret) {
+        L(@"delete things info failed");
+        FUNC_END();
+        return NO;
+    }
+    FUNC_END();
+    return YES;
+}
+
 @end

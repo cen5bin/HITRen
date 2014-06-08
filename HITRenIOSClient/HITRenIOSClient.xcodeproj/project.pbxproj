@@ -239,6 +239,7 @@
 		F8148D8A194374F1000F5C9F /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D89194374F1000F5C9F /* GoodsDetailViewController.m */; };
 		F8148D91194385E5000F5C9F /* imageleft.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D8F194385E5000F5C9F /* imageleft.png */; };
 		F8148D92194385E5000F5C9F /* imageright.png in Resources */ = {isa = PBXBuildFile; fileRef = F8148D90194385E5000F5C9F /* imageright.png */; };
+		F8148D951944BBFB000F5C9F /* ThingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D941944BBFB000F5C9F /* ThingsDetailViewController.m */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -659,6 +660,8 @@
 		F8148D89194374F1000F5C9F /* GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
 		F8148D8F194385E5000F5C9F /* imageleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageleft.png; sourceTree = "<group>"; };
 		F8148D90194385E5000F5C9F /* imageright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageright.png; sourceTree = "<group>"; };
+		F8148D931944BBFB000F5C9F /* ThingsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThingsDetailViewController.h; sourceTree = "<group>"; };
+		F8148D941944BBFB000F5C9F /* ThingsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThingsDetailViewController.m; sourceTree = "<group>"; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -1370,6 +1373,8 @@
 				F8148BD6193A21C4000F5C9F /* FindThingsViewController.m */,
 				F8148BEA193C4B7E000F5C9F /* UploadThingViewController.h */,
 				F8148BEB193C4B7E000F5C9F /* UploadThingViewController.m */,
+				F8148D931944BBFB000F5C9F /* ThingsDetailViewController.h */,
+				F8148D941944BBFB000F5C9F /* ThingsDetailViewController.m */,
 			);
 			name = "寻物平台";
 			sourceTree = "<group>";
@@ -2391,6 +2396,7 @@
 				F8148BDA193A2248000F5C9F /* ThingCell.m in Sources */,
 				F84B7DD018BB3C8D007FC2D5 /* NSData+XMPP.m in Sources */,
 				F8E9688518C714C200B9384B /* RegisterViewController.m in Sources */,
+				F8148D951944BBFB000F5C9F /* ThingsDetailViewController.m in Sources */,
 				F87209C9191E11E400FAC7A1 /* LikedList.m in Sources */,
 				F8148CF3193C73A7000F5C9F /* EmotionView.m in Sources */,
 				F84B7DD318BB3C8D007FC2D5 /* XMPPElement.m in Sources */,

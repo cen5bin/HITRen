@@ -14,6 +14,7 @@
 #import "ThingsLine.h"
 #import "ThingsInfo.h"
 #import "UploadLogic.h"
+#import "ThingsDetailViewController.h"
 
 @interface FindThingsViewController ()
 
@@ -100,16 +101,18 @@
     L([tids description]);
     L([appData.thingsLine.tids description]);
     if (tids.count == 0) return;
-    int index = 0;
-    if (appData.thingsLine.tids.count)
-        index = [tids indexOfObject:[appData.thingsLine.tids objectAtIndex:0]];
-    LOG(@"index %d", index);
-    if (index == NSNotFound) index = 0;
-    for (int i = index + 1; i < tids.count; i++)
-        [appData.thingsLine.tids insertObject:[tids objectAtIndex:i] atIndex:0];
+    appData.thingsLine.tids = [NSMutableArray arrayWithArray:[[tids reverseObjectEnumerator]allObjects]];
+//    int index = 0;
+//    if (appData.thingsLine.tids.count)
+//        index = [tids indexOfObject:[appData.thingsLine.tids objectAtIndex:0]];
+//    LOG(@"index %d", index);
+//    if (index == NSNotFound) index = 0;
+//    for (int i = index + 1; i < tids.count; i++)
+//        [appData.thingsLine.tids insertObject:[tids objectAtIndex:i] atIndex:0];
     [appData.thingsLine update];
     int count = PAGE_THINGS_COUNT > appData.thingsLine.tids.count ? appData.thingsLine.tids.count : PAGE_THINGS_COUNT;
     [FindLogic downloadThingsInfo:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
+    [self.tableView reloadData];
 //    [TradeLogic downloadGoodsInfo:[appData.goodsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
 }
 
@@ -224,8 +227,18 @@
             cell.noImageLabel.hidden = NO;
         }
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ThingsDetailViewController *controller = getViewControllerOfName(@"ThingsDetail");
+    NSNumber *tid = [_data objectAtIndex:indexPath.row];
+    AppData *appData = [AppData sharedInstance];
+    ThingsInfo *thingsInfo = [appData getThingsInfoOfTid:[tid intValue]];
+    if (!thingsInfo) return;
+    controller.thingsInfo = thingsInfo;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

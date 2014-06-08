@@ -13,5 +13,6 @@
 + (BOOL)uploadThingsInfo:(NSDictionary *)dic;
 + (BOOL)downloadThingsLine;
 + (BOOL)downloadThingsInfo:(NSArray *)tids;
++ (BOOL)deleteThing:(int)tid;
 
 @end

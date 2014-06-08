@@ -74,14 +74,26 @@ public class FindLogic extends BaseLogic{
 		JSONObject data = new JSONObject();
 		data.put("seq", seq0);
 		BasicDBList retList = (BasicDBList) retObj.get(ThingsLine.LIST);
-		int len = retList.size();
-		if (len > seq0 - seq + 100)
-			data.put("tids", retList.subList(0, seq0 - seq + 100));
-		else
-			data.put("tids", retList);
-		logger.info(data);
+		data.put("tids", retList);
+//		int len = retList.size();
+//		if (len > seq0 - seq + 100)
+//			data.put("tids", retList.subList(0, seq0 - seq + 100));
+//		else
+//			data.put("tids", retList);
+//		logger.info(data);
 			retData.put(HttpData.DATA, data);	
 		return true;
+	}
+	
+	public static JSONObject deleteThing(int tid) throws JSONException {
+		JSONObject retJsonObject = new JSONObject();
+		BasicDBObject oldObj = new BasicDBObject(ThingsLine.UID, 0);
+		BasicDBObject newObj = new BasicDBObject("$pull", new BasicDBObject(ThingsLine.LIST, tid));
+		newObj.put("$inc", new BasicDBObject(ThingsLine.SEQ, 1));
+		if (!DBController.update(ThingsLine.COLLNAME, oldObj, newObj))
+			retJsonObject.put(HttpData.SUC, false);
+		retJsonObject.put(HttpData.SUC, true);
+		return retJsonObject;
 	}
 	
 	private static boolean addToThingssLine(int tid) {

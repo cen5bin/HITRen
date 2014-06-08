@@ -58,10 +58,11 @@
 #define ASYNC_EVENT_DOWNLOADGOODSINFO @"HITRenAsyncDataDownloadGoodsInfo" //下载商品数据
 #define ASYNC_EVENT_DELETEGOODSINFO @"HITRenAsyncDataDeleteGoods" //删除商品
 
-
 #define ASYNC_EVENT_UPLOADTHINGSINFO @"HITRenAsyncDataUploadThingsInfo" //上传物品信息
 #define ASYNC_EVENT_DOWNLOADTHINGSLINE @"HITRenAsyncDataDownloadThingsLine" //下载物品线
 #define ASYNC_EVENT_DOWNLOADTHINGSINFO @"HITRenAsyncDataDownloadThingsInfo" //下载物品数据
+#define ASYNC_EVENT_DELETETHINGSINFO @"HITRenAsyncDataDeleteThings" //删除物品
+
 
 #define ASYNC_EVENT_DOWNLOADEVENTSINFO @"HITRenAsyncDataDownloadEventsInfo" //下载日程信息
 #define ASYNC_EVENT_UPLOADEVENT @"HITRenAsyncDataUploadEvent" //上传日程
