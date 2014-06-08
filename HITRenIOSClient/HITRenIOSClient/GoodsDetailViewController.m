@@ -14,6 +14,9 @@
 #import "TradeLogic.h"
 #import "User.h"
 #import "MyActivityIndicatorView.h"
+#import "UserInfo.h"
+#import "UserSimpleLogic.h"
+#import "ChatViewController.h"
 
 @interface GoodsDetailViewController ()
 
@@ -101,7 +104,28 @@
         [_myActivityIndicatorView hide];
         [self.navigationController popViewControllerAnimated:YES];
     }
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADUSERINFOS])
+        [self userInfoDidDownload:notification];
 }
+
+- (void)userInfoDidDownload:(NSNotification *)notification {
+//    FUNC_START();
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"userInfo download succ");
+    else L(@"userInfo download fail");
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    [UserSimpleLogic userInfosDidDownload:data];
+    UserInfo *userInfo = [[AppData sharedInstance] getUserInfoOfUid:[self.goodsInfo.uid intValue]];
+    if (userInfo) {
+        ChatViewController *controller = getViewControllerOfName(@"ChatView");
+        controller.userInfo = userInfo;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+
+//    [self.tableView reloadData];
+//    FUNC_END();
+}
+
 
 - (void)imageDidDownload:(NSNotification *)notification {
     UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
@@ -189,7 +213,13 @@
             [TradeLogic deleteGoods:[self.goodsInfo.gid intValue]];
         }
         else {
-            
+            UserInfo *userInfo = [[AppData sharedInstance] getUserInfoOfUid:[self.goodsInfo.uid intValue]];
+            if (userInfo) {
+                ChatViewController *controller = getViewControllerOfName(@"ChatView");
+                controller.userInfo = userInfo;
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+            else [UserSimpleLogic downloadUseInfos:[NSArray arrayWithObjects:self.goodsInfo.uid, nil] from:NSStringFromClass(self.class)];
         }
     }
 }
