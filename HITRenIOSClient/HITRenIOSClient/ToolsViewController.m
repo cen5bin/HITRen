@@ -7,6 +7,7 @@
 //
 
 #import "ToolsViewController.h"
+#import "AppData.h"
 
 @interface ToolsViewController ()
 
@@ -56,9 +57,27 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id cell = [[_data objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     UIViewController *controller = nil;
-    if (cell == self.secondHandCell)
-        controller = getViewControllerOfName(@"SecondHand");
-    else controller = getViewControllerOfName(@"FindThings");
+    AppData *appData = [AppData sharedInstance];
+    if (cell == self.secondHandCell) {
+        NSString *name = @"SecondHand";
+        if ([appData.viewControllerDic objectForKey:name])
+            controller = [appData.viewControllerDic objectForKey:name];
+        else {
+            controller = getViewControllerOfName(@"SecondHand");
+            [appData.viewControllerDic setObject:controller forKey:name];
+        }
+    }
+    else {
+        NSString *name = @"FindThings";
+        if ([appData.viewControllerDic objectForKey:name])
+            controller = [appData.viewControllerDic objectForKey:name];
+        else {
+            controller = getViewControllerOfName(name);
+            [appData.viewControllerDic setObject:controller forKey:name];
+        }
+//[[NSNotificationCenter defaultCenter] removeobs]
+//        controller = getViewControllerOfName(@"FindThings");
+    }
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
