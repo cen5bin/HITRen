@@ -1422,6 +1422,7 @@
 		F8148D35194035A2000F5C9F /* 新鲜事界面 */ = {
 			isa = PBXGroup;
 			children = (
+				F8723EC01927C77200828B5C /* messagecell */,
 				F8E9686818C5FC3900B9384B /* FreshNewsViewController.h */,
 				F8E9686918C5FC3900B9384B /* FreshNewsViewController.m */,
 				F823B5171906313E004D4514 /* SendShortMessageViewController.h */,
@@ -1908,7 +1909,6 @@
 				F8148D5F194202DA000F5C9F /* myActivityIndicatorView */,
 				F8148D04193E2086000F5C9F /* emotionTextView */,
 				F8148CFC193E0031000F5C9F /* freshnews */,
-				F8723EC01927C77200828B5C /* messagecell */,
 				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
 				F842BB8A19051BD700148848 /* menu */,
 				F88F989218C1E910009CE742 /* BtmToolBar.h */,

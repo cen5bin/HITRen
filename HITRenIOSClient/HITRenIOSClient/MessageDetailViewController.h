@@ -10,9 +10,11 @@
 #import "CommentListViewDelegate.h"
 #import "KeyboardToolBarDelegate.h"
 
-@class Message, CommentListView,KeyboardToolBar;
+
+@class Message, CommentListView,KeyboardToolBar,MyActivityIndicatorView;
 @interface MessageDetailViewController : UIViewController <CommentListViewDelegate,UIScrollViewDelegate,KeyboardToolBarDelegate,UITextViewDelegate> {
     KeyboardToolBar *_keyboardToolBar;
+    MyActivityIndicatorView *_myActivityIndicatorView;
 //    NSMutableSet *_downloadingImageSet;
 }
 

@@ -18,6 +18,7 @@
 #import "KeyboardToolBar.h"
 #import "Comment.h"
 #import "UploadLogic.h"
+#import "MyActivityIndicatorView.h"
 
 @interface MessageDetailViewController ()
 
@@ -58,6 +59,9 @@
 //    _downloadingImageSet = [[NSMutableSet alloc] init];
     [MessageLogic downloadCommentList:[NSArray arrayWithObjects:self.message.mid, nil] from:CLASS_NAME];
     [MessageLogic downloadLikedList:[NSArray arrayWithObjects:self.message.mid, nil] from:CLASS_NAME];
+    _myActivityIndicatorView = getViewFromNib(@"MyActivityIndicatorView", self);
+    _myActivityIndicatorView.textLabel.text = @"正在加载";
+    [_myActivityIndicatorView showInView:self.view];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -73,6 +77,8 @@
         [self commentListDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADLIKEDLIST])
         [self likedListDidDownload:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADUSERINFOS])
+        [self userInfoDidDownload:notification];
 }
 
 - (void)imageDidDownload:(NSNotification *)notification {
@@ -81,6 +87,18 @@
     [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
     [self loadContent];
 //    [self.tableView reloadData];
+}
+
+- (void)userInfoDidDownload:(NSNotification *)notification {
+    FUNC_START();
+    NSDictionary *ret = notification.userInfo;
+    if ([ret objectForKey:@"SUC"]) L(@"userInfo download succ");
+    else L(@"userInfo download fail");
+    NSDictionary *data = [ret objectForKey:@"DATA"];
+    [UserSimpleLogic userInfosDidDownload:data];
+//    [self.tableView reloadData];
+    FUNC_END();
+
 }
 
 - (void)likedListDidDownload:(NSNotification *)notification {
@@ -135,6 +153,7 @@
     [UserSimpleLogic downloadUseInfos:uids from:NSStringFromClass(self.class)];
     //    }
     [self loadContent];
+    [_myActivityIndicatorView hide];
     //    [self.tableView reloadData];
 }
 
@@ -171,6 +190,52 @@
     format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     self.timeLabel.text = [format stringFromDate:self.message.time];
     self.textView.text = self.message.content;
+    
+    
+    Comment *comment = [appData getCommentOfMid:[self.message.mid intValue]];
+    NSMutableString *string = [[NSMutableString alloc] init];
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in comment.commentList) {
+        NSNumber *uid = [dic objectForKey:@"uid"];
+        NSNumber *reuid = [dic objectForKey:@"reuid"];
+        UserInfo *userInfo1 = [appData readUserInfoForId:[uid intValue]];
+        if (!userInfo1) continue;
+        if ([reuid intValue] != -1) {
+            UserInfo *userInfo2 = [appData readUserInfoForId:[reuid intValue]];
+            if (!userInfo2) continue;
+            NSString *tmp = [NSString stringWithFormat:@"%@回复%@: %@\n", userInfo1.username, userInfo2.username, [dic objectForKey:@"content"]];
+            [string appendString:tmp];
+        }
+        else
+            [string appendString:[NSString stringWithFormat:@"%@: %@\n", userInfo1.username, [dic objectForKey:@"content"]]];
+        [list addObject:dic];
+    }
+    self.commentList = [[NSMutableArray alloc] init];
+//    cell.userList = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic0 in list) {
+        NSMutableDictionary *tmp = [NSMutableDictionary dictionary];
+        UserInfo *userInfo = [appData readUserInfoForId:[[dic0 objectForKey:@"uid"] intValue]];
+        [tmp setObject:userInfo.username forKey:@"user"];
+        NSNumber *reuid = [dic0 objectForKey:@"reuid"];
+        if ([reuid intValue] != -1) {
+            userInfo = [appData readUserInfoForId:[reuid intValue]];
+            [tmp setObject:userInfo.username forKey:@"reuser"];
+        }
+        [tmp setObject:[dic0 objectForKey:@"content"] forKey:@"content"];
+        [self.commentList addObject:tmp];
+//        [cell.userList addObject:[dic0 objectForKey:@"uid"]];
+    }
+    
+    LikedList *likedList = [appData getLikedListOfMid:[self.message.mid intValue]];
+    self.likedList = [[NSMutableArray alloc] init];
+    for (int i = likedList.userList.count - 1; i >= 0; i--) {
+        //    for (NSNumber *uid in likedList.userList) {
+        NSNumber *uid = [likedList.userList objectAtIndex:i];
+        UserInfo *userInfo0 = [appData readUserInfoForId:[uid intValue]];
+        if (userInfo0.username)
+            [self.likedList addObject:userInfo0.username];
+    }
+
     
     [self update];
     [self updateCommentList];
@@ -479,6 +544,11 @@
     }
     
     [_keyboardToolBar resignFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

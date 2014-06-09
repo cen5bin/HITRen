@@ -685,8 +685,6 @@
     FUNC_END();
 }
 
-
-
 - (void)imageDidDownload:(NSNotification *)notification {
     UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
     if (!image) image = [UIImage imageNamed:@"null.png"];
