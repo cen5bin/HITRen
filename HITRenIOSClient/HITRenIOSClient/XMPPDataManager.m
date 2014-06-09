@@ -9,6 +9,7 @@
 #import "XMPPDataManager.h"
 #import "NoticeObject.h"
 #import "AppData.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 
 @implementation XMPPDataManager
@@ -31,6 +32,8 @@
         [self dealWithChatMessage:message];
     else if (type == 1)
         [self dealWithSNSPushMessage:message];
+    [[NSNotificationCenter defaultCenter] postNotificationName:XMPP_DATA_RECEIVED object:nil];
+    AudioServicesPlaySystemSound(1007);
 }
 
 - (void)dealWithSNSPushMessage:(NSDictionary *)dic {

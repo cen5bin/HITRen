@@ -242,6 +242,7 @@
 		F8148D951944BBFB000F5C9F /* ThingsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D941944BBFB000F5C9F /* ThingsDetailViewController.m */; };
 		F8148D981944C58C000F5C9F /* MyGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D971944C58C000F5C9F /* MyGoodsViewController.m */; };
 		F8148D9B1944D3DD000F5C9F /* MyThingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8148D9A1944D3DD000F5C9F /* MyThingsViewController.m */; };
+		F8148DA1194583E5000F5C9F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8148DA0194583E5000F5C9F /* AudioToolbox.framework */; };
 		F823B5191906313E004D4514 /* SendShortMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B5181906313E004D4514 /* SendShortMessageViewController.m */; };
 		F823B51F190666CD004D4514 /* ShortMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F823B51E190666CD004D4514 /* ShortMessageCell.m */; };
 		F842BB8919051BC600148848 /* Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F842BB8819051BC600148848 /* Menu.xib */; };
@@ -668,6 +669,7 @@
 		F8148D971944C58C000F5C9F /* MyGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyGoodsViewController.m; sourceTree = "<group>"; };
 		F8148D991944D3DD000F5C9F /* MyThingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyThingsViewController.h; sourceTree = "<group>"; };
 		F8148D9A1944D3DD000F5C9F /* MyThingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyThingsViewController.m; sourceTree = "<group>"; };
+		F8148DA0194583E5000F5C9F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F823B5171906313E004D4514 /* SendShortMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendShortMessageViewController.h; sourceTree = "<group>"; };
 		F823B5181906313E004D4514 /* SendShortMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendShortMessageViewController.m; sourceTree = "<group>"; };
 		F823B51D190666CD004D4514 /* ShortMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortMessageCell.h; sourceTree = "<group>"; };
@@ -882,6 +884,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8148DA1194583E5000F5C9F /* AudioToolbox.framework in Frameworks */,
 				F8A5FD57191218930091939B /* CoreData.framework in Frameworks */,
 				F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */,
 				F84B7E0718BB6B6C007FC2D5 /* libidn.a in Frameworks */,
@@ -930,6 +933,7 @@
 		F80B0CF61874269D003E72DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8148DA0194583E5000F5C9F /* AudioToolbox.framework */,
 				F8A5FD56191218930091939B /* CoreData.framework */,
 				F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */,
 				F84B7E0618BB6B6C007FC2D5 /* libidn.a */,

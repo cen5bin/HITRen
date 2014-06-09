@@ -70,6 +70,8 @@
     
     _downloadingImageSet = [[NSMutableSet alloc] init];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:XMPP_DATA_RECEIVED object:nil];
+    
     FUNC_END();
 }
 
@@ -87,6 +89,18 @@
     [self.activityTableView reloadData];
     [self.noticeTableView reloadData];
     [self.contactView willLoad];
+}
+
+- (void)reloadData {
+    AppData *appData = [AppData sharedInstance];
+    Notice *notice = [appData activitiesAtIndex:0];
+    NSArray *array = notice.notices;
+    _activies = [[NSMutableArray alloc] init];
+    for (id obj in array)
+        [_activies insertObject:obj atIndex:0];
+    
+    [self.activityTableView reloadData];
+    [self.noticeTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
