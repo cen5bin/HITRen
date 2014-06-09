@@ -26,9 +26,17 @@
 @property (strong, nonatomic) IBOutlet UITableView *noticeTableView;  //聊天消息
 @property (strong, nonatomic) IBOutlet ContactView *contactView; //通讯录
 
+@property (strong, nonatomic) IBOutlet UIView *colorView; //小绿条
 
 @property (nonatomic) int flag;
 
+@property (strong, nonatomic) IBOutlet UIButton *activityButton;
+@property (strong, nonatomic) IBOutlet UIButton *noticeButton;
+@property (strong, nonatomic) IBOutlet UIButton *contactButton;
+
+- (IBAction)activityButtonClicked:(id)sender;
+- (IBAction)noticeButtonClicked:(id)sender;
+- (IBAction)contactButtonClicked:(id)sender;
 
 //- (IBAction)swipe:(UISwipeGestureRecognizer *)sender;
 

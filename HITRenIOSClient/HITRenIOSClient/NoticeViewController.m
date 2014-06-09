@@ -210,6 +210,9 @@
 //        LOG(@"%f", scrollView.contentOffset.x);
         if (p.x <= 0) {p.x = 0;         [scrollView setContentOffset:p animated:NO];}
         else if (p.x>=640) {p.x = 640;         [scrollView setContentOffset:p animated:NO];}
+        CGRect rect = self.colorView.frame;
+        rect.origin.x = p.x / 3;
+        self.colorView.frame = rect;
 //        [scrollView setContentOffset:p animated:NO];
 //        scrollView.contentOffset = p;
         return;
@@ -226,6 +229,7 @@
     if (scrollView == self.scrollView) {
         if (scrollView.contentOffset.x >=640)
             [self.contactView willLoad];
+        [self scrollToIndex:scrollView.contentOffset.x/320];
         //        LOG(@"%f", scrollView.contentOffset.x);
         return;
     }
@@ -296,4 +300,31 @@
 
 }
 
+- (void)scrollToIndex:(int)index {
+    static NSArray *array = nil;
+    if (!array) array = [NSArray arrayWithObjects:self.activityButton,self.noticeButton,self.contactButton, nil];
+    CGPoint p = self.scrollView.contentOffset;
+    p.x = 320 * index;
+    CGRect rect = [[array objectAtIndex:index] frame];
+    CGRect rect1 = self.colorView.frame;
+    rect1.origin.x = rect.origin.x;
+    rect1.size.width = rect.size.width;
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.colorView.frame = rect1;
+    } completion:nil];
+    
+    [self.scrollView setContentOffset:p animated:YES];
+}
+
+- (IBAction)activityButtonClicked:(id)sender {
+    [self scrollToIndex:0];
+}
+
+- (IBAction)noticeButtonClicked:(id)sender {
+    [self scrollToIndex:1];
+}
+
+- (IBAction)contactButtonClicked:(id)sender {
+    [self scrollToIndex:2];
+}
 @end
