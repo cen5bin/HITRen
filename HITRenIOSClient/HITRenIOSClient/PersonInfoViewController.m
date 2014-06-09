@@ -151,9 +151,10 @@
     [super viewWillAppear:animated];
     if (!_managing) return;
     _managing = NO;
-    NSString *gname = [ChooseGroupViewController choosedGroupName];
-    L(gname);
-    [RelationshipLogic moveUser:[self.userInfo.uid intValue] fromGroup:[RelationshipLogic gnameOfUid:[self.userInfo.uid intValue]] toGroups:[NSArray arrayWithObjects:gname, nil]];
+    NSString *choosedGname = [ChooseGroupViewController choosedGroupName];
+    NSString *originGname = [RelationshipLogic gnameOfUid:[self.userInfo.uid intValue]];
+    if ([choosedGname isEqualToString:originGname]) return;
+    [RelationshipLogic moveUser:[self.userInfo.uid intValue] fromGroup: originGname toGroups:[NSArray arrayWithObjects:choosedGname, nil]];
 //    [RelationshipLogic mo]
 }
 
