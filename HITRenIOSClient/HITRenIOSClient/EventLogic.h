@@ -10,8 +10,8 @@
 
 @interface EventLogic : BaseLogic
 
-+ (BOOL)uploadEvent:(NSDictionary *)info;
-+ (BOOL)downloadEventLine;
-+ (BOOL)downloadEventInfos:(NSArray *)eids;
++ (BOOL)uploadEvent:(NSDictionary *)info from:(NSString *)classname;
++ (BOOL)downloadEventLinefrom:(NSString *)classname;
++ (BOOL)downloadEventInfos:(NSArray *)eids from:(NSString *)classname;
 
 @end

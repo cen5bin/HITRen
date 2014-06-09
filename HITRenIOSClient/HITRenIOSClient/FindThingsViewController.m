@@ -51,8 +51,8 @@
 //    [self.view addSubview:view];
     
     self.tableView.decelerationRate = 0.5;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     
     
 
@@ -60,11 +60,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [FindLogic downloadThingsLine];
+    [FindLogic downloadThingsLinefrom:CLASS_NAME];
     _currentPage = 0;
     _maxLoadedPage = 0;
     _backgroundWorking = NO;
     _downloadFromTop = YES;
+    AppData *appData = [AppData sharedInstance];
+    int count = PAGE_THINGS_COUNT > appData.thingsLine.tids.count ? appData.thingsLine.tids.count : PAGE_THINGS_COUNT;
+    if (count == 0) return;
+    _data = [[NSMutableArray alloc] initWithArray:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
+    [self.tableView reloadData];
 }
 
 
@@ -102,16 +107,9 @@
     L([appData.thingsLine.tids description]);
     if (tids.count == 0) return;
     appData.thingsLine.tids = [NSMutableArray arrayWithArray:[[tids reverseObjectEnumerator]allObjects]];
-//    int index = 0;
-//    if (appData.thingsLine.tids.count)
-//        index = [tids indexOfObject:[appData.thingsLine.tids objectAtIndex:0]];
-//    LOG(@"index %d", index);
-//    if (index == NSNotFound) index = 0;
-//    for (int i = index + 1; i < tids.count; i++)
-//        [appData.thingsLine.tids insertObject:[tids objectAtIndex:i] atIndex:0];
     [appData.thingsLine update];
     int count = PAGE_THINGS_COUNT > appData.thingsLine.tids.count ? appData.thingsLine.tids.count : PAGE_THINGS_COUNT;
-    [FindLogic downloadThingsInfo:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
+    [FindLogic downloadThingsInfo:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(0, count)]from:CLASS_NAME];
     [self.tableView reloadData];
 //    [TradeLogic downloadGoodsInfo:[appData.goodsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
 }
@@ -239,6 +237,7 @@
     if (!thingsInfo) return;
     controller.thingsInfo = thingsInfo;
     [self.navigationController pushViewController:controller animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -264,7 +263,7 @@
     if (count > PAGE_THINGS_COUNT) count = PAGE_THINGS_COUNT;
     if (count < 0) return;
     _backgroundWorking = YES;
-    [FindLogic downloadThingsInfo:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(PAGE_THINGS_COUNT * (_currentPage + 1), count)]];
+    [FindLogic downloadThingsInfo:[appData.thingsLine.tids subarrayWithRange:NSMakeRange(PAGE_THINGS_COUNT * (_currentPage + 1), count)]from:CLASS_NAME];
 //    [TradeLogic downloadGoodsInfo:[appData.goodsLine.tids subarrayWithRange:NSMakeRange(PAGE_THINGS_COUNT * (_currentPage + 1), count)]];
     
 }
@@ -275,6 +274,7 @@
     else [self showMenu];
     UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
     self.topBar.image = image;
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
 }
 
 - (void)menuDidChooseAtIndex:(int)index {

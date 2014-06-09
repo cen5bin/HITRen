@@ -52,11 +52,12 @@
     
     self.targetUid = -1;
     
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@",ASYNCDATALOADED, CLASS_NAME];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
 //    _downloadingImageSet = [[NSMutableSet alloc] init];
-    [MessageLogic downloadCommentList:[NSArray arrayWithObjects:self.message.mid, nil]];
-    [MessageLogic downloadLikedList:[NSArray arrayWithObjects:self.message.mid, nil]];
+    [MessageLogic downloadCommentList:[NSArray arrayWithObjects:self.message.mid, nil] from:CLASS_NAME];
+    [MessageLogic downloadLikedList:[NSArray arrayWithObjects:self.message.mid, nil] from:CLASS_NAME];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -400,12 +401,12 @@
     User *user = [MessageLogic user];
     UserInfo *userInfo = [[AppData sharedInstance] readUserInfoForId:user.uid];
     if (self.liked) {
-        [MessageLogic likeMessage:[self.message.mid intValue]];
+        [MessageLogic likeMessage:[self.message.mid intValue]from:CLASS_NAME];
         [likedList.userList addObject:[NSNumber numberWithInt:user.uid]];
         [self.likedList insertObject:userInfo.username atIndex:0];
     }
     else {
-        [MessageLogic dislikeMessage:[self.message.mid intValue]];
+        [MessageLogic dislikeMessage:[self.message.mid intValue] from:CLASS_NAME];
         [likedList.userList removeObject:[NSNumber numberWithInt:user.uid]];
         [self.likedList removeObject:userInfo.username];
     }
@@ -471,9 +472,9 @@
     [self.userList addObject:[NSNumber numberWithInt:user.uid]];
     [self loadContent];
     if (self.targetUid == -1)
-        [MessageLogic commentMessage:[self.message.mid intValue] withContent:text];
+        [MessageLogic commentMessage:[self.message.mid intValue] withContent:text from:CLASS_NAME];
     else {
-        [MessageLogic replyUser:self.targetUid atMessage:[self.message.mid intValue] withContent:text];
+        [MessageLogic replyUser:self.targetUid atMessage:[self.message.mid intValue] withContent:text from:CLASS_NAME];
         self.targetUid = -1;
     }
     

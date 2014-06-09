@@ -52,8 +52,8 @@
     //    [self.view addSubview:view];
     
     self.tableView.decelerationRate = 0.5;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     
     
     
@@ -61,7 +61,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [FindLogic downloadMyThingsLine];
+    [FindLogic downloadMyThingsLinefrom:CLASS_NAME];
     _currentPage = 0;
     _maxLoadedPage = 0;
     _backgroundWorking = NO;
@@ -112,7 +112,7 @@
     //        [appData.myThingsLine.tids insertObject:[tids objectAtIndex:i] atIndex:0];
     [appData.myThingsLine update];
     int count = PAGE_THINGS_COUNT > appData.myThingsLine.tids.count ? appData.myThingsLine.tids.count : PAGE_THINGS_COUNT;
-    [FindLogic downloadThingsInfo:[appData.myThingsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
+    [FindLogic downloadThingsInfo:[appData.myThingsLine.tids subarrayWithRange:NSMakeRange(0, count)]from:CLASS_NAME];
     [self.tableView reloadData];
     //    [TradeLogic downloadGoodsInfo:[appData.goodsLine.tids subarrayWithRange:NSMakeRange(0, count)]];
 }
@@ -240,6 +240,7 @@
     if (!thingsInfo) return;
     controller.thingsInfo = thingsInfo;
     [self.navigationController pushViewController:controller animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -265,7 +266,7 @@
     if (count > PAGE_THINGS_COUNT) count = PAGE_THINGS_COUNT;
     if (count < 0) return;
     _backgroundWorking = YES;
-    [FindLogic downloadThingsInfo:[appData.myThingsLine.tids subarrayWithRange:NSMakeRange(PAGE_THINGS_COUNT * (_currentPage + 1), count)]];
+    [FindLogic downloadThingsInfo:[appData.myThingsLine.tids subarrayWithRange:NSMakeRange(PAGE_THINGS_COUNT * (_currentPage + 1), count)]from:CLASS_NAME];
     //    [TradeLogic downloadGoodsInfo:[appData.goodsLine.tids subarrayWithRange:NSMakeRange(PAGE_THINGS_COUNT * (_currentPage + 1), count)]];
     
 }

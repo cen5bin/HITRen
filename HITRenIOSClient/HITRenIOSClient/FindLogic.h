@@ -10,10 +10,10 @@
 
 @interface FindLogic : BaseLogic
 
-+ (BOOL)uploadThingsInfo:(NSDictionary *)dic;
-+ (BOOL)downloadThingsLine;
-+ (BOOL)downloadThingsInfo:(NSArray *)tids;
-+ (BOOL)deleteThing:(int)tid;
-+ (BOOL)downloadMyThingsLine;
++ (BOOL)uploadThingsInfo:(NSDictionary *)dic from:(NSString *)classname;
++ (BOOL)downloadThingsLinefrom:(NSString *)classname;
++ (BOOL)downloadThingsInfo:(NSArray *)tids from:(NSString *)classname;
++ (BOOL)deleteThing:(int)tid from:(NSString *)classname;
++ (BOOL)downloadMyThingsLinefrom:(NSString *)classname;
 
 @end

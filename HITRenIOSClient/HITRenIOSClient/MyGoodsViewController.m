@@ -51,8 +51,8 @@
 //    [self.view addSubview:view];
     
     self.tableView.decelerationRate = 0.5;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+     NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     
     
 }
@@ -60,7 +60,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [TradeLogic downloadMyGoods];
+    [TradeLogic downloadMyGoodsfrom:CLASS_NAME];
     _currentPage = 0;
     _maxLoadedPage = 0;
     _backgroundWorking = NO;
@@ -117,7 +117,7 @@
     [appData.myGoodsLine update];
     L([appData.myGoodsLine.gids description]);
     int count = PAGE_GOODS_COUNT > appData.myGoodsLine.gids.count ? appData.myGoodsLine.gids.count : PAGE_GOODS_COUNT;
-    [TradeLogic downloadGoodsInfo:[appData.myGoodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+    [TradeLogic downloadGoodsInfo:[appData.myGoodsLine.gids subarrayWithRange:NSMakeRange(0, count)]from:CLASS_NAME];
     [self.tableView reloadData];
 }
 
@@ -211,6 +211,7 @@
     GoodsDetailViewController *controller = getViewControllerOfName(@"GoodsDetail");
     controller.goodsInfo = goodsInfo;
     [self.navigationController pushViewController:controller animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)hideMenu {
@@ -256,7 +257,7 @@
     if (count > PAGE_GOODS_COUNT) count = PAGE_GOODS_COUNT;
     if (count < 0) return;
     _backgroundWorking = YES;
-    [TradeLogic downloadGoodsInfo:[appData.myGoodsLine.gids subarrayWithRange:NSMakeRange(PAGE_GOODS_COUNT * (_currentPage + 1), count)]];
+    [TradeLogic downloadGoodsInfo:[appData.myGoodsLine.gids subarrayWithRange:NSMakeRange(PAGE_GOODS_COUNT * (_currentPage + 1), count)] from:CLASS_NAME];
     
 }
 

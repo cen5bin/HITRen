@@ -88,11 +88,11 @@
     return YES;
 }
 
-+ (BOOL)updateInfo {
++ (BOOL)updateInfofrom:(NSString *)classname {
     FUNC_START();
     HttpData *data = [UserSimpleLogic packUserInfoData];
     HttpTransfer *httpTransfer = [HttpTransfer transfer];
-    [httpTransfer asyncPost:[data getJsonString] to:@"UpdateUserInfo" withEventName:ASYNC_EVENT_UPDATEUSETINFO];
+    [httpTransfer asyncPost:[data getJsonString] to:@"UpdateUserInfo" withEventName:ASYNC_EVENT_UPDATEUSETINFO fromClass:classname];
     FUNC_END();
     return YES;
 }
@@ -113,11 +113,6 @@
 }
 
 + (BOOL)downloadUseInfos:(NSArray *)uids from:(NSString *)classname{
-//    FUNC_START();
-//    if (!uids.count) {
-//        FUNC_END();
-//        return YES;
-//    }
     HttpData *data = [HttpData data];
     AppData *appData = [AppData sharedInstance];
     NSArray *array = [appData userInfosNeedDownload:uids];
@@ -128,15 +123,6 @@
         return NO;
     }
     return YES;
-//    HttpData *data = [HttpData data];
-//    [data setValue:uids forKey:@"uids"];
-//    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadUsersData" withEventName:ASYNC_EVENT_DOWNLOADUSERINFOS fromClass:classname];
-//    if (!ret) {
-//        L(@"download userinfos fail");
-//        return NO;
-//    }
-//    FUNC_END();
-//    return YES;
 }
 
 + (void)save {

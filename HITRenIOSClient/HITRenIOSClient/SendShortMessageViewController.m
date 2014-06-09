@@ -33,7 +33,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferCompleted:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferCompleted:) name:notificationName object:nil];
     self.textView.layer.borderColor = VIEW_BORDER_COLOR.CGColor;
     self.textView.layer.borderWidth = 0.5;
     self.textView.layer.cornerRadius = 5;
@@ -69,7 +70,7 @@
                 return;
             }
             if (_pics.count == 0) {
-                [MessageLogic sendShortMessage:self.textView.text andPics:[NSArray array]];
+                [MessageLogic sendShortMessage:self.textView.text andPics:[NSArray array] from:CLASS_NAME];
                 [self dismissViewControllerAnimated:YES completion:^(void){}];
             }
             else [UploadLogic uploadImages:_pics from:NSStringFromClass(self.class)];
@@ -134,7 +135,7 @@
 
 - (void)transferCompleted:(NSNotification *)noticifition {
     if ([noticifition.object isEqualToString:ASYNC_EVENT_UPLOADIMAGE]) {
-        [MessageLogic sendShortMessage:self.textView.text andPics:[noticifition.userInfo objectForKey:@"DATA"]];
+        [MessageLogic sendShortMessage:self.textView.text andPics:[noticifition.userInfo objectForKey:@"DATA"] from:CLASS_NAME];
     }
     else if ([noticifition.object isEqualToString:ASYNC_EVENT_SENDSHORTMESSAGE]) {
         [self dismissViewControllerAnimated:YES completion:^(void){}];

@@ -25,7 +25,7 @@
     return ret;
 }
 
-+ (BOOL)sendShortMessage:(NSString *)message andPics:(NSArray *)pics {
++ (BOOL)sendShortMessage:(NSString *)message andPics:(NSArray *)pics from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     User *user = [MessageLogic user];
@@ -33,7 +33,7 @@
     [data setValue:message forKey:@"message"];
     [data setIntValue:0 forKey:@"auth"];
     [data setValue:pics forKey:@"pics"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"SendShortMessage" withEventName:ASYNC_EVENT_SENDSHORTMESSAGE];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"SendShortMessage" withEventName:ASYNC_EVENT_SENDSHORTMESSAGE fromClass:classname];
     if (!ret) {
         LOG(@"SendShortMessage fail");
         FUNC_END();
@@ -76,13 +76,13 @@
     return YES;
 }
 
-+ (BOOL)downloadTimeline {
++ (BOOL)downloadTimelinefrom:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
 //    User *user = [MessageLogic user];
 //    [data setIntValue:user.uid forKey:@"uid"];
     [data setIntValue:[DataManager timeline].seq.intValue forKey:@"seq"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadTimeline" withEventName:ASYNC_EVENT_DOWNLOADTIMELINE];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadTimeline" withEventName:ASYNC_EVENT_DOWNLOADTIMELINE fromClass:classname];
     if (!ret) {
         L(@"DownloadTimeline failed");
         FUNC_END();
@@ -92,11 +92,11 @@
     return YES;
 }
 
-+ (BOOL)downloadMessages:(NSArray *)mids {
++ (BOOL)downloadMessages:(NSArray *)mids from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     [data setValue:mids forKey:@"mids"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadMessages" withEventName:ASYNC_EVENT_DOWNLOADMESSAGES];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadMessages" withEventName:ASYNC_EVENT_DOWNLOADMESSAGES fromClass:classname];
     if (!ret) {
         L(@"DownloadMessages failed");
         FUNC_END();
@@ -106,13 +106,13 @@
     return YES;
 }
 
-+ (BOOL)likeMessage:(int)mid {
++ (BOOL)likeMessage:(int)mid from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     User *user = [MessageLogic user];
     [data setIntValue:mid forKey:@"mid"];
     [data setIntValue:user.uid forKey:@"uid"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"LikeTheMessage" withEventName:ASYNC_EVENT_LIKEMESSAGE];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"LikeTheMessage" withEventName:ASYNC_EVENT_LIKEMESSAGE fromClass:classname];
     if (!ret) {
         L(@"LikeMessage failed");
         FUNC_END();
@@ -122,13 +122,13 @@
     return YES;
 }
 
-+ (BOOL)dislikeMessage:(int)mid {
++ (BOOL)dislikeMessage:(int)mid from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     User *user = [MessageLogic user];
     [data setIntValue:mid forKey:@"mid"];
     [data setIntValue:user.uid forKey:@"uid"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"CancelLikeTheMessage" withEventName:ASYNC_EVENT_LIKEMESSAGE];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"CancelLikeTheMessage" withEventName:ASYNC_EVENT_LIKEMESSAGE fromClass:classname];
     if (!ret) {
         L(@"CancelLikeMessage failed");
         FUNC_END();
@@ -138,12 +138,12 @@
     return YES;
 }
 
-+ (BOOL)downloadLikedList:(NSArray *)mids {
++ (BOOL)downloadLikedList:(NSArray *)mids from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     AppData *appData = [AppData sharedInstance];
     [data setValue:[appData likedListNeedDownload:mids] forKey:@"datas"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadLikedList" withEventName:ASYNC_EVENT_DOWNLOADLIKEDLIST];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadLikedList" withEventName:ASYNC_EVENT_DOWNLOADLIKEDLIST fromClass:classname];
     if (!ret) {
         L(@"DownloadLikedList failed");
         FUNC_END();
@@ -155,14 +155,14 @@
     return YES;
 }
 
-+ (BOOL)commentMessage:(int)mid withContent:(NSString *)content {
++ (BOOL)commentMessage:(int)mid withContent:(NSString *)content from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     User *user = [MessageLogic user];
     [data setIntValue:user.uid forKey:@"uid"];
     [data setValue:content forKey:@"content"];
     [data setIntValue:mid forKey:@"mid"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"CommentMessage" withEventName:ASYNC_EVENT_COMMENTMESSAGE];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"CommentMessage" withEventName:ASYNC_EVENT_COMMENTMESSAGE fromClass:classname];
     if (!ret) {
         L(@"CommentMessage failed");
         FUNC_END();
@@ -172,13 +172,13 @@
     return YES;
 }
 
-+ (BOOL)downloadCommentList:(NSArray *)mids {
++ (BOOL)downloadCommentList:(NSArray *)mids from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     AppData *appData = [AppData sharedInstance];
     [data setValue:[appData commentListNeedDownload:mids] forKey:@"datas"];
 //    [data setValue:mids forKey:@"mids"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadCommentList" withEventName:ASYNC_EVENT_DOWNLOADCOMMENTLIST];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadCommentList" withEventName:ASYNC_EVENT_DOWNLOADCOMMENTLIST fromClass:classname];
     if (!ret) {
         L(@"DownloadCommentList failed");
         FUNC_END();
@@ -188,7 +188,7 @@
     return YES;
 }
 
-+ (BOOL)replyUser:(int)reuid atMessage:(int)mid withContent:(NSString *)content {
++ (BOOL)replyUser:(int)reuid atMessage:(int)mid withContent:(NSString *)content from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     User *user = [MessageLogic user];
@@ -197,7 +197,7 @@
     [data setIntValue:reuid forKey:@"reuid"];
     [data setValue:content forKey:@"content"];
     [data setIntValue:mid forKey:@"mid"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"CommentMessage" withEventName:ASYNC_EVENT_COMMENTMESSAGE];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"CommentMessage" withEventName:ASYNC_EVENT_COMMENTMESSAGE fromClass:classname];
     if (!ret) {
         L(@"CommentMessage failed");
         FUNC_END();

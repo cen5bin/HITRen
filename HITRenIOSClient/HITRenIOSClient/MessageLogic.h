@@ -10,19 +10,19 @@
 
 @interface MessageLogic : BaseLogic
 
-+ (BOOL)sendShortMessage:(NSString *)message;
-+ (BOOL)sendShortMessage:(NSString *)message toGroup:(NSString *)gname;
-+ (BOOL)sendShortMessage:(NSString *)message toGroups:(NSArray *)gnames;
-+ (BOOL)downloadTimeline;
-+ (BOOL)downloadMessages:(NSArray *)mids;
-+ (BOOL)likeMessage:(int)mid;
-+ (BOOL)dislikeMessage:(int)mid;
-+ (BOOL)downloadLikedList:(NSArray *)mids;
-+ (BOOL)commentMessage:(int)mid withContent:(NSString *)content;
-+ (BOOL)downloadCommentList:(NSArray *)mids;
-+ (BOOL)replyUser:(int)reuid atMessage:(int)mid withContent:(NSString *)content;
+//+ (BOOL)sendShortMessage:(NSString *)message;
+//+ (BOOL)sendShortMessage:(NSString *)message toGroup:(NSString *)gname;
+//+ (BOOL)sendShortMessage:(NSString *)message toGroups:(NSArray *)gnames;
++ (BOOL)downloadTimelinefrom:(NSString *)classname;
++ (BOOL)downloadMessages:(NSArray *)mids from:(NSString *)classname;
++ (BOOL)likeMessage:(int)mid from:(NSString *)classname;
++ (BOOL)dislikeMessage:(int)mid from:(NSString *)classname;
++ (BOOL)downloadLikedList:(NSArray *)mids from:(NSString *)classname;
++ (BOOL)commentMessage:(int)mid withContent:(NSString *)content from:(NSString *)classname;
++ (BOOL)downloadCommentList:(NSArray *)mids from:(NSString *)classname;
++ (BOOL)replyUser:(int)reuid atMessage:(int)mid withContent:(NSString *)content from:(NSString *)classname;
 
-+ (BOOL)sendShortMessage:(NSString *)message andPics:(NSArray *)pics;
++ (BOOL)sendShortMessage:(NSString *)message andPics:(NSArray *)pics from:(NSString *)classname;
 
 // 向uid发送聊天消息
 + (BOOL)sendMessage:(NSString *)message toUid:(int)uid;

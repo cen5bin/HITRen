@@ -17,6 +17,7 @@
 #import "UserInfo.h"
 #import "UserSimpleLogic.h"
 #import "ChatViewController.h"
+#import "GoodsLine.h"
 
 @interface GoodsDetailViewController ()
 
@@ -40,8 +41,8 @@
     _cells = [[NSMutableArray alloc] initWithObjects:self.nameCell, self.priceCell, self.picsCell, self.descriptionCell, nil];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = BACKGROUND_COLOR;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     
     _downloadingImageSet = [[NSMutableSet alloc] init];
     
@@ -102,6 +103,8 @@
         [self imageDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DELETEGOODSINFO]) {
         [_myActivityIndicatorView hide];
+        AppData *appData = [AppData sharedInstance];
+        [appData.goodsLine.gids removeObject:self.goodsInfo.gid];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADUSERINFOS])
@@ -211,7 +214,7 @@
         if (_mine) {
             _myActivityIndicatorView.textLabel.text = @"正在删除";
             [_myActivityIndicatorView showInView:self.view];
-            [TradeLogic deleteGoods:[self.goodsInfo.gid intValue]];
+            [TradeLogic deleteGoods:[self.goodsInfo.gid intValue] from:CLASS_NAME];
         }
         else {
             UserInfo *userInfo = [[AppData sharedInstance] getUserInfoOfUid:[self.goodsInfo.uid intValue]];

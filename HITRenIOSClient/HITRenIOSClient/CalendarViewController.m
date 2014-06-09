@@ -35,7 +35,8 @@
 	// Do any additional setup after loading the view.
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = BACKGROUND_COLOR;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     _currentPage = 0;
     _maxLoadedPage = 0;
     _data = [[NSMutableArray alloc] init];
@@ -47,7 +48,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [EventLogic downloadEventLine];
+    [EventLogic downloadEventLinefrom:CLASS_NAME];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -94,7 +95,7 @@
     if (count > PAGE_EVENT_COUNT) count = PAGE_EVENT_COUNT;
     for (int i = 0; i < count; i++)
         if (![tmp containsObject:[_data objectAtIndex:i]]) [tmp addObject:[_data objectAtIndex:i]];
-    [EventLogic downloadEventInfos:tmp];
+    [EventLogic downloadEventInfos:tmp from:CLASS_NAME];
 }
 
 - (void)eventInfosDidDownload:(NSNotification *)notification {
@@ -185,8 +186,8 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    CGPoint p = [touch locationInView:self.view];
+//    UITouch *touch = [touches anyObject];
+//    CGPoint p = [touch locationInView:self.view];
 //    if (CGRectContainsPoint(self.topBar.frame, p)) {
 //        if (p.x <= 50) {
 //            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];

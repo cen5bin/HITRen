@@ -30,7 +30,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferCompleted:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferCompleted:) name:notificationName object:nil];
     _cells = [NSMutableArray arrayWithObjects:self.thingNameCell,self.thingPicCell,self.thingDescriptionCell, nil];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -96,7 +97,7 @@
                                   @"description":self.descriptintextView.text,
                                   @"pics":[NSArray array]
                                   };
-            [FindLogic uploadThingsInfo:dic];
+            [FindLogic uploadThingsInfo:dic from:CLASS_NAME];
         }
         return;
     }
@@ -171,7 +172,7 @@
                               @"description":self.descriptintextView.text,
                               @"pics":[noticifition.userInfo objectForKey:@"DATA"]
                               };
-        [FindLogic uploadThingsInfo:dic];
+        [FindLogic uploadThingsInfo:dic from:CLASS_NAME];
         
     }
     else if ([noticifition.object isEqualToString:ASYNC_EVENT_UPLOADTHINGSINFO]) {

@@ -37,7 +37,7 @@
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = BACKGROUND_COLOR;
     
-    _times = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:5],[NSNumber numberWithInt:15],[NSNumber numberWithInt:30],[NSNumber numberWithInt:60],[NSNumber numberWithInt:120],[NSNumber numberWithInt:1440],[NSNumber numberWithInt:2880], nil];
+    _times = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:5],[NSNumber numberWithInt:15],[NSNumber numberWithInt:30],[NSNumber numberWithInt:60],[NSNumber numberWithInt:120],[NSNumber numberWithInt:1440],[NSNumber numberWithInt:2880], nil];
     _data = [[NSMutableArray alloc] initWithObjects:@"无",@"事件发生时",@"5分钟前",@"15分钟前",@"30分钟前",@"1小时前",@"2小时前",@"1天前",@"2天前", nil];
     
     self.reminds = [[NSMutableArray alloc] init];
@@ -216,7 +216,7 @@
     [event update];
     [AppData saveData];
     NSDictionary *dic = @{@"eid":event.eid, @"time":self.timeField.text, @"place":event.place, @"description":event.desc, @"reminds":tmp};
-    [EventLogic uploadEvent:dic];
+    [EventLogic uploadEvent:dic from:CLASS_NAME];
     [self.navigationController popViewControllerAnimated:YES];
     [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
  }

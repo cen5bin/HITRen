@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define CLASS_NAME NSStringFromClass(self.class)
+
 id getViewControllerOfName(NSString *name);
 void alert(NSString *title, NSString *message, id delegate);
 void drawStringWithFontInRect(NSString *string, UIFont *font, CGRect rect);

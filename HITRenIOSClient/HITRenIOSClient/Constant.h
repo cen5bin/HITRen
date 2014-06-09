@@ -73,6 +73,7 @@
 
 #define ASYNC_EVENT_DELETECONCERNEDUSER @"HITRenAsyncDataDeleteConcernedUser" //取消关注
 #define ASYNC_EVENT_CONCERNUSER @"HITRenAsyncDataConcernUser" //关注
+#define ASYNC_EVENT_MOVEUSER @"HITRenAsyncDataMoveUser" //移动好友
 
 
 

@@ -14,7 +14,7 @@
 
 @implementation EventLogic
 
-+ (BOOL)uploadEvent:(NSDictionary *)info {
++ (BOOL)uploadEvent:(NSDictionary *)info from:(NSString *)classname{
     L([info description]);
     HttpData *data = [HttpData data];
     User *user = [EventLogic user];
@@ -24,7 +24,7 @@
     [data setValue:[info objectForKey:@"reminds"] forKey:@"reminds"];
     [data setValue:[info objectForKey:@"description"] forKey:@"description"];
     [data setValue:[info objectForKey:@"place"] forKey:@"place"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"UploadEvent" withEventName:ASYNC_EVENT_UPLOADEVENT];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"UploadEvent" withEventName:ASYNC_EVENT_UPLOADEVENT fromClass:classname];
     if (ret) {
         L(@"upload event fail");
         return NO;
@@ -32,13 +32,13 @@
     return YES;
 }
 
-+ (BOOL)downloadEventLine {
++ (BOOL)downloadEventLinefrom:(NSString *)classname {
     HttpData *data = [HttpData data];
     User *user = [EventLogic user];
     [data setIntValue:user.uid forKey:@"uid"];
     [data setIntValue:[[[AppData sharedInstance] getEventLine].seq intValue] forKey:@"seq"];
     LOG(@"seq %d", [[[AppData sharedInstance] getEventLine].seq intValue]);
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadEventLine" withEventName:ASYNC_EVENT_DOWNLOADEVENTLINE];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadEventLine" withEventName:ASYNC_EVENT_DOWNLOADEVENTLINE fromClass:classname];
     if (!ret) {
         L(@"download eventline fail");
         return NO;
@@ -46,12 +46,12 @@
     return YES;
 }
 
-+ (BOOL)downloadEventInfos:(NSArray *)eids {
++ (BOOL)downloadEventInfos:(NSArray *)eids from:(NSString *)classname{
     AppData *appData = [AppData sharedInstance];
     NSArray *tmp = [appData eventInfosNeedDownload:eids];
     HttpData *data = [HttpData data];
     [data setValue:tmp forKey:@"datas"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadEventInfos" withEventName:ASYNC_EVENT_DOWNLOADEVENTSINFO];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadEventInfos" withEventName:ASYNC_EVENT_DOWNLOADEVENTSINFO fromClass:classname];
     if (!ret) {
         L(@"download eventinfo fail");
         return NO;

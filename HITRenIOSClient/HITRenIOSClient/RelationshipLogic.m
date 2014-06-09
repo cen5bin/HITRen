@@ -39,7 +39,7 @@
     return YES;
 }
 
-+ (BOOL)addGroup:(NSString *)gname {
++ (BOOL)addGroup:(NSString *)gname{
     FUNC_START();
     HttpData *data = [[HttpData alloc] init];
     [data setIntValue:self.user.uid forKey:@"uid"];
@@ -91,7 +91,7 @@
     return YES;
 }
 
-+ (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname toGroups:(NSArray *)gnames {
++ (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname toGroups:(NSArray *)gnames from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     User *user = [RelationshipLogic user];
@@ -99,8 +99,8 @@
     [data setValue:users forKey:@"users"];
     [data setValue:gname forKey:@"gname"];
     [data setValue:gnames forKey:@"gnames"];
-    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"MoveUsersFromGroupToGroups"];
-    if (![[ret objectForKey:@"SUC"] boolValue]) {
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"MoveUsersFromGroupToGroups" withEventName:ASYNC_EVENT_MOVEUSER fromClass:classname];
+    if (!ret) {
         LOG(@"MoveUsersFromGroupToGroups fail");
         FUNC_END();
         return NO;
@@ -110,16 +110,16 @@
     return YES;
 }
 
-+ (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname0 toGroup:(NSString *)gname {
++ (BOOL)moveUsers:(NSArray *)users fromGroup:(NSString *)gname0 toGroup:(NSString *)gname from:(NSString *)classname{
     FUNC_START();
-    BOOL ret = [RelationshipLogic moveUsers:users fromGroup:gname0 toGroups:[NSArray arrayWithObjects:gname, nil]];
+    BOOL ret = [RelationshipLogic moveUsers:users fromGroup:gname0 toGroups:[NSArray arrayWithObjects:gname, nil] from:classname];
     FUNC_END();
     return ret;
 }
 
-+ (BOOL)moveUser:(int)uid fromGroup:(NSString *)gname toGroups:(NSArray *)gnames {
++ (BOOL)moveUser:(int)uid fromGroup:(NSString *)gname toGroups:(NSArray *)gnames from:(NSString *)classname{
     FUNC_START();
-    BOOL ret = [RelationshipLogic moveUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:uid], nil] fromGroup:gname toGroups:gnames];
+    BOOL ret = [RelationshipLogic moveUsers:[NSArray arrayWithObjects:[NSNumber numberWithInt:uid], nil] fromGroup:gname toGroups:gnames from:classname];
     FUNC_END();
     return ret;
 }
@@ -181,7 +181,7 @@
     return ret;
 }
 
-+ (BOOL)deleteConcernedUser:(int)uid {
++ (BOOL)deleteConcernedUser:(int)uid{
     FUNC_START();
     HttpData *data = [HttpData data];
     [data setIntValue:self.user.uid forKey:@"uid"];

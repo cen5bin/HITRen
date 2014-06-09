@@ -14,12 +14,12 @@
 @implementation FindLogic
 
 
-+ (BOOL)downloadThingsLine{
++ (BOOL)downloadThingsLinefrom:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     AppData *appData = [AppData sharedInstance];
     [data setIntValue:[appData.thingsLine.seq intValue] forKey:@"seq"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadThingsLine" withEventName:ASYNC_EVENT_DOWNLOADTHINGSLINE];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadThingsLine" withEventName:ASYNC_EVENT_DOWNLOADTHINGSLINE fromClass:classname];
     if (!ret) {
         L(@"download thingsline failed");
         FUNC_END();
@@ -31,13 +31,13 @@
 
 }
 
-+ (BOOL)downloadThingsInfo:(NSArray *)tids {
++ (BOOL)downloadThingsInfo:(NSArray *)tids from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     AppData *appData = [AppData sharedInstance];
     NSArray *tmp = [appData thingsInfoNeedDownload:tids];
     [data setValue:tmp forKey:@"tids"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadThingsInfo" withEventName:ASYNC_EVENT_DOWNLOADTHINGSINFO];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadThingsInfo" withEventName:ASYNC_EVENT_DOWNLOADTHINGSINFO fromClass:classname];
     if (!ret) {
         L(@"download thingsInfo failed");
         FUNC_END();
@@ -48,7 +48,7 @@
 
 }
 
-+ (BOOL)uploadThingsInfo:(NSDictionary *)dic {
++ (BOOL)uploadThingsInfo:(NSDictionary *)dic from:(NSString *)classname{
     FUNC_START();
     HttpData *data = [HttpData data];
     User *user = [FindLogic user];
@@ -57,7 +57,7 @@
     [data setValue:[dic objectForKey:@"pics"] forKey:@"pics"];
     [data setValue:[dic objectForKey:@"description"] forKey:@"description"];
     
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"UploadThingsInfo" withEventName:ASYNC_EVENT_UPLOADTHINGSINFO];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"UploadThingsInfo" withEventName:ASYNC_EVENT_UPLOADTHINGSINFO fromClass:classname];
     if (!ret) {
         L(@"upload things info failed");
         FUNC_END();
@@ -67,12 +67,12 @@
     return YES;
 }
 
-+ (BOOL)deleteThing:(int)tid {
++ (BOOL)deleteThing:(int)tid from:(NSString *)classname{
     HttpData *data = [HttpData data];
     [data setIntValue:tid forKey:@"tid"];
     User *user = [FindLogic user];
     [data setIntValue: user.uid forKey:@"uid"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DeleteThing" withEventName:ASYNC_EVENT_DELETETHINGSINFO];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DeleteThing" withEventName:ASYNC_EVENT_DELETETHINGSINFO fromClass:classname];
     if (!ret) {
         L(@"delete things info failed");
         FUNC_END();
@@ -82,12 +82,12 @@
     return YES;
 }
 
-+ (BOOL)downloadMyThingsLine {
++ (BOOL)downloadMyThingsLinefrom:(NSString *)classname {
     HttpData *data = [HttpData data];
     AppData *appData = [AppData sharedInstance];
     [data setIntValue:[appData.myThingsLine.seq intValue] forKey:@"seq"];
     [data setIntValue:[appData getUid] forKey:@"uid"];
-    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadMyThings" withEventName:ASYNC_EVENT_DOWNLOADMYTHINGSLINE];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DownloadMyThings" withEventName:ASYNC_EVENT_DOWNLOADMYTHINGSLINE fromClass:classname];
     if (!ret) {
         L(@"delete my things info failed");
         FUNC_END();

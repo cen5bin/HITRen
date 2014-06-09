@@ -46,7 +46,8 @@
 - (void)awakeFromNib {
     self.delegate = self;
     self.dataSource = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncDataDidDownload:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(asyncDataDidDownload:) name:notificationName object:nil];
     _isLoading = NO;
     _myActivityIndicator = getViewFromNib(@"MyActivityIndicatorView", self);
     _downloadingImageSet = [[NSMutableSet alloc] init];

@@ -66,8 +66,9 @@
     _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
     
 //    return;
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, NSStringFromClass(self.class)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(dataDidDownload:) name:notificationName object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChanged:) name:UIKeyboardDidChangeFrameNotification object:nil];
     
     NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"keyboardtoolbar" owner:self options:nil];
@@ -548,7 +549,7 @@
 - (void)downloadTimeline {
     if (_lockDownloadTimeline) return;
     _lockDownloadTimeline = YES;
-    [MessageLogic downloadTimeline];
+    [MessageLogic downloadTimelinefrom:CLASS_NAME];
     [self performSelector:@selector(unlockDownloadTimeLine) withObject:nil afterDelay:10.0];
 //    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10000 target:self selector:@selector(unlockDownloadTimeLine) userInfo:nil repeats:NO];
 //    [timer fire];
@@ -585,8 +586,8 @@
         int len = PAGE_MESSAGE_COUNT;
         if (appData.timeline.mids.count - tmp * PAGE_MESSAGE_COUNT < PAGE_MESSAGE_COUNT)
             len = appData.timeline.mids.count - tmp * PAGE_MESSAGE_COUNT;
-        [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(tmp*PAGE_MESSAGE_COUNT, len)]];
-        [MessageLogic downloadCommentList:[appData.timeline.mids subarrayWithRange:NSMakeRange(tmp*PAGE_MESSAGE_COUNT, len)]];
+        [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(tmp*PAGE_MESSAGE_COUNT, len)] from:CLASS_NAME];
+        [MessageLogic downloadCommentList:[appData.timeline.mids subarrayWithRange:NSMakeRange(tmp*PAGE_MESSAGE_COUNT, len)] from:CLASS_NAME];
     }
     _currentPage = tmp;//row / PAGE_MESSAGE_COUNT;
     if (_currentPage < _maxDataLoadedPage) return;
@@ -607,7 +608,7 @@
             _backgroubdLoadData = YES;
             _backgroubdLoadDataAtIndex = -1;
             L([messageNeedDownload description]);
-            [MessageLogic downloadMessages:messageNeedDownload];
+            [MessageLogic downloadMessages:messageNeedDownload from:CLASS_NAME];
         }
         return;
     }
@@ -637,7 +638,7 @@
     else {
         _backgroubdLoadData = YES;
         _backgroubdLoadDataAtIndex = _currentPage * PAGE_MESSAGE_COUNT + 1;
-        [MessageLogic downloadMessages:messageNeedDownload];
+        [MessageLogic downloadMessages:messageNeedDownload from:CLASS_NAME];
     }
     
 
@@ -652,7 +653,7 @@
 - (void)beginToDownloadTimeline {
     if (_timelineDownloading) return;
     _timelineDownloading = YES;
-    [MessageLogic downloadTimeline];
+    [MessageLogic downloadTimelinefrom:CLASS_NAME];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -717,8 +718,8 @@
 
 - (void)refleshOtherData {
     int count = PAGE_MESSAGE_COUNT > _data.count ? _data.count : PAGE_MESSAGE_COUNT;
-    [MessageLogic downloadLikedList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)]];
-    [MessageLogic downloadCommentList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)]];
+    [MessageLogic downloadLikedList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)] from:CLASS_NAME];
+    [MessageLogic downloadCommentList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)] from:CLASS_NAME];
 }
 
 - (void)timelineDidDownload:(NSNotification *)notification {
@@ -750,7 +751,7 @@
     appData.timeline.seq = [NSNumber numberWithInt:seq];
     [AppData saveData];
     NSArray *messageNeedDownload = [appData messagesNeedDownload];
-    [MessageLogic downloadMessages:messageNeedDownload];
+    [MessageLogic downloadMessages:messageNeedDownload from:CLASS_NAME];
     LOG(@"messageneeddownload %@", [messageNeedDownload description]);
     
 //    [MessageLogic downloadLikedList:[appData.timeline.mids subarrayWithRange:NSMakeRange(0, PAGE_MESSAGE_COUNT)]];
@@ -857,8 +858,8 @@
     
     int count = _data.count - PAGE_MESSAGE_COUNT * _currentPage;
     if (count > PAGE_MESSAGE_COUNT) count = PAGE_MESSAGE_COUNT;
-    [MessageLogic downloadLikedList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)]];
-    [MessageLogic downloadCommentList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)]];
+    [MessageLogic downloadLikedList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)] from:CLASS_NAME];
+    [MessageLogic downloadCommentList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)] from:CLASS_NAME];
 
     
     //[_data sortedArrayUsingSelector:@selector(compare:)];
@@ -912,7 +913,7 @@
 //    return;
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     Message *message = [[AppData sharedInstance]getMessageOfMid: [[_data objectAtIndex:indexPath.row] intValue] ];
-    [MessageLogic likeMessage:[message.mid intValue]];
+    [MessageLogic likeMessage:[message.mid intValue] from:CLASS_NAME];
     LikedList *likedList = [[AppData sharedInstance] getLikedListOfMid:[message.mid intValue]];
     User *user = [MessageLogic user];
     [likedList.userList addObject:[NSNumber numberWithInt:user.uid]];
@@ -924,7 +925,7 @@
 - (void)dislikeMessage:(id)sender {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     Message *message = [[AppData sharedInstance] getMessageOfMid:[[_data objectAtIndex:indexPath.row] intValue] ];
-    [MessageLogic dislikeMessage:[message.mid intValue]];
+    [MessageLogic dislikeMessage:[message.mid intValue] from:CLASS_NAME];
     LikedList *likedList = [[AppData sharedInstance] getLikedListOfMid:[message.mid intValue]];
     User *user = [MessageLogic user];
     if ([likedList.userList containsObject:[NSNumber numberWithInt:user.uid]])
@@ -992,9 +993,9 @@
     [AppData saveData];
     [self.tableView reloadData];
     if (_reuid == -1)
-        [MessageLogic commentMessage:_commentingMid withContent:text];
+        [MessageLogic commentMessage:_commentingMid withContent:text from:CLASS_NAME];
     else {
-        [MessageLogic replyUser:_reuid atMessage:_commentingMid withContent:text];
+        [MessageLogic replyUser:_reuid atMessage:_commentingMid withContent:text from:CLASS_NAME];
         _reuid = -1;
     }
     

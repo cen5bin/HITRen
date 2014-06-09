@@ -30,7 +30,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferCompleted:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transferCompleted:) name:notificationName object:nil];
     _cells = [NSMutableArray arrayWithObjects:self.goodsNameCell,self.goodsPriceCell,self.goodsPicCell, self.goodsDescriptionCell, nil];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -98,7 +99,7 @@
                                   @"description":self.descriptiontextView.text,
                                   @"pics":[NSArray array]
                                   };
-            [TradeLogic uploadGoodsInfo:dic];
+            [TradeLogic uploadGoodsInfo:dic from:CLASS_NAME];
         }
         return;
     }
@@ -173,7 +174,7 @@
                               @"description":self.descriptiontextView.text,
                               @"pics":[noticifition.userInfo objectForKey:@"DATA"]
                               };
-        [TradeLogic uploadGoodsInfo:dic];
+        [TradeLogic uploadGoodsInfo:dic from:CLASS_NAME];
     }
     else if ([noticifition.object isEqualToString:ASYNC_EVENT_UPLOADGOODSINFO]) {
         L([noticifition.userInfo description]);

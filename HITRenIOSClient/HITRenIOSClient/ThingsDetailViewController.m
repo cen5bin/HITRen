@@ -19,6 +19,7 @@
 #import "UserSimpleLogic.h"
 #import "ChatViewController.h"
 #import "FindLogic.h"
+#import "ThingsLine.h"
 
 @interface ThingsDetailViewController ()
 
@@ -42,8 +43,8 @@
     _cells = [[NSMutableArray alloc] initWithObjects:self.nameCell, self.picsCell, self.descriptionCell, nil];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = BACKGROUND_COLOR;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     
     _downloadingImageSet = [[NSMutableSet alloc] init];
     
@@ -104,6 +105,8 @@
         [self imageDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DELETETHINGSINFO]) {
         [_myActivityIndicatorView hide];
+        AppData *appData = [AppData sharedInstance];
+        [appData.thingsLine.tids removeObject:self.thingsInfo.tid];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADUSERINFOS])
@@ -214,7 +217,7 @@
         if (_mine) {
             _myActivityIndicatorView.textLabel.text = @"正在删除";
             [_myActivityIndicatorView showInView:self.view];
-            [FindLogic deleteThing:[self.thingsInfo.tid intValue]];
+            [FindLogic deleteThing:[self.thingsInfo.tid intValue]from:CLASS_NAME];
 //            [TradeLogic deleteGoods:[self.thingsInfo.tid intValue]];
         }
         else {

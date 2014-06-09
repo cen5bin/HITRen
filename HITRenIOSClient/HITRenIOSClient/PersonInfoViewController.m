@@ -45,7 +45,8 @@
     self.hometownLabel.text = self.userInfo.hometown;
     _downloadingImageSet = [[NSMutableSet alloc] init];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     
     self.sendMessageButton.layer.cornerRadius = 5;
     self.concernButton.layer.cornerRadius = 5;
@@ -154,7 +155,7 @@
     NSString *choosedGname = [ChooseGroupViewController choosedGroupName];
     NSString *originGname = [RelationshipLogic gnameOfUid:[self.userInfo.uid intValue]];
     if ([choosedGname isEqualToString:originGname]) return;
-    [RelationshipLogic moveUser:[self.userInfo.uid intValue] fromGroup: originGname toGroups:[NSArray arrayWithObjects:choosedGname, nil]];
+    [RelationshipLogic moveUser:[self.userInfo.uid intValue] fromGroup: originGname toGroups:[NSArray arrayWithObjects:choosedGname, nil] from:CLASS_NAME];
 //    [RelationshipLogic mo]
 }
 

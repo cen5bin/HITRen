@@ -19,7 +19,7 @@
 + (BOOL)login;
 + (BOOL)signUp;
 + (BOOL)downloadInfo;
-+ (BOOL)updateInfo;
++ (BOOL)updateInfofrom:(NSString *)classname;
 + (BOOL)updateInfoFinished:(NSDictionary*)ret;
 + (BOOL)downloadUseInfos:(NSArray *)uids from:(NSString *)classname;
 + (void)userInfosDidDownload:(NSDictionary *)data;

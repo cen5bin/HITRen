@@ -10,11 +10,11 @@
 #import "AppData.h"
 
 id getViewControllerOfName(NSString *name) {
-    AppData *appData = [AppData sharedInstance];
-    if ([appData.viewControllerDic objectForKey:name]) return [appData.viewControllerDic objectForKey:name];
+//    AppData *appData = [AppData sharedInstance];
+//    if ([appData.viewControllerDic objectForKey:name]) return [appData.viewControllerDic objectForKey:name];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]];
     id controller = [storyboard instantiateViewControllerWithIdentifier:name];
-    [appData.viewControllerDic setObject:controller forKey:name];
+//    [appData.viewControllerDic setObject:controller forKey:name];
     return controller;
 }
 

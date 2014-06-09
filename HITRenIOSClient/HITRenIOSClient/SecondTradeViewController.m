@@ -51,8 +51,8 @@
     [self.view addSubview:view];
     
     self.tableView.decelerationRate = 0.5;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     
 
 }
@@ -60,11 +60,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [TradeLogic downloadGoodsLine];
+    [TradeLogic downloadGoodsLinefrom:CLASS_NAME];
     _currentPage = 0;
     _maxLoadedPage = 0;
     _backgroundWorking = NO;
     _downloadFromTop = YES;
+    AppData *appData = [AppData sharedInstance];
+    int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
+    if (count == 0) return;
+    _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+    [self.tableView reloadData];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -116,7 +121,7 @@
     [appData.goodsLine update];
     L([appData.goodsLine.gids description]);
     int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
-    [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+    [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)] from:CLASS_NAME];
     [self.tableView reloadData];
 }
 
@@ -210,6 +215,7 @@
     GoodsDetailViewController *controller = getViewControllerOfName(@"GoodsDetail");
     controller.goodsInfo = goodsInfo;
     [self.navigationController pushViewController:controller animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)hideMenu {
@@ -255,7 +261,7 @@
     if (count > PAGE_GOODS_COUNT) count = PAGE_GOODS_COUNT;
     if (count < 0) return;
     _backgroundWorking = YES;
-    [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(PAGE_GOODS_COUNT * (_currentPage + 1), count)]];
+    [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(PAGE_GOODS_COUNT * (_currentPage + 1), count)] from:CLASS_NAME];
 
 }
 

@@ -50,15 +50,16 @@ static HttpTransfer *transfer;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     L(@"finished loading");
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@",ASYNCDATALOADED, _className];
     if (_downloadImage) {
         NSDictionary *dic = @{@"imagedata": self.data,@"imagename":_imageName};
-        [[NSNotificationCenter defaultCenter] postNotificationName:ASYNCDATALOADED object:_eventName userInfo:dic];
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:_eventName userInfo:dic];
         _downloadImage = NO;
         return;
     }
     NSMutableDictionary *dic =  [[NSMutableDictionary alloc]initWithDictionary: [NSJSONSerialization JSONObjectWithData:self.data options:NSJSONReadingMutableLeaves error:nil]];
     [dic setObject:_className forKey:@"fromclass"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ASYNCDATALOADED object:_eventName userInfo:dic];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:_eventName userInfo:dic];
 //    [[NSNotificationCenter defaultCenter] po]
 }
 

@@ -98,7 +98,7 @@
         [RelationshipLogic copyUser:self.uid toGroups:_choosedGroups];
     }
     else if (self.flag == 2) {
-        [RelationshipLogic moveUser:self.uid fromGroup:self.gname toGroups:_choosedGroups];
+        [RelationshipLogic moveUser:self.uid fromGroup:self.gname toGroups:_choosedGroups from:CLASS_NAME];
     }
     else if (self.flag == 3) {
 //        [RelationshipLogic deleteUser:self.uid fromGroup:]

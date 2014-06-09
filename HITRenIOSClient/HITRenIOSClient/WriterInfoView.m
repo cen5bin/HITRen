@@ -28,7 +28,8 @@
     self.concernButton.layer.cornerRadius = 5;
     self.sendMessageButton.layer.cornerRadius = 5;
     self.concerned = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(concernedStateChanged:) name:CONCERNEDINFO_CHANGED object:nil];
     
     self.pic.userInteractionEnabled = YES;

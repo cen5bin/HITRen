@@ -10,9 +10,9 @@
 
 @interface TradeLogic : BaseLogic
 
-+ (BOOL)uploadGoodsInfo:(NSDictionary *)dic;
-+ (BOOL)downloadGoodsLine;
-+ (BOOL)downloadGoodsInfo:(NSArray *)gids;
-+ (BOOL)deleteGoods:(int)gid;
-+ (BOOL)downloadMyGoods;
++ (BOOL)uploadGoodsInfo:(NSDictionary *)dic from:(NSString *)classname;
++ (BOOL)downloadGoodsLinefrom:(NSString *)classname;
++ (BOOL)downloadGoodsInfo:(NSArray *)gids from:(NSString *)classname;
++ (BOOL)deleteGoods:(int)gid from:(NSString *)classname;
++ (BOOL)downloadMyGoodsfrom:(NSString *)classname;
 @end

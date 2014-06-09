@@ -37,7 +37,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidFinishLoading:) name:ASYNCDATALOADED object:nil];
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidFinishLoading:) name:notificationName object:nil];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -302,7 +303,7 @@
     else if (self.femaleButton.highlighted) user.sex = 2;
     
 //    [UserSimpleLogic ]
-    [UserSimpleLogic updateInfo];
+    [UserSimpleLogic updateInfofrom:CLASS_NAME];
 //    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
     
 }
