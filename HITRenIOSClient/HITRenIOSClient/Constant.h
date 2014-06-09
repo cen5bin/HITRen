@@ -93,6 +93,8 @@
 #define GREEN_BUTTON_BACKGROUNF1 [UIColor colorWithRed:81.0/255 green:180.0/255 blue:48.0/255 alpha:1]
 
 
+#define JPG_COMPRESSIONQUALITY 0.8
+
 
 #define EMOTION_BEGIN @"[/"
 #define EMOTION_END @"]"

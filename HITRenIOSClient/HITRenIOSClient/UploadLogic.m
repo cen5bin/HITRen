@@ -13,10 +13,10 @@
 
 @implementation UploadLogic
 
-+ (BOOL)uploadImages:(NSArray *)images from:(NSString *)classname{
++ (BOOL)uploadImages:(NSArray *)images withExtend:(NSString *)extend from:(NSString *)classname {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (UIImage *image in images) {
-        NSString *filename = [UploadLogic filename];
+        NSString *filename = [UploadLogic filename:extend];
         NSDictionary *dic = @{@"filename":filename,@"image":image};
         [[AppData sharedInstance] storeImage:image withFilename:filename];
         [array addObject:dic];
@@ -24,14 +24,18 @@
     return [[HttpTransfer transfer] uploadImages:array to:@"UploadImages" from:(NSString *)classname];
 }
 
++ (BOOL)uploadImages:(NSArray *)images from:(NSString *)classname{
+    return [UploadLogic uploadImages:images withExtend:@"png" from:classname];
+}
 
-+ (NSString *)filename {
+
++ (NSString *)filename:(NSString *)extend {
     static int rand = 1;
     User *user = [UploadLogic user];
     int uid = user.uid;
     NSDate *date = [NSDate date];
     double tmp = [date timeIntervalSince1970];
-    NSString *string = [NSString stringWithFormat:@"%03d%010d%.0lf.png",rand % 1000,uid, (tmp*100)];
+    NSString *string = [NSString stringWithFormat:@"%03d%010d%.0lf.%@",rand % 1000,uid, (tmp*100),extend];
     rand++;
     return string;
 }

@@ -13,4 +13,6 @@
 + (BOOL)uploadImages:(NSArray *)images from:(NSString *)classname;
 + (BOOL)downloadImage:(NSString *)filename from:(NSString *)classname;
 
++ (BOOL)uploadImages:(NSArray *)images withExtend:(NSString *)extend from:(NSString *)classname;
+
 @end

@@ -113,6 +113,9 @@
     _writerInfoView.delegate = self;
     _showingUid = -1;
 //    [UploadLogic downloadImage:@"bubble2.png"];
+//    NSString *filename = @"1.jpg";
+//    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageNamed:filename] , nil] withExtend:@"png"  from:NSStringFromClass(self.class)];
+//    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageNamed:filename] , nil] withExtend:@"jpg"  from:NSStringFromClass(self.class)];
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"empty" ofType:@"png"]],[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]], [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]],nil]];
 }
 
@@ -955,7 +958,7 @@
 }
 
 - (void)beginToComment:(id)sender {
-    [MessageLogic sendMessage:@"你好你好你好你好你好你好你好你好你好你好你好你好你好你好" toUid:281];
+//    [MessageLogic sendMessage:@"你好你好你好你好你好你好你好你好你好你好你好你好你好你好" toUid:281];
     int index = [self.tableView indexPathForCell:sender].row;
     Message *message = [[AppData sharedInstance] getMessageOfMid:[[_data objectAtIndex:index] intValue] ];
     _commentingMid = [message.mid intValue];

@@ -169,9 +169,17 @@ static HttpTransfer *transfer;
     for (NSDictionary *dic in images) {
         NSMutableString *body = [[NSMutableString alloc] init];
         [body appendFormat:@"%@\r\n", BOUNDARY];
+        NSString *filename = [dic objectForKey:@"filename"];
+        NSRange range = [filename rangeOfString:@"."];
+        NSString *extendName = [filename substringFromIndex:range.location+range.length];
+        
         [body appendFormat:@"Content-Disposition: form-data; name=\"pic\"; filename=\"%@\"\r\n",[dic objectForKey:@"filename"]];
-        [body appendFormat:@"Content-Type: image/png\r\n\r\n"];
-        NSData *imageData = UIImagePNGRepresentation([dic objectForKey:@"image"]);
+        [body appendFormat:@"Content-Type: image/%@\r\n\r\n",extendName];
+        NSData *imageData;
+        if ([extendName isEqualToString:@"png"])
+            imageData = UIImagePNGRepresentation([dic objectForKey:@"image"]);
+        else imageData = UIImageJPEGRepresentation([dic objectForKey:@"image"], JPG_COMPRESSIONQUALITY);
+//        NSData *imageData = UIImageJPEGRepresentation([dic objectForKey:@"image"], 0.5);//([dic objectForKey:@"image"]);
         [data appendData:[body dataUsingEncoding:NSUTF8StringEncoding]];
         [data appendData:imageData];
         [data appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];

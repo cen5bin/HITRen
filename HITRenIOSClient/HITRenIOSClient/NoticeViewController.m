@@ -208,6 +208,10 @@
 //        if (scrollView.contentOffset.x > 320 && scrollView.contentOffset.x < 640)
 //            [self.contactView willLoad];
 //        LOG(@"%f", scrollView.contentOffset.x);
+        if (p.x <= 0) {p.x = 0;         [scrollView setContentOffset:p animated:NO];}
+        else if (p.x>=640) {p.x = 640;         [scrollView setContentOffset:p animated:NO];}
+//        [scrollView setContentOffset:p animated:NO];
+//        scrollView.contentOffset = p;
         return;
     }
     if (p.y < 0) p.y = 0;
@@ -216,6 +220,7 @@
     if (p.y < 0) p.y = 0;
     scrollView.contentOffset = p;
 }
+
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView == self.scrollView) {
