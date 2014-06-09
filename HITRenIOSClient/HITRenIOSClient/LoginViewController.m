@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "UserSimpleLogic.h"
 #import "User.h"
+#import "AppData.h"
 
 @interface LoginViewController ()
 
@@ -48,8 +49,16 @@
         [userDefaults setInteger:user.uid forKey:@"uid"];
         LOG(@"fuck uid %d", user.uid);
         [userDefaults synchronize];
-
-        MainViewController *controller = getViewControllerOfName(@"mainview3");
+        
+        AppData *appData = [AppData sharedInstance];
+        NSString *name = @"mainview3";
+        MainViewController *controller = nil;
+        if (![appData.viewControllerDic objectForKey:name]) {
+            controller = getViewControllerOfName(@"mainview3");
+            [appData.viewControllerDic setObject:controller forKey:name];
+        }
+        else controller = [appData.viewControllerDic objectForKey:name];
+        
         [self.navigationController pushViewController:controller animated:YES];
     }
 	// Do any additional setup after loading the view.

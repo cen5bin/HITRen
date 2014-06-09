@@ -35,6 +35,8 @@ static AppData *appData;
 @synthesize eventLine = _eventLine;
 @synthesize myThingsLine = _myThingsLine;
 
+//@synthesize viewControllerDic = _viewControllerDic;
+
 - (id)init {
     if (self = [super init]) {
         [self loadMessageInPage:0];
@@ -42,6 +44,7 @@ static AppData *appData;
         _userInfos = [[NSMutableDictionary alloc] init];
         _notices = [[NSMutableDictionary alloc] init];
         _likedLists = [[NSMutableDictionary alloc] init];
+        self.viewControllerDic = [[NSMutableDictionary alloc] init];
     }
     return self;
 }

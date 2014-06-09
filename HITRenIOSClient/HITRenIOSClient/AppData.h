@@ -21,6 +21,8 @@
     ThingsLine *_thingsLine;
     ThingsLine *_myThingsLine;
     EventLine *_eventLine;
+    
+//    NSMutableDictionary *_viewControllerDic;
 //    NSMutableArray *_activityLine;
     
 //    NSMutableArray *_messageList;
@@ -33,6 +35,7 @@
 @property (nonatomic, strong, getter = getThingsLine) ThingsLine *thingsLine;
 @property (nonatomic, strong, getter = getMyThingsLine) ThingsLine *myThingsLine;
 @property (nonatomic, strong, getter = getEventLine) EventLine *eventLine;
+@property (nonatomic, strong) NSMutableDictionary *viewControllerDic;
 //@property (nonatomic, strong) NSMutableDictionary *userInfos;
 //@property (nonatomic, strong, getter = getMessageList) NSMutableArray *messageList;
 

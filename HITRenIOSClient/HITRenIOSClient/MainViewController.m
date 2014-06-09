@@ -8,10 +8,13 @@
 
 #import "MainViewController.h"
 #import "MenuView.h"
+#import "AppData.h"
 
 @interface MainViewController ()
 
 @end
+
+static NSMutableDictionary *dic = nil;
 
 @implementation MainViewController
 
@@ -43,7 +46,17 @@
     CGPoint point = [touch locationInView:self.view];
     if (CGRectContainsPoint(self.btmToolBar.frame, point)) {
         int index = [self.btmToolBar calIndex:point];
-        UIViewController *controller = getViewControllerOfName([NSString stringWithFormat:@"mainview%d", index]);
+        
+        UIViewController *controller;
+        AppData *appData = [AppData sharedInstance];
+        NSString *name = [NSString stringWithFormat:@"mainview%d", index];
+        if ([appData.viewControllerDic objectForKey:name])
+            controller = [appData.viewControllerDic objectForKey:name];
+        else {
+            controller = getViewControllerOfName(name);
+            [appData.viewControllerDic setObject:controller forKey:name];
+//            [dic setObject:controller forKey:[NSString stringWithFormat:@"mainview%d", index]];
+        }
         UINavigationController *navigateController = self.navigationController;
         if (index != 5)
             [self.navigationController popViewControllerAnimated:NO];

@@ -40,6 +40,8 @@
     WriterInfoView *_writerInfoView;
     int _showingUid;
     BOOL _choosingGroup;
+    
+    BOOL _lockDownloadTimeline;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

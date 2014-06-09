@@ -9,6 +9,7 @@
 #import "RegisterViewController.h"
 #import "User.h"
 #import "PersonViewController.h"
+#import "AppData.h"
 
 @interface RegisterViewController ()
 
@@ -59,7 +60,14 @@
     user.email = self.email.text;
     user.password = self.password.text;
     if ([UserSimpleLogic signUp]) {
-        PersonViewController *controller = getViewControllerOfName(@"mainview5");
+        NSString *name = @"mainview5";
+        PersonViewController *controller = nil;
+        AppData *appData = [AppData sharedInstance];
+        if (![appData.viewControllerDic objectForKey:name]) {
+            controller = getViewControllerOfName(@"mainview5");
+            [appData.viewControllerDic setObject:controller forKey:name];
+        }
+        else controller = [appData.viewControllerDic objectForKey:name];
         controller.fromRegister = YES;
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:user.email forKey:@"email"];

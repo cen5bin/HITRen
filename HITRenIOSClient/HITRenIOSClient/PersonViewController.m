@@ -11,6 +11,7 @@
 #import "HometownPicker.h"
 #import "HeadPicViewController.h"
 #import "ContactViewController.h"
+#import "AppData.h"
 
 @interface PersonViewController ()
 
@@ -136,7 +137,14 @@
 
 //            [self.navigationController popViewControllerAnimated:NO];
             if (self.fromRegister) {
-                FreshNewsViewController *controller = getViewControllerOfName(@"mainview3");
+                NSString *name = @"mainview3";
+                AppData *appData = [AppData sharedInstance];
+                FreshNewsViewController *controller = nil;
+                if (![appData.viewControllerDic objectForKey:name]) {
+                    controller = getViewControllerOfName(@"mainview3");
+                    [appData.viewControllerDic setObject:controller forKey:name];
+                }
+                else controller = [appData.viewControllerDic objectForKey:name];
                 [navigateController pushViewController:controller animated:YES];
             }
         }

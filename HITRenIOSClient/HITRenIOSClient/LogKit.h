@@ -18,7 +18,7 @@ NSString *stringToUrlString(NSString * string);
 #define FUNC_INFO ([NSString stringWithFormat:@"<%s:%d> %s: ", [[[[NSString stringWithUTF8String:__FILE__] componentsSeparatedByString:@"/"] lastObject]UTF8String], __LINE__, __FUNCTION__])
 
 #ifdef HITREN_DEBUG
-#define _LOG(fmt, args...) NSLog(fmt, ##args)
+#define _LOG(fmt, args...)  NSLog(fmt, ##args)
 #else
 #define _LOG(fmt, args...) NULL
 #endif

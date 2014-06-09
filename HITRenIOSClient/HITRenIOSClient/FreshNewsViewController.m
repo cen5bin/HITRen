@@ -84,6 +84,7 @@
             [self.tableView addSubview:[self getActivityIndicator]];
         [self.tableView setContentOffset:CGPointMake(0, -35) animated:NO];
         [self beginToDownloadTimeline];
+//        [self downloadTimeline];
     }
     else {
         _currentPage = 0;
@@ -177,7 +178,15 @@
     }
     else if (CGRectContainsPoint(self.btmToolBar.frame, point)) {
         int index = [self.btmToolBar calIndex:point];
-        UIViewController *controller = getViewControllerOfName([NSString stringWithFormat:@"mainview%d", index]);
+        NSString *name = [NSString stringWithFormat:@"mainview%d", index];
+        AppData *appData = [AppData sharedInstance];
+        UIViewController *controller = nil;
+        if (![appData.viewControllerDic objectForKey:name]) {
+            controller = getViewControllerOfName(name);
+            [appData.viewControllerDic setObject:controller forKey:name];
+        }
+        else controller = [appData.viewControllerDic objectForKey:name];
+        
         UINavigationController *navigateController = self.navigationController;
         if (index != 5)
             [self.navigationController popViewControllerAnimated:NO];
@@ -249,10 +258,6 @@
     if (_choosingGroup) {
         _choosingGroup = NO;
         [RelationshipLogic concernUser:[_writerInfoView.userInfo.uid intValue] inGroup:[ChooseGroupViewController choosedGroupName] fromClass:NSStringFromClass(self.class)];
-//        if ([RelationshipLogic concernUser:[_writerInfoView.userInfo.uid intValue] inGroup:[ChooseGroupViewController choosedGroupName]]) {
-//            _writerInfoView.concerned = YES;
-//            [_writerInfoView updateConcernedButton];
-//        }
     }
     return;
     EmotionTextView *textView = [[EmotionTextView alloc] initWithFrame:CGRectMake(0, 100, 176, 0)];
@@ -272,7 +277,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _data.count + _moreMessageCell;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ShortMessageCell";
     static NSString *CellIdentifier1 = @"MoreMessageCell";
@@ -467,7 +471,6 @@
     LOG(@"row %ld %f", (long)indexPath.row, rect.size.height);
     return cell;
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == _data.count) return 50;
     Message *message = [[AppData sharedInstance] getMessageOfMid:[[_data objectAtIndex:indexPath.row] intValue] ];
@@ -514,13 +517,11 @@
     ret += 5;
     return ret;
 }
-
 - (CGFloat)calculateTextViewHeight:(NSString *)string {
     UIFont *font = [UIFont systemFontOfSize:14];
     CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(TEXTVIEW_WIDTH-20, FLT_MAX)];
     return size.height + 20;
 }
-
 - (CGFloat)calculateCommentViewHeight:(NSString *)string {
     UIFont *font = [UIFont boldSystemFontOfSize:15];
     CGSize size = [string sizeWithFont:font constrainedToSize:CGSizeMake(COMMENTLISTVIEW_WIDTH-5, FLT_MAX)];
@@ -533,9 +534,29 @@
         UIView *view = [self getActivityIndicator];
         if (!view.superview)
             [scrollView addSubview:[self getActivityIndicator]];
+//        L(@"fuck");
+//        if (_lockDownloadTimeline) return;
+//        _lockDownloadTimeline = YES;
+//        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(unlockDownloadTimeLine) userInfo:nil repeats:NO];
+//        [timer fire];
         [self beginToDownloadTimeline];
+//        [self downloadTimeline];
         return;
     }
+}
+
+- (void)downloadTimeline {
+    if (_lockDownloadTimeline) return;
+    _lockDownloadTimeline = YES;
+    [MessageLogic downloadTimeline];
+    [self performSelector:@selector(unlockDownloadTimeLine) withObject:nil afterDelay:10.0];
+//    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10000 target:self selector:@selector(unlockDownloadTimeLine) userInfo:nil repeats:NO];
+//    [timer fire];
+}
+
+- (void)unlockDownloadTimeLine {
+    L(@"unlock");
+    _lockDownloadTimeline = NO;
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -543,14 +564,12 @@
 //    [_keyboardToolBar resignFirstResponder];
     [self hideKeyboardToolBar];
 }
-
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (!decelerate) {
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
         [self workAtIndexpath:indexPath];
     }
 }
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
     [self workAtIndexpath:indexPath];
@@ -700,33 +719,19 @@
     int count = PAGE_MESSAGE_COUNT > _data.count ? _data.count : PAGE_MESSAGE_COUNT;
     [MessageLogic downloadLikedList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)]];
     [MessageLogic downloadCommentList:[_data subarrayWithRange:NSMakeRange(_currentPage*PAGE_MESSAGE_COUNT, count)]];
-//    NSArray *tmp = [_data subarrayWithRange:NSMakeRange(0, count)];
-//    AppData *appData = [AppData sharedInstance];
-//    NSArray*tmp1 = [appData getLikedLists:tmp];
-//    
-////    NSMutableArray *uids = [NSMutableArray array];
-////    for (NSNumber *mid in tmp) {
-////    
-////        Message *message = [appData readMessageForId:[mid intValue]];
-////        [uids addObject:message.uid];
-////    }
-//    //    NSArray *userInfoNeedDownload = [appData userInfosNeedDownload:uids];
-//    //    if (userInfoNeedDownload.count) {
-//    [UserSimpleLogic downloadUseInfos:uids from:NSStringFromClass(self.class)];
-//    //    }
-
 }
 
 - (void)timelineDidDownload:(NSNotification *)notification {
     NSDictionary *ret = notification.userInfo;
+    L([self description]);
     if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
         _currentPage = 0;
-        [self refleshOtherData];
         L(@"local timeline newest");
+//        [self refleshOtherData];
         [self hideTopActivityIndicator];
 //        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
         _timelineDownloading = NO;
-        [self refleshUserInfo];
+//        [self refleshUserInfo];
         [self.tableView reloadData];
         return;
     }
