@@ -110,7 +110,7 @@
         Event *event = [appData getEventOfEid:eid];
         if (!event) event = [appData newEvent];
         NSDictionary *tmp = [data objectForKey:eid];
-        L([tmp description]);
+        
         event.eid = [tmp objectForKey:@"eid"];
         event.place = [tmp objectForKey:@"place"];
         event.desc = [tmp objectForKey:@"description"];

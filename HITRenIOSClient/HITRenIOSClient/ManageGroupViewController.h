@@ -15,6 +15,9 @@
     UIActivityIndicatorView *_activityIndicator;
     MyActivityIndicatorView *_myActivityIndicator;
     NSString *_deletingGroup;
+    NSMutableDictionary *_tappedViews;
+    BOOL _modify;
+    NSString *_gname;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

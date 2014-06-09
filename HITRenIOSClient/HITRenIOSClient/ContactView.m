@@ -119,11 +119,13 @@
     else if ([[dic objectForKey:@"INFO"] isEqualToString:@"newest"]) {
         L(@"contact download succ");
         [self loadData];
+//         _isLoading = NO;
 //        [self hideTopActivityIndicator];
         
     }
     else L(@"contact download failed");
     [_myActivityIndicator hide];
+     _isLoading = NO;
 }
 
 - (void)userInfosDidDownload:(NSNotification *)notification {

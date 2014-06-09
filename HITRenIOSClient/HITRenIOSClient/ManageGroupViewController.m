@@ -35,6 +35,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     self.tableView.editing = YES;
     _myActivityIndicator = getViewFromNib(@"MyActivityIndicatorView", self);
+    _tappedViews = [[NSMutableDictionary alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -90,9 +91,20 @@
     if (!cell)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifirt];
     NSString *gname = [[_data objectAtIndex:indexPath.row] objectForKey:@"gname"];
-    if ([gname isEqualToString:@"default"]) gname = @"默认分组(不可删除)";
+    if ([gname isEqualToString:@"default"]) gname = @"默认分组(不可修改)";
     cell.textLabel.text = gname;
     cell.textLabel.font = [UIFont systemFontOfSize:17];
+    if (![_tappedViews objectForKey:indexPath]&&indexPath.row) {
+        CGRect rect = cell.contentView.frame;
+//        rect.origin.x += 50;
+//        rect.size.width -= 50;
+        UIView *view = [[UIView alloc] initWithFrame:rect];
+        view.backgroundColor = [UIColor clearColor];
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+        [view addGestureRecognizer:gesture];
+        [cell.contentView addSubview:view];
+        [_tappedViews setObject:view forKey:indexPath];
+    }
     return cell;
 }
 
@@ -105,6 +117,27 @@
     return @"删除";
 }
 
+- (void)tapped:(UITapGestureRecognizer *)gesture {
+    TextBox *textBox = getViewFromNib(@"textbox", self);
+    textBox.textLabel.text = @"请输入新的分组名称:";
+    textBox.delegate = self;
+    
+    for (NSIndexPath *indexPath in [_tappedViews allKeys]) {
+        if (gesture.view == [_tappedViews objectForKey:indexPath]) {
+            NSString *gname = [[_data objectAtIndex:indexPath.row] objectForKey:@"gname"];
+            textBox.textView.text = gname;
+            _gname = gname;
+            [textBox.textView setSelectedRange:NSMakeRange(0, gname.length)];
+            break;
+        }
+    }
+    _modify = YES;
+    [textBox showInView:self.view];
+//    NSString *gname = @"asd";//[[_data objectAtIndex:indexPath.row] objectForKey:@"gname"];
+//    textBox.textView.text = gname;
+//    [textBox.textView setSelectedRange:NSMakeRange(0, gname.length)];
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         _deletingGroup = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
@@ -113,6 +146,17 @@
         [actionSheet showInView:self.view];
     }
 }
+
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.row == 0) return;
+//    TextBox *textBox = getViewFromNib(@"textbox", self);
+//    textBox.textLabel.text = @"请输入新的分组名称:";
+//    textBox.delegate = self;
+//    [textBox showInView:self.view];
+//    NSString *gname = [[_data objectAtIndex:indexPath.row] objectForKey:@"gname"];
+//    textBox.textView.text = gname;
+//    [textBox.textView setSelectedRange:NSMakeRange(0, gname.length)];
+//}
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
@@ -165,13 +209,10 @@
         else if (p.x > CGRectGetMaxX(self.topBar.frame)-50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base5" ofType:@"png"]];
             self.topBar.image = image;
-//            UIView *view = [[UIView alloc] initWithFrame:self.view.frame];
-//            view.backgroundColor = [UIColor blackColor];
-//            view.alpha = 0.6;
-//            [self.view addSubview:view];
             TextBox *textBox = getViewFromNib(@"textbox", self);
             textBox.textLabel.text = @"请输入分组名称:";
             textBox.delegate = self;
+            _modify = NO;
             [textBox showInView:self.view];
             [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
         }
@@ -191,8 +232,14 @@
         [textBox hide];
         [_myActivityIndicator hide];
         [_myActivityIndicator showInView:self.view];
-        if ([RelationshipLogic addGroup:gname])
-            [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
+        if (!_modify) {
+            if ([RelationshipLogic addGroup:gname])
+                [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
+        }
+        else {
+            if ([RelationshipLogic renameGroup:_gname newName:gname])
+                [RelationshipLogic asyncDownloadInfofromClass:NSStringFromClass(self.class)];
+        }
     }
 }
 

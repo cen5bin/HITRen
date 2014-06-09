@@ -72,14 +72,14 @@
     return YES;
 }
 
-- (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2 {
++ (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2 {
     FUNC_START();
     HttpData *data = [[HttpData alloc]init];
     [data setIntValue:self.user.uid forKey:@"uid"];
     [data setValue:gname1 forKey:@"gname1"];
     [data setValue:gname2 forKey:@"gname2"];
-    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
-    NSMutableDictionary *ret = [httpTransfer syncPost:request to:@"RenameConcernlistGroup"];
+//    NSString *request = [NSString stringWithFormat:@"data=%@",stringToUrlString([data getJsonString])];
+    NSMutableDictionary *ret = [[HttpTransfer transfer] syncPost:[data getJsonString] to:@"RenameConcernlistGroup"];
     if (![[ret objectForKey:@"SUC"] boolValue]) {
         LOG(@"renameGroup fail");
         FUNC_END();

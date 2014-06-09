@@ -39,7 +39,7 @@
 //    return;
     if (_managing) L(@"yes");
     else L(@"no");
-    if (!_managing)
+//    if (!_managing)
         [self.contactView willLoad];
     _managing = NO;
 }

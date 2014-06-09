@@ -25,7 +25,7 @@
 
 + (BOOL)addGroup:(NSString *)gname;
 + (BOOL)deleteGroup:(NSString *)gname;
-- (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2;
++ (BOOL)renameGroup:(NSString *)gname1 newName:(NSString *)gname2;
 + (BOOL)deleteConcernedUser:(int)uid; //同步
 + (BOOL)asyncDeleteConcernedUser:(int)uid fromClass:(NSString *)classname;
 - (BOOL)moveUserToBlacklist:(int)uid;
