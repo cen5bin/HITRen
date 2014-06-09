@@ -15,6 +15,7 @@
 @interface MessageDetailViewController : UIViewController <CommentListViewDelegate,UIScrollViewDelegate,KeyboardToolBarDelegate,UITextViewDelegate> {
     KeyboardToolBar *_keyboardToolBar;
     MyActivityIndicatorView *_myActivityIndicatorView;
+    BOOL _downloadIngImage;
 //    NSMutableSet *_downloadingImageSet;
 }
 

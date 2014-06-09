@@ -96,6 +96,7 @@
     else L(@"userInfo download fail");
     NSDictionary *data = [ret objectForKey:@"DATA"];
     [UserSimpleLogic userInfosDidDownload:data];
+    [self loadContent];
 //    [self.tableView reloadData];
     FUNC_END();
 
@@ -190,6 +191,21 @@
     format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     self.timeLabel.text = [format stringFromDate:self.message.time];
     self.textView.text = self.message.content;
+    
+    if (userInfo.pic && ![userInfo.pic isEqualToString:@""]) {
+        if (!userInfo.pic||!userInfo.pic.length)
+            self.pic.image = [UIImage imageNamed:@"empty.png"];
+        else if ([[userInfo.pic substringToIndex:1] isEqualToString:@"h"])
+            self.pic.image = [UIImage imageNamed:userInfo.pic];
+        else {
+            UIImage *image = [appData getImage:userInfo.pic];
+            if (image) self.pic.image = image;
+            else if (!_downloadIngImage) {
+                _downloadIngImage = YES;
+                [UploadLogic downloadImage:userInfo.pic from:NSStringFromClass(self.class)];
+            }
+        }
+    }
     
     
     Comment *comment = [appData getCommentOfMid:[self.message.mid intValue]];
@@ -373,14 +389,27 @@
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
             [self.navigationController popViewControllerAnimated:YES];
+            [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+            
         }
         else if (p.x >= CGRectGetMaxX(self.topBar.frame)-50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
             self.topBar.image = image;
+            [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
         }
     }
 
 }
+
+
+- (void)clearTopBar {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+    self.topBar.image = image;
+}
+
+
+
+
 
 // 更新的是点赞列表
 - (void)update {
