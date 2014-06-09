@@ -54,6 +54,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    id cell = [[_data objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    UIViewController *controller = nil;
+    if (cell == self.secondHandCell)
+        controller = getViewControllerOfName(@"SecondHand");
+    else controller = getViewControllerOfName(@"FindThings");
+    [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

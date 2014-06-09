@@ -273,7 +273,8 @@
 - (IBAction)moreButtonClicked:(id)sender {
     if (!_menu.hidden) [self hideMenu];
     else [self showMenu];
-
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
 }
 
 - (void)menuDidChooseAtIndex:(int)index {
@@ -300,10 +301,22 @@
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
             [self.navigationController popViewControllerAnimated:YES];
+            
+            [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+            
         }
     }
     
 }
+
+
+- (void)clearTopBar {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+    self.topBar.image = image;
+}
+
+
+
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self hideMenu];

@@ -860,9 +860,6 @@
                                                         </imageView>
                                                     </subviews>
                                                 </tableViewCellContentView>
-                                                <connections>
-                                                    <segue destination="fpy-uz-jc6" kind="push" id="w2U-tO-Ebz"/>
-                                                </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lYt-Q4-vuP">
                                                 <rect key="frame" x="0.0" y="55" width="321" height="45"/>
@@ -883,9 +880,6 @@
                                                         </imageView>
                                                     </subviews>
                                                 </tableViewCellContentView>
-                                                <connections>
-                                                    <segue destination="88n-lR-jcf" kind="push" id="i1I-b3-Nfr"/>
-                                                </connections>
                                             </tableViewCell>
                                         </cells>
                                     </tableViewSection>
@@ -913,7 +907,7 @@
         <!--Second Trade View Controller-->
         <scene sceneID="ZIu-S5-L0n">
             <objects>
-                <viewController id="fpy-uz-jc6" customClass="SecondTradeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondHand" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fpy-uz-jc6" customClass="SecondTradeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OEn-uS-RI0">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3029,7 +3023,7 @@
         <!--Find Things View Controller-->
         <scene sceneID="UdO-7B-517">
             <objects>
-                <viewController id="88n-lR-jcf" customClass="FindThingsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FindThings" useStoryboardIdentifierAsRestorationIdentifier="YES" id="88n-lR-jcf" customClass="FindThingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Uc-ob-KcO">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

@@ -268,6 +268,8 @@
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base4" ofType:@"png"]];
             self.topBar.image = image;
             [self.navigationController popViewControllerAnimated:YES];
+            [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+
         }
     }
     

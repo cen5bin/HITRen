@@ -267,11 +267,16 @@
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
             [self.navigationController popViewControllerAnimated:YES];
+            [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
         }
     }
     
 }
 
+- (void)clearTopBar {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+    self.topBar.image = image;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -296,8 +301,15 @@
 }
 
 - (IBAction)moreButtonClicked:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
+
     if (!_menu.hidden) [self hideMenu];
     else [self showMenu];
+    
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.0];
+    
+
 //    _menu.hidden = !_menu.hidden;
 }
 
