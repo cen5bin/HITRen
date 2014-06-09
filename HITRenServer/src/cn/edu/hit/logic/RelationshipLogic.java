@@ -196,7 +196,7 @@ public class RelationshipLogic {
 	
 	public static boolean moveUsersFromGroupToGroup(int uid, ArrayList<Integer>users, String gname1, String gname2) throws JSONException {
 		retData = new JSONObject();
-		if (gname2.equals(Relationship.DEFAULT) || gname1.equals(Relationship.ALL)) {
+		if (gname1.equals(Relationship.ALL)) {
 			retData.put(HttpData.SUC, false);
 			retData.put(HttpData.INFO, "非法操作");
 			return false;

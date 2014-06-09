@@ -147,6 +147,16 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (!_managing) return;
+    _managing = NO;
+    NSString *gname = [ChooseGroupViewController choosedGroupName];
+    L(gname);
+    [RelationshipLogic moveUser:[self.userInfo.uid intValue] fromGroup:[RelationshipLogic gnameOfUid:[self.userInfo.uid intValue]] toGroups:[NSArray arrayWithObjects:gname, nil]];
+//    [RelationshipLogic mo]
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint p = [touch locationInView:self.view];
@@ -178,7 +188,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)clearTopBar {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+    self.topBar.image = image;
+}
+
 - (IBAction)moreButtonClicked:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"移动到分组", nil, nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [actionSheet showInView:self.view];
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        _managing = YES;
+        UIViewController *controller = getViewControllerOfName(@"ChooseGroup");
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 - (IBAction)buttonTouchDown:(id)sender {

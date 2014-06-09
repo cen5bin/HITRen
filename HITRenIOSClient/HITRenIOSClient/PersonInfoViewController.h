@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class UserInfo;
-@interface PersonInfoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface PersonInfoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
     NSMutableArray *_cells;
     NSMutableSet *_downloadingImageSet;
     BOOL _choosingGroup;
+    BOOL _managing;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *pic;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

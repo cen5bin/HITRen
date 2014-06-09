@@ -29,6 +29,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.contactView.parentController = self;
+    self.contactView.isInContactViewController = YES;
     _managing = NO;
 //    [self.contactView willLoad];
 }

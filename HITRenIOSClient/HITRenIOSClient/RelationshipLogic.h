@@ -36,5 +36,6 @@
 + (NSMutableArray *)downloadFriendsInfo:(NSArray *)users;
 + (void)unPackRelationshipInfoData:(NSDictionary *)dic;
 + (BOOL)uidIsConcerned:(int)uid;
++ (NSString *)gnameOfUid:(int)uid;
 
 @end

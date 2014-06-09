@@ -12,10 +12,12 @@
 @interface ChooseGroupViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, TextBoxDelegate> {
     NSMutableArray *_data;
     MyActivityIndicatorView *_myActivityIndicator;
-    int _selectedIndex;
+//    int _selectedIndex;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
+
+@property (nonatomic) int selectedIndex;
 
 + (NSString *)choosedGroupName;
 

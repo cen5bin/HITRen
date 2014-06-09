@@ -20,6 +20,7 @@
 }
 
 @property (strong, nonatomic) UIViewController *parentController; //包含他的父亲viewController
+@property (nonatomic) BOOL isInContactViewController;
 - (void)willLoad;
 
 @end

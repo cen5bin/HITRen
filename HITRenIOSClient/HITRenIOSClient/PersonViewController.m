@@ -10,6 +10,7 @@
 #import "User.h"
 #import "HometownPicker.h"
 #import "HeadPicViewController.h"
+#import "ContactViewController.h"
 
 @interface PersonViewController ()
 
@@ -175,7 +176,14 @@
     view0.textLabel.textColor = [UIColor darkGrayColor];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    
+}
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     FUNC_START();

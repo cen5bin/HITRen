@@ -516,7 +516,7 @@
                                                     </subviews>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <segue destination="SXO-bv-5Pz" kind="push" id="XBL-2E-7X4"/>
+                                                    <segue destination="W80-up-ZE1" kind="push" id="oi0-wI-goX"/>
                                                 </connections>
                                             </tableViewCell>
                                         </cells>
@@ -2897,6 +2897,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="non-Uf-rmx"/>
                     <connections>
                         <outlet property="contactView" destination="8tt-1L-hIU" id="jwq-80-UGN"/>
                         <outlet property="topBar" destination="738-U3-08c" id="cAq-5q-eeV"/>

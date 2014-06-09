@@ -40,7 +40,8 @@ static NSString *choosedGroupName = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:ASYNCDATALOADED object:nil];
 //    self.tableView.editing = YES;
     _myActivityIndicator = getViewFromNib(@"MyActivityIndicatorView", self);
-    _selectedIndex = 0;
+    if (self.selectedIndex == 0) choosedGroupName = @"default";
+//    _selectedIndex = 0;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -111,6 +112,7 @@ static NSString *choosedGroupName = nil;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     choosedGroupName = [[_data objectAtIndex:indexPath.row] objectForKey:@"gname"];
+    if ([choosedGroupName isEqualToString:@"默认分组"]) choosedGroupName = @"default";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     _selectedIndex = indexPath.row;
     [tableView reloadData];

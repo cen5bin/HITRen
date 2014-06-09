@@ -27,6 +27,7 @@
 #import "ChatViewController.h"
 #import "MyActivityIndicatorView.h"
 #import "UploadLogic.h"
+#import "PersonInfoViewController.h"
 
 
 #define SECTIONVIEW_HEIGHT 40
@@ -198,12 +199,20 @@
     NSDictionary *dic = [_datas objectAtIndex:indexPath.row];
     int type = [[dic objectForKey:@"type"] intValue];
     if (type == 1) { //表示点到的是人
-        ChatViewController *controller = getViewControllerOfName(@"ChatView");
+
         AppData *appData = [AppData sharedInstance];
         int uid = [[dic objectForKey:@"uid"] intValue];
         UserInfo *userInfo = [appData readUserInfoForId:uid];
-        controller.userInfo = userInfo;
-        [self.parentController.navigationController pushViewController:controller animated:YES];
+        if (!self.isInContactViewController) {
+            ChatViewController *controller = getViewControllerOfName(@"ChatView");
+            controller.userInfo = userInfo;
+            [self.parentController.navigationController pushViewController:controller animated:YES];
+        }
+        else {
+            PersonInfoViewController *controller = getViewControllerOfName(@"PersonInfo");
+            controller.userInfo = userInfo;
+            [self.parentController.navigationController pushViewController:controller animated:YES];
+        }
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     else {  //表示点到的是分组

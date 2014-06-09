@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import cn.edu.hit.kit.DataKit;
 import cn.edu.hit.logic.RelationshipLogic;
+import cn.edu.hit.servlet.kit.BaseServlet;
 
 /**
  * Servlet implementation class MoveUsersFromGroupToGroupsServlet
@@ -23,7 +24,7 @@ import cn.edu.hit.logic.RelationshipLogic;
  * 参数 自己的id uid, 要移动的用户users, 当前所在分组gname, 目标分组gnames
  */
 @WebServlet("/MoveUsersFromGroupToGroupsServlet")
-public class MoveUsersFromGroupToGroupsServlet extends HttpServlet {
+public class MoveUsersFromGroupToGroupsServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -47,6 +48,7 @@ public class MoveUsersFromGroupToGroupsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String data = DataKit.getDataFromClient(request.getReader());
+		logger.info(data);
 		try {
 			JSONObject json = new JSONObject(data);
 			int uid = json.getInt("uid");

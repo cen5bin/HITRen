@@ -342,6 +342,16 @@
     return NO;
 }
 
++ (NSString *)gnameOfUid:(int)uid {
+    User *user = [RelationshipLogic user];
+    for (NSDictionary *dic in user.relationShip.concerList) {
+        if ([[dic objectForKey:@"gname"] isEqualToString:@"ALL"]) continue;
+        NSArray *tmp = [dic objectForKey:@"userlist"];
+        if ([tmp containsObject:[NSNumber numberWithInt:uid]]) return [dic objectForKey:@"gname"];
+    }
+    return nil;
+}
+
 - (void)print {
     NSLog(@"seq: %d",self.user.relationShip.seq);
     NSLog(@"blacklist: %@", [self.user.relationShip.blackList description]);
