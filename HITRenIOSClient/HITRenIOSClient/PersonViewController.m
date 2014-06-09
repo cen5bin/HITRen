@@ -132,9 +132,10 @@
         if (point.x <= 50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
+            [self resignAll];
             UINavigationController *navigateController = self.navigationController;
-            
             [self.navigationController popViewControllerAnimated:!self.fromRegister];
+            [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
 
 //            [self.navigationController popViewControllerAnimated:NO];
             if (self.fromRegister) {
@@ -186,6 +187,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [_tableCells objectAtIndex:indexPath.row];
+    if (cell == self.usernameCell)
+        [self.username becomeFirstResponder];
+    else if (cell == self.birthdayCell)
+        [self bitthdayButtonClicked];
+    else if (cell == self.hometownCell)
+        [self hometownButtonClicked];
+//    else if (cell == self)
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -233,6 +242,52 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)bitthdayButtonClicked {
+    [self resignAll];
+    if (_datePicker && _datePicker.superview) return;
+    if (_hometownPicker && _hometownPicker.superview) [_hometownPicker removeFromSuperview];
+    if (!_datePicker) {
+        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame), 0, 0)];
+        _datePicker.datePickerMode = UIDatePickerModeDate;
+        [_datePicker addTarget:self action:@selector(dateValueChanged) forControlEvents:UIControlEventValueChanged];
+    }
+    _datePicker.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), 0, 0);
+    [self.view addSubview:_datePicker];
+    
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+        CGRect rect = _datePicker.frame;
+        rect.origin.y -= rect.size.height;
+        _datePicker.frame = rect;
+    } completion:^(BOOL finished) {}];
+
+}
+
+- (void)hometownButtonClicked {
+    [self resignAll];
+    if (_hometownPicker && _hometownPicker.superview) return;
+    if (_datePicker && _datePicker.superview) [_datePicker removeFromSuperview];
+    if (!_hometownPicker) {
+        _hometownPicker = [[HometownPicker alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame), 320, 216)];
+        
+        [_hometownPicker addTarget:self action:@selector(hometownValueChanged)];
+    }
+    _hometownPicker.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), 320, 216);
+    [self.view addSubview:_hometownPicker];
+    
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
+        CGRect rect = _hometownPicker.frame;
+        rect.origin.y -= rect.size.height;
+        _hometownPicker.frame = rect;
+    } completion:^(BOOL finished) {
+        User *user = [UserSimpleLogic user];
+        if (!user.hometown) {
+            [self.hometown setTitle:@"北京 北京市" forState:UIControlStateNormal];
+            _hometownChanged = YES;
+        }
+    }];
+
+}
+
 - (IBAction)buttonClicked:(id)sender {
     
     if (sender == self.maleButton) {
@@ -246,48 +301,10 @@
         [self performSelector:@selector(unDoHighLight:) withObject:self.maleButton afterDelay:0.0];
     }
     else if (sender == self.birthday) {
-        L(@"birthday");
-        [self resignAll];
-        if (_datePicker && _datePicker.superview) return;
-        if (_hometownPicker && _hometownPicker.superview) [_hometownPicker removeFromSuperview];
-        if (!_datePicker) {
-            _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame), 0, 0)];
-            _datePicker.datePickerMode = UIDatePickerModeDate;
-            [_datePicker addTarget:self action:@selector(dateValueChanged) forControlEvents:UIControlEventValueChanged];
-        }
-        _datePicker.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), 0, 0);
-        [self.view addSubview:_datePicker];
-        
-        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-            CGRect rect = _datePicker.frame;
-            rect.origin.y -= rect.size.height;
-            _datePicker.frame = rect;
-        } completion:^(BOOL finished) {}];
+        [self bitthdayButtonClicked];
     }
     else if (sender == self.hometown) {
-        L(@"hometown");
-        [self resignAll];
-        if (_hometownPicker && _hometownPicker.superview) return;
-        if (_datePicker && _datePicker.superview) [_datePicker removeFromSuperview];
-        if (!_hometownPicker) {
-            _hometownPicker = [[HometownPicker alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame), 320, 216)];
-            
-            [_hometownPicker addTarget:self action:@selector(hometownValueChanged)];
-        }
-        _hometownPicker.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), 320, 216);
-        [self.view addSubview:_hometownPicker];
-        
-        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){
-            CGRect rect = _hometownPicker.frame;
-            rect.origin.y -= rect.size.height;
-            _hometownPicker.frame = rect;
-        } completion:^(BOOL finished) {
-            User *user = [UserSimpleLogic user];
-            if (!user.hometown) {
-                [self.hometown setTitle:@"北京 北京市" forState:UIControlStateNormal];
-                _hometownChanged = YES;
-            }
-        }];
+        [self hometownButtonClicked];
     }
 }
 
@@ -374,6 +391,7 @@
         [UserSimpleLogic updateInfoFinished:notification.userInfo];
         [self clearTopBar];
 //        [self.navigationController popViewControllerAnimated:YES];
+        [self resignAll];
         UINavigationController *navigateController = self.navigationController;
         [self.navigationController popViewControllerAnimated:!self.fromRegister];
         

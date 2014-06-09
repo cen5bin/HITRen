@@ -253,6 +253,7 @@
         [self.tableView reloadData];
         _loadDetail = NO;
     }
+//    _keyboardToolBar.hidden = YES;
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -728,11 +729,11 @@
     if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
         _currentPage = 0;
         L(@"local timeline newest");
-//        [self refleshOtherData];
+        [self refleshOtherData];
         [self hideTopActivityIndicator];
 //        [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
         _timelineDownloading = NO;
-//        [self refleshUserInfo];
+        [self refleshUserInfo];
         [self.tableView reloadData];
         return;
     }
