@@ -333,4 +333,8 @@
     [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
     
 }
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end

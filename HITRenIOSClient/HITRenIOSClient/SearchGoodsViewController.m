@@ -341,5 +341,9 @@
     [TradeLogic searchGoods:searchBar.text from:CLASS_NAME];
     [searchBar resignFirstResponder];
 }
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

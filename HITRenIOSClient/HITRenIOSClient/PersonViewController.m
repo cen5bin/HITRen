@@ -187,13 +187,26 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [_tableCells objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [[_tableCells objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     if (cell == self.usernameCell)
         [self.username becomeFirstResponder];
     else if (cell == self.birthdayCell)
         [self bitthdayButtonClicked];
     else if (cell == self.hometownCell)
         [self hometownButtonClicked];
+    else if (cell == self.friendsManageCell) {
+        L(@"yes");
+        AppData *appData = [AppData sharedInstance];
+        UIViewController *controller = nil;
+        NSString *name = @"ContactView";
+        if ([appData.viewControllerDic objectForKey:name])
+            controller = [appData.viewControllerDic objectForKey:name];
+        else {
+            controller = getViewControllerOfName(name);
+            [appData.viewControllerDic setObject:controller forKey:name];
+        }
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 //    else if (cell == self)
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

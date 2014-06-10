@@ -515,9 +515,6 @@
                                                         </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
-                                                <connections>
-                                                    <segue destination="W80-up-ZE1" kind="push" id="oi0-wI-goX"/>
-                                                </connections>
                                             </tableViewCell>
                                         </cells>
                                     </tableViewSection>
