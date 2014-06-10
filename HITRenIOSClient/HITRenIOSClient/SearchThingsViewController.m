@@ -15,6 +15,7 @@
 #import "ThingsInfo.h"
 #import "UploadLogic.h"
 #import "ThingsDetailViewController.h"
+#import "MyActivityIndicatorView.h"
 
 @interface SearchThingsViewController ()
 
@@ -57,7 +58,7 @@
     self.searchBar.backgroundImage = [UIImage imageNamed:@"white.png"];
     
     
-    
+    _myActivityIndicatorView = getViewFromNib(@"MyActivityIndicatorView", self);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -147,7 +148,7 @@
     }
     _downloadFromTop = NO;
     [self.tableView reloadData];
-    
+    [_myActivityIndicatorView hide];
 }
 
 - (void)imageDidDownload:(NSNotification *)notification {
@@ -325,12 +326,25 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [FindLogic searchThings:searchBar.text from:CLASS_NAME];
-    [searchBar resignFirstResponder];
+    [self beginToSearch];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)beginToSearch {
+    if (!self.searchBar.text||!self.searchBar.text.length) return;
+    [FindLogic searchThings:self.searchBar.text from:CLASS_NAME];
+    [self.searchBar resignFirstResponder];
+    [_myActivityIndicatorView showInView:self.view];
+    
+}
+
+- (IBAction)search:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+    self.topBar.image = image;
+    [self beginToSearch];
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+}
 @end

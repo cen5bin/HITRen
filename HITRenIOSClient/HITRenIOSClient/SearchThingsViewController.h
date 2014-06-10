@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class MyActivityIndicatorView;
 @interface SearchThingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate> {
     NSMutableArray *_data;
 //    FindThingsMenu *_menu;
@@ -22,11 +23,13 @@
     BOOL _downloadFromTop;
     
     NSMutableArray *_tids;
+    MyActivityIndicatorView *_myActivityIndicatorView;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
+- (IBAction)search:(id)sender;
 
 @end

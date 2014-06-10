@@ -15,6 +15,7 @@
 #import "GoodsInfo.h"
 #import "UploadLogic.h"
 #import "GoodsDetailViewController.h"
+#import "MyActivityIndicatorView.h"
 
 
 @interface SearchGoodsViewController ()
@@ -38,25 +39,14 @@
 	// Do any additional setup after loading the view.
     _data = [[NSMutableArray alloc] init];
     self.searchBar.backgroundImage = [UIImage imageNamed:@"white.png"];
-//    _menu = getViewFromNib(@"secondhandmenu", self);
-//    CGRect rect = _menu.frame;
-//    rect.origin.y = CGRectGetMaxY(self.topBar.frame) -2;
-//    rect.origin.x = CGRectGetMaxX(self.view.frame) - rect.size.width -2;
-//    _menu.frame = rect;
-//    [self.view addSubview:_menu];
-//    _menu.hidden = YES;
-//    _menu.delegate = self;
-    
+
     _downloadingImages = [[NSMutableSet alloc] init];
-    
-    //    UIView *view = [self getActivityIndicator];
-    //    [self.view addSubview:view];
     
     self.tableView.decelerationRate = 0.5;
     NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     
-    
+    _myActivityIndicatorView = getViewFromNib(@"MyActivityIndicatorView", self);
 }
 
 
@@ -121,6 +111,7 @@
     int count = PAGE_GOODS_COUNT > _gids.count ? _gids.count : PAGE_GOODS_COUNT;
     [TradeLogic downloadGoodsInfo:[_gids subarrayWithRange:NSMakeRange(0, count)]from:CLASS_NAME];
     [self.tableView reloadData];
+    [_myActivityIndicatorView hide];
 }
 
 - (void)goodsInfoDidDownload:(NSNotification *)notification {
@@ -336,14 +327,37 @@
     
 }
 
+- (void)beginToSearch {
+    if (!self.searchBar.text||!self.searchBar.text.length) return;
+    [TradeLogic searchGoods:self.searchBar.text from:CLASS_NAME];
+    [self.searchBar resignFirstResponder];
+    [_myActivityIndicatorView showInView:self.view];
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    L(@"asd");
-    [TradeLogic searchGoods:searchBar.text from:CLASS_NAME];
-    [searchBar resignFirstResponder];
+    [self beginToSearch];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+//- (void)clearTopBar {
+//    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
+//    self.topBar.image = image;
+//}
+
+
+
+- (IBAction)search:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
+    [self beginToSearch];
+    
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+
+//    if (!self.searchBar.text||!self.searchBar.text.length) return;
+//    [TradeLogic searchGoods:self.searchBar.text from:CLASS_NAME];
+//    [self.searchBar resignFirstResponder];
+}
 @end

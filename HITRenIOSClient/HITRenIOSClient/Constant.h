@@ -9,7 +9,7 @@
 #ifndef HITRenIOSClient_Constant_h
 #define HITRenIOSClient_Constant_h
 
-#define SERVER_IP @"192.168.1.100"//@"172.17.219.148"
+#define SERVER_IP @"192.168.1.101"//@"172.17.219.148"
 
 #define PAGE_MESSAGE_COUNT 30 //一页有多少状态
 #define TEXTVIEW_WIDTH 290     //状态中的textView宽度

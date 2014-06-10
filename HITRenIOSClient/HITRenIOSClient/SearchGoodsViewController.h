@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class MyActivityIndicatorView;
 @interface SearchGoodsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate> {
     NSMutableArray *_data;
     
@@ -21,11 +22,13 @@
     BOOL _downloadFromTop;
     
     NSMutableArray *_gids;
+    MyActivityIndicatorView *_myActivityIndicatorView;
 }
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIImageView *topBar;
 
+- (IBAction)search:(id)sender;
 
 @end
