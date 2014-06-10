@@ -8,27 +8,39 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="TNi-0B-kbH" customClass="SecondHandMenu">
-            <rect key="frame" x="0.0" y="0.0" width="122" height="109"/>
+            <rect key="frame" x="0.0" y="0.0" width="137" height="161"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="basemenu0.png" translatesAutoresizingMaskIntoConstraints="NO" id="XGm-1L-52A">
-                    <rect key="frame" x="0.0" y="0.0" width="122" height="109"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="menu3_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="XGm-1L-52A">
+                    <rect key="frame" x="4" y="0.0" width="133" height="154"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XhX-vJ-DVA">
+                    <rect key="frame" x="12" y="60" width="117" height="42"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <state key="normal" title="搜索商品">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="searchGoods:" destination="TNi-0B-kbH" eventType="touchUpInside" id="CVf-fj-q7O"/>
+                        <action selector="searchGoodsTouchDown:" destination="TNi-0B-kbH" eventType="touchDown" id="U66-rY-rmM"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AO5-6a-jd8">
-                    <rect key="frame" x="0.0" y="60" width="117" height="42"/>
+                    <rect key="frame" x="12" y="104" width="117" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" title="我的商品">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="searchGoods:" destination="TNi-0B-kbH" eventType="touchUpInside" id="fLt-eH-60D"/>
-                        <action selector="searchGoodsTouchDown:" destination="TNi-0B-kbH" eventType="touchDown" id="dEM-2X-Sdp"/>
+                        <action selector="myGoods:" destination="TNi-0B-kbH" eventType="touchUpInside" id="IOh-9Y-6YI"/>
+                        <action selector="myGoodsTouchDown:" destination="TNi-0B-kbH" eventType="touchDown" id="B6z-JN-y2q"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHv-eB-RPf">
-                    <rect key="frame" x="0.0" y="14" width="117" height="42"/>
+                    <rect key="frame" x="12" y="15" width="117" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" title="发布商品">
@@ -47,6 +59,6 @@
         </view>
     </objects>
     <resources>
-        <image name="basemenu0.png" width="245" height="205"/>
+        <image name="menu3_0.png" width="256" height="289"/>
     </resources>
 </document>

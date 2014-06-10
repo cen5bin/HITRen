@@ -98,4 +98,18 @@
     
 }
 
++ (BOOL)searchThings:(NSString *)info from:(NSString *)classname {
+    HttpData *data = [HttpData data];
+    [data setValue:info forKey:@"info"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"SearchThings" withEventName:ASYNC_EVENT_SEARCHTHINGS fromClass:classname];
+    if (!ret) {
+        L(@"search things  failed");
+        FUNC_END();
+        return NO;
+    }
+    FUNC_END();
+    return YES;
+
+}
+
 @end

@@ -15,4 +15,5 @@
 + (BOOL)downloadGoodsInfo:(NSArray *)gids from:(NSString *)classname;
 + (BOOL)deleteGoods:(int)gid from:(NSString *)classname;
 + (BOOL)downloadMyGoodsfrom:(NSString *)classname;
++ (BOOL)searchGoods:(NSString *)info from:(NSString *)classname;
 @end

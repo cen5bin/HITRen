@@ -1,6 +1,7 @@
 package cn.edu.hit.logic;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,6 +81,29 @@ public class FindLogic extends BaseLogic{
 		BasicDBList retList = (BasicDBList) retObj.get(ThingsLine.LIST);
 		data.put("tids", retList);
 		retJsonObject.put(HttpData.DATA, data);	
+		return retJsonObject;
+	}
+	
+	public static JSONObject searchThings(String info) throws JSONException {
+		JSONObject retJsonObject = new JSONObject();
+		BasicDBObject obj1 = new BasicDBObject();
+		String string = String.format("^.*%s.*$", info);
+		Pattern pattern = Pattern.compile(string, Pattern.CASE_INSENSITIVE);
+		ArrayList<BasicDBObject> cond = new ArrayList<BasicDBObject>();
+		cond.add(new BasicDBObject(Thing.NAME, pattern));
+		cond.add(new BasicDBObject(Thing.DESCRIPTION, pattern));
+		
+		obj1.put("$or", cond);
+		DBCursor cursor = DBController.query(Thing.COLLNAME, obj1);
+		ArrayList<Integer> tids = new ArrayList<Integer>();
+		while (cursor.hasNext()) {
+			DBObject retObj = cursor.next();
+			tids.add(Integer.parseInt(retObj.get(Thing.TID).toString()));
+		}
+		retJsonObject.put(HttpData.SUC, true);
+		JSONObject data = new JSONObject();
+		data.put("tids", tids);
+		retJsonObject.put(HttpData.DATA, data);
 		return retJsonObject;
 	}
 	

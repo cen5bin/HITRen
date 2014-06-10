@@ -1,6 +1,7 @@
 package cn.edu.hit.logic;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -122,6 +123,29 @@ public class TradeLogic extends BaseLogic {
 		retJsonObject.put(HttpData.DATA, data);	
 		return retJsonObject;
 	}
+	
+	public static JSONObject searchGoods(String info) throws JSONException {
+		JSONObject retJsonObject = new JSONObject();
+		BasicDBObject obj1 = new BasicDBObject();
+		String string = String.format("^.*%s.*$", info);
+		Pattern pattern = Pattern.compile(string, Pattern.CASE_INSENSITIVE);
+		ArrayList<BasicDBObject> cond = new ArrayList<BasicDBObject>();
+		cond.add(new BasicDBObject(Goods.NAME, pattern));
+		cond.add(new BasicDBObject(Goods.DESCRIPTION, pattern));
+		obj1.put("$or", cond);
+		DBCursor cursor = DBController.query(Goods.COLLNAME, obj1);
+		ArrayList<Integer> gids = new ArrayList<Integer>();
+		while (cursor.hasNext()) {
+			DBObject retObj = cursor.next();
+			gids.add(Integer.parseInt(retObj.get(Goods.GID).toString()));
+		}
+		retJsonObject.put(HttpData.SUC, true);
+		JSONObject data = new JSONObject();
+		data.put("gids", gids);
+		retJsonObject.put(HttpData.DATA, data);
+		return retJsonObject;
+	}
+	
 	
 	private static boolean deleteGoodsInGoodsLine(int uid, int gid) {
 		BasicDBObject oldObj = new BasicDBObject(GoodsLine.UID, uid);

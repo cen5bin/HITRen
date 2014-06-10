@@ -1,12 +1,12 @@
 //
-//  SecondTradeViewController.m
+//  SearchGoodsViewController.m
 //  HITRenIOSClient
 //
-//  Created by wubincen on 14-5-28.
+//  Created by wubincen on 14-6-10.
 //  Copyright (c) 2014年 wubincen. All rights reserved.
 //
 
-#import "SecondTradeViewController.h"
+#import "SearchGoodsViewController.h"
 #import "GoodsCell.h"
 #import "AppData.h"
 #import "SecondHandMenu.h"
@@ -16,11 +16,12 @@
 #import "UploadLogic.h"
 #import "GoodsDetailViewController.h"
 
-@interface SecondTradeViewController ()
+
+@interface SearchGoodsViewController ()
 
 @end
 
-@implementation SecondTradeViewController
+@implementation SearchGoodsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,47 +37,43 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     _data = [[NSMutableArray alloc] init];
-    _menu = getViewFromNib(@"secondhandmenu", self);
-    CGRect rect = _menu.frame;
-    rect.origin.y = CGRectGetMaxY(self.topBar.frame) -2;
-    rect.origin.x = CGRectGetMaxX(self.view.frame) - rect.size.width -2;
-    _menu.frame = rect;
-    [self.view addSubview:_menu];
-    _menu.hidden = YES;
-    _menu.delegate = self;
+    self.searchBar.backgroundImage = [UIImage imageNamed:@"white.png"];
+//    _menu = getViewFromNib(@"secondhandmenu", self);
+//    CGRect rect = _menu.frame;
+//    rect.origin.y = CGRectGetMaxY(self.topBar.frame) -2;
+//    rect.origin.x = CGRectGetMaxX(self.view.frame) - rect.size.width -2;
+//    _menu.frame = rect;
+//    [self.view addSubview:_menu];
+//    _menu.hidden = YES;
+//    _menu.delegate = self;
     
     _downloadingImages = [[NSMutableSet alloc] init];
     
-    UIView *view = [self getActivityIndicator];
-    [self.view addSubview:view];
+    //    UIView *view = [self getActivityIndicator];
+    //    [self.view addSubview:view];
     
     self.tableView.decelerationRate = 0.5;
     NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
     
-
+    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [TradeLogic downloadGoodsLinefrom:CLASS_NAME];
+//    [TradeLogic downloadMyGoodsfrom:CLASS_NAME];
     _currentPage = 0;
     _maxLoadedPage = 0;
     _backgroundWorking = NO;
     _downloadFromTop = YES;
-    AppData *appData = [AppData sharedInstance];
-    int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
-    if (count == 0) return;
-    _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
-    [self.tableView reloadData];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
     NSDictionary *dic = notification.userInfo;
     NSString *string = [dic objectForKey:@"fromclass"];
     if (string && ![string isEqualToString:@""] && ![string isEqualToString:NSStringFromClass(self.class)]) return;
-    if ([notification.object isEqualToString: ASYNC_EVENT_DOWNLOADGOODSLINE])
+    if ([notification.object isEqualToString: ASYNC_EVENT_SEARCHGOODS])
         [self goodsLineDidDownload:notification];
     else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADGOODSINFO])
         [self goodsInfoDidDownload:notification];
@@ -97,31 +94,32 @@
     NSDictionary *ret = notification.userInfo;
     if ([ret objectForKey:@"SUC"]) L(@"goodsline download succ");
     else L(@"goodsline download fail");
-    AppData *appData = [AppData sharedInstance];
+//    AppData *appData = [AppData sharedInstance];
     if ([[ret objectForKey:@"INFO"] isEqualToString:@"newest"]) {
-        int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
-        _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+        int count = PAGE_GOODS_COUNT > _gids.count ? _gids.count : PAGE_GOODS_COUNT;
+        _data = [[NSMutableArray alloc] initWithArray:[_gids subarrayWithRange:NSMakeRange(0, count)]];
         [self.tableView reloadData];
         return;
     }
-
+    
     NSDictionary *data = [ret objectForKey:@"DATA"];
     NSArray *gids = [data objectForKey:@"gids"];
-    appData.goodsLine.seq = [data objectForKey:@"seq"];
+    
+//    _seq = [data objectForKey:@"seq"];
     L([gids description]);
-    appData.goodsLine.gids = [NSMutableArray arrayWithArray:[[gids reverseObjectEnumerator] allObjects]];
-//    if (gids.count == 0) return;
-//    int index = -1;
-//    if (appData.goodsLine.gids.count)
-//        index = [gids indexOfObject:[appData.goodsLine.gids objectAtIndex:0]];
-//    LOG(@"index %d", index);
-//    if (index == NSNotFound) index = -1;
-//    for (int i = index + 1; i < gids.count; i++)
-//        [appData.goodsLine.gids insertObject:[gids objectAtIndex:i] atIndex:0];
-    [appData.goodsLine update];
-    L([appData.goodsLine.gids description]);
-    int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
-    [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)] from:CLASS_NAME];
+    _gids = [NSMutableArray arrayWithArray:[[gids reverseObjectEnumerator] allObjects]];
+    //    if (gids.count == 0) return;
+    //    int index = -1;
+    //    if (_gids.count)
+    //        index = [gids indexOfObject:[_gids objectAtIndex:0]];
+    //    LOG(@"index %d", index);
+    //    if (index == NSNotFound) index = -1;
+    //    for (int i = index + 1; i < gids.count; i++)
+    //        [_gids insertObject:[gids objectAtIndex:i] atIndex:0];
+//    [appData.myGoodsLine update];
+    L([_gids description]);
+    int count = PAGE_GOODS_COUNT > _gids.count ? _gids.count : PAGE_GOODS_COUNT;
+    [TradeLogic downloadGoodsInfo:[_gids subarrayWithRange:NSMakeRange(0, count)]from:CLASS_NAME];
     [self.tableView reloadData];
 }
 
@@ -143,13 +141,13 @@
         [gi update];
     }
     [AppData saveData];
-    int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
+    int count = PAGE_GOODS_COUNT > _gids.count ? _gids.count : PAGE_GOODS_COUNT;
     if (_downloadFromTop)
-        _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+        _data = [[NSMutableArray alloc] initWithArray:[_gids subarrayWithRange:NSMakeRange(0, count)]];
     else {
         _maxLoadedPage++;
-        count = PAGE_GOODS_COUNT * (_maxLoadedPage+1) > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT * (_maxLoadedPage+1);
-        _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+        count = PAGE_GOODS_COUNT * (_maxLoadedPage+1) > _gids.count ? _gids.count : PAGE_GOODS_COUNT * (_maxLoadedPage+1);
+        _data = [[NSMutableArray alloc] initWithArray:[_gids subarrayWithRange:NSMakeRange(0, count)]];
         _backgroundWorking = NO;
     }
     _downloadFromTop = NO;
@@ -222,16 +220,16 @@
     static BOOL isWorking = NO;
     if (isWorking) return;
     isWorking = YES;
-    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_menu.alpha = 0; } completion:^(BOOL finished){_menu.alpha = 1; _menu.hidden = YES; isWorking = NO;}];
+//    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_menu.alpha = 0; } completion:^(BOOL finished){_menu.alpha = 1; _menu.hidden = YES; isWorking = NO;}];
 }
 
 - (void)showMenu {
     static BOOL isWorking = NO;
     if (isWorking) return;
     isWorking = YES;
-    _menu.hidden = NO;
-    _menu.alpha = 0;
-    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_menu.alpha = 1; } completion:^(BOOL finished){ isWorking = NO;}];
+//    _menu.hidden = NO;
+//    _menu.alpha = 0;
+//    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_menu.alpha = 1; } completion:^(BOOL finished){ isWorking = NO;}];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -256,13 +254,13 @@
     if (_currentPage < _maxLoadedPage) return;
     int tmp = index % PAGE_GOODS_COUNT;
     if (tmp < PAGE_GOODS_COUNT * 2 / 3) return;
-    AppData *appData = [AppData sharedInstance];
-    int count = appData.goodsLine.gids.count - (_currentPage + 1) * PAGE_GOODS_COUNT;
+//    AppData *appData = [AppData sharedInstance];
+    int count = _gids.count - (_currentPage + 1) * PAGE_GOODS_COUNT;
     if (count > PAGE_GOODS_COUNT) count = PAGE_GOODS_COUNT;
     if (count < 0) return;
     _backgroundWorking = YES;
-    [TradeLogic downloadGoodsInfo:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(PAGE_GOODS_COUNT * (_currentPage + 1), count)] from:CLASS_NAME];
-
+    [TradeLogic downloadGoodsInfo:[_gids subarrayWithRange:NSMakeRange(PAGE_GOODS_COUNT * (_currentPage + 1), count)] from:CLASS_NAME];
+    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -274,6 +272,7 @@
             self.topBar.image = image;
             [self.navigationController popViewControllerAnimated:YES];
             [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+            
         }
     }
     
@@ -283,6 +282,7 @@
     UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base0" ofType:@"png"]];
     self.topBar.image = image;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -299,29 +299,15 @@
     }
     else if (index == 1) {
         //搜索商品
-        UIViewController *controller = getViewControllerOfName(@"SearchGoods");
-        [self.navigationController pushViewController:controller animated:YES];
-    }
-    else if (index == 2) {
-        //我的商品
-        UIViewController *controller = getViewControllerOfName(@"MyGoods");
-        [self.navigationController pushViewController:controller animated:YES];
     }
     
     [self hideMenu];
 }
 
 - (IBAction)moreButtonClicked:(id)sender {
-    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
-    self.topBar.image = image;
-
-    if (!_menu.hidden) [self hideMenu];
-    else [self showMenu];
-    
-    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.0];
-    
-
-//    _menu.hidden = !_menu.hidden;
+//    if (!_menu.hidden) [self hideMenu];
+//    else [self showMenu];
+    //    _menu.hidden = !_menu.hidden;
 }
 
 - (UIActivityIndicatorView *)getActivityIndicator {
@@ -339,6 +325,21 @@
 - (void)hideTopActivityIndicator {
     _activityIndicator.hidden = YES;
     [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+- (IBAction)addGoods:(id)sender {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
+    self.topBar.image = image;
+    
+    UIViewController *controller = getViewControllerOfName(@"UploadGoods");
+    [self.navigationController pushViewController:controller animated:YES];
+    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+    
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    L(@"asd");
+    [TradeLogic searchGoods:searchBar.text from:CLASS_NAME];
+    [searchBar resignFirstResponder];
 }
 
 @end

@@ -16,8 +16,10 @@
 
 - (IBAction)releaseInfo:(id)sender;
 - (IBAction)searchInfo:(id)sender;
+- (IBAction)myThings:(id)sender;
 
 - (IBAction)releaseInfoTouchDown:(id)sender;
 - (IBAction)searchInfoTouchDown:(id)sender;
+- (IBAction)myThingsTouchDown:(id)sender;
 
 @end

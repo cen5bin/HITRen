@@ -37,20 +37,28 @@
 
 - (IBAction)releaseInfo:(id)sender {
     [self.delegate menuDidChooseAtIndex:0];
-    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu0" ofType:@"png"]];
+    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"menu3_0" ofType:@"png"]];
 }
 
 - (IBAction)searchInfo:(id)sender {
     [self.delegate menuDidChooseAtIndex:1];
-    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu0" ofType:@"png"]];
+    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"menu3_0" ofType:@"png"]];
+}
+
+- (IBAction)myThings:(id)sender {
+    [self.delegate menuDidChooseAtIndex:2];
+    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"menu3_0" ofType:@"png"]];
 }
 
 - (IBAction)releaseInfoTouchDown:(id)sender {
-    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu1" ofType:@"png"]];
+    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"menu3_1" ofType:@"png"]];
 }
 
 - (IBAction)searchInfoTouchDown:(id)sender {
-    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu2" ofType:@"png"]];
+    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"menu3_2" ofType:@"png"]];
+}
 
+- (IBAction)myThingsTouchDown:(id)sender {
+    self.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"menu3_3" ofType:@"png"]];
 }
 @end

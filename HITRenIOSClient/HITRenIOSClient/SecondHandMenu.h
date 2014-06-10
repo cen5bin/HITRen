@@ -18,10 +18,13 @@
 
 - (IBAction)releaseGoods:(id)sender;
 - (IBAction)searchGoods:(id)sender;
+- (IBAction)myGoods:(id)sender;
 
 
 - (IBAction)releaseGoodsTouchDown:(id)sender;
 - (IBAction)searchGoodsTouchDown:(id)sender;
+- (IBAction)myGoodsTouchDown:(id)sender;
+
 
 
 @end

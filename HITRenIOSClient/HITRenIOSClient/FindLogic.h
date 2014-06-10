@@ -15,5 +15,6 @@
 + (BOOL)downloadThingsInfo:(NSArray *)tids from:(NSString *)classname;
 + (BOOL)deleteThing:(int)tid from:(NSString *)classname;
 + (BOOL)downloadMyThingsLinefrom:(NSString *)classname;
++ (BOOL)searchThings:(NSString *)info from:(NSString *)classname;
 
 @end
