@@ -70,9 +70,18 @@
 
 
 - (IBAction)comeback:(id)sender {
+//    User *user = [UserSimpleLogic user];
+//    if (self.selectedIndex != -1)
+//        user.pic = [NSString stringWithFormat:@"h%d.jpg", self.selectedIndex];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)confirm:(id)sender {
     User *user = [UserSimpleLogic user];
     if (self.selectedIndex != -1)
         user.pic = [NSString stringWithFormat:@"h%d.jpg", self.selectedIndex];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SYSTEM_HEADPIC_SET" object:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 @end

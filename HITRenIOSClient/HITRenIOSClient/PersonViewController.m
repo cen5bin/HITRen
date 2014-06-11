@@ -12,6 +12,7 @@
 #import "HeadPicViewController.h"
 #import "ContactViewController.h"
 #import "AppData.h"
+#import "UploadLogic.h"
 
 @interface PersonViewController ()
 
@@ -36,6 +37,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(systemHeadPicSet) name:@"SYSTEM_HEADPIC_SET" object:nil];
     
     NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidFinishLoading:) name:notificationName object:nil];
@@ -66,13 +68,17 @@
     FUNC_END();
 }
 
+- (void)systemHeadPicSet{
+    _selectedImage = nil;
+}
+
 - (void)imageTapped {
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle:@"设置头像"
                                   delegate:self
                                   cancelButtonTitle:@"取消"
                                   destructiveButtonTitle:nil
-                                  otherButtonTitles:@"系统自带", @"从相册选取",nil];
+                                  otherButtonTitles:@"系统自带", @"从相册选取", @"用相机拍摄",nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [actionSheet showInView:self.view];
 }
@@ -80,6 +86,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
+//        _selectedImage = nil;
         HeadPicViewController *controller = getViewControllerOfName(@"ChooseHeadPic");
         User *user = [UserSimpleLogic user];
         if (user.pic && ![user.pic isEqualToString:@""]) {
@@ -92,14 +99,41 @@
         [self.navigationController pushViewController:controller animated:YES];
         
     }else if (buttonIndex == 1) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:picker animated:YES completion:nil];
         
     }else if(buttonIndex == 2) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:picker animated:YES completion:nil];
         
     }else if(buttonIndex == 3) {
         
     }
     
 }
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    UIImage * image=[info objectForKey:UIImagePickerControllerEditedImage];
+    [self performSelector:@selector(picDidSelect:) withObject:image afterDelay:0.0];
+}
+
+- (void)picDidSelect:(UIImage *)image {
+    UIImage *newImage = [AppData imageWithImage:image scaledToSize:CGSizeMake(160, 160)];
+//    self.pic.image = newImage;
+    _selectedImage = newImage;
+}
+
+
+
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -120,8 +154,23 @@
         self.username.text = user.username;
     if (user.sex)
         [self performSelector:@selector(doHighLight:) withObject:user.sex == 2?self.femaleButton:self.maleButton afterDelay:0.0];
-    if (user.pic && ![user.pic isEqualToString:@""])
+    if (_selectedImage) {
+        self.pic.image = _selectedImage;
+        return;
+    }
+    if (user.pic && ![user.pic isEqualToString:@""]) {
+        if ([[user.pic substringToIndex:1] isEqualToString:@"h"])
         self.pic.image = [UIImage imageNamed:user.pic];
+        else {
+            AppData *appData = [AppData sharedInstance];
+            UIImage *image = [appData getImage:user.pic];
+            if (image) self.pic.image = image;
+            else if (!_downloadingImage){
+                _downloadingImage  =YES;
+                [UploadLogic downloadImage:user.pic from:CLASS_NAME];
+            }
+        }
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -158,7 +207,7 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [_tableCells count];
+    return [_tableCells count]-1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -332,6 +381,10 @@
     if (self.maleButton.highlighted) user.sex = 1;
     else if (self.femaleButton.highlighted) user.sex = 2;
     
+    if (_selectedImage) {
+        [UploadLogic uploadImages:[NSArray arrayWithObjects:_selectedImage, nil] withExtend:@"jpg" from:CLASS_NAME];
+        return;
+    }
 //    [UserSimpleLogic ]
     [UserSimpleLogic updateInfofrom:CLASS_NAME];
 //    [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
@@ -415,8 +468,29 @@
         }
 
     }
-    
+    else if ([notification.object isEqualToString:ASYNC_EVENT_UPLOADIMAGE]) {
+        User *user = [UserSimpleLogic user];
+        user.pic = [[notification.userInfo objectForKey:@"DATA"] objectAtIndex:0];
+//        [UserSimpleLogic ]
+        [UserSimpleLogic updateInfofrom:CLASS_NAME];
+    }
+    else if ([notification.object isEqualToString:ASYNC_EVENT_DOWNLOADIMAGE])
+        [self imageDidDownload:notification];
 }
+
+
+- (void)imageDidDownload:(NSNotification *)notification {
+    UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
+    if (!image) image = [UIImage imageNamed:@"empty.png"];
+    NSString *filename = [notification.userInfo objectForKey:@"imagename"];
+    self.pic.image = image;
+    [[AppData sharedInstance] storeImage:image withFilename: filename];
+//    [_downloadingImageSet removeObject: filename];
+}
+
+
+
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     

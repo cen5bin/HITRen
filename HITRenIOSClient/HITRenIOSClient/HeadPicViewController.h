@@ -13,5 +13,6 @@
 
 @property (nonatomic) int selectedIndex;
 - (IBAction)comeback:(id)sender;
+- (IBAction)confirm:(id)sender;
 
 @end

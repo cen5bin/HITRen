@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 
 @class HometownPicker;
-@interface PersonViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIActionSheetDelegate> {
+@interface PersonViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     NSMutableArray *_tableCells;
     UIDatePicker *_datePicker;
     HometownPicker *_hometownPicker;
@@ -18,6 +18,9 @@
     BOOL _birthdayChanged;
     BOOL _sexSet;
     BOOL _usernameChanged;
+    
+    UIImage *_selectedImage;
+    BOOL _downloadingImage;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
