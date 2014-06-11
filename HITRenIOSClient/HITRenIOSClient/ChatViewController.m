@@ -18,6 +18,7 @@
 #import "UploadLogic.h"
 #import "User.h"
 #import "PersonInfoViewController.h"
+#import "DateCell.h"
 
 @interface ChatViewController ()
 
@@ -91,6 +92,11 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     _keyboardToolBarAtBottom.hidden = NO;
@@ -102,6 +108,7 @@
 //    _keyboardToolBarAtBottom.frame = rect;
 //    [self.view addSubview:_keyboardToolBarAtBottom];
 //    [self scrollToBottom];
+//    [self reloadData];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -124,8 +131,6 @@
     else if ([filename isEqualToString:self.userInfo.pic]) _otherImage = image;
     [self.tableView reloadData];
 }
-
-
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     return;
@@ -181,6 +186,27 @@
         for (id obj in notice1.notices) [_datas addObject:obj];
         for (id obj in notice.notices) [_datas addObject:obj];
     }
+    
+    NSArray *tmp = [NSArray arrayWithArray:_datas];
+    _datas = [[NSMutableArray alloc] init];
+    NSDate *date = nil;
+    for (NoticeObject *obj in tmp) {
+        if (date == nil) {
+            date = obj.date;
+            [_datas addObject:date];
+            [_datas addObject:obj];
+            continue;
+        }
+        if ([obj.date timeIntervalSinceDate:date] < 60)
+            [_datas addObject:obj];
+        else {
+            [_datas addObject:obj.date];
+            [_datas addObject:obj];
+            date = obj.date;
+        }
+    }
+    
+    
     [self.tableView reloadData];
     [self scrollToBottom];
 }
@@ -247,23 +273,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ChatCell";
-    ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    if (!cell) cell = [[ChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    NoticeObject *obj = [_datas objectAtIndex:indexPath.row];
-    cell.text = [obj.content objectForKey:@"text"];
-    cell.isReply = obj.isReply;
-    [cell show];
-    
-    UIImage *tmp = cell.isReply?_selfImage:_otherImage;
-    if (tmp)
-        cell.pic.image = tmp;
-    else cell.pic.image = [UIImage imageNamed:@"empty.png"];
-//    
-//    if (cell.isReply) {
-//        
-//    }
-    
-    return cell;
+    static NSString *CellIdentifier1 = @"DateCell";
+    id obj = [_datas objectAtIndex:indexPath.row];
+    if ([obj isKindOfClass:[NoticeObject class]]) {
+        ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        if (!cell) cell = [[ChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NoticeObject *obj = [_datas objectAtIndex:indexPath.row];
+        cell.text = [obj.content objectForKey:@"text"];
+        cell.isReply = obj.isReply;
+        [cell show];
+        
+        UIImage *tmp = cell.isReply?_selfImage:_otherImage;
+        if (tmp)
+            cell.pic.image = tmp;
+        else cell.pic.image = [UIImage imageNamed:@"empty.png"];
+        return cell;
+    }
+    else {
+        DateCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1 forIndexPath:indexPath];
+        if (!cell) cell = [[DateCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier1];
+        NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+        formater.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        cell.dateLabel.text = [formater stringFromDate:obj];
+        return cell;
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -299,10 +332,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NoticeObject *obj = [_datas objectAtIndex:indexPath.row];
-    CGFloat tmp = 0;
-    if (indexPath.row == _datas.count - 1 && _keyboardToolBar.hidden) tmp = _keyboardToolBarAtBottom.frame.size.height;
-    return [ChatCell calculateCellHeight:[obj.content objectForKey:@"text"]] + tmp;
+    id obj = [_datas objectAtIndex:indexPath.row];
+    if ([obj isKindOfClass:[NoticeObject class]]) {
+        CGFloat tmp = 0;
+        if (indexPath.row == _datas.count - 1 && _keyboardToolBar.hidden) tmp = _keyboardToolBarAtBottom.frame.size.height;
+        return [ChatCell calculateCellHeight:[((NoticeObject *)obj).content objectForKey:@"text"]] + tmp;
+    }
+    else return 20;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

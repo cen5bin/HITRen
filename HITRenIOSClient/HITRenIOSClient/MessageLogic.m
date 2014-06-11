@@ -230,7 +230,7 @@
     
     NoticeObject *obj = [[NoticeObject alloc] init];
     obj.content = content;
-    obj.date = [content objectForKey:@"date"];
+    obj.date = [format dateFromString: [content objectForKey:@"date"]];
     obj.type = 0;
     obj.isReply = YES;
     AppData *appData = [AppData sharedInstance];

@@ -327,6 +327,7 @@
 		F883E0A7194879BB00A8D526 /* topbar2.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E0A6194879BB00A8D526 /* topbar2.png */; };
 		F883E0AA1948A98200A8D526 /* notificationview.xib in Resources */ = {isa = PBXBuildFile; fileRef = F883E0A91948A98200A8D526 /* notificationview.xib */; };
 		F883E0AD1948AC9D00A8D526 /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F883E0AC1948AC9D00A8D526 /* NotificationView.m */; };
+		F883E0B01948B41600A8D526 /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F883E0AF1948B41600A8D526 /* DateCell.m */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
 		F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3918BC7C2800407521 /* LoginViewController.m */; };
@@ -834,6 +835,8 @@
 		F883E0A91948A98200A8D526 /* notificationview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = notificationview.xib; sourceTree = "<group>"; };
 		F883E0AB1948AC9D00A8D526 /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
 		F883E0AC1948AC9D00A8D526 /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
+		F883E0AE1948B41600A8D526 /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
+		F883E0AF1948B41600A8D526 /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB3518BC79EA00407521 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		F88BCB3618BC79EA00407521 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
@@ -1902,6 +1905,8 @@
 				F8107C6A1933505A0073C169 /* ChatCell.m */,
 				F8107C6619331A4D0073C169 /* ChatViewController.h */,
 				F8107C6719331A4D0073C169 /* ChatViewController.m */,
+				F883E0AE1948B41600A8D526 /* DateCell.h */,
+				F883E0AF1948B41600A8D526 /* DateCell.m */,
 			);
 			name = "聊天";
 			sourceTree = "<group>";
@@ -2501,6 +2506,7 @@
 				F80B0D51187426F2003E72DC /* User.m in Sources */,
 				F89964FA18FD331200D7FA44 /* FriendInfoViewController.m in Sources */,
 				F8148BCE1938BBC5000F5C9F /* TradeLogic.m in Sources */,
+				F883E0B01948B41600A8D526 /* DateCell.m in Sources */,
 				F8A5FD55191217FA0091939B /* Timeline.m in Sources */,
 				F8148D5E1941F503000F5C9F /* ManageGroupViewController.m in Sources */,
 				F87209C6191DE57400FAC7A1 /* UploadLogic.m in Sources */,
