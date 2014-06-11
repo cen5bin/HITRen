@@ -60,4 +60,18 @@
 
 }
 
++ (BOOL)deleteEvent:(NSString *)eid from:(NSString *)classname {
+    AppData *appData = [AppData sharedInstance];
+    HttpData *data = [HttpData data];
+    [data setIntValue:[appData getUid] forKey:@"uid"];
+    [data setValue:eid forKey:@"eid"];
+    BOOL ret = [[HttpTransfer transfer] asyncPost:[data getJsonString] to:@"DeleteEvent" withEventName:ASYNC_EVENT_DELETEEVENT fromClass:classname];
+    if (!ret) {
+        L(@"delete eventinfo fail");
+        return NO;
+    }
+    return YES;
+
+}
+
 @end

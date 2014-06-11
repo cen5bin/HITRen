@@ -1607,6 +1607,28 @@
                                             </tableViewCell>
                                         </cells>
                                     </tableViewSection>
+                                    <tableViewSection id="7Qk-Fp-343">
+                                        <cells>
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DeleteCell" rowHeight="50" id="q0D-7x-S57">
+                                                <rect key="frame" x="0.0" y="327" width="320" height="52"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q0D-7x-S57" id="nPl-Xj-xPm">
+                                                    <rect key="frame" x="10" y="1" width="300" height="49"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="删除" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NOM-8v-IdT">
+                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="49"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="0.2223426094890506" blue="0.22570711678832117" alpha="1" colorSpace="calibratedRGB"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </cells>
+                                    </tableViewSection>
                                 </sections>
                                 <connections>
                                     <outlet property="dataSource" destination="m1l-GW-fM6" id="9gC-N9-6hP"/>
@@ -1617,6 +1639,7 @@
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="deleteCell" destination="q0D-7x-S57" id="1MP-f0-VSS"/>
                         <outlet property="eventCell" destination="lDx-eq-Clr" id="z1m-aq-JcZ"/>
                         <outlet property="placeCell" destination="iea-Z5-vSr" id="pku-vY-pyj"/>
                         <outlet property="placeField" destination="DRS-iS-enT" id="XMg-cP-k3E"/>

@@ -463,4 +463,8 @@ static AppData *appData;
 
 }
 
+- (NSArray *)getSortedEvents:(NSArray *)eids {
+    return [DataManager getSortedEvents:eids];
+}
+
 @end

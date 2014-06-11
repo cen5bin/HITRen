@@ -71,6 +71,7 @@
 #define ASYNC_EVENT_DOWNLOADEVENTSINFO @"HITRenAsyncDataDownloadEventsInfo" //下载日程信息
 #define ASYNC_EVENT_UPLOADEVENT @"HITRenAsyncDataUploadEvent" //上传日程
 #define ASYNC_EVENT_DOWNLOADEVENTLINE @"HITRenAsyncDataDownloadEventLine" //下载日程线
+#define ASYNC_EVENT_DELETEEVENT @"HITRenAsyncDataDeleteEvent" //删除日程
 
 
 #define ASYNC_EVENT_DELETECONCERNEDUSER @"HITRenAsyncDataDeleteConcernedUser" //取消关注

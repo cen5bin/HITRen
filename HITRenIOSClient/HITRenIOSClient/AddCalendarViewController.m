@@ -12,6 +12,9 @@
 #import "Event.h"
 #import "EventLogic.h"
 #import "User.h"
+#import <QuartzCore/QuartzCore.h>
+#import "MyActivityIndicatorView.h"
+#import "EventLine.h"
 
 @interface AddCalendarViewController ()
 
@@ -58,31 +61,81 @@
         self.textView.text = event.desc;
     }
     
+    self.deleteCell.contentView.layer.cornerRadius = 5;
         
-
+    _myActivityIndicatorView = getViewFromNib(@"MyActivityIndicatorView", self);
     
+    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, CLASS_NAME];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataDidDownload:) name:notificationName object:nil];
+}
+
+- (void)dataDidDownload:(NSNotification *)notification {
+    if ([notification.object isEqualToString:ASYNC_EVENT_DELETEEVENT])
+        [self eventDidDelete:notification];
+    else if ([notification.object isEqualToString:ASYNC_EVENT_UPLOADEVENT])
+        [self eventDidUpload:notification];
+}
+
+- (void)eventDidUpload:(NSNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    if ([dic objectForKey:@"SUC"]) L(@"upload event succ");
+    else L(@"upload event fail");
+    [_myActivityIndicatorView hide];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)eventDidDelete:(NSNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    if ([dic objectForKey:@"SUC"]) L(@"delete event succ");
+    else L(@"delete event fail");
+    [_myActivityIndicatorView hide];
+    AppData *appData = [AppData sharedInstance];
+    [appData.eventLine.eids removeObject:self.eid];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    L([self.reminds description]);
     [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.edit?3:2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) return _cells.count;
+    if (section == 2) return 1;
     return self.reminds.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) return [_cells objectAtIndex:indexPath.row];
+    if (indexPath.section == 2) {
+        static NSString *CellIdentifer1 = @"DeleteCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifer1];
+        if (!cell)
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifer1];
+        cell.contentView.backgroundColor = [UIColor colorWithRed:252.0/255 green:47.0/255 blue:0/255 alpha:1];
+        cell.contentView.layer.cornerRadius = 5;
+        CGRect rect = cell.contentView.frame;
+        rect.origin.x = 0;
+        rect.origin.y = 0;
+        rect.size.width = 300;
+        UILabel *label = [[UILabel alloc] initWithFrame:rect];
+        label.text = @"删除";
+        label.font = [UIFont systemFontOfSize:20];
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.backgroundColor = [UIColor clearColor];
+        [cell.contentView addSubview:label];
+        return cell;
+    }
     static NSString *CellIdentifer = @"RemindCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifer];
     if (!cell)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifer];
+    cell.textLabel.font = [UIFont systemFontOfSize:17];
     if (indexPath.row == 0)
         cell.textLabel.text = @"添加提醒";
     else {
@@ -99,6 +152,7 @@
         UIView *view = [_cells objectAtIndex:indexPath.row];
         return view.frame.size.height;
     }
+//    if (indexPath.section == 2) return self.deleteCell.frame.size.height;
     return 46;
 }
 
@@ -112,12 +166,16 @@
         [self.navigationController pushViewController:controller animated:YES];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
-    else {
+    else if (indexPath.section == 0){
         id obj = [_cells objectAtIndex:indexPath.row];
         if (obj == self.eventCell) [self.textView becomeFirstResponder];
         if (obj == self.placeCell) [self.placeField becomeFirstResponder];
         else if (obj == self.timeCell) [self showDataPicker];
-        
+    }
+    else {
+        [EventLogic deleteEvent:self.eid from:CLASS_NAME];
+        _myActivityIndicatorView.textLabel.text = @"正在删除";
+        [_myActivityIndicatorView showInView:self.view];
     }
     
 }
@@ -217,7 +275,9 @@
     [AppData saveData];
     NSDictionary *dic = @{@"eid":event.eid, @"time":self.timeField.text, @"place":event.place, @"description":event.desc, @"reminds":tmp};
     [EventLogic uploadEvent:dic from:CLASS_NAME];
-    [self.navigationController popViewControllerAnimated:YES];
+    _myActivityIndicatorView.textLabel.text = @"正在上传";
+    [_myActivityIndicatorView showInView:self.view];
+//    [self.navigationController popViewControllerAnimated:YES];
     [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
  }
 

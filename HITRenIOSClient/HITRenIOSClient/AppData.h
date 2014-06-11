@@ -89,6 +89,7 @@
 - (Event *)getEventOfEid:(NSString *)eid;
 - (NSArray *)getEventInPage:(int)page;
 - (NSArray *)eventInfosNeedDownload:(NSArray *)array;
+- (NSArray *)getSortedEvents:(NSArray *)eids;
 //- (UserInfo *)getUserInfo:(int)uid;
 
 //- (void)insertMessage:(Message *)message;

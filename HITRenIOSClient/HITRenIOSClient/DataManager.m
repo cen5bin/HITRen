@@ -453,7 +453,30 @@
     NSArray *array = [context executeFetchRequest:request error:nil];
     if (array && array.count) return array;//[array lastObject];
     return [NSArray array];
+}
 
++ (NSArray *)getSortedEvents:(NSArray *)eids {
+    NSManagedObjectContext *context = [DBController context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:context];
+    request.entity = entity;
+    NSMutableString *string = [[NSMutableString alloc] init];
+    [string appendString:@"{"];
+    for (int i = 0; i < eids.count; i++) {
+        if (i) [string appendString:@","];
+        [string appendString:[NSString stringWithFormat:@"\"%@\"", [eids objectAtIndex:i]]];
+    }
+    [string appendString:@"}"];
+    NSString *tmp = [NSString stringWithFormat:@"eid IN %@", string];
+    //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mid IN {1,2}"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:tmp];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"time" ascending:NO];
+    NSArray *array1 = [NSArray arrayWithObjects:sortDescriptor, nil];
+    request.sortDescriptors = array1;
+    request.predicate = predicate;
+    NSArray *array = [context executeFetchRequest:request error:nil];
+    if (array && array.count) return array;//[array lastObject];
+    return [NSArray array];
 }
 
 + (NSArray *)getUserInfos:(NSArray *)uids {

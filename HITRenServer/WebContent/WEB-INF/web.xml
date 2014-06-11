@@ -382,4 +382,12 @@
     <servlet-name>SearchThings</servlet-name>
     <url-pattern>/SearchThings</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteEvent</servlet-name>
+    <servlet-class>cn.edu.hit.servlet.calendar.DeleteEventServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteEvent</servlet-name>
+    <url-pattern>/DeleteEvent</url-pattern>
+  </servlet-mapping>
 </web-app>

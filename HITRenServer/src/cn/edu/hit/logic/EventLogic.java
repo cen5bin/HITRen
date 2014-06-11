@@ -69,11 +69,12 @@ public class EventLogic extends BaseLogic {
 		JSONObject data = new JSONObject();
 		data.put("seq", seq0);
 		BasicDBList retList = (BasicDBList) retObj.get(EventLine.LIST);
-		int len = retList.size();
-		if (len > seq0 - seq + 100)
-			data.put("eids", retList.subList(0, seq0 - seq + 100));
-		else
-			data.put("eids", retList);
+		data.put("eids", retList);
+//		int len = retList.size();
+//		if (len > seq0 - seq + 100)
+//			data.put("eids", retList.subList(0, seq0 - seq + 100));
+//		else
+//			data.put("eids", retList);
 			retData.put(HttpData.DATA, data);	
 		return true;
 	}
@@ -101,6 +102,19 @@ public class EventLogic extends BaseLogic {
 		retData.put(HttpData.DATA, ret);
 		return true;
 
+	}
+	
+	public static JSONObject deleteEvent(int uid, String eid) throws JSONException {
+		JSONObject reJsonObject = new JSONObject();
+		BasicDBObject oldObj = new BasicDBObject(EventLine.UID, uid);
+		BasicDBObject newObj = new BasicDBObject("$pull", new BasicDBObject(EventLine.LIST, eid));
+		newObj.put("$inc", new BasicDBObject(EventLine.SEQ, 1));
+		if (!DBController.update(EventLine.COLLNAME, oldObj, newObj)) {
+			reJsonObject.put(HttpData.SUC, false);
+			return reJsonObject;
+		}
+		reJsonObject.put(HttpData.SUC, true);
+		return reJsonObject;
 	}
 	
 	private static boolean insertEventLine(int uid, String eid) {

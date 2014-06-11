@@ -51,6 +51,7 @@
 + (Event *)getEventOfEid:(NSString *)eid;
 + (NSArray *)getEventsInPage:(int)page;
 + (NSArray *)getEvents:(NSArray *)eids;
++ (NSArray *)getSortedEvents:(NSArray *)eids;
 
 + (void)deleteEntity:(NSManagedObject *)entity;
 + (void)save;

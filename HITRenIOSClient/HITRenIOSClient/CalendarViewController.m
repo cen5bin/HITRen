@@ -13,6 +13,7 @@
 #import "Event.h"
 #import "EventLogic.h"
 #import "AddCalendarViewController.h"
+//#import <QuartzCore/QuartzCore.h>
 
 @interface CalendarViewController ()
 
@@ -40,15 +41,24 @@
     _currentPage = 0;
     _maxLoadedPage = 0;
     _data = [[NSMutableArray alloc] init];
-    NSArray *tmp = [[AppData sharedInstance] getEventInPage:0];
-    for (Event *event in tmp)
-    if (![_data containsObject:event.eid])
-        [_data addObject:event.eid];
-    [self.tableView reloadData];
+//    NSArray *tmp = [[AppData sharedInstance] getEventInPage:0];
+//    for (Event *event in tmp)
+//    if (![_data containsObject:event.eid])
+//        [_data addObject:event.eid];
+//    [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [EventLogic downloadEventLinefrom:CLASS_NAME];
+    AppData *appData = [AppData sharedInstance];
+    int count = appData.eventLine.eids.count;
+    if (count > PAGE_EVENT_COUNT) count = PAGE_EVENT_COUNT;
+    _data = [NSMutableArray arrayWithArray:[appData.eventLine.eids subarrayWithRange:NSMakeRange(0, count)]];
+    NSArray *tmp = [appData getSortedEvents:_data];
+    _data = [[NSMutableArray alloc] init];
+    for (Event *event in tmp)
+        [_data addObject:event.eid];
+    [self.tableView reloadData];
 }
 
 - (void)dataDidDownload:(NSNotification *)notification {
@@ -72,30 +82,19 @@
     NSDictionary *data = [dic objectForKey:@"DATA"];
     L([data description]);
     appData.eventLine.seq = [data objectForKey:@"seq"];
-    NSArray *eids = [data objectForKey:@"eids"];
-    int index = 0;
-    if (appData.eventLine.eids.count)
-        index = [eids indexOfObject:[appData.eventLine.eids objectAtIndex:0]];
-    if (index == NSNotFound) index = 0;
-    for (int i = index; i < eids.count; i++) {
-        if ([appData.eventLine.eids containsObject:[eids objectAtIndex:i]])
-            [appData.eventLine.eids removeObject:[eids objectAtIndex:i]];
-//        if (appData.eventLine.eids.count)
-            [appData.eventLine.eids insertObject:[eids objectAtIndex:i] atIndex:0];
-//        else [appData.eventLine.eids addObject:[eids objectAtIndex:i]];
-    }
+    appData.eventLine.eids = [NSMutableArray arrayWithArray: [[[data objectForKey:@"eids"] reverseObjectEnumerator] allObjects]];
     [appData.eventLine update];
     [AppData saveData];
     L([appData.eventLine.eids description]);
     
     int count = appData.eventLine.eids.count;
     if (count > PAGE_EVENT_COUNT) count = PAGE_EVENT_COUNT;
-    NSMutableArray *tmp = [NSMutableArray arrayWithArray:[appData.eventLine.eids subarrayWithRange:NSMakeRange(0, count)]];
-    count = _data.count;
-    if (count > PAGE_EVENT_COUNT) count = PAGE_EVENT_COUNT;
-    for (int i = 0; i < count; i++)
-        if (![tmp containsObject:[_data objectAtIndex:i]]) [tmp addObject:[_data objectAtIndex:i]];
-    [EventLogic downloadEventInfos:tmp from:CLASS_NAME];
+    _data = [NSMutableArray arrayWithArray:[appData.eventLine.eids subarrayWithRange:NSMakeRange(0, count)]];
+//    count = _data.count;
+//    if (count > PAGE_EVENT_COUNT) count = PAGE_EVENT_COUNT;
+//    for (int i = 0; i < count; i++)
+//        if (![tmp containsObject:[_data objectAtIndex:i]]) [tmp addObject:[_data objectAtIndex:i]];
+    [EventLogic downloadEventInfos:_data from:CLASS_NAME];
 }
 
 - (void)eventInfosDidDownload:(NSNotification *)notification {
@@ -119,14 +118,12 @@
         event.time = [formater dateFromString:[tmp objectForKey:@"time"]];
         [event update];
     }
+    
     [AppData saveData];
+    NSArray *tmp = [appData getSortedEvents:_data];
     _data = [[NSMutableArray alloc] init];
-    for (int i = 0; i <= _currentPage; i++) {
-        NSArray *tmp = [appData getEventInPage:i];
-        for (Event *event in tmp)
-            if (![_data containsObject:event.eid])
-                [_data addObject:event.eid];
-    }
+    for (Event *event in tmp)
+        [_data addObject:event.eid];
     [self.tableView reloadData];
 }
 
@@ -181,6 +178,7 @@
     NSString *eid = [_data objectAtIndex:indexPath.row];
     AddCalendarViewController *controller = getViewControllerOfName(@"AddCalendar");
     controller.eid = eid;
+    controller.edit = YES;
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
