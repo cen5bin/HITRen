@@ -98,13 +98,13 @@ static NSMutableDictionary *dic = nil;
     L([notification.userInfo description]);
 }
 
-- (void)menuDidChooseAtIndex:(int)index {
-    if (index == 0) {
-        UIViewController *controller = getViewControllerOfName(@"SendShortMessage");
-        [self presentViewController:controller animated:YES completion:^(void){}];
-        [self hideMenu];
-    }
-        
-}
+//- (void)menuDidChooseAtIndex:(int)index {
+//    if (index == 0) {
+//        UIViewController *controller = getViewControllerOfName(@"SendShortMessage");
+//        [self presentViewController:controller animated:YES completion:^(void){}];
+//        [self hideMenu];
+//    }
+//        
+//}
 
 @end

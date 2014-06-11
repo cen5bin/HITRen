@@ -171,11 +171,18 @@
     CGPoint point = [touch locationInView:self.view];
     if (CGRectContainsPoint(self.topToolBar.frame, point)) {
         if (point.x <= 50) {
-            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"topbar2" ofType:@"png"]];
+            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu2" ofType:@"png"]];
             self.topToolBar.image = image;
         }
-        else if (point.x > CGRectGetMaxX(self.topToolBar.frame) - 50)
-            [self menuButtonClicked];
+        else if (point.x > CGRectGetMaxX(self.topToolBar.frame) - 50) {
+            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"topbar1" ofType:@"png"]];
+            self.topToolBar.image = image;
+            UIViewController *controller = getViewControllerOfName(@"SendShortMessage");
+            [self.navigationController pushViewController:controller animated:YES];
+//            [self presentViewController:controller animated:YES completion:^(void){ }];
+            [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
+//            [self menuButtonClicked];
+        }
     }
     else if (CGRectContainsPoint(self.btmToolBar.frame, point)) {
         int index = [self.btmToolBar calIndex:point];
@@ -197,6 +204,11 @@
 //    [self.view.nextResponder touchesBegan:touches withEvent:event];
 
     FUNC_END();
+}
+
+- (void)clearTopBar {
+    UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"topbar0" ofType:@"png"]];
+    self.topToolBar.image = image;
 }
 
 - (void)menuButtonClicked {

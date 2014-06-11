@@ -53,7 +53,8 @@
         if (p.x <= 50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base1" ofType:@"png"]];
             self.topBar.image = image;
-            [self dismissViewControllerAnimated:YES completion:^(void){}];
+            [self.navigationController popViewControllerAnimated:YES];
+//            [self dismissViewControllerAnimated:YES completion:^(void){}];
         }
         else if (p.x >= CGRectGetMaxX(self.topBar.frame)-50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
@@ -71,7 +72,8 @@
             }
             if (_pics.count == 0) {
                 [MessageLogic sendShortMessage:self.textView.text andPics:[NSArray array] from:CLASS_NAME];
-                [self dismissViewControllerAnimated:YES completion:^(void){}];
+                [self.navigationController popViewControllerAnimated:YES];
+//                [self dismissViewControllerAnimated:YES completion:^(void){}];
             }
             else [UploadLogic uploadImages:_pics from:NSStringFromClass(self.class)];
         }
@@ -138,9 +140,13 @@
         [MessageLogic sendShortMessage:self.textView.text andPics:[noticifition.userInfo objectForKey:@"DATA"] from:CLASS_NAME];
     }
     else if ([noticifition.object isEqualToString:ASYNC_EVENT_SENDSHORTMESSAGE]) {
-        [self dismissViewControllerAnimated:YES completion:^(void){}];
+        [self.navigationController popViewControllerAnimated:YES];
+//        [self dismissViewControllerAnimated:YES completion:^(void){}];
     }
 }
 
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+}
 @end
