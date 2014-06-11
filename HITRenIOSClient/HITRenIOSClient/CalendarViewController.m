@@ -117,8 +117,9 @@
         event.seq = [tmp objectForKey:@"seq"];
         event.time = [formater dateFromString:[tmp objectForKey:@"time"]];
         [event update];
+        [EventLogic cancelAlarm:eid];
+        [EventLogic setAlarm:eid];
     }
-    
     [AppData saveData];
     NSArray *tmp = [appData getSortedEvents:_data];
     _data = [[NSMutableArray alloc] init];

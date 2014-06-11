@@ -456,7 +456,7 @@ static AppData *appData;
     }
     
     for (id eid in array) {
-        L(@"fuck");
+//        L(@"fuck");
         NSDictionary *dic = @{ @"eid": eid, @"seq":[NSNumber numberWithInteger:0]};
         [ret addObject:dic];
     }

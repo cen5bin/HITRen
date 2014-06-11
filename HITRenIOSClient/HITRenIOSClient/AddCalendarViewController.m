@@ -173,6 +173,7 @@
         else if (obj == self.timeCell) [self showDataPicker];
     }
     else {
+        [EventLogic cancelAlarm:self.eid];
         [EventLogic deleteEvent:self.eid from:CLASS_NAME];
         _myActivityIndicatorView.textLabel.text = @"正在删除";
         [_myActivityIndicatorView showInView:self.view];
@@ -258,7 +259,8 @@
     UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"base2" ofType:@"png"]];
     self.topBar.image = image;
     AppData *appData = [AppData sharedInstance];
-    Event *event = [appData newEvent];
+    Event *event = !self.eid?[appData newEvent]:[appData getEventOfEid:self.eid];
+    if (!event) event = [appData newEvent];
     if (!self.eid)
         event.eid = [self makeEid];
     else event.eid = self.eid;
@@ -277,6 +279,8 @@
     [EventLogic uploadEvent:dic from:CLASS_NAME];
     _myActivityIndicatorView.textLabel.text = @"正在上传";
     [_myActivityIndicatorView showInView:self.view];
+    [EventLogic cancelAlarm:self.eid];
+    [EventLogic setAlarm:self.eid];
 //    [self.navigationController popViewControllerAnimated:YES];
     [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
  }

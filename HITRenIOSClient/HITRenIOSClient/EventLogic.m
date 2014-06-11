@@ -11,6 +11,7 @@
 #import "User.h"
 #import "AppData.h"
 #import "EventLine.h"
+#import "Event.h"
 
 @implementation EventLogic
 
@@ -71,7 +72,36 @@
         return NO;
     }
     return YES;
+}
 
++ (BOOL)setAlarm:(NSString *)eid {
+    AppData *appData = [AppData sharedInstance];
+    Event *event = [appData getEventOfEid:eid];
+    if (!event) return NO;
+    
+    for (NSNumber *time in event.remindTimes) {
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970: [event.time timeIntervalSince1970] - [time intValue]*60];
+        notification.fireDate =  date;//[event.time dateByAddingTimeInterval:[time intValue]*60];
+        NSDictionary *dic = @{@"eid":eid};
+        notification.userInfo = dic;
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.timeZone=[NSTimeZone defaultTimeZone];
+        notification.alertBody=@"顶部提示内容，通知时间到啦";
+//        notification.soundName= UILocalNotificationDefaultSoundName;
+        notification.alertAction=NSLocalizedString(@"你锁屏啦，通知时间到啦", nil);
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
+    return YES;
+}
+
++ (BOOL)cancelAlarm:(NSString *)eid {
+    NSArray *array = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    for (UILocalNotification *notification in array)
+        if ([[notification.userInfo objectForKey:@"eid"] isEqualToString:eid]) {
+            [[UIApplication sharedApplication] cancelLocalNotification:notification];
+        }
+    return YES;
 }
 
 @end

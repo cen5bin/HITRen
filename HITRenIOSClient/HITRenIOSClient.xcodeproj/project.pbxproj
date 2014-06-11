@@ -325,6 +325,8 @@
 		F883E0A2194875C700A8D526 /* menu1_0.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E0A0194875C700A8D526 /* menu1_0.png */; };
 		F883E0A51948766100A8D526 /* SettingMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F883E0A41948766100A8D526 /* SettingMenu.m */; };
 		F883E0A7194879BB00A8D526 /* topbar2.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E0A6194879BB00A8D526 /* topbar2.png */; };
+		F883E0AA1948A98200A8D526 /* notificationview.xib in Resources */ = {isa = PBXBuildFile; fileRef = F883E0A91948A98200A8D526 /* notificationview.xib */; };
+		F883E0AD1948AC9D00A8D526 /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F883E0AC1948AC9D00A8D526 /* NotificationView.m */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
 		F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3918BC7C2800407521 /* LoginViewController.m */; };
@@ -829,6 +831,9 @@
 		F883E0A31948766100A8D526 /* SettingMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingMenu.h; sourceTree = "<group>"; };
 		F883E0A41948766100A8D526 /* SettingMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingMenu.m; sourceTree = "<group>"; };
 		F883E0A6194879BB00A8D526 /* topbar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar2.png; sourceTree = "<group>"; };
+		F883E0A91948A98200A8D526 /* notificationview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = notificationview.xib; sourceTree = "<group>"; };
+		F883E0AB1948AC9D00A8D526 /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
+		F883E0AC1948AC9D00A8D526 /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB3518BC79EA00407521 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		F88BCB3618BC79EA00407521 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
@@ -1920,6 +1925,16 @@
 			name = "一行";
 			sourceTree = "<group>";
 		};
+		F883E0A81948A96200A8D526 /* 通知 */ = {
+			isa = PBXGroup;
+			children = (
+				F883E0A91948A98200A8D526 /* notificationview.xib */,
+				F883E0AB1948AC9D00A8D526 /* NotificationView.h */,
+				F883E0AC1948AC9D00A8D526 /* NotificationView.m */,
+			);
+			name = "通知";
+			sourceTree = "<group>";
+		};
 		F88BCB2E18BB7A4100407521 /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -1993,6 +2008,7 @@
 		F88F989118C1E86C009CE742 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				F883E0A81948A96200A8D526 /* 通知 */,
 				F883E09B194873C000A8D526 /* 设置 */,
 				F8148D5F194202DA000F5C9F /* myActivityIndicatorView */,
 				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
@@ -2211,6 +2227,7 @@
 				F8148C04193C665C000F5C9F /* h3.jpg in Resources */,
 				F8148CB1193C6691000F5C9F /* f045.gif in Resources */,
 				F883E0951948536300A8D526 /* reflesh.png in Resources */,
+				F883E0AA1948A98200A8D526 /* notificationview.xib in Resources */,
 				F8148D581941F395000F5C9F /* base3.png in Resources */,
 				F8148CAC193C6691000F5C9F /* f040.gif in Resources */,
 				F8148C05193C665C000F5C9F /* h4.jpg in Resources */,
@@ -2531,6 +2548,7 @@
 				F8FC7F4918751A0800842DC5 /* TestRelationship.m in Sources */,
 				F8148D01193E00C6000F5C9F /* FreshNewsMenu.m in Sources */,
 				F8107C6B1933505A0073C169 /* ChatCell.m in Sources */,
+				F883E0AD1948AC9D00A8D526 /* NotificationView.m in Sources */,
 				F84B7DDC18BB3C8D007FC2D5 /* GCDMulticastDelegate.m in Sources */,
 				F892372F18F3C85A00658F47 /* HometownPicker.m in Sources */,
 				F80B0D4B187426F2003E72DC /* MessageLogic.m in Sources */,
