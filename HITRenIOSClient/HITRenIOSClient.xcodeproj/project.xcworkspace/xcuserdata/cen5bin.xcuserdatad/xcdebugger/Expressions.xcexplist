@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[ContactView scrollViewDidScroll:]:ContactView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "scrollView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[MessageDetailViewController sendText:]:MessageDetailViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -14,10 +22,24 @@
          contextName = "-[FreshNewsViewController tableView:cellForRowAtIndexPath:]:FreshNewsViewController.m">
       </ContextState>
       <ContextState
-         contextName = "-[ContactView scrollViewDidScroll:]:ContactView.m">
+         contextName = "-[EmotionTextView judgeEmotion:]:EmotionTextView.m">
          <PersistentStrings>
             <PersistentString
-               value = "scrollView">
+               value = "[string hasSuffix:@&quot;]&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "[string hasPrefix:EMOTION_START]">
+            </PersistentString>
+            <PersistentString
+               value = "[emotions containsObject:string]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[EmotionTextView work]:EmotionTextView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[array objectAtIndex:0] hasPrefix:EMOTION_START]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

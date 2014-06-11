@@ -11,6 +11,7 @@
 @interface EmotionTextView : UITextView <UITextViewDelegate> {
     BOOL _realDraw;
     int _lineCount;
+    BOOL _pureText;
 }
 
 @property (nonatomic) CGFloat len;

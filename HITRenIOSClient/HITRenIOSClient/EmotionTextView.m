@@ -43,6 +43,10 @@ static NSArray *emotions = nil;
     return NO;
 }
 
+- (BOOL)judgeEmotion:(NSString *)string {
+    return [string hasPrefix:EMOTION_START] && [string hasSuffix:EMOTION_END] && [emotions containsObject:string];
+}
+
 - (void)work {
     FUNC_START();
     // Drawing code
@@ -52,15 +56,32 @@ static NSArray *emotions = nil;
     if (self.color == nil) self.color = DEFAULT_COLOR;
     NSMutableArray *array = [NSMutableArray array];
     [self analyzeText:self.text toResult:array];
+    NSArray *emotions = [EmotionTextView getEmotions];
+    _pureText = (array.count == 1 && ![self judgeEmotion:[array objectAtIndex:0]]);
+    if (_pureText) {
+        NSString *string = [array objectAtIndex:0];
+        CGSize size = [string sizeWithFont:self.font constrainedToSize:CGSizeMake(FLT_MAX, self.len)];
+        if (size.width + 16 <= CGRectGetWidth(self.frame)) {
+            self.width = size.width + 16;
+            self.height = size.height + 16;
+        }
+        else {
+            self.width = CGRectGetWidth(self.frame);
+            size = [string sizeWithFont:self.font constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame)-16, FLT_MAX)];
+            self.height = size.height + 16;
+        }
+        return;
+    }
     CGFloat nowX = 8;
     CGFloat nowY = 8;
     CGFloat tap = 2;
     CGFloat width = CGRectGetWidth(self.frame);
-    NSArray *emotions = [EmotionTextView getEmotions];
+    
     NSMutableArray *tmp = [[NSMutableArray alloc] init];
     CGFloat max_h = 0;
     for (NSString *string in array) {
-        if ([string hasPrefix:EMOTION_START] && [string hasSuffix:EMOTION_END] && [emotions containsObject:string]) {
+//        if ([string hasPrefix:EMOTION_START] && [string hasSuffix:EMOTION_END] && [emotions containsObject:string]) {
+        if ([self judgeEmotion:string]) {
             if (nowX+self.len>width - 5) {
                 [self draw:tmp withLineHeight:max_h andNowY:nowY];
                 tmp = [[NSMutableArray alloc] init];
@@ -128,7 +149,8 @@ static NSArray *emotions = nil;
     _realDraw = YES;
     [self.color set];
     [self work];
-    self.text = @"";
+    if (!_pureText)
+        self.text = @"";
 }
 
 - (void)draw:(NSArray *)tmp withLineHeight:(CGFloat)h andNowY:(CGFloat)nowY{
