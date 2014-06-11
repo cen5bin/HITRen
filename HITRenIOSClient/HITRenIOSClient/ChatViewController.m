@@ -158,7 +158,8 @@
         _keyboardToolBarIsDisappearing = NO;
         _keyboardToolBarAtBottom.hidden = NO;
 //        [_keyboardToolBarAtBottom resignFirstResponder];
-        [self.tableView reloadData];
+        [self reloadData];
+//        [self.tableView reloadData];
         return;
     }
     else {
@@ -170,7 +171,8 @@
         if (!_keyboardToolBar.superview)
             [self.view.window addSubview:_keyboardToolBar];
         [_keyboardToolBar becomeFirstResponder];
-        [self.tableView reloadData];
+        [self reloadData];
+//        [self.tableView reloadData];
         [self scrollToBottom];
     }
 }
@@ -178,7 +180,8 @@
 - (void)reloadData {
     AppData *appData = [AppData sharedInstance];
     Notice *notice = [appData lastNoticeOfUid:[self.userInfo.uid intValue]];
-    if (notice.notices.count > 5)
+    int count = _keyboardToolBar.hidden?10:5;
+    if (notice.notices.count > count)
         _datas = [[NSMutableArray alloc] initWithArray:notice.notices];
     else {
         Notice *notice1 = [appData getNoticeOfUid:[self.userInfo.uid intValue] atIndex:[notice.index intValue]-1];
@@ -186,6 +189,8 @@
         for (id obj in notice1.notices) [_datas addObject:obj];
         for (id obj in notice.notices) [_datas addObject:obj];
     }
+    if (_datas.count > count)
+        _datas = [NSMutableArray arrayWithArray: [_datas subarrayWithRange:NSMakeRange(_datas.count-count, count)]];
     [self addDate];
     [self.tableView reloadData];
     [self scrollToBottom];
@@ -200,9 +205,14 @@
     AppData *appData = [AppData sharedInstance];
     Notice *notice = [appData lastNoticeOfUid:[self.userInfo.uid intValue]];
     Notice *notice1 = [appData getNoticeOfUid:[self.userInfo.uid intValue] atIndex:[notice.index intValue]-num];
+    int count1 = notice.notices.count;
     NSMutableArray *tmp = [[NSMutableArray alloc] init];
-    for (id obj in notice1.notices)
+    for (id obj in notice1.notices) {
+        count1--;
         [tmp addObject:obj];
+        if (count1 == 0) break;
+    }
+//        else break;
     for (id obj in _datas)
         if ([obj isKindOfClass:[NoticeObject class]])
             [tmp addObject:obj];
@@ -345,7 +355,8 @@
 //        if (!view.superview)
         [self.tableView addSubview:view];
         view.hidden = NO;
-        [self reloadRecord];
+        [self performSelector:@selector(reloadRecord) withObject:nil afterDelay:0.1];
+//        [self reloadRecord];
         [self performSelector:@selector(lockLoadingRecord) withObject:nil afterDelay:5];
     }
 }

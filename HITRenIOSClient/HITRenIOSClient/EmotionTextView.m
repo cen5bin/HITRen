@@ -148,9 +148,11 @@ static NSArray *emotions = nil;
 - (void)drawRect:(CGRect)rect {
     _realDraw = YES;
     [self.color set];
-    [self work];
-    if (!_pureText)
+
+    if (!_pureText) {
+        [self work];
         self.text = @"";
+    }
 }
 
 - (void)draw:(NSArray *)tmp withLineHeight:(CGFloat)h andNowY:(CGFloat)nowY{
