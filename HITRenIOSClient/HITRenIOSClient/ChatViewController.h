@@ -23,6 +23,9 @@
     UserInfo *_selfInfo;
     UIImage *_selfImage;
     UIImage *_otherImage;
+    
+    UIActivityIndicatorView *_activityIndicator;
+    BOOL _loadingRecord;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

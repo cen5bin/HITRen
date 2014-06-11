@@ -10,7 +10,7 @@
 #import "NoticeObject.h"
 #import "DataManager.h"
 
-const int max_count = 20;
+const int max_count = PAGE_NOTICE_COUNT;
 
 @implementation Notice
 

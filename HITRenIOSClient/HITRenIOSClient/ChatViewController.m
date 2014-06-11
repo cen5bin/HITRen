@@ -178,7 +178,7 @@
 - (void)reloadData {
     AppData *appData = [AppData sharedInstance];
     Notice *notice = [appData lastNoticeOfUid:[self.userInfo.uid intValue]];
-    if (notice.notices.count > 10)
+    if (notice.notices.count > 5)
         _datas = [[NSMutableArray alloc] initWithArray:notice.notices];
     else {
         Notice *notice1 = [appData getNoticeOfUid:[self.userInfo.uid intValue] atIndex:[notice.index intValue]-1];
@@ -186,7 +186,42 @@
         for (id obj in notice1.notices) [_datas addObject:obj];
         for (id obj in notice.notices) [_datas addObject:obj];
     }
+    [self addDate];
+    [self.tableView reloadData];
+    [self scrollToBottom];
+}
+
+- (void)reloadRecord {
+    int count = 0;
+    for (id obj in _datas)
+        if ([obj isKindOfClass:[NoticeObject class]]) count++;
+    int num = count / PAGE_NOTICE_COUNT;
+    if (count % PAGE_NOTICE_COUNT) num++;
+    AppData *appData = [AppData sharedInstance];
+    Notice *notice = [appData lastNoticeOfUid:[self.userInfo.uid intValue]];
+    Notice *notice1 = [appData getNoticeOfUid:[self.userInfo.uid intValue] atIndex:[notice.index intValue]-num];
+    NSMutableArray *tmp = [[NSMutableArray alloc] init];
+    for (id obj in notice1.notices)
+        [tmp addObject:obj];
+    for (id obj in _datas)
+        if ([obj isKindOfClass:[NoticeObject class]])
+            [tmp addObject:obj];
+    _datas = tmp;
+    [self addDate];
+    [self.tableView reloadData];
+    [self performSelector:@selector(resetTableView) withObject:nil afterDelay:0.3];
     
+//    _loadingRecord = NO;
+}
+
+- (void)resetTableView {
+    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+    UIView *view = [self getActivityIndicator];
+    view.hidden = YES;
+    [view removeFromSuperview];
+}
+
+- (void)addDate {
     NSArray *tmp = [NSArray arrayWithArray:_datas];
     _datas = [[NSMutableArray alloc] init];
     NSDate *date = nil;
@@ -205,10 +240,7 @@
             date = obj.date;
         }
     }
-    
-    
-    [self.tableView reloadData];
-    [self scrollToBottom];
+
 }
 
 - (void)scrollToBottom {
@@ -299,7 +331,23 @@
     }
 }
 
+- (void)lockLoadingRecord {
+    _loadingRecord = NO;
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGPoint p = scrollView.contentOffset;
+    if (p.y < - 35) {
+        if (_loadingRecord) return;
+        _loadingRecord = YES;
+        UIView *view = [self getActivityIndicator];
+        if (view.superview) return;
+//        if (!view.superview)
+        [self.tableView addSubview:view];
+        view.hidden = NO;
+        [self reloadRecord];
+        [self performSelector:@selector(lockLoadingRecord) withObject:nil afterDelay:5];
+    }
 }
 
 - (void)hideKeyboardToolBar {
@@ -379,4 +427,23 @@
     }
     [self performSelector:@selector(clearTopBar) withObject:nil afterDelay:0.1];
 }
+
+- (void)hideTopActivityIndicator {
+    _activityIndicator.hidden = YES;
+    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+
+- (UIActivityIndicatorView *)getActivityIndicator {
+    if (!_activityIndicator) {
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        CGFloat len = 30;
+        _activityIndicator.frame = CGRectMake(CGRectGetMidX(self.view.frame)-len / 2, -len, len, len);
+    }
+    _activityIndicator.hidden = YES;
+    if (!_activityIndicator.isAnimating)
+        [_activityIndicator startAnimating];
+    return _activityIndicator;
+}
+
 @end

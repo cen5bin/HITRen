@@ -28,6 +28,7 @@
 #define BOTTOM_HEIGHT 10 //图片的底部空白高度
 
 #define PAGE_ACTIVITY_COUNT 20 // 一页有多少动态消息，点赞之类的
+#define PAGE_NOTICE_COUNT 10 // 一页多少聊天记录
 
 #define PAGE_GOODS_COUNT 20 //一页有多少商品
 
