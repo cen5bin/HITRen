@@ -73,6 +73,8 @@
         [userDefaults setObject:user.email forKey:@"email"];
         [userDefaults setObject:user.password forKey:@"password"];
         [userDefaults synchronize];
+        [self.email resignFirstResponder];
+        [self.password resignFirstResponder];
         [self.navigationController pushViewController:controller animated:YES];
         
     }

@@ -73,7 +73,7 @@
 - (NSArray *)commentListNeedDownload:(NSArray *)mids;
 - (Comment *)getCommentOfMid:(int)mid;
 
-- (void)storeImage:(UIImage *)image withFilename:(NSString *)filename;
+- (BOOL)storeImage:(UIImage *)image withFilename:(NSString *)filename;
 - (UIImage *)getImage:(NSString *)filename;
 + (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
 

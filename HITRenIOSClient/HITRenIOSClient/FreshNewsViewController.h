@@ -11,7 +11,7 @@
 #import "KeyboardToolBarDelegate.h"
 #import "WriteInfoDelegate.h"
 
-@class KeyboardToolBar,FreshNewsMenu, WriterInfoView;
+@class KeyboardToolBar,FreshNewsMenu, WriterInfoView,SettingMenu;
 @interface FreshNewsViewController : MainViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, MessageCellDelegate, KeyboardToolBarDelegate,WriteInfoDelegate> {
     NSMutableArray* _data;  //存的是message
     NSMutableDictionary* _comments; //存的是评论，每个元素是个dic
@@ -27,9 +27,12 @@
     int _maxDataLoadedPage; //最大的加载过数据的页面号，如果拉取过新的timeline，需要将其置为0
     
     NSMutableSet *_downloadingImageSet;
+    NSMutableArray *_imageQueue;
+    BOOL _downloadingImage;
     
     KeyboardToolBar *_keyboardToolBar;
     FreshNewsMenu *_menu;
+    SettingMenu *_settingMenu;
     
     int _commentingMid;
     int _reuid;

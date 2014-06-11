@@ -11,6 +11,17 @@
 #import "HttpData.h"
 #import "AppData.h"
 
+static NSString *IP = //@"10.9.180.121";
+//@"127.0.0.1";
+//@"192.168.0.93";
+//@"192.168.1.151";
+SERVER_IP;
+
+static NSString *SERVER_NAME = @"HITRenServer";
+static int PORT = 8080;
+
+static NSMutableArray *imageQueue;
+
 @implementation UploadLogic
 
 + (BOOL)uploadImages:(NSArray *)images withExtend:(NSString *)extend from:(NSString *)classname {
@@ -41,6 +52,38 @@
 }
 
 + (BOOL)downloadImage:(NSString *)filename from:(NSString *)classname{
+//    static BOOL working = NO;
+//    @synchronized(self) {
+//    if (!imageQueue) imageQueue = [[NSMutableArray alloc] init];
+//    if (![imageQueue containsObject:filename]) [imageQueue addObject:filename];
+//    if (working) return YES;
+//        
+//    LOG(@"filename %@", filename);
+//    L([imageQueue description]);
+//    working = YES;
+//    }
+////    L(@"aaaa");
+//    NSString *tmp = [NSString stringWithFormat:@"http://%@:%d/%@/%@?filename=",IP, PORT, SERVER_NAME, @"DownloadImage"];
+////    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d/%@/%@?filename=%@",IP, PORT, SERVER_NAME, @"DownloadImage",filename]];
+//    NSString *notificationName = [NSString stringWithFormat:@"%@_%@", ASYNCDATALOADED, classname];
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_async(queue, ^{
+//        while (imageQueue.count) {
+//            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", tmp, [imageQueue objectAtIndex:0]]];
+////            L([url description]);
+////            LOG(@"url %@", <#args...#>)
+//            [imageQueue removeObjectAtIndex:0];
+//            LOG(@"image queue %@", [imageQueue description]);
+//            NSData *data = [NSData dataWithContentsOfURL:url];
+////            L([data description]);
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                NSDictionary *dic = @{@"imagedata": data,@"imagename":filename};
+//                [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:ASYNC_EVENT_DOWNLOADIMAGE userInfo:dic];
+//            });
+//        }
+//        working = NO;
+//    });
+//    return YES;
     BOOL ret = [[HttpTransfer transfer] downloadImage:filename from:classname];
     if (!ret) {
         L(@"download image failed");

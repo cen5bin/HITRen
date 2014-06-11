@@ -201,4 +201,16 @@
 
 }
 
++ (BOOL)logout {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:nil forKey:@"username"];
+    [userDefaults setObject:nil forKey:@"password"];
+    [userDefaults setObject:nil forKey:@"birthday"];
+    [userDefaults setObject:nil forKey:@"hometown"];
+    [userDefaults setObject:[NSNumber numberWithInt:0] forKey:@"sex"];
+    [userDefaults setObject:nil forKey:@"pic"];
+    [userDefaults synchronize];
+    return YES;
+}
+
 @end

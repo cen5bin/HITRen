@@ -23,4 +23,5 @@
 + (BOOL)updateInfoFinished:(NSDictionary*)ret;
 + (BOOL)downloadUseInfos:(NSArray *)uids from:(NSString *)classname;
 + (void)userInfosDidDownload:(NSDictionary *)data;
++ (BOOL)logout;
 @end

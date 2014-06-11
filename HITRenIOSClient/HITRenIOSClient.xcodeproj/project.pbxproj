@@ -318,6 +318,13 @@
 		F883E08F1946AF0200A8D526 /* menu3_3.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E08C1946AF0200A8D526 /* menu3_3.png */; };
 		F883E0901946AF0200A8D526 /* menu3_2.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E08D1946AF0200A8D526 /* menu3_2.png */; };
 		F883E0911946AF0200A8D526 /* menu3_1.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E08E1946AF0200A8D526 /* menu3_1.png */; };
+		F883E0951948536300A8D526 /* reflesh.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E0941948536300A8D526 /* reflesh.png */; };
+		F883E0991948558100A8D526 /* topbar3.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E0981948558100A8D526 /* topbar3.png */; };
+		F883E09D1948743A00A8D526 /* settingmenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F883E09C1948743A00A8D526 /* settingmenu.xib */; };
+		F883E0A1194875C700A8D526 /* menu1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E09F194875C700A8D526 /* menu1_1.png */; };
+		F883E0A2194875C700A8D526 /* menu1_0.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E0A0194875C700A8D526 /* menu1_0.png */; };
+		F883E0A51948766100A8D526 /* SettingMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F883E0A41948766100A8D526 /* SettingMenu.m */; };
+		F883E0A7194879BB00A8D526 /* topbar2.png in Resources */ = {isa = PBXBuildFile; fileRef = F883E0A6194879BB00A8D526 /* topbar2.png */; };
 		F88BCB2D18BB7A1F00407521 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */; };
 		F88BCB3718BC79EA00407521 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3618BC79EA00407521 /* RootViewController.m */; };
 		F88BCB3A18BC7C2800407521 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BCB3918BC7C2800407521 /* LoginViewController.m */; };
@@ -350,7 +357,6 @@
 		F8D7482E1938638200829CDA /* UploadGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D7482D1938638200829CDA /* UploadGoodsViewController.m */; };
 		F8D7483419386DC700829CDA /* addimage.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D7483319386DC700829CDA /* addimage.png */; };
 		F8E9685F18C5F96C00B9384B /* topbar0.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685C18C5F96C00B9384B /* topbar0.png */; };
-		F8E9686118C5F96C00B9384B /* topbar2.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9685E18C5F96C00B9384B /* topbar2.png */; };
 		F8E9686418C5F9B800B9384B /* TopToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9686318C5F9B800B9384B /* TopToolBar.m */; };
 		F8E9686718C5FBBC00B9384B /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9686618C5FBBC00B9384B /* TestView.m */; };
 		F8E9686A18C5FC3900B9384B /* FreshNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9686918C5FC3900B9384B /* FreshNewsViewController.m */; };
@@ -815,6 +821,14 @@
 		F883E08C1946AF0200A8D526 /* menu3_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu3_3.png; sourceTree = "<group>"; };
 		F883E08D1946AF0200A8D526 /* menu3_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu3_2.png; sourceTree = "<group>"; };
 		F883E08E1946AF0200A8D526 /* menu3_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu3_1.png; sourceTree = "<group>"; };
+		F883E0941948536300A8D526 /* reflesh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reflesh.png; sourceTree = "<group>"; };
+		F883E0981948558100A8D526 /* topbar3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar3.png; sourceTree = "<group>"; };
+		F883E09C1948743A00A8D526 /* settingmenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = settingmenu.xib; sourceTree = "<group>"; };
+		F883E09F194875C700A8D526 /* menu1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu1_1.png; sourceTree = "<group>"; };
+		F883E0A0194875C700A8D526 /* menu1_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu1_0.png; sourceTree = "<group>"; };
+		F883E0A31948766100A8D526 /* SettingMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingMenu.h; sourceTree = "<group>"; };
+		F883E0A41948766100A8D526 /* SettingMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingMenu.m; sourceTree = "<group>"; };
+		F883E0A6194879BB00A8D526 /* topbar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar2.png; sourceTree = "<group>"; };
 		F88BCB2C18BB7A1F00407521 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F88BCB3518BC79EA00407521 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		F88BCB3618BC79EA00407521 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
@@ -868,7 +882,6 @@
 		F8D7482D1938638200829CDA /* UploadGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadGoodsViewController.m; sourceTree = "<group>"; };
 		F8D7483319386DC700829CDA /* addimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addimage.png; sourceTree = "<group>"; };
 		F8E9685C18C5F96C00B9384B /* topbar0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar0.png; sourceTree = "<group>"; };
-		F8E9685E18C5F96C00B9384B /* topbar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbar2.png; sourceTree = "<group>"; };
 		F8E9686218C5F9B800B9384B /* TopToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopToolBar.h; sourceTree = "<group>"; };
 		F8E9686318C5F9B800B9384B /* TopToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopToolBar.m; sourceTree = "<group>"; };
 		F8E9686518C5FBBC00B9384B /* TestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestView.h; sourceTree = "<group>"; };
@@ -1189,6 +1202,7 @@
 		F8107CB419364CCC0073C169 /* 菜单 */ = {
 			isa = PBXGroup;
 			children = (
+				F883E09E194875B300A8D526 /* 一行 */,
 				F883E0891946AE5F00A8D526 /* 三行 */,
 				F883E0881946AE1B00A8D526 /* 两行 */,
 			);
@@ -1347,14 +1361,14 @@
 			name = "表情";
 			sourceTree = "<group>";
 		};
-		F8148CFC193E0031000F5C9F /* freshnews */ = {
+		F8148CFC193E0031000F5C9F /* 菜单 */ = {
 			isa = PBXGroup;
 			children = (
 				F8148CFD193E004A000F5C9F /* freshnewsmenu.xib */,
 				F8148CFF193E00C6000F5C9F /* FreshNewsMenu.h */,
 				F8148D00193E00C6000F5C9F /* FreshNewsMenu.m */,
 			);
-			name = freshnews;
+			name = "菜单";
 			sourceTree = "<group>";
 		};
 		F8148D04193E2086000F5C9F /* emotionTextView */ = {
@@ -1440,6 +1454,8 @@
 		F8148D35194035A2000F5C9F /* 新鲜事界面 */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D7019422CF6000F5C9F /* 作者 */,
+				F8148CFC193E0031000F5C9F /* 菜单 */,
 				F8723EC01927C77200828B5C /* messagecell */,
 				F8E9686818C5FC3900B9384B /* FreshNewsViewController.h */,
 				F8E9686918C5FC3900B9384B /* FreshNewsViewController.m */,
@@ -1456,10 +1472,9 @@
 		F8148D431941A0AF000F5C9F /* 消息界面 */ = {
 			isa = PBXGroup;
 			children = (
+				F883E09A1948739000A8D526 /* 聊天 */,
 				F8E9687718C709CB00B9384B /* NoticeViewController.h */,
 				F8E9687818C709CB00B9384B /* NoticeViewController.m */,
-				F8107C6619331A4D0073C169 /* ChatViewController.h */,
-				F8107C6719331A4D0073C169 /* ChatViewController.m */,
 			);
 			name = "消息界面";
 			sourceTree = "<group>";
@@ -1488,6 +1503,7 @@
 		F8148D5B1941F4E7000F5C9F /* 通讯录 */ = {
 			isa = PBXGroup;
 			children = (
+				F8148D65194208C7000F5C9F /* textBox */,
 				F8107C971935D2D20073C169 /* 通讯录列表 */,
 				F8148D4C1941ED52000F5C9F /* ContactViewController.h */,
 				F8148D4D1941ED52000F5C9F /* ContactViewController.m */,
@@ -1873,6 +1889,37 @@
 			name = "三行";
 			sourceTree = "<group>";
 		};
+		F883E09A1948739000A8D526 /* 聊天 */ = {
+			isa = PBXGroup;
+			children = (
+				F8148D04193E2086000F5C9F /* emotionTextView */,
+				F8107C691933505A0073C169 /* ChatCell.h */,
+				F8107C6A1933505A0073C169 /* ChatCell.m */,
+				F8107C6619331A4D0073C169 /* ChatViewController.h */,
+				F8107C6719331A4D0073C169 /* ChatViewController.m */,
+			);
+			name = "聊天";
+			sourceTree = "<group>";
+		};
+		F883E09B194873C000A8D526 /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				F883E09C1948743A00A8D526 /* settingmenu.xib */,
+				F883E0A31948766100A8D526 /* SettingMenu.h */,
+				F883E0A41948766100A8D526 /* SettingMenu.m */,
+			);
+			name = "设置";
+			sourceTree = "<group>";
+		};
+		F883E09E194875B300A8D526 /* 一行 */ = {
+			isa = PBXGroup;
+			children = (
+				F883E09F194875C700A8D526 /* menu1_1.png */,
+				F883E0A0194875C700A8D526 /* menu1_0.png */,
+			);
+			name = "一行";
+			sourceTree = "<group>";
+		};
 		F88BCB2E18BB7A4100407521 /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -1924,7 +1971,8 @@
 				F89964DE18FCEF7E00D7FA44 /* me */,
 				F8E9685C18C5F96C00B9384B /* topbar0.png */,
 				F8148D02193E057A000F5C9F /* topbar1.png */,
-				F8E9685E18C5F96C00B9384B /* topbar2.png */,
+				F883E0A6194879BB00A8D526 /* topbar2.png */,
+				F883E0981948558100A8D526 /* topbar3.png */,
 			);
 			name = topbar;
 			sourceTree = "<group>";
@@ -1945,11 +1993,8 @@
 		F88F989118C1E86C009CE742 /* component */ = {
 			isa = PBXGroup;
 			children = (
-				F8148D7019422CF6000F5C9F /* 作者 */,
-				F8148D65194208C7000F5C9F /* textBox */,
+				F883E09B194873C000A8D526 /* 设置 */,
 				F8148D5F194202DA000F5C9F /* myActivityIndicatorView */,
-				F8148D04193E2086000F5C9F /* emotionTextView */,
-				F8148CFC193E0031000F5C9F /* freshnews */,
 				F8C564C31921DBEA00695094 /* keyboardtoolbar */,
 				F842BB8A19051BD700148848 /* menu */,
 				F88F989218C1E910009CE742 /* BtmToolBar.h */,
@@ -1964,8 +2009,6 @@
 				F8696A821918CAD8008887AD /* NoticeCell.m */,
 				F87209C1191CB53E00FAC7A1 /* NoticeViewBar.h */,
 				F87209C2191CB53E00FAC7A1 /* NoticeViewBar.m */,
-				F8107C691933505A0073C169 /* ChatCell.h */,
-				F8107C6A1933505A0073C169 /* ChatCell.m */,
 				F8107CAC19363F370073C169 /* GoodsCell.h */,
 				F8107CAD19363F370073C169 /* GoodsCell.m */,
 				F8148BD8193A2248000F5C9F /* ThingCell.h */,
@@ -2044,6 +2087,7 @@
 		F8E9686B18C6DB4B00B9384B /* button */ = {
 			isa = PBXGroup;
 			children = (
+				F883E0941948536300A8D526 /* reflesh.png */,
 				F8148D7719423933000F5C9F /* blue.png */,
 				F8148D6E19422AD4000F5C9F /* man.png */,
 				F8148D3A1940BA1E000F5C9F /* leftarrow.png */,
@@ -2166,6 +2210,7 @@
 				F8148CEA193C6691000F5C9F /* f102.gif in Resources */,
 				F8148C04193C665C000F5C9F /* h3.jpg in Resources */,
 				F8148CB1193C6691000F5C9F /* f045.gif in Resources */,
+				F883E0951948536300A8D526 /* reflesh.png in Resources */,
 				F8148D581941F395000F5C9F /* base3.png in Resources */,
 				F8148CAC193C6691000F5C9F /* f040.gif in Resources */,
 				F8148C05193C665C000F5C9F /* h4.jpg in Resources */,
@@ -2212,6 +2257,7 @@
 				F8148CD6193C6691000F5C9F /* f082.gif in Resources */,
 				F8148C95193C6691000F5C9F /* f017.gif in Resources */,
 				F8148C07193C665C000F5C9F /* h6.jpg in Resources */,
+				F883E09D1948743A00A8D526 /* settingmenu.xib in Resources */,
 				F8148CA9193C6691000F5C9F /* f037.gif in Resources */,
 				F8148CE4193C6691000F5C9F /* f096.gif in Resources */,
 				F8107CB0193643BC0073C169 /* more.png in Resources */,
@@ -2254,15 +2300,18 @@
 				F89964F718FD2C3600D7FA44 /* base2.png in Resources */,
 				F8148C8F193C6691000F5C9F /* f011.gif in Resources */,
 				F8148CBA193C6691000F5C9F /* f054.gif in Resources */,
+				F883E0A7194879BB00A8D526 /* topbar2.png in Resources */,
 				F8148CB9193C6691000F5C9F /* f053.gif in Resources */,
 				F883E08B1946AE6B00A8D526 /* menu3_0.png in Resources */,
 				F8148C11193C665C000F5C9F /* h16.jpg in Resources */,
 				F8148CB0193C6691000F5C9F /* f044.gif in Resources */,
+				F883E0991948558100A8D526 /* topbar3.png in Resources */,
 				F8148C9B193C6691000F5C9F /* f023.gif in Resources */,
 				F8E9686D18C6DB6A00B9384B /* loginbutton0.png in Resources */,
 				F8148C02193C665C000F5C9F /* h1.jpg in Resources */,
 				F8148CEE193C6691000F5C9F /* f106.gif in Resources */,
 				F8148CC5193C6691000F5C9F /* f065.gif in Resources */,
+				F883E0A1194875C700A8D526 /* menu1_1.png in Resources */,
 				F8148C01193C665C000F5C9F /* h0.jpg in Resources */,
 				F8148CCD193C6691000F5C9F /* f073.gif in Resources */,
 				F8148C13193C665C000F5C9F /* h18.jpg in Resources */,
@@ -2301,6 +2350,7 @@
 				F8550F0118C4C251005E51FE /* p_btm3.png in Resources */,
 				F8148D24193F9195000F5C9F /* basemenu1.png in Resources */,
 				F8148CB6193C6691000F5C9F /* f050.gif in Resources */,
+				F883E0A2194875C700A8D526 /* menu1_0.png in Resources */,
 				F8148CE5193C6691000F5C9F /* f097.gif in Resources */,
 				F8148BDD193A23CF000F5C9F /* findthingsmenu.xib in Resources */,
 				F8148C87193C6691000F5C9F /* f003.gif in Resources */,
@@ -2321,7 +2371,6 @@
 				F8148CEC193C6691000F5C9F /* f104.gif in Resources */,
 				F8148CB4193C6691000F5C9F /* f048.gif in Resources */,
 				F8148CB5193C6691000F5C9F /* f049.gif in Resources */,
-				F8E9686118C5F96C00B9384B /* topbar2.png in Resources */,
 				F8148C8E193C6691000F5C9F /* f010.gif in Resources */,
 				F8148CE0193C6691000F5C9F /* f092.gif in Resources */,
 				F8148CCF193C6691000F5C9F /* f075.gif in Resources */,
@@ -2443,6 +2492,7 @@
 				F8148D471941A59F000F5C9F /* HeadPicViewController.m in Sources */,
 				F84B7DD418BB3C8D007FC2D5 /* XMPPIQ.m in Sources */,
 				F899C93E192F269900CB3D17 /* MessageDetailViewController.m in Sources */,
+				F883E0A51948766100A8D526 /* SettingMenu.m in Sources */,
 				F89DFAE11913B0240043DD6B /* MoreMessageCell.m in Sources */,
 				F8148D4B1941A781000F5C9F /* HeadPicCell.m in Sources */,
 				F8148BD7193A21C4000F5C9F /* FindThingsViewController.m in Sources */,

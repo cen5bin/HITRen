@@ -11,6 +11,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[FreshNewsViewController tableView:cellForRowAtIndexPath:]:FreshNewsViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "-[ContactView scrollViewDidScroll:]:ContactView.m">
          <PersistentStrings>
             <PersistentString

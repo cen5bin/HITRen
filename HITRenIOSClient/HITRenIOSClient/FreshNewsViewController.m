@@ -33,6 +33,7 @@
 #import "ChooseGroupViewController.h"
 #import "RelationshipLogic.h"
 #import "PersonInfoViewController.h"
+#import "SettingMenu.h"
 
 @interface FreshNewsViewController ()
 
@@ -111,9 +112,21 @@
     _menu.hidden = YES;
     _menu.delegate = self;
     
+    
+    _settingMenu = getViewFromNib(@"settingmenu", self);
+    rect = _menu.frame;
+    rect.origin.y = CGRectGetMaxY(self.topToolBar.frame) -2;
+    rect.origin.x = 0;
+    _settingMenu.frame = rect;
+    [self.view addSubview:_settingMenu];
+    _settingMenu.hidden = YES;
+    _settingMenu.delegate = self;
+    
     _writerInfoView = getViewFromNib(@"writer", self);
     _writerInfoView.delegate = self;
     _showingUid = -1;
+    
+    _imageQueue = [[NSMutableArray alloc] init];
 //    [UploadLogic downloadImage:@"bubble2.png"];
 //    NSString *filename = @"1.jpg";
 //    [UploadLogic uploadImages:[NSArray arrayWithObjects:[UIImage imageNamed:filename] , nil] withExtend:@"png"  from:NSStringFromClass(self.class)];
@@ -153,6 +166,7 @@
             if (image)_writerInfoView.pic.image = image;
             else if (![_downloadingImageSet containsObject:userInfo.pic]) {
                 [_downloadingImageSet addObject:userInfo.pic];
+//                [self downloadImage];
                 [UploadLogic downloadImage:userInfo.pic from:NSStringFromClass(self.class)];
             }
         }
@@ -171,8 +185,11 @@
     CGPoint point = [touch locationInView:self.view];
     if (CGRectContainsPoint(self.topToolBar.frame, point)) {
         if (point.x <= 50) {
-            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"basemenu2" ofType:@"png"]];
-            self.topToolBar.image = image;
+//            UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"topbar2" ofType:@"png"]];
+//            self.topToolBar.image = image;
+            if (_settingMenu.hidden)
+                [self showMenu1];
+            else [self hideMenu1];
         }
         else if (point.x > CGRectGetMaxX(self.topToolBar.frame) - 50) {
             UIImage *image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"topbar1" ofType:@"png"]];
@@ -226,6 +243,28 @@
     self.topToolBar.image = [UIImage imageNamed:@"topbar1.png"];
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_menu.alpha = 1; } completion:^(BOOL finished){ isWorking = NO;}];
 }
+
+- (void)showMenu1 {
+    static BOOL isWorking = NO;
+    if (isWorking) return;
+    isWorking = YES;
+    
+    _settingMenu.hidden = NO;
+    _settingMenu.alpha = 0;
+    self.topToolBar.image = [UIImage imageNamed:@"topbar2.png"];
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_settingMenu.alpha = 1; } completion:^(BOOL finished){ isWorking = NO;}];
+}
+
+- (void)hideMenu1 {
+    static BOOL isWorking = NO;
+    if (isWorking) return;
+    isWorking = YES;
+    self.topToolBar.image = [UIImage imageNamed:@"topbar0.png"];
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{_settingMenu.alpha = 0; } completion:^(BOOL finished){_settingMenu.alpha = 1; _settingMenu.hidden = YES; isWorking = NO;}];
+}
+
+
+
 - (void)hideMenu {
     static BOOL isWorking = NO;
     if (isWorking) return;
@@ -301,6 +340,8 @@
         return cell;
     }
     
+    L(@"reload data");
+    
     ShortMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (!cell)
         cell = [[ShortMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -327,6 +368,7 @@
             else if (![_downloadingImageSet containsObject:userInfo.pic]) {
                 [_downloadingImageSet addObject:userInfo.pic];
                 [UploadLogic downloadImage:userInfo.pic from:NSStringFromClass(self.class)];
+//                [self downloadImage];
             }
         }
     }
@@ -358,6 +400,7 @@
             rect = CGRectMake((BETWEEN_IMAGE+SMALLIMAGE_HEIGHT)*(i%3)+tmp, (BETWEEN_IMAGE+SMALLIMAGE_HEIGHT)*line, SMALLIMAGE_HEIGHT, SMALLIMAGE_HEIGHT);
         }
         if (CGRectGetMaxY(rect)+BOTTOM_HEIGHT>max_height) max_height = CGRectGetMaxY(rect) + BOTTOM_HEIGHT;
+        LOG(@"indexpath %d", indexPath.row);
         UIImage *image = [appData getImage:[message.picNames objectAtIndex:i*2]];
         if (image) {
             MyImageView *view = [[MyImageView alloc] initWithImage:image];
@@ -376,6 +419,7 @@
             if (![_downloadingImageSet containsObject:[message.picNames objectAtIndex:i*2]]) {
                 [_downloadingImageSet addObject:[message.picNames objectAtIndex:i*2]];
                 [UploadLogic downloadImage:[message.picNames objectAtIndex:i*2] from:NSStringFromClass(self.class)];
+//                [self downloadImage];
             }
         }
     }
@@ -482,7 +526,7 @@
     rect.size.height = bgh;
     cell.bgView.frame = rect;
     
-    LOG(@"row %ld %f", (long)indexPath.row, rect.size.height);
+//    LOG(@"row %ld %f", (long)indexPath.row, rect.size.height);
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -575,6 +619,7 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self hideMenu];
+    [self hideMenu1];
 //    [_keyboardToolBar resignFirstResponder];
     [self hideKeyboardToolBar];
 }
@@ -591,7 +636,7 @@
 
 // 到达indexPath时处理的工作
 - (void)workAtIndexpath:(NSIndexPath *)indexPath {
-    LOG(@"current %d max %d", _currentPage, _maxDataLoadedPage);
+//    LOG(@"current %d max %d", _currentPage, _maxDataLoadedPage);
     int row = indexPath.row;
     int tmp = row / PAGE_MESSAGE_COUNT;
     AppData *appData = [AppData sharedInstance];
@@ -697,12 +742,43 @@
     FUNC_END();
 }
 
+//- (void)downloadImage {
+////    if ([_downloadingImageSet containsObject:filename]) return;
+////    [_downloadingImageSet addObject:filename];
+//    if (_downloadingImage) return;
+//    if (_downloadingImageSet.count == 0) return;
+//    _downloadingImage = YES;
+////    [_imageQueue addObject:filename];
+////    if (_imageQueue.count > 1) return;
+//    [UploadLogic downloadImage:[_downloadingImageSet lastObject] from:CLASS_NAME];
+//}
+
 - (void)imageDidDownload:(NSNotification *)notification {
+//    return;
+    L(@"asd");
     UIImage *image = [UIImage imageWithData:[notification.userInfo objectForKey:@"imagedata"]];
     if (!image) image = [UIImage imageNamed:@"null.png"];
-    [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
+    
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//    dispatch_async(queue, ^{
+//        [[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
+//            _downloadingImage = NO;
+//            [self downloadImage];
+//            [self.tableView reloadData];
+//        });
+//    });
+    if ([[AppData sharedInstance] storeImage:image withFilename:[notification.userInfo objectForKey:@"imagename"]])
+        LOG(@"%@ write file succ", [notification.userInfo objectForKey:@"imagename"]);
+    else L(@"write file fail");
     [_downloadingImageSet removeObject:[notification.userInfo objectForKey:@"imagename"]];
+    _downloadingImage = NO;
+//    [self downloadImage];
     [self.tableView reloadData];
+//    UIImageView *view = [[UIImageView alloc] initWithImage:image];
+//    view.frame = CGRectMake(100, 100, 100, 100);
+//    [self.view.window addSubview:view];
 }
 
 
@@ -1073,6 +1149,13 @@
 
 - (void)emotionDidSelected:(NSDictionary *)info {
     
+}
+
+- (void)menuDidChooseAtIndex:(int)index {
+    if (index == 0) {
+        [UserSimpleLogic logout];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 @end

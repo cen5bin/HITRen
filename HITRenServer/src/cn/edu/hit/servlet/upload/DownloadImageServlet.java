@@ -16,12 +16,13 @@ import org.json.JSONObject;
 
 import cn.edu.hit.kit.DataKit;
 import cn.edu.hit.kit.FileKit;
+import cn.edu.hit.servlet.kit.BaseServlet;
 
 /**
  * Servlet implementation class DownloadImageServlet
  */
 @WebServlet("/DownloadImageServlet")
-public class DownloadImageServlet extends HttpServlet {
+public class DownloadImageServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -37,7 +38,30 @@ public class DownloadImageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+//		doPost(request, response);
+		String filename = request.getParameter("filename");
+		logger.info(filename);
+		 String path = FileKit.getUpload();  
+	        File file = new File(path + filename);  
+	        if (!file.exists()) {
+	        	return;
+	        }
+	        //设置头信息,内容处理的方式,attachment以附件的形式打开,就是进行下载,并设置下载文件的命名  
+	        response.setHeader("Content-Disposition","attachment;filename="+file.getName());  
+	        // 创建文件输入流  
+	        FileInputStream is = new FileInputStream(file);  
+	        // 响应输出流  
+	        ServletOutputStream out = response.getOutputStream();  
+	        // 创建缓冲区  
+	        byte[] buffer = new byte[1024];  
+	        int len = 0;  
+	        while ((len = is.read(buffer)) != -1) {  
+	            out.write(buffer, 0, len);  
+	        }  
+	        is.close();  
+	        out.flush();  
+	        out.close();  
+
 	}
 
 	/**

@@ -112,7 +112,7 @@ static HttpTransfer *transfer;
 
 - (BOOL)asyncRequestServerForNSDataWithPostMethod:(NSString *)requestString AndServletName:(NSString *)servlet {
     NSString *urlString = [NSString stringWithFormat:@"http://%@:%d/%@/%@",IP, PORT, SERVER_NAME, servlet];
-    NSLog(@"%@",urlString);
+//    NSLog(@"%@",urlString);
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [requestString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%ld",(unsigned long)[data length]];
@@ -151,7 +151,7 @@ static HttpTransfer *transfer;
 }
 
 - (BOOL) asyncPost:(NSString *)string to:(NSString *)servlet {
-    NSLog(@"zzz");
+//    NSLog(@"zzz");
     return [self asyncRequestServerForNSDataWithPostMethod:string AndServletName:servlet];
 }
 

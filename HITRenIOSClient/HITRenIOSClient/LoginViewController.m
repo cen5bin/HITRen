@@ -90,8 +90,10 @@
         [userDefaults setValue:user.email forKey:@"email"];
         [userDefaults setValue:user.password forKey:@"password"];
         [userDefaults setInteger:user.uid forKey:@"uid"];
-        LOG(@"fuck uid %d", user.uid);
+//        LOG(@"fuck uid %d", user.uid);
         [userDefaults synchronize];
+        [self.email resignFirstResponder];
+        [self.password resignFirstResponder];
         MainViewController *controller = getViewControllerOfName(@"mainview3");
         [self.navigationController pushViewController:controller animated:YES];
     }

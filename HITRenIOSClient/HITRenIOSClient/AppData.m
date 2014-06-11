@@ -346,7 +346,7 @@ static AppData *appData;
 
 
 //保存图片
-- (void)storeImage:(UIImage *)image withFilename:(NSString *)filename {
+- (BOOL)storeImage:(UIImage *)image withFilename:(NSString *)filename {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSArray* array = [fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSURL *docURL = [array objectAtIndex:0];
@@ -358,10 +358,11 @@ static AppData *appData;
     NSString *extendName = [filename substringFromIndex:range.length+range.location];
     if (![fm fileExistsAtPath:[NSString stringWithFormat:@"%@/Documents/images/%@",NSHomeDirectory(),filename]]) {
         if ([extendName isEqualToString:@"png"])
-            [UIImagePNGRepresentation(image) writeToURL:targetURL atomically:YES];
+            return [UIImagePNGRepresentation(image) writeToURL:targetURL atomically:YES];
         else if ([extendName isEqualToString:@"jpg"])
-            [UIImageJPEGRepresentation(image, 1.0) writeToURL:targetURL atomically:YES];
+            return [UIImageJPEGRepresentation(image, 1.0) writeToURL:targetURL atomically:YES];
     }
+    return YES;
 }
 
 //获取图片，如果图片不存在则返回nil
