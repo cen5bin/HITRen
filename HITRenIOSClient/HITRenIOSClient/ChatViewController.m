@@ -235,15 +235,24 @@
     NSArray *tmp = [NSArray arrayWithArray:_datas];
     _datas = [[NSMutableArray alloc] init];
     NSDate *date = nil;
+    int count = 0;
     for (NoticeObject *obj in tmp) {
         if (date == nil) {
             date = obj.date;
             [_datas addObject:date];
             [_datas addObject:obj];
+            count = 0;
             continue;
         }
-        if ([obj.date timeIntervalSinceDate:date] < 60)
+        if ([obj.date timeIntervalSinceDate:date] < 60) {
+            count++;
+            if (count == 5) {
+                [_datas addObject:obj.date];
+                count = 0;
+                date = obj.date;
+            }
             [_datas addObject:obj];
+        }
         else {
             [_datas addObject:obj.date];
             [_datas addObject:obj];
