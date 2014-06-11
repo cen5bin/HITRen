@@ -25,7 +25,7 @@
 }
 
 + (BOOL)uploadImages:(NSArray *)images from:(NSString *)classname{
-    return [UploadLogic uploadImages:images withExtend:@"png" from:classname];
+    return [UploadLogic uploadImages:images withExtend:@"jpg" from:classname];
 }
 
 
