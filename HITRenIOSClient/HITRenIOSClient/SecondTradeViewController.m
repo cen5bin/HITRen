@@ -102,6 +102,9 @@
         int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
         _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
         [self.tableView reloadData];
+        UIView *view = [self getActivityIndicator];
+        if (view.superview)
+            [view removeFromSuperview];
         return;
     }
 
@@ -144,14 +147,18 @@
     }
     [AppData saveData];
     int count = PAGE_GOODS_COUNT > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT;
-    if (_downloadFromTop)
+    if (_downloadFromTop) {
         _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
+    }
     else {
         _maxLoadedPage++;
         count = PAGE_GOODS_COUNT * (_maxLoadedPage+1) > appData.goodsLine.gids.count ? appData.goodsLine.gids.count : PAGE_GOODS_COUNT * (_maxLoadedPage+1);
         _data = [[NSMutableArray alloc] initWithArray:[appData.goodsLine.gids subarrayWithRange:NSMakeRange(0, count)]];
         _backgroundWorking = NO;
     }
+    UIView *view = [self getActivityIndicator];
+    if (view.superview)
+        [view removeFromSuperview];
     _downloadFromTop = NO;
     [self.tableView reloadData];
 }
@@ -174,7 +181,7 @@
     GoodsInfo *goodsInfo = [appData getGoodsInfoOfGid:[gid intValue]];
     if (goodsInfo) {
         cell.goodsName.text = goodsInfo.name;
-        cell.goodsPrice.text = goodsInfo.price;
+        cell.goodsPrice.text = [goodsInfo.price stringByAppendingString:@" 元"];
         cell.goodsDesc.text = goodsInfo.desc;
         NSArray *pics = goodsInfo.picNames;
         if (pics.count) {
@@ -242,6 +249,19 @@
     if (!decelerate) {
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:scrollView.contentOffset];
         [self workAtIndexpath:indexPath];
+    }
+    CGPoint p = scrollView.contentOffset;
+    if (p.y < 35) {
+        UIView *view = [self getActivityIndicator];
+        if (view.superview) return;
+        [self.tableView addSubview:view];
+        [scrollView setContentOffset:CGPointMake(0, -35) animated:YES];
+        [TradeLogic downloadGoodsLinefrom:CLASS_NAME];
+        _currentPage = 0;
+        _maxLoadedPage = 0;
+        _backgroundWorking = NO;
+        _downloadFromTop = YES;
+
     }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

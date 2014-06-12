@@ -32,6 +32,9 @@
 
 @property (strong, nonatomic) IBOutlet UIView *imageContainer;
 
+@property (strong, nonatomic) IBOutlet UIView *commentButtonBgView;
+
+
 @property (strong, nonatomic) id<MessageCellDelegate> delegate;
 @property (nonatomic) BOOL liked;
 @property (strong, nonatomic) NSMutableArray *likedList;

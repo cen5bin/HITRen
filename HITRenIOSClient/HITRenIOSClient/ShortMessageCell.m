@@ -48,6 +48,7 @@
 //    self.bgView.layer.shadowColor = [UIColor whiteColor].CGColor;
 //    self.bgView.layer.shadowOpacity = 0.4;
 //    [self.likedButton setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"liked1" ofType:@"png"]] forState:UIControlStateHighlighted];
+//    [self.commentButton setImage:[UIImage imageNamed:@"comment1.png"] forState:UIControlStateHighlighted];
     
 }
 
@@ -92,10 +93,16 @@
     else [self.delegate dislikeMessage:self];
 }
 
+- (void)clear {
+    self.commentButtonBgView.backgroundColor = [UIColor clearColor];
+}
 - (IBAction)commentMessage:(id)sender {
     self.targetUid = -1;
     [self.commentField becomeFirstResponder];
 
+    const CGFloat tmp = 200.0;
+    self.commentButtonBgView.backgroundColor = [UIColor colorWithRed: tmp/255 green:tmp/255 blue:tmp/255 alpha:1];
+    [self performSelector:@selector(clear) withObject:nil afterDelay:0.2];
 //    [self.delegate beginToComment:self];
 //    [self.delegate commentMessage:self];
 }

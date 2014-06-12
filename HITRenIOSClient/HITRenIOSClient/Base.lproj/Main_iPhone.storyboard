@@ -194,6 +194,10 @@
                                                                         <action selector="likeMessage:" destination="i7I-z3-HIe" eventType="touchUpInside" id="8pB-yn-dLr"/>
                                                                     </connections>
                                                                 </button>
+                                                                <view contentMode="scaleToFill" id="D9v-Gd-Ta2">
+                                                                    <rect key="frame" x="102" y="0.0" width="102" height="37"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                </view>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xNl-TJ-VFe">
                                                                     <rect key="frame" x="102" y="6" width="102" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -257,6 +261,7 @@
                                             <outlet property="cellBar" destination="p3i-mL-cre" id="eqI-Mg-Pmb"/>
                                             <outlet property="commentBgView" destination="VRq-0z-Ojd" id="kkD-PX-teu"/>
                                             <outlet property="commentButton" destination="xNl-TJ-VFe" id="DS5-E6-nkm"/>
+                                            <outlet property="commentButtonBgView" destination="D9v-Gd-Ta2" id="Xbo-7z-ARG"/>
                                             <outlet property="commentField" destination="Deu-UG-8Va" id="oLA-Zb-SPC"/>
                                             <outlet property="commentListView" destination="gFQ-A6-0kF" id="JSF-Og-y7d"/>
                                             <outlet property="imageContainer" destination="lji-uC-5Pp" id="r6R-Fr-SxP"/>

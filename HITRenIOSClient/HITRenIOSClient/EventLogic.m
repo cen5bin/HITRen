@@ -87,9 +87,12 @@
         notification.userInfo = dic;
         notification.soundName = UILocalNotificationDefaultSoundName;
         notification.timeZone=[NSTimeZone defaultTimeZone];
-        notification.alertBody=@"顶部提示内容，通知时间到啦";
+        NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+        formater.dateFormat = @"yyyy-MM-dd HH:mm";
+//        [formater str]
+        notification.alertBody= [NSString stringWithFormat:@"时间: %@, 地点: %@, 事件:%@", [formater stringFromDate:event.time ], event.place, event.desc];   //@"顶部提示内容，通知时间到啦";
 //        notification.soundName= UILocalNotificationDefaultSoundName;
-        notification.alertAction=NSLocalizedString(@"你锁屏啦，通知时间到啦", nil);
+//        notification.alertAction=NSLocalizedString(@"你锁屏啦，通知时间到啦", nil);
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
     return YES;
